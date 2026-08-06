@@ -34,6 +34,16 @@ export interface ApiResponse<T = unknown> {
   /** TICKET_1232 F3: HTTP status of a non-ok response, so callers can
    * classify auth failures (401) structurally instead of parsing error text. */
   status?: number;
+  /**
+   * TICKET_1376 RC1: machine code the backend attached to a failed task
+   * (e.g. `CODE_GENERATION_ERROR`). Preserved alongside the prose `error` so
+   * callers classify structurally instead of parsing the message -- the same
+   * rationale as `status`. Previously discarded here, which is why the Guide
+   * WebUI surface had nothing to resolve and rendered `payload=malformed`.
+   * Validated against the shared whitelist at the point of use, never trusted
+   * as a display string.
+   */
+  errorCode?: string;
 }
 
 function extractApiErrorMessage(
