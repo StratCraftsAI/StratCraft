@@ -1,0 +1,1260 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "initializing": "Initializing...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "dismiss": "Dismiss",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "reset": "Reset",
+    "search": "Search",
+    "filter": "Filter",
+    "refresh": "Refresh",
+    "export": "Export",
+    "import": "Import",
+    "enable": "Enable",
+    "disable": "Disable",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "apply": "Apply",
+    "retry": "Retry",
+    "later": "Later",
+    "tryAgain": "Try again",
+    "login": "Login",
+    "logout": "Logout",
+    "signOut": "Sign Out",
+    "upgradePlan": "Upgrade Plan",
+    "signingOut": "Signing out...",
+    "loggingIn": "Logging in...",
+    "home": "Home",
+    "pluginSettings": "Plugin Settings",
+    "loginSignup": "Login / Sign Up"
+  },
+  "compilation": {
+    "compiled": "Compiled",
+    "failed": "Compilation Failed",
+    "noOutput": "No compiler output was provided.",
+    "retry": "Retry",
+    "compiling": "Compiling...",
+    "showRawOutput": "Show raw output"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "strategies": "Strategies",
+    "backtest": "Backtest",
+    "marketplace": "Marketplace",
+    "settings": "Settings",
+    "data": "Data",
+    "nexusHub": "Hub",
+    "strategyStudio": "Strategy Studio",
+    "strategyBuilder": "StratForge",
+    "backtestNexus": "Backtester",
+    "dataNexus": "Data Nexus",
+    "pluginMarketplace": "Plugin Marketplace",
+    "chart": "Chart",
+    "aiAssistant": "AI Assistant",
+    "result": "Result"
+  },
+  "status": {
+    "online": "Online",
+    "offline": "Offline",
+    "connecting": "Connecting...",
+    "checking": "Checking...",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "notConfigured": "Credentials not configured — go to Settings > Credentials",
+    "error": "Error",
+    "ready": "Ready",
+    "pending": "Pending",
+    "running": "Running",
+    "completed": "Completed",
+    "failed": "Failed"
+  },
+  "dialog": {
+    "confirmDelete": "Are you sure you want to delete this item?",
+    "unsavedChanges": "You have unsaved changes. Discard them?",
+    "confirmAction": "Are you sure you want to proceed?"
+  },
+  "time": {
+    "now": "Now",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "ago": "ago"
+  },
+  "strategy": {
+    "categories": {
+      "regimeMode": "Regime Mode",
+      "kronosMode": "Kronos Mode",
+      "traderMode": "Trader Mode",
+      "riskManager": "Risk Manager",
+      "aiCommandCenter": "AI Command Center",
+      "autopilotMode": "Autopilot Mode",
+      "aiStrategyStudio": "Strategy Studio",
+      "chatMode": "Chat Mode",
+      "catalogMode": "Catalog Mode"
+    },
+    "descriptions": {
+      "regimeMode": "Market environment and regime classification units",
+      "kronosMode": "Time-series prediction and sequential analysis",
+      "traderMode": "Market observation and trade execution logic",
+      "riskManager": "Risk management and exit strategy generation",
+      "aiCommandCenter": "Centralized AI control and autonomous agents",
+      "autopilotMode": "AI-powered fully autonomous trading decisions",
+      "aiStrategyStudio": "AI-powered strategy studio for comprehensive strategy creation",
+      "chatMode": "Conversational AI strategy creation through chat",
+      "catalogMode": "Browse and generate C++ strategies from 63 proven trading strategies"
+    },
+    "hub": {
+      "loadingTopology": "Loading service topology...",
+      "noPlugins": "No plugins configured",
+      "installPlugins": "Install plugins from the Marketplace to enable services",
+      "active": "Active",
+      "syncWorkspace": "Sync Workspace",
+      "loginToNona": "Login to Nona",
+      "demo": {
+        "_comment": "Hub placeholder copy: unbuilt-feature demo data rendered by StrategyGroupList / ProviderStatusPanel / ProviderPortal. Remove these keys when the hub is wired to real strategy/provider registries.",
+        "generators": {
+          "regimeTrendX1": "Regime Trend X1",
+          "volAdaptiveBeta": "Vol-Adaptive Beta",
+          "crossSessArbitrage": "Cross-Sess Arbitrage",
+          "cnnSentimentAlpha": "CNN Sentiment Alpha",
+          "highFreqScalperV4": "High-Freq Scalper V4"
+        },
+        "lastRun": {
+          "twoMinAgo": "2m ago",
+          "oneHourAgo": "1h ago",
+          "active": "Active",
+          "failed": "Failed",
+          "fiveMinAgo": "5m ago",
+          "fifteenMinAgo": "15m ago"
+        },
+        "providers": {
+          "pro": "Pro",
+          "quant": "Quant",
+          "alpha": "Alpha"
+        },
+        "templates": {
+          "trendFollowing": "Trend Following",
+          "meanReversion": "Mean Reversion",
+          "marketMaking": "Market Making",
+          "statArbitrage": "Statistical Arbitrage"
+        }
+      }
+    },
+    "tier": {
+      "free": "Free",
+      "basic": "Basic",
+      "pro": "Pro",
+      "enterprise": "Enterprise"
+    },
+    "groupList": {
+      "groupTitle": "GROUP: TREND_FOLLOWING_PACK",
+      "providerRegion": "Provider: NONA // Region: ASIA_PACIFIC",
+      "runAll": "Run All",
+      "configPack": "Config Pack",
+      "colId": "ID",
+      "colName": "NAME",
+      "colStatus": "STATUS",
+      "col7dPnl": "7D PNL",
+      "colCpu": "CPU",
+      "colLastActivity": "LAST ACTIVITY",
+      "colActions": "ACTIONS"
+    },
+    "providerPortal": {
+      "licenseValid": "LICENSE VALID",
+      "availableStrategies": "Available Strategies",
+      "activeGenerators": "ACTIVE GENERATORS",
+      "deployment": "DEP.",
+      "executionLogs": "Execution logs",
+      "info": "INFO",
+      "initializedMessage": "Successfully initialized {{provider}} core engine environment...",
+      "moduleStatus": "Module Status",
+      "ready": "READY"
+    },
+    "performanceChart": {
+      "title": "Performance Overview",
+      "subtitle": "Last 30 days - All providers",
+      "chartPending": "Chart Integration Pending",
+      "chartPendingHint": "Integrate recharts or visx for data visualization",
+      "winRate": "Win Rate",
+      "sharpeRatio": "Sharpe Ratio",
+      "totalReturn": "Total Return"
+    },
+    "audit": {
+      "title": "Audit Report",
+      "description": "Strategy generation quality scoring",
+      "recentAudits": "Recent Audits",
+      "noData": "No audit data available yet",
+      "colProvider": "Provider",
+      "colModel": "Model",
+      "colAlgorithm": "Algorithm",
+      "colSignalSource": "Signal Source",
+      "colScore": "Score",
+      "colRating": "Rating",
+      "colDate": "Date"
+    }
+  },
+  "auth": {
+    "loginTo": "Login to {{provider}}",
+    "loginToUnlock": "Login to Unlock",
+    "signUpFree": "Sign Up Free",
+    "viewPlans": "View Plans",
+    "plan": "{{plan}} Plan",
+    "needHelp": "Need help? Contact support at support@StratCraft.io",
+    "loginRequired": "Login required",
+    "loginRequiredBanner": "Login required to use this feature.",
+    "clickToLogin": "Log In",
+    "credits": "Credits: {{remaining}} / {{total}}",
+    "creditsRemaining": "Credits: {{remaining}}",
+    "renews": "Renews: {{date}}",
+    "passwordPlaceholder": "Password",
+    "inline": {
+      "hero": {
+        "badge": "Quant Research Workspace",
+        "heading": "Build, test, and ship trading systems from one controlled workspace.",
+        "tagline": "Designed for quant teams and independent researchers who need faster idea validation, cleaner execution workflows, and a product surface that feels closer to an operating console than a marketing page.",
+        "pillars": {
+          "workflows": {
+            "title": "AI strategy workflows",
+            "description": "Turn market ideas into structured research, signals, and deployable trading logic."
+          },
+          "backtesting": {
+            "title": "Backtesting built in",
+            "description": "Validate ideas with data, audit trails, and execution-aware simulation before going live."
+          },
+          "controls": {
+            "title": "Operator-grade controls",
+            "description": "Use a secure desktop workspace for data, credentials, plugins, and execution orchestration."
+          }
+        },
+        "stats": {
+          "multistep": {
+            "value": "Multi-step",
+            "label": "research to execution flow"
+          },
+          "desktopNative": {
+            "value": "Desktop-native",
+            "label": "workspace for serious quants"
+          },
+          "secure": {
+            "value": "Secure",
+            "label": "auth, plugins, and local control"
+          }
+        }
+      },
+      "email": {
+        "heading": "Sign in or create your free account",
+        "description": "Enter your email to continue. New accounts are created automatically. Use password login if you already have a credential-based account.",
+        "secureAccess": "Secure Access",
+        "emailVerification": "Email verification",
+        "placeholder": "you@example.com",
+        "continueButton": "Continue with email",
+        "sending": "Sending..."
+      },
+      "method": {
+        "password": {
+          "title": "Use password",
+          "description": "For returning users who sign in with email + password."
+        },
+        "browser": {
+          "title": "Open browser login",
+          "description": "Continue with the hosted auth flow and full account controls."
+        }
+      },
+      "footer": "Free to get started. No credit card required. By continuing, you enter the StratCraft workspace for strategy design, backtesting, plugin-based expansion, and controlled execution.",
+      "code": {
+        "heading": "Check your email",
+        "sentTo": "We sent a 6-digit code to {{email}}",
+        "verifying": "Verifying...",
+        "changeEmail": "Change email",
+        "resendCountdown": "Resend in {{seconds}}s",
+        "resendCode": "Resend code",
+        "otherWays": "Other ways to sign in",
+        "usePassword": "Use your password",
+        "loginWithBrowser": "Login with browser"
+      },
+      "password": {
+        "heading": "Log in with password",
+        "description": "Enter your email and password",
+        "emailPlaceholder": "you@example.com",
+        "loginButton": "Log in",
+        "loggingIn": "Logging in...",
+        "switchToCode": "Use verification code"
+      },
+      "errors": {
+        "invalidEmail": "Please enter a valid email address",
+        "sendCodeFailed": "Failed to send verification code",
+        "networkError": "Network error",
+        "invalidCode": "Invalid verification code",
+        "resendFailed": "Failed to resend code",
+        "invalidCredentials": "Invalid credentials"
+      }
+    }
+  },
+  "plugin": {
+    "error": "Plugin Error",
+    "errorOccurred": "An error occurred in the plugin",
+    "loadingPlugin": "Loading {{title}}...",
+    "failedToLoad": "Failed to load plugin: {{error}}",
+    "sandboxError": "Sandbox error: {{error}}",
+    "pluginLabel": "Plugin: {{pluginId}}"
+  },
+  "permissions": {
+    "unknownPermission": "Unknown permission",
+    "title": "Permission Request",
+    "requestingPermissions": "This plugin is requesting the following permissions:",
+    "dangerousPermissions": "Dangerous Permissions",
+    "dangerousWarning": "This plugin requests elevated permissions that could affect your system security. Only approve if you trust the source.",
+    "deny": "Deny",
+    "approve": "Approve",
+    "approveAnyway": "Approve Anyway",
+    "pluginId": "Plugin ID",
+    "author": "Author",
+    "riskLevels": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "dangerous": "Dangerous",
+      "unknown": "Unknown"
+    }
+  },
+  "locked": {
+    "requiresTier": "This feature requires {{tier}} tier access",
+    "serviceEnabled": "You've enabled this service. It will automatically activate when you upgrade to {{tier}} tier."
+  },
+  "toolbar": {
+    "logo": "Logo",
+    "systemSettings": "System Settings",
+    "researchEnvironment": "Research Environment"
+  },
+  "error": {
+    "somethingWentWrong": "Something went wrong",
+    "unexpectedError": "An unexpected error occurred",
+    "viewNotFound": "View not found: {{view}}",
+    "editorNotFound": "Editor not found for: {{feature}}"
+  },
+  "view": {
+    "loadingView": "Loading view...",
+    "errorPrefix": "Error: {{error}}",
+    "unknownViewType": "Unknown view type",
+    "noProvider": "No provider for view: {{viewId}}",
+    "noViewSelected": "No view selected",
+    "failedToLoad": "Failed to load view"
+  },
+  "tier": {
+    "free": "FREE",
+    "basic": "BASIC",
+    "pro": "PRO",
+    "gold": "GOLD"
+  },
+  "nexusHub": {
+    "initializingSystems": "Initializing Core Systems...",
+    "connectTheAlpha": "CONNECT THE ALPHA",
+    "strategy": "STRATEGY",
+    "backtest": "BACKTEST",
+    "strategyModule": "Strategy Module",
+    "backtestModule": "Backtest Module",
+    "strategyDescription": "Algorithmic strategy generation and logic execution",
+    "backtestDescription": "High-performance C++ backtest engine with integrated data loading",
+    "noLink": "NO {{title}} LINK",
+    "noModulesAvailable": "No Modules Available",
+    "linking": "LINKING",
+    "registry": "Registry",
+    "deactivate": "Deactivate",
+    "systemActive": "SYSTEM_ACTIVE",
+    "moduleStandby": "MODULE_STANDBY",
+    "emptySlot": "EMPTY SLOT",
+    "modules": "Modules",
+    "modulesDescription": "Available plugins for strategy research, testing, and trading"
+  },
+  "strategyStudio": {
+    "strategyNona": "STRATEGY NONA",
+    "advanced": "ADVANCED",
+    "mode": "MODE",
+    "tierAccessRequired": "This feature requires {{tier}} tier access"
+  },
+  "settings": {
+    "title": "Settings"
+  },
+  "breadcrumb": {
+    "nexusHub": "Hub"
+  },
+  "banner": {
+    "apiKey": {
+      "message": "AI features require API key setup or PRO subscription",
+      "configureKey": "Configure Key",
+      "loginUpgrade": "Login & Upgrade",
+      "upgrade": "Upgrade",
+      "dismiss": "Dismiss"
+    }
+  },
+  "symbolSearch": {
+    "placeholder": "Search symbol...",
+    "authRequired": "Session expired. Please log in again.",
+    "credentialError": "Authentication failed. Check your API credentials in Settings.",
+    "serviceUnavailable": "Service unavailable",
+    "truncated": "Showing {{count}} of {{total}} -- refine your search"
+  },
+  "llmSelector": {
+    "platformProvider": "Platform provider - no API key required",
+    "verified": "API key verified",
+    "unverified": "API key not verified - may fail",
+    "selectProvider": "Select LLM Provider",
+    "providerHeader": "Provider",
+    "modelHeader": "Model",
+    "customModelExpand": "Use custom model",
+    "customModelCollapse": "Hide custom model",
+    "customModelPlaceholder": "Enter model ID...",
+    "customModelEmpty": "Model ID cannot be empty",
+    "customModelNoSpaces": "Model ID cannot contain spaces",
+    "customModelAsciiOnly": "Model ID must use ASCII characters only",
+    "proFallback": "Pro"
+  },
+  "modal": {
+    "defaultConfirmTitle": "Confirm",
+    "defaultInfoTitle": "Notice",
+    "defaultOkText": "Ok",
+    "defaultCancelText": "Cancel",
+    "close": "Close",
+    "configureApiKey": "Configure API Key",
+    "defaultDestructiveTitle": "Confirm Delete",
+    "tierUpgrade": {
+      "title": "GET ACCESS TO {{plugin}}",
+      "body": "This plugin requires {{required}} tier.\nYou are on {{current}}.\n\nChoose how you'd like to get access:\n\n- Upgrade Plan: unlocks all {{required}} features\n- Buyout: one-time purchase, this plugin only",
+      "upgradeCta": "Upgrade to Gold",
+      "buyoutCta": "Buyout"
+    }
+  },
+  "dataManagement": {
+    "title": "DATA MANAGEMENT",
+    "callerBadge": {
+      "sweep": "Sweep",
+      "backtest": "Backtest",
+      "discovery": "Discovery",
+      "validation": "Validation",
+      "scoreboard": "Scoreboard",
+      "restore": "Restore"
+    },
+    "tabs": {
+      "catalog": "Catalog",
+      "downloadQueue": "Download Queue",
+      "import": "Import"
+    },
+    "stats": {
+      "totalSize": "Total Size",
+      "totalRows": "Total Rows",
+      "symbols": "Symbols",
+      "providers": "Providers",
+      "segments": "{{count}} segments"
+    },
+    "catalog": {
+      "searchSymbol": "Search symbol...",
+      "allProviders": "All Providers",
+      "allIntervals": "All Intervals",
+      "deleteCount": "Delete ({{count}})",
+      "refresh": "Refresh",
+      "totalSegments": "{{count}} segments",
+      "columnSymbol": "Symbol",
+      "columnInterval": "Interval",
+      "columnDateRange": "Date Range",
+      "columnRows": "Rows",
+      "columnSize": "Size",
+      "loading": "Loading...",
+      "noData": "No cached data segments found",
+      "deleteSegment": "Delete segment",
+      "groupSummary": "{{symbols}} symbol(s) | {{segments}} segment(s) | {{size}}"
+    },
+    "download": {
+      "newDownload": "New Download",
+      "provider": "Provider",
+      "symbol": "Symbol",
+      "searchSymbol": "Search symbol...",
+      "interval": "Interval",
+      "start": "Start",
+      "end": "End",
+      "addToQueue": "Add to Queue",
+      "noTasks": "No download tasks in queue",
+      "columnSymbol": "Symbol",
+      "columnInterval": "Interval",
+      "columnProvider": "Provider",
+      "columnStatus": "Status",
+      "columnProgress": "Progress",
+      "cancel": "Cancel",
+      "maxLookback": "Max {{limit}} lookback",
+      "intervalSetTo": "{{provider}}: interval set to {{interval}} for {{symbol}}",
+      "lookbackAdjusted": "{{provider}} {{interval}} max lookback: {{limit}} -- start date adjusted to {{date}}",
+      "switchedInterval": "Switched to {{interval}} -- {{oldInterval}} max lookback exceeded",
+      "lookbackError": "{{provider}} {{interval}} supports max lookback {{limit}}. Adjust start date or select a coarser interval."
+    },
+    "import": {
+      "title": "Import Data Package",
+      "subtitle": "One-time import of a user-supplied historical-data package (MySQL / SQLite / PostgreSQL) into the local cache. After import the package is selectable as a data source in Alpha Factory.",
+      "packageName": "Package Name",
+      "packageNamePlaceholder": "e.g. cn-a-share-2024",
+      "dialect": "Source Dialect",
+      "connection": "Connection",
+      "connectionPlaceholder": "SQLite file path, or host=... user=... database=...",
+      "adjustMode": "Adjustment Mode",
+      "adjustModeHint": "Declared once per package. hfq (backward-adjusted) is the standard choice for backtests.",
+      "adjustModes": {
+        "none": "none (raw)",
+        "qfq": "qfq (forward-adjusted)",
+        "hfq": "hfq (backward-adjusted)"
+      },
+      "archivalCadence": "Archival Cadence",
+      "archivalCadenceHint": "Publisher release schedule. Pick 'monthly_archive' for HistData / Dukascopy / EOD-Historical monthly bundles so discovery windows are floored to the last published month-end instead of wall-clock. 'snapshot' (default) is correct for one-shot user CSVs.",
+      "archivalCadences": {
+        "monthly_archive": "monthly archive (HistData / Dukascopy / EOD)",
+        "weekly_archive": "weekly archive",
+        "daily_eod": "daily EOD",
+        "snapshot": "snapshot (one-shot CSV)",
+        "realtime": "realtime / streaming"
+      },
+      "run": "Import",
+      "importing": "Importing...",
+      "progressSeries": "{{symbol}} {{interval}} ({{index}}/{{total}})",
+      "complete": "Imported {{count}} series",
+      "importedPackages": "Imported Packages",
+      "empty": "No imported packages yet.",
+      "table": {
+        "col": {
+          "symbol": "Symbol",
+          "interval": "Interval",
+          "from": "From",
+          "to": "To",
+          "rows": "Rows"
+        }
+      }
+    },
+    "importPackage": {
+      "title": "Import Data Package",
+      "subtitle": "Import a directory of Parquet files or a DuckDB file as a data package. Place a manifest.json in the package directory to declare schema, timezone, and adjustment mode.",
+      "selectDirectory": "Select Directory",
+      "selectDuckDb": "Select DuckDB File",
+      "packageNamePlaceholder": "e.g. histdata-forex (optional, defaults to folder name)",
+      "validating": "Validating...",
+      "registering": "Registering...",
+      "importing": "Importing...",
+      "importingSymbol": "{{symbol}} {{interval}} ({{current}}/{{total}})",
+      "complete": "Imported {{count}} series",
+      "scanning": "Scanning...",
+      "scanFailed": "Scan failed: {{message}}",
+      "importFailed": "Import failed.",
+      "confirmImport": "Import",
+      "confirmReimport": "Re-import (update)",
+      "reimportHint": "This package is already imported. Re-importing will update existing data.",
+      "cancelPreview": "Cancel",
+      "changeSource": "Change",
+      "previewDialect": "Source Dialect",
+      "previewSymbols": "Symbols",
+      "previewIntervals": "Intervals",
+      "previewFiles": "Files",
+      "previewSize": "Size",
+      "previewValidation": "Validation",
+      "previewValid": "OK",
+      "previewErrors": "{{count}} errors",
+      "noSymbolsDetected": "No symbols detected",
+      "expandDetails": "Details",
+      "collapseDetails": "Hide",
+      "remove": "Remove",
+      "removeConfirm": "Remove package \"{{name}}\" and all its cached data?",
+      "removeTitle": "Remove Package",
+      "removeButton": "Remove",
+      "removing": "Removing...",
+      "removed": "Package removed.",
+      "reimport": "Re-import",
+      "healthCheck": "Check Health",
+      "healthChecking": "Checking...",
+      "healthOk": "All {{count}} files OK",
+      "healthMissing": "{{missing}} of {{total}} files missing",
+      "nameModal": {
+        "title": "Name Your Data Package",
+        "label": "Package Name",
+        "placeholder": "e.g. histdata-forex",
+        "hint": "This name identifies the package in data source selectors.",
+        "reservedError": "\"{{name}}\" is a reserved name. Choose a different name.",
+        "reimportWarning": "A package with this name already exists. Confirming will update it.",
+        "cancel": "Cancel",
+        "confirm": "Confirm"
+      }
+    }
+  },
+  "backtestConsole": {
+    "title": "Backtest Console",
+    "noTasks": "No backtest tasks",
+    "cancelAllQueued": "Cancel All Queued",
+    "clearFinished": "Clear Finished",
+    "stopBacktest": "Stop backtest",
+    "viewResult": "View result",
+    "removeFromQueue": "Remove from queue",
+    "removeFromList": "Remove from list",
+    "status": {
+      "preparing": "Preparing",
+      "running": "Running",
+      "queued": "Queued",
+      "queuedPosition": "Queued #{{position}}",
+      "completed": "Done",
+      "failed": "Failed",
+      "cancelled": "Cancelled"
+    },
+    "summary": {
+      "running": "Running",
+      "queued": "Queued",
+      "done": "Done",
+      "failed": "Failed"
+    },
+    "taskLabel": "Task:",
+    "openConsole": "Open Backtest Console",
+    "viewDownloadQueue": "View download queue",
+    "openAlphaFactoryConsole": "Open Alpha Factory Console",
+    "sweepStatus": {
+      "tooltip": "View sweep progress",
+      "downloadTooltip": "Downloading data: {{completed}}/{{total}} symbols (~{{eta}} min left)",
+      "complete": "{{succeeded}} OK, {{errors}} errors",
+      "completeWithResumed": "{{succeeded}} OK, {{resumed}} resumed, {{errors}} errors"
+    },
+    "lstmStatus": {
+      "phase": {
+        "boot": "starting",
+        "load_traces": "loading traces",
+        "build_matrix": "building matrix",
+        "build_windows": "building windows"
+      },
+      "foldEpoch": "fold {{fold}}/{{totalFolds}} epoch {{epoch}}/{{totalEpochs}}",
+      "training": "training",
+      "completed": "trained",
+      "failed": "train failed",
+      "tooltip": "LSTM training {{run}} - {{model}} - {{signals}} signals",
+      "tooltipGeneric": "View LSTM training progress"
+    }
+  },
+  "installConsent": {
+    "trustLevels": {
+      "official": "Official",
+      "verified": "Verified",
+      "unverified": "Unverified",
+      "unsigned": "Unsigned"
+    },
+    "publisher": "Publisher",
+    "unknown": "Unknown",
+    "update": "Update",
+    "install": "Install",
+    "version": "Version",
+    "from": "from",
+    "unsignedPlugin": "Unsigned Plugin",
+    "unsignedMessage": "This plugin is not signed and cannot be verified. Only install if you created it yourself or received it from a trusted source.",
+    "unverifiedPublisher": "Unverified Publisher",
+    "unverifiedMessage": "This plugin is signed but the publisher is not verified by StratCraft. Proceed with caution.",
+    "highRiskPermissions": "High-Risk Permissions",
+    "highRiskMessage": "This plugin requests elevated permissions that could affect your system. Only install if you trust the publisher.",
+    "permissionsRequested": "Permissions Requested",
+    "noPermissions": "This plugin does not require any special permissions.",
+    "understandRisks": "I understand the risks",
+    "riskAcknowledgment": "Installing unsigned or native plugins can pose security risks. I have verified the source and take responsibility for this action.",
+    "iUnderstandInstall": "I Understand, Install",
+    "fileSystem": "File System",
+    "id": "ID:",
+    "publisherLabel": "Publisher:"
+  },
+  "alphaFactoryConsole": {
+    "title": "Alpha Factory Console",
+    "active": "Active:",
+    "total": "Total:",
+    "noTasks": "No tasks",
+    "clearFinished": "Clear Finished",
+    "viewTask": "View task",
+    "removeFromQueue": "Remove from queue",
+    "removeFromList": "Remove from list",
+    "status": {
+      "preparing": "PREPARING",
+      "queued": "QUEUED",
+      "running": "RUNNING",
+      "done": "DONE",
+      "failed": "FAILED",
+      "cancelled": "CANCELLED"
+    }
+  },
+  "backtestQueue": {
+    "title": "Backtest Queue",
+    "running": "Running",
+    "view": "View",
+    "cancel": "Cancel",
+    "pending": "Pending",
+    "remove": "Remove",
+    "noTasks": "No backtest tasks",
+    "cancelAll": "Cancel All"
+  },
+  "llmEstimate": {
+    "title": "LLM Call Estimate (Dry Run)",
+    "barsProcessed": "Bars Processed",
+    "calls": " calls",
+    "totalLlmCalls": "Total LLM Calls"
+  },
+  "quantLab": {
+    "title": "Sigma",
+    "pluginDescription": "Sigma is available as a plugin. Install it from the Marketplace to access the Alpha Factory, Signal Library, and more.",
+    "openMarketplace": "Open Marketplace",
+    "subpages": {
+      "batchGeneration": "Signal Discovery",
+      "factory": "Alpha Factory",
+      "engineStore": "Engine Store",
+      "trainingMonitor": "Training Monitor",
+      "universeEditor": "Symbol Subsets",
+      "promotionPipeline": "Factor Promotion",
+      "settings": "Settings"
+    },
+    "authGate": {
+      "title": "Login required",
+      "description": "Log in to use Alpha Factory features.",
+      "cta": "Login / Sign Up"
+    }
+  },
+  "signalGenerator": {
+    "title": "Signal Generator",
+    "pluginDescription": "Signal Generator enables live trading signal production. Install it from the Marketplace to access live signal generation and auto-execution.",
+    "openMarketplace": "Open Marketplace"
+  },
+  "entitlement": {
+    "expired": {
+      "title": "Sigma access required",
+      "description": "Your Sigma access has expired. Purchase or renew to use Alpha Factory features.",
+      "cta": "Get Sigma Access"
+    },
+    "buyout": {
+      "badge": {
+        "freeUntil": "FREE UNTIL {{date}}",
+        "freeAccessEnds": "FREE ACCESS ENDS {{date}}",
+        "lifetime": "LIFETIME",
+        "freeAccessEnded": "FREE ACCESS ENDED",
+        "revoked": "REVOKED"
+      }
+    },
+    "ownership": {
+      "badge": {
+        "owned": "OWNED"
+      }
+    }
+  },
+  "dataDownload": {
+    "downloading": "DOWNLOADING",
+    "loading": "LOADING",
+    "caching": "CACHING",
+    "complete": "COMPLETE",
+    "error": "ERROR",
+    "chunkProgress": "chunk {{completed}}/{{total}}",
+    "barCount": "{{count}} bars"
+  },
+  "providerStatus": {
+    "title": "Provider Status",
+    "viewAll": "View All",
+    "active": "active",
+    "success": "Success:",
+    "latency": "Latency:"
+  },
+  "editor": {
+    "error": "Error",
+    "loading": "Loading editor...",
+    "unknownType": "Unknown editor type",
+    "noEditorsOpen": "No editors open",
+    "close": "Close",
+    "noProvider": "No editor provider for: {{viewType}}",
+    "untitled": "Untitled"
+  },
+  "tree": {
+    "noProvider": "No TreeDataProvider registered for view: {{viewId}}",
+    "loadFailed": "Failed to load tree data"
+  },
+  "accessibility": {
+    "dismiss": "Dismiss",
+    "close": "Close",
+    "strategyNavigator": "Strategy Navigator"
+  },
+  "onboarding": {
+    "toggleTooltip": "Replay Onboarding Guide",
+    "controls": {
+      "next": "Next",
+      "prev": "Back",
+      "done": "Done",
+      "progress": "{{current}} of {{total}}"
+    },
+    "welcome": {
+      "sidebar": {
+        "title": "Navigation Panel",
+        "description": "Use the sidebar to switch between StratForge, Backtester, Sigma, and other modules."
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Configure API keys, data providers, and system preferences here."
+      },
+      "auth": {
+        "title": "Account",
+        "description": "Log in to access Pro features, cloud sync, and AI-powered strategy generation."
+      },
+      "llm": {
+        "title": "LLM Provider",
+        "description": "Select the AI model used for strategy generation. Bring your own API key or use StratCraft Pro."
+      },
+      "language": {
+        "title": "Language",
+        "description": "Switch the application language. StratCraft supports 12 languages."
+      },
+      "finish": {
+        "title": "You are all set!",
+        "description": "Start by exploring the Hub or create your first strategy in StratForge. You can replay this guide from the help icon in the status bar."
+      }
+    }
+  },
+  "assistant": {
+    "panelTitle": "Assistant",
+    "noContent": "No help available for this page.",
+    "tooltip": "Assistant Mode (Ctrl+L)",
+    "backToOverview": "Back to overview",
+    "closePanel": "Close assistant panel"
+  },
+  "notifications": {
+    "regionLabel": "Notifications",
+    "sweep": {
+      "allCompleteTitle": "All Sweeps Completed",
+      "allCompleteBody": "{{count}} sweeps finished. {{succeeded}} succeeded, {{errors}} errors.",
+      "nextSweepTitle": "Starting Next Sweep",
+      "nextSweepBody": "Auto-advancing to next sweep ({{remaining}} remaining in queue)",
+      "sweepCompleteTitle": "Parameter Sweep Complete",
+      "sweepCompleteBody": "{{succeeded}}/{{total}} arms completed successfully",
+      "sweepCompleteBodyWithErrors": "{{succeeded}}/{{total}} arms completed successfully ({{errors}} errors)",
+      "downloadCompleteTitle": "Data Download Complete",
+      "downloadCompleteBody": "{{total}} symbols downloaded. Sweep fitting started.",
+      "downloadCompleteBodyWithFailures": "{{total}} symbols processed ({{failures}} failed). Sweep fitting started."
+    }
+  },
+  "navigationGuard": {
+    "title": "Generation In Progress",
+    "message": "Strategy generation is in progress. Leaving will cancel the current task.",
+    "confirm": "Leave Page",
+    "cancel": "Stay"
+  },
+  "validation": {
+    "backendReport": "Backend Validation Report",
+    "layer": "Layer",
+    "status": "Status",
+    "pass": "Pass",
+    "fail": "Fail",
+    "skip": "Skipped",
+    "noReport": "No backend validation report available",
+    "L1": "Contract Shape",
+    "L2": "Security Scan",
+    "L3": "Compilation",
+    "L4": "Symbol Verification",
+    "L5": "Isolated Load Test",
+    "L6": "Smoke Test",
+    "title": "Backend Validation",
+    "failedAt": "Failed: {{layer}}",
+    "stderrOutput": "stderr output"
+  },
+  "errorState": {
+    "technicalDetails": "Technical details"
+  },
+  "viewRegistry": {
+    "nexus": {
+      "label": "Nexus Hub",
+      "shortLabel": "Hub"
+    },
+    "marketplace": {
+      "label": "Plugin Marketplace",
+      "shortLabel": "Marketplace"
+    },
+    "dataManagement": {
+      "label": "Data Management",
+      "shortLabel": "Data Mgmt"
+    },
+    "settings": {
+      "label": "Settings",
+      "shortLabel": "Settings"
+    },
+    "researchEnvironment": {
+      "label": "Research Environment",
+      "shortLabel": "Research Env"
+    },
+    "strategy": {
+      "label": "StratForge",
+      "shortLabel": "StratForge"
+    },
+    "backtest": {
+      "label": "Backtester",
+      "shortLabel": "Backtester"
+    },
+    "backtestResult": {
+      "label": "Backtest Result",
+      "shortLabel": "Result"
+    },
+    "quantLab": {
+      "label": "Sigma",
+      "shortLabel": "Sigma"
+    },
+    "chart": {
+      "label": "Chart",
+      "shortLabel": "Chart"
+    },
+    "ai": {
+      "label": "AI Assistant",
+      "shortLabel": "AI"
+    },
+    "scoreboard": {
+      "label": "Signal Scoreboard",
+      "shortLabel": "Scoreboard"
+    },
+    "signalGenerator": {
+      "label": "Signal Generator",
+      "shortLabel": "Signal Gen"
+    }
+  },
+  "researchEnvironment": {
+    "loading": "Reading environment status...",
+    "approvalDeclined": "The operation was not approved, so nothing was changed.",
+    "sharedEnvironmentNotice": "These {{count}} capabilities share one locked environment, so they are installed, repaired, and verified together rather than individually.",
+    "states": {
+      "absent": "Not installed",
+      "installing": "Installing",
+      "repairing": "Repairing",
+      "verifying": "Verifying",
+      "uninstalling": "Uninstalling",
+      "ready": "Ready",
+      "failed": "Failed"
+    },
+    "layerStates": {
+      "ready": "Ready",
+      "failed": "Failed",
+      "pending": "Not verified"
+    },
+    "jobStates": {
+      "queued": "Queued",
+      "running": "Running",
+      "succeeded": "Succeeded",
+      "failed": "Failed"
+    },
+    "actions": {
+      "install": "Install Environment",
+      "repair": "Repair Environment",
+      "verify": "Verify Again",
+    "uninstall": "Uninstall Environment",
+      "remove_capability": "Remove Capability",
+      "restore_capability": "Restore Capability"
+    },
+    "progress": {
+      "install": "Installation progress",
+      "repair": "Repair progress",
+      "verify": "Verification progress",
+    "uninstall": "Uninstall progress",
+      "remove_capability": "Capability removal progress",
+      "restore_capability": "Capability restoration progress"
+    },
+    "stages": {
+      "admission": "Checking prerequisites",
+      "install": "Installing packages",
+      "repair": "Rebuilding installation",
+      "uninstall": "Removing local environment",
+      "transition": "Updating environment capabilities",
+      "python_verify": "Verifying Python packages",
+      "julia_verify": "Initializing Julia backend"
+    },
+    "causes": {
+      "unsupported": "Unsupported host",
+      "missing_executable": "Executable not found",
+      "missing_lock": "Lock file not found",
+      "manifest_drift": "Manifest and lock disagree",
+      "lock_io": "Lock file could not be read",
+      "invalid_lock_metadata": "Lock metadata is invalid",
+      "database": "Local record could not be updated",
+      "network": "Network request failed",
+      "process_exit": "Process exited with an error",
+      "process_lost": "Process ended unexpectedly",
+      "import": "Package could not be imported",
+      "probe": "Functional check failed",
+      "backend_init": "Backend initialization failed"
+    },
+    "failureCategory": {
+      "unsupported_platform": "Platform not supported",
+      "pixi_missing": "Pixi is not available",
+      "lock_missing": "Lock file is missing",
+      "lock_drift": "Manifest and lock have drifted",
+      "lifecycle_coordination_failed": "Environment record could not be coordinated",
+      "network_failed": "Download failed",
+      "install_failed": "Installation failed",
+      "repair_failed": "Repair failed",
+      "uninstall_failed": "Uninstall failed",
+      "workload_active": "Research workload is active",
+      "operation_interrupted": "Operation was interrupted",
+      "verification_failed": "Verification failed"
+    },
+    "failure": {
+      "stage": "Stage",
+      "cause": "Cause",
+      "capability": "Package"
+    },
+    "capabilityCause": {
+      "import": "This package could not be imported",
+      "probe": "This package failed its functional check",
+      "backend_init": "The Julia backend failed to initialize"
+    },
+    "capability": {
+      "expected": "Expected",
+      "installed": "Installed",
+      "notInstalled": "--"
+    },
+    "pysr": {
+      "python": "Python package",
+      "julia": "Julia backend"
+    },
+    "capabilities": {
+      "histdata": {
+        "name": "HistData",
+        "description": "Offline-verified parser and Parquet converter for separately reviewed Forex acquisition."
+      },
+      "duckdb": {
+        "name": "DuckDB",
+        "description": "In-process analytical database used for research queries."
+      },
+      "gplearn": {
+        "name": "gplearn",
+        "description": "Genetic programming for symbolic factor discovery."
+      },
+      "gpquant": {
+        "name": "GPQuant",
+        "description": "Genetic programming tuned for quantitative factor search."
+      },
+      "pysr": {
+        "name": "PySR",
+        "description": "Symbolic regression with a Julia backend that initializes on first use."
+      },
+      "pandas_ta": {
+        "name": "pandas-ta",
+        "description": "Technical indicator library behind the TA-Lib factor engine."
+      }
+    },
+    "summary": {
+      "interpreter": "Interpreter",
+      "lastVerified": "Last verified",
+      "pixiVersion": "Pixi version",
+      "technicalDetails": "Technical details",
+      "manifestHash": "Manifest SHA-256",
+      "lockHash": "Lock SHA-256",
+      "liveWorkloadNotice": "Only research runs started after this finishes use the prepared environment. Nothing running right now is restarted or interrupted."
+    },
+    "regions": {
+      "summary": "Environment summary"
+    },
+    "announce": {
+      "succeeded": "{{operation}}: finished successfully.",
+      "failed": "{{operation}}: failed.",
+      "failedState": "The research environment is in a failed state."
+    },
+    "a11y": {
+      "environmentState": "Environment state: {{state}}",
+      "capabilityState": "{{capability}} state: {{state}}",
+      "platform": "Platform: {{platform}} {{architecture}}",
+      "elapsed": "Elapsed time: {{elapsed}}",
+      "logTail": "Recent output from the environment operation"
+    }
+  },
+  "scoreboard": {
+    "title": "Signal Scoreboard",
+    "empty": "No signals scored yet. Generate a signal to populate the scoreboard.",
+    "disclaimer": "Past performance over {{windowBars}} bars. Not a recommendation.",
+    "columns": {
+      "button": "Columns",
+      "menuTitle": "Show columns"
+    },
+    "col": {
+      "algorithm": "Algorithm",
+      "recentIc": "Recent IC",
+      "liveIc": "Live IC",
+      "sharpeLong": "Recent Sharpe (long)",
+      "sharpeShort": "Recent Sharpe (short)",
+      "hitRate": "Hit rate",
+      "trades": "Trades",
+      "asOf": "As of"
+    },
+    "cell": {
+      "liveOnlySince": "live-only -- observing since {{date}}",
+      "liveOnlyTooltip": "Live observation started {{date}}. No historical backtest available -- see TICKET_196_7_7 for why.",
+      "symbols": "symbols",
+      "trainingScaleTooltip": "Trained on {{trained}} of {{requested}} symbols -- some symbols excluded due to insufficient bar history"
+    },
+    "previousVersions": "Previous versions"
+  },
+  "sweepMonitor": {
+    "title": "Sweep Progress",
+    "titleWithQueue": "Sweep Progress (+{{count}}q)",
+    "complete": "Sweep Complete",
+    "stop": "Stop Sweep",
+    "phase": {
+      "downloading": "Downloading Data",
+      "running": "Running Arms"
+    },
+    "eta": "~{{minutes}} min remaining",
+    "throughput": "{{rate}} arms/min",
+    "cpu": "CPU",
+    "cpuApp": "App CPU",
+    "memory": "MEM",
+    "memApp": "App MEM",
+    "trainingCores": "Training: {{cores}} cores",
+    "succeeded": "Succeeded",
+    "cached": "Cached",
+    "failed": "Failed",
+    "resumed": "Resumed",
+    "queue": {
+      "title": "Queue ({{count}} pending)",
+      "cancel": "Cancel"
+    },
+    "completed": {
+      "title": "Completed ({{count}})"
+    }
+  },
+  "llmProvider": {
+    "badge": {
+      "pro": "Pro",
+      "byok": "BYOK"
+    }
+  },
+  "brand": {
+    "tagline": "Connect the Alpha"
+  },
+  "statusDot": {
+    "running": "Running",
+    "warning": "Warning",
+    "error": "Error",
+    "idle": "Idle",
+    "online": "Online",
+    "offline": "Offline",
+    "degraded": "Degraded"
+  },
+  "persistence": {
+    "saveFailed": "Save failed",
+    "restoreFailed": "Restore failed",
+    "deleteFailed": "Delete failed",
+    "fallback": "Persistence failed"
+  },
+  "comingSoon": {
+    "chartView": "Chart View - Coming Soon",
+    "aiAssistant": "AI Assistant - Coming Soon"
+  },
+  "moduleNames": {
+    "optimizer": "Optimizer",
+    "riskEngine": "RiskEngine",
+    "dataFeed": "DataFeed",
+    "backtester": "Backtester"
+  },
+  "pluginPermissions": {
+    "network": {
+      "name": "Network Access",
+      "description": "Access external network resources and APIs"
+    },
+    "networkInternal": {
+      "name": "Internal Network",
+      "description": "Access internal API endpoints only"
+    },
+    "filesystem": {
+      "name": "Sandboxed File Access",
+      "description": "Read and write files within plugin sandbox"
+    },
+    "filesystemFull": {
+      "name": "Full File System Access",
+      "description": "Access any file on the system"
+    },
+    "database": {
+      "name": "Database Access",
+      "description": "Read and write to the application database"
+    },
+    "notification": {
+      "name": "Notifications",
+      "description": "Show system notifications to the user"
+    },
+    "clipboard": {
+      "name": "Clipboard Access",
+      "description": "Read from and write to system clipboard"
+    },
+    "shell": {
+      "name": "Shell Execution",
+      "description": "Execute shell commands on the system"
+    },
+    "native": {
+      "name": "Native Modules",
+      "description": "Load and use native Node.js modules"
+    }
+  },
+  "downloadQueue": {
+    "queued": "Queued",
+    "queuedResumed": "Queued (resumed)",
+    "downloading": "Downloading...",
+    "cancelled": "Cancelled",
+    "yieldedPriority": "Yielded to higher priority",
+    "yieldedPriorityMultiTf": "Yielded to higher priority (multi-TF)",
+    "partial": "Partial: {{rowCount}} bars, missing {{dayCount}} day(s) ({{dayList}})",
+    "complete": "Complete: {{rowCount}} bars",
+    "completeMultiTf": "Complete: {{count}} timeframes"
+  },
+  "dataCache": {
+    "dataReadyCached": "Data ready (cached)",
+    "mergingData": "Merging data...",
+    "fetchingFromProvider": "Fetching data from {{provider}}...",
+    "writingRows": "Writing {{count}} rows...",
+    "providerStartsAt": "Data from {{provider}} starts at {{actualStart}} (requested {{requestedStart}})",
+    "dataReadyAggregated": "Data ready ({{rowCount}} rows, {{target}} aggregated from {{baseInterval}})",
+    "checkingCache": "Checking cache for {{symbol}}/{{interval}}...",
+    "fetchingEarlierData": "Fetching earlier data ({{start}}~{{end}})...",
+    "fetchingNewerData": "Fetching newer data ({{start}}~{{end}})...",
+    "dataReady": "Data ready ({{count}} rows)",
+    "refetchingBackfill": "Re-fetching {{symbol}}/{{interval}} to backfill interior gap...",
+    "dataReadyBackfilled": "Data ready ({{count}} rows, interior gap backfilled)"
+  },
+  "keychainWarning": {
+    "message": "OS keychain unavailable -- API keys cannot be stored securely."
+  },
+  "assistantHelp": {
+    "strategyStudioGuide": "Strategy Studio Guide",
+    "bollingerMacd": "Bollinger Bands + MACD Strategy",
+    "rsiMa": "RSI + Moving Average Strategy",
+    "macdRsiDivergence": "MACD + RSI Divergence Strategy",
+    "emaCrossover": "EMA Crossover Strategy",
+    "ichimokuCloud": "Ichimoku Cloud Strategy",
+    "fibonacciTrend": "Fibonacci Trend Strategy",
+    "vwapStrategy": "VWAP Strategy",
+    "supertrend": "Supertrend Strategy",
+    "dualMaVolume": "Dual MA + Volume Strategy"
+  },
+  "configService": {
+    "loadedSuccessfully": "Configuration loaded successfully"
+  },
+  "strategyTree": {
+    "selectNode": "Select Node"
+  },
+  "installProgress": {
+    "extractingPackage": "Extracting package...",
+    "backingUpExisting": "Backing up existing...",
+    "installingFiles": "Installing files...",
+    "registeringPermissions": "Registering permissions...",
+    "runningLifecycleHooks": "Running lifecycle hooks...",
+    "initializing": "Initializing...",
+    "installationComplete": "Installation complete!"
+  },
+  "marketplace": {
+    "fetchingMetadata": "Fetching plugin metadata...",
+    "downloadingPlugin": "Downloading plugin...",
+    "verifyingChecksum": "Verifying checksum...",
+    "resolvingDependencies": "Resolving dependencies...",
+    "extractingPlugin": "Extracting plugin...",
+    "installingPythonDeps": "Installing Python dependencies...",
+    "finalizingInstallation": "Finalizing installation...",
+    "installationComplete": "Installation complete!",
+    "installingFromBundled": "Installing from bundled package...",
+    "copyingBundledPlugin": "Copying bundled plugin..."
+  }
+}

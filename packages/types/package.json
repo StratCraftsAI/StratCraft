@@ -1,0 +1,48 @@
+{
+  "name": "@StratCraft/types",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "description": "Shared TypeScript types for StratCraft",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "contracts"
+  ],
+  "dependencies": {
+    "zod": "^4.3.6"
+  },
+  "scripts": {
+    "build": "npm run codegen:guide-completion:check && npm run codegen:research-task:check && npm run codegen:governance-evidence:check && npm run codegen:research-worker:check && npm run codegen:governance-api:check && tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "codegen:guide-completion": "node scripts/generate-guide-completion-contract.mjs",
+    "codegen:guide-completion:check": "node scripts/generate-guide-completion-contract.mjs --check",
+    "codegen:research-task": "node --experimental-strip-types --experimental-default-type=module scripts/generate-research-task-schema.mjs",
+    "codegen:research-task:check": "node --experimental-strip-types --experimental-default-type=module scripts/generate-research-task-schema.mjs --check",
+    "codegen:governance-evidence": "node --experimental-strip-types --experimental-default-type=module scripts/generate-governance-evidence-schema.mjs",
+    "codegen:governance-evidence:check": "node --experimental-strip-types --experimental-default-type=module scripts/generate-governance-evidence-schema.mjs --check",
+    "codegen:research-worker": "node --experimental-strip-types --experimental-default-type=module scripts/generate-research-worker-contracts.mjs",
+    "codegen:research-worker:check": "node --experimental-strip-types --experimental-default-type=module scripts/generate-research-worker-contracts.mjs --check",
+    "codegen:governance-api": "node --experimental-strip-types --experimental-default-type=module scripts/generate-governance-api-contract.mjs",
+    "codegen:governance-api:check": "node --experimental-strip-types --experimental-default-type=module scripts/generate-governance-api-contract.mjs --check"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "@vitest/coverage-v8": "1.6.1",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  }
+}

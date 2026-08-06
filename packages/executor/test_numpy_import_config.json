@@ -1,0 +1,34 @@
+{
+  "strategyPath": "packages/executor/test_numpy_import.py",
+  "frameworkPath": "packages/builder-templates",
+  "outputDir": "/tmp/numpy_import_test",
+  "data": {
+    "symbol": "BTC/USDT",
+    "interval": "1h",
+    "startTime": 1704067200,
+    "endTime": 1704153600,
+    "dataPath": "",
+    "dataSourceType": "mock"
+  },
+  "strategy": {
+    "params": {}
+  },
+  "execution": {
+    "initialCapital": 100000.0,
+    "commission": 0.001,
+    "slippage": 0.0005,
+    "allowShort": true,
+    "maxPositionSize": 1.0
+  },
+  "checkpoint": {
+    "enabled": false,
+    "interval": 100,
+    "maxCount": 5,
+    "warmupPeriod": 50,
+    "cleanupOnComplete": true
+  },
+  "resume": {
+    "enabled": false,
+    "taskId": ""
+  }
+}

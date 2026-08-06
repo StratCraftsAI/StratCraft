@@ -1,0 +1,1256 @@
+{
+  "common": {
+    "loading": "加载中...",
+    "initializing": "初始化中...",
+    "save": "保存",
+    "cancel": "取消",
+    "confirm": "确认",
+    "delete": "删除",
+    "edit": "编辑",
+    "close": "关闭",
+    "dismiss": "关闭",
+    "back": "返回",
+    "next": "下一步",
+    "submit": "提交",
+    "reset": "重置",
+    "search": "搜索",
+    "filter": "筛选",
+    "refresh": "刷新",
+    "export": "导出",
+    "import": "导入",
+    "enable": "启用",
+    "disable": "禁用",
+    "enabled": "已启用",
+    "disabled": "已禁用",
+    "yes": "是",
+    "no": "否",
+    "ok": "确定",
+    "apply": "应用",
+    "retry": "重试",
+    "later": "稍后",
+    "tryAgain": "再试一次",
+    "login": "登录",
+    "logout": "退出",
+    "signOut": "退出登录",
+    "upgradePlan": "升级计划",
+    "signingOut": "正在退出...",
+    "loggingIn": "正在登录...",
+    "home": "首页",
+    "pluginSettings": "Plugin Settings",
+    "loginSignup": "Login / Sign Up"
+  },
+  "compilation": {
+    "compiled": "已编译",
+    "failed": "编译失败",
+    "noOutput": "未提供编译器输出。",
+    "retry": "重试",
+    "compiling": "编译中...",
+    "showRawOutput": "显示原始输出"
+  },
+  "nav": {
+    "dashboard": "仪表盘",
+    "strategies": "策略",
+    "backtest": "回测",
+    "marketplace": "插件市场",
+    "settings": "设置",
+    "data": "数据",
+    "nexusHub": "枢纽中心",
+    "strategyStudio": "策略工作室",
+    "strategyBuilder": "StratForge",
+    "backtestNexus": "Backtester",
+    "dataNexus": "数据中心",
+    "pluginMarketplace": "插件市场",
+    "chart": "图表",
+    "aiAssistant": "AI 助手",
+    "result": "结果"
+  },
+  "status": {
+    "online": "在线",
+    "offline": "离线",
+    "connecting": "连接中...",
+    "checking": "检查中...",
+    "connected": "已连接",
+    "disconnected": "已断开",
+    "error": "错误",
+    "ready": "就绪",
+    "pending": "等待中",
+    "running": "运行中",
+    "completed": "已完成",
+    "failed": "失败",
+    "notConfigured": "凭据未配置 — 前往 设置 > 凭据"
+  },
+  "dialog": {
+    "confirmDelete": "确定要删除此项吗?",
+    "unsavedChanges": "有未保存的更改。是否放弃?",
+    "confirmAction": "确定要继续吗?"
+  },
+  "time": {
+    "now": "现在",
+    "today": "今天",
+    "yesterday": "昨天",
+    "ago": "前"
+  },
+  "auth": {
+    "loginTo": "登录 {{provider}}",
+    "loginToUnlock": "登录以解锁",
+    "signUpFree": "免费注册",
+    "loginRequired": "需要登录",
+    "viewPlans": "查看套餐",
+    "plan": "{{plan}} 套餐",
+    "needHelp": "需要帮助? 请联系 support@StratCraft.io",
+    "loginRequiredBanner": "Login required to use this feature.",
+    "clickToLogin": "Log In",
+    "credits": "Credits: {{remaining}} / {{total}}",
+    "creditsRemaining": "Credits: {{remaining}}",
+    "renews": "Renews: {{date}}",
+    "passwordPlaceholder": "密码",
+    "inline": {
+      "hero": {
+        "badge": "量化研究工作台",
+        "heading": "在一个受控工作台中构建、测试并交付交易系统。",
+        "tagline": "面向需要更快验证想法、更清晰执行流程,以及更贴近操作控制台 (而非营销页面) 的量化团队和独立研究者。",
+        "pillars": {
+          "workflows": {
+            "title": "AI 策略工作流",
+            "description": "将市场想法转化为结构化研究、信号和可部署的交易逻辑。"
+          },
+          "backtesting": {
+            "title": "内置回测",
+            "description": "上线前以数据、审计跟踪与执行感知模拟验证想法。"
+          },
+          "controls": {
+            "title": "运营级管控",
+            "description": "在安全的桌面工作台中管理数据、凭据、插件与执行编排。"
+          }
+        },
+        "stats": {
+          "multistep": {
+            "value": "多步骤",
+            "label": "从研究到执行的全流程"
+          },
+          "desktopNative": {
+            "value": "桌面原生",
+            "label": "面向严谨量化的工作台"
+          },
+          "secure": {
+            "value": "安全可控",
+            "label": "认证、插件与本地控制"
+          }
+        }
+      },
+      "email": {
+        "heading": "登录或免费注册账户",
+        "description": "输入邮箱继续。新账户将自动创建。如已有密码账户,可改用密码登录。",
+        "secureAccess": "安全访问",
+        "emailVerification": "邮件验证",
+        "placeholder": "you@example.com",
+        "continueButton": "使用邮箱继续",
+        "sending": "正在发送..."
+      },
+      "method": {
+        "password": {
+          "title": "使用密码",
+          "description": "适用于使用邮箱 + 密码登录的回访用户。"
+        },
+        "browser": {
+          "title": "在浏览器中登录",
+          "description": "通过托管的认证流程继续,使用完整的账户控制。"
+        }
+      },
+      "footer": "免费开始使用,无需信用卡。继续即表示您进入 StratCraft 工作台,用于策略设计、回测、基于插件的扩展以及受控执行。",
+      "code": {
+        "heading": "请查收邮件",
+        "sentTo": "我们已向 {{email}} 发送 6 位验证码",
+        "verifying": "正在验证...",
+        "changeEmail": "更换邮箱",
+        "resendCountdown": "{{seconds}} 秒后可重发",
+        "resendCode": "重新发送",
+        "otherWays": "其他登录方式",
+        "usePassword": "使用密码登录",
+        "loginWithBrowser": "在浏览器中登录"
+      },
+      "password": {
+        "heading": "使用密码登录",
+        "description": "输入您的邮箱和密码",
+        "emailPlaceholder": "you@example.com",
+        "loginButton": "登录",
+        "loggingIn": "登录中...",
+        "switchToCode": "改用验证码"
+      },
+      "errors": {
+        "invalidEmail": "请输入有效的邮箱地址",
+        "sendCodeFailed": "验证码发送失败",
+        "networkError": "网络错误",
+        "invalidCode": "验证码无效",
+        "resendFailed": "重发失败",
+        "invalidCredentials": "凭据无效"
+      }
+    }
+  },
+  "plugin": {
+    "error": "插件错误",
+    "errorOccurred": "插件发生错误",
+    "loadingPlugin": "正在加载 {{title}}...",
+    "failedToLoad": "加载插件失败: {{error}}",
+    "sandboxError": "沙箱错误: {{error}}"
+  },
+  "permissions": {
+    "unknownPermission": "未知权限",
+    "title": "权限请求",
+    "requestingPermissions": "此插件正在请求以下权限:",
+    "dangerousPermissions": "危险权限",
+    "dangerousWarning": "此插件请求可能影响系统安全的高级权限。请仅在信任来源的情况下批准。",
+    "deny": "拒绝",
+    "approve": "批准",
+    "approveAnyway": "仍然批准",
+    "pluginId": "插件 ID",
+    "author": "作者",
+    "riskLevels": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "dangerous": "Dangerous",
+      "unknown": "Unknown"
+    }
+  },
+  "locked": {
+    "requiresTier": "此功能需要 {{tier}} 级别才能访问",
+    "serviceEnabled": "您已启用此服务。当您升级到 {{tier}} 级别后将自动激活。"
+  },
+  "toolbar": {
+    "logo": "标志",
+    "systemSettings": "系统设置",
+    "researchEnvironment": "研究环境"
+  },
+  "error": {
+    "somethingWentWrong": "出现问题",
+    "unexpectedError": "发生意外错误",
+    "viewNotFound": "未找到视图: {{view}}",
+    "editorNotFound": "未找到编辑器: {{feature}}"
+  },
+  "view": {
+    "loadingView": "加载视图中...",
+    "errorPrefix": "错误: {{error}}",
+    "unknownViewType": "未知的视图类型",
+    "noProvider": "没有视图提供者: {{viewId}}",
+    "noViewSelected": "未设置视图",
+    "failedToLoad": "视图加载失败"
+  },
+  "tier": {
+    "free": "FREE",
+    "basic": "BASIC",
+    "pro": "PRO",
+    "gold": "GOLD"
+  },
+  "nexusHub": {
+    "initializingSystems": "正在初始化核心系统...",
+    "connectTheAlpha": "连接 ALPHA",
+    "strategy": "策略",
+    "backtest": "回测",
+    "strategyModule": "策略模块",
+    "backtestModule": "回测模块",
+    "strategyDescription": "算法策略生成和逻辑执行",
+    "backtestDescription": "高性能 C++ 回测引擎，集成数据加载",
+    "noLink": "无 {{title}} 链接",
+    "noModulesAvailable": "无可用模块",
+    "linking": "链接中",
+    "registry": "注册表",
+    "deactivate": "停用",
+    "systemActive": "系统活跃",
+    "moduleStandby": "模块待机",
+    "emptySlot": "空插槽",
+    "modules": "Modules",
+    "modulesDescription": "Available plugins for strategy research, testing, and trading"
+  },
+  "strategyStudio": {
+    "strategyNona": "策略 NONA",
+    "advanced": "高级",
+    "mode": "模式",
+    "tierAccessRequired": "This feature requires {{tier}} tier access"
+  },
+  "breadcrumb": {
+    "nexusHub": "枢纽中心"
+  },
+  "banner": {
+    "apiKey": {
+      "message": "AI 功能需要配置 API 密钥或订阅 PRO 版本",
+      "configureKey": "配置密钥",
+      "loginUpgrade": "登录并升级",
+      "upgrade": "升级",
+      "dismiss": "关闭"
+    }
+  },
+  "modal": {
+    "defaultConfirmTitle": "确认",
+    "defaultInfoTitle": "提示",
+    "defaultOkText": "确定",
+    "defaultCancelText": "取消",
+    "close": "关闭",
+    "configureApiKey": "配置API密钥",
+    "defaultDestructiveTitle": "确认删除",
+    "tierUpgrade": {
+      "title": "解锁 {{plugin}}",
+      "body": "此插件需要 {{required}} 级别。\n您当前为 {{current}}。\n\n请选择获取访问方式：\n\n- 升级套餐：解锁所有 {{required}} 功能\n- 一次性购买：仅解锁此插件",
+      "upgradeCta": "升级到 Gold",
+      "buyoutCta": "单独购买"
+    }
+  },
+  "dataManagement": {
+    "title": "数据管理",
+    "tabs": {
+      "catalog": "数据目录",
+      "downloadQueue": "下载队列",
+      "import": "导入"
+    },
+    "stats": {
+      "totalSize": "总大小",
+      "totalRows": "总行数",
+      "symbols": "标的数",
+      "providers": "数据源",
+      "segments": "{{count}} 个分片"
+    },
+    "catalog": {
+      "searchSymbol": "搜索标的...",
+      "allProviders": "全部数据源",
+      "allIntervals": "全部周期",
+      "deleteCount": "删除 ({{count}})",
+      "refresh": "刷新",
+      "totalSegments": "{{count}} 个分片",
+      "columnSymbol": "标的",
+      "columnInterval": "周期",
+      "columnDateRange": "日期范围",
+      "columnRows": "行数",
+      "columnSize": "大小",
+      "loading": "加载中...",
+      "noData": "未找到缓存数据分片",
+      "deleteSegment": "删除分片",
+      "groupSummary": "{{symbols}} 个标的 | {{segments}} 个分片 | {{size}}"
+    },
+    "download": {
+      "newDownload": "新建下载",
+      "provider": "数据源",
+      "symbol": "标的",
+      "searchSymbol": "搜索标的...",
+      "interval": "周期",
+      "start": "开始",
+      "end": "结束",
+      "addToQueue": "加入队列",
+      "noTasks": "下载队列为空",
+      "columnSymbol": "标的",
+      "columnInterval": "周期",
+      "columnProvider": "数据源",
+      "columnStatus": "状态",
+      "columnProgress": "进度",
+      "cancel": "取消",
+      "maxLookback": "最大回溯 {{limit}}",
+      "intervalSetTo": "{{provider}}: 已为 {{symbol}} 设置周期为 {{interval}}",
+      "lookbackAdjusted": "{{provider}} {{interval}} 最大回溯: {{limit}} -- 开始日期已调整为 {{date}}",
+      "switchedInterval": "已切换为 {{interval}} -- {{oldInterval}} 超出最大回溯",
+      "lookbackError": "{{provider}} {{interval}} 最大回溯为 {{limit}}。请调整开始日期或选择更粗的周期。"
+    },
+    "import": {
+      "title": "导入数据包",
+      "subtitle": "将用户提供的历史数据包（MySQL / SQLite / PostgreSQL）一次性导入本地缓存。导入后该数据包即可在 Alpha Factory 中作为数据源选择。",
+      "packageName": "数据包名称",
+      "packageNamePlaceholder": "例如 cn-a-share-2024",
+      "dialect": "源数据库类型",
+      "connection": "连接",
+      "connectionPlaceholder": "SQLite 文件路径，或 host=... user=... database=...",
+      "adjustMode": "复权模式",
+      "adjustModeHint": "每个数据包仅声明一次。回测通常选择 hfq（后复权）。",
+      "adjustModes": {
+        "none": "none（不复权）",
+        "qfq": "qfq（前复权）",
+        "hfq": "hfq（后复权）"
+      },
+      "archivalCadence": "发布节奏",
+      "archivalCadenceHint": "数据源发布节奏。HistData / Dukascopy / EOD Historical 等月度归档请选择 monthly_archive，让信号发现窗口锚定到上一已发布月末而非系统当前时间；snapshot（默认）适用于一次性用户 CSV。",
+      "archivalCadences": {
+        "monthly_archive": "月度归档（HistData / Dukascopy / EOD）",
+        "weekly_archive": "周度归档",
+        "daily_eod": "日终归档",
+        "snapshot": "快照（一次性 CSV）",
+        "realtime": "实时 / 流式"
+      },
+      "run": "导入",
+      "importing": "导入中...",
+      "progressSeries": "{{symbol}} {{interval}}（{{index}}/{{total}}）",
+      "complete": "已导入 {{count}} 条序列",
+      "importedPackages": "已导入数据包",
+      "empty": "暂无已导入的数据包。",
+      "table": {
+        "col": {
+          "symbol": "代码",
+          "interval": "周期",
+          "from": "开始",
+          "to": "结束",
+          "rows": "行数"
+        }
+      }
+    },
+    "importPackage": {
+      "title": "导入数据包",
+      "subtitle": "从 Parquet 文件目录或 DuckDB 文件导入数据包。在数据包目录中放置 manifest.json 以声明 schema、时区和复权模式。",
+      "selectDirectory": "选择目录",
+      "selectDuckDb": "选择 DuckDB 文件",
+      "packageNamePlaceholder": "例如 histdata-forex（可选，默认使用文件夹名）",
+      "validating": "校验中...",
+      "registering": "注册中...",
+      "importing": "导入中...",
+      "importingSymbol": "{{symbol}} {{interval}} ({{current}}/{{total}})",
+      "complete": "已导入 {{count}} 条序列",
+      "scanning": "扫描中...",
+      "scanFailed": "扫描失败：{{message}}",
+      "confirmImport": "导入",
+      "confirmReimport": "重新导入 (更新)",
+      "reimportHint": "该数据包已导入。重新导入将更新现有数据。",
+      "cancelPreview": "取消",
+      "changeSource": "更换",
+      "previewDialect": "数据格式",
+      "previewSymbols": "品种",
+      "previewIntervals": "周期",
+      "previewFiles": "文件",
+      "previewSize": "大小",
+      "previewValidation": "校验",
+      "previewValid": "通过",
+      "previewErrors": "{{count}} 个错误",
+      "noSymbolsDetected": "未检测到品种",
+      "expandDetails": "详情",
+      "collapseDetails": "收起",
+      "remove": "删除",
+      "removeConfirm": "确定删除数据包 \"{{name}}\" 及其所有缓存数据？",
+      "removeTitle": "删除数据包",
+      "removeButton": "删除",
+      "removing": "删除中...",
+      "removed": "数据包已删除。",
+      "reimport": "重新导入",
+      "healthCheck": "健康检查",
+      "healthChecking": "检查中...",
+      "healthOk": "全部 {{count}} 个文件正常",
+      "healthMissing": "{{total}} 个文件中有 {{missing}} 个缺失",
+      "nameModal": {
+        "title": "命名数据包",
+        "label": "数据包名称",
+        "placeholder": "例如 histdata-forex",
+        "hint": "此名称将在数据源选择器中标识该数据包。",
+        "reservedError": "\"{{name}}\" 是保留名称，请选择其他名称。",
+        "reimportWarning": "同名数据包已存在。确认后将更新已有数据。",
+        "cancel": "取消",
+        "confirm": "确认"
+      },
+      "importFailed": "Import failed."
+    },
+    "maxLookback": "最多回溯 {{limit}}",
+    "callerBadge": {
+      "sweep": "Sweep",
+      "backtest": "Backtest",
+      "discovery": "Discovery",
+      "validation": "Validation",
+      "scoreboard": "Scoreboard",
+      "restore": "Restore"
+    }
+  },
+  "backtestConsole": {
+    "title": "回测控制台",
+    "noTasks": "无回测任务",
+    "cancelAllQueued": "取消所有排队",
+    "clearFinished": "清除已完成",
+    "stopBacktest": "停止回测",
+    "viewResult": "查看结果",
+    "removeFromQueue": "从队列移除",
+    "removeFromList": "从列表移除",
+    "status": {
+      "preparing": "准备中",
+      "running": "运行中",
+      "queued": "排队中",
+      "queuedPosition": "排队 #{{position}}",
+      "completed": "已完成",
+      "failed": "失败",
+      "cancelled": "已取消"
+    },
+    "summary": {
+      "running": "运行中",
+      "queued": "排队中",
+      "done": "已完成",
+      "failed": "失败"
+    },
+    "taskLabel": "任务:",
+    "openConsole": "打开回测控制台",
+    "viewDownloadQueue": "查看下载队列",
+    "openAlphaFactoryConsole": "打开 Alpha Factory 控制台",
+    "sweepStatus": {
+      "tooltip": "查看扫描进度",
+      "complete": "{{succeeded}} 成功, {{errors}} 错误",
+      "completeWithResumed": "{{succeeded}} 成功, {{resumed}} 已恢复, {{errors}} 错误"
+    },
+    "lstmStatus": {
+      "phase": {
+        "boot": "启动中",
+        "load_traces": "加载轨迹",
+        "build_matrix": "构建矩阵",
+        "build_windows": "构建窗口"
+      },
+      "foldEpoch": "折 {{fold}}/{{totalFolds}} 轮次 {{epoch}}/{{totalEpochs}}",
+      "training": "训练中",
+      "completed": "已训练",
+      "failed": "训练失败",
+      "tooltip": "LSTM 训练 {{run}} - {{model}} - {{signals}} 个信号",
+      "tooltipGeneric": "查看 LSTM 训练进度"
+    }
+  },
+  "symbolSearch": {
+    "placeholder": "Search symbol...",
+    "authRequired": "Please log in to search symbols",
+    "serviceUnavailable": "Service unavailable",
+    "credentialError": "身份验证失败。请在设置中检查您的 API 凭据。",
+    "truncated": "显示 {{total}} 中的 {{count}} 项 -- 请细化搜索"
+  },
+  "llmSelector": {
+    "platformProvider": "Platform provider - no API key required",
+    "verified": "API key verified",
+    "unverified": "API key not verified - may fail",
+    "selectProvider": "Select LLM Provider",
+    "providerHeader": "Provider",
+    "modelHeader": "Model",
+    "customModelExpand": "使用自定义模型",
+    "customModelCollapse": "隐藏自定义模型",
+    "customModelPlaceholder": "输入模型ID...",
+    "customModelEmpty": "模型ID不能为空",
+    "customModelNoSpaces": "模型ID不能包含空格",
+    "customModelAsciiOnly": "模型ID只能使用ASCII字符",
+    "proFallback": "Pro"
+  },
+  "installConsent": {
+    "trustLevels": {
+      "official": "官方",
+      "verified": "已验证",
+      "unverified": "未验证",
+      "unsigned": "未签名"
+    },
+    "publisher": "发布者",
+    "unknown": "未知",
+    "update": "更新",
+    "install": "安装",
+    "version": "版本",
+    "from": "来自",
+    "unsignedPlugin": "未签名插件",
+    "unsignedMessage": "此插件未签名，无法验证。仅当您自己创建或从可信来源收到时才安装。",
+    "unverifiedPublisher": "未验证的发布者",
+    "unverifiedMessage": "此插件已签名，但发布者未经 StratCraft 验证。请谨慎进行。",
+    "highRiskPermissions": "高风险权限",
+    "highRiskMessage": "此插件请求可能影响系统的提升权限。仅当您信任发布者时才安装。",
+    "permissionsRequested": "请求的权限",
+    "noPermissions": "此插件不需要任何特殊权限。",
+    "understandRisks": "我理解这些风险",
+    "riskAcknowledgment": "安装未签名或本机插件可能会带来安全风险。我已验证来源并对此操作负责。",
+    "iUnderstandInstall": "我理解了，安装",
+    "fileSystem": "文件系统",
+    "id": "ID:",
+    "publisherLabel": "发布者:"
+  },
+  "strategy": {
+    "categories": {
+      "regimeMode": "市场状态模式",
+      "kronosMode": "时序模式",
+      "traderMode": "交易模式",
+      "riskManager": "风险管理",
+      "aiCommandCenter": "AI 指挥中心",
+      "autopilotMode": "自动驾驶模式",
+      "aiStrategyStudio": "AI 策略工作室",
+      "chatMode": "聊天模式",
+      "catalogMode": "策略目录"
+    },
+    "descriptions": {
+      "regimeMode": "市场环境和状态分类单元",
+      "kronosMode": "时间序列预测和序列分析",
+      "traderMode": "市场观察和交易执行逻辑",
+      "riskManager": "风险管理和退出策略生成",
+      "aiCommandCenter": "集中式 AI 控制和自主代理",
+      "autopilotMode": "AI 驱动的全自主交易决策",
+      "aiStrategyStudio": "AI 驱动的策略工作室，用于全面的策略创建",
+      "chatMode": "通过聊天进行对话式 AI 策略创建",
+      "catalogMode": "浏览并从 63 个成熟交易策略中生成 C++ 策略代码"
+    },
+    "hub": {
+      "loadingTopology": "加载服务拓扑...",
+      "noPlugins": "未配置插件",
+      "installPlugins": "从插件市场安装插件以启用服务",
+      "active": "活跃",
+      "syncWorkspace": "同步工作区",
+      "loginToNona": "登录 Nona",
+      "demo": {
+        "_comment": "Hub placeholder copy: unbuilt-feature demo data rendered by StrategyGroupList / ProviderStatusPanel / ProviderPortal. Remove these keys when the hub is wired to real strategy/provider registries.",
+        "generators": {
+          "regimeTrendX1": "市场状态趋势 X1",
+          "volAdaptiveBeta": "波动率自适应 Beta",
+          "crossSessArbitrage": "跨时段套利",
+          "cnnSentimentAlpha": "CNN 情绪 Alpha",
+          "highFreqScalperV4": "高频剥头皮 V4"
+        },
+        "lastRun": {
+          "twoMinAgo": "2 分钟前",
+          "oneHourAgo": "1 小时前",
+          "active": "运行中",
+          "failed": "失败",
+          "fiveMinAgo": "5 分钟前",
+          "fifteenMinAgo": "15 分钟前"
+        },
+        "providers": {
+          "pro": "专业版",
+          "quant": "量化版",
+          "alpha": "Alpha"
+        },
+        "templates": {
+          "trendFollowing": "趋势跟踪",
+          "meanReversion": "均值回归",
+          "marketMaking": "做市",
+          "statArbitrage": "统计套利"
+        }
+      }
+    },
+    "tier": {
+      "free": "免费版",
+      "basic": "基础版",
+      "pro": "专业版",
+      "enterprise": "企业版"
+    },
+    "groupList": {
+      "groupTitle": "GROUP: TREND_FOLLOWING_PACK",
+      "providerRegion": "Provider: NONA // Region: ASIA_PACIFIC",
+      "runAll": "全部运行",
+      "configPack": "配置包",
+      "colId": "ID",
+      "colName": "名称",
+      "colStatus": "状态",
+      "col7dPnl": "7日盈亏",
+      "colCpu": "CPU",
+      "colLastActivity": "最后活动",
+      "colActions": "操作"
+    },
+    "providerPortal": {
+      "licenseValid": "许可证有效",
+      "availableStrategies": "可用策略",
+      "activeGenerators": "活跃生成器",
+      "deployment": "部署",
+      "executionLogs": "执行日志",
+      "info": "信息",
+      "initializedMessage": "{{provider}} 核心引擎环境初始化成功...",
+      "moduleStatus": "模块状态",
+      "ready": "就绪"
+    },
+    "performanceChart": {
+      "title": "性能概览",
+      "subtitle": "最近30天 - 全部提供者",
+      "chartPending": "图表集成待处理",
+      "chartPendingHint": "集成 recharts 或 visx 进行数据可视化",
+      "winRate": "胜率",
+      "sharpeRatio": "夏普比率",
+      "totalReturn": "总收益"
+    },
+    "audit": {
+      "title": "Audit Report",
+      "description": "Strategy generation quality scoring",
+      "recentAudits": "Recent Audits",
+      "noData": "No audit data available yet",
+      "colProvider": "Provider",
+      "colModel": "Model",
+      "colAlgorithm": "Algorithm",
+      "colSignalSource": "Signal Source",
+      "colScore": "Score",
+      "colRating": "Rating",
+      "colDate": "Date"
+    }
+  },
+  "alphaFactoryConsole": {
+    "title": "Alpha Factory 控制台",
+    "active": "活跃:",
+    "total": "总计:",
+    "noTasks": "无任务",
+    "clearFinished": "清除已完成",
+    "viewTask": "查看任务",
+    "removeFromQueue": "从队列移除",
+    "removeFromList": "从列表移除",
+    "status": {
+      "preparing": "准备中",
+      "queued": "排队中",
+      "running": "运行中",
+      "done": "已完成",
+      "failed": "失败",
+      "cancelled": "已取消"
+    }
+  },
+  "backtestQueue": {
+    "title": "回测队列",
+    "running": "运行中",
+    "view": "查看",
+    "cancel": "取消",
+    "pending": "待处理",
+    "remove": "移除",
+    "noTasks": "无回测任务",
+    "cancelAll": "全部取消"
+  },
+  "llmEstimate": {
+    "title": "LLM 调用估算 (模拟运行)",
+    "barsProcessed": "已处理K线数",
+    "calls": " 次调用",
+    "totalLlmCalls": "LLM 调用总数"
+  },
+  "quantLab": {
+    "title": "Sigma",
+    "pluginDescription": "Sigma 可作为插件使用。请从插件市场安装，以访问 Alpha Factory、Signal Library 等功能。",
+    "openMarketplace": "打开插件市场",
+    "subpages": {
+      "batchGeneration": "信号发现",
+      "factory": "Alpha 工厂",
+      "engineStore": "引擎商店",
+      "trainingMonitor": "训练监控",
+      "universeEditor": "符号子集",
+      "promotionPipeline": "因子晋升",
+      "settings": "设置"
+    },
+    "authGate": {
+      "title": "需要登录",
+      "description": "请登录以使用 Alpha Factory 功能。",
+      "cta": "登录 / 注册"
+    }
+  },
+  "signalGenerator": {
+    "title": "Signal Generator",
+    "pluginDescription": "Signal Generator enables live trading signal production. Install it from the Marketplace to access live signal generation and auto-execution.",
+    "openMarketplace": "Open Marketplace"
+  },
+  "entitlement": {
+    "expired": {
+      "title": "Sigma access required",
+      "description": "Your Sigma access has expired. Purchase or renew to use Alpha Factory features.",
+      "cta": "Get Sigma Access"
+    },
+    "buyout": {
+      "badge": {
+        "freeUntil": "FREE UNTIL {{date}}",
+        "freeAccessEnds": "FREE ACCESS ENDS {{date}}",
+        "lifetime": "LIFETIME",
+        "freeAccessEnded": "FREE ACCESS ENDED",
+        "revoked": "REVOKED"
+      }
+    },
+    "ownership": {
+      "badge": {
+        "owned": "OWNED"
+      }
+    }
+  },
+  "dataDownload": {
+    "downloading": "下载中",
+    "loading": "加载中",
+    "caching": "缓存中",
+    "complete": "已完成",
+    "error": "错误",
+    "chunkProgress": "chunk {{completed}}/{{total}}",
+    "barCount": "{{count}} bars"
+  },
+  "providerStatus": {
+    "title": "数据源状态",
+    "viewAll": "查看全部",
+    "active": "活跃",
+    "success": "成功:",
+    "latency": "延迟:"
+  },
+  "editor": {
+    "error": "错误",
+    "loading": "正在加载编辑器...",
+    "unknownType": "未知的编辑器类型",
+    "noEditorsOpen": "没有打开的编辑器",
+    "close": "关闭",
+    "noProvider": "没有编辑器提供者: {{viewType}}"
+  },
+  "tree": {
+    "noProvider": "未为视图注册 TreeDataProvider: {{viewId}}",
+    "loadFailed": "加载树形数据失败"
+  },
+  "accessibility": {
+    "dismiss": "忽略",
+    "close": "关闭",
+    "strategyNavigator": "策略导航器"
+  },
+  "settings": {
+    "title": "Settings",
+    "testButton": "测试"
+  },
+  "onboarding": {
+    "toggleTooltip": "Replay Onboarding Guide",
+    "controls": {
+      "next": "Next",
+      "prev": "Back",
+      "done": "Done",
+      "progress": "{{current}} of {{total}}"
+    },
+    "welcome": {
+      "sidebar": {
+        "title": "Navigation Panel",
+        "description": "Use the sidebar to switch between StratForge, Backtester, Sigma, and other modules."
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Configure API keys, data providers, and system preferences here."
+      },
+      "auth": {
+        "title": "Account",
+        "description": "Log in to access Pro features, cloud sync, and AI-powered strategy generation."
+      },
+      "llm": {
+        "title": "LLM Provider",
+        "description": "Select the AI model used for strategy generation. Bring your own API key or use StratCraft Pro."
+      },
+      "language": {
+        "title": "Language",
+        "description": "Switch the application language. StratCraft supports 12 languages."
+      },
+      "finish": {
+        "title": "You are all set!",
+        "description": "Start by exploring the Hub or create your first strategy in StratForge. You can replay this guide from the help icon in the status bar."
+      }
+    }
+  },
+  "assistant": {
+    "panelTitle": "助手",
+    "noContent": "此页面没有可用的帮助内容。",
+    "tooltip": "助手模式 (Ctrl+L)",
+    "backToOverview": "返回概览",
+    "closePanel": "关闭助手面板"
+  },
+  "navigationGuard": {
+    "title": "Generation In Progress",
+    "message": "Strategy generation is in progress. Leaving will cancel the current task.",
+    "confirm": "Leave Page",
+    "cancel": "Stay"
+  },
+  "validation": {
+    "backendReport": "Backend Validation Report",
+    "layer": "Layer",
+    "status": "Status",
+    "pass": "Pass",
+    "fail": "Fail",
+    "skip": "Skipped",
+    "noReport": "No backend validation report available",
+    "L1": "Contract Shape",
+    "L2": "Security Scan",
+    "L3": "Compilation",
+    "L4": "Symbol Verification",
+    "L5": "Isolated Load Test",
+    "L6": "Smoke Test",
+    "title": "后端验证",
+    "failedAt": "失败: {{layer}}",
+    "stderrOutput": "stderr 输出"
+  },
+  "notifications": {
+    "regionLabel": "通知",
+    "sweep": {
+      "allCompleteTitle": "所有扫描已完成",
+      "allCompleteBody": "{{count}}个扫描已完成。{{succeeded}}个成功，{{errors}}个错误。",
+      "nextSweepTitle": "正在启动下一个扫描",
+      "nextSweepBody": "正在自动切换到下一个扫描（队列中剩余{{remaining}}个）",
+      "sweepCompleteTitle": "参数扫描完成",
+      "sweepCompleteBody": "{{succeeded}}/{{total}} arms已成功完成",
+      "sweepCompleteBodyWithErrors": "{{succeeded}}/{{total}} arms已成功完成（{{errors}}个错误）",
+      "downloadCompleteTitle": "Data Download Complete",
+      "downloadCompleteBody": "{{total}} symbols downloaded. Sweep fitting started.",
+      "downloadCompleteBodyWithFailures": "{{total}} symbols processed ({{failures}} failed). Sweep fitting started."
+    }
+  },
+  "errorState": {
+    "technicalDetails": "技术详情"
+  },
+  "viewRegistry": {
+    "nexus": {
+      "label": "枢纽中心",
+      "shortLabel": "枢纽"
+    },
+    "marketplace": {
+      "label": "插件市场",
+      "shortLabel": "市场"
+    },
+    "dataManagement": {
+      "label": "数据管理",
+      "shortLabel": "数据"
+    },
+    "settings": {
+      "label": "设置",
+      "shortLabel": "设置"
+    },
+    "researchEnvironment": {
+      "label": "研究环境",
+      "shortLabel": "研究环境"
+    },
+    "strategy": {
+      "label": "StratForge",
+      "shortLabel": "StratForge"
+    },
+    "backtest": {
+      "label": "回测器",
+      "shortLabel": "回测器"
+    },
+    "backtestResult": {
+      "label": "回测结果",
+      "shortLabel": "结果"
+    },
+    "quantLab": {
+      "label": "Sigma",
+      "shortLabel": "Sigma"
+    },
+    "chart": {
+      "label": "图表",
+      "shortLabel": "图表"
+    },
+    "ai": {
+      "label": "AI 助手",
+      "shortLabel": "AI"
+    },
+    "scoreboard": {
+      "label": "信号评分榜",
+      "shortLabel": "评分榜"
+    },
+    "signalGenerator": {
+      "label": "Signal Generator",
+      "shortLabel": "Signal Gen"
+    }
+  },
+  "researchEnvironment": {
+    "loading": "正在读取环境状态...",
+    "approvalDeclined": "操作未获批准，因此未做任何更改。",
+    "sharedEnvironmentNotice": "这 {{count}} 项能力共用同一个锁定环境，因此会一起安装、修复和验证，而不是逐个进行。",
+    "states": {
+      "absent": "未安装",
+      "installing": "正在安装",
+      "repairing": "正在修复",
+      "verifying": "正在验证",
+      "uninstalling": "正在卸载",
+      "ready": "就绪",
+      "failed": "失败"
+    },
+    "layerStates": {
+      "ready": "就绪",
+      "failed": "失败",
+      "pending": "未验证"
+    },
+    "jobStates": {
+      "queued": "排队中",
+      "running": "运行中",
+      "succeeded": "成功",
+      "failed": "失败"
+    },
+    "actions": {
+      "install": "安装环境",
+      "repair": "修复环境",
+      "verify": "重新验证",
+      "uninstall": "卸载研究环境",
+      "remove_capability": "移除功能",
+      "restore_capability": "恢复功能"
+    },
+    "progress": {
+      "install": "安装进度",
+      "repair": "修复进度",
+      "verify": "验证进度",
+      "uninstall": "卸载进度",
+      "remove_capability": "功能移除进度",
+      "restore_capability": "功能恢复进度"
+    },
+    "stages": {
+      "admission": "正在检查前置条件",
+      "install": "正在安装软件包",
+      "repair": "正在重建安装",
+      "uninstall": "正在移除本地环境",
+      "transition": "正在更新环境功能",
+      "python_verify": "正在验证 Python 软件包",
+      "julia_verify": "正在初始化 Julia 后端"
+    },
+    "causes": {
+      "unsupported": "主机不受支持",
+      "missing_executable": "未找到可执行文件",
+      "missing_lock": "未找到锁文件",
+      "manifest_drift": "清单与锁文件不一致",
+      "lock_io": "无法读取锁文件",
+      "invalid_lock_metadata": "锁文件元数据无效",
+      "database": "无法更新本地记录",
+      "network": "网络请求失败",
+      "process_exit": "进程以错误退出",
+      "process_lost": "进程意外结束",
+      "import": "无法导入软件包",
+      "probe": "功能检查失败",
+      "backend_init": "后端初始化失败"
+    },
+    "failureCategory": {
+      "unsupported_platform": "平台不受支持",
+      "pixi_missing": "Pixi 不可用",
+      "lock_missing": "缺少锁文件",
+      "lock_drift": "清单与锁文件已偏离",
+      "lifecycle_coordination_failed": "无法协调环境记录",
+      "network_failed": "下载失败",
+      "install_failed": "安装失败",
+      "repair_failed": "修复失败",
+      "uninstall_failed": "卸载失败",
+      "workload_active": "研究任务正在运行",
+      "operation_interrupted": "操作被中断",
+      "verification_failed": "验证失败"
+    },
+    "failure": {
+      "stage": "阶段",
+      "cause": "原因",
+      "capability": "软件包"
+    },
+    "capabilityCause": {
+      "import": "无法导入该软件包",
+      "probe": "该软件包未通过功能检查",
+      "backend_init": "Julia 后端初始化失败"
+    },
+    "capability": {
+      "expected": "期望版本",
+      "installed": "已安装版本",
+      "notInstalled": "--"
+    },
+    "pysr": {
+      "python": "Python 软件包",
+      "julia": "Julia 后端"
+    },
+    "capabilities": {
+      "histdata": {
+        "name": "HistData",
+        "description": "用于独立审核外汇数据采集的离线验证解析器和 Parquet 转换器。"
+      },
+      "duckdb": {
+        "name": "DuckDB",
+        "description": "用于研究查询的进程内分析型数据库。"
+      },
+      "gplearn": {
+        "name": "gplearn",
+        "description": "用于符号化因子发现的遗传编程。"
+      },
+      "gpquant": {
+        "name": "GPQuant",
+        "description": "面向量化因子搜索调优的遗传编程。"
+      },
+      "pysr": {
+        "name": "PySR",
+        "description": "符号回归，其 Julia 后端在首次使用时初始化。"
+      },
+      "pandas_ta": {
+        "name": "pandas-ta",
+        "description": "支撑 TA-Lib 因子引擎的技术指标库。"
+      }
+    },
+    "summary": {
+      "interpreter": "解释器",
+      "lastVerified": "上次验证",
+      "pixiVersion": "Pixi 版本",
+      "technicalDetails": "技术细节",
+      "manifestHash": "清单 SHA-256",
+      "lockHash": "锁文件 SHA-256",
+      "liveWorkloadNotice": "只有在此操作完成之后启动的研究任务才会使用准备好的环境。当前正在运行的任何任务都不会被重启或中断。"
+    },
+    "regions": {
+      "summary": "环境概览"
+    },
+    "announce": {
+      "succeeded": "{{operation}}：已成功完成。",
+      "failed": "{{operation}}：失败。",
+      "failedState": "研究环境处于失败状态。"
+    },
+    "a11y": {
+      "environmentState": "环境状态：{{state}}",
+      "capabilityState": "{{capability}} 状态：{{state}}",
+      "platform": "平台：{{platform}} {{architecture}}",
+      "elapsed": "已用时间：{{elapsed}}",
+      "logTail": "环境操作的最近输出"
+    }
+  },
+  "scoreboard": {
+    "title": "信号评分榜",
+    "empty": "暂无评分信号。生成一个信号以填充评分榜。",
+    "disclaimer": "基于 {{windowBars}} 根 K 线的历史表现。不构成投资建议。",
+    "columns": {
+      "button": "列",
+      "menuTitle": "显示列"
+    },
+    "col": {
+      "algorithm": "算法",
+      "recentIc": "近期 IC",
+      "liveIc": "实盘 IC",
+      "sharpeLong": "近期夏普 (多头)",
+      "sharpeShort": "近期夏普 (空头)",
+      "hitRate": "命中率",
+      "trades": "交易数",
+      "asOf": "截至"
+    },
+    "cell": {
+      "liveOnlySince": "仅实盘 -- 自 {{date}} 起观测",
+      "liveOnlyTooltip": "实盘观测自 {{date}} 起。无可用的历史回测 -- 原因见 TICKET_196_7_7。",
+      "symbols": "个标的",
+      "trainingScaleTooltip": "训练使用了 {{requested}} 个标的中的 {{trained}} 个 -- 部分标的因历史数据不足被排除"
+    },
+    "previousVersions": "历史版本"
+  },
+  "sweepMonitor": {
+    "title": "扫描进度",
+    "titleWithQueue": "扫描进度 (+{{count}}q)",
+    "complete": "扫描完成",
+    "stop": "停止扫描",
+    "phase": {
+      "downloading": "下载数据",
+      "running": "运行中"
+    },
+    "eta": "约 {{minutes}} 分钟",
+    "throughput": "{{rate}} 臂/分钟",
+    "cpu": "CPU",
+    "cpuApp": "应用 CPU",
+    "memory": "内存",
+    "memApp": "应用内存",
+    "trainingCores": "训练中: {{cores}} 核",
+    "succeeded": "成功",
+    "cached": "缓存",
+    "failed": "失败",
+    "resumed": "已恢复",
+    "queue": {
+      "title": "队列 ({{count}} 等待中)",
+      "cancel": "取消"
+    },
+    "completed": {
+      "title": "已完成 ({{count}})"
+    }
+  },
+  "llmProvider": {
+    "badge": {
+      "pro": "Pro",
+      "byok": "自带密钥"
+    }
+  },
+  "brand": {
+    "tagline": "Connect the Alpha"
+  },
+  "statusDot": {
+    "running": "运行中",
+    "warning": "警告",
+    "error": "错误",
+    "idle": "空闲",
+    "online": "在线",
+    "offline": "离线",
+    "degraded": "降级"
+  },
+  "persistence": {
+    "saveFailed": "保存失败",
+    "restoreFailed": "恢复失败",
+    "deleteFailed": "删除失败",
+    "fallback": "持久化失败"
+  },
+  "comingSoon": {
+    "chartView": "图表视图 - 即将推出",
+    "aiAssistant": "AI 助手 - 即将推出"
+  },
+  "moduleNames": {
+    "optimizer": "Optimizer",
+    "riskEngine": "RiskEngine",
+    "dataFeed": "DataFeed",
+    "backtester": "Backtester"
+  },
+  "pluginPermissions": {
+    "network": {
+      "name": "Network Access",
+      "description": "Access external network resources and APIs"
+    },
+    "networkInternal": {
+      "name": "Internal Network",
+      "description": "Access internal API endpoints only"
+    },
+    "filesystem": {
+      "name": "Sandboxed File Access",
+      "description": "Read and write files within plugin sandbox"
+    },
+    "filesystemFull": {
+      "name": "Full File System Access",
+      "description": "Access any file on the system"
+    },
+    "database": {
+      "name": "Database Access",
+      "description": "Read and write to the application database"
+    },
+    "notification": {
+      "name": "Notifications",
+      "description": "Show system notifications to the user"
+    },
+    "clipboard": {
+      "name": "Clipboard Access",
+      "description": "Read from and write to system clipboard"
+    },
+    "shell": {
+      "name": "Shell Execution",
+      "description": "Execute shell commands on the system"
+    },
+    "native": {
+      "name": "Native Modules",
+      "description": "Load and use native Node.js modules"
+    }
+  },
+  "downloadQueue": {
+    "queued": "Queued",
+    "queuedResumed": "Queued (resumed)",
+    "downloading": "Downloading...",
+    "cancelled": "Cancelled",
+    "yieldedPriority": "Yielded to higher priority",
+    "yieldedPriorityMultiTf": "Yielded to higher priority (multi-TF)",
+    "partial": "Partial: {{rowCount}} bars, missing {{dayCount}} day(s) ({{dayList}})",
+    "complete": "Complete: {{rowCount}} bars",
+    "completeMultiTf": "Complete: {{count}} timeframes"
+  },
+  "dataCache": {
+    "dataReadyCached": "Data ready (cached)",
+    "mergingData": "Merging data...",
+    "fetchingFromProvider": "Fetching data from {{provider}}...",
+    "writingRows": "Writing {{count}} rows...",
+    "providerStartsAt": "Data from {{provider}} starts at {{actualStart}} (requested {{requestedStart}})",
+    "dataReadyAggregated": "Data ready ({{rowCount}} rows, {{target}} aggregated from {{baseInterval}})",
+    "checkingCache": "Checking cache for {{symbol}}/{{interval}}...",
+    "fetchingEarlierData": "Fetching earlier data ({{start}}~{{end}})...",
+    "fetchingNewerData": "Fetching newer data ({{start}}~{{end}})...",
+    "dataReady": "Data ready ({{count}} rows)",
+    "refetchingBackfill": "Re-fetching {{symbol}}/{{interval}} to backfill interior gap...",
+    "dataReadyBackfilled": "Data ready ({{count}} rows, interior gap backfilled)"
+  },
+  "keychainWarning": {
+    "message": "操作系统密钥链不可用 -- API 密钥无法安全存储。"
+  },
+  "assistantHelp": {
+    "strategyStudioGuide": "Strategy Studio 指南",
+    "bollingerMacd": "布林带 + MACD 策略",
+    "rsiMa": "RSI + 移动平均线策略",
+    "macdRsiDivergence": "MACD + RSI 背离策略",
+    "emaCrossover": "EMA 交叉策略",
+    "ichimokuCloud": "一目均衡表策略",
+    "fibonacciTrend": "斐波那契趋势策略",
+    "vwapStrategy": "VWAP 策略",
+    "supertrend": "超级趋势策略",
+    "dualMaVolume": "双均线 + 成交量策略"
+  },
+  "configService": {
+    "loadedSuccessfully": "配置加载成功"
+  },
+  "installProgress": {
+    "extractingPackage": "Extracting package...",
+    "backingUpExisting": "Backing up existing...",
+    "installingFiles": "Installing files...",
+    "registeringPermissions": "Registering permissions...",
+    "runningLifecycleHooks": "Running lifecycle hooks...",
+    "initializing": "Initializing...",
+    "installationComplete": "Installation complete!"
+  },
+  "marketplace": {
+    "fetchingMetadata": "Fetching plugin metadata...",
+    "downloadingPlugin": "Downloading plugin...",
+    "verifyingChecksum": "Verifying checksum...",
+    "resolvingDependencies": "Resolving dependencies...",
+    "extractingPlugin": "Extracting plugin...",
+    "installingPythonDeps": "Installing Python dependencies...",
+    "finalizingInstallation": "Finalizing installation...",
+    "installationComplete": "Installation complete!",
+    "installingFromBundled": "Installing from bundled package...",
+    "copyingBundledPlugin": "Copying bundled plugin..."
+  }
+}

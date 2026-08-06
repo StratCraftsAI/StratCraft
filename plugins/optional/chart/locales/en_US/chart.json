@@ -1,0 +1,63 @@
+{
+  "view": {
+    "loading": "Loading...",
+    "refresh": "Refresh",
+    "retry": "Retry",
+    "loadingChartData": "Loading chart data...",
+    "toggle": {
+      "volume": "Volume",
+      "grid": "Grid"
+    },
+    "error": {
+      "chart": "Error loading chart",
+      "loadData": "Failed to load data"
+    }
+  },
+  "settings": {
+    "section": {
+      "indicators": "Indicators",
+      "style": "Style",
+      "drawingTools": "Drawing Tools"
+    },
+    "indicator": {
+      "sma": "SMA",
+      "ema": "EMA",
+      "rsi": "RSI",
+      "macd": "MACD",
+      "bb": "Bollinger Bands"
+    },
+    "param": {
+      "period": "Period",
+      "fast": "Fast",
+      "slow": "Slow",
+      "signal": "Signal",
+      "stdDev": "Std Dev"
+    },
+    "chartType": {
+      "label": "Chart Type",
+      "option": {
+        "candlesticks": "Candlesticks",
+        "hollowCandles": "Hollow Candles",
+        "ohlc": "OHLC",
+        "line": "Line",
+        "area": "Area"
+      }
+    },
+    "color": {
+      "up": "Up Color",
+      "down": "Down Color"
+    },
+    "drawingTool": {
+      "line": "Line",
+      "ray": "Ray",
+      "rect": "Rect",
+      "fib": "Fib"
+    },
+    "actions": {
+      "apply": "Apply Changes"
+    }
+  },
+  "notification": {
+    "indicatorAdded": "Indicator added: {{indicator}}"
+  }
+}

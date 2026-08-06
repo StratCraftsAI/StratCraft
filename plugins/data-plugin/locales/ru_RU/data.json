@@ -1,0 +1,22 @@
+{
+  "manifest": {
+    "displayName": "Data Foundation",
+    "description": "Foundation plugin providing shared data source components and types"
+  },
+  "fitQuality": {
+    "insufficientData": "Nedostatochno dannykh",
+    "needTwoFoldResults": "Neobkhodimo 2+ rezultata foldov",
+    "dataStarved": "nedostatok dannykh ({{sampleCount}} vyborok / {{paramCount}} parametrov = {{ratio}}:1, neobkhodimo {{targetRatio}}:1+)",
+    "dataSufficiency": "Dostatochnost dannykh",
+    "needRatio": "neobkhodimo sootnoshenie {{targetRatio}}:1 vyborok/parametrov, tekushchee {{currentRatio}}:1",
+    "modelFitQuality": "Kachestvo podgonki modeli"
+  },
+  "dataSource": {
+    "region": {
+      "usGlobal": "SSHA i Globalniy",
+      "crypto": "Kripto",
+      "cnAShare": "Kitay A-aktsii",
+      "myData": "Moi dannyye"
+    }
+  }
+}

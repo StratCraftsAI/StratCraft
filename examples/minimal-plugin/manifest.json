@@ -1,0 +1,11 @@
+{
+  "name": "minimal-plugin",
+  "version": "1.0.0",
+  "description": "A minimal example plugin for StratCraft",
+  "tier": 1,
+  "distribution": "marketplace",
+  "main": "./ui/minimal-plugin-nexus/dist/index.js",
+  "dependencies": {
+    "plugins": []
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "packageId": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "workerId": {
+      "$ref": "#/$defs/__schema2"
+    },
+    "packageVersion": {
+      "$ref": "#/$defs/__schema3"
+    },
+    "protocol": {
+      "$ref": "#/$defs/__schema4"
+    },
+    "controlTransport": {
+      "$ref": "#/$defs/__schema5"
+    },
+    "executableRelativePath": {
+      "$ref": "#/$defs/__schema6"
+    },
+    "capabilities": {
+      "$ref": "#/$defs/__schema7"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "packageId",
+    "workerId",
+    "packageVersion",
+    "protocol",
+    "controlTransport",
+    "executableRelativePath",
+    "capabilities"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "type": "number",
+      "const": 1
+    },
+    "__schema1": {
+      "type": "string",
+      "const": "com.stratcraft.quant-lab"
+    },
+    "__schema2": {
+      "type": "string",
+      "const": "stratcraft-research-worker"
+    },
+    "__schema3": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "__schema4": {
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "current": {
+          "$ref": "#/$defs/__schema3"
+        }
+      },
+      "required": [
+        "minimum",
+        "current"
+      ],
+      "additionalProperties": false
+    },
+    "__schema5": {
+      "type": "string",
+      "const": "stdio-jsonl"
+    },
+    "__schema6": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "__schema7": {
+      "minItems": 1,
+      "maxItems": 64,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema8"
+      }
+    },
+    "__schema8": {
+      "type": "object",
+      "properties": {
+        "capabilityId": {
+          "type": "string",
+          "enum": [
+            "research.discovery",
+            "research.factor-evaluation",
+            "research.fusion",
+            "research.scoring",
+            "research.promotion",
+            "research.governance",
+            "research.lstm-training"
+          ]
+        },
+        "contractVersion": {
+          "$ref": "#/$defs/__schema3"
+        }
+      },
+      "required": [
+        "capabilityId",
+        "contractVersion"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

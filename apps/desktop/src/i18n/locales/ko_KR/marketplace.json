@@ -1,0 +1,192 @@
+{
+  "title": "Plugin Marketplace",
+  "subtitle": "Discover and install community plugins",
+  "search": {
+    "placeholder": "Search plugins...",
+    "noResults": "No plugins found"
+  },
+  "filters": {
+    "all": "All",
+    "installed": "Installed",
+    "updates": "Updates Available",
+    "category": "Category"
+  },
+  "categories": {
+    "all": "All",
+    "visualization": "Visualization",
+    "indicators": "Indicators",
+    "trading": "Trading",
+    "data": "Data",
+    "ai": "AI",
+    "tools": "Tools",
+    "strategy": "Strategy",
+    "analysis": "Analysis",
+    "integration": "Integration"
+  },
+  "sort": {
+    "mostDownloads": "Most Downloads",
+    "mostStars": "Most Stars",
+    "recentlyUpdated": "Recently Updated",
+    "name": "Name"
+  },
+  "plugin": {
+    "install": "Install",
+    "uninstall": "Uninstall",
+    "update": "Update",
+    "enable": "Enable",
+    "disable": "Disable",
+    "settings": "Settings",
+    "installed": "Installed",
+    "notInstalled": "Not Installed",
+    "version": "Version",
+    "author": "Author",
+    "downloads": "Downloads",
+    "lastUpdated": "Last Updated",
+    "purchase": "Purchase",
+    "enterLicense": "Enter License Key",
+    "licenseExpired": "License Expired",
+    "licenseActive": "License Active",
+    "owned": "Owned"
+  },
+  "results": {
+    "showing": "Showing {{count}} plugin",
+    "showingPlural": "Showing {{count}} plugins"
+  },
+  "install": {
+    "title": "Install Plugin",
+    "installingPlugin": "Installing Plugin",
+    "installing": "Installing \"{{name}}\"",
+    "installQuestion": "Install \"{{name}}\"?",
+    "confirm": "Are you sure you want to install this plugin?",
+    "progress": "Installing...",
+    "success": "Plugin installed successfully",
+    "successMessage": "Plugin installed successfully!",
+    "activateHint": "You can now activate the plugin from the Plugins panel.",
+    "error": "Failed to install plugin",
+    "errorMessage": "Installation failed",
+    "cancel": "Cancel",
+    "installAnyway": "Install Anyway",
+    "phases": {
+      "downloading": "패키지 다운로드 중",
+      "verifying": "서명 확인 중",
+      "validating": "권한 확인 중",
+      "extracting": "파일 추출 중",
+      "copying": "파일 복사 중",
+      "registering": "플러그인 등록 중",
+      "initializing": "초기화 중",
+      "complete": "설치 완료",
+      "resolving_dependencies": "의존성 해결 중",
+      "installing_python_deps": "Python 의존성 설치 중",
+      "finalizing": "마무리 중",
+      "error": "오류"
+    },
+    "header": {
+      "complete": "설치 완료",
+      "failed": "설치 실패",
+      "installing": "\"{{name}}\" 설치 중"
+    },
+    "buttons": {
+      "cancel": "취소",
+      "close": "닫기"
+    },
+    "permissions": {
+      "title": "This plugin requests:",
+      "network": "Network access",
+      "networkDetail": "External APIs",
+      "filesystem": "File system access",
+      "filesystemNone": "None",
+      "filesystemPlugin": "Plugin directory only",
+      "filesystemUser": "User data directory",
+      "filesystemUnknown": "Unknown",
+      "native": "Native modules",
+      "nativeDetail": "Compiled extensions"
+    },
+    "author": {
+      "unverified": "(unverified)"
+    },
+    "warning": {
+      "riskyPermissions": "This plugin requests elevated permissions. Only install if you trust the author."
+    },
+    "progress": {
+      "validatingManifest": "플러그인 매니페스트 검증 중...",
+      "verifyingBinary": "네이티브 바이너리 검증 중...",
+      "binaryVerified": "네이티브 바이너리 검증됨",
+      "copyingFiles": "플러그인 파일 복사 중...",
+      "registeringPlugin": "플러그인 등록 중...",
+      "installationComplete": "설치 완료"
+    }
+  },
+  "uninstall": {
+    "title": "Uninstall Plugin",
+    "confirm": "Are you sure you want to uninstall this plugin?",
+    "success": "Plugin uninstalled successfully",
+    "error": "Failed to uninstall plugin"
+  },
+  "detail": {
+    "by": "by",
+    "description": "Description",
+    "repository": "Repository",
+    "permissions": "Permissions",
+    "networkAccess": "Network Access",
+    "fileSystem": "File System",
+    "nativeModules": "Native Modules",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "pythonDependencies": "Python Dependencies",
+    "changelog": "Changelog",
+    "installedVersion": "Installed: v{{version}}",
+    "updateAvailable": "(Update available: v{{version}})",
+    "updateTo": "Update to v{{version}}",
+    "yes": "Yes",
+    "no": "No",
+    "done": "Done"
+  },
+  "noPlugins": {
+    "title": "플러그인을 찾을 수 없습니다",
+    "hint": "검색 또는 필터를 조정해보세요"
+  },
+  "permissionValue": {
+    "enabled": "활성화됨",
+    "disabled": "비활성화됨",
+    "yes": "예",
+    "no": "아니요"
+  },
+  "license": {
+    "title": "Enter License Key",
+    "keyLabel": "License Key",
+    "keyPlaceholder": "Enter your license key...",
+    "activate": "Activate",
+    "validating": "Validating...",
+    "noPurchaseLink": "Don't have a key? Purchase one",
+    "activated": "License key activated successfully",
+    "removed": "License key removed",
+    "invalid": "Invalid license key",
+    "expired": "License key has expired",
+    "error": "License validation failed"
+  },
+  "pricing": {
+    "title": "Pricing",
+    "price": "Price",
+    "type": "Billing",
+    "paid": "Paid",
+    "one-time": "One-time payment",
+    "monthly": "Monthly subscription",
+    "yearly": "Yearly subscription"
+  },
+  "lifecycle": {
+    "creatingStrategyDirs": "전략 디렉토리 생성 중...",
+    "initializingDatabase": "데이터베이스 초기화 중...",
+    "creatingDefaultTemplates": "기본 템플릿 생성 중...",
+    "templateIndicatorDesc": "기술적 지표를 사용하는 전략 템플릿",
+    "creatingConfiguration": "구성 생성 중...",
+    "installationComplete": "설치 완료",
+    "checkingUpgradeRequirements": "업그레이드 요구사항 확인 중...",
+    "migratingDatabaseToV2": "데이터베이스 스키마를 v2.0으로 마이그레이션 중...",
+    "updatingConfiguration": "구성 업데이트 중...",
+    "creatingNewDirectories": "새 디렉토리 생성 중...",
+    "upgradeComplete": "업그레이드 완료",
+    "checkingConfiguration": "구성 확인 중...",
+    "creatingBacktestDirs": "백테스트 디렉토리 생성 중...",
+    "updatingDatabaseSchema": "데이터베이스 스키마 업데이트 중..."
+  }
+}

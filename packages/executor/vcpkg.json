@@ -1,0 +1,48 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "stratcraft-executor",
+  "version-string": "0.1.0",
+  "description": "StratCraft Executor - Standalone C++ Strategy Executor",
+  "homepage": "https://github.com/StratCraft/StratCraft",
+  "license": "MIT",
+  "dependencies": [
+    "arrow",
+    "abseil",
+    "nlohmann-json",
+    "catch2",
+    "json-schema-validator"
+  ],
+  "builtin-baseline": "af752f21c9d79ba3df9cb0250ce2233933f58486",
+  "features": {
+    "tests": {
+      "description": "Build unit tests",
+      "dependencies": [
+        "catch2"
+      ]
+    },
+    "xsimd": {
+      "description": "Cross-platform SIMD abstraction (AVX2 + ARM NEON)",
+      "dependencies": [
+        "xsimd"
+      ]
+    },
+    "mimalloc": {
+      "description": "Microsoft high-performance allocator with per-session heap",
+      "dependencies": [
+        "mimalloc"
+      ]
+    },
+    "quill": {
+      "description": "Async logging with ~12ns hot path latency",
+      "dependencies": [
+        "quill"
+      ]
+    },
+    "abseil": {
+      "description": "Abseil Swiss Tables (flat_hash_map) for faster lookups",
+      "dependencies": [
+        "abseil"
+      ]
+    }
+  }
+}

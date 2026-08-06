@@ -1,0 +1,164 @@
+# CLAUDE.md
+
+## Architecture V3: Builder-Executor Model
+
+**Architecture V3 (Current)**:
+- **4 layers, 2 processes, 1 protocol**
+- **Builder Component**: Strategy authoring - generates standard Python .py files
+- **Executor Process**: C++ with embedded Python (pybind11), reads .py + Parquet data
+- **IPC-only communication**: Electron Main - Renderer via IPC
+- **Performance**: 500-1000x faster (in-process Python, zero-copy NumPy)
+
+**Key Components**:
+- `packages/executor/` - C++ Executor with pybind11 embedded Python
+- `packages/builder-templates/` - Strategy framework and code generation
+- `apps/desktop/src/main/services/executor-service.ts` - Executor lifecycle
+- `apps/desktop/src/main/ipc/v3-handlers.ts` - V3 IPC handlers
+- `apps/desktop/src/renderer/hooks/useExecutor.ts` - V3 React hooks
+
+**Plugin Architecture**: Three plugin tiers:
+- Tier 0: Foundation plugins (e.g., `data-plugin` for shared data providers/UI)
+- Tier 1: Business plugins (`strategy-builder-nexus` Builder, `back-test-nexus` Executor, `quant-lab-nexus` Alpha Factory)
+- Tier 1 may import Tier 0 and other Tier 1 plugins; only upward imports (Tier 0 importing Tier 1) are prohibited
+
+**Key Principles**:
+- Standard Python Strategies - Strategies are portable .py files, not internal formats
+- Single-Process Execution - Backtest runs in C++ Executor with embedded Python
+- File-based Data - Parquet files via Apache Arrow (zero-copy to NumPy)
+- File System Storage - Strategies, data, results stored as files
+- NO Extension Host - Replaced by Executor process
+- NO gRPC - Replaced by IPC + file-based communication
+- NO SharedMemory - Eliminated (Executor loads data directly)
+
+```
+Renderer (React UI)
+    | IPC
+Main Process (Electron)
+    | spawn + file I/O
+Executor (C++ with embedded Python)
+```
+
+---
+
+## Project Structure
+
+```
+StratCraft/
+├── apps/desktop/
+│   └── src/
+│       ├── main/           # Electron main process
+│       ├── renderer/       # Frontend UI (React)
+│       ├── preload/        # IPC bridge
+│       └── shared/         # Shared code
+├── packages/
+│   ├── executor/           # C++ Executor binary
+│   └── builder-templates/  # Strategy framework for Python
+├── plugins/                # Bundled plugins
+├── docs/                   # Design documentation
+└── scripts/                # Build and utility scripts
+```
+
+---
+
+## Tech Stack
+
+- **Electron 28** - Desktop framework
+- **TypeScript** - Type safety
+- **React** - UI framework
+- **Webpack** - Build system
+- **SQLite (better-sqlite3)** - Local database
+- **C++23** - Executor engine
+- **pybind11** - Python embedding
+- **Apache Arrow / Parquet** - Data format
+
+---
+
+## Common Commands
+
+```bash
+# Development
+npm run dev            # Build and run
+npm run dev:watch      # Build with auto-reload
+
+# Build
+npm run build          # Production build
+npm run test:build     # Build and verify
+
+# Package
+npm run package        # All platforms
+npm run package:win    # Windows
+npm run package:mac    # macOS
+npm run package:linux  # Linux
+```
+
+---
+
+## Development Guidelines
+
+### IPC Communication
+- All IPC communication must go through the preload script
+- Use `contextBridge.exposeInMainWorld()` for secure API exposure
+- Never expose Node.js APIs directly to renderer
+
+### Error Handling
+- Use explicit error types and messages
+- Log errors with sufficient context for debugging
+- Never silently catch and ignore errors
+- All errors must propagate to the UI layer with actionable messages
+
+### Security
+- Context isolation enabled
+- Node integration disabled
+- Sandbox mode enabled
+- CSP headers configured
+
+### TypeScript Standards
+- Use strict mode
+- Define proper types for all IPC channels
+- Avoid `any` type unless absolutely necessary
+
+### C++ Standards
+
+**Mandatory Patterns** (for all C++ code in `packages/executor/`):
+- **C++23 Standard** - Use latest language features (`std::expected`, `std::format`, concepts)
+- **Zero-copy Data Flow** - pybind11 NumPy bindings, `std::span`, `std::move` semantics
+- **Compile-time Optimization** - `consteval`, `constexpr`, static assertions, NTTP
+- **Memory Sovereignty** - PMR pools, vector pre-allocation, cache-line alignment
+- **Type Safety** - Strong types, `[[nodiscard]]`, `std::optional`, non-copyable RAII
+- **Deterministic Execution** - `noexcept`, `std::chrono::steady_clock`, no exceptions on hot path
+
+**Prohibited Patterns**:
+- `new`/`delete` on hot paths (use PMR or object pools)
+- `std::endl` (use `\n`)
+- `virtual` functions in performance-critical code (use `std::variant` + `std::visit`)
+- `std::shared_ptr` on hot paths (use raw pointers with clear ownership)
+- Floating-point for prices (use fixed-point arithmetic)
+
+### UI Standards
+- **StratCraftsAI Design**: Deep Navy/Violet/Teal color palette, Glassmorphism, CyberGrid aesthetic
+- **Theme Color System**: Use `--color-terminal-accent-primary` as single source of truth
+- **Dropdown Portal**: Dropdown menus must use Portal + Floating UI to prevent overflow clipping
+
+---
+
+## Logging System
+
+**Unified log directory**: Development `apps/desktop/logs/`, Production `{userData}/logs/`
+
+| Log Type | Development Path |
+|----------|------------------|
+| Electron Main | `apps/desktop/logs/main.log` |
+| C++ OPS | `apps/desktop/logs/core_YYYYMMDD.log` |
+| C++ TRADE | `apps/desktop/logs/trade/trade_YYYYMMDD.log` |
+| C++ PLUGIN | `apps/desktop/logs/plugin/plugin_YYYYMMDD.log` |
+| Console Output | `logs/output.log` |
+
+**Log Categories**: `[APP]`, `[WINDOW]`, `[IPC]`, `[PYTHON]`, `[CPP]`, `[HEALTH]`, `[PLUGIN]`, `[GRPC]`
+
+**Important**: Use `electron-log` for all logging in the main process. Do not use `console.log`/`console.error` - output will not be written to log files.
+
+---
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to this project.

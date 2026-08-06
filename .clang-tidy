@@ -1,0 +1,29 @@
+# TICKET_1340_100: Curated C++23 check set
+# Excludes misc-const-correctness (90.6% noise in TICKET_1340)
+# Excludes bugprone-easily-swappable-parameters (low signal in numeric code)
+Checks: >
+  -*,
+  bugprone-*,
+  -bugprone-easily-swappable-parameters,
+  performance-*,
+  modernize-use-override,
+  modernize-use-nullptr,
+  modernize-use-using,
+  modernize-use-auto,
+  modernize-loop-convert,
+  modernize-use-nodiscard,
+  modernize-use-starts-ends-with,
+  misc-redundant-expression,
+  misc-unused-using-decls,
+  readability-duplicate-include,
+  readability-redundant-smartptr-get,
+  readability-simplify-boolean-expr,
+  cppcoreguidelines-slicing,
+  cppcoreguidelines-pro-type-static-cast-downcast
+
+WarningsAsErrors: >
+  bugprone-use-after-move,
+  bugprone-dangling-handle,
+  bugprone-unchecked-optional-access
+
+HeaderFilterRegex: '(packages/executor|packages/research-kernels)/(src|include)/.*'

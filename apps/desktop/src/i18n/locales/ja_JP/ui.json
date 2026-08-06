@@ -1,0 +1,1120 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "initializing": "Initializing...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "dismiss": "閉じる",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "reset": "Reset",
+    "search": "Search",
+    "filter": "Filter",
+    "refresh": "Refresh",
+    "export": "Export",
+    "import": "Import",
+    "enable": "Enable",
+    "disable": "Disable",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "apply": "Apply",
+    "retry": "Retry",
+    "later": "Later",
+    "tryAgain": "Try again",
+    "login": "Login",
+    "logout": "Logout",
+    "signOut": "Sign Out",
+    "upgradePlan": "Upgrade Plan",
+    "signingOut": "Signing out...",
+    "loggingIn": "Logging in...",
+    "home": "Home",
+    "pluginSettings": "Plugin Settings",
+    "loginSignup": "Login / Sign Up"
+  },
+  "compilation": {
+    "compiled": "コンパイル完了",
+    "failed": "コンパイル失敗",
+    "noOutput": "コンパイラ出力が提供されませんでした。",
+    "retry": "再試行",
+    "compiling": "コンパイル中...",
+    "showRawOutput": "生の出力を表示"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "strategies": "Strategies",
+    "backtest": "Backtest",
+    "marketplace": "Marketplace",
+    "settings": "Settings",
+    "data": "Data",
+    "nexusHub": "Nexus Hub",
+    "strategyStudio": "Strategy Studio",
+    "strategyBuilder": "StratForge",
+    "backtestNexus": "Backtester",
+    "dataNexus": "Data Nexus",
+    "pluginMarketplace": "Plugin Marketplace",
+    "chart": "Chart",
+    "aiAssistant": "AI Assistant",
+    "result": "Result"
+  },
+  "status": {
+    "online": "Online",
+    "offline": "Offline",
+    "connecting": "Connecting...",
+    "checking": "確認中...",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "error": "Error",
+    "ready": "Ready",
+    "pending": "Pending",
+    "running": "Running",
+    "completed": "Completed",
+    "failed": "Failed",
+    "notConfigured": "認証情報が構成されていません — 設定 > 認証情報に移動してください"
+  },
+  "dialog": {
+    "confirmDelete": "Are you sure you want to delete this item?",
+    "unsavedChanges": "You have unsaved changes. Discard them?",
+    "confirmAction": "Are you sure you want to proceed?"
+  },
+  "time": {
+    "now": "Now",
+    "today": "Today",
+    "yesterday": "昨日",
+    "ago": "ago"
+  },
+  "auth": {
+    "loginTo": "Login to {{provider}}",
+    "loginToUnlock": "Login to Unlock",
+    "loginRequired": "ログインが必要です",
+    "viewPlans": "View Plans",
+    "plan": "{{plan}} Plan",
+    "needHelp": "Need help? Contact support at support@StratCraft.io",
+    "loginRequiredBanner": "Login required to use this feature.",
+    "clickToLogin": "Log In",
+    "credits": "Credits: {{remaining}} / {{total}}",
+    "creditsRemaining": "Credits: {{remaining}}",
+    "renews": "Renews: {{date}}",
+    "passwordPlaceholder": "パスワード",
+    "inline": {
+      "hero": {
+        "badge": "クオンツリサーチ ワークスペース",
+        "heading": "1 つの統制されたワークスペースで取引システムを構築、テスト、展開します。",
+        "tagline": "アイデアの検証を高速化し、よりクリーンな実行ワークフローを実現したいクオンツチームや独立系リサーチャーのために、マーケティングページではなくオペレーション コンソールに近い体験を提供します。",
+        "pillars": {
+          "workflows": {
+            "title": "AI 戦略ワークフロー",
+            "description": "市場のアイデアを構造化されたリサーチ、シグナル、デプロイ可能なトレーディング ロジックに変換します。"
+          },
+          "backtesting": {
+            "title": "バックテスト標準搭載",
+            "description": "ライブ運用前に、データ、監査証跡、実行を考慮したシミュレーションでアイデアを検証します。"
+          },
+          "controls": {
+            "title": "オペレーター級の制御",
+            "description": "データ、認証情報、プラグイン、実行オーケストレーションのための安全なデスクトップ ワークスペースを利用できます。"
+          }
+        },
+        "stats": {
+          "multistep": {
+            "value": "マルチステップ",
+            "label": "リサーチから実行までのフロー"
+          },
+          "desktopNative": {
+            "value": "デスクトップ ネイティブ",
+            "label": "本格派クオンツのためのワークスペース"
+          },
+          "secure": {
+            "value": "セキュア",
+            "label": "認証、プラグイン、ローカル制御"
+          }
+        }
+      },
+      "email": {
+        "heading": "サインインまたは無料アカウントを作成",
+        "description": "続行するにはメール アドレスを入力してください。新規アカウントは自動的に作成されます。既に認証情報をお持ちの場合はパスワード ログインをご利用ください。",
+        "secureAccess": "セキュア アクセス",
+        "emailVerification": "メール認証",
+        "placeholder": "you@example.com",
+        "continueButton": "メールで続行",
+        "sending": "送信中..."
+      },
+      "method": {
+        "password": {
+          "title": "パスワードを使用",
+          "description": "メール + パスワードでサインインする既存ユーザー向けです。"
+        },
+        "browser": {
+          "title": "ブラウザでログイン",
+          "description": "ホスト型認証フローを使用し、すべてのアカウント管理機能を利用できます。"
+        }
+      },
+      "footer": "クレジット カード不要で無料で始められます。続行することで、戦略設計、バックテスト、プラグイン拡張、統制された実行のための StratCraft ワークスペースに入ります。",
+      "code": {
+        "heading": "メールをご確認ください",
+        "sentTo": "{{email}} に 6 桁のコードを送信しました",
+        "verifying": "確認中...",
+        "changeEmail": "メール アドレスを変更",
+        "resendCountdown": "{{seconds}} 秒後に再送信",
+        "resendCode": "コードを再送信",
+        "otherWays": "その他のサインイン方法",
+        "usePassword": "パスワードを使用",
+        "loginWithBrowser": "ブラウザでログイン"
+      },
+      "password": {
+        "heading": "パスワードでログイン",
+        "description": "メール アドレスとパスワードを入力してください",
+        "emailPlaceholder": "you@example.com",
+        "loginButton": "ログイン",
+        "loggingIn": "ログイン中...",
+        "switchToCode": "認証コードを使用"
+      },
+      "errors": {
+        "invalidEmail": "有効なメール アドレスを入力してください",
+        "sendCodeFailed": "認証コードの送信に失敗しました",
+        "networkError": "ネットワーク エラー",
+        "invalidCode": "無効な認証コードです",
+        "resendFailed": "再送信に失敗しました",
+        "invalidCredentials": "認証情報が無効です"
+      }
+    }
+  },
+  "plugin": {
+    "error": "Plugin Error",
+    "errorOccurred": "An error occurred in the plugin",
+    "loadingPlugin": "Loading {{title}}...",
+    "failedToLoad": "Failed to load plugin: {{error}}",
+    "sandboxError": "Sandbox error: {{error}}"
+  },
+  "permissions": {
+    "unknownPermission": "不明な権限",
+    "title": "Permission Request",
+    "requestingPermissions": "This plugin is requesting the following permissions:",
+    "dangerousPermissions": "Dangerous Permissions",
+    "dangerousWarning": "This plugin requests elevated permissions that could affect your system security. Only approve if you trust the source.",
+    "deny": "Deny",
+    "approve": "Approve",
+    "approveAnyway": "Approve Anyway",
+    "pluginId": "Plugin ID",
+    "author": "Author",
+    "riskLevels": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "dangerous": "Dangerous",
+      "unknown": "Unknown"
+    }
+  },
+  "locked": {
+    "requiresTier": "This feature requires {{tier}} tier access",
+    "serviceEnabled": "You've enabled this service. It will automatically activate when you upgrade to {{tier}} tier."
+  },
+  "toolbar": {
+    "logo": "Logo",
+    "systemSettings": "System Settings",
+    "researchEnvironment": "Research Environment"
+  },
+  "error": {
+    "somethingWentWrong": "Something went wrong",
+    "unexpectedError": "An unexpected error occurred",
+    "viewNotFound": "View not found: {{view}}",
+    "editorNotFound": "Editor not found for: {{feature}}"
+  },
+  "view": {
+    "loadingView": "ビューを読み込み中...",
+    "errorPrefix": "エラー: {{error}}",
+    "unknownViewType": "不明なビュータイプ",
+    "noProvider": "ビューのプロバイダがありません: {{viewId}}",
+    "noViewSelected": "ビューが選択されていません",
+    "failedToLoad": "ビューの読み込みに失敗しました"
+  },
+  "tier": {
+    "free": "FREE",
+    "basic": "BASIC",
+    "pro": "PRO",
+    "gold": "GOLD"
+  },
+  "nexusHub": {
+    "initializingSystems": "Initializing Core Systems...",
+    "connectTheAlpha": "CONNECT THE ALPHA",
+    "strategy": "STRATEGY",
+    "backtest": "BACKTEST",
+    "strategyModule": "Strategy Module",
+    "backtestModule": "Backtest Module",
+    "strategyDescription": "Algorithmic strategy generation and logic execution",
+    "backtestDescription": "High-performance C++ backtest engine with integrated data loading",
+    "noLink": "NO {{title}} LINK",
+    "noModulesAvailable": "No Modules Available",
+    "linking": "LINKING",
+    "registry": "Registry",
+    "deactivate": "Deactivate",
+    "systemActive": "SYSTEM_ACTIVE",
+    "moduleStandby": "MODULE_STANDBY",
+    "emptySlot": "EMPTY SLOT",
+    "modules": "Modules",
+    "modulesDescription": "Available plugins for strategy research, testing, and trading"
+  },
+  "strategyStudio": {
+    "strategyNona": "STRATEGY NONA",
+    "advanced": "ADVANCED",
+    "mode": "MODE",
+    "tierAccessRequired": "This feature requires {{tier}} tier access"
+  },
+  "breadcrumb": {
+    "nexusHub": "Nexus Hub"
+  },
+  "banner": {
+    "apiKey": {
+      "message": "AI機能にはAPIキーの設定またはPROサブスクリプションが必要です",
+      "configureKey": "キーを設定",
+      "loginUpgrade": "ログインしてアップグレード",
+      "upgrade": "アップグレード",
+      "dismiss": "閉じる"
+    }
+  },
+  "modal": {
+    "defaultConfirmTitle": "確認",
+    "defaultInfoTitle": "お知らせ",
+    "defaultOkText": "OK",
+    "defaultCancelText": "キャンセル",
+    "close": "閉じる",
+    "configureApiKey": "APIキーを設定",
+    "defaultDestructiveTitle": "削除の確認"
+  },
+  "dataManagement": {
+    "title": "データ管理",
+    "tabs": {
+      "catalog": "カタログ",
+      "downloadQueue": "ダウンロードキュー"
+    },
+    "stats": {
+      "totalSize": "合計サイズ",
+      "totalRows": "合計行数",
+      "symbols": "シンボル数",
+      "providers": "データプロバイダー",
+      "segments": "{{count}} セグメント"
+    },
+    "catalog": {
+      "searchSymbol": "シンボルを検索...",
+      "allProviders": "すべてのプロバイダー",
+      "allIntervals": "すべての時間足",
+      "deleteCount": "削除 ({{count}})",
+      "refresh": "更新",
+      "totalSegments": "{{count}} セグメント",
+      "columnSymbol": "シンボル",
+      "columnInterval": "時間足",
+      "columnDateRange": "日付範囲",
+      "columnRows": "行数",
+      "columnSize": "サイズ",
+      "loading": "読み込み中...",
+      "noData": "キャッシュされたデータセグメントが見つかりません",
+      "deleteSegment": "セグメントを削除",
+      "groupSummary": "{{symbols}} シンボル | {{segments}} セグメント | {{size}}"
+    },
+    "download": {
+      "newDownload": "新規ダウンロード",
+      "provider": "プロバイダー",
+      "symbol": "シンボル",
+      "searchSymbol": "シンボルを検索...",
+      "interval": "時間足",
+      "start": "開始",
+      "end": "終了",
+      "addToQueue": "キューに追加",
+      "noTasks": "ダウンロードタスクがキューにありません",
+      "columnSymbol": "シンボル",
+      "columnInterval": "時間足",
+      "columnProvider": "プロバイダー",
+      "columnStatus": "ステータス",
+      "columnProgress": "進捗",
+      "cancel": "キャンセル",
+      "maxLookback": "最大{{limit}}の遡及",
+      "intervalSetTo": "{{provider}}: {{symbol}} の時間足を{{interval}} に設定",
+      "lookbackAdjusted": "{{provider}} {{interval}} 最大遡及：{{limit}} -- 開始日を{{date}} に調整",
+      "switchedInterval": "{{interval}} に切り替え -- {{oldInterval}} 最大遡及を超えました",
+      "lookbackError": "{{provider}} {{interval}} は最大{{limit}} の遡及をサポートしています。開始日を調整するか、より粗い時間足を選択してください。"
+    },
+    "import": {
+      "table": {
+        "col": {
+          "symbol": "銘柄",
+          "interval": "間隔",
+          "from": "開始",
+          "to": "終了",
+          "rows": "行数"
+        }
+      }
+    },
+    "maxLookback": "最大 {{limit}} ルックバック",
+    "callerBadge": {
+      "sweep": "Sweep",
+      "backtest": "Backtest",
+      "discovery": "Discovery",
+      "validation": "Validation",
+      "scoreboard": "Scoreboard",
+      "restore": "Restore"
+    }
+  },
+  "backtestConsole": {
+    "title": "バックテストコンソール",
+    "noTasks": "バックテストタスクがありません",
+    "cancelAllQueued": "すべてのキューをキャンセル",
+    "clearFinished": "完了をクリア",
+    "stopBacktest": "バックテストを停止",
+    "viewResult": "結果を表示",
+    "removeFromQueue": "キューから削除",
+    "removeFromList": "リストから削除",
+    "status": {
+      "preparing": "準備中",
+      "running": "実行中",
+      "queued": "キュー待ち",
+      "queuedPosition": "キュー #{{position}}",
+      "completed": "完了",
+      "failed": "失敗",
+      "cancelled": "キャンセル済み"
+    },
+    "summary": {
+      "running": "実行中",
+      "queued": "キュー待ち",
+      "done": "完了",
+      "failed": "失敗"
+    },
+    "taskLabel": "タスク:",
+    "openConsole": "バックテストコンソールを開く",
+    "viewDownloadQueue": "ダウンロードキューを表示",
+    "openAlphaFactoryConsole": "Alpha Factory コンソールを開く",
+    "lstmStatus": {
+      "phase": {
+        "boot": "起動中",
+        "load_traces": "トレース読み込み",
+        "build_matrix": "行列構築",
+        "build_windows": "ウィンドウ構築"
+      },
+      "foldEpoch": "フォールド {{fold}}/{{totalFolds}} エポック {{epoch}}/{{totalEpochs}}",
+      "training": "学習中",
+      "completed": "学習完了",
+      "failed": "学習失敗",
+      "tooltip": "LSTM学習 {{run}} - {{model}} - {{signals}} シグナル",
+      "tooltipGeneric": "LSTM学習の進捗を表示"
+    }
+  },
+  "symbolSearch": {
+    "placeholder": "Search symbol...",
+    "authRequired": "Please log in to search symbols",
+    "serviceUnavailable": "Service unavailable",
+    "credentialError": "認証に失敗しました。設定で API 認証情報を確認してください。",
+    "truncated": "{{total}} 件中 {{count}} 件を表示中 -- 検索条件を絞り込んでください"
+  },
+  "llmSelector": {
+    "platformProvider": "Platform provider - no API key required",
+    "verified": "API key verified",
+    "unverified": "API key not verified - may fail",
+    "selectProvider": "Select LLM Provider",
+    "providerHeader": "Provider",
+    "modelHeader": "Model",
+    "customModelExpand": "カスタムモデルを使用",
+    "customModelCollapse": "カスタムモデルを非表示",
+    "customModelPlaceholder": "モデルIDを入力...",
+    "customModelEmpty": "モデルIDは空にできません",
+    "customModelNoSpaces": "モデルIDにスペースは使用できません",
+    "customModelAsciiOnly": "モデルIDはASCII文字のみ使用できます",
+    "proFallback": "Pro"
+  },
+  "installConsent": {
+    "trustLevels": {
+      "official": "公式",
+      "verified": "検証済み",
+      "unverified": "未検証",
+      "unsigned": "未署名"
+    },
+    "publisher": "パブリッシャー",
+    "unknown": "不明",
+    "update": "更新",
+    "install": "インストール",
+    "version": "バージョン",
+    "from": "から",
+    "unsignedPlugin": "未署名プラグイン",
+    "unsignedMessage": "このプラグインは署名されておらず、検証できません。自分で作成したか、信頼できるソースから受け取った場合のみインストールしてください。",
+    "unverifiedPublisher": "未検証のパブリッシャー",
+    "unverifiedMessage": "このプラグインは署名されていますが、パブリッシャーはStratCraftによって検証されていません。注意して進んでください。",
+    "highRiskPermissions": "高リスク権限",
+    "highRiskMessage": "このプラグインはシステムに影響を与える可能性のある昇格権限を要求しています。パブリッシャーを信頼する場合のみインストールしてください。",
+    "permissionsRequested": "リクエストされた権限",
+    "noPermissions": "このプラグインは特別な権限を必要としません。",
+    "understandRisks": "リスクを理解しています",
+    "riskAcknowledgment": "署名されていないまたはネイティブプラグインのインストールはセキュリティリスクをもたらす可能性があります。ソースを確認し、この操作に対して責任を負います。",
+    "iUnderstandInstall": "理解しました、インストール",
+    "fileSystem": "ファイルシステム",
+    "id": "ID:",
+    "publisherLabel": "パブリッシャー:"
+  },
+  "strategy": {
+    "categories": {
+      "regimeMode": "Regime Mode",
+      "kronosMode": "Kronos Mode",
+      "traderMode": "Trader Mode",
+      "riskManager": "Risk Manager",
+      "aiCommandCenter": "AI Command Center",
+      "autopilotMode": "オートパイロットモード",
+      "aiStrategyStudio": "Strategy Studio",
+      "chatMode": "チャットモード",
+      "catalogMode": "Catalog Mode"
+    },
+    "descriptions": {
+      "regimeMode": "Market environment and regime classification units",
+      "kronosMode": "Time-series prediction and sequential analysis",
+      "traderMode": "Market observation and trade execution logic",
+      "riskManager": "Risk management and exit strategy generation",
+      "aiCommandCenter": "Centralized AI control and autonomous agents",
+      "autopilotMode": "AI駆動の完全自律型トレーディング判断",
+      "aiStrategyStudio": "AI-powered strategy studio for comprehensive strategy creation",
+      "chatMode": "チャットによる対話型AI戦略作成",
+      "catalogMode": "Browse and generate C++ strategies from 63 proven trading strategies"
+    },
+    "hub": {
+      "loadingTopology": "Loading service topology...",
+      "noPlugins": "No plugins configured",
+      "installPlugins": "Install plugins from the Marketplace to enable services",
+      "active": "Active",
+      "syncWorkspace": "Sync Workspace",
+      "loginToNona": "Login to Nona",
+      "demo": {
+        "_comment": "Hub placeholder copy: unbuilt-feature demo data rendered by StrategyGroupList / ProviderStatusPanel / ProviderPortal. Remove these keys when the hub is wired to real strategy/provider registries.",
+        "generators": {
+          "regimeTrendX1": "レジームトレンド X1",
+          "volAdaptiveBeta": "ボラティリティ適応ベータ",
+          "crossSessArbitrage": "クロスセッションアービトラージ",
+          "cnnSentimentAlpha": "CNN センチメントアルファ",
+          "highFreqScalperV4": "高頻度スキャルパー V4"
+        },
+        "lastRun": {
+          "twoMinAgo": "2分前",
+          "oneHourAgo": "1時間前",
+          "active": "稼働中",
+          "failed": "失敗",
+          "fiveMinAgo": "5分前",
+          "fifteenMinAgo": "15分前"
+        },
+        "providers": {
+          "pro": "Pro",
+          "quant": "Quant",
+          "alpha": "Alpha"
+        },
+        "templates": {
+          "trendFollowing": "トレンドフォロー",
+          "meanReversion": "平均回帰",
+          "marketMaking": "マーケットメイク",
+          "statArbitrage": "統計的裁定取引"
+        }
+      }
+    },
+    "tier": {
+      "free": "Free",
+      "basic": "Basic",
+      "pro": "Pro",
+      "enterprise": "Enterprise"
+    },
+    "groupList": {
+      "groupTitle": "GROUP: TREND_FOLLOWING_PACK",
+      "providerRegion": "Provider: NONA // Region: ASIA_PACIFIC",
+      "runAll": "すべて実行",
+      "configPack": "設定パック",
+      "colId": "ID",
+      "colName": "名前",
+      "colStatus": "ステータス",
+      "col7dPnl": "7D PNL",
+      "colCpu": "CPU",
+      "colLastActivity": "最終アクティビティ",
+      "colActions": "アクション"
+    },
+    "providerPortal": {
+      "licenseValid": "ライセンス有効",
+      "availableStrategies": "利用可能なストラテジー",
+      "activeGenerators": "アクティブなジェネレータ",
+      "deployment": "デプロイ",
+      "executionLogs": "実行ログ",
+      "info": "情報",
+      "initializedMessage": "{{provider}} コアエンジン環境が正常に初期化されました...",
+      "moduleStatus": "モジュールステータス",
+      "ready": "準備完了"
+    },
+    "performanceChart": {
+      "title": "パフォーマンス概要",
+      "subtitle": "過去30日 - すべてのプロバイダー",
+      "chartPending": "チャート統合保留中",
+      "chartPendingHint": "データ可視化用のrecharts または visx を統合",
+      "winRate": "勝率",
+      "sharpeRatio": "シャープレシオ",
+      "totalReturn": "総リターン"
+    },
+    "audit": {
+      "title": "Audit Report",
+      "description": "Strategy generation quality scoring",
+      "recentAudits": "Recent Audits",
+      "noData": "No audit data available yet",
+      "colProvider": "Provider",
+      "colModel": "Model",
+      "colAlgorithm": "Algorithm",
+      "colSignalSource": "Signal Source",
+      "colScore": "Score",
+      "colRating": "Rating",
+      "colDate": "Date"
+    }
+  },
+  "alphaFactoryConsole": {
+    "title": "Alpha Factory コンソール",
+    "active": "アクティブ:",
+    "total": "合計:",
+    "noTasks": "タスクなし",
+    "clearFinished": "完了をクリア",
+    "viewTask": "タスクを表示",
+    "removeFromQueue": "キューから削除",
+    "removeFromList": "リストから削除",
+    "status": {
+      "preparing": "準備中",
+      "queued": "キュー待ち",
+      "running": "実行中",
+      "done": "完了",
+      "failed": "失敗",
+      "cancelled": "キャンセル済み"
+    }
+  },
+  "backtestQueue": {
+    "title": "バックテストキュー",
+    "running": "実行中",
+    "view": "表示",
+    "cancel": "キャンセル",
+    "pending": "保留中",
+    "remove": "削除",
+    "noTasks": "バックテストタスクなし",
+    "cancelAll": "すべてキャンセル"
+  },
+  "llmEstimate": {
+    "title": "LLM 呼び出し見積もり (ドライラン)",
+    "barsProcessed": "処理済みバー数",
+    "calls": " 回呼び出し",
+    "totalLlmCalls": "LLM 呼び出し合計"
+  },
+  "quantLab": {
+    "title": "Sigma",
+    "pluginDescription": "Sigma はプラグインとして利用できます。マーケットプレイスからインストールして、Alpha Factory、Signal Library などにアクセスしてください。",
+    "openMarketplace": "マーケットプレイスを開く",
+    "subpages": {
+      "batchGeneration": "シグナル発見",
+      "factory": "アルファファクトリー",
+      "engineStore": "エンジンストア",
+      "trainingMonitor": "トレーニングモニター",
+      "promotionPipeline": "ファクター昇格",
+      "settings": "設定"
+    }
+  },
+  "dataDownload": {
+    "downloading": "ダウンロード中",
+    "loading": "読み込み中",
+    "caching": "キャッシュ中",
+    "complete": "完了",
+    "error": "エラー",
+    "chunkProgress": "chunk {{completed}}/{{total}}",
+    "barCount": "{{count}} bars"
+  },
+  "providerStatus": {
+    "title": "プロバイダーステータス",
+    "viewAll": "すべて表示",
+    "active": "アクティブ",
+    "success": "成功:",
+    "latency": "レイテンシ:"
+  },
+  "editor": {
+    "error": "エラー",
+    "loading": "エディターを読み込み中...",
+    "unknownType": "不明なエディタータイプ",
+    "noEditorsOpen": "開いているエディターがありません",
+    "close": "閉じる",
+    "noProvider": "エディタープロバイダーがありません: {{viewType}}"
+  },
+  "tree": {
+    "noProvider": "ビューに対する TreeDataProvider が登録されていません: {{viewId}}",
+    "loadFailed": "ツリーデータの読み込みに失敗しました"
+  },
+  "accessibility": {
+    "dismiss": "閉じる",
+    "close": "閉じる",
+    "strategyNavigator": "ストラテジーナビゲーター"
+  },
+  "settings": {
+    "title": "Settings",
+    "testButton": "テスト"
+  },
+  "onboarding": {
+    "toggleTooltip": "Replay Onboarding Guide",
+    "controls": {
+      "next": "Next",
+      "prev": "Back",
+      "done": "Done",
+      "progress": "{{current}} of {{total}}"
+    },
+    "welcome": {
+      "sidebar": {
+        "title": "Navigation Panel",
+        "description": "Use the sidebar to switch between StratForge, Backtester, Sigma, and other modules."
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Configure API keys, data providers, and system preferences here."
+      },
+      "auth": {
+        "title": "Account",
+        "description": "Log in to access Pro features, cloud sync, and AI-powered strategy generation."
+      },
+      "llm": {
+        "title": "LLM Provider",
+        "description": "Select the AI model used for strategy generation. Bring your own API key or use StratCraft Pro."
+      },
+      "language": {
+        "title": "Language",
+        "description": "Switch the application language. StratCraft supports 12 languages."
+      },
+      "finish": {
+        "title": "You are all set!",
+        "description": "Start by exploring the Hub or create your first strategy in StratForge. You can replay this guide from the help icon in the status bar."
+      }
+    }
+  },
+  "assistant": {
+    "panelTitle": "アシスタント",
+    "noContent": "このページのヘルプはありません。",
+    "tooltip": "アシスタントモード (Ctrl+L)",
+    "backToOverview": "概要に戻る",
+    "closePanel": "アシスタントパネルを閉じる"
+  },
+  "navigationGuard": {
+    "title": "Generation In Progress",
+    "message": "Strategy generation is in progress. Leaving will cancel the current task.",
+    "confirm": "Leave Page",
+    "cancel": "Stay"
+  },
+  "validation": {
+    "backendReport": "Backend Validation Report",
+    "layer": "Layer",
+    "status": "Status",
+    "pass": "Pass",
+    "fail": "Fail",
+    "skip": "Skipped",
+    "noReport": "No backend validation report available",
+    "L1": "Contract Shape",
+    "L2": "Security Scan",
+    "L3": "Compilation",
+    "L4": "Symbol Verification",
+    "L5": "Isolated Load Test",
+    "L6": "Smoke Test",
+    "title": "バックエンド検証",
+    "failedAt": "失敗: {{layer}}",
+    "stderrOutput": "stderr 出力"
+  },
+  "notifications": {
+    "regionLabel": "通知",
+    "sweep": {
+      "allCompleteTitle": "全てのスイープが完了しました",
+      "allCompleteBody": "{{count}}件のスイープが完了。{{succeeded}}件成功、{{errors}}件エラー。",
+      "nextSweepTitle": "次のスイープを開始中",
+      "nextSweepBody": "次のスイープに自動移行中（キューに{{remaining}}件残り）",
+      "sweepCompleteTitle": "パラメータスイープ完了",
+      "sweepCompleteBody": "{{succeeded}}/{{total}} armsが正常に完了",
+      "sweepCompleteBodyWithErrors": "{{succeeded}}/{{total}} armsが正常に完了（{{errors}}件エラー）",
+      "downloadCompleteTitle": "Data Download Complete",
+      "downloadCompleteBody": "{{total}} symbols downloaded. Sweep fitting started.",
+      "downloadCompleteBodyWithFailures": "{{total}} symbols processed ({{failures}} failed). Sweep fitting started."
+    }
+  },
+  "errorState": {
+    "technicalDetails": "技術的な詳細"
+  },
+  "viewRegistry": {
+    "nexus": {
+      "label": "ネクサスハブ",
+      "shortLabel": "ハブ"
+    },
+    "marketplace": {
+      "label": "プラグインマーケット",
+      "shortLabel": "マーケット"
+    },
+    "dataManagement": {
+      "label": "データ管理",
+      "shortLabel": "データ"
+    },
+    "settings": {
+      "label": "設定",
+      "shortLabel": "設定"
+    },
+    "researchEnvironment": {
+      "label": "研究環境",
+      "shortLabel": "研究環境"
+    },
+    "strategy": {
+      "label": "StratForge",
+      "shortLabel": "StratForge"
+    },
+    "backtest": {
+      "label": "バックテスター",
+      "shortLabel": "バックテスター"
+    },
+    "backtestResult": {
+      "label": "バックテスト結果",
+      "shortLabel": "結果"
+    },
+    "quantLab": {
+      "label": "Sigma",
+      "shortLabel": "Sigma"
+    },
+    "chart": {
+      "label": "チャート",
+      "shortLabel": "チャート"
+    },
+    "ai": {
+      "label": "AI アシスタント",
+      "shortLabel": "AI"
+    },
+    "scoreboard": {
+      "label": "シグナル スコアボード",
+      "shortLabel": "スコアボード"
+    },
+    "signalGenerator": {
+      "label": "Signal Generator",
+      "shortLabel": "Signal Gen"
+    }
+  },
+  "researchEnvironment": {
+    "loading": "環境の状態を読み取っています...",
+    "approvalDeclined": "操作が承認されなかったため、何も変更されていません。",
+    "sharedEnvironmentNotice": "これら {{count}} 個の機能は 1 つのロックされた環境を共有しているため、個別ではなくまとめてインストール・修復・検証されます。",
+    "states": {
+      "absent": "未インストール",
+      "installing": "インストール中",
+      "repairing": "修復中",
+      "verifying": "検証中",
+      "uninstalling": "Uninstalling",
+      "ready": "使用可能",
+      "failed": "失敗"
+    },
+    "layerStates": {
+      "ready": "使用可能",
+      "failed": "失敗",
+      "pending": "未検証"
+    },
+    "jobStates": {
+      "queued": "待機中",
+      "running": "実行中",
+      "succeeded": "成功",
+      "failed": "失敗"
+    },
+    "actions": {
+      "install": "環境をインストール",
+      "repair": "環境を修復",
+      "verify": "再検証",
+    "uninstall": "環境をアンインストール",
+      "remove_capability": "機能を削除",
+      "restore_capability": "機能を復元"
+    },
+    "progress": {
+      "install": "インストールの進行状況",
+      "repair": "修復の進行状況",
+      "verify": "検証の進行状況",
+    "uninstall": "アンインストールの進行状況",
+      "remove_capability": "機能削除の進行状況",
+      "restore_capability": "機能復元の進行状況"
+    },
+    "stages": {
+      "admission": "前提条件を確認しています",
+      "install": "パッケージをインストールしています",
+      "repair": "インストールを再構築しています",
+      "uninstall": "ローカル環境を削除しています",
+      "transition": "環境機能を更新しています",
+      "python_verify": "Python パッケージを検証しています",
+      "julia_verify": "Julia バックエンドを初期化しています"
+    },
+    "causes": {
+      "unsupported": "サポートされていないホスト",
+      "missing_executable": "実行ファイルが見つかりません",
+      "missing_lock": "ロックファイルが見つかりません",
+      "manifest_drift": "マニフェストとロックが一致しません",
+      "lock_io": "ロックファイルを読み取れませんでした",
+      "invalid_lock_metadata": "ロックのメタデータが不正です",
+      "database": "ローカルの記録を更新できませんでした",
+      "network": "ネットワーク要求が失敗しました",
+      "process_exit": "プロセスがエラーで終了しました",
+      "process_lost": "プロセスが予期せず終了しました",
+      "import": "パッケージをインポートできませんでした",
+      "probe": "機能チェックに失敗しました",
+      "backend_init": "バックエンドの初期化に失敗しました"
+    },
+    "failureCategory": {
+      "unsupported_platform": "サポートされていないプラットフォーム",
+      "pixi_missing": "Pixi を利用できません",
+      "lock_missing": "ロックファイルがありません",
+      "lock_drift": "マニフェストとロックが乖離しています",
+      "lifecycle_coordination_failed": "環境の記録を調整できませんでした",
+      "network_failed": "ダウンロードに失敗しました",
+      "install_failed": "インストールに失敗しました",
+      "repair_failed": "修復に失敗しました",
+      "uninstall_failed": "Uninstall failed",
+      "workload_active": "Research workload is active",
+      "operation_interrupted": "操作が中断されました",
+      "verification_failed": "検証に失敗しました"
+    },
+    "failure": {
+      "stage": "段階",
+      "cause": "原因",
+      "capability": "パッケージ"
+    },
+    "capabilityCause": {
+      "import": "このパッケージをインポートできませんでした",
+      "probe": "このパッケージは機能チェックに失敗しました",
+      "backend_init": "Julia バックエンドの初期化に失敗しました"
+    },
+    "capability": {
+      "expected": "想定",
+      "installed": "インストール済み",
+      "notInstalled": "--"
+    },
+    "pysr": {
+      "python": "Python パッケージ",
+      "julia": "Julia バックエンド"
+    },
+    "capabilities": {
+      "histdata": {
+        "name": "HistData",
+        "description": "Offline-verified parser and Parquet converter for separately reviewed Forex acquisition."
+      },
+      "duckdb": {
+        "name": "DuckDB",
+        "description": "リサーチ用クエリに使用するインプロセス分析データベース。"
+      },
+      "gplearn": {
+        "name": "gplearn",
+        "description": "記号的なファクター探索のための遺伝的プログラミング。"
+      },
+      "gpquant": {
+        "name": "GPQuant",
+        "description": "定量的なファクター探索に最適化された遺伝的プログラミング。"
+      },
+      "pysr": {
+        "name": "PySR",
+        "description": "初回使用時に初期化される Julia バックエンドを備えた記号回帰。"
+      },
+      "pandas_ta": {
+        "name": "pandas-ta",
+        "description": "TA-Lib ファクターエンジンを支えるテクニカル指標ライブラリ。"
+      }
+    },
+    "summary": {
+      "interpreter": "インタープリター",
+      "lastVerified": "最終検証",
+      "pixiVersion": "Pixi バージョン",
+      "technicalDetails": "技術的な詳細",
+      "manifestHash": "マニフェスト SHA-256",
+      "lockHash": "ロック SHA-256",
+      "liveWorkloadNotice": "準備された環境を使用するのは、この処理の完了後に開始されたリサーチ実行のみです。現在実行中のものが再起動されたり中断されたりすることはありません。"
+    },
+    "regions": {
+      "summary": "環境の概要"
+    },
+    "announce": {
+      "succeeded": "{{operation}}: 正常に完了しました。",
+      "failed": "{{operation}}: 失敗しました。",
+      "failedState": "リサーチ環境は失敗状態です。"
+    },
+    "a11y": {
+      "environmentState": "環境の状態: {{state}}",
+      "capabilityState": "{{capability}} の状態: {{state}}",
+      "platform": "プラットフォーム: {{platform}} {{architecture}}",
+      "elapsed": "経過時間: {{elapsed}}",
+      "logTail": "環境操作の最近の出力"
+    }
+  },
+  "scoreboard": {
+    "title": "シグナル スコアボード",
+    "empty": "まだスコアリングされたシグナルはありません。シグナルを生成してスコアボードを埋めてください。",
+    "disclaimer": "{{windowBars}} バーにわたる過去のパフォーマンス。推奨ではありません。",
+    "columns": {
+      "button": "列",
+      "menuTitle": "列を表示"
+    },
+    "col": {
+      "algorithm": "アルゴリズム",
+      "recentIc": "最近の IC",
+      "liveIc": "ライブ IC",
+      "sharpeLong": "最近のシャープ (ロング)",
+      "sharpeShort": "最近のシャープ (ショート)",
+      "hitRate": "勝率",
+      "trades": "トレード数",
+      "asOf": "時点"
+    },
+    "cell": {
+      "liveOnlySince": "ライブのみ -- {{date}} から観測中",
+      "liveOnlyTooltip": "{{date}} にライブ観測を開始。過去バックテストは利用できません -- 理由は TICKET_196_7_7 を参照してください。"
+    }
+  },
+  "llmProvider": {
+    "badge": {
+      "pro": "Pro",
+      "byok": "持ち込みキー"
+    }
+  },
+  "signalGenerator": {
+    "title": "Signal Generator",
+    "pluginDescription": "Signal Generator enables live trading signal production. Install it from the Marketplace to access live signal generation and auto-execution.",
+    "openMarketplace": "Open Marketplace"
+  },
+  "entitlement": {
+    "buyout": {
+      "badge": {
+        "freeUntil": "FREE UNTIL {{date}}",
+        "freeAccessEnds": "FREE ACCESS ENDS {{date}}",
+        "lifetime": "LIFETIME",
+        "freeAccessEnded": "FREE ACCESS ENDED",
+        "revoked": "REVOKED"
+      }
+    },
+    "ownership": {
+      "badge": {
+        "owned": "OWNED"
+      }
+    }
+  },
+  "brand": {
+    "tagline": "Connect the Alpha"
+  },
+  "statusDot": {
+    "running": "実行中",
+    "warning": "警告",
+    "error": "エラー",
+    "idle": "アイドル",
+    "online": "オンライン",
+    "offline": "オフライン",
+    "degraded": "劣化"
+  },
+  "persistence": {
+    "saveFailed": "保存に失敗",
+    "restoreFailed": "復元に失敗",
+    "deleteFailed": "削除に失敗",
+    "fallback": "永続化に失敗"
+  },
+  "comingSoon": {
+    "chartView": "チャートビュー - 近日公開",
+    "aiAssistant": "AIアシスタント - 近日公開"
+  },
+  "moduleNames": {
+    "optimizer": "Optimizer",
+    "riskEngine": "RiskEngine",
+    "dataFeed": "DataFeed",
+    "backtester": "Backtester"
+  },
+  "pluginPermissions": {
+    "network": {
+      "name": "Network Access",
+      "description": "Access external network resources and APIs"
+    },
+    "networkInternal": {
+      "name": "Internal Network",
+      "description": "Access internal API endpoints only"
+    },
+    "filesystem": {
+      "name": "Sandboxed File Access",
+      "description": "Read and write files within plugin sandbox"
+    },
+    "filesystemFull": {
+      "name": "Full File System Access",
+      "description": "Access any file on the system"
+    },
+    "database": {
+      "name": "Database Access",
+      "description": "Read and write to the application database"
+    },
+    "notification": {
+      "name": "Notifications",
+      "description": "Show system notifications to the user"
+    },
+    "clipboard": {
+      "name": "Clipboard Access",
+      "description": "Read from and write to system clipboard"
+    },
+    "shell": {
+      "name": "Shell Execution",
+      "description": "Execute shell commands on the system"
+    },
+    "native": {
+      "name": "Native Modules",
+      "description": "Load and use native Node.js modules"
+    }
+  },
+  "downloadQueue": {
+    "queued": "Queued",
+    "queuedResumed": "Queued (resumed)",
+    "downloading": "Downloading...",
+    "cancelled": "Cancelled",
+    "yieldedPriority": "Yielded to higher priority",
+    "yieldedPriorityMultiTf": "Yielded to higher priority (multi-TF)",
+    "partial": "Partial: {{rowCount}} bars, missing {{dayCount}} day(s) ({{dayList}})",
+    "complete": "Complete: {{rowCount}} bars",
+    "completeMultiTf": "Complete: {{count}} timeframes"
+  },
+  "dataCache": {
+    "dataReadyCached": "Data ready (cached)",
+    "mergingData": "Merging data...",
+    "fetchingFromProvider": "Fetching data from {{provider}}...",
+    "writingRows": "Writing {{count}} rows...",
+    "providerStartsAt": "Data from {{provider}} starts at {{actualStart}} (requested {{requestedStart}})",
+    "dataReadyAggregated": "Data ready ({{rowCount}} rows, {{target}} aggregated from {{baseInterval}})",
+    "checkingCache": "Checking cache for {{symbol}}/{{interval}}...",
+    "fetchingEarlierData": "Fetching earlier data ({{start}}~{{end}})...",
+    "fetchingNewerData": "Fetching newer data ({{start}}~{{end}})...",
+    "dataReady": "Data ready ({{count}} rows)",
+    "refetchingBackfill": "Re-fetching {{symbol}}/{{interval}} to backfill interior gap...",
+    "dataReadyBackfilled": "Data ready ({{count}} rows, interior gap backfilled)"
+  },
+  "keychainWarning": {
+    "message": "OSキーチェーンが利用できません -- APIキーを安全に保存できません。"
+  },
+  "assistantHelp": {
+    "strategyStudioGuide": "Strategy Studio ガイド",
+    "bollingerMacd": "ボリンジャーバンド + MACD 戦略",
+    "rsiMa": "RSI + 移動平均 戦略",
+    "macdRsiDivergence": "MACD + RSI ダイバージェンス戦略",
+    "emaCrossover": "EMA クロスオーバー戦略",
+    "ichimokuCloud": "一目均衡表戦略",
+    "fibonacciTrend": "フィボナッチトレンド戦略",
+    "vwapStrategy": "VWAP 戦略",
+    "supertrend": "スーパートレンド戦略",
+    "dualMaVolume": "デュアルMA + 出来高戦略"
+  },
+  "configService": {
+    "loadedSuccessfully": "設定が正常に読み込まれました"
+  },
+  "installProgress": {
+    "extractingPackage": "Extracting package...",
+    "backingUpExisting": "Backing up existing...",
+    "installingFiles": "Installing files...",
+    "registeringPermissions": "Registering permissions...",
+    "runningLifecycleHooks": "Running lifecycle hooks...",
+    "initializing": "Initializing...",
+    "installationComplete": "Installation complete!"
+  },
+  "marketplace": {
+    "fetchingMetadata": "Fetching plugin metadata...",
+    "downloadingPlugin": "Downloading plugin...",
+    "verifyingChecksum": "Verifying checksum...",
+    "resolvingDependencies": "Resolving dependencies...",
+    "extractingPlugin": "Extracting plugin...",
+    "installingPythonDeps": "Installing Python dependencies...",
+    "finalizingInstallation": "Finalizing installation...",
+    "installationComplete": "Installation complete!",
+    "installingFromBundled": "Installing from bundled package...",
+    "copyingBundledPlugin": "Copying bundled plugin..."
+  }
+}

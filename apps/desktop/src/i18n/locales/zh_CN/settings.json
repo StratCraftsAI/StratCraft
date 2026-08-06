@@ -1,0 +1,335 @@
+{
+  "title": "Settings",
+  "sections": {
+    "general": "General",
+    "appearance": "Appearance",
+    "language": "Language",
+    "network": "Network",
+    "security": "Security",
+    "plugins": "Plugins",
+    "advanced": "Advanced",
+    "about": "About",
+    "config": "Config",
+    "credentials": "Credentials",
+    "system": "System"
+  },
+  "language": {
+    "title": "Language",
+    "description": "Select your preferred language",
+    "system": "Use system language",
+    "restart": "Restart required to apply language changes"
+  },
+  "theme": {
+    "title": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
+  },
+  "plugins": {
+    "title": "Plugin Settings",
+    "config": "Configuration",
+    "secrets": "Secrets",
+    "noConfig": "No configuration options available",
+    "noSecrets": "No secrets configured"
+  },
+  "actions": {
+    "save": "Save Settings",
+    "reset": "Reset to Defaults",
+    "export": "Export Settings",
+    "import": "Import Settings",
+    "reload": "Reload",
+    "retry": "Retry"
+  },
+  "config": {
+    "title": "System Configuration",
+    "description": "Manage application settings and preferences",
+    "configFilePath": "Configuration file path",
+    "nav": {
+      "performance": "Performance",
+      "sync": "Sync",
+      "scoreboard": "信号评分板",
+      "diagnostics": "Diagnostics",
+      "onboarding": "新手引导",
+      "privacy": "Privacy",
+      "dataRouting": "数据路由",
+      "resourceGovernance": "资源治理"
+    },
+    "performance": {
+      "maxBacktestTasks": "Max Backtest Tasks",
+      "maxBacktestDescription": "Concurrent backtest limit (1-32)",
+      "autoDetectTitle": "CPU core based auto-detection",
+      "autoDetect": "Auto Detect"
+    },
+    "sync": {
+      "title": "Workspace Sync",
+      "description": "Sync your workspace to a local folder (e.g., OneDrive, Google Drive, Dropbox mount)",
+      "targetFolder": "Target Folder",
+      "targetFolderDescription": "Folder path for workspace sync. Use a cloud drive mount for cross-device sync.",
+      "targetFolderPlaceholder": "Select a sync folder...",
+      "browse": "Browse",
+      "lastSynced": "Last Synced",
+      "neverSynced": "Never synced",
+      "syncNow": "Sync Now",
+      "syncing": "Syncing...",
+      "restoreFromSync": "Restore from Sync",
+      "restoring": "Restoring...",
+      "exportSuccess": "Workspace exported successfully ({{strategies}} strategies, {{algorithms}} algorithms, {{results}} results)",
+      "importSuccess": "Workspace imported successfully ({{strategies}} strategies, {{algorithms}} algorithms, {{results}} results)",
+      "confirmRestore": "This will import workspace data from the sync folder. Existing data with the same IDs will be overwritten. Continue?",
+      "errors": {
+        "noTargetDir": "Please select a target folder first",
+        "exportFailed": "Export failed: {{error}}",
+        "importFailed": "Import failed: {{error}}"
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "restore": "Restore"
+      }
+    },
+    "health": {
+      "parseError": "配置文件错误",
+      "parseWarning": "配置文件警告",
+      "usingFallback": "应用程序正在使用上次已知的有效配置运行。请修复配置文件并重新加载。",
+      "reloadFailed": "由于解析错误，配置重新加载失败。"
+    },
+    "scoreboard": {
+      "title": "信号评分板",
+      "description": "信号性能评分板的设置。修改将在下次重算时生效 -- 无需重启应用。",
+      "windowBars": "窗口K线数",
+      "windowBarsDescription": "IC / 夏普 / 命中率使用的滚动窗口长度（{{min}}-{{max}} 根K线）。"
+    },
+    "dataRouting": {
+      "title": "Data routing",
+      "descriptionPrefix": "For each market, choose which data provider should be tried first. Markets with multiple eligible providers (for example,",
+      "descriptionMiddle": "served by both",
+      "descriptionAnd": "and",
+      "descriptionSuffix": ") expose a reorderable list. Single-provider markets are read-only.",
+      "moveUp": "Move {{provider}} up",
+      "moveDown": "Move {{provider}} down"
+    },
+    "resourceGovernance": {
+      "title": "资源治理",
+      "description": "为 sweep、因子挖掘和 LSTM 训练分别设置 CPU / 内存上限。闸门阈值可热重载；cgroup 硬上限在各工作负载下次启动时生效。",
+      "enabled": "启用资源治理",
+      "sweepCap": "Sweep 上限（%）",
+      "miningCap": "因子挖掘上限（%）",
+      "lstmCap": "LSTM 训练上限（%）",
+      "capDescription": "在 CPU / 内存中较紧的一项上占用机器资源的最大比例（{{min}}-{{max}}%）。",
+      "applyNote": "闸门阈值立即生效。cgroup 硬上限在各工作负载下次启动时生效。",
+      "aggregateExceeded": "三项上限之和不得超过 {{max}}%。",
+      "admissionCeiling": "System admission ceiling (%)",
+      "admissionCeilingDesc": "Maximum combined peak memory including other workloads and the operating system ({{min}}-{{max}}%)."
+    }
+  },
+  "advanced": {
+    "diagnostics": {
+      "title": "Diagnostics",
+      "openLogFolder": "Open Log Folder",
+      "openLogFolderDescription": "Opens the log directory in your file manager"
+    },
+    "onboarding": {
+      "title": "新手引导",
+      "showGuides": "显示新手引导",
+      "showGuidesDescription": "首次访问页面时显示交互式引导教程。",
+      "assistantMode": "助手模式",
+      "assistantModeDescription": "显示当前页面的上下文帮助面板，包含教学内容。",
+      "resetProgress": "重置引导进度",
+      "resetProgressDescription": "清除所有已完成的引导教程，使其在下次访问时重新播放。",
+      "resetButton": "重置"
+    },
+    "privacy": {
+      "title": "Privacy",
+      "description": "Control what data is shared with StratCraft to help improve the application.",
+      "crashReports": "Crash Reports",
+      "crashReportsDescription": "Automatically send error and crash data to help us fix bugs. No personal data is included.",
+      "crashReportsAlwaysOn": "Crash reports are always sent to help us fix critical issues. No personal data is included.",
+      "alwaysOn": "Always On",
+      "analytics": "Send Usage Analytics",
+      "analyticsDescription": "Share anonymous usage statistics to help us improve features and performance."
+    }
+  },
+  "permissions": {
+    "title": "Permission Request",
+    "requestingPermissions": "This plugin is requesting the following permissions:",
+    "dangerousPermissions": "Dangerous Permissions",
+    "dangerousWarning": "This plugin requests elevated permissions that could affect your system security. Only approve if you trust the source.",
+    "deny": "Deny",
+    "approve": "Approve",
+    "approveAnyway": "Approve Anyway",
+    "pluginId": "Plugin ID: {{id}}",
+    "author": "Author: {{author}}"
+  },
+  "credentials": {
+    "title": "凭证管理器",
+    "description": "安全管理插件凭证",
+    "nav": {
+      "security": "安全",
+      "credentials": "凭证",
+      "auditLog": "审计日志"
+    },
+    "security": {
+      "title": "安全状态",
+      "description": "凭证使用 AES-256-GCM 加密。系统密钥链集成已激活。"
+    },
+    "actions": {
+      "setMasterPassword": "设置主密码",
+      "addCredential": "添加凭证",
+      "refresh": "刷新",
+      "copyToClipboard": "复制到剪贴板",
+      "showValue": "显示值",
+      "hideValue": "隐藏值",
+      "deleteCredential": "删除凭证"
+    },
+    "search": {
+      "placeholder": "搜索凭证..."
+    },
+    "list": {
+      "title": "已存储的凭证",
+      "empty": "暂无存储的凭证",
+      "noMatch": "没有匹配的凭证",
+      "addFirst": "添加您的第一个凭证"
+    },
+    "audit": {
+      "title": "最近活动",
+      "empty": "暂无活动记录",
+      "loadFailed": "无法加载审计日志"
+    },
+    "dialog": {
+      "add": {
+        "title": "添加凭证",
+        "pluginId": "插件 ID",
+        "pluginIdPlaceholder": "com.example.plugin",
+        "key": "密钥名",
+        "keyPlaceholder": "API_KEY",
+        "value": "密钥值",
+        "valuePlaceholder": "输入密钥值",
+        "adding": "添加中...",
+        "submit": "添加凭证"
+      },
+      "password": {
+        "setTitle": "设置主密码",
+        "enterTitle": "输入主密码",
+        "setDescription": "设置主密码以保护您的凭证。访问敏感数据时需要此密码。",
+        "enterDescription": "输入主密码以解锁凭证访问。",
+        "password": "密码",
+        "passwordPlaceholder": "输入密码",
+        "confirmPassword": "确认密码",
+        "confirmPlaceholder": "确认密码",
+        "processing": "处理中...",
+        "setButton": "设置密码",
+        "unlockButton": "解锁"
+      }
+    },
+    "errors": {
+      "passwordMismatch": "密码不匹配",
+      "passwordTooShort": "密码至少需要8个字符",
+      "invalidPassword": "密码无效",
+      "setPasswordFailed": "设置密码失败"
+    },
+    "confirmDelete": "Delete credential \"{{key}}\" from {{pluginId}}?"
+  },
+  "consent": {
+    "title": "Help Improve StratCraft",
+    "description": "StratCraft collects crash reports to fix critical issues. You can also opt in to share anonymous usage data. You can change these settings at any time in Settings > Advanced.",
+    "crashReports": "Crash Reports",
+    "crashReportsAlwaysOn": "Crash reports are always sent to help us fix critical issues. No personal data is included.",
+    "optionalDataSharing": "Optional data sharing:",
+    "analytics": "Send usage analytics",
+    "analyticsDescription": "Share anonymous usage data to help us understand how StratCraft is used and improve features.",
+    "privacyNote": "All data is anonymized before transmission. No personal information, trading data, or API keys are ever collected. You can change these preferences anytime in Settings > Advanced > Privacy.",
+    "noThanks": "No Thanks",
+    "enableSelected": "Enable Selected"
+  },
+  "secretsPanel": {
+    "verifyMissingApiKey": "缺少 API 密钥",
+    "verifyMissingCompositeKey": "缺少 API 密钥 ID 或密钥 Secret",
+    "verifyRequestFailed": "验证请求失败",
+    "patternMismatch": "Value does not match expected pattern ({{pattern}})",
+    "failedToSaveKey": "Failed to save {{key}}",
+    "failedToClearKey": "Failed to clear {{key}}",
+    "failedToDeleteKey": "Failed to delete {{key}}",
+    "recoveryAction": "恢复凭据存储",
+    "recoveryConfirm": "归档全部不可读凭据并清除活动记录？之后必须重新输入受影响的凭据。",
+    "recoveryConfirmButton": "归档并重置",
+    "replaceConfirm": "新凭据已通过提供商验证。是否归档每个不可读密文并保存替换凭据？",
+    "replaceConfirmButton": "归档并替换",
+    "replacementRequiresVerification": "保存前必须先成功测试当前替换凭据。",
+    "recoveryUnavailable": "当前凭据存储状态不支持此恢复操作。",
+    "recoveryFailed": "凭据恢复失败。",
+    "apiKey": {
+      "aria": {
+        "required": "必填",
+        "hideValue": "隐藏值",
+        "showValue": "显示值"
+      }
+    },
+    "providers": {
+      "lino": {
+        "name": "LinoAPI",
+        "description": "国内 API 中转网关 — 500+ 模型，OpenAI 协议",
+        "apiKey": "API 密钥",
+        "apiKeyPlaceholder": "your-lino-api-key",
+        "enabledModels": "已添加模型",
+        "addModels": "添加模型",
+        "noEnabledModels": "添加模型后才会显示在模型选择器中",
+        "modelSearchPlaceholder": "搜索 LinoAPI 模型..."
+      },
+      "openaiCompatible": {
+        "name": "OpenAI 兼容接口",
+        "description": "任何支持 OpenAI 聊天补全协议的服务",
+        "baseUrl": "API 基础地址",
+        "baseUrlPlaceholder": "https://api.example.com/v1",
+        "apiKey": "API 密钥",
+        "apiKeyPlaceholder": "sk-..."
+      }
+    }
+  },
+  "errors": {
+    "saveFailed": "Save failed",
+    "loadFailed": "Failed to load configuration"
+  },
+  "lifecycle": {
+    "title": "凭据存储生命周期",
+    "description": "迁移、轮换和恢复共享的加密凭据存储。",
+    "refresh": "刷新",
+    "mode": "模式",
+    "generation": "代次",
+    "credentials": "凭据",
+    "unreadable": "不可读",
+    "modes": {
+      "empty": "空",
+      "legacy": "旧版",
+      "gcm2": "当前",
+      "mixed": "需要迁移",
+      "recovery_required": "需要恢复"
+    },
+    "migrate": "迁移加密格式",
+    "rotate": "轮换主密钥",
+    "resetUnreadable": "归档并重置不可读凭据",
+    "resetConfirm": "归档全部不可读密文并清除这些活动凭据？之后必须重新输入。",
+    "confirm": "确认",
+    "cancel": "取消",
+    "export": "导出加密恢复包",
+    "exportSelectedBackup": "导出所选备份密钥",
+    "exportPassphrase": "恢复口令",
+    "confirmPassphrase": "确认恢复口令",
+    "import": "导入恢复包",
+    "importPassphrase": "恢复包口令",
+    "importHelp": "选择加密的 .recovery 文件以恢复缺失的密钥托管。",
+    "passphraseMismatch": "两次恢复口令不一致。",
+    "passphraseRequired": "请输入恢复包口令。",
+    "operationFailed": "凭据生命周期操作失败。",
+    "migrateComplete": "凭据加密迁移已完成。",
+    "rotateComplete": "凭据主密钥已轮换。",
+    "resetComplete": "不可读凭据已归档并清除。",
+    "exportComplete": "加密恢复包已导出。",
+    "backupExportComplete": "所选备份的加密恢复包已导出。",
+    "importComplete": "恢复包已验证并导入。"
+  },
+  "dataRouting": {
+    "loading": "正在加载市场路由偏好...",
+    "instructions": "对于每个市场，列表中的第一个数据源优先。仅有一个数据源的市场为只读。",
+    "noProvider": "无数据源",
+    "singleProvider": "单一"
+  }
+}

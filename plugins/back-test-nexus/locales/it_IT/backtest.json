@@ -1,0 +1,539 @@
+{
+  "workflow": {
+    "title": "Backtest Workflow",
+    "selectStrategy": "Select Strategy",
+    "configureData": "Configure Data",
+    "setParameters": "Set Parameters",
+    "runBacktest": "Run Backtest",
+    "viewResults": "View Results",
+    "compiled": "C++ compilato",
+    "compilationFailed": "Compilazione C++ fallita"
+  },
+  "panel": {
+    "history": "Backtest History",
+    "trades": "Trades",
+    "logs": "Logs",
+    "results": "Results"
+  },
+  "actions": {
+    "run": "Run Backtest",
+    "stop": "Stop Backtest",
+    "export": "Export Results",
+    "compare": "Compare Results",
+    "clear": "Clear History"
+  },
+  "status": {
+    "idle": "Ready",
+    "running": "Running...",
+    "completed": "Completed",
+    "failed": "Failed",
+    "cancelled": "Cancelled"
+  },
+  "results": {
+    "summary": "Summary",
+    "performance": "Performance",
+    "trades": "Trade List",
+    "equity": "Equity Curve",
+    "drawdown": "Drawdown",
+    "statistics": "Statistics"
+  },
+  "metrics": {
+    "totalReturn": "Total Return",
+    "sharpeRatio": "Sharpe Ratio",
+    "maxDrawdown": "Max Drawdown",
+    "winRate": "Win Rate",
+    "profitFactor": "Profit Factor",
+    "totalTrades": "Total Trades"
+  },
+  "errors": {
+    "noStrategy": "No strategy selected",
+    "noData": "No data available",
+    "runFailed": "Backtest execution failed",
+    "exportFailed": "Failed to export results",
+    "searchFailed": "Search failed",
+    "coverageCheckFailed": "Coverage check failed",
+    "downloadFailed": "Download failed",
+    "fetchMarketDataFailed": "Failed to fetch market data",
+    "resultNotFound": "Result not found",
+    "fetchDataFailed": "Failed to fetch data",
+    "userNotAuthenticated": "User not authenticated. Please log in.",
+    "backtestAlreadyRunning": "Backtest already running",
+    "maxDrawdownReached": "Max drawdown reached",
+    "exportFallback": "Export failed",
+    "resumeFailed": "Resume failed",
+    "startBacktestFailed": "Failed to start backtest"
+  },
+  "config": {
+    "title": "Data Configuration",
+    "dataSource": "Data Source",
+    "symbol": "Symbol",
+    "searchSymbol": "Search symbol...",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "timeframe": "Timeframe",
+    "initialCapital": "Initial Capital",
+    "orderSize": "Order Size",
+    "searchTruncated": "Mostrando {{count}} di {{total}} -- affina la tua ricerca",
+    "confidenceWeightedSizing": "Confidence-Weighted Sizing",
+    "confidenceWeightedSizingHint": "Scale position size by signal confidence"
+  },
+  "timeframes": {
+    "1m": "1 Minute",
+    "5m": "5 Minutes",
+    "15m": "15 Minutes",
+    "30m": "30 Minutes",
+    "1h": "1 Hour",
+    "4h": "4 Hours",
+    "1d": "1 Day",
+    "1w": "1 Week",
+    "1M": "1 Month"
+  },
+  "orderUnits": {
+    "cash": "$",
+    "percent": "%",
+    "shares": "Shares"
+  },
+  "sidebar": {
+    "history": "History",
+    "backtesting": "Backtesting",
+    "loading": "Loading...",
+    "noHistory": "No backtest history",
+    "testing": "testing...",
+    "capLabel": "Cap.:",
+    "sizeLabel": "Dim.:",
+    "testedLabel": "Testato:",
+    "delete": "Elimina",
+    "checkpointTooltip": "Checkpoint: {{percent}}% completato"
+  },
+  "page": {
+    "loadingAlgorithms": "Loading algorithms...",
+    "workflowTitle": "Workflow Configuration",
+    "noResults": "Nessun risultato di backtest disponibile.",
+    "startBacktest": "Avvia un backtest dalla pagina di Configurazione.",
+    "realtimeChartPending": "Il grafico in tempo reale apparira quando i dati saranno disponibili",
+    "loadingResult": "Loading result..."
+  },
+  "buttons": {
+    "newBacktest": "New Backtest",
+    "keep": "Keep",
+    "discard": "Discard",
+    "reset": "Reset",
+    "execute": "Execute",
+    "executing": "Executing...",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "backToConfig": "Torna alla Configurazione",
+    "runInBackground": "Run in Background",
+    "exportToQuantLab": "Salva strategia",
+    "exporting": "Salvataggio...",
+    "return": "Indietro"
+  },
+  "workflowSteps": {
+    "marketAnalysis": "Analisi di Mercato",
+    "entryFilter": "Filtro di Ingresso",
+    "entrySignal": "Segnale di Ingresso",
+    "exitStrategy": "Strategia di Uscita"
+  },
+  "statusBar": {
+    "running": "In esecuzione",
+    "runningBacktests": "Backtest in esecuzione",
+    "backtestsRunning": "{{count}} backtest in esecuzione"
+  },
+  "executorStatus": {
+    "ready": "Pronto",
+    "starting": "Avvio...",
+    "executing": "Esecuzione",
+    "completed": "Completato",
+    "failed": "Fallito",
+    "cancelled": "Annullato"
+  },
+  "checkpoint": {
+    "available": "Checkpoint disponibile",
+    "completed": "{{percent}}% completato ({{processed}}/{{total}} barre)",
+    "saved": "Salvato {{time}}",
+    "dataNotFound": "File dati non trovato",
+    "dataNotFoundDesc": "Il file dati originale e stato spostato o eliminato. Impossibile riprendere.",
+    "dataNotFoundHint": "Si prega di scartare questo checkpoint e avviare un nuovo backtest.",
+    "dataChanged": "File dati modificato",
+    "dataChangedDesc": "Il file dati e stato modificato dalla creazione del checkpoint.",
+    "dataChangedHint": "La ripresa potrebbe produrre risultati incoerenti. Si consiglia di ricominciare.",
+    "validating": "Validazione dati...",
+    "validatingDesc": "Verifica dell'integrita del file dati.",
+    "pnl": "P&L",
+    "return": "Rendimento",
+    "trades": "Operazioni",
+    "winRate": "Tasso di successo",
+    "openPositions": "Posizioni aperte al checkpoint",
+    "resume": "Riprendi backtest",
+    "resuming": "Ripresa...",
+    "discardStartNew": "Scarta e ricomincia",
+    "percentSaved": "{{percent}}% salvato",
+    "justNow": "proprio ora",
+    "minutesAgo": "{{count}} minuto/i fa",
+    "hoursAgo": "{{count}} ora/e fa",
+    "daysAgo": "{{count}} giorno/i fa",
+    "recently": "recentemente"
+  },
+  "dialog": {
+    "deleteTitle": "Delete History Record",
+    "deleteMessage": "This will permanently delete the backtest result, including all trade records and equity curve data."
+  },
+  "cancelDialog": {
+    "title": "Cancel Backtest",
+    "message": "Are you sure you want to cancel the running backtest? This action cannot be undone.",
+    "confirm": "Cancel Backtest",
+    "keep": "Keep Running"
+  },
+  "cancelledDialog": {
+    "title": "Backtest Annullato",
+    "message": "Il backtest e stato annullato. Cosa desideri fare?",
+    "stay": "Resta Qui",
+    "goBack": "Torna Indietro"
+  },
+  "workflowSelector": {
+    "selectAlgorithm": "Market Analysis",
+    "preCondition": "Entry Filter",
+    "selectSteps": "Entry Signal",
+    "postCondition": "Exit Strategy",
+    "search": "Search..."
+  },
+  "breadcrumb": {
+    "backtestNexus": "Backtester",
+    "indicatorsCockpit": "Regime",
+    "kronosCockpit": "Kronos",
+    "traderCockpit": "Trader",
+    "aiLiberoCockpit": "Libero",
+    "aiStudioCockpit": "Studio",
+    "catalogCockpit": "Catalog",
+    "result": "Risultato",
+    "backtestResult": "Risultato del Backtest",
+    "home": "Nexus Hub"
+  },
+  "kronos": {
+    "title": "Strategie KRONOS",
+    "subtitle": "Seleziona una strategia generata da Kronos per il backtest",
+    "noStrategies": "Nessuna Strategia Kronos",
+    "noStrategiesHint": "Genera strategie usando la funzione Kronos nello Strategy Builder per vederle qui.",
+    "columnName": "Nome Strategia",
+    "columnType": "Tipo",
+    "columnCreated": "Creato",
+    "columnAction": "Seleziona",
+    "execute": "Esegui",
+    "executing": "Esecuzione...",
+    "selectAlgorithmFirst": "Seleziona prima una strategia",
+    "executionStarted": "Esecuzione avviata",
+    "executionFailed": "Esecuzione fallita"
+  },
+  "locked": {
+    "requiresTier": "Questa funzione richiede un abbonamento {{tier}}"
+  },
+  "auth": {
+    "loginToUnlock": "Accedi per sbloccare",
+    "viewPlans": "Visualizza piani"
+  },
+  "common": {
+    "cancel": "Annulla"
+  },
+  "notification": {
+    "backtestCompleted": "Backtest completato con successo",
+    "backtestCompletedReturn": "Backtest completato: {{returnPercent}}% di rendimento",
+    "backtestFailed": "Backtest fallito: {{error}}",
+    "resultsCleared": "Risultati cancellati",
+    "noDataSource": "Nessuna fonte dati disponibile. Si prega di configurare un fornitore di dati.",
+    "noResultsToExport": "Nessun risultato da esportare"
+  },
+  "cockpitSelector": {
+    "title": "Seleziona Cockpit",
+    "subtitle": "Scegli una modalita di backtest per continuare",
+    "indicatorsCockpit": "Regime",
+    "indicatorsCockpitDesc": "Backtest basato su indicatori con configurazione workflow",
+    "traderCockpit": "Trader",
+    "traderCockpitDesc": "Watchlist + strategie LLM Trader backtest",
+    "aiLiberoCockpit": "Libero",
+    "aiLiberoCockpitDesc": "Strategie backtest agente autonomo Libero",
+    "aiStudioCockpit": "Studio",
+    "aiStudioCockpitDesc": "Strategie backtest conversazionali Studio",
+    "catalogCockpit": "Catalog",
+    "catalogCockpitDesc": "Strategie di backtest dal catalogo strategie",
+    "kronosCockpit": "KRONOS",
+    "kronosCockpitDesc": "Integrazione backtest serie temporali Kronos",
+    "free": "GRATUITO",
+    "pro": "PRO"
+  },
+  "tabBar": {
+    "prep": "Prep",
+    "wait": "Attesa",
+    "closeTab": "Chiudi scheda",
+    "close": "Chiudi",
+    "closeOthers": "Chiudi altri",
+    "closeAll": "Chiudi tutto"
+  },
+  "messages": {
+    "resumeApiNotAvailable": "API di ripresa non disponibile",
+    "resumingFromCheckpoint": "Ripresa del backtest dal checkpoint...",
+    "resumeFailed": "Ripresa fallita: {{message}}",
+    "deleteCheckpointFailed": "Eliminazione del checkpoint fallita",
+    "noWorkflowConfig": "Nessuna configurazione workflow trovata",
+    "missingAlgorithm": "Algoritmo di analisi o di ingresso mancante",
+    "exportedToQuantLab": "Strategia \"{{name}}\" salvata",
+    "exportToQuantLabFailed": "Salvataggio della strategia fallito",
+    "startDateAdjustedLookback": "Data di inizio auto-adattata a {{date}} (vincolo maxLookback)",
+    "startDateAdjustedTimeframe": "Data di inizio auto-adattata a {{date}} (cambio di timeframe)",
+    "generatingStrategy": "Generazione strategia...",
+    "runningBacktest": "Esecuzione backtest...",
+    "noWorkflowsConfigured": "Nessun workflow configurato. Aggiungere almeno una selezione di algoritmo.",
+    "missingMarketAnalysis": "L'analisi di mercato (rilevamento del regime) e necessaria. Selezionare un algoritmo di rilevamento del regime.",
+    "missingEntrySignal": "Il segnale di ingresso e necessario. Selezionare un algoritmo di segnale di ingresso.",
+    "loadingMarketData": "Caricamento dati di mercato per {{symbol}}...",
+    "executionFailed": "Esecuzione del backtest fallita. Controllare i log."
+  },
+  "validation": {
+    "symbolRequired": "Il simbolo e obbligatorio",
+    "dataSourceRequired": "La fonte dati e obbligatoria",
+    "startDateRequired": "La data di inizio e obbligatoria",
+    "endDateRequired": "La data di fine e obbligatoria",
+    "endDateAfterStart": "La data di fine deve essere successiva alla data di inizio",
+    "initialCapitalPositive": "Il capitale iniziale deve essere positivo",
+    "orderSizePositive": "La dimensione dell'ordine deve essere positiva",
+    "lookbackExceeded": "Intervallo {{timeframe}}: max {{lookback}} lookback ({{selected}}g selezionati)",
+    "lookbackWarning": "L'intervallo selezionato ({{selected}}g) supera il lookback massimo ({{max}}g)"
+  },
+  "settings": {
+    "back": "Indietro",
+    "title": "Impostazioni",
+    "secrets": "Segreti",
+    "deleteSecret": "Elimina Segreto",
+    "deleteSecretConfirm": "Sei sicuro di voler eliminare",
+    "deleteSecretWarning": "Questa azione non puo essere annullata.",
+    "save": "Salva",
+    "saving": "Salvataggio...",
+    "secretsPageTitle": "Segreti",
+    "secretsPageDescription": "Gestisci le chiavi API e le credenziali dei provider di dati",
+    "refresh": "Aggiorna",
+    "securityStatus": "Stato di Sicurezza",
+    "securityStatusDescription": "{{configured}} di {{total}} segreti configurati. I segreti sono crittografati con AES-256-GCM e archiviati in modo sicuro.",
+    "searchSecrets": "Cerca segreti...",
+    "storedSecrets": "Segreti Memorizzati",
+    "noSecretsMatch": "Nessun segreto corrisponde alla ricerca",
+    "noSecretsConfigured": "Nessun segreto configurato",
+    "recentActivity": "Attivita Recente",
+    "noActivityRecorded": "Nessuna attivita registrata",
+    "navStatus": "Stato",
+    "navCredentials": "Credenziali",
+    "navActivity": "Attivita",
+    "required": "Obbligatorio",
+    "copyToClipboard": "Copia negli appunti",
+    "hideValue": "Nascondi valore",
+    "showValue": "Mostra valore",
+    "editValue": "Modifica",
+    "setValue": "Imposta valore",
+    "testApiKey": "Testa chiave API",
+    "deleteCredential": "Elimina credenziale",
+    "testing": "Test in corso...",
+    "enterSecretValue": "Inserisci il valore del segreto",
+    "getApiKey": "Ottieni chiave API",
+    "valueCannotBeEmpty": "Il valore non puo essere vuoto",
+    "failedToSave": "Salvataggio fallito",
+    "missingCredential": "Credenziale mancante: {{key}}",
+    "failedToRetrieveApiKey": "Impossibile recuperare la chiave API",
+    "verifiedKeyType": "Verificata ({{keyType}})",
+    "verified": "Verificata",
+    "invalidApiKey": "Chiave API non valida",
+    "validationFailed": "Validazione fallita",
+    "keyTypePaper": "Paper",
+    "keyTypeLive": "Live",
+    "deleteButton": "Elimina"
+  },
+  "resultPanel": {
+    "tabs": {
+      "charts": "Grafici",
+      "trades": "Operazioni",
+      "compare": "Confronta"
+    },
+    "charts": {
+      "equityCurve": "Curva di Equity",
+      "klineChart": "Grafico K-Line",
+      "bars": "{{count}} barre",
+      "noEquityData": "Nessun dato equity",
+      "noKlineData": "Nessun dato K-Line",
+      "processing": "Elaborazione... ({{count}} punti)",
+      "backtesting": "Backtesting...",
+      "noTrades": "Nessuna operazione"
+    },
+    "summary": {
+      "equity": "Equity: {{count}} punti",
+      "candles": "Candele: {{count}} barre",
+      "trades": "Operazioni: {{count}}"
+    },
+    "tradesTable": {
+      "index": "#",
+      "entryTime": "Ora Ingresso",
+      "exitTime": "Ora Uscita",
+      "side": "Lato",
+      "entry": "Ingresso",
+      "exit": "Uscita",
+      "qty": "Qta",
+      "pnl": "P&L",
+      "showingOf": "Mostrando {{shown}} di {{total}} operazioni",
+      "noTrades": "Nessuna operazione"
+    },
+    "llmEstimate": "Stima Chiamate LLM (Esecuzione a Secco)",
+    "barsProcessed": "Barre Elaborate",
+    "calls": "chiamate",
+    "totalLlmCalls": "Totale Chiamate LLM",
+    "elapsed": "Trascorso",
+    "status": {
+      "noResults": "Nessun risultato disponibile",
+      "case": "Caso {{index}}",
+      "testing": "- Test in corso...",
+      "pending": "- in attesa",
+      "tradesCount": "({{count}} operazioni)",
+      "collectingData": "Raccolta dati...",
+      "waiting": "In attesa...",
+      "cancelled": "Annullato"
+    },
+    "comparison": {
+      "title": "Confronto Prestazioni",
+      "metric": "Metrica",
+      "strategy": "Strategia {{index}}",
+      "totalPnl": "P&L Totale",
+      "totalReturn": "Rendimento Totale",
+      "sharpeRatio": "Rapporto di Sharpe",
+      "maxDrawdown": "Drawdown Max",
+      "winRate": "Tasso di Successo",
+      "totalTrades": "Totale Operazioni",
+      "profitFactor": "Fattore di Profitto",
+      "equityOverlay": "Sovrapposizione Curve",
+      "noResults": "Nessun risultato da confrontare"
+    }
+  },
+  "configSummary": {
+    "dataSource": "Fonte Dati",
+    "symbol": "Simbolo",
+    "startDate": "Data di Inizio",
+    "endDate": "Data di Fine",
+    "capital": "Capitale",
+    "orderSize": "Dimensione Ordine",
+    "sharesUnit": "{{size}} azioni",
+    "confidenceWeighted": "CWS"
+  },
+  "namingDialog": {
+    "titleBuilder": "Nomina Strategia",
+    "titleExport": "Esporta in Sigma",
+    "titleBacktest": "Nomina Backtest",
+    "confirmBuilder": "Conferma e Genera",
+    "confirmExport": "Conferma ed Esporta",
+    "confirmBacktest": "Conferma ed Esegui",
+    "suggestedName": "Nome suggerito:",
+    "useThis": "Usa Questo",
+    "or": "o",
+    "customName": "Nome personalizzato:",
+    "placeholder": "Inserisci il tuo nome personalizzato...",
+    "finalName": "Nome finale:",
+    "cancel": "Annulla"
+  },
+  "dryRunExecute": {
+    "execute": "Esegui",
+    "executing": "Esecuzione...",
+    "dryRun": "Esecuzione A Secco",
+    "direct": "Diretto"
+  },
+  "workflowDropdown": {
+    "searchPlaceholder": "Cerca...",
+    "noAlgorithmsFound": "Nessun algoritmo trovato"
+  },
+  "backtestDataConfig": {
+    "placeholderSearchSymbol": "Cerca simbolo...",
+    "placeholderInitialCapital": "10000"
+  },
+  "pipeline": {
+    "download": "Download",
+    "spawn": "Avvio",
+    "initialize": "Inizializzazione",
+    "loadData": "Caricamento dati",
+    "backtest": "Backtest",
+    "finalize": "Finalizzazione"
+  },
+  "manifest": {
+    "displayName": "Backtester",
+    "description": "Strategy backtesting with workflow UI and results visualization",
+    "viewsContainers": {
+      "sidebar": {
+        "backtestExplorer": "BACKTEST"
+      }
+    },
+    "views": {
+      "backtestExplorer": {
+        "backtestHistory": "Backtest History"
+      },
+      "workbench": {
+        "backtestWorkflow": "Backtest Workflow",
+        "backtestResults": "Results"
+      }
+    },
+    "bottomPanel": {
+      "trades": "Trades",
+      "logs": "Logs"
+    },
+    "commands": {
+      "run": "Run Backtest",
+      "stop": "Stop Backtest",
+      "export": "Export Results"
+    },
+    "configuration": {
+      "title": "Backtester Settings",
+      "properties": {
+        "alpacaApiKeyId": {
+          "description": "Alpaca Markets API Key ID",
+          "category": "Data Providers"
+        },
+        "alpacaApiSecretKey": {
+          "description": "Alpaca Markets API Secret Key",
+          "category": "Data Providers"
+        }
+      }
+    }
+  },
+  "exportDialog": {
+    "title": "Save Strategy",
+    "nameLabel": "Strategy Name",
+    "namePlaceholder": "Enter strategy name...",
+    "nameHint": "This name will be used to identify the strategy in your library.",
+    "cancel": "Cancel",
+    "saving": "Saving...",
+    "confirm": "Save"
+  },
+  "result": {
+    "dryRunBadge": "DRY RUN",
+    "liveConfirm": {
+      "confirming": "CONFERMANDO...",
+      "confirm": "CONFERMA"
+    }
+  },
+  "tree": {
+    "backtestWorkflow": "FLUSSO DI BACKTEST",
+    "openWorkflow": "Apri flusso di lavoro",
+    "history": "CRONOLOGIA",
+    "backtestResultN": "Risultato Backtest #{{n}}"
+  },
+  "engine": {
+    "noDataInRange": "Nessun dato nell'intervallo richiesto",
+    "noPositionToSell": "Nessuna posizione da vendere (vendita allo scoperto disattivata)",
+    "strategies": {
+      "smaCrossover": {
+        "name": "Incrocio SMA",
+        "description": "Comprare quando SMA veloce incrocia sopra SMA lento, vendere quando incrocia sotto",
+        "fastPeriod": "Periodo SMA veloce",
+        "slowPeriod": "Periodo SMA lento"
+      },
+      "rsiMeanReversion": {
+        "name": "Reversione alla Media RSI",
+        "description": "Comprare quando RSI e ipervenduto, vendere quando ipercomprato",
+        "period": "Periodo RSI",
+        "oversold": "Livello di ipervenduto",
+        "overbought": "Livello di ipercomprato"
+      }
+    },
+    "insufficientFunds": "Insufficient funds"
+  }
+}

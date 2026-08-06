@@ -1,0 +1,539 @@
+{
+  "workflow": {
+    "title": "Backtest Workflow",
+    "selectStrategy": "Select Strategy",
+    "configureData": "Configure Data",
+    "setParameters": "Set Parameters",
+    "runBacktest": "Run Backtest",
+    "viewResults": "View Results",
+    "compiled": "C++ コンパイル済み",
+    "compilationFailed": "C++ コンパイル失敗"
+  },
+  "panel": {
+    "history": "Backtest History",
+    "trades": "Trades",
+    "logs": "Logs",
+    "results": "Results"
+  },
+  "actions": {
+    "run": "Run Backtest",
+    "stop": "Stop Backtest",
+    "export": "Export Results",
+    "compare": "Compare Results",
+    "clear": "Clear History"
+  },
+  "status": {
+    "idle": "Ready",
+    "running": "Running...",
+    "completed": "Completed",
+    "failed": "Failed",
+    "cancelled": "Cancelled"
+  },
+  "results": {
+    "summary": "Summary",
+    "performance": "Performance",
+    "trades": "Trade List",
+    "equity": "Equity Curve",
+    "drawdown": "Drawdown",
+    "statistics": "Statistics"
+  },
+  "metrics": {
+    "totalReturn": "Total Return",
+    "sharpeRatio": "Sharpe Ratio",
+    "maxDrawdown": "Max Drawdown",
+    "winRate": "Win Rate",
+    "profitFactor": "Profit Factor",
+    "totalTrades": "Total Trades"
+  },
+  "errors": {
+    "noStrategy": "No strategy selected",
+    "noData": "No data available",
+    "runFailed": "Backtest execution failed",
+    "exportFailed": "Failed to export results",
+    "searchFailed": "Search failed",
+    "coverageCheckFailed": "Coverage check failed",
+    "downloadFailed": "Download failed",
+    "fetchMarketDataFailed": "Failed to fetch market data",
+    "resultNotFound": "Result not found",
+    "fetchDataFailed": "Failed to fetch data",
+    "userNotAuthenticated": "User not authenticated. Please log in.",
+    "backtestAlreadyRunning": "Backtest already running",
+    "maxDrawdownReached": "Max drawdown reached",
+    "exportFallback": "Export failed",
+    "resumeFailed": "Resume failed",
+    "startBacktestFailed": "Failed to start backtest"
+  },
+  "config": {
+    "title": "Data Configuration",
+    "dataSource": "Data Source",
+    "symbol": "Symbol",
+    "searchSymbol": "Search symbol...",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "timeframe": "Timeframe",
+    "initialCapital": "Initial Capital",
+    "orderSize": "Order Size",
+    "searchTruncated": "{{total}} 件中 {{count}} 件を表示 -- 検索を絞り込んでください",
+    "confidenceWeightedSizing": "Confidence-Weighted Sizing",
+    "confidenceWeightedSizingHint": "Scale position size by signal confidence"
+  },
+  "timeframes": {
+    "1m": "1 Minute",
+    "5m": "5 Minutes",
+    "15m": "15 Minutes",
+    "30m": "30 Minutes",
+    "1h": "1 Hour",
+    "4h": "4 Hours",
+    "1d": "1 Day",
+    "1w": "1 Week",
+    "1M": "1 Month"
+  },
+  "orderUnits": {
+    "cash": "$",
+    "percent": "%",
+    "shares": "Shares"
+  },
+  "sidebar": {
+    "history": "履歴",
+    "backtesting": "バックテスト中",
+    "loading": "読み込み中...",
+    "noHistory": "バックテスト履歴なし",
+    "testing": "テスト中...",
+    "capLabel": "資金:",
+    "sizeLabel": "規模:",
+    "testedLabel": "テスト:",
+    "delete": "削除",
+    "checkpointTooltip": "チェックポイント: {{percent}}% 完了"
+  },
+  "page": {
+    "loadingAlgorithms": "アルゴリズムを読み込み中...",
+    "workflowTitle": "ワークフロー設定",
+    "noResults": "バックテスト結果がありません。",
+    "startBacktest": "設定ページからバックテストを開始してください。",
+    "realtimeChartPending": "データが利用可能になるとリアルタイムチャートが表示されます",
+    "loadingResult": "結果を読み込み中..."
+  },
+  "buttons": {
+    "newBacktest": "新規バックテスト",
+    "keep": "保持",
+    "discard": "破棄",
+    "reset": "リセット",
+    "execute": "実行",
+    "executing": "実行中...",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "backToConfig": "設定に戻る",
+    "runInBackground": "バックグラウンドで実行",
+    "exportToQuantLab": "戦略を保存",
+    "exporting": "保存中...",
+    "return": "戻る"
+  },
+  "workflowSteps": {
+    "marketAnalysis": "市場分析",
+    "entryFilter": "エントリーフィルター",
+    "entrySignal": "エントリーシグナル",
+    "exitStrategy": "イグジット戦略"
+  },
+  "statusBar": {
+    "running": "実行中",
+    "runningBacktests": "実行中のバックテスト",
+    "backtestsRunning": "{{count}} 件のバックテスト実行中"
+  },
+  "executorStatus": {
+    "ready": "準備完了",
+    "starting": "開始中...",
+    "executing": "実行中",
+    "completed": "完了",
+    "failed": "失敗",
+    "cancelled": "キャンセル済み"
+  },
+  "checkpoint": {
+    "available": "チェックポイント利用可能",
+    "completed": "{{percent}}% 完了 ({{processed}}/{{total}} 本)",
+    "saved": "{{time}} に保存",
+    "dataNotFound": "データファイルが見つかりません",
+    "dataNotFoundDesc": "元のデータファイルが移動または削除されました。再開できません。",
+    "dataNotFoundHint": "このチェックポイントを破棄して新しいバックテストを開始してください。",
+    "dataChanged": "データファイルが変更されました",
+    "dataChangedDesc": "チェックポイント作成以降にデータファイルが変更されました。",
+    "dataChangedHint": "再開すると一貫性のない結果が生じる可能性があります。最初からやり直すことをお勧めします。",
+    "validating": "データ検証中...",
+    "validatingDesc": "データファイルの整合性を確認しています。",
+    "pnl": "損益",
+    "return": "リターン",
+    "trades": "取引",
+    "winRate": "勝率",
+    "openPositions": "チェックポイント時のポジション",
+    "resume": "バックテストを再開",
+    "resuming": "再開中...",
+    "discardStartNew": "破棄して新規開始",
+    "percentSaved": "{{percent}}% 保存済み",
+    "justNow": "たった今",
+    "minutesAgo": "{{count}} 分前",
+    "hoursAgo": "{{count}} 時間前",
+    "daysAgo": "{{count}} 日前",
+    "recently": "最近"
+  },
+  "dialog": {
+    "deleteTitle": "履歴を削除",
+    "deleteMessage": "バックテスト結果を完全に削除します。すべての取引記録と資産曲線データが含まれます。"
+  },
+  "cancelDialog": {
+    "title": "バックテストをキャンセル",
+    "message": "実行中のバックテストをキャンセルしますか？この操作は元に戻せません。",
+    "confirm": "バックテストをキャンセル",
+    "keep": "実行を続ける"
+  },
+  "cancelledDialog": {
+    "title": "バックテストがキャンセルされました",
+    "message": "バックテストがキャンセルされました。どうしますか？",
+    "stay": "ここに留まる",
+    "goBack": "戻る"
+  },
+  "workflowSelector": {
+    "selectAlgorithm": "市場分析",
+    "preCondition": "エントリーフィルター",
+    "selectSteps": "エントリーシグナル",
+    "postCondition": "イグジット戦略",
+    "search": "検索..."
+  },
+  "breadcrumb": {
+    "backtestNexus": "バックテスト Nexus",
+    "indicatorsCockpit": "Regime",
+    "kronosCockpit": "クロノス",
+    "traderCockpit": "トレーダー",
+    "aiLiberoCockpit": "AI LIBERO",
+    "aiStudioCockpit": "AI STUDIO",
+    "catalogCockpit": "Catalog",
+    "result": "結果",
+    "backtestResult": "バックテスト結果",
+    "home": "Nexus Hub"
+  },
+  "kronos": {
+    "title": "クロノス戦略",
+    "subtitle": "バックテストするクロノス生成戦略を選択",
+    "noStrategies": "クロノス戦略なし",
+    "noStrategiesHint": "Strategy Builderのクロノス機能で戦略を生成すると、ここに表示されます。",
+    "columnName": "戦略名",
+    "columnType": "タイプ",
+    "columnCreated": "作成日",
+    "columnAction": "選択",
+    "execute": "実行",
+    "executing": "実行中...",
+    "selectAlgorithmFirst": "まず戦略を選択してください",
+    "executionStarted": "実行を開始しました",
+    "executionFailed": "実行に失敗しました"
+  },
+  "locked": {
+    "requiresTier": "この機能には {{tier}} サブスクリプションが必要です"
+  },
+  "auth": {
+    "loginToUnlock": "ログインして解除",
+    "viewPlans": "プランを見る"
+  },
+  "common": {
+    "cancel": "キャンセル"
+  },
+  "notification": {
+    "backtestCompleted": "バックテストが正常に完了しました",
+    "backtestCompletedReturn": "バックテスト完了: {{returnPercent}}% リターン",
+    "backtestFailed": "バックテスト失敗: {{error}}",
+    "resultsCleared": "結果がクリアされました",
+    "noDataSource": "データソースが利用できません。データプロバイダーを設定してください。",
+    "noResultsToExport": "エクスポートする結果がありません"
+  },
+  "cockpitSelector": {
+    "title": "コックピット選択",
+    "subtitle": "バックテストモードを選択して続行",
+    "indicatorsCockpit": "Regime",
+    "indicatorsCockpitDesc": "指標ベースのワークフロー構成バックテスト",
+    "traderCockpit": "トレーダー",
+    "traderCockpitDesc": "ウォッチリスト + LLM トレーダーバックテスト戦略",
+    "aiLiberoCockpit": "Libero",
+    "aiLiberoCockpitDesc": "Libero 自律エージェントバックテスト戦略",
+    "aiStudioCockpit": "Studio",
+    "aiStudioCockpitDesc": "Studio 会話型ルールベースバックテスト戦略",
+    "catalogCockpit": "Catalog",
+    "catalogCockpitDesc": "Strategy Catalog からのバックテスト戦略",
+    "kronosCockpit": "クロノス",
+    "kronosCockpitDesc": "Kronos 時系列バックテスト統合",
+    "free": "無料",
+    "pro": "プロ"
+  },
+  "tabBar": {
+    "prep": "準備中",
+    "wait": "待機中",
+    "closeTab": "タブを閉じる",
+    "close": "閉じる",
+    "closeOthers": "他を閉じる",
+    "closeAll": "すべて閉じる"
+  },
+  "messages": {
+    "resumeApiNotAvailable": "再開APIが利用できません",
+    "resumingFromCheckpoint": "チェックポイントからバックテストを再開中...",
+    "resumeFailed": "再開に失敗しました: {{message}}",
+    "deleteCheckpointFailed": "チェックポイントの削除に失敗しました",
+    "noWorkflowConfig": "ワークフロー設定が見つかりません",
+    "missingAlgorithm": "分析またはエントリーアルゴリズムがありません",
+    "exportedToQuantLab": "戦略 \"{{name}}\" を保存しました",
+    "exportToQuantLabFailed": "戦略の保存に失敗しました",
+    "startDateAdjustedLookback": "開始日が {{date}} に自動調整されました (maxLookback制約)",
+    "startDateAdjustedTimeframe": "開始日が {{date}} に自動調整されました (タイムフレーム変更)",
+    "generatingStrategy": "戦略を生成中...",
+    "runningBacktest": "バックテスト実行中...",
+    "noWorkflowsConfigured": "ワークフローが設定されていません。少なくとも1つのアルゴリズム選択を追加してください。",
+    "missingMarketAnalysis": "マーケット分析（レジーム検出）が必要です。レジーム検出アルゴリズムを選択してください。",
+    "missingEntrySignal": "エントリーシグナルが必要です。エントリーシグナルアルゴリズムを選択してください。",
+    "loadingMarketData": "{{symbol}} の市場データを読み込み中...",
+    "executionFailed": "バックテストの実行に失敗しました。ログを確認してください。"
+  },
+  "validation": {
+    "symbolRequired": "シンボルは必須です",
+    "dataSourceRequired": "データソースは必須です",
+    "startDateRequired": "開始日は必須です",
+    "endDateRequired": "終了日は必須です",
+    "endDateAfterStart": "終了日は開始日より後でなければなりません",
+    "initialCapitalPositive": "初期資金は正の値でなければなりません",
+    "orderSizePositive": "注文サイズは正の値でなければなりません",
+    "lookbackExceeded": "{{timeframe}} 間隔: 最大ルックバック {{lookback}} ({{selected}}d 選択済)",
+    "lookbackWarning": "選択範囲 ({{selected}}d) が最大ルックバック ({{max}}d) を超えています"
+  },
+  "settings": {
+    "back": "戻る",
+    "title": "設定",
+    "secrets": "シークレット",
+    "deleteSecret": "シークレットを削除",
+    "deleteSecretConfirm": "本当に削除しますか",
+    "deleteSecretWarning": "この操作は元に戻せません。",
+    "save": "保存",
+    "saving": "保存中...",
+    "secretsPageTitle": "シークレット",
+    "secretsPageDescription": "データプロバイダーのAPIキーと認証情報を管理",
+    "refresh": "更新",
+    "securityStatus": "セキュリティ状態",
+    "securityStatusDescription": "{{configured}} / {{total}} 個のシークレットが設定済み。シークレットはAES-256-GCMで暗号化され安全に保管されています。",
+    "searchSecrets": "シークレットを検索...",
+    "storedSecrets": "保存されたシークレット",
+    "noSecretsMatch": "検索に一致するシークレットがありません",
+    "noSecretsConfigured": "シークレットが設定されていません",
+    "recentActivity": "最近のアクティビティ",
+    "noActivityRecorded": "アクティビティなし",
+    "navStatus": "ステータス",
+    "navCredentials": "認証情報",
+    "navActivity": "アクティビティ",
+    "required": "必須",
+    "copyToClipboard": "クリップボードにコピー",
+    "hideValue": "値を隠す",
+    "showValue": "値を表示",
+    "editValue": "編集",
+    "setValue": "値を設定",
+    "testApiKey": "APIキーをテスト",
+    "deleteCredential": "認証情報を削除",
+    "testing": "テスト中...",
+    "enterSecretValue": "シークレット値を入力",
+    "getApiKey": "APIキーを取得",
+    "valueCannotBeEmpty": "値は空にできません",
+    "failedToSave": "保存に失敗しました",
+    "missingCredential": "認証情報がありません: {{key}}",
+    "failedToRetrieveApiKey": "APIキーの取得に失敗しました",
+    "verifiedKeyType": "検証済み ({{keyType}})",
+    "verified": "検証済み",
+    "invalidApiKey": "無効なAPIキー",
+    "validationFailed": "検証に失敗しました",
+    "keyTypePaper": "ペーパー",
+    "keyTypeLive": "ライブ",
+    "deleteButton": "削除"
+  },
+  "resultPanel": {
+    "tabs": {
+      "charts": "チャート",
+      "trades": "取引",
+      "compare": "比較"
+    },
+    "charts": {
+      "equityCurve": "資産曲線",
+      "klineChart": "K線チャート",
+      "bars": "{{count}} 本",
+      "noEquityData": "資産データなし",
+      "noKlineData": "K線データなし",
+      "processing": "処理中... ({{count}} ポイント)",
+      "backtesting": "バックテスト中...",
+      "noTrades": "取引なし"
+    },
+    "summary": {
+      "equity": "資産: {{count}} ポイント",
+      "candles": "ローソク足: {{count}} 本",
+      "trades": "取引: {{count}} 件"
+    },
+    "tradesTable": {
+      "index": "#",
+      "entryTime": "エントリー時間",
+      "exitTime": "エグジット時間",
+      "side": "売買",
+      "entry": "エントリー",
+      "exit": "エグジット",
+      "qty": "数量",
+      "pnl": "損益",
+      "showingOf": "{{total}} 件中 {{shown}} 件を表示",
+      "noTrades": "取引なし"
+    },
+    "llmEstimate": "LLM呼び出し見積もり (ドライラン)",
+    "barsProcessed": "処理済みバー数",
+    "calls": "呼び出し",
+    "totalLlmCalls": "LLM呼び出し合計",
+    "elapsed": "経過時間",
+    "status": {
+      "noResults": "結果がありません",
+      "case": "ケース {{index}}",
+      "testing": " - テスト中...",
+      "pending": " - 待機中",
+      "tradesCount": "({{count}} 件)",
+      "collectingData": "データ収集中...",
+      "waiting": "待機中...",
+      "cancelled": "キャンセル済み"
+    },
+    "comparison": {
+      "title": "パフォーマンス比較",
+      "metric": "指標",
+      "strategy": "戦略 {{index}}",
+      "totalPnl": "合計損益",
+      "totalReturn": "合計リターン",
+      "sharpeRatio": "シャープレシオ",
+      "maxDrawdown": "最大ドローダウン",
+      "winRate": "勝率",
+      "totalTrades": "取引総数",
+      "profitFactor": "プロフィットファクター",
+      "equityOverlay": "資産曲線オーバーレイ",
+      "noResults": "比較する結果がありません"
+    }
+  },
+  "configSummary": {
+    "dataSource": "データソース",
+    "symbol": "シンボル",
+    "startDate": "開始日",
+    "endDate": "終了日",
+    "capital": "資本",
+    "orderSize": "注文サイズ",
+    "sharesUnit": "{{size}} 株",
+    "confidenceWeighted": "CWS"
+  },
+  "namingDialog": {
+    "titleBuilder": "戦略の名前",
+    "titleExport": "Sigma にエクスポート",
+    "titleBacktest": "バックテストの名前",
+    "confirmBuilder": "確認して生成",
+    "confirmExport": "確認してエクスポート",
+    "confirmBacktest": "確認して実行",
+    "suggestedName": "推奨名：",
+    "useThis": "これを使用",
+    "or": "または",
+    "customName": "カスタム名：",
+    "placeholder": "カスタム名を入力してください...",
+    "finalName": "最終名：",
+    "cancel": "キャンセル"
+  },
+  "dryRunExecute": {
+    "execute": "実行",
+    "executing": "実行中...",
+    "dryRun": "ドライラン",
+    "direct": "ダイレクト"
+  },
+  "workflowDropdown": {
+    "searchPlaceholder": "検索...",
+    "noAlgorithmsFound": "アルゴリズムが見つかりません"
+  },
+  "backtestDataConfig": {
+    "placeholderSearchSymbol": "シンボルを検索...",
+    "placeholderInitialCapital": "10000"
+  },
+  "pipeline": {
+    "download": "ダウンロード",
+    "spawn": "起動",
+    "initialize": "初期化",
+    "loadData": "データ読み込み",
+    "backtest": "バックテスト",
+    "finalize": "完了"
+  },
+  "manifest": {
+    "displayName": "バックテスター",
+    "description": "ワークフローUIと結果可視化を備えた戦略バックテスト",
+    "viewsContainers": {
+      "sidebar": {
+        "backtestExplorer": "バックテスト"
+      }
+    },
+    "views": {
+      "backtestExplorer": {
+        "backtestHistory": "バックテスト履歴"
+      },
+      "workbench": {
+        "backtestWorkflow": "バックテストワークフロー",
+        "backtestResults": "結果"
+      }
+    },
+    "bottomPanel": {
+      "trades": "取引",
+      "logs": "ログ"
+    },
+    "commands": {
+      "run": "バックテストを実行",
+      "stop": "バックテストを停止",
+      "export": "結果をエクスポート"
+    },
+    "configuration": {
+      "title": "バックテスター設定",
+      "properties": {
+        "alpacaApiKeyId": {
+          "description": "Alpaca Markets API Key ID",
+          "category": "データプロバイダー"
+        },
+        "alpacaApiSecretKey": {
+          "description": "Alpaca Markets API Secret Key",
+          "category": "データプロバイダー"
+        }
+      }
+    }
+  },
+  "exportDialog": {
+    "title": "戦略を保存",
+    "nameLabel": "戦略名",
+    "namePlaceholder": "戦略名を入力...",
+    "nameHint": "この名前は、ライブラリ内で戦略を識別するために使用されます。",
+    "cancel": "キャンセル",
+    "saving": "保存中...",
+    "confirm": "保存"
+  },
+  "result": {
+    "dryRunBadge": "DRY RUN",
+    "liveConfirm": {
+      "confirming": "確認中...",
+      "confirm": "確認"
+    }
+  },
+  "tree": {
+    "backtestWorkflow": "バックテストワークフロー",
+    "openWorkflow": "ワークフローを開く",
+    "history": "履歴",
+    "backtestResultN": "バックテスト結果 #{{n}}"
+  },
+  "engine": {
+    "noDataInRange": "リクエストされた範囲にデータがありません",
+    "noPositionToSell": "売却するポジションがありません（空売り無効）",
+    "strategies": {
+      "smaCrossover": {
+        "name": "SMAクロスオーバー",
+        "description": "高速SMAが低速SMAを上抜けた時に買い、下抜けた時に売り",
+        "fastPeriod": "高速SMA期間",
+        "slowPeriod": "低速SMA期間"
+      },
+      "rsiMeanReversion": {
+        "name": "RSI平均回帰",
+        "description": "RSIが売られ過ぎの時に買い、買われ過ぎの時に売り",
+        "period": "RSI期間",
+        "oversold": "売られ過ぎ水準",
+        "overbought": "買われ過ぎ水準"
+      }
+    },
+    "insufficientFunds": "Insufficient funds"
+  }
+}

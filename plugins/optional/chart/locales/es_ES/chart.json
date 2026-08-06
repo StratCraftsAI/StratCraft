@@ -1,0 +1,63 @@
+{
+  "view": {
+    "loading": "Cargando...",
+    "refresh": "Actualizar",
+    "retry": "Reintentar",
+    "loadingChartData": "Cargando datos del gráfico...",
+    "toggle": {
+      "volume": "Volumen",
+      "grid": "Cuadrícula"
+    },
+    "error": {
+      "chart": "Error al cargar el gráfico",
+      "loadData": "No se pudieron cargar los datos"
+    }
+  },
+  "settings": {
+    "section": {
+      "indicators": "Indicadores",
+      "style": "Estilo",
+      "drawingTools": "Herramientas de dibujo"
+    },
+    "indicator": {
+      "sma": "SMA",
+      "ema": "EMA",
+      "rsi": "RSI",
+      "macd": "MACD",
+      "bb": "Bandas de Bollinger"
+    },
+    "param": {
+      "period": "Periodo",
+      "fast": "Rápido",
+      "slow": "Lento",
+      "signal": "Señal",
+      "stdDev": "Desv. est."
+    },
+    "chartType": {
+      "label": "Tipo de gráfico",
+      "option": {
+        "candlesticks": "Velas",
+        "hollowCandles": "Velas huecas",
+        "ohlc": "OHLC",
+        "line": "Línea",
+        "area": "Área"
+      }
+    },
+    "color": {
+      "up": "Color alcista",
+      "down": "Color bajista"
+    },
+    "drawingTool": {
+      "line": "Línea",
+      "ray": "Rayo",
+      "rect": "Rect.",
+      "fib": "Fib"
+    },
+    "actions": {
+      "apply": "Aplicar cambios"
+    }
+  },
+  "notification": {
+    "indicatorAdded": "Indicador agregado: {{indicator}}"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@StratCraft/create-plugin",
+  "version": "1.0.0",
+  "description": "Scaffold a new StratCraft plugin project",
+  "bin": {
+    "create-StratCraft-plugin": "./src/index.mjs"
+  },
+  "type": "module",
+  "files": [
+    "src/"
+  ],
+  "keywords": [
+    "StratCraft",
+    "plugin",
+    "scaffold",
+    "generator"
+  ],
+  "author": "StratCraftsAI",
+  "license": "Apache-2.0"
+}

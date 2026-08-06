@@ -1,0 +1,539 @@
+{
+  "workflow": {
+    "title": "Geri Test İş Akışı",
+    "selectStrategy": "Strateji Seç",
+    "configureData": "Veriyi Yapılandır",
+    "setParameters": "Parametreleri Ayarla",
+    "runBacktest": "Geri Testi Çalıştır",
+    "viewResults": "Sonuçları Görüntüle",
+    "compiled": "C++ derlendi",
+    "compilationFailed": "C++ derleme başarısız"
+  },
+  "panel": {
+    "history": "Geri Test Geçmişi",
+    "trades": "İşlemler",
+    "logs": "Günlükler",
+    "results": "Sonuçlar"
+  },
+  "actions": {
+    "run": "Geri Testi Çalıştır",
+    "stop": "Geri Testi Durdur",
+    "export": "Sonuçları Dışa Aktar",
+    "compare": "Sonuçları Karşılaştır",
+    "clear": "Geçmişi Temizle"
+  },
+  "status": {
+    "idle": "Hazır",
+    "running": "Çalışıyor...",
+    "completed": "Tamamlandı",
+    "failed": "Başarısız",
+    "cancelled": "İptal Edildi"
+  },
+  "results": {
+    "summary": "Özet",
+    "performance": "Performans",
+    "trades": "İşlem Listesi",
+    "equity": "Sermaye Eğrisi",
+    "drawdown": "Düşüş",
+    "statistics": "İstatistikler"
+  },
+  "metrics": {
+    "totalReturn": "Toplam Getiri",
+    "sharpeRatio": "Sharpe Oranı",
+    "maxDrawdown": "Maksimum Düşüş",
+    "winRate": "Kazanma Oranı",
+    "profitFactor": "Kâr Faktörü",
+    "totalTrades": "Toplam İşlem"
+  },
+  "errors": {
+    "noStrategy": "Strateji seçilmedi",
+    "noData": "Kullanılabilir veri yok",
+    "runFailed": "Geri test yürütmesi başarısız oldu",
+    "exportFailed": "Sonuçlar dışa aktarılamadı",
+    "searchFailed": "Arama başarısız oldu",
+    "coverageCheckFailed": "Kapsam kontrolü başarısız oldu",
+    "downloadFailed": "İndirme başarısız oldu",
+    "fetchMarketDataFailed": "Piyasa verileri alınamadı",
+    "resultNotFound": "Sonuç bulunamadı",
+    "fetchDataFailed": "Veri alınamadı",
+    "userNotAuthenticated": "Kullanıcı kimliği doğrulanmadı. Lütfen giriş yapın.",
+    "backtestAlreadyRunning": "Geri test zaten çalışıyor",
+    "maxDrawdownReached": "Maksimum düşüşe ulaşıldı",
+    "exportFallback": "Dışa aktarma başarısız oldu",
+    "resumeFailed": "Devam ettirme başarısız oldu",
+    "startBacktestFailed": "Geri test başlatılamadı"
+  },
+  "config": {
+    "title": "Veri Yapılandırması",
+    "dataSource": "Veri Kaynağı",
+    "symbol": "Sembol",
+    "searchSymbol": "Sembol ara...",
+    "startDate": "Başlangıç Tarihi",
+    "endDate": "Bitiş Tarihi",
+    "timeframe": "Zaman Dilimi",
+    "initialCapital": "Başlangıç Sermayesi",
+    "orderSize": "Emir Büyüklüğü",
+    "searchTruncated": "{{total}} öğeden {{count}} gösteriliyor -- aramanızı daraltın",
+    "confidenceWeightedSizing": "Confidence-Weighted Sizing",
+    "confidenceWeightedSizingHint": "Scale position size by signal confidence"
+  },
+  "timeframes": {
+    "1m": "1 Dakika",
+    "5m": "5 Dakika",
+    "15m": "15 Dakika",
+    "30m": "30 Dakika",
+    "1h": "1 Saat",
+    "4h": "4 Saat",
+    "1d": "1 Gün",
+    "1w": "1 Hafta",
+    "1M": "1 Ay"
+  },
+  "orderUnits": {
+    "cash": "$",
+    "percent": "%",
+    "shares": "Hisse"
+  },
+  "sidebar": {
+    "history": "Geçmiş",
+    "backtesting": "Geri Test Yapılıyor",
+    "loading": "Yükleniyor...",
+    "noHistory": "Geri test geçmişi yok",
+    "testing": "test ediliyor...",
+    "capLabel": "Cap:",
+    "sizeLabel": "Boyut:",
+    "testedLabel": "Test Edildi:",
+    "delete": "Sil",
+    "checkpointTooltip": "Kontrol noktası: %{{percent}} tamamlandı"
+  },
+  "page": {
+    "loadingAlgorithms": "Algoritmalar yükleniyor...",
+    "workflowTitle": "İş Akışı Yapılandırması",
+    "noResults": "Kullanılabilir geri test sonucu yok.",
+    "startBacktest": "Yapılandırma sayfasından bir geri test başlatın.",
+    "realtimeChartPending": "Veri kullanılabilir olduğunda gerçek zamanlı grafik görünecek",
+    "loadingResult": "Loading result..."
+  },
+  "buttons": {
+    "newBacktest": "Yeni Geri Test",
+    "keep": "Sakla",
+    "discard": "At",
+    "reset": "Sıfırla",
+    "execute": "Yürüt",
+    "executing": "Yürütülüyor...",
+    "cancel": "İptal",
+    "delete": "Sil",
+    "backToConfig": "Yapılandırmaya Dön",
+    "runInBackground": "Arka Planda Çalıştır",
+    "exportToQuantLab": "Stratejiyi Kaydet",
+    "exporting": "Kaydediliyor...",
+    "return": "Dön"
+  },
+  "workflowSteps": {
+    "marketAnalysis": "Piyasa Analizi",
+    "entryFilter": "Giriş Filtresi",
+    "entrySignal": "Giriş Sinyali",
+    "exitStrategy": "Çıkış Stratejisi"
+  },
+  "statusBar": {
+    "running": "Çalışıyor",
+    "runningBacktests": "Çalışan Geri Testler",
+    "backtestsRunning": "{{count}} geri test çalışıyor"
+  },
+  "executorStatus": {
+    "ready": "Hazır",
+    "starting": "Başlatılıyor...",
+    "executing": "Yürütülüyor",
+    "completed": "Tamamlandı",
+    "failed": "Başarısız",
+    "cancelled": "İptal Edildi"
+  },
+  "checkpoint": {
+    "available": "Kontrol Noktası Mevcut",
+    "completed": "%{{percent}} tamamlandı ({{processed}}/{{total}} mum)",
+    "saved": "Kaydedildi {{time}}",
+    "dataNotFound": "Veri Dosyası Bulunamadı",
+    "dataNotFoundDesc": "Orijinal veri dosyası taşınmış veya silinmiş. Devam edilemiyor.",
+    "dataNotFoundHint": "Lütfen bu kontrol noktasını atın ve yeni bir geri test başlatın.",
+    "dataChanged": "Veri Dosyası Değişti",
+    "dataChangedDesc": "Kontrol noktası oluşturulduğundan beri veri dosyası değiştirilmiş.",
+    "dataChangedHint": "Devam etmek tutarsız sonuçlar üretebilir. Sıfırdan başlamanız önerilir.",
+    "validating": "Veri Doğrulanıyor...",
+    "validatingDesc": "Veri dosyası bütünlüğü kontrol ediliyor.",
+    "pnl": "PnL",
+    "return": "Getiri",
+    "trades": "İşlemler",
+    "winRate": "Kazanma Oranı",
+    "openPositions": "Kontrol Noktasındaki Açık Pozisyonlar",
+    "resume": "Geri Teste Devam Et",
+    "resuming": "Devam ediliyor...",
+    "discardStartNew": "At ve Yeniden Başla",
+    "percentSaved": "%{{percent}} kaydedildi",
+    "justNow": "az önce",
+    "minutesAgo": "{{count}} dakika önce",
+    "hoursAgo": "{{count}} saat önce",
+    "daysAgo": "{{count}} gün önce",
+    "recently": "yakın zamanda"
+  },
+  "dialog": {
+    "deleteTitle": "Geçmiş Kaydını Sil",
+    "deleteMessage": "Bu, geri test sonucunu tüm işlem kayıtları ve sermaye eğrisi verileri dahil olmak üzere kalıcı olarak silecektir."
+  },
+  "cancelDialog": {
+    "title": "Geri Testi İptal Et",
+    "message": "Çalışan geri testi iptal etmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+    "confirm": "Geri Testi İptal Et",
+    "keep": "Çalışmaya Devam Et"
+  },
+  "cancelledDialog": {
+    "title": "Geri Test İptal Edildi",
+    "message": "Geri test iptal edildi. Ne yapmak istersiniz?",
+    "stay": "Burada Kal",
+    "goBack": "Geri Dön"
+  },
+  "workflowSelector": {
+    "selectAlgorithm": "Piyasa Analizi",
+    "preCondition": "Giriş Filtresi",
+    "selectSteps": "Giriş Sinyali",
+    "postCondition": "Çıkış Stratejisi",
+    "search": "Ara..."
+  },
+  "breadcrumb": {
+    "backtestNexus": "Backtester",
+    "indicatorsCockpit": "Rejim",
+    "kronosCockpit": "Kronos",
+    "traderCockpit": "Trader",
+    "aiLiberoCockpit": "Libero",
+    "aiStudioCockpit": "Studio",
+    "catalogCockpit": "Catalog",
+    "result": "Sonuç",
+    "backtestResult": "Geri Test Sonucu",
+    "home": "Nexus Hub"
+  },
+  "kronos": {
+    "title": "Kronos Stratejileri",
+    "subtitle": "Geri test için Kronos ile üretilmiş bir strateji seçin",
+    "noStrategies": "Kronos Stratejisi Yok",
+    "noStrategiesHint": "Burada görmek için Strateji Oluşturucu'daki Kronos özelliğini kullanarak strateji üretin.",
+    "columnName": "Strateji Adı",
+    "columnType": "Tür",
+    "columnCreated": "Oluşturulma",
+    "columnAction": "Seç",
+    "execute": "Yürüt",
+    "executing": "Yürütülüyor...",
+    "selectAlgorithmFirst": "Lütfen önce bir strateji seçin",
+    "executionStarted": "Yürütme başladı",
+    "executionFailed": "Yürütme başarısız"
+  },
+  "locked": {
+    "requiresTier": "Bu özellik {{tier}} aboneliği gerektirir"
+  },
+  "auth": {
+    "loginToUnlock": "Kilidi Açmak İçin Giriş Yap",
+    "viewPlans": "Planları Görüntüle"
+  },
+  "common": {
+    "cancel": "İptal"
+  },
+  "notification": {
+    "backtestCompleted": "Geri test başarıyla tamamlandı",
+    "backtestCompletedReturn": "Geri test tamamlandı: {{returnPercent}}% getiri",
+    "backtestFailed": "Geri test başarısız: {{error}}",
+    "resultsCleared": "Sonuclar temizlendi",
+    "noDataSource": "Kullanılabilir veri kaynağı yok. Lutfen bir veri sağlayıcısı yapilandiriniz.",
+    "noResultsToExport": "Dışa aktarılacak sonuc yok"
+  },
+  "cockpitSelector": {
+    "title": "Kokpit Seç",
+    "subtitle": "Devam etmek için bir geri test modu seçin",
+    "indicatorsCockpit": "Rejim",
+    "indicatorsCockpitDesc": "İş akışı yapılandırması ile gösterge tabanlı geri test",
+    "traderCockpit": "Trader",
+    "traderCockpitDesc": "İzleme listesi + LLM Trader geri test stratejileri",
+    "aiLiberoCockpit": "Libero",
+    "aiLiberoCockpitDesc": "Libero otonom ajan geri test stratejileri",
+    "aiStudioCockpit": "Studio",
+    "aiStudioCockpitDesc": "Studio sohbet tabanlı kural tabanlı geri test stratejileri",
+    "catalogCockpit": "Catalog",
+    "catalogCockpitDesc": "Strateji katalogundan geri test stratejileri",
+    "kronosCockpit": "Kronos",
+    "kronosCockpitDesc": "Kronos zaman serisi geri test entegrasyonu",
+    "free": "ÜCRETSİZ",
+    "pro": "PRO"
+  },
+  "tabBar": {
+    "prep": "Hazırlık",
+    "wait": "Bekle",
+    "closeTab": "Sekmeyi kapat",
+    "close": "Kapat",
+    "closeOthers": "Diğerlerini Kapat",
+    "closeAll": "Tümünü Kapat"
+  },
+  "messages": {
+    "resumeApiNotAvailable": "Devam etme API'si mevcut değil",
+    "resumingFromCheckpoint": "Kontrol noktasından geri teste devam ediliyor...",
+    "resumeFailed": "Devam etme başarısız: {{message}}",
+    "deleteCheckpointFailed": "Kontrol noktası silinemedi",
+    "noWorkflowConfig": "İş akışı yapılandırması bulunamadı",
+    "missingAlgorithm": "Analiz veya giriş algoritması eksik",
+    "exportedToQuantLab": "Strateji \"{{name}}\" kaydedildi",
+    "exportToQuantLabFailed": "Strateji kaydedilemedi",
+    "startDateAdjustedLookback": "Başlangıç tarihi {{date}} olarak otomatik ayarlandı (maxLookback kısıtı)",
+    "startDateAdjustedTimeframe": "Başlangıç tarihi {{date}} olarak otomatik ayarlandı (zaman dilimi değişti)",
+    "generatingStrategy": "Strateji üretiliyor...",
+    "runningBacktest": "Geri test çalıştırılıyor...",
+    "noWorkflowsConfigured": "Yapılandırılmış iş akışı yok. Lütfen en az bir algoritma seçimi ekleyin.",
+    "missingMarketAnalysis": "Piyasa Analizi (Rejim Tespiti) gereklidir. Lütfen bir rejim tespiti algoritması seçin.",
+    "missingEntrySignal": "Giriş Sinyali gereklidir. Lütfen bir giriş sinyali algoritması seçin.",
+    "loadingMarketData": "{{symbol}} için piyasa verileri yükleniyor...",
+    "executionFailed": "Geri test yürütülemedi. Lütfen günlükleri kontrol edin."
+  },
+  "validation": {
+    "symbolRequired": "Sembol gereklidir",
+    "dataSourceRequired": "Veri kaynağı gereklidir",
+    "startDateRequired": "Başlangıç tarihi gereklidir",
+    "endDateRequired": "Bitiş tarihi gereklidir",
+    "endDateAfterStart": "Bitiş tarihi başlangıç tarihinden sonra olmalıdır",
+    "initialCapitalPositive": "Başlangıç sermayesi pozitif olmalıdır",
+    "orderSizePositive": "Emir büyüklüğü pozitif olmalıdır",
+    "lookbackExceeded": "{{timeframe}} aralığı: maks. {{lookback}} geriye bakış ({{selected}}g seçildi)",
+    "lookbackWarning": "Seçilen aralık ({{selected}}g) maks. geriye bakışı ({{max}}g) aşıyor"
+  },
+  "settings": {
+    "back": "Geri",
+    "title": "Ayarlar",
+    "secrets": "Sırlar",
+    "deleteSecret": "Sırrı Sil",
+    "deleteSecretConfirm": "Silmek istediğinizden emin misiniz",
+    "deleteSecretWarning": "Bu işlem geri alınamaz.",
+    "save": "Kaydet",
+    "saving": "Kaydediliyor...",
+    "secretsPageTitle": "Sırlar",
+    "secretsPageDescription": "Veri sağlayıcı API anahtarlarını ve kimlik bilgilerini yönetin",
+    "refresh": "Yenile",
+    "securityStatus": "Güvenlik Durumu",
+    "securityStatusDescription": "{{total}} sırdan {{configured}} tanesi yapılandırıldı. Sırlar AES-256-GCM ile şifrelenir ve güvenli şekilde saklanır.",
+    "searchSecrets": "Sırları ara...",
+    "storedSecrets": "Saklanan Sırlar",
+    "noSecretsMatch": "Aramanızla eşleşen sır yok",
+    "noSecretsConfigured": "Yapılandırılmış sır yok",
+    "recentActivity": "Son Etkinlik",
+    "noActivityRecorded": "Kayıtlı etkinlik yok",
+    "navStatus": "Durum",
+    "navCredentials": "Kimlik Bilgileri",
+    "navActivity": "Etkinlik",
+    "required": "Gerekli",
+    "copyToClipboard": "Panoya kopyala",
+    "hideValue": "Değeri gizle",
+    "showValue": "Değeri göster",
+    "editValue": "Düzenle",
+    "setValue": "Değer ayarla",
+    "testApiKey": "API anahtarını test et",
+    "deleteCredential": "Kimlik bilgisini sil",
+    "testing": "Test ediliyor...",
+    "enterSecretValue": "Sır değerini girin",
+    "getApiKey": "API anahtarı al",
+    "valueCannotBeEmpty": "Değer boş olamaz",
+    "failedToSave": "Kaydedilemedi",
+    "missingCredential": "Eksik kimlik bilgisi: {{key}}",
+    "failedToRetrieveApiKey": "API anahtarı alınamadı",
+    "verifiedKeyType": "Doğrulandı ({{keyType}})",
+    "verified": "Doğrulandı",
+    "invalidApiKey": "Geçersiz API anahtarı",
+    "validationFailed": "Doğrulama başarısız",
+    "keyTypePaper": "Kâğıt",
+    "keyTypeLive": "Canlı",
+    "deleteButton": "Sil"
+  },
+  "resultPanel": {
+    "tabs": {
+      "charts": "Grafikler",
+      "trades": "İşlemler",
+      "compare": "Karşılaştır"
+    },
+    "charts": {
+      "equityCurve": "Sermaye Eğrisi",
+      "klineChart": "Mum Grafiği",
+      "bars": "{{count}} mum",
+      "noEquityData": "Sermaye verisi yok",
+      "noKlineData": "Mum verisi yok",
+      "processing": "İşleniyor... ({{count}} nokta)",
+      "backtesting": "Geri test yapılıyor...",
+      "noTrades": "İşlem yok"
+    },
+    "summary": {
+      "equity": "Sermaye: {{count}} nokta",
+      "candles": "Mumlar: {{count}} adet",
+      "trades": "İşlemler: {{count}}"
+    },
+    "tradesTable": {
+      "index": "#",
+      "entryTime": "Giriş Zamanı",
+      "exitTime": "Çıkış Zamanı",
+      "side": "Yön",
+      "entry": "Giriş",
+      "exit": "Çıkış",
+      "qty": "Adet",
+      "pnl": "P&L",
+      "showingOf": "{{total}} işlemden {{shown}} gösteriliyor",
+      "noTrades": "İşlem yok"
+    },
+    "llmEstimate": "LLM Çağrı Tahmini (Kuru Çalıştırma)",
+    "barsProcessed": "İşlenen Mumlar",
+    "calls": "çağrı",
+    "totalLlmCalls": "Toplam LLM Çağrısı",
+    "elapsed": "Geçen Süre",
+    "status": {
+      "noResults": "Sonuç bulunmuyor",
+      "case": "Durum {{index}}",
+      "testing": " - Test ediliyor...",
+      "pending": " - Beklemede",
+      "tradesCount": "({{count}} işlem)",
+      "collectingData": "Veri toplanıyor...",
+      "waiting": "Bekleniyor...",
+      "cancelled": "İptal Edildi"
+    },
+    "comparison": {
+      "title": "Performans Karşılaştırması",
+      "metric": "Metrik",
+      "strategy": "Strateji {{index}}",
+      "totalPnl": "Toplam P&L",
+      "totalReturn": "Toplam Getiri",
+      "sharpeRatio": "Sharpe Oranı",
+      "maxDrawdown": "Maksimum Düşüş",
+      "winRate": "Kazanma Oranı",
+      "totalTrades": "Toplam İşlem",
+      "profitFactor": "Kâr Faktörü",
+      "equityOverlay": "Sermaye Eğrileri Üst Üste",
+      "noResults": "Karşılaştırılacak sonuç yok"
+    }
+  },
+  "configSummary": {
+    "dataSource": "Veri Kaynağı",
+    "symbol": "Sembol",
+    "startDate": "Başlangıç Tarihi",
+    "endDate": "Bitiş Tarihi",
+    "capital": "Sermaye",
+    "orderSize": "Emir Büyüklüğü",
+    "sharesUnit": "{{size}} hisse",
+    "confidenceWeighted": "CWS"
+  },
+  "namingDialog": {
+    "titleBuilder": "Stratejinizi Adlandırın",
+    "titleExport": "Sigma'ya Aktar",
+    "titleBacktest": "Geri Testinizi Adlandırın",
+    "confirmBuilder": "Onayla ve Üret",
+    "confirmExport": "Onayla ve Dışa Aktar",
+    "confirmBacktest": "Onayla ve Yürüt",
+    "suggestedName": "Önerilen ad:",
+    "useThis": "Bunu Kullan",
+    "or": "veya",
+    "customName": "Özel ad:",
+    "placeholder": "Özel adınızı girin...",
+    "finalName": "Nihai ad:",
+    "cancel": "İptal"
+  },
+  "dryRunExecute": {
+    "execute": "Yürüt",
+    "executing": "Yürütülüyor",
+    "dryRun": "Kuru Çalıştırma",
+    "direct": "Doğrudan"
+  },
+  "workflowDropdown": {
+    "searchPlaceholder": "Ara...",
+    "noAlgorithmsFound": "Algoritma bulunamadı"
+  },
+  "backtestDataConfig": {
+    "placeholderSearchSymbol": "Sembol ara...",
+    "placeholderInitialCapital": "10000"
+  },
+  "pipeline": {
+    "download": "İndir",
+    "spawn": "Başlat",
+    "initialize": "Hazırla",
+    "loadData": "Veriyi Yükle",
+    "backtest": "Geri Test",
+    "finalize": "Sonlandır"
+  },
+  "manifest": {
+    "displayName": "Backtester",
+    "description": "Strategy backtesting with workflow UI and results visualization",
+    "viewsContainers": {
+      "sidebar": {
+        "backtestExplorer": "BACKTEST"
+      }
+    },
+    "views": {
+      "backtestExplorer": {
+        "backtestHistory": "Backtest History"
+      },
+      "workbench": {
+        "backtestWorkflow": "Backtest Workflow",
+        "backtestResults": "Results"
+      }
+    },
+    "bottomPanel": {
+      "trades": "Trades",
+      "logs": "Logs"
+    },
+    "commands": {
+      "run": "Run Backtest",
+      "stop": "Stop Backtest",
+      "export": "Export Results"
+    },
+    "configuration": {
+      "title": "Backtester Settings",
+      "properties": {
+        "alpacaApiKeyId": {
+          "description": "Alpaca Markets API Key ID",
+          "category": "Data Providers"
+        },
+        "alpacaApiSecretKey": {
+          "description": "Alpaca Markets API Secret Key",
+          "category": "Data Providers"
+        }
+      }
+    }
+  },
+  "exportDialog": {
+    "title": "Save Strategy",
+    "nameLabel": "Strategy Name",
+    "namePlaceholder": "Enter strategy name...",
+    "nameHint": "This name will be used to identify the strategy in your library.",
+    "cancel": "Cancel",
+    "saving": "Saving...",
+    "confirm": "Save"
+  },
+  "result": {
+    "dryRunBadge": "DRY RUN",
+    "liveConfirm": {
+      "confirming": "ONAYLANIYOR...",
+      "confirm": "ONAYLA"
+    }
+  },
+  "tree": {
+    "backtestWorkflow": "GERİ TEST İŞ AKIŞI",
+    "openWorkflow": "İş akışını ac",
+    "history": "GECMİŞ",
+    "backtestResultN": "Geri Test Sonucu #{{n}}"
+  },
+  "engine": {
+    "noDataInRange": "İstenen aralıkta veri yok",
+    "noPositionToSell": "Satılacak pozisyon yok (aciga satis devre disi)",
+    "strategies": {
+      "smaCrossover": {
+        "name": "SMA Kesisimi",
+        "description": "Hizli SMA yavas SMA'yi yukari gectiginde al, asagi gectiginde sat",
+        "fastPeriod": "Hizli SMA periyodu",
+        "slowPeriod": "Yavas SMA periyodu"
+      },
+      "rsiMeanReversion": {
+        "name": "RSI Ortalamaya Donus",
+        "description": "RSI asiri satimda iken al, asiri alimda iken sat",
+        "period": "RSI periyodu",
+        "oversold": "Asiri satim seviyesi",
+        "overbought": "Asiri alim seviyesi"
+      }
+    },
+    "insufficientFunds": "Insufficient funds"
+  }
+}

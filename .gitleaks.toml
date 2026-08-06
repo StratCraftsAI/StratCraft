@@ -1,0 +1,97 @@
+# Gitleaks configuration
+#
+# TICKET_1372_3: [extend] is REQUIRED. A config without it replaces the entire
+# built-in ruleset, so gitleaks runs with zero rules and every scan reports
+# "no leaks found" regardless of content. Because both compliance.yml and
+# public-release-gates.yml invoke `gitleaks detect --source .`, gitleaks
+# auto-loads this file from the target path and the secret gate silently
+# became a no-op. Never remove this block.
+[extend]
+  useDefault = true
+
+# Allowlisted findings are historical commits that have been reviewed and remediated.
+# - oauth-token file: removed from git tracking, added to .gitignore
+# - doc example tokens: truncated placeholder values in current HEAD
+# - test fake tokens: replaced with non-matching test values in current HEAD
+# - credential-handlers sessionToken: replaced with safe value in current HEAD
+# - deleted files (core-engine test, TICKET_055): no longer exist in HEAD
+
+[allowlist]
+  description = "Historical findings reviewed and remediated"
+
+  # TICKET_1372_3: reviewed non-secrets that the generic-api-key rule matches on
+  # the generated public tree. Matched by content, not line number, so an edit
+  # above them does not silently re-open the finding.
+  # Matched against the detected secret value itself, not the surrounding line.
+  regexes = [
+    # Literal marker returned by the V3 OS-keychain path; not a credential.
+    # apps/desktop/src/main/ipc/credential-handlers.ts
+    '''^v3-os-keychain$''',
+    # OpenAPI schema property name (P25 percentile compute-hours metric); not a credential.
+    # packages/types/contracts/governance-api-v1.openapi.json
+    '''^p25_compute_hours$''',
+  ]
+
+  # 16-hex content digests identifying audit entries, not credentials.
+  paths = [
+    '''docs/architecture/modern-cpp-audit/approved-boundaries\.json$''',
+  ]
+
+  fingerprints = [
+    # log-sanitizer.test.ts: fake sk_live_ test string (stripe-access-token rule)
+    # Remediated: replaced with test_key_ prefix in current HEAD
+    "ef9c92ed9f6d41f758710fd66e6d0b9a9d300846:apps/desktop/src/main/utils/__tests__/log-sanitizer.test.ts:stripe-access-token:91",
+
+    # TICKET_564_BACKEND_API_SPEC.md: example access_token/refresh_token in API doc
+    "3e7238c37b9ae4a91dcc7d9444779ca0663bbade:docs/design/TICKET_564_BACKEND_API_SPEC.md:generic-api-key:144",
+    "3e7238c37b9ae4a91dcc7d9444779ca0663bbade:docs/design/TICKET_564_BACKEND_API_SPEC.md:generic-api-key:145",
+
+    # oauth-token: JWT tokens committed in historical commits (file now in .gitignore)
+    "7576dd62ac5f750615c31193ced372475421ebc3:apps/desktop/data/oauth-token:jwt:1",
+    "5792b494a2e0df711eb2c162be914ea56cc69575:apps/desktop/data/oauth-token:jwt:1",
+    "cfd36630e8cfd725e72c6d0d1b29cc133cc9ba9f:apps/desktop/data/oauth-token:jwt:1",
+    "83d00c727eae26901ebad3ca6ac9bd9bdc919d6a:apps/desktop/data/oauth-token:jwt:1",
+    "77862adf51cad25554d6946d4fc48304ace5121c:apps/desktop/data/oauth-token:jwt:1",
+    "f33d58af437288f8ba5a1cbb5473d4d08e735f92:apps/desktop/data/oauth-token:jwt:1",
+    "8384f00950fd39d54f442907a43fc0d6ff89f50a:apps/desktop/data/oauth-token:jwt:1",
+    "446d7ddbe01a3b12ac60c83c71c02f6cff5edece:apps/desktop/data/oauth-token:jwt:1",
+    "27f339865734af96f9eec90f9f1377fa225d1878:apps/desktop/data/oauth-token:jwt:1",
+    "e4613ac74bf124c773718afa7aecdcce289b6e1b:apps/desktop/data/oauth-token:jwt:1",
+
+    # credential-handlers.test.ts: fake sessionToken in test (historical commit)
+    "732f31194b2b5c5a1c73a020fa8ce2bdc3f5de51:apps/desktop/src/main/ipc/__tests__/credential-handlers.test.ts:generic-api-key:232",
+
+    # TICKET_415_1: UUID example in bug investigation doc
+    "82a9eda53b18f567453008f0f943b0113347a217:docs/design/TICKET_415_1_UUID_PARSEINT_TRUNCATION_BUG.md:generic-api-key:16",
+
+    # PRODUCTION_RELEASE_CHECKLIST.md: GitHub PAT reference (historical)
+    "629fd8319d875791c0e12ae53e27e7104f222079:docs/PRODUCTION_RELEASE_CHECKLIST.md:github-pat:20",
+
+    # credential-handlers.ts: sessionToken value (replaced with safe value in current HEAD)
+    "b10c3847912b12377faf5776b6ea1bcfca3d35fe:apps/desktop/src/main/ipc/credential-handlers.ts:generic-api-key:126",
+
+    # TICKET_074_OAUTH_ENDPOINT_IMPLEMENTATION.md: example tokens in API doc
+    "8c56216c53c5de8624bdac96e10a49c8a071e492:docs/design/TICKET_074_OAUTH_ENDPOINT_IMPLEMENTATION.md:generic-api-key:238",
+    "8c56216c53c5de8624bdac96e10a49c8a071e492:docs/design/TICKET_074_OAUTH_ENDPOINT_IMPLEMENTATION.md:generic-api-key:239",
+
+    # TICKET_074_DESKTOP_API_CONTRACT.md: example tokens in API doc
+    "8c56216c53c5de8624bdac96e10a49c8a071e492:docs/back-source/TICKET_074_DESKTOP_API_CONTRACT.md:generic-api-key:101",
+    "8c56216c53c5de8624bdac96e10a49c8a071e492:docs/back-source/TICKET_074_DESKTOP_API_CONTRACT.md:generic-api-key:102",
+
+    # TICKET_074_WP_IMPLEMENTATION_GUIDE.md: example tokens in API doc
+    "95611475f7cd2a0c3ca9feb30b6a4af4cb5c33b0:docs/design/TICKET_074_WP_IMPLEMENTATION_GUIDE.md:generic-api-key:124",
+    "95611475f7cd2a0c3ca9feb30b6a4af4cb5c33b0:docs/design/TICKET_074_WP_IMPLEMENTATION_GUIDE.md:generic-api-key:127",
+
+    # TICKET_066_1_REMOTE_USER_AUTHENTICATION.md: example tokens in auth design doc
+    "68c29f79f47b180aa884f625fdd7a60fb2116987:docs/design/TICKET_066_1_REMOTE_USER_AUTHENTICATION.md:generic-api-key:358",
+    "68c29f79f47b180aa884f625fdd7a60fb2116987:docs/design/TICKET_066_1_REMOTE_USER_AUTHENTICATION.md:generic-api-key:359",
+
+    # TICKET_055: GitHub PAT in migration investigation doc (file deleted)
+    "9e73baaed180556467c75e0e62eecf996ae7ecf6:docs/TICKET_055_PRIVATE_TO_PUBLIC_MIGRATION_INVESTIGATION.md:github-pat:21",
+
+    # TICKET_039: example access_token in auth protocol design doc
+    "099c9b171120607b6e0659dd819416850ade145e:docs/design/TICKET_039_MODULE_AUTHENTICATION_PROTOCOL_DESIGN.md:generic-api-key:131",
+
+    # test_clickhouse_credential.cpp: test api_secret (file deleted from repo)
+    "32a08740c10734fd7a0a3c948f8d8ca566df20b3:packages/core-engine/tests/test_clickhouse_credential.cpp:generic-api-key:159",
+  ]

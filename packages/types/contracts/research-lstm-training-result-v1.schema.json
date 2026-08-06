@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "operation": {
+      "type": "string",
+      "enum": [
+        "prepare",
+        "train",
+        "evaluate",
+        "checkpoint"
+      ]
+    },
+    "contractVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "terminalStatus": {
+      "type": "string",
+      "enum": [
+        "prepared",
+        "succeeded",
+        "checkpointed"
+      ]
+    },
+    "trainingSessionId": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "modelId": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "modelVersionId": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "resourcePlanDecisionId": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "configurationFingerprint": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "completedGeometry": {
+      "type": "object",
+      "properties": {
+        "epochsCompleted": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "batchesCompleted": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "trainSamples": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "validationSamples": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "testSamples": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "processCount": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "threadsPerProcess": {
+          "$ref": "#/$defs/__schema3"
+        }
+      },
+      "required": [
+        "epochsCompleted",
+        "batchesCompleted",
+        "trainSamples",
+        "validationSamples",
+        "testSamples",
+        "processCount",
+        "threadsPerProcess"
+      ],
+      "additionalProperties": false
+    },
+    "metrics": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "bestValidationSharpe": {
+              "type": "number"
+            },
+            "holdoutSharpe": {
+              "type": "number"
+            },
+            "holdoutMeanReturn": {
+              "type": "number"
+            },
+            "holdoutVolatility": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "bestValidationSharpe",
+            "holdoutSharpe",
+            "holdoutMeanReturn",
+            "holdoutVolatility"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lineage": {
+      "type": "object",
+      "properties": {
+        "inputReferenceId": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "inputSha256": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "checkpointArtifactId": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/__schema0"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "inputReferenceId",
+        "inputSha256",
+        "checkpointArtifactId"
+      ],
+      "additionalProperties": false
+    },
+    "artifacts": {
+      "maxItems": 2,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema4"
+      }
+    }
+  },
+  "required": [
+    "operation",
+    "contractVersion",
+    "terminalStatus",
+    "trainingSessionId",
+    "modelId",
+    "modelVersionId",
+    "resourcePlanDecisionId",
+    "configurationFingerprint",
+    "completedGeometry",
+    "metrics",
+    "lineage",
+    "artifacts"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "__schema1": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "__schema2": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema3": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema4": {
+      "type": "object",
+      "properties": {
+        "artifactId": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "artifactKind": {
+          "type": "string",
+          "enum": [
+            "model",
+            "checkpoint"
+          ]
+        },
+        "schemaVersion": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+        },
+        "sha256": {
+          "$ref": "#/$defs/__schema1"
+        }
+      },
+      "required": [
+        "artifactId",
+        "artifactKind",
+        "schemaVersion",
+        "sha256"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

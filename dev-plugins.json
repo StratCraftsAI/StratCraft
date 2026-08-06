@@ -1,0 +1,8 @@
+{
+  "localPlugins": [
+    {
+      "id": "com.stratcraft.quant-lab-nexus",
+      "zipPath": "plugins/quant-lab-nexus/out/quant-lab-nexus-1.0.0.zip"
+    }
+  ]
+}

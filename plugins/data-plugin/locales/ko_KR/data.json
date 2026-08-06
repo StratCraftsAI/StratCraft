@@ -1,0 +1,22 @@
+{
+  "manifest": {
+    "displayName": "Data Foundation",
+    "description": "Foundation plugin providing shared data source components and types"
+  },
+  "fitQuality": {
+    "insufficientData": "데이터 부족",
+    "needTwoFoldResults": "2개 이상의 폴드 결과 필요",
+    "dataStarved": "데이터 부족 ({{sampleCount}}개 샘플 / {{paramCount}}개 파라미터 = {{ratio}}:1, {{targetRatio}}:1 이상 필요)",
+    "dataSufficiency": "데이터 충분성",
+    "needRatio": "샘플/파라미터 비율 {{targetRatio}}:1 필요, 현재 {{currentRatio}}:1",
+    "modelFitQuality": "모델 적합 품질"
+  },
+  "dataSource": {
+    "region": {
+      "usGlobal": "미국 및 글로벌",
+      "crypto": "암호화폐",
+      "cnAShare": "중국 A주",
+      "myData": "내 데이터"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "kind": "required_pull_bars",
+  "contract": {
+    "scheme": "walk_forward",
+    "totalSegments": 6,
+    "testSegments": 1,
+    "embargoBars": 5,
+    "horizonBars": 0,
+    "warmupBars": 100,
+    "netNewBars": 600
+  }
+}

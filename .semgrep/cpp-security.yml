@@ -1,0 +1,33 @@
+rules:
+  - id: quantnexus.cpp.unsafe-unbounded-c-string-api
+    languages: [cpp]
+    message: >-
+      Unbounded C string APIs can overflow destination buffers; use a
+      size-aware C++ API whose bounds are enforced by the owning type.
+    severity: ERROR
+    metadata:
+      category: security
+      confidence: HIGH
+      cwe:
+        - "CWE-120: Buffer Copy without Checking Size of Input"
+    pattern-either:
+      - pattern: gets(...)
+      - pattern: strcpy(...)
+      - pattern: strcat(...)
+      - pattern: sprintf(...)
+      - pattern: vsprintf(...)
+
+  - id: quantnexus.cpp.shell-command-execution
+    languages: [cpp]
+    message: >-
+      Shell command execution is an injection boundary; prefer an argv-based
+      process API and verify that no untrusted value reaches the command.
+    severity: WARNING
+    metadata:
+      category: security
+      confidence: MEDIUM
+      cwe:
+        - "CWE-78: Improper Neutralization of Special Elements used in an OS Command"
+    pattern-either:
+      - pattern: system(...)
+      - pattern: popen(...)

@@ -1,0 +1,41 @@
+{
+  "description": "TICKET_471_1: Performance regression thresholds for StratCraft Executor benchmarks",
+  "note": "Values are absolute maximums in the specified unit. CI fails if any benchmark exceeds its threshold.",
+  "baselines": [
+    {
+      "name": "DataLoading_Parquet_100K",
+      "description": "Load 100K OHLCV rows from Parquet file",
+      "p50_max_ms": 50,
+      "p99_max_ms": 100,
+      "unit": "ms"
+    },
+    {
+      "name": "BacktestExecution_SMA_1Y",
+      "description": "Execute SMA crossover strategy on 1 year daily data",
+      "p50_max_ms": 500,
+      "p99_max_ms": 800,
+      "unit": "ms"
+    },
+    {
+      "name": "Serialization_ResultJSON",
+      "description": "Serialize backtest result to JSON",
+      "p50_max_ms": 10,
+      "p99_max_ms": 20,
+      "unit": "ms"
+    },
+    {
+      "name": "MemoryPool_Alloc_10K",
+      "description": "PMR pool 10K allocations",
+      "p50_max_ns": 500,
+      "p99_max_ns": 1000,
+      "unit": "ns"
+    },
+    {
+      "name": "SIMD_OHLCV_Aggregate",
+      "description": "AVX2 OHLCV data aggregation",
+      "p50_max_ns": 200,
+      "p99_max_ns": 400,
+      "unit": "ns"
+    }
+  ]
+}

@@ -1,0 +1,572 @@
+{
+  "tools": {
+    "list_strategies": {
+      "description": "List all strategies/algorithms stored in StratCraft. Returns id, code, name, type, and creation time.",
+      "params": {
+        "limit": "Maximum number of strategies to return"
+      }
+    },
+    "get_strategy": {
+      "description": "Get detailed information about a specific strategy by ID, including classification metadata and strategy rules.",
+      "params": {
+        "id": "Strategy ID"
+      }
+    },
+    "list_backtest_results": {
+      "description": "List backtest results with key metrics (PnL, Sharpe, drawdown, win rate). Returns summary without full trade/equity data.",
+      "params": {
+        "limit": "Maximum number of results to return"
+      }
+    },
+    "get_backtest_result": {
+      "description": "Get full backtest result by task ID, including trades and equity curve data.",
+      "params": {
+        "task_id": "Backtest task ID"
+      }
+    },
+    "list_factors": {
+      "description": "List all factors/indicators stored in StratCraft with IC and Sharpe metrics.",
+      "params": {
+        "limit": "Maximum number of factors to return"
+      }
+    },
+    "list_signal_sources": {
+      "description": "List all signal sources registered in StratCraft Quant Lab.",
+      "params": {
+        "limit": "Maximum number of signal sources to return"
+      }
+    },
+    "generate_strategy": {
+      "description": "Generate a C++ ABI v2 regime-detector strategy through the direct nona_server Architecture V3 path. Use canonical regime and indicator catalog slugs. Omit strategy_name to use the shared default and storage collision policy. Returns algorithm ID and resolved strategy name on success.",
+      "params": {
+        "regime": "Canonical regime: trend, range, consolidation, oscillation, or bespoke",
+        "indicators": "Strategy indicator catalog slugs returned by list_strategy_indicators",
+        "strategy_name": "Optional strategy name; omit to use the shared default and storage collision suffix policy",
+        "preference": "Free-text preference/instructions for the LLM",
+        "persona": "Optional persona constraint ID; omit unless the user explicitly selected one",
+        "llm_provider": "LLM provider (e.g., PRO_CATALOG, OPENAI, CLAUDE)",
+        "llm_model": "LLM model name"
+      }
+    },
+    "list_personas": {
+      "description": "List available trading personas for strategy generation constraints. Personas define trading style, risk profile, and strategy constraints."
+    },
+    "generate_kronos_strategy": {
+      "description": "Generate a Kronos AI time-series prediction strategy. Requires the Electron desktop app to be running. Returns algorithmId and strategyName on success.",
+      "params": {
+        "strategy_name": "Optional strategy name; omit to use the shared default and storage collision suffix policy",
+        "model": "Kronos model (kronos-mini, kronos-small, kronos-base)",
+        "lookback": "Lookback window size (10-2048)",
+        "pred_len": "Prediction length (1-512)",
+        "temperature": "Sampling temperature (0.1-2.0)",
+        "top_p": "Top-p sampling (0.5-1.0)",
+        "top_k": "Top-k sampling (0-256)",
+        "sample_count": "Number of samples (1-20)",
+        "time_range": "Time range mode",
+        "start_time": "Start time in ISO format (only for custom time_range)",
+        "llm_provider": "LLM provider (e.g., PRO_CATALOG, OPENAI, CLAUDE)",
+        "llm_model": "LLM model name"
+      }
+    },
+    "generate_entry_signal": {
+      "description": "Generate an entry signal strategy using LLM. Requires the Electron desktop app to be running. Returns algorithmId and strategyName on success.",
+      "params": {
+        "strategy_name": "Name for the generated entry signal strategy",
+        "entry_signal_base": "Entry signal base type",
+        "indicators": "List of technical indicators (e.g., RSI, MACD, EMA, Bollinger, Stochastic, ADX)",
+        "preference": "Free-text preference/instructions for the LLM (e.g., \"RSI(14) overbought/oversold crossover\")",
+        "auto_reverse": "Auto-generate short conditions as inverse of long",
+        "llm_provider": "LLM provider (e.g., PRO_CATALOG, OPENAI, CLAUDE)",
+        "llm_model": "LLM model name"
+      }
+    },
+    "generate_exit_strategy": {
+      "description": "Generate an exit/risk-override strategy using LLM. Supports circuit_breaker, time_limit, drawdown_limit, and indicator_guard rules. Requires the Electron desktop app to be running.",
+      "params": {
+        "strategy_name": "Name for the generated exit strategy",
+        "exit_rules": "List of exit rules",
+        "max_loss_percent": "Hard safety max loss percent",
+        "llm_provider": "LLM provider (e.g., PRO_CATALOG, OPENAI, CLAUDE)",
+        "llm_model": "LLM model name",
+        "exit_rule": {
+          "type": "Exit rule type",
+          "trigger_pnl_percent": "PnL trigger percent for circuit_breaker (e.g., -5.0)",
+          "scope": "Scope for circuit_breaker",
+          "max_holding_hours": "Max holding hours for time_limit",
+          "max_drawdown_percent": "Max drawdown percent for drawdown_limit",
+          "indicator": "Indicator name for indicator_guard (e.g., RSI)",
+          "condition": "Condition for indicator_guard (e.g., crosses_below)",
+          "threshold": "Threshold value for indicator_guard (e.g., 30)",
+          "direction": "Direction for indicator_guard"
+        }
+      }
+    },
+    "generate_ai_libero_strategy": {
+      "description": "Generate an AI Libero standalone agent strategy using LLM. Requires the Electron desktop app to be running. Returns algorithmId and strategyName on success.",
+      "params": {
+        "strategy_name": "Optional strategy name; omit to use the shared default and storage collision suffix policy",
+        "prompt": "Trading strategy description for the LLM agent (min 10 chars)",
+        "preset_mode": "Trader preset mode defining risk/frequency constraints",
+        "indicators": "Technical indicators for the agent (e.g., RSI, MACD, EMA)",
+        "analysis_interval": "Call LLM every N bars (1-100)",
+        "warmup_period": "Skip first N bars (50-500)",
+        "lookback_bars": "Bars of history sent to LLM (20-200)",
+        "batch_size": "Decisions per LLM call (50-500)",
+        "llm_provider": "LLM provider (e.g., PRO_CATALOG, OPENAI, CLAUDE)",
+        "llm_model": "LLM model name"
+      }
+    },
+    "generate_ai_studio_strategy": {
+      "description": "Generate a strategy using AI Studio (conversational strategy authoring). Extracts trading rules from a named strategy, trader, or concept description, then generates C++ code. No regime or indicator selection needed -- the server self-routes via Fishbone modules. Returns algorithmId and strategyName on success.",
+      "params": {
+        "strategy_name": "Optional strategy name; omit to use the shared default and storage collision suffix policy",
+        "description": "What to generate: a strategy concept, named strategy, or trader style to extract and codify (min 10 chars)",
+        "indicators": "Optional technical indicators (e.g., RSI, MACD, EMA). Usually not needed -- the server extracts indicators from the description.",
+        "llm_provider": "LLM provider (e.g., PRO_CATALOG, OPENAI, CLAUDE)",
+        "llm_model": "LLM model name"
+      }
+    },
+    "start_ai_studio_session": {
+      "description": "Start a new AI Studio conversational session. Sends a strategy description to the server and returns session_id, strategy_rules (extracted trading rules), available_actions (what the user can do next), and metadata including fishbone_module (which module the server routed to). Use this for multi-turn strategy authoring where you need to iteratively refine rules before generating code.",
+      "params": {
+        "description": "The strategy concept, named strategy, or trader style to explore (e.g., \"extract Larry Williams strategy\", \"decompose Turtle Trading rules\")",
+        "strategy_name": "Optional strategy name; omit to let the server derive one",
+        "llm_provider": "LLM provider (e.g., PRO_CATALOG, OPENAI, CLAUDE)",
+        "llm_model": "LLM model name"
+      }
+    },
+    "continue_ai_studio_session": {
+      "description": "Continue an existing AI Studio session with a follow-up message. Pass the session_id from start_ai_studio_session and optionally the current_strategy_rules from the previous response. The server maintains conversation history per session_id. Use this to refine strategy rules, add conditions, or ask clarifying questions before generating code.",
+      "params": {
+        "session_id": "Session ID returned by start_ai_studio_session",
+        "message": "Follow-up message to the AI Studio session (e.g., \"add a trailing stop at 2%\", \"what indicators does this use?\")",
+        "current_strategy_rules": "Strategy rules from the previous turn response; pass them back to maintain rule state across turns",
+        "strategy_name": "Optional strategy name override",
+        "llm_provider": "LLM provider",
+        "llm_model": "LLM model name"
+      }
+    },
+    "run_ai_studio_action": {
+      "description": "Run a gated action on an AI Studio session. The action must be present in the available_actions array from the previous session response. Actions: generate_code (generates C++ strategy code from the defined rules), save_strategy (persists the generated strategy to the database, returns algorithmId), run_backtest (not yet supported). For save_strategy, the strategy is classified with strategy_type=1 and signal_source=aiStudio, identical to the batch path.",
+      "params": {
+        "session_id": "Session ID from start_ai_studio_session",
+        "action": "Action to run; must be listed in the previous response available_actions array",
+        "current_strategy_rules": "Strategy rules from the previous turn; required for accurate code generation",
+        "strategy_name": "Strategy name for persistence; defaults to \"AI Studio Strategy\" if omitted",
+        "llm_provider": "LLM provider",
+        "llm_model": "LLM model name"
+      }
+    },
+    "run_backtest": {
+      "description": "Run a backtest on a stored algorithm. Requires the Electron desktop app to be running. Returns taskId for status tracking.",
+      "params": {
+        "algorithm_id": "Algorithm ID from generate_strategy, generate_entry_signal, or generate_exit_strategy",
+        "symbol": "Trading symbol (e.g., AAPL, MSFT, BTC-USD)",
+        "interval": "Data interval (e.g., 1m, 5m, 15m, 1h, 4h, 1d)",
+        "start_date": "Start date in ISO format (e.g., 2023-01-01). Defaults to 2 years ago.",
+        "end_date": "End date in ISO format (e.g., 2024-12-31). Defaults to today.",
+        "initial_capital": "Initial capital",
+        "commission": "Commission rate",
+        "slippage": "Slippage rate",
+        "allow_short": "Allow short selling",
+        "data_source": "Data source (yfinance, dukascopy, clickhouse)",
+        "dry_run": "Run in dry-run mode: stubs LLM/Kronos API calls, returns estimated call counts instead of real PnL"
+      }
+    },
+    "get_backtest_status": {
+      "description": "Get the status of a running or completed backtest task. Returns status (preparing, queued, running, completed, failed, cancelled).",
+      "params": {
+        "task_id": "Backtest task ID from run_backtest"
+      }
+    },
+    "alpha_factory_add_signals": {
+      "description": "Add signals to the active Alpha Factory config by ID. Accepts signal-definition IDs (from list_signal_runs / list_signal_definitions) or persisted signal IDs (persistedSignalId) -- definition IDs are resolved to the persisted signal via fingerprint. Idempotent and self-verifying: adding an id already present is a safe no-op, reported per-id in results[] with outcome already_present_input_id / already_present_resolved_id plus the matching chip name and persistedSignalId. DO NOT load_alpha_factory_config first to check membership -- call add directly and read each result outcome. Returns results[] (one outcome per id, with resolvedVia) plus derived counters and totalSignals. T2 (mutates active config).",
+      "params": {
+        "signal_ids": "Signal ids to add -- accepts a union: signal-definition id (from list_signal_runs / list_signal_definitions) OR persisted signal id (the persistedSignalId projected on scoreboard/definition rows). Definition ids resolve to the persisted signal via fingerprint. The result reports which resolution fired per id (resolvedVia)."
+      }
+    }
+  },
+  "handlers": {
+    "strategies": {
+      "generationFailed": "Echec de la generation de strategie : %s",
+      "generationError": "Erreur de generation de strategie : %s",
+      "entrySignalFailed": "Echec de la generation du signal d'entree : %s",
+      "entrySignalError": "Erreur de generation du signal d'entree : %s",
+      "exitStrategyFailed": "Echec de la generation de la strategie de sortie : %s",
+      "exitStrategyError": "Erreur de generation de la strategie de sortie : %s",
+      "kronosFailed": "Echec de la prediction Kronos : %s",
+      "kronosError": "Erreur de prediction Kronos : %s",
+      "aiLiberoFailed": "Echec de la generation AI Libero : %s",
+      "aiLiberoError": "Erreur de generation AI Libero : %s",
+      "aiStudioFailed": "AI Studio generation failed: %s",
+      "aiStudioError": "AI Studio generation error: %s",
+      "aiStudioSessionStartFailed": "AI Studio session start failed: %s",
+      "aiStudioSessionStartError": "AI Studio session start error: %s",
+      "aiStudioSessionContinueFailed": "AI Studio session continue failed: %s",
+      "aiStudioSessionContinueError": "AI Studio session continue error: %s",
+      "aiStudioActionFailed": "AI Studio action failed: %s",
+      "aiStudioActionError": "AI Studio action error: %s",
+      "notFound": "Strategie avec id=%s introuvable",
+      "unknownError": "Erreur inconnue"
+    },
+    "backtests": {
+      "resultNotFound": "Resultat de backtest avec task_id=%s introuvable",
+      "electronNotRunningExecution": "L'application de bureau Electron n'est pas en cours d'execution. L'execution du backtest necessite l'application en fonctionnement.",
+      "executionFailed": "Echec de l'execution du backtest : %s",
+      "executionError": "Erreur d'execution du backtest : %s",
+      "telemetryError": "Erreur de requete de telemetrie : %s",
+      "electronNotRunningStatus": "L'application de bureau Electron n'est pas en cours d'execution. Le statut du backtest necessite l'application en fonctionnement.",
+      "statusFailed": "Echec de la requete de statut du backtest : %s",
+      "statusError": "Erreur de statut du backtest : %s"
+    },
+    "sweep": {
+      "electronNotRunningSweep": "L'application de bureau Electron n'est pas en cours d'execution. Le balayage de decouverte de signaux necessite l'application de bureau.",
+      "startFailed": "Echec du demarrage du balayage",
+      "electronNotRunning": "L'application de bureau Electron n'est pas en cours d'execution."
+    },
+    "personas": {
+      "listFailed": "Echec de la liste des personas : %s",
+      "listError": "Erreur de liste des personas : %s"
+    }
+  },
+  "server": {
+    "unknownAuthEndpoint": "Point d'authentification inconnu",
+    "authServerUnreachable": "Serveur d'authentification inaccessible : %s",
+    "notFoundUseMcp": "Introuvable. Utilisez POST /mcp pour le protocole MCP.",
+    "missingSessionId": "Mcp-Session-Id manquant ou invalide. Envoyez d'abord initialize."
+  },
+  "guidedAgent": {
+    "welcome": {
+      "title": "Welcome to StratCraft",
+      "subtitle": "What would you like to do?"
+    },
+    "choices": {
+      "editStrategy": {
+        "title": "Edit a Strategy",
+        "description": "Create or modify C++ trading strategies"
+      },
+      "runBacktest": {
+        "title": "Run a Backtest",
+        "description": "Test strategies on historical data"
+      },
+      "signalDiscovery": {
+        "title": "Signal Discovery",
+        "description": "Train ML models to find alpha signals"
+      },
+      "viewScoreboard": {
+        "title": "View Scoreboard",
+        "description": "See ranked signals by performance"
+      },
+      "systemHealth": {
+        "title": "System Health",
+        "description": "Run diagnostics on data, sweep processes, and connectivity"
+      }
+    },
+    "badges": {
+      "strategies": "%s strategies",
+      "results": "%s results",
+      "trained": "%s trained",
+      "getStarted": "Get started",
+      "topSignals": "Top %s signals",
+      "empty": "Empty"
+    },
+    "errors": {
+      "notAuthenticated": "Not authenticated. Log in to enable natural language understanding.",
+      "llmIntentFailed": "LLM intent resolution failed",
+      "llmNoTaskId": "LLM intent resolution returned no task_id",
+      "llmPollFailed": "LLM status poll failed",
+      "llmTaskFailed": "LLM intent resolution task failed",
+      "llmTimedOut": "LLM intent resolution timed out"
+    },
+    "authRequired": {
+      "title": "Session expirée",
+      "message": "Votre session a expiré. Veuillez vous reconnecter."
+    },
+    "fallback": {
+      "title": "I can help with...",
+      "tryAsking": "Try asking things like...",
+      "noteHeading": "Note",
+      "nlHeading": "Natural Language",
+      "nlBody": "NL understanding requires the desktop app running. Start StratCraft to enable AI-powered intent resolution.",
+      "examples": {
+        "showScoreboard": "Show me the signal scoreboard",
+        "trainXgboost": "Train an XGBoost model on EURUSD",
+        "runBacktest": "Run a backtest on my strategy",
+        "checkSweep": "Check if a sweep is running",
+        "listProviders": "List available data providers",
+        "retryDownloads": "Retry failed downloads"
+      }
+    },
+    "diagnostics": {
+      "fxCalendarHolidays": "Validate FX 5/24 holiday exclusions",
+      "dukascopyFetchProbe": "Test Dukascopy data provider connectivity",
+      "tradingDayCoverage": "Verify parquet cache trading day coverage",
+      "downloadQueueHistory": "Query download queue history",
+      "sweepProcessStatus": "Check sweep process PID and state",
+      "rdagentProcessStatus": "Check RDAgent process and registry"
+    },
+    "actions": {
+      "queueDownload": "Enqueue a data download",
+      "retryFailed": "Re-enqueue ERROR-state downloads",
+      "getDownloadStatus": "Read download queue rows",
+      "deleteSegment": "Delete a cached data segment",
+      "importPackage": "Import a BYOD data package",
+      "startSweep": "Start a sweep grid",
+      "stopSweep": "Stop the running sweep",
+      "getSweepStatus": "Get current sweep session status",
+      "runSingleCell": "Train a single signal cell",
+      "getScoreboard": "Read signal scoreboard rankings",
+      "refreshScoreboard": "Force scoreboard re-computation",
+      "reRollupVerdict": "Re-compute statistical verdicts",
+      "refitArtifact": "Refit a signal artifact",
+      "listStrategies": "List saved strategies",
+      "generateStrategy": "Generate a strategy via LLM",
+      "runBacktest": "Run a backtest",
+      "getBacktestStatus": "Query backtest status/results",
+      "importRdagentFactors": "Import RDAgent-discovered factors",
+      "runFactorSweep": "Run factor sweep"
+    },
+    "diagrams": {
+      "gettingStarted": {
+        "title": "Getting Started",
+        "subtitle": "You have 0 strategies. Create your first one."
+      },
+      "createStrategy": {
+        "label": "Create Strategy",
+        "description": "Start here"
+      },
+      "builder": {
+        "label": "Builder",
+        "description": "Visual strategy editor"
+      },
+      "sigma": {
+        "label": "Sigma",
+        "description": "AI-guided generation"
+      },
+      "edges": {
+        "choose": "choose",
+        "or": "or",
+        "then": "then"
+      },
+      "yourSignals": {
+        "title": "Your Signals",
+        "subtitleTemplate": "%s trained signals. %s"
+      },
+      "topIcBadge": "Top IC: %s",
+      "entriesBadge": "%s entries",
+      "signalsLabel": "%s Signals",
+      "scoreboard": {
+        "label": "Scoreboard",
+        "description": "Ranked by performance"
+      },
+      "trainMore": {
+        "label": "Train More",
+        "description": "Add new signals"
+      },
+      "backtest": {
+        "label": "Backtest",
+        "description": "Test strategies",
+        "descriptionYour": "Test your strategy"
+      },
+      "sweepRunning": {
+        "titleTemplate": "%s Sweep Running",
+        "sweepLabel": "%s Sweep"
+      },
+      "viewProgress": {
+        "label": "View Progress"
+      },
+      "cancelSweep": {
+        "label": "Cancel Sweep"
+      },
+      "strategyComponents": {
+        "title": "Strategy Components",
+        "subtitle": "Missing %s structural component(s)"
+      },
+      "yourStrategyComponents": {
+        "label": "Your Strategy Components"
+      },
+      "componentLabels": {
+        "regimeDetector": "Add Regime Detector",
+        "regimeEntry": "Add Entry Signal",
+        "exitStrategy": "Add Exit Strategy"
+      },
+      "componentDescriptions": {
+        "regimeDetector": "Classify market regimes",
+        "regimeEntry": "Entry signals for regime mode",
+        "exitStrategy": "Risk management / exit rules"
+      },
+      "strategyComplete": {
+        "title": "Strategy Complete",
+        "subtitle": "All structural components present. %s strategies ready."
+      },
+      "signalDiscovery": {
+        "label": "Signal Discovery",
+        "description": "Train ML models"
+      },
+      "systemHealth": {
+        "label": "System Health",
+        "description": "Diagnostics and connectivity checks"
+      }
+    },
+    "wizards": {
+      "unknownWizard": {
+        "title": "Unknown Wizard",
+        "errorHeading": "Error",
+        "errorBody": "Unknown wizard: %s"
+      },
+      "selectTemplate": {
+        "title": "Select Template",
+        "description": "Choose an ML model or TA indicator to train.",
+        "fieldLabel": "Template"
+      },
+      "dataConfiguration": {
+        "title": "Data Configuration",
+        "description": "Configure data source for %s",
+        "universeLabel": "Universe",
+        "customSymbolsLabel": "Custom Symbols (only if Universe = Custom)",
+        "customSymbolsPlaceholder": "AAPL, MSFT, GOOGL",
+        "providerLabel": "Data Provider",
+        "timeframeLabel": "Timeframe"
+      },
+      "gridParameters": {
+        "title": "Grid Parameters",
+        "description": "Configure sweep grid for %s"
+      },
+      "confirmStart": {
+        "title": "Confirm & Start",
+        "description": "Review your sweep configuration and start training.",
+        "templateLabel": "Template",
+        "universeLabel": "Universe",
+        "providerLabel": "Provider",
+        "timeframeLabel": "Timeframe",
+        "lookbackLabel": "Lookback",
+        "lookbackValue": "%s bars"
+      },
+      "gridFields": {
+        "lookbackMin": "Lookback Min",
+        "lookbackMax": "Lookback Max",
+        "lookbackStep": "Lookback Step",
+        "statesMin": "States Min",
+        "statesMax": "States Max",
+        "rsiPeriod": "RSI Period",
+        "overbought": "Overbought",
+        "oversold": "Oversold",
+        "fastPeriod": "Fast Period",
+        "slowPeriod": "Slow Period",
+        "signalPeriod": "Signal Period",
+        "shortSma": "Short SMA",
+        "longSma": "Long SMA",
+        "lookback": "Lookback"
+      },
+      "templates": {
+        "xgboost": {
+          "label": "XGBoost",
+          "description": "Gradient boosted trees for return prediction"
+        },
+        "xgboostV2": {
+          "label": "XGBoost v2",
+          "description": "XGBoost with enriched features (momentum, vol, calendar)"
+        },
+        "xgboostV3": {
+          "label": "XGBoost v3",
+          "description": "XGBoost v3 OOS-regularized (horizon guard, feature selection, early stopping)"
+        },
+        "pytorchMlp": {
+          "label": "PyTorch MLP",
+          "description": "Multi-layer perceptron neural network"
+        },
+        "pytorchLstm": {
+          "label": "PyTorch LSTM",
+          "description": "LSTM recurrent network"
+        },
+        "ridge": {
+          "label": "Ridge Regression",
+          "description": "Ridge linear regression"
+        },
+        "hmmRegime": {
+          "label": "HMM Regime",
+          "description": "Hidden Markov Model regime detection"
+        },
+        "rsi": {
+          "label": "RSI",
+          "description": "Relative Strength Index signal"
+        },
+        "macd": {
+          "label": "MACD",
+          "description": "MACD crossover signal"
+        },
+        "smaCross": {
+          "label": "SMA Cross",
+          "description": "Simple Moving Average crossover"
+        },
+        "ngram": {
+          "label": "N-gram",
+          "description": "N-gram next-bar prediction"
+        }
+      },
+      "timeframes": {
+        "1m": "1 minute",
+        "5m": "5 minutes",
+        "15m": "15 minutes",
+        "30m": "30 minutes",
+        "1h": "1 hour",
+        "2h": "2 hours",
+        "4h": "4 hours",
+        "1d": "1 day",
+        "1w": "1 week",
+        "1M": "1 month"
+      },
+      "providers": {
+        "yfinance": {
+          "label": "Yahoo Finance",
+          "description": "Free, daily/intraday US equities"
+        },
+        "databento": {
+          "label": "Databento",
+          "description": "Paid, tick-level market data"
+        }
+      },
+      "universes": {
+        "sp500Top50": {
+          "label": "S&P 500 Top 50",
+          "description": "Top 50 US equities by market cap"
+        },
+        "g10Fx": {
+          "label": "G10 FX",
+          "description": "9 major currency pairs (EURUSD, USDJPY, GBPUSD, ...)"
+        },
+        "cryptoTop50": {
+          "label": "Crypto Top 50",
+          "description": "Top crypto assets"
+        },
+        "usSectorEtfs": {
+          "label": "US Sector ETFs",
+          "description": "11 SPDR sector ETFs (XLK, XLF, ...)"
+        },
+        "custom": {
+          "label": "Custom Symbols",
+          "description": "Enter your own symbol list"
+        }
+      }
+    },
+    "types": {
+      "groups": {
+        "regimeMode": "REGIME MODE",
+        "traderMode": "TRADER MODE",
+        "autopilotMode": "AUTOPILOT MODE",
+        "chatMode": "CHAT MODE",
+        "riskManager": "RISK MANAGER",
+        "catalogMode": "CATALOG MODE"
+      },
+      "componentLabels": {
+        "regimeDetector": "Regime Detector",
+        "entry": "Entry",
+        "marketObserver": "Market Observer",
+        "aiLibero": "AI Libero",
+        "strategyStudio": "Strategy Studio",
+        "exit": "Exit",
+        "strategyCatalog": "Strategy Catalog"
+      }
+    }
+  }
+}

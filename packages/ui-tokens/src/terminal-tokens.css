@@ -1,0 +1,108 @@
+/**
+ * Professional Terminal Design Tokens (StratCraft)
+ * 
+ * Theme: StratCraftsAI (Blue/Gold High-Tech)
+ * Palette: Deep Navy, Tech Blue, Amber Gold
+ */
+
+:root {
+  /* High-Density Spacing */
+  --terminal-spacing-xxs: 2px;
+  --terminal-spacing-xs: 4px;
+  --terminal-spacing-sm: 8px;
+  --terminal-spacing-md: 12px;
+  --terminal-spacing-lg: 16px;
+  --terminal-spacing-xl: 24px;
+
+  /* Layout Constants */
+  --terminal-header-height: 40px;
+  --terminal-sidebar-width-min: 240px;
+  --terminal-sidebar-width-max: 400px;
+  --terminal-statusbar-height: 24px;
+
+  /* Specialized Typography */
+  --terminal-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --terminal-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --terminal-font-size-xs: 12px;
+  --terminal-font-size-sm: 12px;
+  --terminal-font-size-base: 12px;
+  --terminal-font-size-lg: 14px;
+
+  /* Component Density */
+  --terminal-row-height-compact: 24px;
+  --terminal-row-height-normal: 32px;
+  
+  /* Color Palette (StratCraftsAI Edition) */
+  --color-terminal-bg: #0B1121;           /* Deep Navy Background */
+  --color-terminal-panel: #151E32;        /* Tech Blue Panel Bg */
+  --color-terminal-accent-gold: #F59E0B;  /* Primary Accent (Amber-500) */
+  --color-terminal-accent-teal: #10B981;  /* Success/Active (Emerald-500) */
+  --color-terminal-accent-red: #EF4444;   /* Error/Risk (Red-500) */
+  --color-terminal-text-primary: #F8FAFC; /* Slate-50 (Bright White) */
+  --color-terminal-text-secondary: #94A3B8; /* Slate-400 (Muted) */
+  --color-terminal-text-muted: #475569;   /* Slate-600 (Dimmed) */
+  --color-terminal-border: #1E293B;       /* Slate-800 (Subtle Border) */
+
+  /* Nexus Specific Colors */
+  --color-nexus-gold: #F59E0B;
+  --color-nexus-blue: #3B82F6;
+  --color-nexus-teal: #10B981;
+
+  /* Status Colors (Semantic) */
+  --color-status-success: var(--color-terminal-accent-teal);
+  --color-status-warning: var(--color-terminal-accent-gold);
+  --color-status-error: var(--color-terminal-accent-red);
+  --color-status-info: #3B82F6;           /* Blue-500 */
+  --color-status-neutral: var(--color-terminal-text-secondary);
+
+  /* Data Visualization Colors */
+  --color-chart-primary: var(--color-terminal-accent-gold);
+  --color-chart-secondary: #3B82F6;       /* Blue */
+  --color-chart-tertiary: #10B981;        /* Teal */
+  --color-chart-quaternary: #8B5CF6;      /* Violet */
+
+  /* Interactive State Colors */
+  --color-interactive-hover: rgba(59, 130, 246, 0.1);
+  --color-interactive-active: rgba(59, 130, 246, 0.2);
+  --color-interactive-focus: rgba(245, 158, 11, 0.3);
+
+  /* Depth Layer Shadows (Glow Effects) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.7);
+  --shadow-glow-gold: 0 0 15px rgba(245, 158, 11, 0.15);
+  --shadow-glow-blue: 0 0 15px rgba(59, 130, 246, 0.15);
+  --shadow-panel: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+
+  /* Typography Scale */
+  --font-size-micro: 12px;
+  --font-size-tiny: 12px;
+  --font-size-small: 12px;
+  --font-size-base: 12px;
+  --font-size-large: 15px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 32px;
+
+  /* Transition Standards */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Terminal Layer */
+.terminal-theme {
+  font-family: var(--terminal-font-sans);
+  font-size: var(--terminal-font-size-base);
+  background: var(--color-terminal-bg);
+  color: var(--color-terminal-text-primary);
+}
+
+.terminal-mono {
+  font-family: var(--terminal-font-mono);
+}
+
+.terminal-compact-text {
+  font-size: var(--terminal-font-size-sm);
+  line-height: 1.2;
+}

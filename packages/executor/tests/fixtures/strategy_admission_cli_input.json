@@ -1,0 +1,12 @@
+{
+  "diagnosticVersion": 1,
+  "code": "#include <stratforge/strategy/strategy.hpp>\n#include <qnx_strategy_sdk/qnx_strategy_sdk.hpp>\n\nclass MyStrategy : public stratforge::Strategy {\npublic:\n    void init() override {}\n    void next() override {\n        double c = data().close()[0];\n        (void)c;\n    }\n};\n\nQNX_STRATEGY_FACTORY_EXPORT(MyStrategy)\n",
+  "signalSource": "indicator_detector_trend",
+  "checks": {
+    "prohibitedConstructs": true,
+    "structural": true,
+    "syntax": false,
+    "warnings": false,
+    "abiExport": false
+  }
+}

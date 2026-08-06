@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-07-22",
+  "sourceCommit": "3e4a213059f036236a3268b6ef4c7353f51426ec",
+  "baselines": [
+    {
+      "id": "ts-semantic-fixtures",
+      "candidates": ["MC-01", "MC-02", "MC-03", "MC-04", "MC-07", "MC-11", "MC-14"],
+      "kind": "local-semantic",
+      "command": "pnpm --filter @StratCraft/desktop rebuild better-sqlite3 && pnpm --filter @StratCraft/desktop exec vitest run src/main/services/signal-discovery/__tests__/statistical-filters.test.ts src/main/services/signal-discovery/__tests__/family-bh.test.ts src/main/services/signal-discovery/__tests__/factor-canonical-adapter.test.ts src/main/services/signal-discovery/__tests__/hypothesis-canonical-adapter.test.ts src/main/services/signal-discovery/__tests__/factor-portfolio-backtest.unit.test.ts src/main/services/signal-discovery/__tests__/firm-portfolio-aggregator.test.ts src/main/services/signal-discovery/__tests__/data-snapshot-spec.test.ts src/main/services/signal-discovery/__tests__/signal-correlation-checker.test.ts src/main/services/signal-discovery/__tests__/signal-clustering-gate.987.test.ts src/main/services/signal-discovery/__tests__/eval-parquet-writer.test.ts",
+      "evidence": "measurements/local-semantic-baseline.md",
+      "status": "passed",
+      "productionEvidenceRequired": true
+    },
+    {
+      "id": "python-semantic-fixtures",
+      "candidates": ["MC-05", "MC-06", "MC-07", "MC-08", "MC-13", "MC-17"],
+      "kind": "local-semantic",
+      "command": "python -m pytest -q packages/nona-algorithm/tests/scoreboard/test_compute_scores.py packages/nona-algorithm/tests/scoreboard/test_score_one.py packages/nona-algorithm/tests/scoreboard/test_score_alt_one.py packages/nona-algorithm/tests/io/test_ohlcv_parquet_contract.py packages/nona-algorithm/tests/storage/test_eval_parquet_writer.py packages/nona-algorithm/tests/promotion/test_gates.py packages/nona-algorithm/tests/promotion/test_evaluator.py packages/nona-algorithm/tests/signal_sweep/test_factor_eval_fallback.py",
+      "evidence": "measurements/local-semantic-baseline.md",
+      "status": "passed",
+      "productionEvidenceRequired": true
+    },
+    {
+      "id": "cpp-semantic-fixtures",
+      "candidates": ["MC-01", "MC-03", "MC-04", "MC-07", "MC-08", "MC-13", "MC-14"],
+      "kind": "local-semantic",
+      "command": "ctest --test-dir packages/executor/build --output-on-failure -R '^(test_signal_fusion_math|test_onnx_artifact_loader|test_factor_meta_schema|test_factor_eval_config|test_factor_eval_rsi_golden|test_factor_eval_sma_golden|test_factor_eval_reducers_golden|test_factor_eval_s8_result_json|test_factor_eval_universe|test_factor_eval_reducers_composite_golden)$'",
+      "evidence": "measurements/local-semantic-baseline.md",
+      "status": "passed",
+      "productionEvidenceRequired": true
+    },
+    {
+      "id": "static-boundary-freeze",
+      "candidates": ["MC-09", "MC-10", "MC-12", "MC-15", "MC-16", "MC-18", "MC-19", "MC-20"],
+      "kind": "static-contract",
+      "command": "node scripts/ci/modern-cpp-boundary-audit.mjs",
+      "evidence": "approved-boundaries.json",
+      "status": "passed",
+      "productionEvidenceRequired": true
+    },
+    {
+      "id": "production-observations-20260723",
+      "candidates": ["MC-01", "MC-02", "MC-03", "MC-04", "MC-05", "MC-06", "MC-07", "MC-08", "MC-09", "MC-10", "MC-11", "MC-12", "MC-13", "MC-14", "MC-15", "MC-18", "MC-20"],
+      "kind": "production-observation",
+      "command": "See measurements/production-observations-20260723.md for isolated commands and read-only live-run evidence.",
+      "evidence": "measurements/production-observations-20260723.md",
+      "status": "passed-with-findings",
+      "productionEvidenceRequired": false
+    },
+    {
+      "id": "mc-21-pre-migration-data-plane-observation",
+      "candidates": ["MC-21"],
+      "kind": "production-observation",
+      "command": "See measurements/mc-21-pre-migration-data-plane-decision.md for read-only production-log evidence and isolated production-owner replay commands.",
+      "evidence": "measurements/mc-21-pre-migration-data-plane-decision.md",
+      "status": "passed-with-explicit-live-gaps",
+      "productionEvidenceRequired": false
+    },
+    {
+      "id": "accepted-migrations-post-migration-20260726",
+      "candidates": ["MC-01", "MC-02", "MC-03", "MC-04", "MC-05", "MC-06", "MC-08", "MC-09", "MC-10", "MC-11", "MC-12", "MC-13", "MC-14", "MC-17", "MC-21"],
+      "kind": "migration-acceptance",
+      "evidenceType": "post-migration-representative",
+      "command": "Run the candidate-specific focused commands recorded in the evidence index.",
+      "evidence": "measurements/migration-acceptance-20260726.md",
+      "status": "passed-local-live-pending"
+    },
+    {
+      "id": "mc-17-pre-migration-process-comparison",
+      "candidates": ["MC-17"],
+      "kind": "migration-acceptance",
+      "evidenceType": "pre-migration-observation",
+      "command": "See measurements/mc-17-phase-e-portable-classical-decision.md for the incumbent Python and candidate C++ process measurements.",
+      "evidence": "measurements/mc-17-phase-e-portable-classical-decision.md",
+      "status": "passed-local-live-pending"
+    },
+    {
+      "id": "accepted-migrations-removal-20260726",
+      "candidates": ["MC-01", "MC-02", "MC-03", "MC-04", "MC-05", "MC-06", "MC-08", "MC-09", "MC-10", "MC-11", "MC-12", "MC-13", "MC-14", "MC-17", "MC-21"],
+      "kind": "migration-acceptance",
+      "evidenceType": "removal",
+      "command": "Run the candidate-specific ownership and superseded-path checks recorded in the evidence index.",
+      "evidence": "measurements/migration-acceptance-20260726.md",
+      "status": "passed-local-live-pending"
+    },
+    {
+      "id": "accepted-migrations-default-path-20260726",
+      "candidates": ["MC-01", "MC-02", "MC-03", "MC-04", "MC-05", "MC-06", "MC-08", "MC-09", "MC-10", "MC-11", "MC-12", "MC-13", "MC-14", "MC-17", "MC-21"],
+      "kind": "migration-acceptance",
+      "evidenceType": "default-path",
+      "command": "Run the candidate-specific default-owner and failure-propagation checks recorded in the evidence index.",
+      "evidence": "measurements/migration-acceptance-20260726.md",
+      "status": "passed-local-live-pending"
+    }
+  ],
+  "trackedGaps": []
+}

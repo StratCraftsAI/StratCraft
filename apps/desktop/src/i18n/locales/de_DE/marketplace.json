@@ -1,0 +1,192 @@
+{
+  "title": "Plugin Marketplace",
+  "subtitle": "Discover and install community plugins",
+  "search": {
+    "placeholder": "Search plugins...",
+    "noResults": "No plugins found"
+  },
+  "filters": {
+    "all": "All",
+    "installed": "Installed",
+    "updates": "Updates Available",
+    "category": "Category"
+  },
+  "categories": {
+    "all": "All",
+    "visualization": "Visualization",
+    "indicators": "Indicators",
+    "trading": "Trading",
+    "data": "Data",
+    "ai": "AI",
+    "tools": "Tools",
+    "strategy": "Strategy",
+    "analysis": "Analysis",
+    "integration": "Integration"
+  },
+  "sort": {
+    "mostDownloads": "Most Downloads",
+    "mostStars": "Most Stars",
+    "recentlyUpdated": "Recently Updated",
+    "name": "Name"
+  },
+  "plugin": {
+    "install": "Install",
+    "uninstall": "Uninstall",
+    "update": "Update",
+    "enable": "Enable",
+    "disable": "Disable",
+    "settings": "Settings",
+    "installed": "Installed",
+    "notInstalled": "Not Installed",
+    "version": "Version",
+    "author": "Author",
+    "downloads": "Downloads",
+    "lastUpdated": "Last Updated",
+    "purchase": "Purchase",
+    "enterLicense": "Enter License Key",
+    "licenseExpired": "License Expired",
+    "licenseActive": "License Active",
+    "owned": "Owned"
+  },
+  "results": {
+    "showing": "Showing {{count}} plugin",
+    "showingPlural": "Showing {{count}} plugins"
+  },
+  "install": {
+    "title": "Install Plugin",
+    "installingPlugin": "Installing Plugin",
+    "installing": "Installing \"{{name}}\"",
+    "installQuestion": "Install \"{{name}}\"?",
+    "confirm": "Are you sure you want to install this plugin?",
+    "progress": "Installing...",
+    "success": "Plugin installed successfully",
+    "successMessage": "Plugin installed successfully!",
+    "activateHint": "You can now activate the plugin from the Plugins panel.",
+    "error": "Failed to install plugin",
+    "errorMessage": "Installation failed",
+    "cancel": "Cancel",
+    "installAnyway": "Install Anyway",
+    "phases": {
+      "downloading": "Paket wird heruntergeladen",
+      "verifying": "Signatur wird verifiziert",
+      "validating": "Berechtigungen werden validiert",
+      "extracting": "Dateien werden entpackt",
+      "copying": "Dateien werden kopiert",
+      "registering": "Plugin wird registriert",
+      "initializing": "Initialisierung",
+      "complete": "Installation abgeschlossen",
+      "resolving_dependencies": "Abhaengigkeiten werden aufgeloest",
+      "installing_python_deps": "Python-Abhaengigkeiten werden installiert",
+      "finalizing": "Abschluss",
+      "error": "Fehler"
+    },
+    "header": {
+      "complete": "Installation abgeschlossen",
+      "failed": "Installation fehlgeschlagen",
+      "installing": "\"{{name}}\" wird installiert"
+    },
+    "buttons": {
+      "cancel": "Abbrechen",
+      "close": "Schliessen"
+    },
+    "permissions": {
+      "title": "This plugin requests:",
+      "network": "Network access",
+      "networkDetail": "External APIs",
+      "filesystem": "File system access",
+      "filesystemNone": "None",
+      "filesystemPlugin": "Plugin directory only",
+      "filesystemUser": "User data directory",
+      "filesystemUnknown": "Unknown",
+      "native": "Native modules",
+      "nativeDetail": "Compiled extensions"
+    },
+    "author": {
+      "unverified": "(unverified)"
+    },
+    "warning": {
+      "riskyPermissions": "This plugin requests elevated permissions. Only install if you trust the author."
+    },
+    "progress": {
+      "validatingManifest": "Plugin-Manifest wird validiert...",
+      "verifyingBinary": "Native Binaerdatei wird ueberprueft...",
+      "binaryVerified": "Native Binaerdatei verifiziert",
+      "copyingFiles": "Plugin-Dateien werden kopiert...",
+      "registeringPlugin": "Plugin wird registriert...",
+      "installationComplete": "Installation abgeschlossen"
+    }
+  },
+  "uninstall": {
+    "title": "Uninstall Plugin",
+    "confirm": "Are you sure you want to uninstall this plugin?",
+    "success": "Plugin uninstalled successfully",
+    "error": "Failed to uninstall plugin"
+  },
+  "detail": {
+    "by": "by",
+    "description": "Description",
+    "repository": "Repository",
+    "permissions": "Permissions",
+    "networkAccess": "Network Access",
+    "fileSystem": "File System",
+    "nativeModules": "Native Modules",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "pythonDependencies": "Python Dependencies",
+    "changelog": "Changelog",
+    "installedVersion": "Installed: v{{version}}",
+    "updateAvailable": "(Update available: v{{version}})",
+    "updateTo": "Update to v{{version}}",
+    "yes": "Yes",
+    "no": "No",
+    "done": "Done"
+  },
+  "noPlugins": {
+    "title": "Keine Plugins gefunden",
+    "hint": "Versuchen Sie, Ihre Suche oder Filter anzupassen"
+  },
+  "permissionValue": {
+    "enabled": "Aktiviert",
+    "disabled": "Deaktiviert",
+    "yes": "Ja",
+    "no": "Nein"
+  },
+  "license": {
+    "title": "Enter License Key",
+    "keyLabel": "License Key",
+    "keyPlaceholder": "Enter your license key...",
+    "activate": "Activate",
+    "validating": "Validating...",
+    "noPurchaseLink": "Don't have a key? Purchase one",
+    "activated": "License key activated successfully",
+    "removed": "License key removed",
+    "invalid": "Invalid license key",
+    "expired": "License key has expired",
+    "error": "License validation failed"
+  },
+  "pricing": {
+    "title": "Pricing",
+    "price": "Price",
+    "type": "Billing",
+    "paid": "Paid",
+    "one-time": "One-time payment",
+    "monthly": "Monthly subscription",
+    "yearly": "Yearly subscription"
+  },
+  "lifecycle": {
+    "creatingStrategyDirs": "Strategie-Verzeichnisse werden erstellt...",
+    "initializingDatabase": "Datenbank wird initialisiert...",
+    "creatingDefaultTemplates": "Standardvorlagen werden erstellt...",
+    "templateIndicatorDesc": "Strategievorlage mit technischen Indikatoren",
+    "creatingConfiguration": "Konfiguration wird erstellt...",
+    "installationComplete": "Installation abgeschlossen",
+    "checkingUpgradeRequirements": "Upgrade-Anforderungen werden geprueft...",
+    "migratingDatabaseToV2": "Datenbankschema wird auf v2.0 migriert...",
+    "updatingConfiguration": "Konfiguration wird aktualisiert...",
+    "creatingNewDirectories": "Neue Verzeichnisse werden erstellt...",
+    "upgradeComplete": "Upgrade abgeschlossen",
+    "checkingConfiguration": "Konfiguration wird geprueft...",
+    "creatingBacktestDirs": "Backtest-Verzeichnisse werden erstellt...",
+    "updatingDatabaseSchema": "Datenbankschema wird aktualisiert..."
+  }
+}

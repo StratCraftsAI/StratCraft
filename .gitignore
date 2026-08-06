@@ -1,0 +1,204 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# pixi materialised env (TICKET_1289 F4 -- only pixi.toml + pixi.lock are tracked)
+.pixi/
+
+# Build outputs
+dist/
+build/
+.build-cache/
+!apps/desktop/build/
+apps/desktop/build/*
+!apps/desktop/build/icon-1024x1024.png
+!apps/desktop/build/icons/
+!apps/desktop/build/icons/*.png
+out/
+release/
+*.tsbuildinfo
+
+# TypeScript build outputs in source directories (from plugin builds)
+apps/desktop/src/shared/types/**/*.d.ts
+apps/desktop/src/shared/types/**/*.js
+apps/desktop/src/shared/types/**/*.js.map
+apps/desktop/src/shared/types/**/*.d.ts.map
+packages/types/src/**/*.d.ts
+packages/types/src/**/*.js
+packages/types/src/**/*.js.map
+packages/types/src/**/*.d.ts.map
+
+# Turbo cache
+.turbo/
+
+# V3 Executor build artifacts
+packages/executor/build/
+packages/executor/vcpkg_installed/
+packages/research-kernels/vcpkg_installed/
+packages/executor/CMakeFiles/
+packages/executor/CMakeCache.txt
+packages/executor/cmake_install.cmake
+packages/executor/compile_commands.json
+
+# TICKET_196_7_6_2: factor_eval dispatch table is generated at build time
+# from packages/builder-templates/framework/factor_engines/talib_cpp_crosswalk.json
+# by packages/builder-templates/scripts/generate_factor_dispatch.py (added in S4).
+packages/executor/src/factor_eval/dispatch_generated.cpp
+
+# TICKET_196_7_6_3 Slice S4: factor_talib_<factor_id> template_id list,
+# emitted alongside dispatch_generated.cpp by the same generator. Consumed by
+# FactorArtifactLoader::register_factories() (Slice S5) via #include.
+packages/executor/include/quantnexus/executor/signal/factor_talib_template_ids_generated.hpp
+
+# TICKET_1337: agent runtime manifest resolved from source template at build time
+apps/desktop/src/mcp/standalone/src/agent/runtime/agent-runtime-compatibility-manifest.generated.json
+packages/agent-runtime-release/src/release-identity.generated.ts
+apps/desktop/resources/agent-runtime/compatibility-manifest.json
+apps/desktop/resources/agent-runtime/THIRD_PARTY_NOTICES.spdx.json
+apps/desktop/resources/agent-runtime/release-inventory.json
+
+# Electron
+apps/desktop/dist/
+apps/desktop/release/
+apps/desktop/out/
+
+# Plugin builds
+plugins/*/dist/
+plugins/*/node_modules/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+*.log.gz
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime log directories (electron-log rotation + C++ log channels)
+apps/desktop/logs/
+apps/desktop/src/main/database/logs/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Sensitive files (CRITICAL - never commit)
+*.enc
+*.key
+*.pem
+*.p12
+*.pfx
+credentials*
+secrets*
+*_secret*
+*.credential*
+
+# Test coverage
+coverage/
+.nyc_output/
+.coverage
+.coverage.*
+htmlcov/
+
+# Temp files
+*.tmp
+*.temp
+.cache/
+tmp/
+.plan
+
+# Images (screenshots)
+image*.png
+image*.jpg
+*.txt
+!CMakeLists.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.egg-info/
+.eggs/
+venv/
+.venv/
+
+# Sweep runner (only source .py/.yaml/.toml is committed)
+packages/sweep-runner/data/
+packages/sweep-runner/dist/
+packages/sweep-runner/results/
+packages/sweep-runner/logs/
+packages/sweep-runner/manifests/
+packages/sweep-runner/*.whl
+
+test/
+tools/
+/data/
+newhome/
+images-source/
+# Core dumps
+core
+core.*
+# The bare core-dump pattern above also matches directories named "core";
+# re-include the SDK core package explicitly.
+!packages/sdk/core/
+
+# Private docs (competitive analysis, internal notes)
+docs/private/
+docs/local/
+
+# Internal release compliance records
+.internal/
+docs/design/NONABT_TICKET_010_2_BUNDLED_COMPILER_FEASIBILITY.md
+docs/design/OS_INSTALLER_LLM_001_COMPILED_PLUGIN_INSTALLER_LLM_BUILD_DOCTOR.md
+
+# TICKET_439: Proprietary code excluded from Open Core public repo
+apps/server/
+
+# Runtime artifacts
+apps/desktop/data/api-port
+apps/desktop/data/api-token
+# TICKET_1334: the Service API runtime-role claim, written next to the two
+# discovery files above and released on shutdown. Same class of per-machine
+# runtime artifact -- it records a live pid, so a committed copy is meaningless
+# to any other checkout and looks like a stale claim to the reaper.
+apps/desktop/data/api-runtime.lock
+apps/desktop/data/oauth-token
+apps/desktop/logs/*.backup
+
+# Database files (SQLite runtime: db, WAL journal, shared-memory, backups)
+apps/desktop/data/*.db
+apps/desktop/data/*.db-shm
+apps/desktop/data/*.db-wal
+apps/desktop/data/*.db.backup.*
+apps/desktop/data/*.db.bak.*
+apps/desktop/data/*.db.*.bak
+apps/desktop/data/*.db.corrupt.*
+apps/desktop/data/*.db.corrupt.*-shm
+apps/desktop/data/*.db.corrupt.*-wal
+apps/desktop/data/*.db.pre-purge*
+apps/desktop/data/*.db.pre_*
+apps/desktop/data/backups/
+
+# CatBoost training byproducts (catboost_info/) -- never commit
+catboost_info/
+
+# TICKET_1303_1_10: Playwright per-run artifacts. Kept OUT of test-results/,
+# which holds committed P8/P9 acceptance evidence Playwright would clear.
+apps/desktop/playwright-artifacts/
+
+# TICKET_1340 audit scan artifacts (HTML/JSON reports); the .md analyses are tracked
+reports/*
+!reports/*.md

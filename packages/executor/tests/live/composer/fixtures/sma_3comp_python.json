@@ -1,0 +1,40 @@
+{
+  "strategyId": "fixture-sma-3comp-0001-py",
+  "symbol": "BTC/USDT",
+  "timeframe": "1m",
+  "components": [
+    {
+      "role": "analysis",
+      "algorithmId": "sma-analysis",
+      "algorithmName": "SmaAnalysis",
+      "algorithmCode": "# Analysis is fused into SmaCombined below -- composeSavedStrategyCerebro\n# only wires bt.Strategy hooks for the entry wrapper, so a separate analysis\n# Strategy could not share state with entry/exit. TICKET_794 Phase 2 finding:\n# the Python composition model needs a single combined bt.Strategy. This\n# component is kept for compose-script schema parity but emits no code.\nclass SmaAnalysis(bt.Strategy):\n    def __init__(self, state_manager=None):\n        self.state_manager = state_manager\n    def next(self):\n        pass\n",
+      "baseClass": "AnalysisBase",
+      "timeframe": "1m",
+      "parameters": "{\"period\": 20}",
+      "sortOrder": 0
+    },
+    {
+      "role": "entry",
+      "algorithmId": "sma-combined-entry",
+      "algorithmName": "SmaCombined",
+      "algorithmCode": "class SmaCombined(bt.Strategy):\n    # Combined analysis + entry + exit so position state is shared. Mirrors\n    # the C++ composer's ComposedLiveStrategy semantics (analysis populates\n    # ctx, entry edge-fires, exit closes after hold_bars).\n    params = (('period', 20), ('hold_bars', 5))\n\n    def __init__(self, state_manager=None):\n        self.state_manager = state_manager\n        self.sma = bt.indicators.SimpleMovingAverage(self.data.close, period=self.params.period)\n        self.order = None\n        self.prev_above = False\n        self.entry_bar = None\n\n    def next(self):\n        if len(self.sma) < self.params.period:\n            return\n        above = self.data.close[0] > self.sma[0]\n        if self.order is not None:\n            self.prev_above = above\n            return\n        if not self.position:\n            if above and not self.prev_above:\n                self.order = self.buy(size=1)\n        else:\n            if self.entry_bar is not None and (len(self) - self.entry_bar) >= self.params.hold_bars:\n                self.order = self.sell(size=self.position.size)\n        self.prev_above = above\n\n    def notify_order(self, order):\n        if order.status == order.Completed:\n            if order.isbuy():\n                self.entry_bar = len(self)\n            else:\n                self.entry_bar = None\n            self.order = None\n        elif order.status in (order.Canceled, order.Rejected, order.Margin):\n            self.order = None\n",
+      "baseClass": "EntryBase",
+      "timeframe": "1m",
+      "parameters": "{}",
+      "sortOrder": 1
+    },
+    {
+      "role": "exit",
+      "algorithmId": "n-bar-exit",
+      "algorithmName": "NBarExit",
+      "algorithmCode": "# Exit logic is fused into SmaCombined above for the reason explained on\n# SmaAnalysis. This stub exists so the composer schema (3 components) is\n# satisfied and exercises composeSavedStrategyCerebro's exit-branch code.\nclass NBarExit(bt.Strategy):\n    def __init__(self, state_manager=None):\n        self.state_manager = state_manager\n    def next(self):\n        pass\n",
+      "baseClass": "ExitBase",
+      "timeframe": "1m",
+      "parameters": "{\"hold_bars\": 5}",
+      "sortOrder": 2
+    }
+  ],
+  "compilerPath": null,
+  "cppHardening": false,
+  "stratforgeVersion": "0.1.0"
+}

@@ -1,0 +1,204 @@
+[
+  {
+    "id": "public_7_standard",
+    "name": "7 Indicators Standard",
+    "description": "Standard configuration with 7 core technical indicators for comprehensive market analysis",
+    "category": "standard",
+    "indicators": [
+      {
+        "id": "ind_1",
+        "indicatorSlug": "RSI",
+        "field": "close",
+        "paramValues": { "period": 14 }
+      },
+      {
+        "id": "ind_2",
+        "indicatorSlug": "MACD",
+        "field": "close",
+        "paramValues": { "period_me1": 12, "period_me2": 26, "period_signal": 9 }
+      },
+      {
+        "id": "ind_3",
+        "indicatorSlug": "SMA",
+        "field": "close",
+        "paramValues": { "period": 20 }
+      },
+      {
+        "id": "ind_4",
+        "indicatorSlug": "EMA",
+        "field": "close",
+        "paramValues": { "period": 50 }
+      },
+      {
+        "id": "ind_5",
+        "indicatorSlug": "BBANDS",
+        "field": "close",
+        "paramValues": { "period": 20, "devfactor": 2.0 }
+      },
+      {
+        "id": "ind_6",
+        "indicatorSlug": "ATR",
+        "field": "close",
+        "paramValues": { "period": 14 }
+      },
+      {
+        "id": "ind_7",
+        "indicatorSlug": "STOCH",
+        "field": "close",
+        "paramValues": { "period": 14, "period_dfast": 3, "period_dslow": 3 }
+      }
+    ]
+  },
+  {
+    "id": "public_momentum",
+    "name": "Momentum Indicators",
+    "description": "Momentum-focused indicators for identifying trend strength and potential reversals",
+    "category": "momentum",
+    "indicators": [
+      {
+        "id": "ind_1",
+        "indicatorSlug": "RSI",
+        "field": "close",
+        "paramValues": { "period": 14 }
+      },
+      {
+        "id": "ind_2",
+        "indicatorSlug": "MACD",
+        "field": "close",
+        "paramValues": { "period_me1": 12, "period_me2": 26, "period_signal": 9 }
+      },
+      {
+        "id": "ind_3",
+        "indicatorSlug": "STOCH",
+        "field": "close",
+        "paramValues": { "period": 14, "period_dfast": 3, "period_dslow": 3 }
+      },
+      {
+        "id": "ind_4",
+        "indicatorSlug": "CCI",
+        "field": "close",
+        "paramValues": { "period": 20 }
+      },
+      {
+        "id": "ind_5",
+        "indicatorSlug": "WILLR",
+        "field": "close",
+        "paramValues": { "period": 14 }
+      },
+      {
+        "id": "ind_6",
+        "indicatorSlug": "MFI",
+        "field": "close",
+        "paramValues": { "period": 14 }
+      }
+    ]
+  },
+  {
+    "id": "public_trend",
+    "name": "Trend Following Indicators",
+    "description": "Trend-following indicators for identifying and riding market trends",
+    "category": "trend",
+    "indicators": [
+      {
+        "id": "ind_1",
+        "indicatorSlug": "SMA",
+        "field": "close",
+        "paramValues": { "period": 20 }
+      },
+      {
+        "id": "ind_2",
+        "indicatorSlug": "SMA",
+        "field": "close",
+        "paramValues": { "period": 50 }
+      },
+      {
+        "id": "ind_3",
+        "indicatorSlug": "EMA",
+        "field": "close",
+        "paramValues": { "period": 12 }
+      },
+      {
+        "id": "ind_4",
+        "indicatorSlug": "EMA",
+        "field": "close",
+        "paramValues": { "period": 26 }
+      },
+      {
+        "id": "ind_5",
+        "indicatorSlug": "ADX",
+        "field": "close",
+        "paramValues": { "period": 14 }
+      },
+      {
+        "id": "ind_6",
+        "indicatorSlug": "PSAR",
+        "field": "close",
+        "paramValues": { "period": 2, "af": 0.02, "afmax": 0.2 }
+      }
+    ]
+  },
+  {
+    "id": "public_volatility",
+    "name": "Volatility Indicators",
+    "description": "Volatility-focused indicators for measuring market uncertainty and range",
+    "category": "volatility",
+    "indicators": [
+      {
+        "id": "ind_1",
+        "indicatorSlug": "ATR",
+        "field": "close",
+        "paramValues": { "period": 14 }
+      },
+      {
+        "id": "ind_2",
+        "indicatorSlug": "BBANDS",
+        "field": "close",
+        "paramValues": { "period": 20, "devfactor": 2.0 }
+      },
+      {
+        "id": "ind_3",
+        "indicatorSlug": "STDDEV",
+        "field": "close",
+        "paramValues": { "period": 20 }
+      },
+      {
+        "id": "ind_4",
+        "indicatorSlug": "NATR",
+        "field": "close",
+        "paramValues": { "period": 14 }
+      }
+    ]
+  },
+  {
+    "id": "public_volume",
+    "name": "Volume Indicators",
+    "description": "Volume-based indicators for confirming price movements",
+    "category": "volume",
+    "indicators": [
+      {
+        "id": "ind_1",
+        "indicatorSlug": "OBV",
+        "field": "close",
+        "paramValues": {}
+      },
+      {
+        "id": "ind_2",
+        "indicatorSlug": "MFI",
+        "field": "close",
+        "paramValues": { "period": 14 }
+      },
+      {
+        "id": "ind_3",
+        "indicatorSlug": "ADOSC",
+        "field": "close",
+        "paramValues": { "period_fast": 3, "period_slow": 10 }
+      },
+      {
+        "id": "ind_4",
+        "indicatorSlug": "VWAP",
+        "field": "close",
+        "paramValues": {}
+      }
+    ]
+  }
+]

@@ -1,0 +1,819 @@
+{
+  "tools": {
+    "get_config": {
+      "description": "读取类型化的用户可见系统配置，不开放内部架构、配置覆盖、模块或任意路径访问。",
+      "params": { "keys": "可选的白名单配置键；省略时返回全部用户可见配置。" }
+    },
+    "set_config": {
+      "description": "原子更新一个类型化白名单系统配置字段，并报告是否需要重启应用。",
+      "params": { "change": "恰好一个类型化白名单配置变更。" }
+    },
+    "reload_config": { "description": "请求正在运行的桌面运行时重新加载系统配置，并返回权威健康结果。" },
+    "get_config_health": { "description": "获取桌面运行时的配置健康状态和最后正常状态。" },
+    "get_machine_info": { "description": "通过实时运行时容量来源探测 CPU、内存、交换空间及当前可用量。" },
+    "validate_config": { "description": "验证全部类型化用户配置字段及跨字段资源上限约束。" },
+    "backup_database": { "description": "通过正在运行的桌面数据库所有者创建一致的 SQLite 备份。" },
+    "list_database_backups": { "description": "列出桌面数据库所有者可用的数据库备份。" },
+    "restore_database": {
+      "description": "验证数据库备份并暂存，以便下次应用数据库启动前原子恢复；需要重启所有应用数据库进程。",
+      "params": {
+        "backup_filename": "list_database_backups 返回的备份文件名；拒绝任意文件系统路径。",
+        "confirm": "必须为 true 才能确认暂存此破坏性恢复操作。"
+      }
+    },
+    "set_provider_defaults": {
+      "description": "为受支持的市场域设置或清除经过验证的默认数据提供商。共享值会同步显示在桌面设置和 Tool Sweep 提供商选择器中。",
+      "params": {
+        "domain": "受支持的默认提供商域",
+        "provider_id": "经过验证的提供商 ID，或使用 null 清除默认值"
+      }
+    },
+    "create_conversation": {
+      "description": "在 Guide 聊天使用的同一用户归属共享存储中创建 AI Strategy Studio 会话。",
+      "params": {
+        "title": "会话标题",
+        "preview": "可选的会话预览文本"
+      }
+    },
+    "update_conversation": {
+      "description": "更新归属当前用户的 AI Strategy Studio 会话中的类型化可编辑字段。",
+      "params": {
+        "id": "归属当前用户的会话 ID",
+        "title": "新的会话标题",
+        "preview": "新的预览文本，或使用 null 清除",
+        "token_limit": "新的会话令牌上限",
+        "strategy_rules": "策略规则，或使用 null 清除",
+        "status": "会话生命周期状态"
+      }
+    },
+    "search_conversations": {
+      "description": "按标题和消息内容搜索归属当前用户且未删除的会话，并按最新顺序返回。",
+      "params": {
+        "query": "非空的标题或消息搜索文本",
+        "limit": "返回的匹配会话数量上限"
+      }
+    },
+    "add_message": {
+      "description": "向归属当前用户的会话添加一条类型化消息，并以事务方式更新消息数和令牌数。",
+      "params": {
+        "conversation_id": "归属当前用户的会话 ID",
+        "type": "消息角色",
+        "content": "消息内容",
+        "token_count": "此消息贡献的令牌数",
+        "metadata": "随消息持久化的类型化 JSON 元数据"
+      }
+    },
+    "delete_message": {
+      "description": "永久删除一条归属当前用户的会话消息，并以事务方式更新计数。破坏性操作：需要 confirm=true。",
+      "params": {
+        "message_id": "归属当前用户的消息 ID",
+        "confirm": "必须为 true 才能确认永久删除消息"
+      }
+    },
+    "get_startup_audit": {
+      "description": "获取最近一次持久化的桌面启动审计；如果尚无启动记录则返回 null。"
+    },
+    "list_startup_audits": {
+      "description": "按确定性的从新到旧顺序列出持久化的桌面启动审计。",
+      "params": {
+        "limit": "返回的启动审计数量上限",
+        "offset": "分页偏移量"
+      }
+    },
+    "get_credit_status": {
+      "description": "从权威 StratCraft 账户服务获取已登录账户的积分余额和使用总计。"
+    },
+    "get_rate_limit_status": {
+      "description": "获取桌面端实时的免费层策略生成速率限制状态，且不消耗配额。需要 Electron 桌面应用正在运行。"
+    },
+    "get_distribution_info": {
+      "description": "获取已安装应用的发行类型及其是否为公开发行版。Electron 停止时仍可使用。"
+    },
+    "get_consent_status": {
+      "description": "获取持久化的崩溃报告和分析同意状态，以及是否已记录同意选择。Electron 停止时仍可使用。"
+    },
+    "set_consent": {
+      "description": "通过桌面设置页面使用的同一跨进程安全存储持久化崩溃报告和分析同意设置。",
+      "params": {
+        "crashes": "是否同意崩溃报告",
+        "analytics": "是否同意产品分析"
+      }
+    },
+    "get_app_info": {
+      "description": "获取应用版本、权威用户数据路径和研究模式状态。Electron 停止时仍可使用。"
+    },
+    "get_server_status": {
+      "description": "获取 Electron Service API 和 C++ 工具链的实时就绪状态。需要 Electron 桌面应用正在运行。"
+    },
+    "get_marketplace_registry": {
+      "description": "从 Marketplace 页面使用的同一实时服务获取插件市场目录、下载统计和已安装版本。需要 Electron 桌面应用正在运行。",
+      "params": { "force_refresh": "绕过目录缓存并获取最新目录" }
+    },
+    "get_marketplace_plugin_details": {
+      "description": "获取单个插件的市场元数据和已安装版本。需要 Electron 桌面应用正在运行。",
+      "params": { "plugin_id": "Marketplace 插件 ID" }
+    },
+    "check_plugin_updates": {
+      "description": "检查已安装的市场插件是否有可用更新。需要 Electron 桌面应用正在运行。"
+    },
+    "activate_license": {
+      "description": "验证并安全存储第三方插件许可证密钥。绝不返回密钥。T2 持久化变更：需要 confirm=true 且 Electron 桌面应用正在运行。",
+      "params": {
+        "plugin_id": "要激活许可证的插件 ID",
+        "license_key": "要验证并安全存储的许可证密钥；绝不返回",
+        "confirm": "必须为 true 才允许持久化安全存储许可证"
+      }
+    },
+    "get_license_status": {
+      "description": "获取一个或多个插件的不含密钥的许可证状态。绝不返回已存储的许可证密钥。需要 Electron 桌面应用正在运行。",
+      "params": { "plugin_ids": "非空插件 ID 列表" }
+    },
+    "remove_license": {
+      "description": "从安全存储中永久移除插件许可证密钥。T2 破坏性操作：需要 confirm=true 且 Electron 桌面应用正在运行。",
+      "params": {
+        "plugin_id": "要移除已存储许可证密钥的插件 ID",
+        "confirm": "必须为 true 才能永久移除已存储的许可证密钥"
+      }
+    },
+    "check_marketplace_entitlement": {
+      "description": "使用桌面认证会话检查当前登录账户对单个市场插件的权益。需要 Electron 桌面应用正在运行。",
+      "params": { "plugin_id": "Marketplace 插件 ID" }
+    },
+    "check_marketplace_entitlements_batch": {
+      "description": "检查当前登录账户对非空市场插件列表的权益。需要 Electron 桌面应用正在运行。",
+      "params": { "plugin_ids": "非空 Marketplace 插件 ID 列表" }
+    },
+    "get_entitlement_audit_log": {
+      "description": "从实时权益执行器获取最近的权益检查、执行和切换决策。需要 Electron 桌面应用正在运行。",
+      "params": { "limit": "返回的最新审计记录最大数量" }
+    },
+    "list_strategies": {
+      "description": "列出 StratCraft 中保存的所有策略/算法。返回 id、代码、名称、类型和创建时间。",
+      "params": {
+        "limit": "返回的策略数量上限"
+      }
+    },
+    "get_strategy": {
+      "description": "按 ID 获取指定策略的详细信息，包括分类元数据和策略规则。",
+      "params": {
+        "id": "策略 ID"
+      }
+    },
+    "start_generation_session": {
+      "description": "通过桌面端使用的同一实时 GenerationService 启动页面级策略生成会话。LLM 提供商、模型和语言环境由权威会话上下文注入。需要 Electron 桌面应用正在运行。",
+      "params": {
+        "page_id": "拥有本次生成槽位的稳定策略构建器页面标识符",
+        "strategy_name": "生成状态中显示的策略名称",
+        "start_endpoint": "对应桌面页面使用的已核准生成启动端点",
+        "poll_endpoint": "与启动端点配对的已核准生成状态端点",
+        "request_body": "由所选策略构建器工作流定义的 JSON 生成请求",
+        "poll_interval_ms": "可选的轮询间隔（毫秒）",
+        "timeout_ms": "可选的生成截止时间（毫秒）"
+      }
+    },
+    "cancel_generation_session": {
+      "description": "通过实时 GenerationService 取消策略构建器页面正在进行的生成会话。需要 Electron 桌面应用正在运行。",
+      "params": { "page_id": "要取消其活动生成任务的策略构建器页面标识符" }
+    },
+    "get_generation_state": {
+      "description": "读取桌面端观察到的权威页面级生成槽位，包括状态、结果、错误、策略名称和开始时间。需要 Electron 桌面应用正在运行。",
+      "params": { "page_id": "要返回其生成状态的策略构建器页面标识符" }
+    },
+    "generate_from_catalog": {
+      "description": "通过桌面端使用的同一实时权威操作，从策略目录生成、验证并持久化 C++ ABI v2 策略，同时保持所选 LLM 提供商、模型和语言环境契约。需要 Electron 桌面应用正在运行。",
+      "params": {
+        "catalog_id": "策略目录条目 ID",
+        "strategy_name": "生成策略的名称",
+        "preference": "可选的生成偏好",
+        "timeframe": "可选的目录时间周期覆盖值",
+        "risk_level": "可选的目录风险等级覆盖值",
+        "customization": "可选的类型化目录定制配置"
+      }
+    },
+    "start_batch_generation": {
+      "description": "通过实时批量生成权威操作启动串行策略构建器批量生成，使用渐进式去重和权威的已选 LLM 执行上下文。需要 Electron 桌面应用正在运行。",
+      "params": {
+        "regime": "批次中每个策略使用的市场状态",
+        "indicators": "每个生成策略使用的非空指标名称列表",
+        "quantity": "要生成的策略数量",
+        "preference": "应用于批次的可选生成偏好",
+        "persona": "可选的角色约束 ID"
+      }
+    },
+    "cancel_batch_generation": {
+      "description": "通过桌面端使用的同一实时批量生成权威操作取消活动批次。需要 Electron 桌面应用正在运行。"
+    },
+    "get_batch_generation_state": {
+      "description": "获取当前或最近一次批量策略生成任务的权威状态及逐项结果。需要 Electron 桌面应用正在运行。",
+      "params": {}
+    },
+    "list_deleted_strategies": {
+      "description": "列出回收站中已软删除的策略，按删除时间从新到旧排序。",
+      "params": {
+        "limit": "返回的已删除策略数量上限",
+        "offset": "跳过的已删除策略数量"
+      }
+    },
+    "restore_strategy": {
+      "description": "从回收站恢复一个已软删除的策略。",
+      "params": { "id": "已删除策略 ID" }
+    },
+    "purge_strategy": {
+      "description": "永久删除一个已在回收站中的策略。此操作不可撤销，必须设置 confirm=true。",
+      "params": {
+        "id": "已删除策略 ID",
+        "confirm": "必须为 true 以确认永久删除"
+      }
+    },
+    "list_audit_entries": {
+      "description": "按桌面端相同的信号来源、LLM、评级、排序和数量契约列出策略构建器审计记录。",
+      "params": {
+        "signal_source": "精确的信号来源筛选",
+        "llm_provider": "精确的 LLM 提供商筛选",
+        "llm_model": "精确的 LLM 模型筛选",
+        "min_star": "最低星级，包含边界",
+        "max_star": "最高星级，包含边界",
+        "limit": "返回的审计记录数量上限"
+      }
+    },
+    "get_audit_by_algorithm": {
+      "description": "获取指定算法或信号 ID 的最新策略构建器审计记录。",
+      "params": { "algorithm_id": "算法或信号 ID" }
+    },
+    "list_backtest_results": {
+      "description": "列出回测结果及关键指标（盈亏、夏普比率、最大回撤、胜率）。仅返回汇总，不含完整成交/权益曲线数据。",
+      "params": {
+        "limit": "返回的结果数量上限"
+      }
+    },
+    "get_backtest_result": {
+      "description": "按任务 ID 获取完整的回测结果，包括成交记录和权益曲线数据。",
+      "params": {
+        "task_id": "回测任务 ID"
+      }
+    },
+    "list_factors": {
+      "description": "列出 StratCraft 中保存的所有因子/指标，包含 IC 和夏普比率指标。",
+      "params": {
+        "limit": "返回的因子数量上限"
+      }
+    },
+    "list_signal_sources": {
+      "description": "列出 StratCraft Quant Lab 中注册的所有信号源。",
+      "params": {
+        "limit": "返回的信号源数量上限"
+      }
+    },
+    "generate_strategy": {
+      "description": "通过直连 nona_server 的 Architecture V3 路径生成 C++ ABI v2 市场状态检测策略。使用规范市场状态和指标目录 slug。省略 strategy_name 时使用共享默认名称和存储层冲突处理规则。成功时返回算法 ID 和最终策略名称。",
+      "params": {
+        "regime": "规范市场状态：trend、range、consolidation、oscillation 或 bespoke",
+        "indicators": "由 list_strategy_indicators 返回的策略指标目录 slug",
+        "strategy_name": "可选策略名称；省略时使用共享默认名称和存储层冲突后缀规则",
+        "preference": "传递给 LLM 的自由文本偏好/指令",
+        "persona": "可选 Persona 约束 ID；仅在用户明确选择时提供",
+        "llm_provider": "LLM 服务商（例如 PRO_CATALOG、OPENAI、CLAUDE）",
+        "llm_model": "LLM 模型名称"
+      }
+    },
+    "list_personas": {
+      "description": "列出可用于策略生成约束的交易 Persona。Persona 定义了交易风格、风险偏好和策略约束。"
+    },
+    "generate_kronos_strategy": {
+      "description": "生成一个 Kronos AI 时序预测策略。需要 Electron 桌面应用处于运行状态。成功时返回 algorithmId 和 strategyName。",
+      "params": {
+        "strategy_name": "生成策略的名称",
+        "model": "Kronos 模型（kronos-mini、kronos-small、kronos-base）",
+        "lookback": "回看窗口大小（10-2048）",
+        "pred_len": "预测长度（1-512）",
+        "temperature": "采样温度（0.1-2.0）",
+        "top_p": "Top-p 采样（0.5-1.0）",
+        "top_k": "Top-k 采样（0-256）",
+        "sample_count": "采样次数（1-20）",
+        "time_range": "时间范围模式",
+        "start_time": "ISO 格式起始时间（仅用于自定义 time_range）",
+        "llm_provider": "LLM 服务商（例如 PRO_CATALOG、OPENAI、CLAUDE）",
+        "llm_model": "LLM 模型名称"
+      }
+    },
+    "generate_entry_signal": {
+      "description": "使用 LLM 生成一个入场信号策略。需要 Electron 桌面应用处于运行状态。成功时返回 algorithmId 和 strategyName。",
+      "params": {
+        "strategy_name": "生成入场信号策略的名称",
+        "entry_signal_base": "入场信号基础类型",
+        "indicators": "技术指标列表（例如 RSI、MACD、EMA、Bollinger、Stochastic、ADX）",
+        "preference": "传递给 LLM 的自由文本偏好/指令（例如 \"RSI(14) 超买/超卖交叉\"）",
+        "auto_reverse": "自动生成与多头条件相反的空头条件",
+        "llm_provider": "LLM 服务商（例如 PRO_CATALOG、OPENAI、CLAUDE）",
+        "llm_model": "LLM 模型名称"
+      }
+    },
+    "generate_exit_strategy": {
+      "description": "使用 LLM 生成一个出场/风控覆盖策略。支持 circuit_breaker、time_limit、drawdown_limit 和 indicator_guard 规则。需要 Electron 桌面应用处于运行状态。",
+      "params": {
+        "strategy_name": "生成出场策略的名称",
+        "exit_rules": "出场规则列表",
+        "max_loss_percent": "硬性安全最大亏损百分比",
+        "llm_provider": "LLM 服务商（例如 PRO_CATALOG、OPENAI、CLAUDE）",
+        "llm_model": "LLM 模型名称",
+        "exit_rule": {
+          "type": "出场规则类型",
+          "trigger_pnl_percent": "circuit_breaker 的盈亏触发百分比（例如 -5.0）",
+          "scope": "circuit_breaker 的作用范围",
+          "max_holding_hours": "time_limit 的最大持仓小时数",
+          "max_drawdown_percent": "drawdown_limit 的最大回撤百分比",
+          "indicator": "indicator_guard 使用的指标名（例如 RSI）",
+          "condition": "indicator_guard 的触发条件（例如 crosses_below）",
+          "threshold": "indicator_guard 的阈值（例如 30）",
+          "direction": "indicator_guard 的方向"
+        }
+      }
+    },
+    "generate_ai_libero_strategy": {
+      "description": "使用 LLM 生成一个 AI Libero 独立代理策略。需要 Electron 桌面应用处于运行状态。成功时返回 algorithmId 和 strategyName。",
+      "params": {
+        "strategy_name": "生成策略的名称",
+        "prompt": "传递给 LLM 代理的交易策略描述（至少 10 个字符）",
+        "preset_mode": "定义风险/频率约束的交易员预设模式",
+        "indicators": "提供给代理的技术指标（例如 RSI、MACD、EMA）",
+        "analysis_interval": "每 N 根 K 线调用一次 LLM（1-100）",
+        "warmup_period": "跳过前 N 根 K 线（50-500）",
+        "lookback_bars": "发送给 LLM 的历史 K 线数量（20-200）",
+        "batch_size": "每次 LLM 调用的决策数量（50-500）",
+        "llm_provider": "LLM 服务商（例如 PRO_CATALOG、OPENAI、CLAUDE）",
+        "llm_model": "LLM 模型名称"
+      }
+    },
+    "generate_ai_studio_strategy": {
+      "description": "Generate a strategy using AI Studio (conversational strategy authoring). Extracts trading rules from a named strategy, trader, or concept description, then generates C++ code. No regime or indicator selection needed -- the server self-routes via Fishbone modules. Returns algorithmId and strategyName on success.",
+      "params": {
+        "strategy_name": "Optional strategy name; omit to use the shared default and storage collision suffix policy",
+        "description": "What to generate: a strategy concept, named strategy, or trader style to extract and codify (min 10 chars)",
+        "indicators": "Optional technical indicators (e.g., RSI, MACD, EMA). Usually not needed -- the server extracts indicators from the description.",
+        "llm_provider": "LLM provider (e.g., PRO_CATALOG, OPENAI, CLAUDE)",
+        "llm_model": "LLM model name"
+      }
+    },
+    "start_ai_studio_session": {
+      "description": "Start a new AI Studio conversational session. Sends a strategy description to the server and returns session_id, strategy_rules (extracted trading rules), available_actions (what the user can do next), and metadata including fishbone_module (which module the server routed to). Use this for multi-turn strategy authoring where you need to iteratively refine rules before generating code.",
+      "params": {
+        "description": "The strategy concept, named strategy, or trader style to explore (e.g., \"extract Larry Williams strategy\", \"decompose Turtle Trading rules\")",
+        "strategy_name": "Optional strategy name; omit to let the server derive one",
+        "llm_provider": "LLM provider (e.g., PRO_CATALOG, OPENAI, CLAUDE)",
+        "llm_model": "LLM model name"
+      }
+    },
+    "continue_ai_studio_session": {
+      "description": "Continue an existing AI Studio session with a follow-up message. Pass the session_id from start_ai_studio_session and optionally the current_strategy_rules from the previous response. The server maintains conversation history per session_id. Use this to refine strategy rules, add conditions, or ask clarifying questions before generating code.",
+      "params": {
+        "session_id": "Session ID returned by start_ai_studio_session",
+        "message": "Follow-up message to the AI Studio session (e.g., \"add a trailing stop at 2%\", \"what indicators does this use?\")",
+        "current_strategy_rules": "Strategy rules from the previous turn response; pass them back to maintain rule state across turns",
+        "strategy_name": "Optional strategy name override",
+        "llm_provider": "LLM provider",
+        "llm_model": "LLM model name"
+      }
+    },
+    "run_ai_studio_action": {
+      "description": "Run a gated action on an AI Studio session. The action must be present in the available_actions array from the previous session response. Actions: generate_code (generates C++ strategy code from the defined rules), save_strategy (persists the generated strategy to the database, returns algorithmId), run_backtest (not yet supported). For save_strategy, the strategy is classified with strategy_type=1 and signal_source=aiStudio, identical to the batch path.",
+      "params": {
+        "session_id": "Session ID from start_ai_studio_session",
+        "action": "Action to run; must be listed in the previous response available_actions array",
+        "current_strategy_rules": "Strategy rules from the previous turn; required for accurate code generation",
+        "strategy_name": "Strategy name for persistence; defaults to \"AI Studio Strategy\" if omitted",
+        "llm_provider": "LLM provider",
+        "llm_model": "LLM model name"
+      }
+    },
+    "run_backtest": {
+      "description": "对已保存的算法运行回测。需要 Electron 桌面应用处于运行状态。返回用于状态跟踪的 taskId。",
+      "params": {
+        "algorithm_id": "来自 generate_strategy、generate_entry_signal 或 generate_exit_strategy 的算法 ID",
+        "symbol": "交易标的（例如 AAPL、MSFT、BTC-USD）",
+        "interval": "数据周期（例如 1m、5m、15m、1h、4h、1d）",
+        "start_date": "ISO 格式起始日期（例如 2023-01-01）。默认值为两年前。",
+        "end_date": "ISO 格式结束日期（例如 2024-12-31）。默认值为今天。",
+        "initial_capital": "初始资金",
+        "commission": "手续费率",
+        "slippage": "滑点率",
+        "allow_short": "允许做空",
+        "data_source": "数据源（yfinance、dukascopy、clickhouse）",
+        "dry_run": "试运行模式：桩接 LLM/Kronos API 调用，仅返回预估调用次数而非真实盈亏"
+      }
+    },
+    "get_backtest_status": {
+      "description": "获取运行中或已完成的回测任务状态。返回的状态包括 preparing、queued、running、completed、failed、cancelled。",
+      "params": {
+        "task_id": "来自 run_backtest 的回测任务 ID"
+      }
+    },
+    "alpha_factory_add_signals": {
+      "description": "Add signals to the active Alpha Factory config by ID. Accepts signal-definition IDs (from list_signal_runs / list_signal_definitions) or persisted signal IDs (persistedSignalId) -- definition IDs are resolved to the persisted signal via fingerprint. Idempotent and self-verifying: adding an id already present is a safe no-op, reported per-id in results[] with outcome already_present_input_id / already_present_resolved_id plus the matching chip name and persistedSignalId. DO NOT load_alpha_factory_config first to check membership -- call add directly and read each result outcome. Returns results[] (one outcome per id, with resolvedVia) plus derived counters and totalSignals. T2 (mutates active config).",
+      "params": {
+        "signal_ids": "Signal ids to add -- accepts a union: signal-definition id (from list_signal_runs / list_signal_definitions) OR persisted signal id (the persistedSignalId projected on scoreboard/definition rows). Definition ids resolve to the persisted signal via fingerprint. The result reports which resolution fired per id (resolvedVia)."
+      }
+    }
+  },
+  "handlers": {
+    "strategies": {
+      "generationFailed": "策略生成失败: %s",
+      "generationError": "策略生成错误: %s",
+      "entrySignalFailed": "入场信号生成失败: %s",
+      "entrySignalError": "入场信号生成错误: %s",
+      "exitStrategyFailed": "出场策略生成失败: %s",
+      "exitStrategyError": "出场策略生成错误: %s",
+      "kronosFailed": "Kronos 预测失败: %s",
+      "kronosError": "Kronos 预测错误: %s",
+      "aiLiberoFailed": "AI Libero 生成失败: %s",
+      "aiLiberoError": "AI Libero 生成错误: %s",
+      "aiStudioFailed": "AI Studio generation failed: %s",
+      "aiStudioError": "AI Studio generation error: %s",
+      "aiStudioSessionStartFailed": "AI Studio session start failed: %s",
+      "aiStudioSessionStartError": "AI Studio session start error: %s",
+      "aiStudioSessionContinueFailed": "AI Studio session continue failed: %s",
+      "aiStudioSessionContinueError": "AI Studio session continue error: %s",
+      "aiStudioActionFailed": "AI Studio action failed: %s",
+      "aiStudioActionError": "AI Studio action error: %s",
+      "notFound": "未找到 id=%s 的策略",
+      "unknownError": "未知错误",
+      "persistenceError": "%s 在策略持久化存储中失败：%e",
+      "batchStateFailed": "批量生成状态查询失败：%s",
+      "batchStateError": "批量生成状态查询错误：%s",
+      "purgeConfirmationRequired": "purge_strategy 需要 confirm=true，因为永久删除无法撤销。"
+    },
+    "backtests": {
+      "resultNotFound": "未找到 task_id=%s 的回测结果",
+      "electronNotRunningExecution": "Electron 桌面应用未在运行。回测执行需要运行中的应用。",
+      "executionFailed": "回测执行失败: %s",
+      "executionError": "回测执行错误: %s",
+      "telemetryError": "遥测查询错误: %s",
+      "electronNotRunningStatus": "Electron 桌面应用未在运行。回测状态查询需要运行中的应用。",
+      "statusFailed": "回测状态查询失败: %s",
+      "statusError": "回测状态错误: %s"
+    },
+    "sweep": {
+      "electronNotRunningSweep": "Electron 桌面应用未在运行。信号发现扫描需要桌面应用。",
+      "startFailed": "扫描启动失败",
+      "electronNotRunning": "Electron 桌面应用未在运行。"
+    },
+    "personas": {
+      "listFailed": "Persona 列表获取失败: %s",
+      "listError": "Persona 列表错误: %s"
+    }
+  },
+  "server": {
+    "unknownAuthEndpoint": "未知的认证端点",
+    "authServerUnreachable": "认证服务器不可达: %s",
+    "notFoundUseMcp": "未找到。请使用 POST /mcp 访问 MCP 协议。",
+    "missingSessionId": "缺少或无效的 Mcp-Session-Id。请先发送 initialize。"
+  },
+  "guidedAgent": {
+    "welcome": {
+      "title": "Welcome to StratCraft",
+      "subtitle": "What would you like to do?"
+    },
+    "choices": {
+      "editStrategy": {
+        "title": "Edit a Strategy",
+        "description": "Create or modify C++ trading strategies"
+      },
+      "runBacktest": {
+        "title": "Run a Backtest",
+        "description": "Test strategies on historical data"
+      },
+      "signalDiscovery": {
+        "title": "Signal Discovery",
+        "description": "Train ML models to find alpha signals"
+      },
+      "viewScoreboard": {
+        "title": "View Scoreboard",
+        "description": "See ranked signals by performance"
+      },
+      "systemHealth": {
+        "title": "System Health",
+        "description": "Run diagnostics on data, sweep processes, and connectivity"
+      }
+    },
+    "badges": {
+      "strategies": "%s strategies",
+      "results": "%s results",
+      "trained": "%s trained",
+      "getStarted": "Get started",
+      "topSignals": "Top %s signals",
+      "empty": "Empty"
+    },
+    "errors": {
+      "notAuthenticated": "Not authenticated. Log in to enable natural language understanding.",
+      "llmIntentFailed": "LLM intent resolution failed",
+      "llmNoTaskId": "LLM intent resolution returned no task_id",
+      "llmPollFailed": "LLM status poll failed",
+      "llmTaskFailed": "LLM intent resolution task failed",
+      "llmTimedOut": "LLM intent resolution timed out"
+    },
+    "authRequired": {
+      "title": "会话已过期",
+      "message": "您的会话已过期,请重新登录。"
+    },
+    "fallback": {
+      "title": "I can help with...",
+      "tryAsking": "Try asking things like...",
+      "noteHeading": "Note",
+      "nlHeading": "Natural Language",
+      "nlBody": "NL understanding requires the desktop app running. Start StratCraft to enable AI-powered intent resolution.",
+      "examples": {
+        "showScoreboard": "Show me the signal scoreboard",
+        "trainXgboost": "Train an XGBoost model on EURUSD",
+        "runBacktest": "Run a backtest on my strategy",
+        "checkSweep": "Check if a sweep is running",
+        "listProviders": "List available data providers",
+        "retryDownloads": "Retry failed downloads"
+      }
+    },
+    "diagnostics": {
+      "fxCalendarHolidays": "Validate FX 5/24 holiday exclusions",
+      "dukascopyFetchProbe": "Test Dukascopy data provider connectivity",
+      "tradingDayCoverage": "Verify parquet cache trading day coverage",
+      "downloadQueueHistory": "Query download queue history",
+      "sweepProcessStatus": "Check sweep process PID and state",
+      "rdagentProcessStatus": "Check RDAgent process and registry"
+    },
+    "actions": {
+      "queueDownload": "Enqueue a data download",
+      "retryFailed": "Re-enqueue ERROR-state downloads",
+      "getDownloadStatus": "Read download queue rows",
+      "deleteSegment": "Delete a cached data segment",
+      "importPackage": "Import a BYOD data package",
+      "startSweep": "Start a sweep grid",
+      "stopSweep": "Stop the running sweep",
+      "getSweepStatus": "Get current sweep session status",
+      "runSingleCell": "Train a single signal cell",
+      "getScoreboard": "Read signal scoreboard rankings",
+      "refreshScoreboard": "Force scoreboard re-computation",
+      "reRollupVerdict": "Re-compute statistical verdicts",
+      "refitArtifact": "Refit a signal artifact",
+      "listStrategies": "List saved strategies",
+      "generateStrategy": "Generate a strategy via LLM",
+      "runBacktest": "Run a backtest",
+      "getBacktestStatus": "Query backtest status/results",
+      "importRdagentFactors": "Import RDAgent-discovered factors",
+      "runFactorSweep": "Run factor sweep"
+    },
+    "diagrams": {
+      "gettingStarted": {
+        "title": "Getting Started",
+        "subtitle": "You have 0 strategies. Create your first one."
+      },
+      "createStrategy": {
+        "label": "Create Strategy",
+        "description": "Start here"
+      },
+      "builder": {
+        "label": "Builder",
+        "description": "Visual strategy editor"
+      },
+      "sigma": {
+        "label": "Sigma",
+        "description": "AI-guided generation"
+      },
+      "edges": {
+        "choose": "choose",
+        "or": "or",
+        "then": "then"
+      },
+      "yourSignals": {
+        "title": "Your Signals",
+        "subtitleTemplate": "%s trained signals. %s"
+      },
+      "topIcBadge": "Top IC: %s",
+      "entriesBadge": "%s entries",
+      "signalsLabel": "%s Signals",
+      "scoreboard": {
+        "label": "Scoreboard",
+        "description": "Ranked by performance"
+      },
+      "trainMore": {
+        "label": "Train More",
+        "description": "Add new signals"
+      },
+      "backtest": {
+        "label": "Backtest",
+        "description": "Test strategies",
+        "descriptionYour": "Test your strategy"
+      },
+      "sweepRunning": {
+        "titleTemplate": "%s Sweep Running",
+        "sweepLabel": "%s Sweep"
+      },
+      "viewProgress": {
+        "label": "View Progress"
+      },
+      "cancelSweep": {
+        "label": "Cancel Sweep"
+      },
+      "strategyComponents": {
+        "title": "Strategy Components",
+        "subtitle": "Missing %s structural component(s)"
+      },
+      "yourStrategyComponents": {
+        "label": "Your Strategy Components"
+      },
+      "componentLabels": {
+        "regimeDetector": "Add Regime Detector",
+        "regimeEntry": "Add Entry Signal",
+        "exitStrategy": "Add Exit Strategy"
+      },
+      "componentDescriptions": {
+        "regimeDetector": "Classify market regimes",
+        "regimeEntry": "Entry signals for regime mode",
+        "exitStrategy": "Risk management / exit rules"
+      },
+      "strategyComplete": {
+        "title": "Strategy Complete",
+        "subtitle": "All structural components present. %s strategies ready."
+      },
+      "signalDiscovery": {
+        "label": "Signal Discovery",
+        "description": "Train ML models"
+      },
+      "systemHealth": {
+        "label": "System Health",
+        "description": "Diagnostics and connectivity checks"
+      },
+      "installedPlugin": {
+        "title": "已安装插件",
+        "subtitle": "已安装 %s 个",
+        "description": "已安装插件",
+        "discoveryError": "插件不可用"
+      }
+    },
+    "wizards": {
+      "unknownWizard": {
+        "title": "Unknown Wizard",
+        "errorHeading": "Error",
+        "errorBody": "Unknown wizard: %s"
+      },
+      "selectTemplate": {
+        "title": "Select Template",
+        "description": "Choose an ML model or TA indicator to train.",
+        "fieldLabel": "Template"
+      },
+      "dataConfiguration": {
+        "title": "Data Configuration",
+        "description": "Configure data source for %s",
+        "universeLabel": "Universe",
+        "customSymbolsLabel": "Custom Symbols (only if Universe = Custom)",
+        "customSymbolsPlaceholder": "AAPL, MSFT, GOOGL",
+        "providerLabel": "Data Provider",
+        "timeframeLabel": "Timeframe"
+      },
+      "gridParameters": {
+        "title": "Grid Parameters",
+        "description": "Configure sweep grid for %s"
+      },
+      "confirmStart": {
+        "title": "Confirm & Start",
+        "description": "Review your sweep configuration and start training.",
+        "templateLabel": "Template",
+        "universeLabel": "Universe",
+        "providerLabel": "Provider",
+        "timeframeLabel": "Timeframe",
+        "lookbackLabel": "Lookback",
+        "lookbackValue": "%s bars"
+      },
+      "gridFields": {
+        "lookbackMin": "Lookback Min",
+        "lookbackMax": "Lookback Max",
+        "lookbackStep": "Lookback Step",
+        "statesMin": "States Min",
+        "statesMax": "States Max",
+        "rsiPeriod": "RSI Period",
+        "overbought": "Overbought",
+        "oversold": "Oversold",
+        "fastPeriod": "Fast Period",
+        "slowPeriod": "Slow Period",
+        "signalPeriod": "Signal Period",
+        "shortSma": "Short SMA",
+        "longSma": "Long SMA",
+        "lookback": "Lookback"
+      },
+      "templates": {
+        "xgboost": {
+          "label": "XGBoost",
+          "description": "Gradient boosted trees for return prediction"
+        },
+        "xgboostV2": {
+          "label": "XGBoost v2",
+          "description": "XGBoost with enriched features (momentum, vol, calendar)"
+        },
+        "xgboostV3": {
+          "label": "XGBoost v3",
+          "description": "XGBoost v3 OOS-regularized (horizon guard, feature selection, early stopping)"
+        },
+        "pytorchMlp": {
+          "label": "PyTorch MLP",
+          "description": "Multi-layer perceptron neural network"
+        },
+        "pytorchLstm": {
+          "label": "PyTorch LSTM",
+          "description": "LSTM recurrent network"
+        },
+        "ridge": {
+          "label": "Ridge Regression",
+          "description": "Ridge linear regression"
+        },
+        "hmmRegime": {
+          "label": "HMM Regime",
+          "description": "Hidden Markov Model regime detection"
+        },
+        "rsi": {
+          "label": "RSI",
+          "description": "Relative Strength Index signal"
+        },
+        "macd": {
+          "label": "MACD",
+          "description": "MACD crossover signal"
+        },
+        "smaCross": {
+          "label": "SMA Cross",
+          "description": "Simple Moving Average crossover"
+        },
+        "ngram": {
+          "label": "N-gram",
+          "description": "N-gram next-bar prediction"
+        }
+      },
+      "timeframes": {
+        "1m": "1 minute",
+        "5m": "5 minutes",
+        "15m": "15 minutes",
+        "30m": "30 minutes",
+        "1h": "1 hour",
+        "2h": "2 hours",
+        "4h": "4 hours",
+        "1d": "1 day",
+        "1w": "1 week",
+        "1M": "1 month"
+      },
+      "providers": {
+        "yfinance": {
+          "label": "Yahoo Finance",
+          "description": "Free, daily/intraday US equities"
+        },
+        "databento": {
+          "label": "Databento",
+          "description": "Paid, tick-level market data"
+        }
+      },
+      "universes": {
+        "sp500Top50": {
+          "label": "S&P 500 Top 50",
+          "description": "Top 50 US equities by market cap"
+        },
+        "g10Fx": {
+          "label": "G10 FX",
+          "description": "9 major currency pairs (EURUSD, USDJPY, GBPUSD, ...)"
+        },
+        "cryptoTop50": {
+          "label": "Crypto Top 50",
+          "description": "Top crypto assets"
+        },
+        "usSectorEtfs": {
+          "label": "US Sector ETFs",
+          "description": "11 SPDR sector ETFs (XLK, XLF, ...)"
+        },
+        "custom": {
+          "label": "Custom Symbols",
+          "description": "Enter your own symbol list"
+        }
+      }
+    },
+    "types": {
+      "groups": {
+        "regimeMode": "REGIME MODE",
+        "traderMode": "TRADER MODE",
+        "autopilotMode": "AUTOPILOT MODE",
+        "chatMode": "CHAT MODE",
+        "riskManager": "RISK MANAGER",
+        "catalogMode": "CATALOG MODE"
+      },
+      "componentLabels": {
+        "regimeDetector": "Regime Detector",
+        "entry": "Entry",
+        "marketObserver": "Market Observer",
+        "aiLibero": "AI Libero",
+        "strategyStudio": "Strategy Studio",
+        "exit": "Exit",
+        "strategyCatalog": "Strategy Catalog"
+      }
+    }
+  },
+  "agentLoop": {
+    "turnCancelled": "Turn cancelled.",
+    "toolCallNotExecuted": "Not executed: the turn ended before this tool call was reached."
+  },
+  "conversationStore": {
+    "notInitialized": "Conversation store not initialized -- call initConversationStore first.",
+    "tableNotFound": "Conversation table not found -- run the desktop app once to initialize the database.",
+    "notFound": "Conversation {{id}} not found"
+  }
+}

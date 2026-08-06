@@ -1,0 +1,269 @@
+{
+  "title": "Settings",
+  "sections": {
+    "general": "General",
+    "appearance": "Appearance",
+    "language": "Language",
+    "network": "Network",
+    "security": "Security",
+    "plugins": "Plugins",
+    "advanced": "Advanced",
+    "about": "About",
+    "config": "Config",
+    "credentials": "Credentials",
+    "system": "System"
+  },
+  "language": {
+    "title": "Language",
+    "description": "Select your preferred language",
+    "system": "Use system language",
+    "restart": "Restart required to apply language changes"
+  },
+  "theme": {
+    "title": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
+  },
+  "plugins": {
+    "title": "Plugin Settings",
+    "config": "Configuration",
+    "secrets": "Secrets",
+    "noConfig": "No configuration options available",
+    "noSecrets": "No secrets configured"
+  },
+  "actions": {
+    "save": "Save Settings",
+    "reset": "Reset to Defaults",
+    "export": "Export Settings",
+    "import": "Import Settings",
+    "reload": "Reload",
+    "retry": "Reessayer"
+  },
+  "config": {
+    "title": "System Configuration",
+    "description": "Manage application settings and preferences",
+    "configFilePath": "Configuration file path",
+    "nav": {
+      "performance": "Performance",
+      "sync": "Sync",
+      "scoreboard": "Tableau des signaux",
+      "diagnostics": "Diagnostics",
+      "onboarding": "Intégration",
+      "privacy": "Privacy",
+      "dataRouting": "Routage des donnees",
+      "resourceGovernance": "Resource Governance"
+    },
+    "performance": {
+      "maxBacktestTasks": "Max Backtest Tasks",
+      "maxBacktestDescription": "Concurrent backtest limit (1-32)",
+      "autoDetectTitle": "Detection automatique basee sur les coeurs CPU",
+      "autoDetect": "Auto-detection"
+    },
+    "sync": {
+      "title": "Workspace Sync",
+      "description": "Sync your workspace to a local folder (e.g., OneDrive, Google Drive, Dropbox mount)",
+      "targetFolder": "Target Folder",
+      "targetFolderDescription": "Folder path for workspace sync. Use a cloud drive mount for cross-device sync.",
+      "targetFolderPlaceholder": "Select a sync folder...",
+      "browse": "Browse",
+      "lastSynced": "Last Synced",
+      "neverSynced": "Never synced",
+      "syncNow": "Sync Now",
+      "syncing": "Syncing...",
+      "restoreFromSync": "Restore from Sync",
+      "restoring": "Restoring...",
+      "exportSuccess": "Workspace exported successfully ({{strategies}} strategies, {{algorithms}} algorithms, {{results}} results)",
+      "importSuccess": "Workspace imported successfully ({{strategies}} strategies, {{algorithms}} algorithms, {{results}} results)",
+      "confirmRestore": "This will import workspace data from the sync folder. Existing data with the same IDs will be overwritten. Continue?",
+      "errors": {
+        "noTargetDir": "Please select a target folder first",
+        "exportFailed": "Export failed: {{error}}",
+        "importFailed": "Import failed: {{error}}"
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "restore": "Restore"
+      }
+    },
+    "health": {
+      "parseError": "Erreur du fichier de configuration",
+      "parseWarning": "Avertissement du fichier de configuration",
+      "usingFallback": "L'application fonctionne avec la dernière configuration valide connue. Corrigez le fichier de configuration et rechargez-le.",
+      "reloadFailed": "Le rechargement de la configuration a échoué en raison d'erreurs d'analyse."
+    },
+    "scoreboard": {
+      "title": "Tableau des signaux",
+      "description": "Reglages du Tableau de Performance des Signaux. Les changements prennent effet au prochain recalcul -- aucun redemarrage requis.",
+      "windowBars": "Barres de la fenetre",
+      "windowBarsDescription": "Longueur de la fenetre glissante pour IC / Sharpe / taux de reussite ({{min}}-{{max}} barres)."
+    },
+    "dataRouting": {
+      "title": "Data routing",
+      "descriptionPrefix": "For each market, choose which data provider should be tried first. Markets with multiple eligible providers (for example,",
+      "descriptionMiddle": "served by both",
+      "descriptionAnd": "and",
+      "descriptionSuffix": ") expose a reorderable list. Single-provider markets are read-only.",
+      "moveUp": "Deplacer {{provider}} vers le haut",
+      "moveDown": "Deplacer {{provider}} vers le bas"
+    },
+    "resourceGovernance": {
+      "title": "Resource Governance",
+      "description": "Per-workload CPU / memory caps for sweep, factor mining, and LSTM training. Gate thresholds hot-reload; cgroup hard caps apply on the next launch of each workload.",
+      "enabled": "Enable resource governance",
+      "sweepCap": "Sweep cap (%)",
+      "miningCap": "Factor mining cap (%)",
+      "lstmCap": "LSTM training cap (%)",
+      "capDescription": "Maximum share of machine resources on the tighter of CPU / memory ({{min}}-{{max}}%).",
+      "applyNote": "Gate thresholds apply immediately. cgroup hard caps apply on the next launch of each workload.",
+      "aggregateExceeded": "Combined caps must not exceed {{max}}%.",
+      "admissionCeiling": "System admission ceiling (%)",
+      "admissionCeilingDesc": "Maximum combined peak memory including other workloads and the operating system ({{min}}-{{max}}%)."
+    }
+  },
+  "advanced": {
+    "diagnostics": {
+      "title": "Diagnostics",
+      "openLogFolder": "Ouvrir le dossier des logs",
+      "openLogFolderDescription": "Ouvre le repertoire des logs dans le gestionnaire de fichiers"
+    },
+    "onboarding": {
+      "title": "Intégration",
+      "showGuides": "Afficher les guides d'intégration",
+      "showGuidesDescription": "Afficher des visites guidées interactives lors de la première visite des pages.",
+      "assistantMode": "Mode assistant",
+      "assistantModeDescription": "Afficher le panneau d'aide contextuelle avec du contenu pédagogique pour la page actuelle.",
+      "resetProgress": "Réinitialiser la progression d'intégration",
+      "resetProgressDescription": "Effacer toutes les visites terminées afin de les rejouer à la prochaine visite.",
+      "resetButton": "Réinitialiser"
+    },
+    "privacy": {
+      "title": "Privacy",
+      "description": "Control what data is shared with StratCraft to help improve the application.",
+      "crashReports": "Crash Reports",
+      "crashReportsDescription": "Automatically send error and crash data to help us fix bugs. No personal data is included.",
+      "crashReportsAlwaysOn": "Crash reports are always sent to help us fix critical issues. No personal data is included.",
+      "alwaysOn": "Always On",
+      "analytics": "Send Usage Analytics",
+      "analyticsDescription": "Share anonymous usage statistics to help us improve features and performance."
+    }
+  },
+  "permissions": {
+    "title": "Permission Request",
+    "requestingPermissions": "This plugin is requesting the following permissions:",
+    "dangerousPermissions": "Dangerous Permissions",
+    "dangerousWarning": "This plugin requests elevated permissions that could affect your system security. Only approve if you trust the source.",
+    "deny": "Deny",
+    "approve": "Approve",
+    "approveAnyway": "Approve Anyway",
+    "pluginId": "Plugin ID: {{id}}",
+    "author": "Author: {{author}}"
+  },
+  "credentials": {
+    "title": "Gestionnaire d'Identifiants",
+    "description": "Gerer les identifiants des plugins en toute securite",
+    "nav": {
+      "security": "Securite",
+      "credentials": "Identifiants",
+      "auditLog": "Journal d'Audit"
+    },
+    "security": {
+      "title": "Etat de Securite",
+      "description": "Les identifiants sont chiffres avec AES-256-GCM. Integration au trousseau systeme active."
+    },
+    "actions": {
+      "setMasterPassword": "Definir le Mot de Passe Principal",
+      "addCredential": "Ajouter un Identifiant",
+      "refresh": "Actualiser",
+      "copyToClipboard": "Copier dans le presse-papiers",
+      "showValue": "Afficher la valeur",
+      "hideValue": "Masquer la valeur",
+      "deleteCredential": "Supprimer l'identifiant"
+    },
+    "search": {
+      "placeholder": "Rechercher des identifiants..."
+    },
+    "list": {
+      "title": "Identifiants Stockes",
+      "empty": "Aucun identifiant stocke",
+      "noMatch": "Aucun identifiant correspondant",
+      "addFirst": "Ajoutez votre premier identifiant"
+    },
+    "audit": {
+      "title": "Activite Recente",
+      "empty": "Aucune activite enregistree",
+      "loadFailed": "Echec du chargement du journal d'audit"
+    },
+    "dialog": {
+      "add": {
+        "title": "Ajouter un Identifiant",
+        "pluginId": "ID du Plugin",
+        "pluginIdPlaceholder": "com.example.plugin",
+        "key": "Cle",
+        "keyPlaceholder": "API_KEY",
+        "value": "Valeur",
+        "valuePlaceholder": "Entrez la valeur secrete",
+        "adding": "Ajout en cours...",
+        "submit": "Ajouter l'Identifiant"
+      },
+      "password": {
+        "setTitle": "Definir le Mot de Passe Principal",
+        "enterTitle": "Entrer le Mot de Passe Principal",
+        "setDescription": "Definissez un mot de passe principal pour proteger vos identifiants. Ce mot de passe sera requis pour acceder aux donnees sensibles.",
+        "enterDescription": "Entrez votre mot de passe principal pour deverrouiller l'acces aux identifiants.",
+        "password": "Mot de passe",
+        "passwordPlaceholder": "Entrez le mot de passe",
+        "confirmPassword": "Confirmer le Mot de Passe",
+        "confirmPlaceholder": "Confirmer le mot de passe",
+        "processing": "Traitement en cours...",
+        "setButton": "Definir le Mot de Passe",
+        "unlockButton": "Deverrouiller"
+      }
+    },
+    "errors": {
+      "passwordMismatch": "Les mots de passe ne correspondent pas",
+      "passwordTooShort": "Le mot de passe doit contenir au moins 8 caracteres",
+      "invalidPassword": "Mot de passe invalide",
+      "setPasswordFailed": "Echec de la definition du mot de passe"
+    },
+    "confirmDelete": "Supprimer les identifiants \"{{key}}\" de {{pluginId}} ?"
+  },
+  "consent": {
+    "title": "Help Improve StratCraft",
+    "description": "StratCraft collects crash reports to fix critical issues. You can also opt in to share anonymous usage data. You can change these settings at any time in Settings > Advanced.",
+    "crashReports": "Crash Reports",
+    "crashReportsAlwaysOn": "Crash reports are always sent to help us fix critical issues. No personal data is included.",
+    "optionalDataSharing": "Optional data sharing:",
+    "analytics": "Send usage analytics",
+    "analyticsDescription": "Share anonymous usage data to help us understand how StratCraft is used and improve features.",
+    "privacyNote": "All data is anonymized before transmission. No personal information, trading data, or API keys are ever collected. You can change these preferences anytime in Settings > Advanced > Privacy.",
+    "noThanks": "No Thanks",
+    "enableSelected": "Enable Selected"
+  },
+  "secretsPanel": {
+    "verifyMissingApiKey": "Cle API manquante",
+    "verifyMissingCompositeKey": "ID ou secret de cle API manquant",
+    "verifyRequestFailed": "La demande de validation a echoue",
+    "patternMismatch": "Value does not match expected pattern ({{pattern}})",
+    "failedToSaveKey": "Failed to save {{key}}",
+    "failedToClearKey": "Failed to clear {{key}}",
+    "failedToDeleteKey": "Failed to delete {{key}}",
+    "apiKey": {
+      "aria": {
+        "required": "obligatoire",
+        "hideValue": "Masquer la valeur",
+        "showValue": "Afficher la valeur"
+      }
+    }
+  },
+  "errors": {
+    "saveFailed": "Echec de la sauvegarde",
+    "loadFailed": "Echec du chargement de la configuration"
+  },
+  "dataRouting": {
+    "loading": "Chargement des preferences de routage de marche...",
+    "instructions": "Pour chaque marche, le premier fournisseur de la liste est prioritaire. Les marches avec un seul fournisseur sont en lecture seule.",
+    "noProvider": "aucun fournisseur",
+    "singleProvider": "Unique"
+  }
+}

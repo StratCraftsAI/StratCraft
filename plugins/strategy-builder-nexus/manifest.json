@@ -1,0 +1,390 @@
+{
+  "$schema": "https://StratCraft.io/schemas/plugin-manifest.json",
+  "id": "com.stratcraft.strategy-builder-nexus",
+  "name": "strategy-builder-nexus",
+  "displayName": "StratForge",
+  "displayNameKey": "manifest.displayName",
+  "version": "1.0.0",
+  "description": "Strategy creation, market regime classification, and AI-powered code generation",
+  "descriptionKey": "manifest.description",
+  "main": "./dist/index.js",
+  "type": "nexus",
+  "lifecycle": {
+    "onInstall": "./scripts/install.js",
+    "onUpgrade": "./scripts/upgrade.js",
+    "onUninstall": "./scripts/uninstall.js"
+  },
+  "category": "strategy",
+  "protocols": ["strategy-nexus"],
+  "entitlements": {
+    "tierMapping": {
+      "free": 0,
+      "basic": 1,
+      "pro": 2,
+      "gold": 3
+    },
+    "services": [
+      {
+        "id": "regime_mode",
+        "name": "Regime Detector",
+        "nameKey": "manifest.services.regimeMode.name",
+        "description": "Market environment and regime classification",
+        "descriptionKey": "manifest.services.regimeMode.description",
+        "tier": "free",
+        "defaultEnabled": true,
+        "category": "REGIME MODE",
+        "categoryKey": "manifest.services.regimeMode.category"
+      },
+      {
+        "id": "indicator_entry_generator",
+        "name": "ENTRY",
+        "nameKey": "manifest.services.indicatorEntryGenerator.name",
+        "description": "Generate entry signals from technical indicators",
+        "descriptionKey": "manifest.services.indicatorEntryGenerator.description",
+        "tier": "free",
+        "defaultEnabled": true,
+        "category": "REGIME MODE",
+        "categoryKey": "manifest.services.indicatorEntryGenerator.category"
+      },
+      {
+        "id": "kronos_predictor",
+        "name": "KRONOS PREDICTOR",
+        "nameKey": "manifest.services.kronosPredictor.name",
+        "description": "Time-series prediction engine",
+        "descriptionKey": "manifest.services.kronosPredictor.description",
+        "tier": "pro",
+        "defaultEnabled": false,
+        "category": "KRONOS MODE",
+        "categoryKey": "manifest.services.kronosPredictor.category"
+      },
+      {
+        "id": "indicator_entry",
+        "name": "INDICATOR ENTRY",
+        "nameKey": "manifest.services.indicatorEntry.name",
+        "description": "Indicator-based entry signals",
+        "descriptionKey": "manifest.services.indicatorEntry.description",
+        "tier": "pro",
+        "defaultEnabled": false,
+        "category": "KRONOS MODE",
+        "categoryKey": "manifest.services.indicatorEntry.category"
+      },
+      {
+        "id": "ai_entry",
+        "name": "AI ENTRY",
+        "nameKey": "manifest.services.aiEntry.name",
+        "description": "AI-powered entry signal generation",
+        "descriptionKey": "manifest.services.aiEntry.description",
+        "tier": "pro",
+        "defaultEnabled": false,
+        "category": "KRONOS MODE",
+        "categoryKey": "manifest.services.aiEntry.category"
+      },
+      {
+        "id": "market_observer",
+        "name": "MARKET OBSERVER",
+        "nameKey": "manifest.services.marketObserver.name",
+        "description": "Real-time market observation",
+        "descriptionKey": "manifest.services.marketObserver.description",
+        "tier": "basic",
+        "defaultEnabled": true,
+        "category": "TRADER MODE",
+        "categoryKey": "manifest.services.marketObserver.category"
+      },
+      {
+        "id": "ai_entry_generator",
+        "name": "ENTRY",
+        "nameKey": "manifest.services.aiEntryGenerator.name",
+        "description": "AI-powered entry generation for trading",
+        "descriptionKey": "manifest.services.aiEntryGenerator.description",
+        "tier": "basic",
+        "defaultEnabled": true,
+        "category": "TRADER MODE",
+        "categoryKey": "manifest.services.aiEntryGenerator.category"
+      },
+      {
+        "id": "indicator_exit_generator",
+        "name": "EXIT",
+        "nameKey": "manifest.services.indicatorExitGenerator.name",
+        "description": "Risk management and exit strategy generation",
+        "descriptionKey": "manifest.services.indicatorExitGenerator.description",
+        "tier": "free",
+        "defaultEnabled": true,
+        "category": "RISK MANAGER",
+        "categoryKey": "manifest.services.indicatorExitGenerator.category"
+      },
+      {
+        "id": "ai_libero",
+        "name": "AI LIBERO",
+        "nameKey": "manifest.services.aiLibero.name",
+        "description": "Centralized AI control and autonomous agents",
+        "descriptionKey": "manifest.services.aiLibero.description",
+        "tier": "basic",
+        "defaultEnabled": true,
+        "category": "AUTOPILOT MODE",
+        "categoryKey": "manifest.services.aiLibero.category"
+      },
+      {
+        "id": "ai_strategy_studio",
+        "name": "STRATEGY STUDIO",
+        "nameKey": "manifest.services.aiStrategyStudio.name",
+        "description": "AI-powered strategy studio for comprehensive strategy creation",
+        "descriptionKey": "manifest.services.aiStrategyStudio.description",
+        "tier": "pro",
+        "defaultEnabled": true,
+        "category": "CHAT MODE",
+        "categoryKey": "manifest.services.aiStrategyStudio.category"
+      },
+      {
+        "id": "strategy_catalog",
+        "name": "STRATEGY CATALOG",
+        "nameKey": "manifest.services.strategyCatalog.name",
+        "description": "Browse and generate strategies from the catalog of 63 proven trading strategies",
+        "descriptionKey": "manifest.services.strategyCatalog.description",
+        "tier": "free",
+        "defaultEnabled": true,
+        "category": "CATALOG MODE",
+        "categoryKey": "manifest.services.strategyCatalog.category"
+      }
+    ]
+  },
+  "hub": {
+    "contributes": ["nona_algorithm"],
+    "consumes": ["nona_algorithm"]
+  },
+  "contributes": {
+    "i18n": {
+      "path": "./locales",
+      "namespaces": ["strategy-builder"]
+    },
+    "strategies": [],
+    "configuration": {
+      "title": "StratForge Settings",
+      "titleKey": "manifest.configuration.title",
+      "properties": {
+        "strategy.dataSource": {
+          "type": "string",
+          "enum": ["local"],
+          "enumDescriptions": [
+            "Store data locally only"
+          ],
+          "default": "local",
+          "description": "Data storage mode for strategies",
+          "descriptionKey": "manifest.configuration.properties.strategyDataSource.description",
+          "category": "Data",
+          "categoryKey": "manifest.configuration.properties.strategyDataSource.category",
+          "order": 1,
+          "readOnly": true
+        },
+        "llm.selectedProvider": {
+          "type": "string",
+          "valuesFrom": "llm-catalog:providers",
+          "default": "NONA",
+          "description": "Active LLM Provider for code generation",
+          "descriptionKey": "manifest.configuration.properties.llmSelectedProvider.description",
+          "category": "LLM Settings",
+          "categoryKey": "manifest.configuration.properties.llmSelectedProvider.category",
+          "order": 9
+        },
+        "llm.selectedModel": {
+          "type": "string",
+          "valuesFrom": "llm-catalog:models",
+          "valuesFromArgs": { "provider": "{llm.selectedProvider}" },
+          "default": "",
+          "description": "Active LLM Model ID",
+          "descriptionKey": "manifest.configuration.properties.llmSelectedModel.description",
+          "category": "LLM Settings",
+          "categoryKey": "manifest.configuration.properties.llmSelectedModel.category",
+          "order": 9
+        },
+        "llm.claude.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Anthropic Claude API Key",
+          "descriptionKey": "manifest.configuration.properties.llmClaudeApiKey.description",
+          "secret": true,
+          "category": "LLM Providers",
+          "categoryKey": "manifest.configuration.properties.llmClaudeApiKey.category",
+          "order": 10
+        },
+        "llm.openai.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API Key",
+          "descriptionKey": "manifest.configuration.properties.llmOpenaiApiKey.description",
+          "secret": true,
+          "category": "LLM Providers",
+          "categoryKey": "manifest.configuration.properties.llmOpenaiApiKey.category",
+          "order": 11
+        },
+        "llm.gemini.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Google Gemini API Key",
+          "descriptionKey": "manifest.configuration.properties.llmGeminiApiKey.description",
+          "secret": true,
+          "category": "LLM Providers",
+          "categoryKey": "manifest.configuration.properties.llmGeminiApiKey.category",
+          "order": 12
+        },
+        "llm.deepseek.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "DeepSeek API Key",
+          "descriptionKey": "manifest.configuration.properties.llmDeepseekApiKey.description",
+          "secret": true,
+          "category": "LLM Providers",
+          "categoryKey": "manifest.configuration.properties.llmDeepseekApiKey.category",
+          "order": 13
+        },
+        "llm.grok.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "xAI Grok API Key",
+          "descriptionKey": "manifest.configuration.properties.llmGrokApiKey.description",
+          "secret": true,
+          "category": "LLM Providers",
+          "categoryKey": "manifest.configuration.properties.llmGrokApiKey.category",
+          "order": 14
+        },
+        "llm.qwen.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Alibaba Qwen API Key",
+          "descriptionKey": "manifest.configuration.properties.llmQwenApiKey.description",
+          "secret": true,
+          "category": "LLM Providers",
+          "categoryKey": "manifest.configuration.properties.llmQwenApiKey.category",
+          "order": 15
+        }
+      }
+    },
+    "viewsContainers": {
+      "sidebar": [{
+        "id": "strategyExplorer",
+        "title": "STRATEGY",
+        "titleKey": "manifest.viewsContainers.sidebar.strategyExplorer",
+        "icon": "resources/strategy-icon.svg"
+      }]
+    },
+    "views": {
+      "strategyExplorer": [{
+        "id": "strategy.tree",
+        "name": "Strategy Tree",
+        "nameKey": "manifest.views.strategyExplorer.strategyTree"
+      }],
+      "workbench": [{
+        "id": "strategy.hub",
+        "name": "Strategy Hub",
+        "nameKey": "manifest.views.workbench.strategyHub"
+      }, {
+        "id": "strategy.providerPortal",
+        "name": "Provider Portal",
+        "nameKey": "manifest.views.workbench.providerPortal"
+      }, {
+        "id": "strategy.groupList",
+        "name": "Strategy Groups",
+        "nameKey": "manifest.views.workbench.strategyGroups"
+      }],
+      "settings": [{
+        "id": "strategy.settings",
+        "name": "Settings",
+        "nameKey": "manifest.views.settings.strategySettings",
+        "component": "PluginSettingsPage",
+        "isMainPage": true
+      }, {
+        "id": "strategy.llmSettings",
+        "name": "LLM Providers",
+        "nameKey": "manifest.views.settings.strategyLlmSettings",
+        "component": "LLMSettingsPanel"
+      }]
+    },
+    "editors": [
+      {
+        "viewType": "strategy.regimeEditor",
+        "displayName": "Regime Detector",
+        "displayNameKey": "manifest.editors.regimeEditor",
+        "serviceIds": ["regime_mode"],
+        "selector": [{ "resourceScheme": "strategy" }]
+      },
+      {
+        "viewType": "strategy.entrySignal",
+        "displayName": "Entry Signal Generator",
+        "displayNameKey": "manifest.editors.entrySignal",
+        "serviceIds": ["indicator_entry_generator"],
+        "selector": [{ "resourceScheme": "strategy" }]
+      },
+      {
+        "viewType": "strategy.kronosPredictor",
+        "displayName": "Kronos AI Predictor",
+        "displayNameKey": "manifest.editors.kronosPredictor",
+        "serviceIds": ["kronos_predictor"],
+        "selector": [{ "resourceScheme": "strategy" }]
+      },
+      {
+        "viewType": "strategy.kronosIndicatorEntry",
+        "displayName": "Kronos Indicator Entry",
+        "displayNameKey": "manifest.editors.kronosIndicatorEntry",
+        "serviceIds": ["indicator_entry"],
+        "selector": [{ "resourceScheme": "strategy" }]
+      },
+      {
+        "viewType": "strategy.kronosAIEntry",
+        "displayName": "Kronos AI Entry",
+        "displayNameKey": "manifest.editors.kronosAIEntry",
+        "serviceIds": ["ai_entry"],
+        "selector": [{ "resourceScheme": "strategy" }]
+      },
+      {
+        "viewType": "strategy.marketObserver",
+        "displayName": "Market Observer",
+        "displayNameKey": "manifest.editors.marketObserver",
+        "serviceIds": ["market_observer"],
+        "selector": [{ "resourceScheme": "strategy" }]
+      },
+      {
+        "viewType": "strategy.traderAIEntry",
+        "displayName": "AI Entry Generator",
+        "displayNameKey": "manifest.editors.traderAIEntry",
+        "serviceIds": ["ai_entry_generator"],
+        "selector": [{ "resourceScheme": "strategy" }]
+      },
+      {
+        "viewType": "strategy.aiLibero",
+        "displayName": "AI Libero",
+        "displayNameKey": "manifest.editors.aiLibero",
+        "serviceIds": ["ai_libero"],
+        "selector": [{ "resourceScheme": "strategy" }]
+      },
+      {
+        "viewType": "strategy.aiStrategyStudio",
+        "displayName": "Strategy Studio",
+        "displayNameKey": "manifest.editors.aiStrategyStudio",
+        "serviceIds": ["ai_strategy_studio"],
+        "selector": [{ "resourceScheme": "strategy" }]
+      },
+      {
+        "viewType": "strategy.indicatorExit",
+        "displayName": "Indicator Exit Generator",
+        "displayNameKey": "manifest.editors.indicatorExit",
+        "serviceIds": ["indicator_exit_generator"],
+        "selector": [{ "resourceScheme": "strategy" }]
+      },
+      {
+        "viewType": "strategy.strategyCatalog",
+        "displayName": "Strategy Catalog",
+        "displayNameKey": "manifest.editors.strategyCatalog",
+        "serviceIds": ["strategy_catalog"],
+        "selector": [{ "resourceScheme": "strategy" }]
+      }
+    ],
+    "commands": [
+      { "id": "strategy.openHub", "title": "Open Strategy Hub", "titleKey": "manifest.commands.openHub" },
+      { "id": "strategy.generate", "title": "Generate Strategy Code", "titleKey": "manifest.commands.generate" },
+      { "id": "strategy.validate", "title": "Validate Strategy", "titleKey": "manifest.commands.validate" },
+      { "id": "strategy.register", "title": "Register Strategy to Core", "titleKey": "manifest.commands.register" }
+    ]
+  },
+  "permissions": ["network", "database"],
+  "isolation": "trusted",
+  "activationEvents": ["*"]
+}

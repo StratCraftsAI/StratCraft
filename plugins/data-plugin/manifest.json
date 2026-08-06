@@ -1,0 +1,24 @@
+{
+  "$schema": "https://StratCraft.io/schemas/plugin-manifest.json",
+  "id": "com.stratcraft.data-plugin",
+  "name": "data-plugin",
+  "displayName": "Data Foundation",
+  "displayNameKey": "manifest.displayName",
+  "version": "1.0.0",
+  "description": "Foundation plugin providing shared data source components and types",
+  "descriptionKey": "manifest.description",
+  "type": "nexus",
+  "tier": 0,
+  "distribution": "bundled",
+  "main": "./ui/data-nexus/dist/index.js",
+  "category": "data",
+  "contributes": {
+    "i18n": {
+      "path": "./locales",
+      "namespaces": ["data"]
+    }
+  },
+  "permissions": ["network:internal", "database"],
+  "isolation": "trusted",
+  "activationEvents": ["*"]
+}

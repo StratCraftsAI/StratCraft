@@ -1,0 +1,82 @@
+{
+  "$schema": "./backtest-test-case.schema.json",
+  "description": "Test case from test/3.txt - Backtest configuration with multiple algorithm workflows",
+  "backtestConfig": {
+    "symbol": "AAPL",
+    "start_time": "2018-11-01 00:00:00",
+    "end_time": "2021-01-01 00:00:00",
+    "timeframe": "1D",
+    "initial_capital": 100005,
+    "order_size_value": 8000,
+    "order_size_unit": "cash"
+  },
+  "testCases": [
+    {
+      "id": "test-case-4",
+      "description": "FreqMarketState005 + EnsembleVotingStrategy017 + FreqExit005Simple",
+      "active": true,
+      "workflow": {
+        "analysis": "FreqMarketState005",
+        "precondition": "",
+        "execution": "EnsembleVotingStrategy017",
+        "postcondition": "FreqExit005Simple"
+      }
+    },
+    {
+      "id": "test-case-2",
+      "description": "FreqMarketState002 + FreqExecute002 + FreqExit001Simple",
+      "active": false,
+      "workflow": {
+        "analysis": "FreqMarketState002",
+        "precondition": "",
+        "execution": "FreqExecute002",
+        "postcondition": "FreqExit001Simple"
+      }
+    },
+    {
+      "id": "test-case-3",
+      "description": "LLMAdaptiveAdvisor001 + FreqMarketState005 + EnsembleVotingStrategy017 + FreqExit005Simple",
+      "active": false,
+      "workflow": {
+        "advisor": "LLMAdaptiveAdvisor001",
+        "analysis": "FreqMarketState005",
+        "precondition": "",
+        "execution": "EnsembleVotingStrategy017",
+        "postcondition": "FreqExit005Simple"
+      }
+    },
+    {
+      "id": "test-case-5",
+      "description": "SignalTriggerEMA001 + EnsembleVotingStrategy017 + FreqExit005Simple",
+      "active": false,
+      "workflow": {
+        "analysis": "FreqMarketState005",
+        "precondition": "SignalTriggerEMA001",
+        "execution": "EnsembleVotingStrategy017",
+        "postcondition": "FreqExit005Simple"
+      }
+    },
+    {
+      "id": "test-case-a1",
+      "description": "MyStrategy5778 + MyStrategy7015 + FreqExit005Simple (Good Result)",
+      "active": false,
+      "workflow": {
+        "analysis": "",
+        "precondition": "MyStrategy5778",
+        "execution": "MyStrategy7015",
+        "postcondition": "FreqExit005Simple"
+      }
+    },
+    {
+      "id": "test-case-a9",
+      "description": "Execution only - No analysis, precondition, or postcondition",
+      "active": false,
+      "workflow": {
+        "analysis": "",
+        "precondition": "",
+        "execution": "111 (2025-12-23 11:24)",
+        "postcondition": ""
+      }
+    }
+  ]
+}

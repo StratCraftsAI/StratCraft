@@ -1,0 +1,40 @@
+{
+  "schema_version": "qnx.evaluation-envelope/1.0.0",
+  "evaluation_id": "phase1-golden-completed",
+  "model_id": "factor:alpha158/MA5",
+  "window": {
+    "start_ms": 0,
+    "end_ms": 253402300799999,
+    "end_inclusive": true
+  },
+  "status": "partial",
+  "rows": [
+    { "symbol": "AAPL", "timestamp_ms": 0, "signal_score": 0.0, "confidence": 0.0, "forward_return": 0.01 },
+    { "symbol": "AAPL", "timestamp_ms": 1716901200000, "signal_score": 0.5, "confidence": 0.75, "forward_return": null },
+    { "symbol": "MSFT", "timestamp_ms": 253402300799999, "signal_score": -1.0, "confidence": 1.0, "forward_return": -0.02 }
+  ],
+  "statistics": [
+    { "name": "spearman_ic", "value": 0.5, "sample_count": 3, "raw_p_value": 0.025, "adjusted_p_value": 0.05 },
+    { "name": "thin_sample_marker", "value": 0.0, "sample_count": 0, "raw_p_value": null, "adjusted_p_value": null }
+  ],
+  "verdict_inputs": {
+    "observed_sample_count": 3,
+    "minimum_sample_count": 5,
+    "effect_size": 0.5,
+    "raw_p_value": 0.025,
+    "adjusted_p_value": 0.05,
+    "significance_level": 0.05,
+    "passed": false
+  },
+  "progress": { "completed_units": 3, "total_units": 3, "stage": "completed" },
+  "cancellation": { "requested": false, "cancelled": false, "reason": null },
+  "missing_symbols": ["MISSING"],
+  "errors": [
+    {
+      "code": "QNX_EVAL_MISSING_SYMBOL",
+      "message": "No bounded input rows were available for symbol MISSING",
+      "field": "missing_symbols[0]",
+      "retryable": false
+    }
+  ]
+}

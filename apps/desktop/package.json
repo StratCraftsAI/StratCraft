@@ -1,0 +1,311 @@
+{
+  "name": "@StratCraft/desktop",
+  "version": "0.1.0",
+  "description": "StratCraft Desktop Application",
+  "main": "./dist/main/index.js",
+  "author": {
+    "name": "StratCraft Team",
+    "email": "security@stratcraft.ai"
+  },
+  "homepage": "https://stratcraft.ai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StratCraftsAI/StratCraft.git"
+  },
+  "license": "Apache-2.0",
+  "scripts": {
+    "dev": "ELECTRON_DISABLE_SANDBOX=1 electron-vite dev",
+    "dev:research": "STRATCRAFT_RESEARCH_MODE=1 ELECTRON_DISABLE_SANDBOX=1 electron-vite dev",
+    "build": "electron-vite build",
+    "build:clean": "npm run clean:db && npm run build",
+    "clean:db": "rm -f data/StratCraft.db data/StratCraft.db-shm data/StratCraft.db-wal",
+    "build:executor": "cd ../../packages/executor && ./build.sh",
+    "preview": "electron-vite preview",
+    "start": "electron .",
+    "serve": "bash ../../scripts/serve/run-stratcraft-serve.sh",
+    "serve:systemd": "bash ../../scripts/serve/run-stratcraft-serve.sh --systemd",
+    "prebuild:plugins": "npx ts-node scripts/copy-bundled-plugins.ts",
+    "package": "npm run prebuild:plugins && electron-builder --publish never",
+    "package:win": "npm run prebuild:plugins && electron-builder --win --publish never",
+    "package:mac": "npm run prebuild:plugins && electron-builder --mac --publish never",
+    "package:linux": "npm run prebuild:plugins && electron-builder --linux --publish never",
+    "lint": "eslint . --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit",
+    "typecheck:renderer": "tsc --noEmit --project tsconfig.renderer.json",
+    "typecheck:main": "tsc --noEmit --project tsconfig.main.json",
+    "clean": "rm -rf dist release resources/bundled_plugins",
+    "seed:test": "npx ts-node scripts/seed-test-data.ts",
+    "seed:test:clean": "npx ts-node scripts/seed-test-data.ts --clean",
+    "seed:sql": "sqlite3 data/StratCraft.db < scripts/seed-test-algorithms.sql",
+    "backfill:signal-discovery": "TS_NODE_TRANSPILE_ONLY=true TS_NODE_COMPILER_OPTIONS='{\"module\":\"CommonJS\",\"moduleResolution\":\"node\",\"target\":\"ES2022\",\"esModuleInterop\":true,\"skipLibCheck\":true,\"isolatedModules\":false}' electron --no-sandbox -r ts-node/register ../../scripts/backfill-signal-discovery-pipeline.cjs",
+    "ticket958:single-cell": "STRATCRAFT_RESEARCH_MODE=1 TS_NODE_TRANSPILE_ONLY=true TS_NODE_COMPILER_OPTIONS='{\"module\":\"CommonJS\",\"moduleResolution\":\"node\",\"target\":\"ES2022\",\"esModuleInterop\":true,\"skipLibCheck\":true,\"isolatedModules\":false}' electron --no-sandbox -r ts-node/register scripts/run-databento-single-cell.cjs",
+    "regenerate:863_4": "TS_NODE_TRANSPILE_ONLY=true TS_NODE_COMPILER_OPTIONS='{\"module\":\"CommonJS\",\"moduleResolution\":\"node\",\"target\":\"ES2022\",\"esModuleInterop\":true,\"skipLibCheck\":true,\"isolatedModules\":false}' npx ts-node ../../scripts/regenerate-863_4-calibration-report.ts",
+    "audit:signals": "TS_NODE_TRANSPILE_ONLY=true TS_NODE_COMPILER_OPTIONS='{\"module\":\"CommonJS\",\"moduleResolution\":\"node\",\"target\":\"ES2022\",\"esModuleInterop\":true,\"skipLibCheck\":true,\"isolatedModules\":false}' npx ts-node ../../scripts/audit_signal_contracts.ts",
+    "cohort:soft-delete": "TS_NODE_TRANSPILE_ONLY=true TS_NODE_COMPILER_OPTIONS='{\"module\":\"CommonJS\",\"moduleResolution\":\"node\",\"target\":\"ES2022\",\"esModuleInterop\":true,\"skipLibCheck\":true,\"isolatedModules\":false}' npx ts-node ../../scripts/soft_delete_signals_by_cohort.ts",
+    "check:migrations": "TS_NODE_TRANSPILE_ONLY=true TS_NODE_COMPILER_OPTIONS='{\"module\":\"CommonJS\",\"moduleResolution\":\"node\",\"target\":\"ES2022\",\"esModuleInterop\":true,\"skipLibCheck\":true,\"isolatedModules\":false}' npx ts-node scripts/check-migration-manifest.ts",
+    "check:migrations:write": "TS_NODE_TRANSPILE_ONLY=true TS_NODE_COMPILER_OPTIONS='{\"module\":\"CommonJS\",\"moduleResolution\":\"node\",\"target\":\"ES2022\",\"esModuleInterop\":true,\"skipLibCheck\":true,\"isolatedModules\":false}' npx ts-node scripts/check-migration-manifest.ts --write",
+    "codegen:floors": "npx tsx scripts/codegen-signal-source-floors.ts",
+    "codegen:floors:check": "npx tsx scripts/codegen-signal-source-floors.ts --check",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:p8:ac6": "playwright test e2e/ac-6.p8.test.ts",
+    "test:e2e:p8:ac7": "playwright test e2e/ac-7.p8.test.ts",
+    "test:e2e:p9:ac8": "playwright test e2e/ac-8.p9.test.ts",
+    "test:e2e:ui": "playwright test --ui",
+    "postinstall": "node -e \"if(!process.env.CI){const{execSync:r}=require('child_process');r('npx @electron/rebuild -m .',{stdio:'inherit'});const p=require('path').resolve(__dirname,'../../node_modules/.pnpm/better-sqlite3@12.11.1/node_modules/better-sqlite3');try{require('fs').statSync(p+'/binding.gyp');r('npx node-gyp rebuild --release',{cwd:p,stdio:'inherit'})}catch{}r('npm install --prefix src/mcp/standalone',{stdio:'inherit'})}\""
+  },
+  "optionalDependencies": {
+    "@clickhouse/client": "^1.16.0"
+  },
+  "dependencies": {
+    "@StratCraft/ai-studio-operations": "workspace:*",
+    "@StratCraft/app-state-core": "workspace:*",
+    "@StratCraft/chat-markdown": "workspace:*",
+    "@StratCraft/shared-ui": "workspace:*",
+    "@StratCraft/config-file": "workspace:*",
+    "@StratCraft/corrective-ai-core": "workspace:*",
+    "@StratCraft/data-cache-store": "workspace:*",
+    "@StratCraft/db-migrations": "workspace:*",
+    "@StratCraft/llm-providers": "workspace:*",
+    "@StratCraft/managed-tools-core": "workspace:*",
+    "@StratCraft/operation-admission": "workspace:*",
+    "@StratCraft/plugin-store": "workspace:*",
+    "@StratCraft/research-environment": "workspace:*",
+    "@StratCraft/secure-store": "workspace:*",
+    "@StratCraft/strategy-persistence-store": "workspace:*",
+    "@StratCraft/types": "workspace:*",
+    "@StratCraft/user-data-store": "workspace:*",
+    "@StratCraft/workload-prelaunch": "workspace:*",
+    "@dsnp/parquetjs": "1.8.8",
+    "@duckdb/node-api": "1.5.2-r.2",
+    "@sentry/electron": "~7.16.0",
+    "@tanstack/react-query": "^5.60.0",
+    "adm-zip": "^0.6.0",
+    "apache-arrow": "18.1.0",
+    "better-sqlite3": "^11.7.0",
+    "bottleneck": "^2.19.5",
+    "ccxt": "^4.5.71",
+    "chokidar": "3.6.0",
+    "clsx": "^2.1.0",
+    "driver.js": "^1.4.0",
+    "dukascopy-node": "^1.46.3",
+    "electron-log": "^5.4.3",
+    "electron-store": "^8.2.0",
+    "electron-updater": "^6.8.9",
+    "i18next": "^23.16.0",
+    "jsonc-parser": "^3.3.1",
+    "lucide-react": "^0.460.0",
+    "onnxruntime-node": "^1.27.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "react-i18next": "^14.1.0",
+    "tailwind-merge": "^2.5.0",
+    "zustand": "^5.0.0"
+  },
+  "devDependencies": {
+    "@electron-toolkit/utils": "^3.0.0",
+    "@electron/notarize": "^2.5.0",
+    "@electron/rebuild": "^3.7.1",
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "@playwright/test": "^1.49.0",
+    "@types/adm-zip": "^0.5.7",
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.10.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "@vitest/coverage-v8": "^1.0.0",
+    "autoprefixer": "^10.4.20",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.0",
+    "electron-vite": "^2.3.0",
+    "eslint": "^9.15.0",
+    "fast-check": "^4.7.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "tailwindcss-animate": "^1.0.7",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0",
+    "vitest": "^1.0.0",
+    "zod": "^4.3.6"
+  },
+  "build": {
+    "appId": "com.StratCraft.desktop",
+    "productName": "StratCraft",
+    "npmRebuild": false,
+    "afterSign": "scripts/notarize.cjs",
+    "publish": {
+      "provider": "github",
+      "owner": "StratCraftsAI",
+      "repo": "StratCraft"
+    },
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "build/icon-1024x1024.png",
+        "to": "icon.png"
+      },
+      {
+        "from": "../../packages/builder-templates/framework",
+        "to": "framework",
+        "filter": [
+          "**/*.py"
+        ]
+      },
+      {
+        "from": "../../packages/builder-templates/tools",
+        "to": "tools",
+        "filter": [
+          "**/*.py",
+          "!**/tests/**",
+          "!**/__pycache__/**"
+        ]
+      },
+      {
+        "from": "resources/bundled_plugins",
+        "to": "bundled_plugins",
+        "filter": [
+          "**/*",
+          "!**/*.pyc",
+          "!**/__pycache__/**"
+        ]
+      },
+      {
+        "from": "resources/core",
+        "to": "core",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "resources/research-worker-trust.json",
+        "to": "research-worker-trust.json"
+      },
+      {
+        "from": "resources/runner",
+        "to": "runner",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "resources/agent-runtime",
+        "to": "agent-runtime",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "src/mcp/standalone/node_modules/@agentclientprotocol/sdk",
+        "to": "agent-runtime/node_modules/@agentclientprotocol/sdk",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "src/mcp/standalone/node_modules/@github/copilot-sdk",
+        "to": "agent-runtime/node_modules/@github/copilot-sdk",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "src/mcp/standalone/node_modules/@github/copilot",
+        "to": "agent-runtime/node_modules/@github/copilot",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "src/mcp/standalone/node_modules/@anthropic-ai/claude-agent-sdk",
+        "to": "agent-runtime/node_modules/@anthropic-ai/claude-agent-sdk",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "mac": {
+      "icon": "build/icon-1024x1024.png",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.finance",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "extraResources": [
+        {
+          "from": "../../packages/executor/build/StratCraft-executor",
+          "to": "executor/macos-${arch}/StratCraft-executor"
+        },
+        {
+          "from": "src/mcp/standalone/node_modules/@github/copilot-darwin-${arch}",
+          "to": "agent-runtime/node_modules/@github/copilot-darwin-${arch}"
+        },
+        {
+          "from": "src/mcp/standalone/node_modules/@anthropic-ai/claude-agent-sdk-darwin-${arch}",
+          "to": "agent-runtime/node_modules/@anthropic-ai/claude-agent-sdk-darwin-${arch}"
+        }
+      ]
+    },
+    "win": {
+      "icon": "build/icon-1024x1024.png",
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "signingHashAlgorithms": [
+        "sha256"
+      ],
+      "extraResources": [
+        {
+          "from": "../../packages/executor/build/StratCraft-executor.exe",
+          "to": "executor/windows-x64/StratCraft-executor.exe"
+        },
+        {
+          "from": "src/mcp/standalone/node_modules/@github/copilot-win32-${arch}",
+          "to": "agent-runtime/node_modules/@github/copilot-win32-${arch}"
+        },
+        {
+          "from": "src/mcp/standalone/node_modules/@anthropic-ai/claude-agent-sdk-win32-${arch}",
+          "to": "agent-runtime/node_modules/@anthropic-ai/claude-agent-sdk-win32-${arch}"
+        }
+      ]
+    },
+    "linux": {
+      "icon": "build/icons",
+      "target": [
+        "AppImage",
+        "deb",
+        "zip"
+      ],
+      "category": "Finance",
+      "extraResources": [
+        {
+          "from": "../../packages/executor/build/StratCraft-executor",
+          "to": "executor/linux-x64/StratCraft-executor"
+        },
+        {
+          "from": "src/mcp/standalone/node_modules/@github/copilot-linux-${arch}",
+          "to": "agent-runtime/node_modules/@github/copilot-linux-${arch}"
+        },
+        {
+          "from": "src/mcp/standalone/node_modules/@anthropic-ai/claude-agent-sdk-linux-${arch}",
+          "to": "agent-runtime/node_modules/@anthropic-ai/claude-agent-sdk-linux-${arch}"
+        }
+      ]
+    }
+  },
+  "distribution": "public"
+}

@@ -1,0 +1,221 @@
+// Auto-generated C++ live alt-data factor strategy: {{STRATEGY_NAME}}
+// Generated: {{GENERATED_TIME}}
+//
+// TICKET_196_7_7 P3.2 -- alt-data branch in the live strategy template.
+//
+// This strategy is a SIGNAL SOURCE (not a trading rule). It subscribes to
+// exactly one alternative-data series and emits a continuous score in
+// [-1, 1] via the v2 signal contract (TICKET_196_7_0):
+//
+//   on_alt_data(row) -- validates provider_id / series_id against the
+//                       compile-time constants below, pushes row.value
+//                       through AltDataReducer (raw / zscore / rank).
+//                       No signal emission here; reducer update only.
+//
+//   on_bar(bar)      -- reads AltDataReducer::current_score(); if NaN or
+//                       still inside the reducer warmup region, emits
+//                       nothing. Otherwise emits one signal JSON frame
+//                       with direction = 0 and the continuous score in
+//                       the "score" field. The trading rule (threshold /
+//                       hysteresis) lives in the strategy that consumes
+//                       this signal, not in this template.
+//
+// Single-series only -- multi-series alt-data factors are a follow-up.
+
+#include "quantnexus/executor/factor_eval/alt_data_reducer.hpp"
+#include "quantnexus/executor/factor_eval/keys.hpp"
+
+#include <cmath>
+#include <cstdlib>
+#include <limits>
+#include <optional>
+#include <string>
+#include <string_view>
+
+namespace qnx_live_alt {
+
+struct Bar {
+    long long timestamp = 0;
+    double close = 0.0;
+    unsigned int bar_index = 0;
+};
+
+// Maximum digits in a JSON numeric literal (sign + 17 significant + decimal + exponent)
+constexpr std::size_t MAX_JSON_NUMBER_LENGTH = 48;
+
+inline double number_field(std::string_view json, std::string_view key, double fallback = 0.0) {
+    const std::string search = "\"" + std::string(key) + "\"";
+    auto pos = json.find(search);
+    if (pos == std::string_view::npos) {
+        return fallback;
+    }
+    pos = json.find(':', pos + search.size());
+    if (pos == std::string_view::npos) {
+        return fallback;
+    }
+    ++pos;
+    while (pos < json.size() && (json[pos] == ' ' || json[pos] == '\t')) {
+        ++pos;
+    }
+    return std::strtod(std::string(json.substr(pos, MAX_JSON_NUMBER_LENGTH)).c_str(), nullptr);
+}
+
+inline std::optional<std::string_view> string_field(std::string_view json, std::string_view key) {
+    const std::string search = "\"" + std::string(key) + "\"";
+    auto pos = json.find(search);
+    if (pos == std::string_view::npos) {
+        return std::nullopt;
+    }
+    pos = json.find(':', pos + search.size());
+    if (pos == std::string_view::npos) {
+        return std::nullopt;
+    }
+    ++pos;
+    while (pos < json.size() && (json[pos] == ' ' || json[pos] == '\t')) {
+        ++pos;
+    }
+    if (pos >= json.size() || json[pos] != '"') {
+        return std::nullopt;
+    }
+    ++pos;
+    const auto end = json.find('"', pos);
+    if (end == std::string_view::npos) {
+        return std::nullopt;
+    }
+    return json.substr(pos, end - pos);
+}
+
+inline Bar parse_bar(std::string_view json) {
+    return Bar{
+        .timestamp = static_cast<long long>(number_field(json, "t")),
+        .close = number_field(json, "c"),
+        .bar_index = static_cast<unsigned int>(number_field(json, "bar_index")),
+    };
+}
+
+inline std::string escape_json(std::string_view value) {
+    std::string escaped;
+    escaped.reserve(value.size());
+    for (char ch : value) {
+        if (ch == '"' || ch == '\\') {
+            escaped += '\\';
+        }
+        escaped += ch;
+    }
+    return escaped;
+}
+
+inline std::string score_signal_json(double score, const Bar& bar, std::string_view reason) {
+    return std::string("{\"type\":\"signal\",\"data\":{") +
+        "\"direction\":0" +
+        ",\"score\":" + std::to_string(score) +
+        ",\"value\":" + std::to_string(score) +
+        ",\"confidence\":1.0" +
+        ",\"reason\":\"" + escape_json(reason) + "\"" +
+        ",\"bar_index\":" + std::to_string(bar.bar_index) +
+        ",\"timestamp\":" + std::to_string(bar.timestamp) +
+        "}}";
+}
+
+// Compile-time constants. The orchestrator (P2.2) is responsible for routing
+// only the matching (provider_id, series_id) rows to this strategy, but we
+// validate again here so a misrouted row is silently ignored rather than
+// corrupting the reducer state.
+constexpr std::string_view kStrategyProviderId = "{{PROVIDER_ID}}";
+constexpr std::string_view kStrategySeriesId   = "{{SERIES_ID}}";
+constexpr std::string_view kStrategyReducer    = "{{REDUCER}}";
+constexpr std::size_t       kStrategyLookback  = {{LOOKBACK}};
+constexpr std::string_view kStrategyReason     =
+    "alt_data_factor:{{PROVIDER_ID}}:{{SERIES_ID}}:{{REDUCER}}";
+
+} // namespace qnx_live_alt
+
+namespace {
+
+using StratCraft::executor::factor_eval::AltDataReducer;
+
+std::optional<AltDataReducer> g_reducer;
+unsigned int g_updates_seen = 0;
+std::string g_last_response;
+
+void ensure_reducer() {
+    if (g_reducer.has_value()) {
+        return;
+    }
+    auto built = AltDataReducer::make(qnx_live_alt::kStrategyReducer,
+                                      qnx_live_alt::kStrategyLookback);
+    if (!built.has_value()) {
+        // make() rejects unknown reducer / lookback<=1 for zscore|rank.
+        // Construction failure is a codegen bug, not a runtime condition;
+        // leave g_reducer empty so on_bar / on_alt_data become no-ops and
+        // the engine logs the missing state via cerr below.
+        return;
+    }
+    g_reducer = std::move(built).value();
+    g_updates_seen = 0;
+}
+
+} // namespace
+
+extern "C" int qnx_live_strategy_abi_version() {
+    return 2;
+}
+
+extern "C" void qnx_live_strategy_reset() {
+    g_reducer.reset();
+    g_updates_seen = 0;
+    g_last_response.clear();
+    ensure_reducer();
+}
+
+extern "C" const char* qnx_live_strategy_on_alt_data(const char* row_json) {
+    if (row_json == nullptr) {
+        return "";
+    }
+    ensure_reducer();
+    if (!g_reducer.has_value()) {
+        return "";
+    }
+    const std::string_view json(row_json);
+
+    const auto provider = qnx_live_alt::string_field(json, "provider_id");
+    const auto series   = qnx_live_alt::string_field(json, "series_id");
+    if (!provider.has_value() || !series.has_value()) {
+        return "";
+    }
+    if (*provider != qnx_live_alt::kStrategyProviderId ||
+        *series   != qnx_live_alt::kStrategySeriesId) {
+        // Misrouted row -- drop silently; the engine already validated the
+        // five required fields and the orchestrator is the source of truth
+        // for routing.
+        return "";
+    }
+
+    const double value = qnx_live_alt::number_field(json, "value",
+                                                    std::numeric_limits<double>::quiet_NaN());
+    g_reducer->update(value);
+    if (!std::isnan(value)) {
+        ++g_updates_seen;
+    }
+    return "";
+}
+
+extern "C" const char* qnx_live_strategy_on_bar(const char* bar_json) {
+    g_last_response.clear();
+    ensure_reducer();
+    if (!g_reducer.has_value()) {
+        return "";
+    }
+    if (g_updates_seen < g_reducer->minimum_period()) {
+        return "";
+    }
+    const double score = g_reducer->current_score();
+    if (std::isnan(score)) {
+        return "";
+    }
+    const auto bar = qnx_live_alt::parse_bar(
+        bar_json == nullptr ? "{}" : std::string_view(bar_json));
+    g_last_response = qnx_live_alt::score_signal_json(
+        score, bar, qnx_live_alt::kStrategyReason);
+    return g_last_response.c_str();
+}

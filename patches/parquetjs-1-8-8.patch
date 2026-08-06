@@ -1,0 +1,11 @@
+diff --git a/package.json b/package.json
+index 78f5064..1f36897 100644
+--- a/package.json
++++ b/package.json
+@@ -19,6 +19,5 @@
+     "@types/node-int64": "^0.4.32",
+     "@types/thrift": "^0.10.17",
+-    "@zenfs/core": "^2.3.8",
+     "brotli-wasm": "^3.0.1",
+     "bson": "6.10.4",
+     "int53": "^1.0.0",

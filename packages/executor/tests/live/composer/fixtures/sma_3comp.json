@@ -1,0 +1,40 @@
+{
+  "strategyId": "fixture-sma-3comp-0001",
+  "symbol": "BTC/USDT",
+  "timeframe": "1m",
+  "components": [
+    {
+      "role": "analysis",
+      "algorithmId": "sma-analysis",
+      "algorithmName": "SmaAnalysis",
+      "algorithmCode": "class SmaAnalysis {\npublic:\n    void set_params(const nlohmann::json& params) {\n        period_ = params.value(\"period\", 20);\n        if (period_ < 1) period_ = 1;\n        sum_ = 0.0;\n        window_.clear();\n        window_.reserve(static_cast<std::size_t>(period_));\n    }\n    void update(BarContext& ctx) {\n        sum_ += ctx.bar.close;\n        window_.push_back(ctx.bar.close);\n        if (static_cast<int>(window_.size()) > period_) {\n            sum_ -= window_.front();\n            window_.erase(window_.begin());\n        }\n        ctx.sma = window_.empty() ? 0.0 : sum_ / static_cast<double>(window_.size());\n        ctx.sma_ready = static_cast<int>(window_.size()) >= period_;\n    }\nprivate:\n    int period_ = 20;\n    double sum_ = 0.0;\n    std::vector<double> window_;\n};",
+      "baseClass": "AnalysisBase",
+      "timeframe": "1m",
+      "parameters": "{\"period\": 20}",
+      "sortOrder": 0
+    },
+    {
+      "role": "entry",
+      "algorithmId": "sma-cross-entry",
+      "algorithmName": "SmaCrossEntry",
+      "algorithmCode": "class SmaCrossEntry {\npublic:\n    void set_params(const nlohmann::json& params) {\n        (void)params;\n    }\n    bool evaluate(const BarContext& ctx) {\n        return ctx.sma_ready && ctx.bar.close > ctx.sma;\n    }\n    int direction(const BarContext& ctx) {\n        (void)ctx;\n        return 1;\n    }\n    double confidence(const BarContext& ctx) {\n        (void)ctx;\n        return 1.0;\n    }\n    std::string reason() const {\n        return \"sma_cross_long\";\n    }\n};",
+      "baseClass": "EntryBase",
+      "timeframe": "1m",
+      "parameters": "{}",
+      "sortOrder": 1
+    },
+    {
+      "role": "exit",
+      "algorithmId": "n-bar-exit",
+      "algorithmName": "NBarExit",
+      "algorithmCode": "class NBarExit {\npublic:\n    void set_params(const nlohmann::json& params) {\n        hold_bars_ = params.value(\"hold_bars\", 5);\n        if (hold_bars_ < 1) hold_bars_ = 1;\n        bars_since_entry_ = -1;\n    }\n    bool evaluate(const BarContext& ctx) {\n        (void)ctx;\n        if (bars_since_entry_ < 0) {\n            bars_since_entry_ = 0;\n            return false;\n        }\n        ++bars_since_entry_;\n        if (bars_since_entry_ >= hold_bars_) {\n            bars_since_entry_ = -1;\n            return true;\n        }\n        return false;\n    }\n    std::string reason() const {\n        return \"n_bar_exit\";\n    }\nprivate:\n    int hold_bars_ = 5;\n    int bars_since_entry_ = -1;\n};",
+      "baseClass": "ExitBase",
+      "timeframe": "1m",
+      "parameters": "{\"hold_bars\": 5}",
+      "sortOrder": 2
+    }
+  ],
+  "compilerPath": null,
+  "cppHardening": false,
+  "stratforgeVersion": "0.1.0"
+}

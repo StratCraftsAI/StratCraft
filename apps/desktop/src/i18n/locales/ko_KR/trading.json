@@ -1,0 +1,46 @@
+{
+  "position": {
+    "long": "\ub871",
+    "short": "\uc19f",
+    "flat": "\ud3ec\uc9c0\uc158 \uc5c6\uc74c",
+    "open": "\uc624\ud508",
+    "closed": "\uccad\uc0b0"
+  },
+  "order": {
+    "market": "\uc2dc\uc7a5\uac00 \uc8fc\ubb38",
+    "limit": "\uc9c0\uc815\uac00 \uc8fc\ubb38",
+    "stop": "\uc2a4\ud1b1 \uc8fc\ubb38",
+    "stopLimit": "\uc2a4\ud1b1 \uc9c0\uc815\uac00 \uc8fc\ubb38"
+  },
+  "side": {
+    "buy": "\ub9e4\uc218",
+    "sell": "\ub9e4\ub3c4"
+  },
+  "metrics": {
+    "sharpe": "\uc0e4\ud504 \ube44\uc728",
+    "sortino": "\uc18c\ub974\ud2f0\ub178 \ube44\uc728",
+    "maxDrawdown": "\ucd5c\ub300 \ub0d9\ud3ed",
+    "winRate": "\uc2b9\ub960",
+    "profitFactor": "\uc218\uc775 \uc694\uc18c",
+    "totalReturn": "\ucd1d \uc218\uc775\ub960",
+    "annualizedReturn": "\uc5f0\ud658\uc0b0 \uc218\uc775\ub960",
+    "volatility": "\ubcc0\ub3d9\uc131",
+    "calmar": "\uce7c\ub9c8 \ube44\uc728"
+  },
+  "timeframe": {
+    "1m": "1\ubd84",
+    "5m": "5\ubd84",
+    "15m": "15\ubd84",
+    "1h": "1\uc2dc\uac04",
+    "4h": "4\uc2dc\uac04",
+    "1d": "1\uc77c",
+    "1w": "1\uc8fc"
+  },
+  "asset": {
+    "stock": "\uc8fc\uc2dd",
+    "crypto": "\uc554\ud638\ud654\ud3d0",
+    "forex": "\uc678\ud658",
+    "futures": "\uc120\ubb3c",
+    "options": "\uc635\uc158"
+  }
+}

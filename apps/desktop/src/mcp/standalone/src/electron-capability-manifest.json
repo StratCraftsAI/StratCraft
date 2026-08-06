@@ -1,0 +1,4477 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": {
+    "preload": "src/preload/index.ts",
+    "ipc": "src/main/**/*.ts",
+    "mcpRegistry": "src/mcp/standalone/src/handlers/index.ts"
+  },
+  "capabilities": [
+    {
+      "id": "a1",
+      "name": "Alpha Factory Run Backtest queue",
+      "domain": "Quant Lab -- Alpha Factory + factor mining",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "alphaFactory.cancelBacktest",
+        "alphaFactory.getQueueStatus",
+        "alphaFactory.onQueueStatus",
+        "alphaFactory.onRunUniverseIncrement",
+        "alphaFactory.registerTask",
+        "alphaFactory.runBacktest"
+      ],
+      "ipcChannels": [
+        "alpha-factory:queue-cancel",
+        "alpha-factory:queue-enqueue",
+        "alpha-factory:queue-register",
+        "alpha-factory:queue-status"
+      ],
+      "mcpTools": [
+        "run_alpha_factory_backtest",
+        "cancel_alpha_factory"
+      ]
+    },
+    {
+      "id": "a10",
+      "name": "Alpha Factory signal selection",
+      "domain": "Quant Lab -- Alpha Factory + factor mining",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [],
+      "ipcChannels": [
+        "alpha-factory:add-signals"
+      ],
+      "mcpTools": [
+        "alpha_factory_add_signals"
+      ]
+    },
+    {
+      "id": "a2",
+      "name": "Alpha Factory config save/load",
+      "domain": "Quant Lab -- Alpha Factory + factor mining",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "alphaFactory.loadConfig",
+        "alphaFactory.saveConfig"
+      ],
+      "ipcChannels": [
+        "alpha-factory:load-config",
+        "alpha-factory:save-config"
+      ],
+      "mcpTools": [
+        "save_alpha_factory_config",
+        "load_alpha_factory_config"
+      ]
+    },
+    {
+      "id": "a3",
+      "name": "Alpha Factory auxiliary reads",
+      "domain": "Quant Lab -- Alpha Factory + factor mining",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "alphaFactory.getActiveDownloadState",
+        "alphaFactory.getLastBacktestResult",
+        "alphaFactory.getProviderWindow",
+        "alphaFactory.getSignalPersistedSymbols"
+      ],
+      "ipcChannels": [
+        "alpha-factory:get-active-download-state",
+        "alpha-factory:get-last-backtest-result",
+        "alpha-factory:provider-window",
+        "alpha-factory:signal-persisted-symbols"
+      ],
+      "mcpTools": [
+        "get_alpha_factory_last_result",
+        "get_provider_window"
+      ]
+    },
+    {
+      "id": "a4",
+      "name": "Chip allowed-regimes get/set",
+      "domain": "Quant Lab -- Alpha Factory + factor mining",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "alphaFactory.getChipAllowedRegimes",
+        "alphaFactory.setChipAllowedRegimes"
+      ],
+      "ipcChannels": [
+        "alpha-factory:get-chip-allowed-regimes",
+        "alpha-factory:set-chip-allowed-regimes"
+      ],
+      "mcpTools": [
+        "get_chip_allowed_regimes",
+        "set_chip_allowed_regimes"
+      ]
+    },
+    {
+      "id": "a5",
+      "name": "Run-universe hypothesis eval",
+      "domain": "Quant Lab -- Alpha Factory + factor mining",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "alphaFactory.cancelRunUniverse",
+        "alphaFactory.runUniverse"
+      ],
+      "ipcChannels": [
+        "alpha-factory:run-universe",
+        "alpha-factory:run-universe:cancel"
+      ],
+      "mcpTools": [
+        "run_hypothesis_eval",
+        "run_single_cell",
+        "cancel_universe_run"
+      ]
+    },
+    {
+      "id": "a6",
+      "name": "Backtest auto-persist (signal confirm is Q12)",
+      "domain": "Quant Lab -- Alpha Factory + factor mining",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "executor.autoPersist"
+      ],
+      "ipcChannels": [
+        "backtest:auto-persist"
+      ],
+      "mcpTools": [],
+      "rationale": "Auto-persist is renderer completion plumbing below the covered Alpha Factory run and signal-confirmation contracts."
+    },
+    {
+      "id": "a7",
+      "name": "Factor mining sessions",
+      "domain": "Quant Lab -- Alpha Factory + factor mining",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "factor.local.list",
+        "factor.mining.resume",
+        "factor.mining.start",
+        "factor.mining.startFromReports",
+        "factor.mining.uploadReports",
+        "factor.results",
+        "factor.sessions.detail",
+        "factor.sessions.list"
+      ],
+      "ipcChannels": [
+        "factor:local:list",
+        "factor:mining:resume",
+        "factor:mining:start",
+        "factor:mining:start-from-reports",
+        "factor:mining:upload-reports",
+        "factor:results",
+        "factor:sessions:detail",
+        "factor:sessions:list"
+      ],
+      "mcpTools": [
+        "list_factors",
+        "start_factor_mining",
+        "get_factor_mining_status",
+        "list_factor_sessions"
+      ],
+      "ownershipNotes": "Session reads are Class-S; starting or resuming mining is Class-R."
+    },
+    {
+      "id": "a8",
+      "name": "Factor catalog registry/activation",
+      "domain": "Quant Lab -- Alpha Factory + factor mining",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "factorCatalog.activate",
+        "factorCatalog.deactivate",
+        "factorCatalog.registry"
+      ],
+      "ipcChannels": [
+        "factor-catalog:activate",
+        "factor-catalog:deactivate",
+        "factor-engine:registry"
+      ],
+      "mcpTools": [
+        "list_factor_catalogs",
+        "activate_factor_catalog",
+        "deactivate_factor_catalog"
+      ],
+      "ownershipNotes": "Registry reads are Class-S; catalog activation and deactivation are Class-R. TICKET_1335 D2: these operations no longer install or remove Python packages -- the locked pixi.toml/pixi.lock manifest is the sole owner of package identity."
+    },
+    {
+      "id": "a9",
+      "name": "Factor formula generate/persist",
+      "domain": "Quant Lab -- Alpha Factory + factor mining",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "factorFormula.generate",
+        "factorFormula.persist"
+      ],
+      "ipcChannels": [
+        "factor-formula:generate",
+        "factor-formula:persist"
+      ],
+      "mcpTools": [
+        "generate_factor_formula",
+        "persist_factor_formula"
+      ],
+      "ownershipNotes": "Formula persistence is Class-S; LLM-backed formula generation is Class-R."
+    },
+    {
+      "id": "b1",
+      "name": "Run backtest",
+      "domain": "Backtest lifecycle",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "executor.onCancelled",
+        "executor.onCompleted",
+        "executor.onDryRunLlm",
+        "executor.onError",
+        "executor.onIncrement",
+        "executor.onPhase",
+        "executor.onProgress",
+        "executor.onQueueStatus",
+        "executor.onStarted",
+        "executor.runBacktest"
+      ],
+      "ipcChannels": [
+        "v3:run-backtest"
+      ],
+      "mcpTools": [
+        "run_backtest"
+      ]
+    },
+    {
+      "id": "b10",
+      "name": "Open-tabs UI persistence",
+      "domain": "Backtest lifecycle",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "executor.loadOpenTabs",
+        "executor.saveOpenTabs"
+      ],
+      "ipcChannels": [
+        "backtest:loadOpenTabs",
+        "backtest:saveOpenTabs"
+      ],
+      "mcpTools": [],
+      "rationale": "This surface is internal only (renderer tab state) and is not an agent-facing business contract."
+    },
+    {
+      "id": "b11",
+      "name": "Backtest-run records (Alpha Factory DTO store)",
+      "domain": "Backtest lifecycle",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [],
+      "ipcChannels": [
+        "backtest-run:delete",
+        "backtest-run:get",
+        "backtest-run:list"
+      ],
+      "mcpTools": [
+        "list_backtest_results",
+        "get_backtest_run",
+        "delete_backtest_run"
+      ]
+    },
+    {
+      "id": "b13",
+      "name": "Backtest result chain reads",
+      "domain": "Backtest lifecycle",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "alphaFactory.getChainEntries",
+        "alphaFactory.getRunResult",
+        "alphaFactory.listChains"
+      ],
+      "ipcChannels": [
+        "backtest-chain:entries",
+        "backtest-chain:list",
+        "backtest-run:get-result"
+      ],
+      "mcpTools": [
+        "get_backtest_result",
+        "list_backtest_results"
+      ]
+    },
+    {
+      "id": "b2",
+      "name": "Task registration/status/phase",
+      "domain": "Backtest lifecycle",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "executor.getCurrentPhase",
+        "executor.getTaskStatus",
+        "executor.registerTask"
+      ],
+      "ipcChannels": [
+        "executor:getCurrentPhase",
+        "v3:executor:register-task",
+        "v3:get-task-status"
+      ],
+      "mcpTools": [
+        "get_backtest_status",
+        "get_backtest_phase"
+      ]
+    },
+    {
+      "id": "b3",
+      "name": "Cancel backtest",
+      "domain": "Backtest lifecycle",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "executor.cancelBacktest"
+      ],
+      "ipcChannels": [
+        "v3:cancel-backtest"
+      ],
+      "mcpTools": [
+        "cancel_backtest"
+      ]
+    },
+    {
+      "id": "b4",
+      "name": "Queue status / cancel-all",
+      "domain": "Backtest lifecycle",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "executor.cancelAllBacktests",
+        "executor.getQueueStatus"
+      ],
+      "ipcChannels": [
+        "v3:queue-cancel-all",
+        "v3:queue-status"
+      ],
+      "mcpTools": [
+        "get_backtest_queue",
+        "cancel_all_backtests"
+      ]
+    },
+    {
+      "id": "b5",
+      "name": "Results read",
+      "domain": "Backtest lifecycle",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "executor.getHistory",
+        "executor.getHistoryResult",
+        "executor.getResults"
+      ],
+      "ipcChannels": [
+        "backtest:getHistory",
+        "backtest:getResult",
+        "v3:get-results"
+      ],
+      "mcpTools": [
+        "get_backtest_result",
+        "list_backtest_results"
+      ]
+    },
+    {
+      "id": "b6",
+      "name": "Result/history delete",
+      "domain": "Backtest lifecycle",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "executor.deleteHistoryResult",
+        "executor.deleteTaskHistory"
+      ],
+      "ipcChannels": [
+        "backtest:deleteResult",
+        "backtest:deleteTaskHistory"
+      ],
+      "mcpTools": [
+        "delete_backtest_result",
+        "delete_backtest_task_history"
+      ]
+    },
+    {
+      "id": "b7",
+      "name": "Task history load",
+      "domain": "Backtest lifecycle",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "executor.loadTaskHistory"
+      ],
+      "ipcChannels": [
+        "backtest:loadTaskHistory"
+      ],
+      "mcpTools": [
+        "get_backtest_task_history"
+      ]
+    },
+    {
+      "id": "b8",
+      "name": "Checkpoints (resume)",
+      "domain": "Backtest lifecycle",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [],
+      "ipcChannels": [
+        "backtest:deleteCheckpoint",
+        "backtest:getCheckpointInfo",
+        "backtest:hasCheckpoint",
+        "backtest:listCheckpoints",
+        "backtest:resume"
+      ],
+      "mcpTools": [
+        "list_checkpoints",
+        "get_checkpoint",
+        "resume_backtest",
+        "delete_checkpoint"
+      ],
+      "ownershipNotes": "Checkpoint list/get/delete are storage-owned Class-S; resuming execution is Class-R."
+    },
+    {
+      "id": "b9",
+      "name": "Candles fetch for result chart",
+      "domain": "Backtest lifecycle",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "executor.fetchCandles"
+      ],
+      "ipcChannels": [
+        "backtest:fetchCandles"
+      ],
+      "mcpTools": [
+        "get_backtest_candles"
+      ]
+    },
+    {
+      "id": "c2",
+      "name": "Conversation CRUD",
+      "domain": "AI guide / conversations",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/conversation-handlers.ts"
+      ],
+      "preloadMethods": [
+        "conversation.create",
+        "conversation.delete",
+        "conversation.get",
+        "conversation.list",
+        "conversation.search",
+        "conversation.update"
+      ],
+      "ipcChannels": [
+        "conversation:create",
+        "conversation:delete",
+        "conversation:get",
+        "conversation:list",
+        "conversation:search",
+        "conversation:update"
+      ],
+      "mcpTools": [
+        "list_conversations",
+        "get_conversation",
+        "delete_conversation",
+        "create_conversation",
+        "update_conversation",
+        "search_conversations"
+      ]
+    },
+    {
+      "id": "c3",
+      "name": "Messages",
+      "domain": "AI guide / conversations",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/conversation-handlers.ts"
+      ],
+      "preloadMethods": [
+        "message.add",
+        "message.delete",
+        "message.list"
+      ],
+      "ipcChannels": [
+        "message:add",
+        "message:delete",
+        "message:list"
+      ],
+      "mcpTools": [
+        "get_conversation",
+        "add_message",
+        "delete_message"
+      ]
+    },
+    {
+      "id": "ch1",
+      "name": "Market data reads",
+      "domain": "Chart / market data",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/plugin-handlers.ts"
+      ],
+      "preloadMethods": [
+        "getMarketData",
+        "getSymbols"
+      ],
+      "ipcChannels": [
+        "market:getData",
+        "market:getSymbols"
+      ],
+      "mcpTools": [
+        "get_market_data",
+        "get_market_symbols"
+      ],
+      "ownershipNotes": "The live provider pool owns online and cached provider resolution. Electron IPC and MCP both call market-data-api; Electron absence is therefore an explicit Class-R error."
+    },
+    {
+      "id": "ch3",
+      "name": "Kronos prediction",
+      "domain": "Chart / market data",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/kronos-handlers.ts"
+      ],
+      "preloadMethods": [
+        "kronos.cancel",
+        "kronos.getModels",
+        "kronos.onComplete",
+        "kronos.onError",
+        "kronos.onProgress",
+        "kronos.predict",
+        "kronosPrice.health",
+        "kronosPrice.predict"
+      ],
+      "ipcChannels": [
+        "kronos-price:health",
+        "kronos-price:predict",
+        "kronos:cancel",
+        "kronos:getModels",
+        "kronos:predict"
+      ],
+      "mcpTools": [
+        "run_kronos_prediction",
+        "cancel_kronos_prediction",
+        "list_kronos_models"
+      ]
+    },
+    {
+      "id": "d1",
+      "name": "Ensure data (download-or-cache)",
+      "domain": "Data Management",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/data-handlers.ts"
+      ],
+      "preloadMethods": [
+        "data.ensure",
+        "data.ensureMultiTimeframe"
+      ],
+      "ipcChannels": [
+        "data:ensure",
+        "data:ensureMultiTimeframe"
+      ],
+      "mcpTools": [],
+      "rationale": "This surface is internal only (prefetch plumbing, F5) and is not an agent-facing business contract."
+    },
+    {
+      "id": "d10",
+      "name": "Data readiness preflight",
+      "domain": "Data Management",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "dataReadiness.evaluate",
+        "dataReadiness.onProgress",
+        "dataReadiness.run"
+      ],
+      "ipcChannels": [
+        "data-readiness:evaluate",
+        "data-readiness:run"
+      ],
+      "mcpTools": [],
+      "rationale": "This surface is internal only (evaluator plumbing, F5) and is not an agent-facing business contract."
+    },
+    {
+      "id": "d2",
+      "name": "Provider list/status",
+      "domain": "Data Management",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/data-handlers.ts"
+      ],
+      "preloadMethods": [
+        "data.checkConnection",
+        "data.checkProvidersProgressive",
+        "data.getProviderList",
+        "data.listProviders",
+        "data.refreshProviderStatus"
+      ],
+      "ipcChannels": [
+        "data:checkConnection",
+        "data:checkProvidersProgressive",
+        "data:getProviderList",
+        "data:listProviders",
+        "data:refreshProviderStatus"
+      ],
+      "mcpTools": [
+        "list_data_providers"
+      ]
+    },
+    {
+      "id": "d3",
+      "name": "Coverage / symbols / ranges",
+      "domain": "Data Management",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/data-handlers.ts"
+      ],
+      "preloadMethods": [
+        "data.checkCoverage",
+        "data.getSymbolDateRange",
+        "data.getSymbols",
+        "data.searchSymbols"
+      ],
+      "ipcChannels": [
+        "data:checkCoverage",
+        "data:getSymbolDateRange",
+        "data:getSymbols",
+        "data:searchSymbols"
+      ],
+      "mcpTools": [
+        "search_symbols",
+        "get_symbol_date_range",
+        "check_data_coverage"
+      ]
+    },
+    {
+      "id": "d4",
+      "name": "Download queue",
+      "domain": "Data Management",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/data-handlers.ts"
+      ],
+      "preloadMethods": [
+        "data.cancelDownload",
+        "data.cancelQueueTask",
+        "data.enqueueDownload",
+        "data.getQueueStatus",
+        "data.onDownloadQueueProgress",
+        "data.onImportProgress",
+        "data.onProgress",
+        "data.onProviderStatus",
+        "data.onProviderStatusChanged"
+      ],
+      "ipcChannels": [
+        "data:cancelDownload",
+        "data:cancelQueueTask",
+        "data:enqueueDownload",
+        "data:getQueueStatus"
+      ],
+      "mcpTools": [
+        "queue_data_download",
+        "cancel_download",
+        "get_download_status",
+        "retry_failed_downloads",
+        "get_queue_status"
+      ]
+    },
+    {
+      "id": "d5",
+      "name": "Segments list/delete",
+      "domain": "Data Management",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T0",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/data-handlers.ts"
+      ],
+      "preloadMethods": [
+        "data.deleteSegments",
+        "data.listSegments"
+      ],
+      "ipcChannels": [
+        "data:deleteSegments",
+        "data:listSegments"
+      ],
+      "mcpTools": [
+        "list_data_segments",
+        "delete_data_segments"
+      ],
+      "ownershipNotes": "Segment listing is Class-S; coordinated data deletion is Class-R."
+    },
+    {
+      "id": "d6",
+      "name": "Cache stats / metrics / clear-all",
+      "domain": "Data Management",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T0",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/data-handlers.ts"
+      ],
+      "preloadMethods": [
+        "data.clearAll",
+        "data.getCacheStats"
+      ],
+      "ipcChannels": [
+        "data:clearAll",
+        "data:getCacheStats",
+        "data:getMetrics"
+      ],
+      "mcpTools": [
+        "get_cache_stats",
+        "clear_data_cache"
+      ],
+      "ownershipNotes": "Cache statistics are Class-S; coordinated cache clearing is Class-R."
+    },
+    {
+      "id": "d7",
+      "name": "Package import lifecycle",
+      "domain": "Data Management",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/data-handlers.ts"
+      ],
+      "preloadMethods": [
+        "data.cancelImport",
+        "data.checkImportedPackageHealth",
+        "data.importDataPackage",
+        "data.listImportedPackageFiles",
+        "data.listImportedPackages",
+        "data.registerParquetDirectory",
+        "data.removeImportedPackage",
+        "data.scanDataPackage"
+      ],
+      "ipcChannels": [
+        "data:cancelImport",
+        "data:checkImportedPackageHealth",
+        "data:importDataPackage",
+        "data:listImportedPackageFiles",
+        "data:listImportedPackages",
+        "data:registerParquetDirectory",
+        "data:removeImportedPackage",
+        "data:scanDataPackage"
+      ],
+      "mcpTools": [
+        "import_data_package",
+        "list_imported_packages",
+        "remove_imported_package",
+        "register_parquet_directory"
+      ],
+      "ownershipNotes": "Imported-package reads are Class-S; import, registration, cancellation, and removal are Class-R."
+    },
+    {
+      "id": "d8",
+      "name": "Provider defaults",
+      "domain": "Data Management",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/data-provider-defaults-handlers.ts"
+      ],
+      "preloadMethods": [
+        "dataProviderDefaults.get",
+        "dataProviderDefaults.onChanged",
+        "dataProviderDefaults.set"
+      ],
+      "ipcChannels": [
+        "dataProviderDefaults:get",
+        "dataProviderDefaults:set"
+      ],
+      "mcpTools": [
+        "set_provider_defaults"
+      ]
+    },
+    {
+      "id": "d9",
+      "name": "Market routing preference",
+      "domain": "Data Management",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/data-routing-handlers.ts"
+      ],
+      "preloadMethods": [
+        "dataRouting.getMarketPreference",
+        "dataRouting.listMarkets",
+        "dataRouting.setMarketPreference"
+      ],
+      "ipcChannels": [
+        "dataRouting:getMarketPreference",
+        "dataRouting:listMarkets",
+        "dataRouting:setMarketPreference"
+      ],
+      "mcpTools": [
+        "get_settings",
+        "set_market_routing"
+      ]
+    },
+    {
+      "id": "i1",
+      "name": "Window chrome",
+      "domain": "Internal-only plumbing",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/system.ts"
+      ],
+      "preloadMethods": [
+        "window.close",
+        "window.isMaximized",
+        "window.maximize",
+        "window.minimize"
+      ],
+      "ipcChannels": [
+        "window:close",
+        "window:isMaximized",
+        "window:maximize",
+        "window:minimize"
+      ],
+      "mcpTools": [],
+      "rationale": "Electron window controls are renderer-only presentation plumbing."
+    },
+    {
+      "id": "i10",
+      "name": "Artifact storage plumbing",
+      "domain": "Internal-only plumbing",
+      "classification": "lower-layer-of-covered-capability",
+      "ownership": "class-s",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "artifactStorage.get",
+        "artifactStorage.migrate",
+        "artifactStorage.set",
+        "artifactStorage.usage"
+      ],
+      "ipcChannels": [
+        "artifact-storage:get",
+        "artifact-storage:migrate",
+        "artifact-storage:set",
+        "artifact-storage:usage"
+      ],
+      "mcpTools": [],
+      "rationale": "Artifact persistence is a lower layer of typed strategy, sweep, and backtest workflows."
+    },
+    {
+      "id": "i11",
+      "name": "Alpha Factory resource preflight plumbing",
+      "domain": "Internal-only plumbing",
+      "classification": "lower-layer-of-covered-capability",
+      "ownership": "class-r",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "alphaFactory.preflightResourceProfile"
+      ],
+      "ipcChannels": [
+        "qnx:alpha-factory:preflight-resource-profile"
+      ],
+      "mcpTools": [],
+      "rationale": "The preflight profile is consumed by the covered Alpha Factory launch contract."
+    },
+    {
+      "id": "i2",
+      "name": "Native dialogs and raw filesystem access",
+      "domain": "Internal-only plumbing",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/system.ts"
+      ],
+      "preloadMethods": [
+        "file.openDialog",
+        "file.read",
+        "file.saveDialog",
+        "file.write"
+      ],
+      "ipcChannels": [
+        "file:openDialog",
+        "file:read",
+        "file:saveDialog",
+        "file:write"
+      ],
+      "mcpTools": [],
+      "rationale": "Native dialogs and unrestricted filesystem access are not safe agent contracts."
+    },
+    {
+      "id": "i3",
+      "name": "Renderer logging transport",
+      "domain": "Internal-only plumbing",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/log-handlers.ts"
+      ],
+      "preloadMethods": [
+        "log"
+      ],
+      "ipcChannels": [
+        "log"
+      ],
+      "mcpTools": [],
+      "rationale": "Renderer log forwarding is observability plumbing."
+    },
+    {
+      "id": "i4",
+      "name": "Renderer visual affordances",
+      "domain": "Internal-only plumbing",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/plugin-handlers.ts"
+      ],
+      "preloadMethods": [
+        "hideProgress",
+        "showDialog",
+        "showNotification",
+        "showProgress",
+        "ui.onNavigateToSettings",
+        "ui.showPluginSettings",
+        "updateProgress"
+      ],
+      "ipcChannels": [
+        "ui:dialog",
+        "ui:notification",
+        "ui:progress:hide",
+        "ui:progress:show",
+        "ui:progress:update"
+      ],
+      "mcpTools": [],
+      "rationale": "Notifications, dialogs, and progress overlays require renderer presentation."
+    },
+    {
+      "id": "i5",
+      "name": "File entity storage plumbing",
+      "domain": "Internal-only plumbing",
+      "classification": "lower-layer-of-covered-capability",
+      "ownership": "class-r",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/file-handlers.ts",
+        "src/main/ipc/hub-handlers.ts"
+      ],
+      "preloadMethods": [
+        "hub.emit",
+        "hub.findFiles",
+        "hub.getAllState",
+        "hub.getState",
+        "hub.invokeEntity",
+        "hub.onEvent",
+        "hub.onStateChanged",
+        "hub.removeFile",
+        "hub.replay",
+        "hub.resolveFile",
+        "hub.setState",
+        "hub.transaction"
+      ],
+      "ipcChannels": [
+        "entity:get:file:cache",
+        "entity:get:file:config",
+        "entity:get:file:data",
+        "entity:get:file:report",
+        "entity:get:file:strategy",
+        "entity:save:file:cache",
+        "entity:save:file:config",
+        "entity:save:file:data",
+        "entity:save:file:report",
+        "entity:save:file:strategy",
+        "hub:file:cleanup",
+        "hub:file:find",
+        "hub:file:remove",
+        "hub:file:resolve",
+        "hub:transaction"
+      ],
+      "mcpTools": [],
+      "rationale": "File entity operations are lower-layer storage plumbing beneath typed business capabilities."
+    },
+    {
+      "id": "i6",
+      "name": "Executor plugin low-level rail",
+      "domain": "Internal-only plumbing",
+      "classification": "lower-layer-of-covered-capability",
+      "ownership": "class-r",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/plugin-handlers.ts"
+      ],
+      "preloadMethods": [],
+      "ipcChannels": [
+        "executor-plugin:cancel",
+        "executor-plugin:execute",
+        "executor-plugin:list",
+        "executor-plugin:progress",
+        "executor-plugin:result"
+      ],
+      "mcpTools": [],
+      "rationale": "Executor plugin IPC is a lower layer beneath typed compute workflows."
+    },
+    {
+      "id": "i7",
+      "name": "Generic API proxy",
+      "domain": "Internal-only plumbing",
+      "classification": "lower-layer-of-covered-capability",
+      "ownership": "class-r",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "api.proxy"
+      ],
+      "ipcChannels": [
+        "api:proxy"
+      ],
+      "mcpTools": [],
+      "rationale": "The generic proxy is transport plumbing and cannot count as a typed capability."
+    },
+    {
+      "id": "i8",
+      "name": "Install token management",
+      "domain": "Internal-only plumbing",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/install-token-handlers.ts"
+      ],
+      "preloadMethods": [
+        "installToken.get",
+        "installToken.reRegister"
+      ],
+      "ipcChannels": [
+        "installToken:get",
+        "installToken:reRegister"
+      ],
+      "mcpTools": [],
+      "rationale": "Device registration tokens are security-sensitive application internals."
+    },
+    {
+      "id": "i9",
+      "name": "Log folder launcher",
+      "domain": "Internal-only plumbing",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/diagnostic-handlers.ts"
+      ],
+      "preloadMethods": [
+        "diagnostics.openLogFolder"
+      ],
+      "ipcChannels": [
+        "diagnostics:openLogFolder"
+      ],
+      "mcpTools": [],
+      "rationale": "Opening an operating-system file manager is renderer-only presentation plumbing."
+    },
+    {
+      "id": "m1",
+      "name": "Registry / details / updates",
+      "domain": "Marketplace / plugins / entitlements",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/marketplace-handlers.ts"
+      ],
+      "preloadMethods": [
+        "marketplace.checkUpdates",
+        "marketplace.getPluginDetails",
+        "marketplace.getRegistry",
+        "marketplace.onEntitlementChanged",
+        "marketplace.onInstallComplete",
+        "marketplace.onInstallError",
+        "marketplace.onInstallProgress",
+        "marketplace.onLicenseStatusChanged",
+        "marketplace.onPluginActivated"
+      ],
+      "ipcChannels": [
+        "marketplace:checkUpdates",
+        "marketplace:getPluginDetails",
+        "marketplace:getRegistry"
+      ],
+      "mcpTools": [
+        "get_marketplace_registry",
+        "get_marketplace_plugin_details",
+        "check_plugin_updates"
+      ]
+    },
+    {
+      "id": "m2",
+      "name": "Install / uninstall",
+      "domain": "Marketplace / plugins / entitlements",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/marketplace-handlers.ts"
+      ],
+      "preloadMethods": [
+        "marketplace.install",
+        "marketplace.uninstall"
+      ],
+      "ipcChannels": [
+        "marketplace:install",
+        "marketplace:uninstall"
+      ],
+      "mcpTools": [
+        "install_plugin",
+        "uninstall_plugin"
+      ]
+    },
+    {
+      "id": "m3",
+      "name": "Licenses",
+      "domain": "Marketplace / plugins / entitlements",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/marketplace-handlers.ts"
+      ],
+      "preloadMethods": [
+        "marketplace.activateLicense",
+        "marketplace.getLicenseStatus",
+        "marketplace.removeLicense",
+        "marketplace.validateLicense"
+      ],
+      "ipcChannels": [
+        "marketplace:activateLicense",
+        "marketplace:getLicenseStatus",
+        "marketplace:removeLicense",
+        "marketplace:validateLicense"
+      ],
+      "mcpTools": [
+        "activate_license",
+        "get_license_status",
+        "remove_license"
+      ]
+    },
+    {
+      "id": "m3-browser",
+      "name": "Marketplace purchase browser launch",
+      "domain": "Internal-only plumbing",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/marketplace-handlers.ts"
+      ],
+      "preloadMethods": [
+        "marketplace.openPurchaseUrl"
+      ],
+      "ipcChannels": [
+        "marketplace:openPurchaseUrl"
+      ],
+      "mcpTools": [],
+      "rationale": "Opening the operating-system browser is renderer presentation plumbing."
+    },
+    {
+      "id": "m4",
+      "name": "Entitlement checks (marketplace)",
+      "domain": "Marketplace / plugins / entitlements",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/marketplace-handlers.ts"
+      ],
+      "preloadMethods": [
+        "marketplace.checkEntitlement",
+        "marketplace.checkEntitlementsBatch"
+      ],
+      "ipcChannels": [
+        "marketplace:checkEntitlement",
+        "marketplace:checkEntitlementsBatch"
+      ],
+      "mcpTools": [
+        "check_marketplace_entitlement",
+        "check_marketplace_entitlements_batch"
+      ]
+    },
+    {
+      "id": "m5",
+      "name": "Promo telemetry",
+      "domain": "Marketplace / plugins / entitlements",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/marketplace-handlers.ts"
+      ],
+      "preloadMethods": [
+        "marketplace.promoTelemetry.clearInstallWithPromoAt",
+        "marketplace.promoTelemetry.getInstallWithPromoAt",
+        "marketplace.promoTelemetry.markFirstRunIfFirst",
+        "marketplace.promoTelemetry.setInstallWithPromoAt"
+      ],
+      "ipcChannels": [
+        "marketplace:promoTelemetry:clearInstallWithPromoAt",
+        "marketplace:promoTelemetry:getInstallWithPromoAt",
+        "marketplace:promoTelemetry:markFirstRunIfFirst",
+        "marketplace:promoTelemetry:setInstallWithPromoAt"
+      ],
+      "mcpTools": [],
+      "rationale": "This surface is internal only and is not an agent-facing business contract."
+    },
+    {
+      "id": "m6",
+      "name": "Plugin scan/status/manifest/config",
+      "domain": "Marketplace / plugins / entitlements",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/plugin-handlers.ts"
+      ],
+      "preloadMethods": [
+        "plugin.getAllStatus",
+        "plugin.getConfig",
+        "plugin.getManifest",
+        "plugin.getStatus",
+        "plugin.isInstalled",
+        "plugin.scanAll",
+        "plugin.setConfig"
+      ],
+      "ipcChannels": [
+        "plugin:getAllStatus",
+        "plugin:getConfig",
+        "plugin:getManifest",
+        "plugin:getStatus",
+        "plugin:isInstalled",
+        "plugin:scanAll",
+        "plugin:setConfig"
+      ],
+      "mcpTools": [
+        "list_plugins",
+        "get_plugin",
+        "get_plugin_config",
+        "set_plugin_config"
+      ],
+      "ownershipNotes": "Plugin manifest/config reads are Class-S; configuration writes and lifecycle reconciliation are Class-R."
+    },
+    {
+      "id": "m6-filesystem",
+      "name": "Plugin raw filesystem inspection",
+      "domain": "Internal-only plumbing",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/plugin-handlers.ts"
+      ],
+      "preloadMethods": [
+        "getPluginDirectories",
+        "plugin.getDirectories",
+        "plugin.getPaths",
+        "plugin.readFile",
+        "readFile"
+      ],
+      "ipcChannels": [
+        "plugin:getDirectories",
+        "plugin:getPaths",
+        "plugin:readFile"
+      ],
+      "mcpTools": [],
+      "rationale": "Raw plugin paths and file reads would create an unrestricted filesystem egress surface."
+    },
+    {
+      "id": "m7",
+      "name": "Plugin process lifecycle (nexus activation)",
+      "domain": "Marketplace / plugins / entitlements",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/plugin-handlers.ts"
+      ],
+      "preloadMethods": [
+        "pluginProcess.activate",
+        "pluginProcess.deactivate",
+        "pluginProcess.getStatus",
+        "pluginProcess.onPort"
+      ],
+      "ipcChannels": [
+        "plugin:process:activate",
+        "plugin:process:deactivate",
+        "plugin:process:getStatus"
+      ],
+      "mcpTools": [
+        "activate_plugin",
+        "deactivate_plugin",
+        "get_plugin"
+      ]
+    },
+    {
+      "id": "m8",
+      "name": "Install permission flow",
+      "domain": "Marketplace / plugins / entitlements",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/install-handlers.ts"
+      ],
+      "preloadMethods": [],
+      "ipcChannels": [
+        "plugin:install:confirm",
+        "plugin:install:getPermissions",
+        "plugin:install:hasPermission",
+        "plugin:install:preview"
+      ],
+      "mcpTools": [
+        "install_plugin"
+      ]
+    },
+    {
+      "id": "m9",
+      "name": "Plugin entitlements (dual-registered stub/real)",
+      "domain": "Marketplace / plugins / entitlements",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/entitlement-handlers.ts",
+        "src/main/ipc/entitlement-stub.ts"
+      ],
+      "preloadMethods": [
+        "entitlement.getAllEntitlements",
+        "entitlement.getAuditLog",
+        "entitlement.checkPluginAdmission",
+        "entitlement.getEntitledPlugins",
+        "entitlement.getPluginEntitlements",
+        "entitlement.getPluginOwnership",
+        "entitlement.getServiceState",
+        "entitlement.isServiceEnabled",
+        "entitlement.onConnectionModeChanged",
+        "entitlement.onLLMProviderStatusChanged",
+        "entitlement.onServiceToggled",
+        "entitlement.onUserTierChanged",
+        "entitlement.toggleService"
+      ],
+      "ipcChannels": [
+        "entitlement:checkPluginAdmission",
+        "entitlement:getAllEntitlements",
+        "entitlement:getAuditLog",
+        "entitlement:getEntitledPlugins",
+        "entitlement:getPluginEntitlements",
+        "entitlement:getPluginOwnership",
+        "entitlement:getServiceState",
+        "entitlement:isServiceEnabled",
+        "entitlement:toggleService"
+      ],
+      "mcpTools": [
+        "list_entitlements",
+        "get_plugin_entitlement",
+        "toggle_entitlement_service",
+        "get_entitlement_audit_log"
+      ],
+      "ownershipNotes": "Manifest and user-config entitlement reads are Class-S. The in-memory audit log, service toggling, and live reconciliation are Class-R."
+    },
+    {
+      "id": "research-worker-host",
+      "name": "Optional signed research-worker host boundary",
+      "domain": "Quant Lab -- signed worker package",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/research-worker-handlers.ts"
+      ],
+      "preloadMethods": [
+        "researchWorker.cancel",
+        "researchWorker.cancelAll",
+        "researchWorker.discover",
+        "researchWorker.e2eInstall",
+        "researchWorker.e2eUninstall",
+        "researchWorker.execute",
+        "researchWorker.getActive",
+        "researchWorker.onProgress"
+      ],
+      "ipcChannels": [
+        "e2e:worker:install",
+        "e2e:worker:uninstall",
+        "research-worker:discover"
+      ],
+      "mcpTools": [],
+      "rationale": "Discovery and test lifecycle are public host plumbing; execution channels are registered only by the verified signed package registrar and are not standalone MCP tools."
+    },
+    {
+      "id": "re1",
+      "name": "Research environment lifecycle",
+      "domain": "Research environment -- locked Pixi materialization",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/research-environment-handlers.ts",
+        "src/main/services/api/research-environment-api.ts"
+      ],
+      "preloadMethods": [
+        "researchEnvironment.getJob",
+        "researchEnvironment.getStatus",
+        "researchEnvironment.install",
+        "researchEnvironment.repair",
+        "researchEnvironment.uninstall",
+        "researchEnvironment.verify"
+      ],
+      "ipcChannels": [
+        "research-environment:get-job",
+        "research-environment:get-status",
+        "research-environment:install",
+        "research-environment:repair",
+        "research-environment:uninstall",
+        "research-environment:verify"
+      ],
+      "mcpTools": [
+        "get_research_environment_status",
+        "get_research_environment_job",
+        "verify_research_environment",
+        "install_research_environment",
+        "repair_research_environment",
+        "uninstall_research_environment"
+      ],
+      "ownershipNotes": "TICKET_1335 D2 and TICKET_1355: Electron and Guide MCP are thin adapters over the shared ResearchEnvironmentService. Install, repair, and whole-environment uninstall use the same durable lifecycle; mutation authority requires native human approval and uninstall additionally fails closed unless workload activity is authoritatively idle. Individual package removal is intentionally not exposed because pixi.toml and pixi.lock are the repository-owned dependency definition."
+    },
+    {
+      "id": "q1",
+      "name": "Sweep start/cancel",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/signal-discovery-handlers.ts"
+      ],
+      "preloadMethods": [
+        "signalDiscovery.cancel",
+        "signalDiscovery.onAlphaDecayWarning",
+        "signalDiscovery.onBatchProgress",
+        "signalDiscovery.onCompileGateResult",
+        "signalDiscovery.onComplete",
+        "signalDiscovery.onDuplicate",
+        "signalDiscovery.onError",
+        "signalDiscovery.onFoldStarted",
+        "signalDiscovery.onProgress",
+        "signalDiscovery.onRound2Progress",
+        "signalDiscovery.onRoundResult",
+        "signalDiscovery.onRunCreated",
+        "signalDiscovery.onRunGroupRolledUp",
+        "signalDiscovery.onSignalCoverage",
+        "signalDiscovery.onSimilarityCheck",
+        "signalDiscovery.onSweepLiveness",
+        "signalDiscovery.onSweepPipelineProgress",
+        "signalDiscovery.onUniverseQualityFilter",
+        "signalDiscovery.start"
+      ],
+      "ipcChannels": [
+        "signal-discovery:cancel",
+        "signal-discovery:start"
+      ],
+      "mcpTools": [
+        "start_sweep",
+        "stop_sweep"
+      ]
+    },
+    {
+      "id": "q10",
+      "name": "Statistical remediation",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/signal-discovery-handlers.ts"
+      ],
+      "preloadMethods": [
+        "signalDiscovery.backfillSignal",
+        "signalDiscovery.barFloorPreflight",
+        "signalDiscovery.recomputeFamilyBH"
+      ],
+      "ipcChannels": [
+        "signal-discovery:backfill-signal",
+        "signal-discovery:bar-floor-preflight",
+        "signal-discovery:recompute-family-bh"
+      ],
+      "mcpTools": [
+        "recompute_family_bh"
+      ]
+    },
+    {
+      "id": "q11",
+      "name": "Signal source reads",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "signalSource.getById",
+        "signalSource.getByIds",
+        "signalSource.listDiscovered"
+      ],
+      "ipcChannels": [
+        "signal-source:get-by-id",
+        "signal-source:get-by-ids",
+        "signal-source:list-discovered"
+      ],
+      "mcpTools": [
+        "list_signal_sources",
+        "get_signal_source"
+      ]
+    },
+    {
+      "id": "q12",
+      "name": "Signal source delete / confirm",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "signalSource.confirm",
+        "signalSource.deleteDiscovered"
+      ],
+      "ipcChannels": [
+        "signal-source:confirm",
+        "signal-source:delete-discovered"
+      ],
+      "mcpTools": [
+        "delete_signal_source",
+        "confirm_signal_source"
+      ]
+    },
+    {
+      "id": "q13",
+      "name": "Signal promotion / roster admission",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/signal-discovery-handlers.ts",
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "promotion.deprecate",
+        "promotion.getStatus",
+        "promotion.goLive",
+        "promotion.register"
+      ],
+      "ipcChannels": [
+        "promotion:deprecate",
+        "promotion:go-live",
+        "promotion:register",
+        "promotion:register-library",
+        "promotion:register-signal",
+        "promotion:status"
+      ],
+      "mcpTools": [
+        "register_promotion",
+        "get_promotion_status"
+      ],
+      "ownershipNotes": "Persisted promotion status is Class-S; live admission and go-live transitions are Class-R."
+    },
+    {
+      "id": "q14",
+      "name": "Roster states/transitions",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "roster.applyTransition",
+        "roster.getAllStates",
+        "roster.getCurrentScore",
+        "roster.getRecentTransitions",
+        "roster.listStalenessSeries",
+        "roster.listWithStates",
+        "roster.onTransitionEvent"
+      ],
+      "ipcChannels": [
+        "roster:apply-transition",
+        "roster:get-all-states",
+        "roster:get-current-score",
+        "roster:get-recent-transitions",
+        "roster:get-state",
+        "roster:get-transitions",
+        "roster:initial-admit",
+        "roster:list-staleness-series",
+        "roster:list-with-states",
+        "roster:remove"
+      ],
+      "mcpTools": [
+        "get_roster_state",
+        "list_roster",
+        "apply_roster_transition",
+        "remove_from_roster"
+      ]
+    },
+    {
+      "id": "q15",
+      "name": "Relegation config/cycle",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "roster.getRelegationConfig",
+        "roster.onCycleEvent",
+        "roster.runCycle",
+        "roster.setRelegationConfig"
+      ],
+      "ipcChannels": [
+        "relegation:get-config",
+        "relegation:run-cycle",
+        "relegation:set-config"
+      ],
+      "mcpTools": [
+        "get_relegation_config",
+        "set_relegation_config",
+        "run_relegation_cycle"
+      ],
+      "ownershipNotes": "Relegation configuration is Class-S; executing a relegation cycle is Class-R."
+    },
+    {
+      "id": "q16",
+      "name": "LSTM model management",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/signal-discovery-handlers.ts"
+      ],
+      "preloadMethods": [
+        "lstmModel.getManifest",
+        "lstmModel.retrain",
+        "lstmModel.setActiveVersion",
+        "lstmModel.setEnabled",
+        "lstmModel.startFresh"
+      ],
+      "ipcChannels": [
+        "lstm-model:deleteVersion",
+        "lstm-model:getManifest",
+        "lstm-model:retrain",
+        "lstm-model:setActiveVersion",
+        "lstm-model:setEnabled",
+        "lstm-model:start-fresh"
+      ],
+      "mcpTools": [
+        "get_lstm_manifest",
+        "set_lstm_active_version",
+        "delete_lstm_version"
+      ],
+      "ownershipNotes": "Model manifests and snapshots are Class-S; retraining and live model activation are Class-R."
+    },
+    {
+      "id": "q17",
+      "name": "LSTM snapshots",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/signal-discovery-handlers.ts"
+      ],
+      "preloadMethods": [
+        "lstmModel.deleteSnapshot",
+        "lstmModel.getSnapshotVersions",
+        "lstmModel.importVersionFromSnapshot",
+        "lstmModel.listSnapshots",
+        "lstmModel.renameSnapshot",
+        "lstmModel.restoreSnapshot",
+        "lstmModel.saveSnapshot"
+      ],
+      "ipcChannels": [
+        "lstm-model:delete-snapshot",
+        "lstm-model:get-snapshot-versions",
+        "lstm-model:import-version-from-snapshot",
+        "lstm-model:list-snapshots",
+        "lstm-model:rename-snapshot",
+        "lstm-model:restore-snapshot",
+        "lstm-model:save-snapshot"
+      ],
+      "mcpTools": [
+        "list_lstm_snapshots",
+        "save_lstm_snapshot",
+        "restore_lstm_snapshot",
+        "delete_lstm_snapshot"
+      ]
+    },
+    {
+      "id": "q18",
+      "name": "LSTM training runs",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/signal-discovery-handlers.ts"
+      ],
+      "preloadMethods": [
+        "lstmTraining.cancel",
+        "lstmTraining.delete",
+        "lstmTraining.getHistory",
+        "lstmTraining.getStatus",
+        "lstmTraining.onConfirmSignals",
+        "lstmTraining.onProgress",
+        "lstmTraining.retry",
+        "lstmTraining.startWithSelection"
+      ],
+      "ipcChannels": [
+        "lstm-training:cancel",
+        "lstm-training:delete",
+        "lstm-training:getHistory",
+        "lstm-training:getStatus",
+        "lstm-training:retry",
+        "lstm-training:start-with-selection"
+      ],
+      "mcpTools": [
+        "start_lstm_training",
+        "get_lstm_training_status",
+        "cancel_lstm_training",
+        "get_lstm_training_history",
+        "get_lstm_fit_quality_report"
+      ],
+      "ownershipNotes": "Training history is Class-S; start, status, retry, and cancellation coordinate a Class-R trainer."
+    },
+    {
+      "id": "q2",
+      "name": "Sweep session state",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/signal-discovery-handlers.ts"
+      ],
+      "preloadMethods": [
+        "sweep.dismissSession",
+        "sweep.getSessionState",
+        "sweep.onQueueChanged",
+        "sweep.resumeSession"
+      ],
+      "ipcChannels": [
+        "sweep:dismiss-session",
+        "sweep:get-session-state"
+      ],
+      "mcpTools": [
+        "get_sweep_status"
+      ]
+    },
+    {
+      "id": "q3",
+      "name": "Sweep queue",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/signal-discovery-handlers.ts"
+      ],
+      "preloadMethods": [
+        "sweep.cancelQueue",
+        "sweep.clearQueue",
+        "sweep.enqueue",
+        "sweep.getQueue"
+      ],
+      "ipcChannels": [
+        "sweep:queue-cancel",
+        "sweep:queue-clear",
+        "sweep:queue-enqueue",
+        "sweep:queue-get"
+      ],
+      "mcpTools": [
+        "get_sweep_queue",
+        "enqueue_sweep_item",
+        "cancel_sweep_item",
+        "clear_sweep_queue"
+      ]
+    },
+    {
+      "id": "q4",
+      "name": "Sweep templates",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/signal-discovery-handlers.ts"
+      ],
+      "preloadMethods": [
+        "signalDiscovery.listTemplates"
+      ],
+      "ipcChannels": [
+        "signal-discovery:list-templates"
+      ],
+      "mcpTools": [
+        "list_sweep_templates"
+      ]
+    },
+    {
+      "id": "q5",
+      "name": "Run history CRUD",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/signal-discovery-handlers.ts"
+      ],
+      "preloadMethods": [
+        "signalDiscovery.deleteRunHistory",
+        "signalDiscovery.getRunHistory",
+        "signalDiscovery.saveRunHistory",
+        "signalDiscovery.updateRunHistory"
+      ],
+      "ipcChannels": [
+        "signal-discovery:delete-run-history",
+        "signal-discovery:get-run-history",
+        "signal-discovery:save-run-history",
+        "signal-discovery:update-run-history"
+      ],
+      "mcpTools": [
+        "list_signal_runs",
+        "delete_signal_run",
+        "update_signal_run"
+      ]
+    },
+    {
+      "id": "q6",
+      "name": "Sweep history/coverage reads",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/signal-discovery-handlers.ts"
+      ],
+      "preloadMethods": [
+        "signalDiscovery.getSignalCoverage",
+        "signalDiscovery.listSweepCoverage",
+        "signalDiscovery.listSweepHistory"
+      ],
+      "ipcChannels": [
+        "signal-discovery:get-signal-coverage",
+        "signal-discovery:list-sweep-coverage",
+        "signal-discovery:list-sweep-history"
+      ],
+      "mcpTools": [
+        "get_sweep_history",
+        "get_sweep_coverage"
+      ]
+    },
+    {
+      "id": "q7",
+      "name": "Leaderboard reads",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/signal-discovery-handlers.ts"
+      ],
+      "preloadMethods": [
+        "signalDiscovery.getLeaderboardBatchIds",
+        "signalDiscovery.getLeaderboardDetail",
+        "signalDiscovery.getLeaderboardGroups"
+      ],
+      "ipcChannels": [
+        "signal-discovery:get-leaderboard-batch-ids",
+        "signal-discovery:get-leaderboard-detail",
+        "signal-discovery:get-leaderboard-groups"
+      ],
+      "mcpTools": [
+        "get_leaderboard"
+      ]
+    },
+    {
+      "id": "q8",
+      "name": "Definition rollups",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/signal-discovery-handlers.ts"
+      ],
+      "preloadMethods": [
+        "signalDiscovery.getDefinitionRollup",
+        "signalDiscovery.listDefinitionRollups"
+      ],
+      "ipcChannels": [
+        "signal-discovery:get-definition-rollup",
+        "signal-discovery:list-definition-rollups"
+      ],
+      "mcpTools": [
+        "list_signal_definitions",
+        "get_definition_rollup"
+      ]
+    },
+    {
+      "id": "q9",
+      "name": "Custom factors save/delete + availability",
+      "domain": "Quant Lab -- sweep / discovery",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/signal-discovery-handlers.ts"
+      ],
+      "preloadMethods": [
+        "signalDiscovery.deleteCustomFactor",
+        "signalDiscovery.getFactorAvailability",
+        "signalDiscovery.saveCustomFactor"
+      ],
+      "ipcChannels": [
+        "signal-discovery:delete-custom-factor",
+        "signal-discovery:get-factor-availability",
+        "signal-discovery:save-custom-factor"
+      ],
+      "mcpTools": [
+        "list_factors",
+        "save_custom_factor",
+        "delete_custom_factor"
+      ]
+    },
+    {
+      "id": "s1",
+      "name": "LLM strategy generation (5 modes)",
+      "domain": "Strategy Builder",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "executor.generateStrategy",
+        "executor.generateWorkflowStrategy"
+      ],
+      "ipcChannels": [
+        "v3:generate-strategy",
+        "v3:generate-workflow-strategy"
+      ],
+      "mcpTools": [
+        "generate_strategy",
+        "generate_entry_signal",
+        "generate_exit_strategy",
+        "generate_kronos_strategy",
+        "generate_ai_libero_strategy",
+        "generate_workflow_strategy"
+      ]
+    },
+    {
+      "id": "s10",
+      "name": "Compile + validation report + toolchain",
+      "domain": "Strategy Builder",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "cppToolchain.getStatus",
+        "executor.compileAlgorithm",
+        "executor.getCompilationStatus",
+        "executor.getValidationReport",
+        "executor.onCompilationStatus"
+      ],
+      "ipcChannels": [
+        "v3:algorithm:compile",
+        "v3:algorithm:get-compilation-status",
+        "v3:algorithm:get-validation-report",
+        "v3:cpp-toolchain:status"
+      ],
+      "mcpTools": [
+        "compile_strategy",
+        "get_compilation_status",
+        "get_strategy_validation",
+        "get_cpp_toolchain_status"
+      ]
+    },
+    {
+      "id": "s11",
+      "name": "Workspace sync",
+      "domain": "Strategy Builder",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "workspaceSync.export",
+        "workspaceSync.getStatus",
+        "workspaceSync.import"
+      ],
+      "ipcChannels": [
+        "v3:workspace:sync:export",
+        "v3:workspace:sync:import",
+        "v3:workspace:sync:status"
+      ],
+      "mcpTools": [
+        "export_workspace",
+        "import_workspace",
+        "get_workspace_sync_status"
+      ]
+    },
+    {
+      "id": "s12",
+      "name": "Recycle bin",
+      "domain": "Strategy Builder",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/recycle-bin-handlers.ts"
+      ],
+      "preloadMethods": [
+        "recycleBin.listDeleted",
+        "recycleBin.purge",
+        "recycleBin.restore"
+      ],
+      "ipcChannels": [
+        "v3:recycle-bin:list-deleted",
+        "v3:recycle-bin:purge",
+        "v3:recycle-bin:restore"
+      ],
+      "mcpTools": [
+        "list_deleted_strategies",
+        "restore_strategy",
+        "purge_strategy"
+      ]
+    },
+    {
+      "id": "s13",
+      "name": "Audit trail reads",
+      "domain": "Strategy Builder",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "audit.getByAlgorithm",
+        "audit.list"
+      ],
+      "ipcChannels": [
+        "audit:getByAlgorithm",
+        "audit:list"
+      ],
+      "mcpTools": [
+        "list_audit_entries",
+        "get_audit_by_algorithm"
+      ]
+    },
+    {
+      "id": "s14",
+      "name": "Persona list (generation flavor)",
+      "domain": "Strategy Builder",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/persona-handlers.ts"
+      ],
+      "preloadMethods": [
+        "persona.list"
+      ],
+      "ipcChannels": [
+        "persona:list"
+      ],
+      "mcpTools": [
+        "list_personas"
+      ]
+    },
+    {
+      "id": "s2",
+      "name": "Generation session start/cancel/state (per-page slots)",
+      "domain": "Strategy Builder",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/generation-handlers.ts"
+      ],
+      "preloadMethods": [
+        "generation.cancel",
+        "generation.getState",
+        "generation.onComplete",
+        "generation.onError",
+        "generation.onStatus",
+        "generation.start"
+      ],
+      "ipcChannels": [
+        "generation:cancel",
+        "generation:start",
+        "generation:state"
+      ],
+      "mcpTools": [
+        "generate_strategy",
+        "start_generation_session",
+        "cancel_generation_session",
+        "get_generation_state"
+      ]
+    },
+    {
+      "id": "s3",
+      "name": "Legacy generation start/cancel",
+      "domain": "Strategy Builder",
+      "classification": "deprecated-duplicate",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/strategy-generation-handlers.ts"
+      ],
+      "preloadMethods": [
+        "strategy.cancel",
+        "strategy.generate",
+        "strategy.onComplete",
+        "strategy.onError",
+        "strategy.onProgress"
+      ],
+      "ipcChannels": [
+        "strategy:cancel",
+        "strategy:generate"
+      ],
+      "mcpTools": [],
+      "rationale": "This channel is a deprecated duplicate rail of the named business capability."
+    },
+    {
+      "id": "s4",
+      "name": "Catalog-driven generation",
+      "domain": "Strategy Builder",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/catalog-generation-handler.ts"
+      ],
+      "preloadMethods": [
+        "strategy.generateFromCatalog"
+      ],
+      "ipcChannels": [
+        "strategy:generate-from-catalog"
+      ],
+      "mcpTools": [
+        "generate_from_catalog"
+      ]
+    },
+    {
+      "id": "s5",
+      "name": "Batch generation",
+      "domain": "Strategy Builder",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/batch-generation-handlers.ts"
+      ],
+      "preloadMethods": [
+        "batchGeneration.cancel",
+        "batchGeneration.getState",
+        "batchGeneration.onComplete",
+        "batchGeneration.onError",
+        "batchGeneration.onProgress",
+        "batchGeneration.start"
+      ],
+      "ipcChannels": [
+        "batch-generation:cancel",
+        "batch-generation:get-state",
+        "batch-generation:start"
+      ],
+      "mcpTools": [
+        "start_batch_generation",
+        "cancel_batch_generation",
+        "get_batch_generation_state"
+      ]
+    },
+    {
+      "id": "s6",
+      "name": "Strategy CRUD (legacy store)",
+      "domain": "Strategy Builder",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/strategy.ts"
+      ],
+      "preloadMethods": [
+        "strategy.delete",
+        "strategy.get",
+        "strategy.list",
+        "strategy.save"
+      ],
+      "ipcChannels": [
+        "strategy:delete",
+        "strategy:get",
+        "strategy:list",
+        "strategy:save"
+      ],
+      "mcpTools": [
+        "list_strategies",
+        "get_strategy",
+        "save_strategy",
+        "delete_strategy"
+      ]
+    },
+    {
+      "id": "s7",
+      "name": "Strategy CRUD (v3 workspace)",
+      "domain": "Strategy Builder",
+      "classification": "deprecated-duplicate",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "executor.listStrategies",
+        "executor.loadStrategy",
+        "executor.saveStrategy"
+      ],
+      "ipcChannels": [
+        "v3:list-strategies",
+        "v3:load-strategy",
+        "v3:save-strategy"
+      ],
+      "mcpTools": [],
+      "rationale": "This channel is a deprecated duplicate rail of the named business capability."
+    },
+    {
+      "id": "s8",
+      "name": "Algorithm entity CRUD (TICKET_077_D1 store)",
+      "domain": "Strategy Builder",
+      "classification": "lower-layer-of-covered-capability",
+      "ownership": "class-s",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/algorithm-handlers.ts"
+      ],
+      "preloadMethods": [
+        "algorithm.list"
+      ],
+      "ipcChannels": [
+        "entity:get:nona_algorithm",
+        "entity:list:nona_algorithm",
+        "entity:save:nona_algorithm",
+        "entity:update:nona_algorithm"
+      ],
+      "mcpTools": [],
+      "rationale": "Algorithm entity persistence is the storage layer beneath the typed strategy CRUD capability."
+    },
+    {
+      "id": "s9",
+      "name": "Legacy algorithm list",
+      "domain": "Strategy Builder",
+      "classification": "deprecated-duplicate",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/database-handlers.ts"
+      ],
+      "preloadMethods": [
+        "database.getAlgorithms"
+      ],
+      "ipcChannels": [
+        "database:getAlgorithms"
+      ],
+      "mcpTools": [],
+      "rationale": "This channel is a deprecated duplicate rail of the named business capability."
+    },
+    {
+      "id": "sc1",
+      "name": "Scoreboard reads",
+      "domain": "Scoreboard",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/scoreboard-handlers.ts"
+      ],
+      "preloadMethods": [
+        "scoreboard.getCacheAge",
+        "scoreboard.readAllVersions",
+        "scoreboard.readLatest"
+      ],
+      "ipcChannels": [
+        "scoreboard:get-cache-age",
+        "scoreboard:read-all-versions",
+        "scoreboard:read-latest"
+      ],
+      "mcpTools": [
+        "get_signal_scoreboard"
+      ]
+    },
+    {
+      "id": "sc2",
+      "name": "Scoreboard recompute",
+      "domain": "Scoreboard",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/scoreboard-handlers.ts"
+      ],
+      "preloadMethods": [
+        "scoreboard.onJobStatus",
+        "scoreboard.onRowUpdated",
+        "scoreboard.requestRecompute"
+      ],
+      "ipcChannels": [
+        "scoreboard:request-recompute"
+      ],
+      "mcpTools": [
+        "refresh_scoreboard",
+        "rerollup_verdict",
+        "refit_artifact"
+      ]
+    },
+    {
+      "id": "st1",
+      "name": "Locale",
+      "domain": "Settings / auth / app",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/locale-handlers.ts"
+      ],
+      "preloadMethods": [
+        "locale.getInitial",
+        "locale.getSupported",
+        "locale.getSystem",
+        "locale.onChanged",
+        "locale.setUser"
+      ],
+      "ipcChannels": [
+        "locale:getInitial",
+        "locale:getSupported",
+        "locale:getSystem",
+        "locale:setUser"
+      ],
+      "mcpTools": [
+        "get_settings",
+        "set_locale"
+      ]
+    },
+    {
+      "id": "st10",
+      "name": "Consent (crash/analytics)",
+      "domain": "Settings / auth / app",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/diagnostic-handlers.ts"
+      ],
+      "preloadMethods": [
+        "consent.getStatus",
+        "consent.setConsent"
+      ],
+      "ipcChannels": [
+        "consent:getStatus",
+        "consent:setConsent"
+      ],
+      "mcpTools": [
+        "get_consent_status",
+        "set_consent"
+      ]
+    },
+    {
+      "id": "st11",
+      "name": "Server/bridge status",
+      "domain": "Settings / auth / app",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "server.getStatus",
+        "server.onError",
+        "server.onStatusChange"
+      ],
+      "ipcChannels": [
+        "server:status"
+      ],
+      "mcpTools": [
+        "get_server_status"
+      ]
+    },
+    {
+      "id": "st12",
+      "name": "App info",
+      "domain": "Settings / auth / app",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/system.ts"
+      ],
+      "preloadMethods": [
+        "app.getPath",
+        "app.getVersion",
+        "app.isResearchMode"
+      ],
+      "ipcChannels": [
+        "app:path",
+        "app:research-mode",
+        "app:version"
+      ],
+      "mcpTools": [
+        "get_app_info"
+      ]
+    },
+    {
+      "id": "st13",
+      "name": "Auto-update",
+      "domain": "Settings / auth / app",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/update-handlers.ts"
+      ],
+      "preloadMethods": [
+        "update.check",
+        "update.download",
+        "update.getStatus",
+        "update.install",
+        "update.onStatusChanged"
+      ],
+      "ipcChannels": [
+        "update:check",
+        "update:download",
+        "update:get-status",
+        "update:install"
+      ],
+      "mcpTools": [],
+      "rationale": "This surface is internal only (desktop updater) and is not an agent-facing business contract."
+    },
+    {
+      "id": "st14",
+      "name": "Onboarding tours",
+      "domain": "Settings / auth / app",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/onboarding-handlers.ts"
+      ],
+      "preloadMethods": [
+        "onboarding.getState",
+        "onboarding.markCompleted",
+        "onboarding.reset",
+        "onboarding.setAssistantMode",
+        "onboarding.setEnabled"
+      ],
+      "ipcChannels": [
+        "onboarding:getState",
+        "onboarding:markCompleted",
+        "onboarding:reset",
+        "onboarding:setAssistantMode",
+        "onboarding:setEnabled"
+      ],
+      "mcpTools": [],
+      "rationale": "This surface is internal only (UI tours) and is not an agent-facing business contract."
+    },
+    {
+      "id": "st15",
+      "name": "Plugin KV store",
+      "domain": "Settings / auth / app",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/plugin-handlers.ts"
+      ],
+      "preloadMethods": [
+        "storeDelete",
+        "storeGet",
+        "storeKeys",
+        "storeSet"
+      ],
+      "ipcChannels": [
+        "store:delete",
+        "store:get",
+        "store:keys",
+        "store:set"
+      ],
+      "mcpTools": [],
+      "rationale": "This surface is internal only (raw KV backdoor bypasses validation; no MCP exposure) and is not an agent-facing business contract."
+    },
+    {
+      "id": "st16",
+      "name": "Decision trust policy",
+      "domain": "Settings / auth / app",
+      "classification": "lower-layer-of-covered-capability",
+      "ownership": "class-s",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/decision-trust-policy-handlers.ts"
+      ],
+      "preloadMethods": [
+        "decisionTrustPolicy.openSettings"
+      ],
+      "ipcChannels": [
+        "trust-policy:open-settings"
+      ],
+      "mcpTools": [],
+      "rationale": "Policy configuration is an authority lower layer beneath typed T2 operations. Exposing a policy-write MCP tool would let the agent widen its own authority, so only Guide's authenticated control route and Electron Main's native ceremony may write it."
+    },
+    {
+      "id": "st2",
+      "name": "Config profile/health",
+      "domain": "Settings / auth / app",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/config-handlers.ts"
+      ],
+      "preloadMethods": [
+        "config.detectOptimalBacktestTasks",
+        "config.get",
+        "config.getAll",
+        "config.getHealth",
+        "config.getLogging",
+        "config.getMachineInfo",
+        "config.getProfile",
+        "config.onChanged",
+        "config.onHealthChanged",
+        "config.onProfileChanged",
+        "config.onReloaded",
+        "config.reload",
+        "config.set",
+        "config.setProfile",
+        "config.validate"
+      ],
+      "ipcChannels": [
+        "config:detectOptimalBacktestTasks",
+        "config:get",
+        "config:getAll",
+        "config:getHealth",
+        "config:getLogging",
+        "config:getMachineInfo",
+        "config:getProfile",
+        "config:reload",
+        "config:set",
+        "config:setProfile",
+        "config:validate"
+      ],
+      "mcpTools": [
+        "get_config",
+        "set_config",
+        "reload_config",
+        "get_config_health",
+        "get_machine_info",
+        "validate_config"
+      ],
+      "ownershipNotes": "Stored configuration and validation are Class-S; reload, capacity detection, and live health are Class-R."
+    },
+    {
+      "id": "st3",
+      "name": "LLM provider catalog + BYOK",
+      "domain": "Settings / auth / app",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/llm-entitlement-handlers.ts"
+      ],
+      "preloadMethods": [
+        "byok.getModels",
+        "entitlement.canAccessLLMFeatures",
+        "entitlement.getConfiguredBYOKProviders",
+        "entitlement.getLLMProvidersWithStatus",
+        "entitlement.onLLMExternalStoreChanged",
+        "entitlement.setLLMProviderValidationStatus",
+        "llmCatalog.getModels",
+        "llmCatalog.getProviders",
+        "llmCatalog.getStatus",
+        "llmCatalog.onStatusChanged",
+        "llmCatalog.refresh"
+      ],
+      "ipcChannels": [
+        "byok:getModels",
+        "entitlement:canAccessLLMFeatures",
+        "entitlement:getConfiguredBYOKProviders",
+        "entitlement:getLLMProvidersWithStatus",
+        "entitlement:setLLMProviderValidationStatus",
+        "llm-catalog:getModels",
+        "llm-catalog:getProviders",
+        "llm-catalog:getStatus",
+        "llm-catalog:refresh"
+      ],
+      "mcpTools": [
+        "list_llm_providers",
+        "refresh_llm_models",
+        "set_llm_provider_models",
+        "set_llm_selection"
+      ],
+      "ownershipNotes": "Stored provider selection and credentials are Class-S; catalog refresh and authenticated provider resolution are Class-R."
+    },
+    {
+      "id": "st3-secret",
+      "name": "LLM secret resolution plumbing",
+      "domain": "Internal-only plumbing",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/llm-entitlement-handlers.ts"
+      ],
+      "preloadMethods": [
+        "entitlement.resolveLLMApiKey"
+      ],
+      "ipcChannels": [
+        "entitlement:resolveLLMApiKey"
+      ],
+      "mcpTools": [],
+      "rationale": "Resolved API keys are secret material and may not cross the MCP boundary."
+    },
+    {
+      "id": "st4",
+      "name": "Credentials vault",
+      "domain": "Settings / auth / app",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/credential-handlers.ts"
+      ],
+      "preloadMethods": [
+        "credential.delete",
+        "credential.getAuditLog",
+        "credential.has",
+        "credential.list",
+        "credential.onKeychainUnavailable",
+        "credential.onT0Rejected",
+        "credential.onT1Warning",
+        "credential.set",
+        "credential.validateApiKey",
+        "credential.validateUser"
+      ],
+      "ipcChannels": [
+        "credential:delete",
+        "credential:getAuditLog",
+        "credential:has",
+        "credential:list",
+        "credential:set",
+        "credential:validateApiKey",
+        "credential:validateUser"
+      ],
+      "mcpTools": [
+        "set_llm_credential",
+        "check_llm_credential",
+        "delete_llm_credential"
+      ],
+      "ownershipNotes": "Credential persistence is Class-S; remote validation and live keychain notifications are Class-R."
+    },
+    {
+      "id": "st4-secret",
+      "name": "Credential secret egress and execution plumbing",
+      "domain": "Internal-only plumbing",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/credential-handlers.ts"
+      ],
+      "preloadMethods": [
+        "credential.executeWith",
+        "credential.get",
+        "credential.setMasterPassword"
+      ],
+      "ipcChannels": [
+        "credential:executeWith",
+        "credential:get",
+        "credential:setMasterPassword"
+      ],
+      "mcpTools": [],
+      "rationale": "Raw credential values and execute-with-secret callbacks are security-sensitive internals."
+    },
+    {
+      "id": "st5",
+      "name": "Auth session (desktop OAuth)",
+      "domain": "Settings / auth / app",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/auth-handlers.ts"
+      ],
+      "preloadMethods": [
+        "auth.getAccessToken",
+        "auth.getState",
+        "auth.getUser",
+        "auth.login",
+        "auth.logout",
+        "auth.onError",
+        "auth.onStateChanged",
+        "auth.refresh"
+      ],
+      "ipcChannels": [
+        "auth:callback",
+        "auth:getAccessToken",
+        "auth:getState",
+        "auth:getUser",
+        "auth:login",
+        "auth:logout",
+        "auth:refresh"
+      ],
+      "mcpTools": [],
+      "rationale": "This surface is internal only (MCP has own Bearer rail, TICKET_1027/1232) and is not an agent-facing business contract."
+    },
+    {
+      "id": "st6",
+      "name": "Inline auth",
+      "domain": "Settings / auth / app",
+      "classification": "internal-only",
+      "ownership": "not-applicable",
+      "authTiers": [],
+      "owningSources": [
+        "src/main/ipc/inline-auth-handlers.ts"
+      ],
+      "preloadMethods": [
+        "inlineAuth.loginWithPassword",
+        "inlineAuth.sendCode",
+        "inlineAuth.verifyCode"
+      ],
+      "ipcChannels": [
+        "inlineAuth:loginPassword",
+        "inlineAuth:sendCode",
+        "inlineAuth:verifyCode"
+      ],
+      "mcpTools": [],
+      "rationale": "This surface is internal only and is not an agent-facing business contract."
+    },
+    {
+      "id": "st7",
+      "name": "Credits / rate limit / distribution",
+      "domain": "Settings / auth / app",
+      "classification": "covered-user-capability",
+      "ownership": "mixed",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/credit-handlers.ts",
+        "src/main/ipc/v3-handlers.ts"
+      ],
+      "preloadMethods": [
+        "credit.getStatus",
+        "distribution.getDistribution",
+        "distribution.isPublicRelease",
+        "rateLimit.getStatus"
+      ],
+      "ipcChannels": [
+        "credit:get-status",
+        "distribution:getDistribution",
+        "distribution:isPublicRelease",
+        "rateLimit:status"
+      ],
+      "mcpTools": [
+        "get_credit_status",
+        "get_rate_limit_status",
+        "get_distribution_info"
+      ],
+      "ownershipNotes": "Credit and distribution are available without Electron through their backend/file owners. Rate-limit state is in-memory Class-R state owned by Electron Main."
+    },
+    {
+      "id": "st8",
+      "name": "Database backup/restore",
+      "domain": "Settings / auth / app",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/backup-handlers.ts"
+      ],
+      "preloadMethods": [
+        "databaseBackup.backup",
+        "databaseBackup.listBackups",
+        "databaseBackup.restore"
+      ],
+      "ipcChannels": [
+        "v3:database:backup",
+        "v3:database:list-backups",
+        "v3:database:restore"
+      ],
+      "mcpTools": [
+        "backup_database",
+        "list_database_backups",
+        "restore_database"
+      ]
+    },
+    {
+      "id": "st9",
+      "name": "Startup audit",
+      "domain": "Settings / auth / app",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [
+        "src/main/ipc/startup-audit-handlers.ts"
+      ],
+      "preloadMethods": [
+        "startupAudit.getLatest",
+        "startupAudit.list"
+      ],
+      "ipcChannels": [
+        "startup-audit:get-latest",
+        "startup-audit:list"
+      ],
+      "mcpTools": [
+        "get_startup_audit",
+        "list_startup_audits"
+      ]
+    },
+    {
+      "id": "sys1",
+      "name": "Runtime system monitoring",
+      "domain": "Internal-only plumbing",
+      "classification": "covered-user-capability",
+      "ownership": "class-r",
+      "authTiers": [
+        "T0"
+      ],
+      "owningSources": [],
+      "preloadMethods": [
+        "system.onResourceStats"
+      ],
+      "ipcChannels": [],
+      "mcpTools": [
+        "get_system_monitor"
+      ]
+    },
+    {
+      "id": "u1",
+      "name": "Universe CRUD",
+      "domain": "Universe management",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T1",
+        "T2"
+      ],
+      "owningSources": [
+        "src/main/ipc/universe-handlers.ts"
+      ],
+      "preloadMethods": [
+        "universe.create",
+        "universe.delete",
+        "universe.get",
+        "universe.list",
+        "universe.update"
+      ],
+      "ipcChannels": [
+        "universe:create",
+        "universe:delete",
+        "universe:get",
+        "universe:list",
+        "universe:update"
+      ],
+      "mcpTools": [
+        "list_universes",
+        "get_universe",
+        "create_universe",
+        "update_universe",
+        "delete_universe"
+      ]
+    },
+    {
+      "id": "u2",
+      "name": "Universe symbol membership",
+      "domain": "Universe management",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/universe-handlers.ts"
+      ],
+      "preloadMethods": [
+        "universe.addSymbols",
+        "universe.removeSymbols"
+      ],
+      "ipcChannels": [
+        "universe:addSymbols",
+        "universe:removeSymbols"
+      ],
+      "mcpTools": [
+        "add_universe_symbols",
+        "remove_universe_symbols"
+      ]
+    },
+    {
+      "id": "u3",
+      "name": "Nona-universe persistence",
+      "domain": "Universe management",
+      "classification": "covered-user-capability",
+      "ownership": "class-s",
+      "authTiers": [
+        "T0",
+        "T1"
+      ],
+      "owningSources": [
+        "src/main/ipc/nona-universe-handlers.ts"
+      ],
+      "preloadMethods": [
+        "nonaUniverse.get",
+        "nonaUniverse.persist"
+      ],
+      "ipcChannels": [
+        "nona-universe:get",
+        "nona-universe:persist"
+      ],
+      "mcpTools": [
+        "persist_nona_universe",
+        "get_nona_universe"
+      ]
+    }
+  ],
+  "mutationAuthorities": [
+    {
+      "name": "activate_factor_catalog",
+      "level": "none"
+    },
+    {
+      "name": "activate_license",
+      "level": "human-origin-required",
+      "operation": "activate_license",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "activate_plugin",
+      "level": "none"
+    },
+    {
+      "name": "add_message",
+      "level": "none"
+    },
+    {
+      "name": "add_universe_symbols",
+      "level": "none"
+    },
+    {
+      "name": "alpha_factory_add_signals",
+      "level": "none"
+    },
+    {
+      "name": "append_to_package",
+      "level": "human-origin-required",
+      "operation": "append_to_package",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "apply_roster_transition",
+      "level": "none"
+    },
+    {
+      "name": "audit_imported_package_orphans",
+      "level": "none"
+    },
+    {
+      "name": "backup_database",
+      "level": "none"
+    },
+    {
+      "name": "build_coverage_report",
+      "level": "none"
+    },
+    {
+      "name": "cancel_agent_turn",
+      "level": "none"
+    },
+    {
+      "name": "cancel_all_backtests",
+      "level": "human-origin-required",
+      "operation": "cancel_all_backtests",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "cancel_alpha_factory",
+      "level": "none"
+    },
+    {
+      "name": "cancel_backtest",
+      "level": "none"
+    },
+    {
+      "name": "cancel_batch_generation",
+      "level": "none"
+    },
+    {
+      "name": "cancel_download",
+      "level": "none"
+    },
+    {
+      "name": "cancel_generation_session",
+      "level": "none"
+    },
+    {
+      "name": "cancel_kronos_prediction",
+      "level": "none"
+    },
+    {
+      "name": "cancel_lstm_training",
+      "level": "none"
+    },
+    {
+      "name": "cancel_sweep_item",
+      "level": "none"
+    },
+    {
+      "name": "cancel_universe_run",
+      "level": "none"
+    },
+    {
+      "name": "check_data_coverage",
+      "level": "none"
+    },
+    {
+      "name": "check_imported_package_integrity",
+      "level": "none"
+    },
+    {
+      "name": "check_llm_credential",
+      "level": "none"
+    },
+    {
+      "name": "check_marketplace_entitlement",
+      "level": "none"
+    },
+    {
+      "name": "check_marketplace_entitlements_batch",
+      "level": "none"
+    },
+    {
+      "name": "check_plugin_updates",
+      "level": "none"
+    },
+    {
+      "name": "clear_data_cache",
+      "level": "human-origin-required",
+      "operation": "clear_data_cache",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "clear_sweep_queue",
+      "level": "none"
+    },
+    {
+      "name": "compile_strategy",
+      "level": "none"
+    },
+    {
+      "name": "confirm_data_download",
+      "level": "none"
+    },
+    {
+      "name": "confirm_factor_mining",
+      "level": "none"
+    },
+    {
+      "name": "confirm_signal_source",
+      "level": "none"
+    },
+    {
+      "name": "continue_ai_studio_session",
+      "level": "none"
+    },
+    {
+      "name": "corrective_get_artifact_report",
+      "level": "none"
+    },
+    {
+      "name": "corrective_get_comparison",
+      "level": "none"
+    },
+    {
+      "name": "corrective_get_training_status",
+      "level": "none"
+    },
+    {
+      "name": "corrective_list_artifacts",
+      "level": "none"
+    },
+    {
+      "name": "corrective_publish_artifact",
+      "level": "none"
+    },
+    {
+      "name": "corrective_read_config",
+      "level": "none"
+    },
+    {
+      "name": "corrective_run_comparison",
+      "level": "none"
+    },
+    {
+      "name": "corrective_start_training",
+      "level": "none"
+    },
+    {
+      "name": "corrective_validate_readiness",
+      "level": "none"
+    },
+    {
+      "name": "corrective_write_config",
+      "level": "none"
+    },
+    {
+      "name": "create_conversation",
+      "level": "none"
+    },
+    {
+      "name": "create_research_task",
+      "level": "none"
+    },
+    {
+      "name": "create_universe",
+      "level": "none"
+    },
+    {
+      "name": "deactivate_factor_catalog",
+      "level": "human-origin-required",
+      "operation": "deactivate_factor_catalog",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "deactivate_plugin",
+      "level": "none"
+    },
+    {
+      "name": "delete_backtest_result",
+      "level": "human-origin-required",
+      "operation": "delete_backtest_result",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "delete_backtest_run",
+      "level": "human-origin-required",
+      "operation": "delete_backtest_run",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "delete_backtest_task_history",
+      "level": "human-origin-required",
+      "operation": "delete_backtest_task_history",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "delete_checkpoint",
+      "level": "human-origin-required",
+      "operation": "delete_checkpoint",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "delete_conversation",
+      "level": "human-origin-required",
+      "operation": "delete_conversation",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "delete_custom_factor",
+      "level": "human-origin-required",
+      "operation": "delete_custom_factor",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "delete_data_segments",
+      "level": "human-origin-required",
+      "operation": "delete_data_segments",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "delete_llm_credential",
+      "level": "human-origin-required",
+      "operation": "delete_llm_credential",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "delete_lstm_snapshot",
+      "level": "human-origin-required",
+      "operation": "delete_lstm_snapshot",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "delete_lstm_version",
+      "level": "human-origin-required",
+      "operation": "delete_lstm_version",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "delete_message",
+      "level": "human-origin-required",
+      "operation": "delete_message",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "delete_signal_run",
+      "level": "human-origin-required",
+      "operation": "delete_signal_run",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "delete_signal_source",
+      "level": "human-origin-required",
+      "operation": "delete_signal_source",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "delete_strategy",
+      "level": "none"
+    },
+    {
+      "name": "delete_universe",
+      "level": "human-origin-required",
+      "operation": "delete_universe",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "dequeue_workload",
+      "level": "none"
+    },
+    {
+      "name": "edit_workload_review",
+      "level": "none"
+    },
+    {
+      "name": "enqueue_sweep_item",
+      "level": "none"
+    },
+    {
+      "name": "enqueue_workload",
+      "level": "none"
+    },
+    {
+      "name": "export_credential_recovery_bundle",
+      "level": "none"
+    },
+    {
+      "name": "export_workspace",
+      "level": "none"
+    },
+    {
+      "name": "generate_ai_libero_strategy",
+      "level": "none"
+    },
+    {
+      "name": "generate_ai_studio_strategy",
+      "level": "none"
+    },
+    {
+      "name": "generate_entry_signal",
+      "level": "none"
+    },
+    {
+      "name": "generate_exit_strategy",
+      "level": "none"
+    },
+    {
+      "name": "generate_factor_formula",
+      "level": "none"
+    },
+    {
+      "name": "generate_from_catalog",
+      "level": "none"
+    },
+    {
+      "name": "generate_kronos_strategy",
+      "level": "none"
+    },
+    {
+      "name": "generate_strategy",
+      "level": "human-origin-required",
+      "operation": "generate_strategy",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "generate_workflow_strategy",
+      "level": "none"
+    },
+    {
+      "name": "get_alpha_factory_last_result",
+      "level": "none"
+    },
+    {
+      "name": "get_app_info",
+      "level": "none"
+    },
+    {
+      "name": "get_audit_by_algorithm",
+      "level": "none"
+    },
+    {
+      "name": "get_backtest_candles",
+      "level": "none"
+    },
+    {
+      "name": "get_backtest_phase",
+      "level": "none"
+    },
+    {
+      "name": "get_backtest_queue",
+      "level": "none"
+    },
+    {
+      "name": "get_backtest_result",
+      "level": "none"
+    },
+    {
+      "name": "get_backtest_run",
+      "level": "none"
+    },
+    {
+      "name": "get_backtest_status",
+      "level": "none"
+    },
+    {
+      "name": "get_backtest_task_history",
+      "level": "none"
+    },
+    {
+      "name": "get_backtest_telemetry_by_mode",
+      "level": "none"
+    },
+    {
+      "name": "get_batch_generation_state",
+      "level": "none"
+    },
+    {
+      "name": "get_cache_stats",
+      "level": "none"
+    },
+    {
+      "name": "get_checkpoint",
+      "level": "none"
+    },
+    {
+      "name": "get_chip_allowed_regimes",
+      "level": "none"
+    },
+    {
+      "name": "get_compilation_status",
+      "level": "none"
+    },
+    {
+      "name": "get_config",
+      "level": "none"
+    },
+    {
+      "name": "get_config_health",
+      "level": "none"
+    },
+    {
+      "name": "get_consent_status",
+      "level": "none"
+    },
+    {
+      "name": "get_conversation",
+      "level": "none"
+    },
+    {
+      "name": "get_cpp_toolchain_status",
+      "level": "none"
+    },
+    {
+      "name": "get_credential_store_lifecycle",
+      "level": "none"
+    },
+    {
+      "name": "get_credit_status",
+      "level": "none"
+    },
+    {
+      "name": "get_definition_rollup",
+      "level": "none"
+    },
+    {
+      "name": "get_distribution_info",
+      "level": "none"
+    },
+    {
+      "name": "get_download_status",
+      "level": "none"
+    },
+    {
+      "name": "get_entitlement_audit_log",
+      "level": "none"
+    },
+    {
+      "name": "get_factor_mining_status",
+      "level": "none"
+    },
+    {
+      "name": "get_generation_state",
+      "level": "none"
+    },
+    {
+      "name": "get_guide_llm_settings",
+      "level": "none"
+    },
+    {
+      "name": "get_guide_toolbar_config",
+      "level": "none"
+    },
+    {
+      "name": "get_guided_action",
+      "level": "none"
+    },
+    {
+      "name": "get_leaderboard",
+      "level": "none"
+    },
+    {
+      "name": "get_license_status",
+      "level": "none"
+    },
+    {
+      "name": "get_lstm_fit_quality_report",
+      "level": "none"
+    },
+    {
+      "name": "get_lstm_manifest",
+      "level": "none"
+    },
+    {
+      "name": "get_lstm_training_history",
+      "level": "none"
+    },
+    {
+      "name": "get_lstm_training_status",
+      "level": "none"
+    },
+    {
+      "name": "get_machine_info",
+      "level": "none"
+    },
+    {
+      "name": "get_market_data",
+      "level": "none"
+    },
+    {
+      "name": "get_market_symbols",
+      "level": "none"
+    },
+    {
+      "name": "get_marketplace_plugin_details",
+      "level": "none"
+    },
+    {
+      "name": "get_marketplace_registry",
+      "level": "none"
+    },
+    {
+      "name": "get_nona_universe",
+      "level": "none"
+    },
+    {
+      "name": "get_plugin",
+      "level": "none"
+    },
+    {
+      "name": "get_plugin_config",
+      "level": "none"
+    },
+    {
+      "name": "get_plugin_entitlement",
+      "level": "none"
+    },
+    {
+      "name": "get_promotion_status",
+      "level": "none"
+    },
+    {
+      "name": "get_provider_window",
+      "level": "none"
+    },
+    {
+      "name": "get_queue_status",
+      "level": "none"
+    },
+    {
+      "name": "get_rate_limit_status",
+      "level": "none"
+    },
+    {
+      "name": "get_relegation_config",
+      "level": "none"
+    },
+    {
+      "name": "get_research_environment_job",
+      "level": "none"
+    },
+    {
+      "name": "get_research_environment_status",
+      "level": "none"
+    },
+    {
+      "name": "get_roster_state",
+      "level": "none"
+    },
+    {
+      "name": "get_server_status",
+      "level": "none"
+    },
+    {
+      "name": "get_settings",
+      "level": "none"
+    },
+    {
+      "name": "get_sigma_install_eligibility",
+      "level": "none"
+    },
+    {
+      "name": "get_sigma_install_status",
+      "level": "none"
+    },
+    {
+      "name": "get_signal_generator_status",
+      "level": "none"
+    },
+    {
+      "name": "get_signal_quality_metrics",
+      "level": "none"
+    },
+    {
+      "name": "get_signal_scoreboard",
+      "level": "none"
+    },
+    {
+      "name": "get_signal_source",
+      "level": "none"
+    },
+    {
+      "name": "get_startup_audit",
+      "level": "none"
+    },
+    {
+      "name": "get_strategy",
+      "level": "none"
+    },
+    {
+      "name": "get_strategy_validation",
+      "level": "none"
+    },
+    {
+      "name": "get_sweep_coverage",
+      "level": "none"
+    },
+    {
+      "name": "get_sweep_history",
+      "level": "none"
+    },
+    {
+      "name": "get_sweep_queue",
+      "level": "none"
+    },
+    {
+      "name": "get_sweep_status",
+      "level": "none"
+    },
+    {
+      "name": "get_symbol_date_range",
+      "level": "none"
+    },
+    {
+      "name": "get_system_monitor",
+      "level": "none"
+    },
+    {
+      "name": "get_universe",
+      "level": "none"
+    },
+    {
+      "name": "get_workload_queue",
+      "level": "none"
+    },
+    {
+      "name": "get_workspace_sync_status",
+      "level": "none"
+    },
+    {
+      "name": "histdata_confirm",
+      "level": "none"
+    },
+    {
+      "name": "histdata_execute",
+      "level": "human-origin-required",
+      "operation": "histdata_execute",
+      "delegationPolicy": "direct-only"
+    },
+    {
+      "name": "histdata_review",
+      "level": "none"
+    },
+    {
+      "name": "import_credential_recovery_bundle",
+      "level": "human-origin-required",
+      "operation": "import_credential_recovery_bundle",
+      "delegationPolicy": "direct-only"
+    },
+    {
+      "name": "import_data_package",
+      "level": "none"
+    },
+    {
+      "name": "import_rdagent_factors",
+      "level": "none"
+    },
+    {
+      "name": "import_workspace",
+      "level": "human-origin-required",
+      "operation": "import_workspace",
+      "delegationPolicy": "direct-only"
+    },
+    {
+      "name": "install_plugin",
+      "level": "human-origin-required",
+      "operation": "install_plugin",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "install_research_environment",
+      "level": "human-origin-required",
+      "operation": "install_research_environment",
+      "delegationPolicy": "direct-only"
+    },
+    {
+      "name": "install_sigma_plugin",
+      "level": "human-origin-required",
+      "operation": "install_sigma_plugin",
+      "delegationPolicy": "direct-only"
+    },
+    {
+      "name": "list_actions",
+      "level": "none"
+    },
+    {
+      "name": "list_audit_entries",
+      "level": "none"
+    },
+    {
+      "name": "list_backtest_results",
+      "level": "none"
+    },
+    {
+      "name": "list_checkpoints",
+      "level": "none"
+    },
+    {
+      "name": "list_conversations",
+      "level": "none"
+    },
+    {
+      "name": "list_data_providers",
+      "level": "none"
+    },
+    {
+      "name": "list_data_segments",
+      "level": "none"
+    },
+    {
+      "name": "list_database_backups",
+      "level": "none"
+    },
+    {
+      "name": "list_deleted_strategies",
+      "level": "none"
+    },
+    {
+      "name": "list_diagnostics",
+      "level": "none"
+    },
+    {
+      "name": "list_entitlements",
+      "level": "none"
+    },
+    {
+      "name": "list_factor_catalogs",
+      "level": "none"
+    },
+    {
+      "name": "list_factor_sessions",
+      "level": "none"
+    },
+    {
+      "name": "list_factors",
+      "level": "none"
+    },
+    {
+      "name": "list_imported_package_summaries",
+      "level": "none"
+    },
+    {
+      "name": "list_imported_packages",
+      "level": "none"
+    },
+    {
+      "name": "list_kronos_models",
+      "level": "none"
+    },
+    {
+      "name": "list_llm_providers",
+      "level": "none"
+    },
+    {
+      "name": "list_lstm_snapshots",
+      "level": "none"
+    },
+    {
+      "name": "list_personas",
+      "level": "none"
+    },
+    {
+      "name": "list_plugins",
+      "level": "none"
+    },
+    {
+      "name": "list_roster",
+      "level": "none"
+    },
+    {
+      "name": "list_signal_definitions",
+      "level": "none"
+    },
+    {
+      "name": "list_signal_generator_runs",
+      "level": "none"
+    },
+    {
+      "name": "list_signal_runs",
+      "level": "none"
+    },
+    {
+      "name": "list_signal_sources",
+      "level": "none"
+    },
+    {
+      "name": "list_startup_audits",
+      "level": "none"
+    },
+    {
+      "name": "list_strategies",
+      "level": "none"
+    },
+    {
+      "name": "list_strategy_indicators",
+      "level": "none"
+    },
+    {
+      "name": "list_sweep_templates",
+      "level": "none"
+    },
+    {
+      "name": "list_universes",
+      "level": "none"
+    },
+    {
+      "name": "load_alpha_factory_config",
+      "level": "none"
+    },
+    {
+      "name": "load_strategy",
+      "level": "none"
+    },
+    {
+      "name": "migrate_credential_store",
+      "level": "human-origin-required",
+      "operation": "migrate_credential_store",
+      "delegationPolicy": "direct-only"
+    },
+    {
+      "name": "persist_factor_formula",
+      "level": "none"
+    },
+    {
+      "name": "persist_nona_universe",
+      "level": "none"
+    },
+    {
+      "name": "purge_strategy",
+      "level": "human-origin-required",
+      "operation": "purge_strategy",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "queue_data_download",
+      "level": "none"
+    },
+    {
+      "name": "recompute_family_bh",
+      "level": "none"
+    },
+    {
+      "name": "refit_artifact",
+      "level": "none"
+    },
+    {
+      "name": "refresh_llm_models",
+      "level": "none"
+    },
+    {
+      "name": "refresh_scoreboard",
+      "level": "none"
+    },
+    {
+      "name": "register_parquet_directory",
+      "level": "none"
+    },
+    {
+      "name": "register_promotion",
+      "level": "none"
+    },
+    {
+      "name": "reload_config",
+      "level": "none"
+    },
+    {
+      "name": "remove_from_roster",
+      "level": "human-origin-required",
+      "operation": "remove_from_roster",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "remove_imported_package",
+      "level": "human-origin-required",
+      "operation": "remove_imported_package",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "remove_license",
+      "level": "human-origin-required",
+      "operation": "remove_license",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "remove_research_environment_capability",
+      "level": "human-origin-required",
+      "operation": "remove_research_environment_capability",
+      "delegationPolicy": "direct-only"
+    },
+    {
+      "name": "remove_universe_symbols",
+      "level": "none"
+    },
+    {
+      "name": "repair_research_environment",
+      "level": "human-origin-required",
+      "operation": "repair_research_environment",
+      "delegationPolicy": "direct-only"
+    },
+    {
+      "name": "replace_unreadable_llm_credential",
+      "level": "human-origin-required",
+      "operation": "replace_unreadable_llm_credential",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "rerollup_verdict",
+      "level": "none"
+    },
+    {
+      "name": "reset_unreadable_credentials",
+      "level": "human-origin-required",
+      "operation": "reset_unreadable_credentials",
+      "delegationPolicy": "direct-only"
+    },
+    {
+      "name": "restore_database",
+      "level": "human-origin-required",
+      "operation": "restore_database",
+      "delegationPolicy": "direct-only"
+    },
+    {
+      "name": "restore_lstm_snapshot",
+      "level": "human-origin-required",
+      "operation": "restore_lstm_snapshot",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "restore_strategy",
+      "level": "none"
+    },
+    {
+      "name": "resume_backtest",
+      "level": "none"
+    },
+    {
+      "name": "retry_failed_downloads",
+      "level": "none"
+    },
+    {
+      "name": "review_data_download",
+      "level": "none"
+    },
+    {
+      "name": "review_factor_mining",
+      "level": "none"
+    },
+    {
+      "name": "rotate_credential_master_key",
+      "level": "human-origin-required",
+      "operation": "rotate_credential_master_key",
+      "delegationPolicy": "direct-only"
+    },
+    {
+      "name": "run_action",
+      "level": "none"
+    },
+    {
+      "name": "run_ai_studio_action",
+      "level": "none"
+    },
+    {
+      "name": "run_alpha_factory_backtest",
+      "level": "none"
+    },
+    {
+      "name": "run_backtest",
+      "level": "none"
+    },
+    {
+      "name": "run_diagnostic",
+      "level": "none"
+    },
+    {
+      "name": "run_factor_sweep",
+      "level": "none"
+    },
+    {
+      "name": "run_hypothesis_eval",
+      "level": "none"
+    },
+    {
+      "name": "run_kronos_prediction",
+      "level": "none"
+    },
+    {
+      "name": "run_relegation_cycle",
+      "level": "none"
+    },
+    {
+      "name": "run_single_cell",
+      "level": "none"
+    },
+    {
+      "name": "save_alpha_factory_config",
+      "level": "none"
+    },
+    {
+      "name": "save_custom_factor",
+      "level": "none"
+    },
+    {
+      "name": "save_lstm_snapshot",
+      "level": "none"
+    },
+    {
+      "name": "save_strategy",
+      "level": "none"
+    },
+    {
+      "name": "search_conversations",
+      "level": "none"
+    },
+    {
+      "name": "search_symbols",
+      "level": "none"
+    },
+    {
+      "name": "send_agent_message",
+      "level": "none"
+    },
+    {
+      "name": "set_chip_allowed_regimes",
+      "level": "none"
+    },
+    {
+      "name": "set_config",
+      "level": "none"
+    },
+    {
+      "name": "set_consent",
+      "level": "none"
+    },
+    {
+      "name": "set_guide_agent_selection",
+      "level": "none"
+    },
+    {
+      "name": "set_llm_credential",
+      "level": "none"
+    },
+    {
+      "name": "set_llm_provider_models",
+      "level": "none"
+    },
+    {
+      "name": "set_llm_selection",
+      "level": "none"
+    },
+    {
+      "name": "set_locale",
+      "level": "none"
+    },
+    {
+      "name": "set_lstm_active_version",
+      "level": "none"
+    },
+    {
+      "name": "set_market_routing",
+      "level": "none"
+    },
+    {
+      "name": "set_plugin_config",
+      "level": "none"
+    },
+    {
+      "name": "set_provider_defaults",
+      "level": "none"
+    },
+    {
+      "name": "set_relegation_config",
+      "level": "none"
+    },
+    {
+      "name": "start_ai_studio_session",
+      "level": "none"
+    },
+    {
+      "name": "start_batch_generation",
+      "level": "none"
+    },
+    {
+      "name": "start_factor_mining",
+      "level": "none"
+    },
+    {
+      "name": "start_generation_session",
+      "level": "none"
+    },
+    {
+      "name": "start_lstm_training",
+      "level": "none"
+    },
+    {
+      "name": "start_signal_generator",
+      "level": "none"
+    },
+    {
+      "name": "start_sweep",
+      "level": "none"
+    },
+    {
+      "name": "stop_signal_generator",
+      "level": "none"
+    },
+    {
+      "name": "stop_sweep",
+      "level": "none"
+    },
+    {
+      "name": "toggle_entitlement_service",
+      "level": "none"
+    },
+    {
+      "name": "uninstall_plugin",
+      "level": "human-origin-required",
+      "operation": "uninstall_plugin",
+      "delegationPolicy": "session-trust-eligible"
+    },
+    {
+      "name": "uninstall_research_environment",
+      "level": "human-origin-required",
+      "operation": "uninstall_research_environment",
+      "delegationPolicy": "direct-only"
+    },
+    {
+      "name": "update_conversation",
+      "level": "none"
+    },
+    {
+      "name": "update_signal_run",
+      "level": "none"
+    },
+    {
+      "name": "update_universe",
+      "level": "none"
+    },
+    {
+      "name": "validate_config",
+      "level": "none"
+    },
+    {
+      "name": "verify_research_environment",
+      "level": "none"
+    }
+  ]
+}

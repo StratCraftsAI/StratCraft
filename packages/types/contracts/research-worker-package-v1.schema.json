@@ -1,0 +1,289 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "packageId": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "packageVersion": {
+      "$ref": "#/$defs/__schema2"
+    },
+    "discoveryDescriptorRelativePath": {
+      "$ref": "#/$defs/__schema3"
+    },
+    "hostModule": {
+      "$ref": "#/$defs/__schema4"
+    },
+    "protocol": {
+      "$ref": "#/$defs/__schema7"
+    },
+    "algorithmRootRelativePath": {
+      "$ref": "#/$defs/__schema8"
+    },
+    "executables": {
+      "$ref": "#/$defs/__schema9"
+    },
+    "signedFiles": {
+      "$ref": "#/$defs/__schema11"
+    },
+    "signature": {
+      "$ref": "#/$defs/__schema13"
+    },
+    "lifecycle": {
+      "$ref": "#/$defs/__schema14"
+    },
+    "upgradesFrom": {
+      "$ref": "#/$defs/__schema16"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "packageId",
+    "packageVersion",
+    "discoveryDescriptorRelativePath",
+    "hostModule",
+    "protocol",
+    "executables",
+    "signedFiles",
+    "signature",
+    "lifecycle",
+    "upgradesFrom"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "type": "number",
+      "const": 1
+    },
+    "__schema1": {
+      "type": "string",
+      "const": "com.stratcraft.quant-lab"
+    },
+    "__schema2": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "__schema3": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "__schema4": {
+      "type": "object",
+      "properties": {
+        "relativePath": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "sha256": {
+          "$ref": "#/$defs/__schema5"
+        },
+        "contractVersion": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "operationContractVersion": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "registerExport": {
+          "type": "string",
+          "const": "registerCommercialHostCapabilities"
+        },
+        "supportedHostRoles": {
+          "minItems": 1,
+          "maxItems": 2,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema6"
+          }
+        }
+      },
+      "required": [
+        "relativePath",
+        "sha256",
+        "contractVersion",
+        "operationContractVersion",
+        "registerExport",
+        "supportedHostRoles"
+      ],
+      "additionalProperties": false
+    },
+    "__schema5": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "__schema6": {
+      "type": "string",
+      "enum": [
+        "electron",
+        "service-api"
+      ]
+    },
+    "__schema7": {
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "current": {
+          "$ref": "#/$defs/__schema2"
+        }
+      },
+      "required": [
+        "minimum",
+        "current"
+      ],
+      "additionalProperties": false
+    },
+    "__schema8": {
+      "$ref": "#/$defs/__schema3"
+    },
+    "__schema9": {
+      "minItems": 1,
+      "maxItems": 6,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema10"
+      }
+    },
+    "__schema10": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "type": "string",
+          "enum": [
+            "linux-x64",
+            "linux-arm64",
+            "darwin-x64",
+            "darwin-arm64",
+            "win32-x64",
+            "win32-arm64"
+          ]
+        },
+        "relativePath": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "sha256": {
+          "$ref": "#/$defs/__schema5"
+        },
+        "libraryRelativePaths": {
+          "maxItems": 8,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema3"
+          }
+        }
+      },
+      "required": [
+        "platform",
+        "relativePath",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "__schema11": {
+      "minItems": 1,
+      "maxItems": 16384,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema12"
+      }
+    },
+    "__schema12": {
+      "type": "object",
+      "properties": {
+        "relativePath": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "sha256": {
+          "$ref": "#/$defs/__schema5"
+        }
+      },
+      "required": [
+        "relativePath",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "__schema13": {
+      "type": "object",
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "const": "Ed25519"
+        },
+        "publisherId": {
+          "type": "string",
+          "const": "com.stratcraft"
+        },
+        "keyId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "signatureRelativePath": {
+          "$ref": "#/$defs/__schema3"
+        }
+      },
+      "required": [
+        "algorithm",
+        "publisherId",
+        "keyId",
+        "signatureRelativePath"
+      ],
+      "additionalProperties": false
+    },
+    "__schema14": {
+      "type": "object",
+      "properties": {
+        "atomicInstall": {
+          "type": "boolean",
+          "const": true
+        },
+        "healthCheckCommand": {
+          "minItems": 1,
+          "maxItems": 16,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema15"
+          }
+        },
+        "rollbackSupported": {
+          "type": "boolean",
+          "const": true
+        },
+        "uninstallRemoves": {
+          "minItems": 1,
+          "maxItems": 16384,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema3"
+          }
+        }
+      },
+      "required": [
+        "atomicInstall",
+        "healthCheckCommand",
+        "rollbackSupported",
+        "uninstallRemoves"
+      ],
+      "additionalProperties": false
+    },
+    "__schema15": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "__schema16": {
+      "maxItems": 256,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema2"
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "@StratCraft/plugin-chart",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "description": "Interactive financial chart plugin for StratCraft",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@StratCraft/types": "workspace:*",
+    "lightweight-charts": "^4.1.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-i18next": "^14.0.0",
+    "i18next": "^23.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.3.0",
+    "vitest": "^3.1.1"
+  }
+}

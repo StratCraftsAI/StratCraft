@@ -1,0 +1,269 @@
+{
+  "title": "Settings",
+  "sections": {
+    "general": "General",
+    "appearance": "Appearance",
+    "language": "Language",
+    "network": "Network",
+    "security": "Security",
+    "plugins": "Plugins",
+    "advanced": "Advanced",
+    "about": "About",
+    "config": "Config",
+    "credentials": "Credentials",
+    "system": "System"
+  },
+  "language": {
+    "title": "Language",
+    "description": "Select your preferred language",
+    "system": "Use system language",
+    "restart": "Restart required to apply language changes"
+  },
+  "theme": {
+    "title": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
+  },
+  "plugins": {
+    "title": "Plugin Settings",
+    "config": "Configuration",
+    "secrets": "Secrets",
+    "noConfig": "No configuration options available",
+    "noSecrets": "No secrets configured"
+  },
+  "actions": {
+    "save": "Save Settings",
+    "reset": "Reset to Defaults",
+    "export": "Export Settings",
+    "import": "Import Settings",
+    "reload": "Reload",
+    "retry": "Retry"
+  },
+  "secretsPanel": {
+    "verifyMissingApiKey": "API anahtari eksik",
+    "verifyMissingCompositeKey": "API anahtar kimligi veya gizli deger eksik",
+    "verifyRequestFailed": "Dogrulama istegi basarisiz oldu",
+    "patternMismatch": "Value does not match expected pattern ({{pattern}})",
+    "failedToSaveKey": "Failed to save {{key}}",
+    "failedToClearKey": "Failed to clear {{key}}",
+    "failedToDeleteKey": "Failed to delete {{key}}",
+    "apiKey": {
+      "aria": {
+        "required": "zorunlu",
+        "hideValue": "Degeri gizle",
+        "showValue": "Degeri goster"
+      }
+    }
+  },
+  "errors": {
+    "saveFailed": "Save failed",
+    "loadFailed": "Failed to load configuration"
+  },
+  "config": {
+    "title": "System Configuration",
+    "description": "Manage application settings and preferences",
+    "configFilePath": "Configuration file path",
+    "nav": {
+      "performance": "Performance",
+      "sync": "Sync",
+      "scoreboard": "Sinyal puan tablosu",
+      "diagnostics": "Diagnostics",
+      "onboarding": "Tanıtım",
+      "privacy": "Privacy",
+      "dataRouting": "Veri yonlendirme",
+      "resourceGovernance": "Resource Governance"
+    },
+    "performance": {
+      "maxBacktestTasks": "Max Backtest Tasks",
+      "maxBacktestDescription": "Concurrent backtest limit (1-32)",
+      "autoDetectTitle": "Auto-detect based on CPU cores",
+      "autoDetect": "Auto Detect"
+    },
+    "sync": {
+      "title": "Workspace Sync",
+      "description": "Sync your workspace to a local folder (e.g., OneDrive, Google Drive, Dropbox mount)",
+      "targetFolder": "Target Folder",
+      "targetFolderDescription": "Folder path for workspace sync. Use a cloud drive mount for cross-device sync.",
+      "targetFolderPlaceholder": "Select a sync folder...",
+      "browse": "Browse",
+      "lastSynced": "Last Synced",
+      "neverSynced": "Never synced",
+      "syncNow": "Sync Now",
+      "syncing": "Syncing...",
+      "restoreFromSync": "Restore from Sync",
+      "restoring": "Restoring...",
+      "exportSuccess": "Workspace exported successfully ({{strategies}} strategies, {{algorithms}} algorithms, {{results}} results)",
+      "importSuccess": "Workspace imported successfully ({{strategies}} strategies, {{algorithms}} algorithms, {{results}} results)",
+      "confirmRestore": "This will import workspace data from the sync folder. Existing data with the same IDs will be overwritten. Continue?",
+      "errors": {
+        "noTargetDir": "Please select a target folder first",
+        "exportFailed": "Export failed: {{error}}",
+        "importFailed": "Import failed: {{error}}"
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "restore": "Restore"
+      }
+    },
+    "health": {
+      "parseError": "Yapılandırma dosyası hatası",
+      "parseWarning": "Yapılandırma dosyası uyarısı",
+      "usingFallback": "Uygulama bilinen son geçerli yapılandırmayla çalışıyor. Yapılandırma dosyasını düzeltin ve yeniden yükleyin.",
+      "reloadFailed": "Çözümleme hataları nedeniyle yapılandırma yeniden yüklenemedi."
+    },
+    "scoreboard": {
+      "title": "Sinyal puan tablosu",
+      "description": "Sinyal Performans Puan Tablosu ayarlari. Degisiklikler bir sonraki yeniden hesaplamada gecerli olur -- uygulamayi yeniden baslatmaya gerek yoktur.",
+      "windowBars": "Pencere bari",
+      "windowBarsDescription": "IC / Sharpe / isabet orani icin kayan pencere uzunlugu ({{min}}-{{max}} bar)."
+    },
+    "dataRouting": {
+      "title": "Data routing",
+      "descriptionPrefix": "For each market, choose which data provider should be tried first. Markets with multiple eligible providers (for example,",
+      "descriptionMiddle": "served by both",
+      "descriptionAnd": "and",
+      "descriptionSuffix": ") expose a reorderable list. Single-provider markets are read-only.",
+      "moveUp": "Move {{provider}} up",
+      "moveDown": "Move {{provider}} down"
+    },
+    "resourceGovernance": {
+      "title": "Resource Governance",
+      "description": "Per-workload CPU / memory caps for sweep, factor mining, and LSTM training. Gate thresholds hot-reload; cgroup hard caps apply on the next launch of each workload.",
+      "enabled": "Enable resource governance",
+      "sweepCap": "Sweep cap (%)",
+      "miningCap": "Factor mining cap (%)",
+      "lstmCap": "LSTM training cap (%)",
+      "capDescription": "Maximum share of machine resources on the tighter of CPU / memory ({{min}}-{{max}}%).",
+      "applyNote": "Gate thresholds apply immediately. cgroup hard caps apply on the next launch of each workload.",
+      "aggregateExceeded": "Combined caps must not exceed {{max}}%.",
+      "admissionCeiling": "System admission ceiling (%)",
+      "admissionCeilingDesc": "Maximum combined peak memory including other workloads and the operating system ({{min}}-{{max}}%)."
+    }
+  },
+  "advanced": {
+    "diagnostics": {
+      "title": "Diagnostics",
+      "openLogFolder": "Open Log Folder",
+      "openLogFolderDescription": "Opens the log directory in your file manager"
+    },
+    "onboarding": {
+      "title": "Tanıtım",
+      "showGuides": "Tanıtım kılavuzlarını göster",
+      "showGuidesDescription": "Sayfalar ilk kez ziyaret edildiğinde etkileşimli rehberli turlar göster.",
+      "assistantMode": "Asistan Modu",
+      "assistantModeDescription": "Mevcut sayfa için öğretici içerikli bağlamsal yardım panelini göster.",
+      "resetProgress": "Tanıtım ilerlemesini sıfırla",
+      "resetProgressDescription": "Tamamlanan tüm turları temizle, böylece bir sonraki ziyarette tekrar oynatılırlar.",
+      "resetButton": "Sıfırla"
+    },
+    "privacy": {
+      "title": "Privacy",
+      "description": "Control what data is shared with StratCraft to help improve the application.",
+      "crashReports": "Crash Reports",
+      "crashReportsDescription": "Automatically send error and crash data to help us fix bugs. No personal data is included.",
+      "crashReportsAlwaysOn": "Crash reports are always sent to help us fix critical issues. No personal data is included.",
+      "alwaysOn": "Always On",
+      "analytics": "Send Usage Analytics",
+      "analyticsDescription": "Share anonymous usage statistics to help us improve features and performance."
+    }
+  },
+  "permissions": {
+    "title": "Permission Request",
+    "requestingPermissions": "This plugin is requesting the following permissions:",
+    "dangerousPermissions": "Dangerous Permissions",
+    "dangerousWarning": "This plugin requests elevated permissions that could affect your system security. Only approve if you trust the source.",
+    "deny": "Deny",
+    "approve": "Approve",
+    "approveAnyway": "Approve Anyway",
+    "pluginId": "Plugin ID: {{id}}",
+    "author": "Author: {{author}}"
+  },
+  "credentials": {
+    "title": "Credential Manager",
+    "description": "Securely manage plugin credentials",
+    "confirmDelete": "Delete credential \"{{key}}\" from {{pluginId}}?",
+    "nav": {
+      "security": "Security",
+      "credentials": "Credentials",
+      "auditLog": "Audit Log"
+    },
+    "security": {
+      "title": "Security Status",
+      "description": "Credentials are encrypted with AES-256-GCM. System keychain integration active."
+    },
+    "actions": {
+      "setMasterPassword": "Set Master Password",
+      "addCredential": "Add Credential",
+      "refresh": "Refresh",
+      "copyToClipboard": "Copy to clipboard",
+      "showValue": "Show value",
+      "hideValue": "Hide value",
+      "deleteCredential": "Delete credential"
+    },
+    "search": {
+      "placeholder": "Search credentials..."
+    },
+    "list": {
+      "title": "Stored Credentials",
+      "empty": "No credentials stored",
+      "noMatch": "No credentials match your search",
+      "addFirst": "Add your first credential"
+    },
+    "audit": {
+      "title": "Recent Activity",
+      "empty": "No activity recorded",
+      "loadFailed": "Denetim gunlugu yuklenemedi"
+    },
+    "dialog": {
+      "add": {
+        "title": "Add Credential",
+        "pluginId": "Plugin ID",
+        "pluginIdPlaceholder": "com.example.plugin",
+        "key": "Key",
+        "keyPlaceholder": "API_KEY",
+        "value": "Value",
+        "valuePlaceholder": "Enter secret value",
+        "adding": "Adding...",
+        "submit": "Add Credential"
+      },
+      "password": {
+        "setTitle": "Set Master Password",
+        "enterTitle": "Enter Master Password",
+        "setDescription": "Set a master password to protect your credentials. This password will be required to access sensitive data.",
+        "enterDescription": "Enter your master password to unlock credential access.",
+        "password": "Password",
+        "passwordPlaceholder": "Enter password",
+        "confirmPassword": "Confirm Password",
+        "confirmPlaceholder": "Confirm password",
+        "processing": "Processing...",
+        "setButton": "Set Password",
+        "unlockButton": "Unlock"
+      }
+    },
+    "errors": {
+      "passwordMismatch": "Passwords do not match",
+      "passwordTooShort": "Password must be at least 8 characters",
+      "invalidPassword": "Invalid password",
+      "setPasswordFailed": "Failed to set password"
+    }
+  },
+  "consent": {
+    "title": "Help Improve StratCraft",
+    "description": "StratCraft collects crash reports to fix critical issues. You can also opt in to share anonymous usage data. You can change these settings at any time in Settings > Advanced.",
+    "crashReports": "Crash Reports",
+    "crashReportsAlwaysOn": "Crash reports are always sent to help us fix critical issues. No personal data is included.",
+    "optionalDataSharing": "Optional data sharing:",
+    "analytics": "Send usage analytics",
+    "analyticsDescription": "Share anonymous usage data to help us understand how StratCraft is used and improve features.",
+    "privacyNote": "All data is anonymized before transmission. No personal information, trading data, or API keys are ever collected. You can change these preferences anytime in Settings > Advanced > Privacy.",
+    "noThanks": "No Thanks",
+    "enableSelected": "Enable Selected"
+  },
+  "dataRouting": {
+    "loading": "Piyasa yonlendirme tercihleri yukleniyor...",
+    "instructions": "Her piyasa icin listedeki ilk saglayici onceliklidir. Tek saglayicili piyasalar salt okunurdur.",
+    "noProvider": "saglayici yok",
+    "singleProvider": "Tekli"
+  }
+}

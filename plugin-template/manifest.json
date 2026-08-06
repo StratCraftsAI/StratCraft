@@ -1,0 +1,15 @@
+{
+  "id": "com.example.my-plugin",
+  "name": "my-plugin",
+  "displayName": "My Plugin",
+  "version": "1.0.0",
+  "description": "A StratCraft plugin template",
+  "author": "Your Name",
+  "license": "MIT",
+  "tier": 1,
+  "distribution": "marketplace",
+  "main": "./ui/my-plugin-nexus/dist/index.js",
+  "dependencies": {
+    "plugins": []
+  }
+}

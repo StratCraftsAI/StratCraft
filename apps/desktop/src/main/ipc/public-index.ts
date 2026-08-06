@@ -1,0 +1,54 @@
+/** Electron IPC registrations available in the open Desktop Base. */
+import { registerAuthHandlers } from './auth-handlers';
+import { registerBackupHandlers } from './backup-handlers';
+import { registerConfigHandlers } from './config-handlers';
+import { registerCredentialHandlers } from './credential-handlers';
+import { registerDataHandlers } from './data-handlers';
+import { registerDataProviderDefaultsHandlers } from './data-provider-defaults-handlers';
+import { registerDataRoutingHandlers } from './data-routing-handlers';
+import { registerDatabaseHandlers } from './database-handlers';
+import { registerDiagnosticHandlers } from './diagnostic-handlers';
+import { registerExtensionBridgeHandlers } from './extension-bridge-handlers';
+import { registerFileHandlers } from './file-handlers';
+import { registerHubMessagingHandlers } from './hub-handlers';
+import { initializeInstallHandlers } from './install-handlers';
+import { registerLocaleHandlers } from './locale-handlers';
+import { registerLogHandlers } from './log-handlers';
+import { registerOnboardingHandlers } from './onboarding-handlers';
+import { registerPluginHandlers } from './plugin-handlers';
+import { registerRecycleBinHandlers } from './recycle-bin-handlers';
+import { registerResearchEnvironmentHandlers } from './research-environment-handlers';
+import { registerResearchWorkerHandlers } from './research-worker-handlers';
+import { registerStrategyHandlers } from './strategy';
+import { registerSystemHandlers } from './system';
+import { registerUpdateHandlers } from './update-handlers';
+import { initializePluginProcessManager } from '../services/plugin-process-manager';
+import { ipcLog } from '../utils/logger';
+
+export async function registerPublicIpcHandlers(): Promise<void> {
+  registerLogHandlers();
+  registerSystemHandlers();
+  registerStrategyHandlers();
+  registerPluginHandlers();
+  registerCredentialHandlers();
+  registerConfigHandlers();
+  registerAuthHandlers();
+  registerLocaleHandlers();
+  registerDataProviderDefaultsHandlers();
+  registerDataRoutingHandlers();
+  registerFileHandlers();
+  registerHubMessagingHandlers();
+  registerDatabaseHandlers();
+  registerResearchWorkerHandlers();
+  registerExtensionBridgeHandlers();
+  registerResearchEnvironmentHandlers();
+  registerDiagnosticHandlers();
+  registerBackupHandlers();
+  registerRecycleBinHandlers();
+  registerOnboardingHandlers();
+  registerUpdateHandlers();
+  registerDataHandlers();
+  initializePluginProcessManager();
+  await initializeInstallHandlers();
+  ipcLog.info('[Public Base] IPC handlers registered');
+}

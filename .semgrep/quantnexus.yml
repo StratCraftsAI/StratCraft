@@ -1,0 +1,28 @@
+rules:
+  - id: quantnexus.python.no-silent-factor-mining-candidate-failure
+    languages: [python]
+    message: >-
+      Factor-mining candidate failures must be observable; report the exception
+      with engine and candidate context before rejecting the candidate.
+    severity: ERROR
+    metadata:
+      category: correctness
+      confidence: HIGH
+      references:
+        - docs/design/TICKET_1340_101_SEMGREP_CROSS_LANGUAGE_ANALYSIS.md
+        - docs/design/TICKET_858_NO_SILENT_FAILURES_ERROR_PROPAGATION_RULE.md
+    paths:
+      include:
+        - /scripts/factor_mining/engines/
+        - /.semgrep/tests/
+    pattern-either:
+      - pattern: |
+          try:
+            ...
+          except Exception:
+            pass
+      - pattern: |
+          try:
+            ...
+          except Exception:
+            continue

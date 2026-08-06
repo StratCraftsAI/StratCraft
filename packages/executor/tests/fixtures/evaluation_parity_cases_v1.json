@@ -1,0 +1,76 @@
+{
+  "fixture_version": "qnx.evaluation-parity/1.0.0",
+  "non_finite_canonicalization": [
+    { "input": "NaN", "expected_signal_score": 0.0, "expected_confidence": 0.0 },
+    { "input": "+Infinity", "expected_signal_score": 0.0, "expected_confidence": 0.0 },
+    { "input": "-Infinity", "expected_signal_score": 0.0, "expected_confidence": 0.0 }
+  ],
+  "tie_ranks": {
+    "input": [3.0, 1.0, 1.0, 2.0],
+    "expected_average_ranks": [4.0, 1.5, 1.5, 3.0]
+  },
+  "sample_boundaries": [
+    { "name": "empty", "sample_count": 0, "expected_error_code": "QNX_EVAL_EMPTY_SAMPLE" },
+    { "name": "thin", "sample_count": 1, "expected_error_code": "QNX_EVAL_THIN_SAMPLE" }
+  ],
+  "timestamp_boundaries_ms": [0, 253402300799999],
+  "missing_symbols": ["MISSING"],
+  "failure_envelope": {
+    "schema_version": "qnx.evaluation-envelope/1.0.0",
+    "evaluation_id": "phase1-golden-failure",
+    "model_id": "factor:failure",
+    "window": { "start_ms": 1716901200000, "end_ms": 1716901200000, "end_inclusive": true },
+    "status": "failed",
+    "rows": [],
+    "statistics": [],
+    "verdict_inputs": {
+      "observed_sample_count": 0,
+      "minimum_sample_count": 2,
+      "effect_size": 0.0,
+      "raw_p_value": null,
+      "adjusted_p_value": null,
+      "significance_level": 0.05,
+      "passed": false
+    },
+    "progress": { "completed_units": 0, "total_units": 1, "stage": "input_validation" },
+    "cancellation": { "requested": false, "cancelled": false, "reason": null },
+    "missing_symbols": ["MISSING"],
+    "errors": [
+      {
+        "code": "QNX_EVAL_EMPTY_SAMPLE",
+        "message": "Evaluation requires at least two finite observations",
+        "field": "rows",
+        "retryable": false
+      }
+    ]
+  },
+  "cancelled_envelope": {
+    "schema_version": "qnx.evaluation-envelope/1.0.0",
+    "evaluation_id": "phase1-golden-cancelled",
+    "model_id": "factor:cancelled",
+    "window": { "start_ms": 1716901200000, "end_ms": 1716901200000, "end_inclusive": true },
+    "status": "cancelled",
+    "rows": [],
+    "statistics": [],
+    "verdict_inputs": {
+      "observed_sample_count": 0,
+      "minimum_sample_count": 2,
+      "effect_size": 0.0,
+      "raw_p_value": null,
+      "adjusted_p_value": null,
+      "significance_level": 0.05,
+      "passed": false
+    },
+    "progress": { "completed_units": 0, "total_units": 1, "stage": "cancelled" },
+    "cancellation": { "requested": true, "cancelled": true, "reason": "user_requested" },
+    "missing_symbols": [],
+    "errors": [
+      {
+        "code": "QNX_EVAL_CANCELLED",
+        "message": "Evaluation was cancelled by the caller",
+        "field": null,
+        "retryable": true
+      }
+    ]
+  }
+}

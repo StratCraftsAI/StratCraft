@@ -1,0 +1,22 @@
+{
+  "manifest": {
+    "displayName": "Data Foundation",
+    "description": "Foundation plugin providing shared data source components and types"
+  },
+  "fitQuality": {
+    "insufficientData": "資料不足",
+    "needTwoFoldResults": "需要2個以上的摺疊結果",
+    "dataStarved": "資料不足 ({{sampleCount}}個樣本 / {{paramCount}}個參數 = {{ratio}}:1, 需要{{targetRatio}}:1+)",
+    "dataSufficiency": "資料充足度",
+    "needRatio": "需要{{targetRatio}}:1的樣本/參數比, 目前{{currentRatio}}:1",
+    "modelFitQuality": "模型擬合品質"
+  },
+  "dataSource": {
+    "region": {
+      "usGlobal": "美國與全球",
+      "crypto": "加密貨幣",
+      "cnAShare": "中國A股",
+      "myData": "我的資料"
+    }
+  }
+}

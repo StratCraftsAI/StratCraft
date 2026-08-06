@@ -1,0 +1,285 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "templateId": "catboost_return_v2",
+      "codeVersion": "6ed90b885fa9402dcecaaa849ec3bbeabc30b6cad75293479f7792f4446a6234",
+      "sourceFilesSha256": "9d80c8c3b7e8509e13867e40302518460ad5ee061766ca59e3896b9c3394545a",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 15,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "double_ensemble_return_v2",
+      "codeVersion": "7f34ba317983351a668fb32e031a24fe2613dc76faf332d37ce534ab325b2339",
+      "sourceFilesSha256": "d3cef81b19b3f87223a834e612b0cc8a01e8d49562d8257e77d68ba528302c1a",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 14,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "ft_transformer_return_v1",
+      "codeVersion": "fe39f9ee39b946c2906bb61059a6b3af04dc28a034e4955fa15ee8cd4dd46b4d",
+      "sourceFilesSha256": "606807ba7d6614576fd05b220401abde6e807a10bd2bf3d7c6c599d1b41f5802",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 15,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "gmm_regime_v1",
+      "codeVersion": "219f9c5a17492e8ccbce150cfea4b17675e61ec9d3c3e79179fad80d320d418a",
+      "sourceFilesSha256": "4f6f7782f851e8829796926aea5c0005228413eac7fd6b77651051362c4863b5",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 8,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "hmm_regime_v1",
+      "codeVersion": "bfbea51d1b822d18b324666d5736db62eaee9eb60aef87e0548f8e0476a98026",
+      "sourceFilesSha256": "e5bb20650727121d8d867895943c1d1d6192bba805517fdce1caeb16875b1059",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 8,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "isolation_forest_anomaly_v1",
+      "codeVersion": "3074339c72beb97ae5742e0d65db158e37bbd40af02ac97f0df549ec55188210",
+      "sourceFilesSha256": "56fee6b8cd00129d83634104e00ef1d16065828096e29d67e8751a3a4fa7aa0f",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 11,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "kalman_filter_v1",
+      "codeVersion": "353a6044dec8e7cf2dc7301372fba7becedf391fd5255c7129f99148890d9097",
+      "sourceFilesSha256": "b3e42595f8bf0774bfcc23e73f44d5b1415b3a453a35315c3b0cf62df4cd6ffe",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 11,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "lightgbm_return_v1",
+      "codeVersion": "fa46063fc36c940ef9ecc0e8d117c6111b27cb4fd8b78a7b4394aab4197c7974",
+      "sourceFilesSha256": "449b80fe5c46eb0188c3d7d3e461e1d242c632f848e14e5dacf890b86190a95b",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 13,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "lightgbm_return_v2",
+      "codeVersion": "67680af6fa29c12af2be176b7baa6bd248121ce4c8842f03583fe9aa8c269945",
+      "sourceFilesSha256": "c0f4618aad414baf5bc61f00c8caf3dd1b5c29f62a16b1d689783bfd489a708c",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 15,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "ngram_next_bar_v1",
+      "codeVersion": "5fef40c13f95af44571ffa08118c417d640ae8f7e8ec0a494d98e985506bb5bd",
+      "sourceFilesSha256": "4aea8793f3a1a13439e38ac07ec2081b9ea1247ad40265c0a02a02e200401b17",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 8,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "pytorch_gru_return_v1",
+      "codeVersion": "bd659a0bd532d7a441b90a8c90225988aac3e080e7920c616f934fc836bc6eaf",
+      "sourceFilesSha256": "c2d6a31fdf92d6264429a76ab7a2ef4cb4aa43d73665c6685fd610ac3ab791ce",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 12,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "pytorch_lstm_return_v1",
+      "codeVersion": "a28fe9c5b1df4a05c2155fbaa58eaa1f6139a34580a36e7b960b697c6cf437cd",
+      "sourceFilesSha256": "0ab0f797a12cfcbcbb9888c9783caa78c76c342ab9a9afc2ff5e63bb33a3f126",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 12,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "pytorch_mlp_return_v1",
+      "codeVersion": "6aa392c35c7899941c3eb76812051ac398897f1cb3f7648fb6508cf819fd3820",
+      "sourceFilesSha256": "7bc1a1173eac7e99ebadae924ab2708a476172827d2b5b97203122843797b19c",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 12,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "pytorch_tcn_return_v1",
+      "codeVersion": "2ef4648c3e12a3b12913c342446c0a19050352ddcc9382192c7cd957e289eaa2",
+      "sourceFilesSha256": "90ea9529ad70b3a8115b6ee39153cf9b1d6f3ba0224a5e8cd6d5370761efa1a7",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 12,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "pytorch_ts_transformer_return_v1",
+      "codeVersion": "fa965f815669eff6a345c55be46d74d0ad54aa27900d216545f61b5b7315c530",
+      "sourceFilesSha256": "7fb7ef303fb7d450d7ddb895598fcc9c759ecf26d8ee3cb6c27503fae30aee14",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 12,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "rdagent_bridge",
+      "codeVersion": "4766133827f9412fb877cdaa9e6c691924cda0f008d6d386ec35e226b10c1652",
+      "sourceFilesSha256": "82dfcfb08853e7cdd52b34fa50e3aa4383c6eed5a5962438155c160eea36e082",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 8,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "sklearn_bayesian_ridge_return_v1",
+      "codeVersion": "4efe06ce7dd0e0a04448916c265668a890d5ec4a7d5862ecbb7ca7a8e4a74355",
+      "sourceFilesSha256": "2c567e80af0c32cd8298f81c10f9598f3b38fdaf7400ac9d296ebb3ee146acb1",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 12,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "sklearn_bayesian_ridge_return_v2",
+      "codeVersion": "0542e8af3dd0b434c3085950cbdc042be6c548c1550c7aeabcac8b136478258f",
+      "sourceFilesSha256": "32e01c5564f8fb7c4971dce726029f43031e7f3c563d64c27b9a704e8075d7a1",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 13,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "sklearn_elasticnet_return_v1",
+      "codeVersion": "f71f7586da06a893cc6a96b54d7d5ca6be5e8af9908d781952ca4d89b2d19378",
+      "sourceFilesSha256": "540a76c17b123f3d9f2dfcf60332846b9ff3e4ed31f2f590f230227583301c76",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 12,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "sklearn_elasticnet_return_v2",
+      "codeVersion": "9f60831b32bf386ad035608ea6f9426014868000ac731fbd02779243cc311f44",
+      "sourceFilesSha256": "cdce3694a2f8ec9ea808b070cee5c9447e4e133d517742dc33e2f4b39fa1cba2",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 13,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "sklearn_gp_return_v1",
+      "codeVersion": "e46de4a6cc68053fb1d6eab8bf50a217acbf7c89564c47fab828e5d74ccf9c5d",
+      "sourceFilesSha256": "9e19b1a047b756c9cd6f2e082b028debe24fb1d635bcf15b8cb778ea2c82789a",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 13,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "sklearn_gp_return_v2",
+      "codeVersion": "2db0ceb16f3e1f599d06a03a5b794eeaf674c4b8c31234b95e175ede3f5e0ca4",
+      "sourceFilesSha256": "84797ae61dfe6ceb9d78f4d28660e12a74d044e3f86edce126c7d7dcd02b6c99",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 14,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "sklearn_knn_return_v1",
+      "codeVersion": "73631d29de87fceee1e2a3a879a392b7558b05248021d6c0d639e9ae3bbadc7e",
+      "sourceFilesSha256": "fd3d04bffc57019a2c8b9ec301d8470f7eaa406f016585b2e10ddd3c7048cb42",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 13,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "sklearn_knn_return_v2",
+      "codeVersion": "6ac9bae27d3288e6795d67a29e0c19e57162b3b309383b7a43457f5d0c0151bf",
+      "sourceFilesSha256": "c63fa08d11271fcd5d3ebd313bca2cdab571e4bf4043585afd9c1632f00f0b48",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 14,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "sklearn_lasso_return_v1",
+      "codeVersion": "95b05b9d84cf482c063bfadd1d9397741c4eb17033f0a78ee0d31773c92dd060",
+      "sourceFilesSha256": "a548e19e70bb515388015e05eb120e3db64ccecc3fb7f422fd93c7bf67960011",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 12,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "sklearn_lasso_return_v2",
+      "codeVersion": "c5116021b9fac2b77062f33e1679d19b2779ceaa40494af87e1f931220a7217c",
+      "sourceFilesSha256": "6d31730dd64119afaf6e15e1bb29eda8faaa37376d45b1aba1400774200d28c9",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 13,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "sklearn_logistic_return_v1",
+      "codeVersion": "7edb2f70495e8a46aea0ec339e8626e262fcdea53470a93a1857dd48692a911f",
+      "sourceFilesSha256": "1d6b07cdca7eb28368ef49e2f3812c3f745424bee4017ebc60203a6b2e1a286b",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 12,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "sklearn_logistic_return_v2",
+      "codeVersion": "948830b17a8893f1b103a63a55a7a4b6f17162b81752ce854af750c5a2b22550",
+      "sourceFilesSha256": "e21e0d37d5a00fb6134e82cf04bc53f7b8ddafd7ca5ead5747183f0b549a286c",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 13,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "sklearn_random_forest_return_v1",
+      "codeVersion": "32028e29e6ab3e59119028a19bc8c65c367f3f8aa0e8fdbc4eae028bfaac224d",
+      "sourceFilesSha256": "bbcffe43c3008373eb658aadad3ffb780ce28ba9c07616cf77bd2df98b64185e",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 13,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "sklearn_random_forest_return_v2",
+      "codeVersion": "484c11dbb98743064382d43b844cc1408fc2cea632e7fd6f2c9e612982fcdb72",
+      "sourceFilesSha256": "4749d84645bb9a42222da43ff9166b493c7cef1e478895d16bddaef23a3f7a8c",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 14,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "sklearn_ridge_return_v1",
+      "codeVersion": "d80da735ac3d3cfa9b04e9189a2134b9f24a2d72e927d831f71b4366058347c2",
+      "sourceFilesSha256": "fa81b310d94827eab9ae51b26fba8b286a7bcfd0a74f7a1b0cc5a7a934266394",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 12,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "sklearn_ridge_return_v2",
+      "codeVersion": "8a0312883c5b4a610100370933bb4e5dc57b601e536a9ab3bf643dbc8d088acd",
+      "sourceFilesSha256": "eda163f6370895b96e08a7158aea09e2e68af3962987e04bfdf2686c767666e0",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 13,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "xgboost_return_v1",
+      "codeVersion": "e6e70cdf576114cb2931d571503ef1f0413b15431e34596afbc2788b5498e98e",
+      "sourceFilesSha256": "cd7ee7f200323a59c77300d4ae8a837f40e463cd689317acb409ca30418fd4e8",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 13,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "xgboost_return_v2",
+      "codeVersion": "05c49a14f753c6f4f9332a29aa0bb4b9d81a35474e4e76c467d8fb9f4619a281",
+      "sourceFilesSha256": "19f90470edd85614c9d0720fc3036308b7e2caa2b6bb2620c7b67bebfcf7afae",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 14,
+      "lockfileBasename": "requirements.txt"
+    },
+    {
+      "templateId": "xgboost_return_v3",
+      "codeVersion": "b665772ffc9223ca65d17c40d1b9d42f9376b7bb7df022781eac0b9dff8a2022",
+      "sourceFilesSha256": "2a54a48a72eaefa6e903c927d9ce17e7fd83bfdff506f676533bf0fe50354428",
+      "lockfileSha256": "7076daa2291725e04fda7cdddf37a97a1da9858c01a9a2661ee834c6f7ea9ad7",
+      "sourceFileCount": 19,
+      "lockfileBasename": "requirements.txt"
+    }
+  ]
+}

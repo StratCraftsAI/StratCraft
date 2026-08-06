@@ -1,0 +1,438 @@
+// Auto-generated QuantNexus C++ workflow strategy.
+// Workflow: {{WORKFLOW_NAME}}
+// Generated: {{GENERATED_TIME}}
+//
+// ABI v2: Strategy exports factory pair via QNX_STRATEGY_FACTORY_EXPORT.
+// Runner (stratforge-runner) owns Cerebro orchestration, data loading,
+// analyzers, serialization, and result I/O.
+
+#include <qnx_strategy_sdk/qnx_strategy_sdk.hpp>
+#include <stratforge/strategy/strategy.hpp>
+
+#include <algorithm>
+#include <array>
+#include <cmath>
+#include <cstdint>
+#include <cstdlib>
+#include <memory>
+#include <string>
+#include <unordered_map>
+
+namespace qnx_workflow {
+
+enum class Regime {
+    Unknown,
+    TrendingUp,
+    TrendingDown,
+    Ranging,
+    HighVolatility,
+    LowVolatility,
+};
+
+enum class Signal {
+    Hold,
+    EnterLong,
+    EnterShort,
+    ExitLong,
+    ExitShort,
+};
+
+struct ComponentSignal {
+    Signal signal = Signal::Hold;
+    double confidence = 0.0;
+    std::string reason;
+};
+
+struct WorkflowState {
+    std::size_t bar_index = 0;
+    Regime regime = Regime::Unknown;
+    ComponentSignal entry_signal;
+    ComponentSignal exit_signal;
+    ComponentSignal signal;
+    std::unordered_map<std::string, double> numeric;
+    std::unordered_map<std::string, std::string> text;
+
+    void reset_bar_signals() {
+        entry_signal = {};
+        exit_signal = {};
+        signal = {};
+    }
+};
+
+struct ComponentContext {
+    stratforge::Strategy& strategy;
+    WorkflowState& state;
+    const stratforge::DataFeed& data;
+    std::size_t bar_index;
+
+    [[nodiscard]] double open() const { return data.open()[0]; }
+    [[nodiscard]] double high() const { return data.high()[0]; }
+    [[nodiscard]] double low() const { return data.low()[0]; }
+    [[nodiscard]] double close() const { return data.close()[0]; }
+    [[nodiscard]] double volume() const { return data.volume()[0]; }
+};
+
+class RegimeComponent {
+public:
+    virtual ~RegimeComponent() = default;
+    virtual void init(ComponentContext&) {}
+    virtual void advance_indicators(ComponentContext&) {}
+    virtual Regime on_bar(ComponentContext&) = 0;
+    [[nodiscard]] virtual std::size_t warmup_period() const { return 1; }
+};
+
+class EntryComponent {
+public:
+    virtual ~EntryComponent() = default;
+    virtual void init(ComponentContext&) {}
+    virtual void advance_indicators(ComponentContext&) {}
+    virtual ComponentSignal on_bar(ComponentContext&) = 0;
+    [[nodiscard]] virtual std::size_t warmup_period() const { return 1; }
+};
+
+class ExitComponent {
+public:
+    virtual ~ExitComponent() = default;
+    virtual void init(ComponentContext&) {}
+    virtual void advance_indicators(ComponentContext&) {}
+    virtual ComponentSignal on_bar(ComponentContext&) = 0;
+    [[nodiscard]] virtual std::size_t warmup_period() const { return 1; }
+};
+
+// TICKET_783_5: Rolling vote-history window. Stores the last `Lookback` bars'
+// per-component vote sign as int8_t (+1 EnterLong / -1 EnterShort / 0 Hold).
+// Consumed by `rolling_corr` to compute pairwise Pearson correlation between
+// component vote streams; the aggregator's `correlation_adjusted` method then
+// down-weights components whose votes are redundant with others. Cheap by
+// construction: int8_t storage, O(1) push, fixed-size stack-allocated.
+template <std::size_t Lookback>
+class RollingVote {
+public:
+    void push(std::int8_t v) noexcept {
+        buf_[head_] = v;
+        head_ = (head_ + 1) % Lookback;
+        if (head_ == 0) {
+            full_ = true;
+        }
+        if (!full_) {
+            ++size_;
+        }
+    }
+
+    // Number of samples currently in the window (0 .. Lookback).
+    [[nodiscard]] std::size_t size() const noexcept {
+        return full_ ? Lookback : size_;
+    }
+
+    // Read the i-th most recent sample (0 = newest). Returns 0 when out of range.
+    [[nodiscard]] std::int8_t at(std::size_t i) const noexcept {
+        const std::size_t n = size();
+        if (i >= n) return 0;
+        // head_ points at the next write slot; newest is at (head_ - 1) mod L.
+        const std::size_t idx = (head_ + Lookback - 1 - i) % Lookback;
+        return buf_[idx];
+    }
+
+private:
+    std::array<std::int8_t, Lookback> buf_{};
+    std::size_t head_ = 0;
+    std::size_t size_ = 0;
+    bool full_ = false;
+};
+
+// TICKET_783_5: Pearson correlation of two vote streams over their common
+// in-window length. Zero-variance series (e.g. one component always Hold)
+// yield rho = 0 by convention -- NaN-safe so callers can sum `|rho|` without
+// special-casing. N_min < 2 also yields 0 (insufficient data).
+template <std::size_t Lookback>
+[[nodiscard]] inline double rolling_corr(
+    const RollingVote<Lookback>& a,
+    const RollingVote<Lookback>& b) noexcept {
+    const std::size_t n = std::min(a.size(), b.size());
+    if (n < 2) {
+        return 0.0;
+    }
+    double sum_a = 0.0, sum_b = 0.0, sum_aa = 0.0, sum_bb = 0.0, sum_ab = 0.0;
+    for (std::size_t i = 0; i < n; ++i) {
+        const double av = static_cast<double>(a.at(i));
+        const double bv = static_cast<double>(b.at(i));
+        sum_a += av;
+        sum_b += bv;
+        sum_aa += av * av;
+        sum_bb += bv * bv;
+        sum_ab += av * bv;
+    }
+    const double dn = static_cast<double>(n);
+    const double mean_a = sum_a / dn;
+    const double mean_b = sum_b / dn;
+    const double var_a = (sum_aa / dn) - (mean_a * mean_a);
+    const double var_b = (sum_bb / dn) - (mean_b * mean_b);
+    if (var_a <= 0.0 || var_b <= 0.0) {
+        return 0.0;
+    }
+    const double cov = (sum_ab / dn) - (mean_a * mean_b);
+    return cov / std::sqrt(var_a * var_b);
+}
+
+// TICKET_783_3: Rolling shadow-PnL window for per-entry-component Sharpe
+// estimation. `push(r)` records one bar's shadow return for the component
+// (sign(vote) * bar_return); only non-Hold votes (r == 0 from a Hold is also
+// recorded so the denominator still advances). `non_zero_count()` is what the
+// aggregator uses as `n_rolling`. `sharpe()` returns 0 when `non_zero_count()
+// < 2` (no usable estimate).
+template <std::size_t Lookback>
+class RollingPnl {
+public:
+    void push(double r, bool was_active) noexcept {
+        if (full_) {
+            // Evict the oldest sample before overwriting.
+            const double oldest = buf_[head_];
+            sum_ -= oldest;
+            sum_sq_ -= oldest * oldest;
+            if (active_buf_[head_]) {
+                --non_zero_;
+            }
+        }
+        buf_[head_] = r;
+        active_buf_[head_] = was_active;
+        sum_ += r;
+        sum_sq_ += r * r;
+        if (was_active) {
+            ++non_zero_;
+        }
+        head_ = (head_ + 1) % Lookback;
+        if (head_ == 0) {
+            full_ = true;
+        }
+    }
+
+    [[nodiscard]] std::int64_t non_zero_count() const noexcept {
+        return non_zero_;
+    }
+
+    [[nodiscard]] std::size_t size() const noexcept {
+        return full_ ? Lookback : head_;
+    }
+
+    [[nodiscard]] double sharpe() const noexcept {
+        const std::size_t n = size();
+        if (n < 2 || non_zero_ < 2) {
+            return 0.0;
+        }
+        const double dn = static_cast<double>(n);
+        const double mean = sum_ / dn;
+        const double var = (sum_sq_ / dn) - (mean * mean);
+        if (var <= 0.0) {
+            return 0.0;
+        }
+        return mean / std::sqrt(var);
+    }
+
+private:
+    std::array<double, Lookback> buf_{};
+    std::array<bool, Lookback> active_buf_{};
+    double sum_ = 0.0;
+    double sum_sq_ = 0.0;
+    std::int64_t non_zero_ = 0;
+    std::size_t head_ = 0;
+    bool full_ = false;
+};
+
+} // namespace qnx_workflow
+
+{{COMPONENT_CODE}}
+
+// TICKET_783_1: Combinator aggregator. Placed in an anonymous namespace so the
+// helper name cannot collide with any user-component code concatenated above.
+namespace {
+
+// signalMethod selected at code-gen time. Reserved methods
+// (sharpe_weighted / correlation_adjusted / regime_based) currently fall
+// through to the equal/majority-vote branch and log a one-time line on the
+// host side (see v3-handlers.ts). TICKET_783_2/4/5 will fill them in.
+constexpr const char* kSignalMethod = {{SIGNAL_METHOD_CONST}};
+
+// Unified-formula constants. lambda_warmup is unused by the runtime once the
+// per-signal lambda_schedule (TICKET_783_3) is wired -- kept for ABI stability
+// and so reserved-method branches can still observe the design-intent value.
+constexpr double kLambdaWarmup = {{LAMBDA_WARMUP_CONST}};
+constexpr double kSrFloor = {{SR_FLOOR_CONST}};
+constexpr double kVoteThreshold = {{VOTE_THRESHOLD_CONST}};
+
+// TICKET_783_3: rolling-window length for per-component shadow-PnL Sharpe.
+// Matches WorkflowGenOptions.lookback (default 60). Used as the std::size_t
+// template parameter for RollingPnl<Lookback>.
+constexpr std::size_t kRollingLookback = {{ROLLING_LOOKBACK_CONST}};
+
+constexpr bool kConfidenceWeightedSizing = {{CONFIDENCE_WEIGHTED_SIZING}};
+
+// TICKET_783_5: refresh cadence for the N x N pairwise vote-correlation matrix
+// consumed by the `correlation_adjusted` method. Bar indices that are
+// multiples of kCorrRefreshK recompute the matrix; intermediate bars read the
+// cached values. 20 matches the default cadence in the design doc -- low
+// enough to track regime changes within ~one trading month on daily bars,
+// high enough that the O(N^2 * L) recompute is negligible relative to a full
+// backtest. Only the `correlation_adjusted` method consults the cache; other
+// methods compile in the constant but never read it.
+constexpr std::size_t kCorrRefreshK = 20;
+
+// TICKET_783_3: hard floor on total sample count (prior + rolling) below
+// which a component drops into per-signal equal-weight regardless of method.
+// Set by the parent ticket (TICKET_783) to 10 to match the D1 hard-floor
+// decision. Reserved methods will respect this floor too.
+constexpr std::int64_t kNMin = 10;
+
+// TICKET_783_3: D1 lambda(n) shrinkage schedule. lambda = 1 (prior dominates)
+// at n=0; decays linearly to 0 (rolling dominates) at n>=N_full. N_full = 252
+// is one trading year on daily bars; the assumption is documented in the
+// design doc (Risk 2). lambda is computed per-component each bar from that
+// component's `n_rolling`.
+[[nodiscard]] constexpr double lambda_schedule(std::int64_t n) noexcept {
+    constexpr std::int64_t kNFull = 252;
+    if (n >= kNFull) {
+        return 0.0;
+    }
+    if (n <= 0) {
+        return 1.0;
+    }
+    return 1.0 - static_cast<double>(n) / static_cast<double>(kNFull);
+}
+
+// TICKET_783_3: per-entry-component Bayesian priors. Populated from
+// `nona_signal.cached_stats_json` (Discovered chips) or
+// `saved_strategy_components.parameters.cached_stats` (workflow chips). When
+// no prior exists, both default to 0 -- `n_prior_i = 0` means the schedule
+// has no meaningful prior to anchor to, and `lambda_schedule(n_rolling_i)`
+// still controls the shrinkage; if rolling samples are also < kNMin the
+// signal falls into per-signal equal-weight via the hard floor.
+{{ENTRY_PRIORS}}
+
+{{COMBINE_ENTRIES_FN}}
+
+// TICKET_1225 P3: per-feed index constants baked at code-gen time.
+{{FEED_INDEX_CONSTANTS}}
+
+} // namespace
+
+class {{WORKFLOW_CLASS}} final : public stratforge::Strategy {
+public:
+    void init() override {
+        auto ctx = make_context();
+{{COMPONENT_INIT_CALLS}}
+{{WARMUP_PERIOD_COMPUTATION}}
+    }
+
+    void prenext() override {
+        auto ctx = make_context();
+        // Advance component indicators during warmup so they build
+        // enough history (e.g. for line()[-1] access) before next() fires.
+        // Only indicator advancement runs here; signal logic is skipped.
+{{PRENEXT_CALLS}}
+    }
+
+    void next() override {
+        auto ctx = make_context();
+        state_.reset_bar_signals();
+        state_.bar_index = ctx.bar_index;
+
+{{REGIME_UPDATE_CALLS}}
+        // TICKET_783_3: shadow-PnL update for per-component rolling Sharpe.
+        // The previous bar's vote (held in prev_entry_signals_) earned
+        // sign(vote) * bar_return over the interval [prev close, this close].
+        // bar_return is recomputed from the data feed -- the only sample we
+        // can read here without instrumenting position state. The first bar
+        // has no prev_close, so the update is gated on bar_index >= 1.
+        // Hold votes contribute r=0 with was_active=false, so they don't
+        // inflate non_zero_count but still advance the window.
+        if (ctx.bar_index >= 1) {
+            const double prev_close = ctx.data.close()[-1];
+            const double this_close = ctx.data.close()[0];
+            const double bar_return = (prev_close > 0.0)
+                ? (this_close / prev_close - 1.0)
+                : 0.0;
+{{ROLLING_PNL_UPDATE_CALLS}}
+        }
+
+{{ENTRY_UPDATE_CALLS}}
+{{EXIT_UPDATE_CALLS}}
+        execute_signal();
+    }
+
+private:
+    // TICKET_1225 P3: make_context with explicit feed index for multi-feed
+    // strategies. data(feed_idx) binds the context to the specified feed.
+    [[nodiscard]] qnx_workflow::ComponentContext make_context(std::size_t feed_idx = 0) {
+        return qnx_workflow::ComponentContext{
+            .strategy = *this,
+            .state = state_,
+            .data = data(feed_idx),
+            .bar_index = data(feed_idx).index(),
+        };
+    }
+
+    void execute_signal() {
+        const auto& pos = position();
+        switch (state_.signal.signal) {
+        case qnx_workflow::Signal::EnterLong:
+            if (pos.is_flat()) {
+                if constexpr (kConfidenceWeightedSizing) {
+                    const double base = sizer().getsizing(
+                        data(0), stratforge::OrderSide::Buy,
+                        data(0).close()[0], 0, *this);
+                    [[maybe_unused]] auto r = buy(base * state_.signal.confidence);
+                } else {
+                    [[maybe_unused]] auto r = buy();
+                }
+            }
+            break;
+        case qnx_workflow::Signal::EnterShort:
+            if (pos.is_flat()) {
+                if constexpr (kConfidenceWeightedSizing) {
+                    const double base = sizer().getsizing(
+                        data(0), stratforge::OrderSide::Sell,
+                        data(0).close()[0], 0, *this);
+                    [[maybe_unused]] auto r = sell(base * state_.signal.confidence);
+                } else {
+                    [[maybe_unused]] auto r = sell();
+                }
+            }
+            break;
+        case qnx_workflow::Signal::ExitLong:
+            if (pos.is_long()) {
+                [[maybe_unused]] auto r = close();
+            }
+            break;
+        case qnx_workflow::Signal::ExitShort:
+            if (pos.is_short()) {
+                [[maybe_unused]] auto r = close();
+            }
+            break;
+        case qnx_workflow::Signal::Hold:
+            break;
+        }
+    }
+
+    qnx_workflow::WorkflowState state_;
+{{COMPONENT_MEMBERS}}
+    // TICKET_783_3: previous bar's per-entry-component votes, needed to
+    // attribute the current bar's realised return back to the votes that
+    // produced this bar's position. Filled by combine_entries' caller after
+    // each bar's vote is collected; consumed at the start of the next bar.
+{{PREV_ENTRY_SIGNALS_MEMBER}}
+    // TICKET_783_3: per-entry-component shadow-PnL rolling window.
+    // Length is kRollingLookback (default 60); one member per entry component
+    // so different chip sets get independent rolling estimates.
+{{ROLLING_PNL_MEMBERS}}
+    // TICKET_783_5: per-entry-component rolling-vote window + cached N x N
+    // pairwise correlation matrix. Emitted only when signalMethod is
+    // `correlation_adjusted`; under other methods both placeholders collapse
+    // to a comment so the class stays unchanged.
+{{ROLLING_VOTE_MEMBERS}}
+{{CORR_MATRIX_MEMBER}}
+};
+
+QNX_STRATEGY_FACTORY_EXPORT({{WORKFLOW_CLASS}})
+
+// TICKET_1225 P3: additive optional ABI symbol. Runner cross-checks it
+// against the loaded feed count and fails fast on mismatch (stale .so / config drift).
+{{EXPECTED_FEEDS_EXPORT}}

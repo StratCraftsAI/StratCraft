@@ -1,0 +1,14 @@
+// Auto-generated QuantNexus C++ strategy.
+// Strategy: {{STRATEGY_NAME}}
+// Generated: {{GENERATED_TIME}}
+//
+// ABI v2: Strategy exports factory pair via QNX_STRATEGY_FACTORY_EXPORT.
+// Runner (stratforge-runner) owns Cerebro orchestration, data loading,
+// analyzers, serialization, and result I/O.
+
+#include <qnx_strategy_sdk/qnx_strategy_sdk.hpp>
+#include <stratforge/strategy/strategy.hpp>
+
+{{STRATEGY_CODE}}
+
+QNX_STRATEGY_FACTORY_EXPORT({{STRATEGY_CLASS}})

@@ -1,0 +1,22 @@
+{
+  "manifest": {
+    "displayName": "数据基础",
+    "description": "提供共享数据源组件和类型的基础插件"
+  },
+  "fitQuality": {
+    "insufficientData": "数据不足",
+    "needTwoFoldResults": "需要2个以上的折叠结果",
+    "dataStarved": "数据不足 ({{sampleCount}}个样本 / {{paramCount}}个参数 = {{ratio}}:1, 需要{{targetRatio}}:1+)",
+    "dataSufficiency": "数据充足度",
+    "needRatio": "需要{{targetRatio}}:1的样本/参数比, 当前{{currentRatio}}:1",
+    "modelFitQuality": "模型拟合质量"
+  },
+  "dataSource": {
+    "region": {
+      "usGlobal": "美国和全球",
+      "crypto": "加密货币",
+      "cnAShare": "中国A股",
+      "myData": "我的数据"
+    }
+  }
+}

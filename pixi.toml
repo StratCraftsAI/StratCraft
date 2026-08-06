@@ -1,0 +1,123 @@
+# TICKET_1289 P4 (F4) -- declarative research environment.
+# TICKET_1335 D0/AC0 -- channel split corrected against solver evidence.
+#
+# This manifest is the single source of truth for the Python *research* stack
+# (histdata-supplementary/gplearn/gpquant/pysr/catboost/lightgbm/xgboost/torch/
+# onnx/pyarrow/duckdb/numpy/pandas/scipy/sklearn/optuna/pytest/pandas-ta). It supersedes the
+# untracked, unpinned miniconda env in the developer home directory (TICKET_1289 D4).
+#
+# Provenance: version constraints below are pinned to the live, code-verified
+# research env probed on 2026-07-20 and re-probed on 2026-07-30 (python 3.12.2
+# conda-forge). See docs/design/TICKET_1289_pixi_env_inventory.md for the full
+# inventory.
+#
+# CHANNEL SPLIT (TICKET_1335 D0). The original manifest declared the numerical
+# and ML stack under `[dependencies]` (conda-forge). That was wrong: a
+# `conda list` probe of the live env shows python is the ONLY conda-forge
+# package -- all 17 others report `pypi_0`. The mis-split first surfaced as
+# `No candidates were found for onnxruntime 1.23.*`, because conda-forge's
+# onnxruntime line has no 1.23.x at all while PyPI does. onnxruntime was the
+# symptom, not the defect; scikit-learn 1.8, pyarrow 18.1, onnx 1.21 and
+# xgboost 2.1 sit on equally divergent conda-forge version lines.
+#
+# The correction moves those packages to `[pypi-dependencies]` at their exact
+# probed versions -- every one verified present on PyPI. No version was
+# broadened to make the solve pass (TICKET_1335 D0). python stays on
+# conda-forge because that is where the live interpreter came from.
+
+[workspace]
+name = "stratcraft-research"
+version = "0.1.0"
+description = "StratCraft research Python environment (factor mining, sweeps, LSTM training) -- TICKET_1289 F4"
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+# Interpreter pinned to the live research env (probe: python 3.12.2).
+# This is the only conda-forge package -- see CHANNEL SPLIT above.
+[dependencies]
+python = "3.12.*"
+
+[pypi-dependencies]
+# --- Core numerical / data stack (ABI-sensitive -- pin to live versions) -----
+numpy = "==2.2.6"
+# pandas is 2.3.3, NOT the probed live 2.2.2. This is solver-forced, not a
+# speculative broadening (TICKET_1335 D0). pandas-ta is required by
+# talib_engine.py, and PyPI now carries only 0.4.67b0/0.4.71b0 -- both declare
+# `pandas>=2.3.2`. The classic 0.3.14b0 that ran against pandas 2.2 was removed
+# from PyPI and returns 404, so no installable pandas-ta is compatible with
+# 2.2.2. Solver error: "all versions of pandas-ta depend on pandas>=2.3.2 and
+# you require pandas==2.2.2". 2.3.3 is the newest 2.3.x, chosen over a 3.x jump
+# to stay within the same major as the probed env.
+pandas = "==2.3.3"
+scipy = "==1.14.1"
+scikit-learn = "==1.8.0"
+# pyarrow is ABI-load-bearing for the zero-copy parquet reads under
+# /data2/ws/stratcraft-data (TICKET_1289 rationale).
+pyarrow = "==18.1.0"
+duckdb = "==1.5.3"
+
+# --- Gradient-boosting model backends (sweeps) -------------------------------
+catboost = "==1.2.10"
+lightgbm = "==4.6.0"
+xgboost = "==2.1.4"
+
+# --- Deep learning (LSTM training + ONNX export) -----------------------------
+# Live env is torch 2.6.0+cu124 (CUDA 12.4). GPU passthrough is native (no
+# container -- TICKET_1289 decision record). The PyPI default `torch==2.6.0`
+# wheel bundles the CUDA 12.4 runtime, matching the probed live build.
+torch = "==2.6.0"
+onnx = "==1.21.0"
+onnxruntime = "==1.23.2"
+
+# --- Hyperparameter optimisation (bayesian sweep phase) ----------------------
+optuna = "==4.9.0"
+
+# --- Test runner (TICKET_494 coverage mandate) -------------------------------
+pytest = "==8.3.5"
+
+# --- Factor-mining engines ---------------------------------------------------
+# gplearn is pinned to the stable 0.4.2 PyPI release. TICKET_1335 AC0a audited
+# the divergence against the live 0.5.dev0 snapshot and closed it: every symbol
+# this repository uses -- make_fitness, make_function, SymbolicTransformer (all
+# 17 kwargs passed by scripts/factor_mining/engines/gplearn_engine.py),
+# _best_programs, _Program.execute/.program/.fitness_/.depth_/.length_, and
+# node .name/.arity -- exists identically in 0.4.2. 0.5.dev0 adds no
+# constructor parameter, and `generation_` is absent from _Program in BOTH
+# versions (the engine already guards it with hasattr). The dev build was
+# never required.
+pysr = "==1.5.10"
+gplearn = ">=0.4.2"
+
+# pandas-ta (TICKET_1335 D2): the TA-Lib factor engine
+# (packages/builder-templates/framework/factor_engines/talib_engine.py) imports
+# `pandas_ta` inside this same research runtime. It was previously installed by
+# the Engine Store `pip install` path, which TICKET_1335 removes; the locked
+# environment is now its only owner.
+# Pinned exactly: PyPI carries only 0.4.67b0 and 0.4.71b0 (0.3.14b0 was
+# removed upstream -- 404). 0.4.71b0 pulls in numba==0.61.2 and requires
+# pandas>=2.3.2, which is what forces the pandas pin above.
+pandas-ta = "==0.4.71b0"
+
+# HistData Supplementary (TICKET_1335 D8 / AC24) is code-only provisioning.
+# No release is published yet, so the repository dependency is immutable at the
+# exact reviewed commit required by the ticket. Readiness uses only an embedded
+# bounded fixture and never invokes the downloader or contacts histdata.com.
+histdata-supplementary = { git = "https://github.com/StratCraftsAI/histdata.git", rev = "86bd632b030c23cf3a0e8dbe4246f02f43bce067" }
+
+research-contracts = { path = "packages/research-contracts", editable = true }
+
+# TICKET_1355_1: GPQuant is an optional, repository-governed capability. Both
+# supported projections are solved into pixi.lock; runtime lifecycle operations
+# may select only these environment names and always install with --locked.
+[feature.gpquant.pypi-dependencies]
+gpquant = "==0.1.6"
+
+[environments]
+default = ["gpquant"]
+without-gpquant = []
+
+[tasks]
+# Research-import smoke: every manifest package must import together. This is
+# the AC5 validation gate once the env is materialised (`pixi run smoke`).
+smoke = "python -c \"import numpy, pandas, scipy, sklearn, pyarrow, duckdb, catboost, lightgbm, xgboost, torch, onnx, onnxruntime, optuna, gplearn, gpquant, pysr, pandas_ta, histdata_supplementary; print('research stack OK')\""
+smoke-without-gpquant = "python -c \"import importlib.util, numpy, pandas, scipy, sklearn, pyarrow, duckdb, catboost, lightgbm, xgboost, torch, onnx, onnxruntime, optuna, gplearn, pysr, pandas_ta, histdata_supplementary; assert importlib.util.find_spec('gpquant') is None; print('research stack without GPQuant OK')\""

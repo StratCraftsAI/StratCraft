@@ -1,0 +1,383 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "operation": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "contractVersion": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "trainingSessionId": {
+      "$ref": "#/$defs/__schema2"
+    },
+    "modelId": {
+      "$ref": "#/$defs/__schema2"
+    },
+    "modelVersionId": {
+      "$ref": "#/$defs/__schema2"
+    },
+    "resourcePlanDecisionId": {
+      "$ref": "#/$defs/__schema2"
+    },
+    "data": {
+      "$ref": "#/$defs/__schema3"
+    },
+    "featureSchema": {
+      "$ref": "#/$defs/__schema4"
+    },
+    "signalIds": {
+      "$ref": "#/$defs/__schema6"
+    },
+    "split": {
+      "$ref": "#/$defs/__schema7"
+    },
+    "architecture": {
+      "$ref": "#/$defs/__schema11"
+    },
+    "optimizer": {
+      "$ref": "#/$defs/__schema13"
+    },
+    "seed": {
+      "$ref": "#/$defs/__schema10"
+    },
+    "epochs": {
+      "$ref": "#/$defs/__schema16"
+    },
+    "batchSize": {
+      "$ref": "#/$defs/__schema17"
+    },
+    "earlyStop": {
+      "$ref": "#/$defs/__schema18"
+    },
+    "checkpoint": {
+      "$ref": "#/$defs/__schema19"
+    }
+  },
+  "required": [
+    "operation",
+    "contractVersion",
+    "trainingSessionId",
+    "modelId",
+    "modelVersionId",
+    "resourcePlanDecisionId",
+    "data",
+    "featureSchema",
+    "signalIds",
+    "split",
+    "architecture",
+    "optimizer",
+    "seed",
+    "epochs",
+    "batchSize",
+    "earlyStop",
+    "checkpoint"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "type": "string",
+      "enum": [
+        "prepare",
+        "train",
+        "evaluate",
+        "checkpoint"
+      ]
+    },
+    "__schema1": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "__schema2": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "__schema3": {
+      "type": "object",
+      "properties": {
+        "inputReferenceId": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "timestampColumn": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "targetEndTimestampColumn": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "symbolColumn": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "signalIdColumn": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "targetColumn": {
+          "$ref": "#/$defs/__schema2"
+        }
+      },
+      "required": [
+        "inputReferenceId",
+        "timestampColumn",
+        "targetEndTimestampColumn",
+        "symbolColumn",
+        "signalIdColumn",
+        "targetColumn"
+      ],
+      "additionalProperties": false
+    },
+    "__schema4": {
+      "minItems": 2,
+      "maxItems": 128,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema5"
+      }
+    },
+    "__schema5": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "dataType": {
+          "type": "string",
+          "enum": [
+            "float32",
+            "float64"
+          ]
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "score",
+            "metadata"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "dataType",
+        "role"
+      ],
+      "additionalProperties": false
+    },
+    "__schema6": {
+      "minItems": 2,
+      "maxItems": 256,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema2"
+      }
+    },
+    "__schema7": {
+      "type": "object",
+      "properties": {
+        "train": {
+          "$ref": "#/$defs/__schema8"
+        },
+        "validation": {
+          "$ref": "#/$defs/__schema8"
+        },
+        "test": {
+          "$ref": "#/$defs/__schema8"
+        },
+        "embargoBars": {
+          "$ref": "#/$defs/__schema10"
+        }
+      },
+      "required": [
+        "train",
+        "validation",
+        "test",
+        "embargoBars"
+      ],
+      "additionalProperties": false
+    },
+    "__schema8": {
+      "type": "object",
+      "properties": {
+        "startUtc": {
+          "$ref": "#/$defs/__schema9"
+        },
+        "endUtc": {
+          "$ref": "#/$defs/__schema9"
+        }
+      },
+      "required": [
+        "startUtc",
+        "endUtc"
+      ],
+      "additionalProperties": false
+    },
+    "__schema9": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+    },
+    "__schema10": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema11": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "shared-encoder-lstm-v1"
+        },
+        "lookbackBars": {
+          "maximum": 4096,
+          "$ref": "#/$defs/__schema12"
+        },
+        "hiddenSize": {
+          "maximum": 1024,
+          "$ref": "#/$defs/__schema12"
+        },
+        "numLayers": {
+          "maximum": 16,
+          "$ref": "#/$defs/__schema12"
+        },
+        "dropout": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "metadataFeatureCount": {
+          "maximum": 127,
+          "$ref": "#/$defs/__schema12"
+        }
+      },
+      "required": [
+        "kind",
+        "lookbackBars",
+        "hiddenSize",
+        "numLayers",
+        "dropout",
+        "metadataFeatureCount"
+      ],
+      "additionalProperties": false
+    },
+    "__schema12": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema13": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "adam"
+        },
+        "learningRate": {
+          "$ref": "#/$defs/__schema14"
+        },
+        "beta1": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1
+        },
+        "beta2": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1
+        },
+        "epsilon": {
+          "$ref": "#/$defs/__schema14"
+        },
+        "weightDecay": {
+          "$ref": "#/$defs/__schema15"
+        },
+        "gradientClipNorm": {
+          "$ref": "#/$defs/__schema14"
+        }
+      },
+      "required": [
+        "kind",
+        "learningRate",
+        "beta1",
+        "beta2",
+        "epsilon",
+        "weightDecay",
+        "gradientClipNorm"
+      ],
+      "additionalProperties": false
+    },
+    "__schema14": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "__schema15": {
+      "type": "number",
+      "minimum": 0
+    },
+    "__schema16": {
+      "maximum": 100000,
+      "$ref": "#/$defs/__schema12"
+    },
+    "__schema17": {
+      "maximum": 1048576,
+      "$ref": "#/$defs/__schema12"
+    },
+    "__schema18": {
+      "type": "object",
+      "properties": {
+        "patience": {
+          "$ref": "#/$defs/__schema12"
+        },
+        "minimumImprovement": {
+          "$ref": "#/$defs/__schema15"
+        }
+      },
+      "required": [
+        "patience",
+        "minimumImprovement"
+      ],
+      "additionalProperties": false
+    },
+    "__schema19": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "artifactId": {
+              "$ref": "#/$defs/__schema2"
+            },
+            "relativePath": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024
+            },
+            "schemaVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+            },
+            "sha256": {
+              "$ref": "#/$defs/__schema20"
+            },
+            "configurationFingerprint": {
+              "$ref": "#/$defs/__schema20"
+            }
+          },
+          "required": [
+            "artifactId",
+            "relativePath",
+            "schemaVersion",
+            "sha256",
+            "configurationFingerprint"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "__schema20": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

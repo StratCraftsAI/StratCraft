@@ -1,0 +1,14 @@
+{
+  "*.{ts,tsx,js,jsx}": [
+    "bash scripts/check-ascii.sh"
+  ],
+  "*.{py,cpp,c,h,hpp}": [
+    "bash scripts/check-ascii.sh"
+  ],
+  "*.{css,scss}": [
+    "bash scripts/check-ascii.sh"
+  ],
+  "*.md": [
+    "bash scripts/check-ascii.sh"
+  ]
+}

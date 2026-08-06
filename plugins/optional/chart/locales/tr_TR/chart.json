@@ -1,0 +1,63 @@
+{
+  "view": {
+    "loading": "Yükleniyor...",
+    "refresh": "Yenile",
+    "retry": "Yeniden dene",
+    "loadingChartData": "Grafik verileri yükleniyor...",
+    "toggle": {
+      "volume": "Hacim",
+      "grid": "Izgara"
+    },
+    "error": {
+      "chart": "Grafik yükleme hatası",
+      "loadData": "Veriler yüklenemedi"
+    }
+  },
+  "settings": {
+    "section": {
+      "indicators": "Göstergeler",
+      "style": "Stil",
+      "drawingTools": "Çizim Araçları"
+    },
+    "indicator": {
+      "sma": "SMA",
+      "ema": "EMA",
+      "rsi": "RSI",
+      "macd": "MACD",
+      "bb": "Bollinger Bantları"
+    },
+    "param": {
+      "period": "Periyot",
+      "fast": "Hızlı",
+      "slow": "Yavaş",
+      "signal": "Sinyal",
+      "stdDev": "Std. sapma"
+    },
+    "chartType": {
+      "label": "Grafik Türü",
+      "option": {
+        "candlesticks": "Mumlar",
+        "hollowCandles": "Boş Mumlar",
+        "ohlc": "OHLC",
+        "line": "Çizgi",
+        "area": "Alan"
+      }
+    },
+    "color": {
+      "up": "Yükseliş rengi",
+      "down": "Düşüş rengi"
+    },
+    "drawingTool": {
+      "line": "Çizgi",
+      "ray": "Işın",
+      "rect": "Dikdörtgen",
+      "fib": "Fib"
+    },
+    "actions": {
+      "apply": "Değişiklikleri Uygula"
+    }
+  },
+  "notification": {
+    "indicatorAdded": "Gösterge eklendi: {{indicator}}"
+  }
+}

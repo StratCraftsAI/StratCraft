@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "templateId": "hmm_regime_v1",
+      "params": {
+        "n_states": 3
+      },
+      "effectiveMemoryBars": 30,
+      "embargoBars": 60
+    },
+    {
+      "templateId": "hmm_regime_v1",
+      "params": {
+        "n_states": 5,
+        "window": 20
+      },
+      "effectiveMemoryBars": 20,
+      "embargoBars": 40
+    },
+    {
+      "templateId": "hmm_regime_v1",
+      "params": {
+        "n_states": 3,
+        "window": 256
+      },
+      "effectiveMemoryBars": 30,
+      "embargoBars": 60
+    },
+    {
+      "templateId": "gmm_regime_v1",
+      "params": {
+        "n_components": 3
+      },
+      "effectiveMemoryBars": 30,
+      "embargoBars": 60
+    },
+    {
+      "templateId": "gmm_regime_v1",
+      "params": {
+        "n_components": 4,
+        "window": 15
+      },
+      "effectiveMemoryBars": 15,
+      "embargoBars": 30
+    },
+    {
+      "templateId": "ngram_next_bar_v1",
+      "params": {
+        "k": 3
+      },
+      "effectiveMemoryBars": 3,
+      "embargoBars": 6
+    },
+    {
+      "templateId": "ngram_next_bar_v1",
+      "params": {
+        "k": 3,
+        "tau": 5
+      },
+      "effectiveMemoryBars": 11,
+      "embargoBars": 22
+    },
+    {
+      "templateId": "ngram_next_bar_v1",
+      "params": {
+        "k": 5,
+        "tau": 2
+      },
+      "effectiveMemoryBars": 9,
+      "embargoBars": 18
+    },
+    {
+      "templateId": "sklearn_ridge_return_v1",
+      "params": {
+        "lookback": 64
+      },
+      "effectiveMemoryBars": 64,
+      "embargoBars": 128
+    },
+    {
+      "templateId": "sklearn_ridge_return_v1",
+      "params": {
+        "window": 32
+      },
+      "effectiveMemoryBars": 32,
+      "embargoBars": 64
+    },
+    {
+      "templateId": "sklearn_ridge_return_v1",
+      "params": {},
+      "effectiveMemoryBars": 0,
+      "embargoBars": 5
+    },
+    {
+      "templateId": "xgboost_return_v1",
+      "params": {
+        "lookback": 128
+      },
+      "effectiveMemoryBars": 128,
+      "embargoBars": 256
+    },
+    {
+      "templateId": "lightgbm_return_v1",
+      "params": {
+        "lookback": 0
+      },
+      "effectiveMemoryBars": 0,
+      "embargoBars": 5
+    },
+    {
+      "templateId": "xgboost_return_v3",
+      "params": {
+        "lookback": 64,
+        "horizon": 5
+      },
+      "effectiveMemoryBars": 64,
+      "embargoBars": 128
+    },
+    {
+      "templateId": "xgboost_return_v3",
+      "params": {
+        "lookback": 8,
+        "horizon": 5
+      },
+      "effectiveMemoryBars": 10,
+      "embargoBars": 20
+    },
+    {
+      "templateId": "xgboost_return_v3",
+      "params": {
+        "lookback": 8,
+        "horizon": 3
+      },
+      "effectiveMemoryBars": 8,
+      "embargoBars": 16
+    },
+    {
+      "templateId": "xgboost_return_v3",
+      "params": {
+        "lookback": 8,
+        "horizon": 5,
+        "multi_tf": "1d"
+      },
+      "effectiveMemoryBars": 125,
+      "embargoBars": 250
+    },
+    {
+      "templateId": "xgboost_return_v3",
+      "params": {
+        "lookback": 8,
+        "horizon": 5,
+        "multi_tf": "4h"
+      },
+      "effectiveMemoryBars": 25,
+      "embargoBars": 50
+    },
+    {
+      "templateId": "xgboost_return_v3",
+      "params": {
+        "lookback": 8,
+        "horizon": 5,
+        "multi_tf": "1d,4h"
+      },
+      "effectiveMemoryBars": 125,
+      "embargoBars": 250
+    },
+    {
+      "templateId": "catboost_return_v2",
+      "params": {
+        "lookback": 32,
+        "horizon": 10
+      },
+      "effectiveMemoryBars": 32,
+      "embargoBars": 64
+    },
+    {
+      "templateId": "lightgbm_return_v2",
+      "params": {
+        "lookback": 16,
+        "horizon": 5,
+        "multi_tf": "4h"
+      },
+      "effectiveMemoryBars": 25,
+      "embargoBars": 50
+    },
+    {
+      "templateId": "rsi_v1",
+      "params": {
+        "period": 14
+      },
+      "effectiveMemoryBars": 0,
+      "embargoBars": 5
+    },
+    {
+      "templateId": "macd_v1",
+      "params": {
+        "fast_period": 12
+      },
+      "effectiveMemoryBars": 0,
+      "embargoBars": 5
+    },
+    {
+      "templateId": "sma_cross_v1",
+      "params": {
+        "fast_period": 10
+      },
+      "effectiveMemoryBars": 0,
+      "embargoBars": 5
+    },
+    {
+      "templateId": "unknown_template_xyz",
+      "params": {
+        "lookback": 99
+      },
+      "effectiveMemoryBars": 0,
+      "embargoBars": 5
+    }
+  ]
+}

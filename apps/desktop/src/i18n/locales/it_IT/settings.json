@@ -1,0 +1,269 @@
+{
+  "title": "Settings",
+  "sections": {
+    "general": "General",
+    "appearance": "Appearance",
+    "language": "Language",
+    "network": "Network",
+    "security": "Security",
+    "plugins": "Plugins",
+    "advanced": "Advanced",
+    "about": "About",
+    "config": "Config",
+    "credentials": "Credentials",
+    "system": "System"
+  },
+  "language": {
+    "title": "Language",
+    "description": "Select your preferred language",
+    "system": "Use system language",
+    "restart": "Restart required to apply language changes"
+  },
+  "theme": {
+    "title": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
+  },
+  "plugins": {
+    "title": "Plugin Settings",
+    "config": "Configuration",
+    "secrets": "Secrets",
+    "noConfig": "No configuration options available",
+    "noSecrets": "No secrets configured"
+  },
+  "actions": {
+    "save": "Save Settings",
+    "reset": "Reset to Defaults",
+    "export": "Export Settings",
+    "import": "Import Settings",
+    "reload": "Reload",
+    "retry": "Riprova"
+  },
+  "config": {
+    "title": "System Configuration",
+    "description": "Manage application settings and preferences",
+    "configFilePath": "Configuration file path",
+    "nav": {
+      "performance": "Performance",
+      "sync": "Sync",
+      "scoreboard": "Tabellone segnali",
+      "diagnostics": "Diagnostica",
+      "onboarding": "Introduzione",
+      "privacy": "Privacy",
+      "dataRouting": "Instradamento dati",
+      "resourceGovernance": "Resource Governance"
+    },
+    "performance": {
+      "maxBacktestTasks": "Max Backtest Tasks",
+      "maxBacktestDescription": "Concurrent backtest limit (1-32)",
+      "autoDetectTitle": "Rilevamento automatico basato sui core CPU",
+      "autoDetect": "Auto Rileva"
+    },
+    "sync": {
+      "title": "Workspace Sync",
+      "description": "Sync your workspace to a local folder (e.g., OneDrive, Google Drive, Dropbox mount)",
+      "targetFolder": "Target Folder",
+      "targetFolderDescription": "Folder path for workspace sync. Use a cloud drive mount for cross-device sync.",
+      "targetFolderPlaceholder": "Select a sync folder...",
+      "browse": "Browse",
+      "lastSynced": "Last Synced",
+      "neverSynced": "Never synced",
+      "syncNow": "Sync Now",
+      "syncing": "Syncing...",
+      "restoreFromSync": "Restore from Sync",
+      "restoring": "Restoring...",
+      "exportSuccess": "Workspace exported successfully ({{strategies}} strategies, {{algorithms}} algorithms, {{results}} results)",
+      "importSuccess": "Workspace imported successfully ({{strategies}} strategies, {{algorithms}} algorithms, {{results}} results)",
+      "confirmRestore": "This will import workspace data from the sync folder. Existing data with the same IDs will be overwritten. Continue?",
+      "errors": {
+        "noTargetDir": "Please select a target folder first",
+        "exportFailed": "Export failed: {{error}}",
+        "importFailed": "Import failed: {{error}}"
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "restore": "Restore"
+      }
+    },
+    "health": {
+      "parseError": "Errore del file di configurazione",
+      "parseWarning": "Avviso del file di configurazione",
+      "usingFallback": "L'applicazione è in esecuzione con l'ultima configurazione valida conosciuta. Correggi il file di configurazione e ricarica.",
+      "reloadFailed": "Ricaricamento della configurazione fallito a causa di errori di analisi."
+    },
+    "scoreboard": {
+      "title": "Tabellone segnali",
+      "description": "Parametri del Tabellone Prestazioni Segnali. Le modifiche hanno effetto al prossimo ricalcolo -- nessun riavvio richiesto.",
+      "windowBars": "Barre della finestra",
+      "windowBarsDescription": "Lunghezza della finestra mobile per IC / Sharpe / hit-rate ({{min}}-{{max}} barre)."
+    },
+    "dataRouting": {
+      "title": "Data routing",
+      "descriptionPrefix": "For each market, choose which data provider should be tried first. Markets with multiple eligible providers (for example,",
+      "descriptionMiddle": "served by both",
+      "descriptionAnd": "and",
+      "descriptionSuffix": ") expose a reorderable list. Single-provider markets are read-only.",
+      "moveUp": "Sposta {{provider}} in alto",
+      "moveDown": "Sposta {{provider}} in basso"
+    },
+    "resourceGovernance": {
+      "title": "Resource Governance",
+      "description": "Per-workload CPU / memory caps for sweep, factor mining, and LSTM training. Gate thresholds hot-reload; cgroup hard caps apply on the next launch of each workload.",
+      "enabled": "Enable resource governance",
+      "sweepCap": "Sweep cap (%)",
+      "miningCap": "Factor mining cap (%)",
+      "lstmCap": "LSTM training cap (%)",
+      "capDescription": "Maximum share of machine resources on the tighter of CPU / memory ({{min}}-{{max}}%).",
+      "applyNote": "Gate thresholds apply immediately. cgroup hard caps apply on the next launch of each workload.",
+      "aggregateExceeded": "Combined caps must not exceed {{max}}%.",
+      "admissionCeiling": "System admission ceiling (%)",
+      "admissionCeilingDesc": "Maximum combined peak memory including other workloads and the operating system ({{min}}-{{max}}%)."
+    }
+  },
+  "advanced": {
+    "diagnostics": {
+      "title": "Diagnostica",
+      "openLogFolder": "Apri cartella log",
+      "openLogFolderDescription": "Apre la directory dei log nel gestore file"
+    },
+    "onboarding": {
+      "title": "Introduzione",
+      "showGuides": "Mostra guide di introduzione",
+      "showGuidesDescription": "Mostra tour guidati interattivi quando visiti le pagine per la prima volta.",
+      "assistantMode": "Modalità assistente",
+      "assistantModeDescription": "Mostra il pannello di aiuto contestuale con contenuti didattici per la pagina corrente.",
+      "resetProgress": "Reimposta progresso introduzione",
+      "resetProgressDescription": "Cancella tutti i tour completati in modo che vengano riprodotti di nuovo alla prossima visita.",
+      "resetButton": "Reimposta"
+    },
+    "privacy": {
+      "title": "Privacy",
+      "description": "Control what data is shared with StratCraft to help improve the application.",
+      "crashReports": "Crash Reports",
+      "crashReportsDescription": "Automatically send error and crash data to help us fix bugs. No personal data is included.",
+      "crashReportsAlwaysOn": "Crash reports are always sent to help us fix critical issues. No personal data is included.",
+      "alwaysOn": "Always On",
+      "analytics": "Send Usage Analytics",
+      "analyticsDescription": "Share anonymous usage statistics to help us improve features and performance."
+    }
+  },
+  "permissions": {
+    "title": "Permission Request",
+    "requestingPermissions": "This plugin is requesting the following permissions:",
+    "dangerousPermissions": "Dangerous Permissions",
+    "dangerousWarning": "This plugin requests elevated permissions that could affect your system security. Only approve if you trust the source.",
+    "deny": "Deny",
+    "approve": "Approve",
+    "approveAnyway": "Approve Anyway",
+    "pluginId": "Plugin ID: {{id}}",
+    "author": "Author: {{author}}"
+  },
+  "credentials": {
+    "title": "Gestore Credenziali",
+    "description": "Gestisci le credenziali dei plugin in modo sicuro",
+    "nav": {
+      "security": "Sicurezza",
+      "credentials": "Credenziali",
+      "auditLog": "Registro Audit"
+    },
+    "security": {
+      "title": "Stato Sicurezza",
+      "description": "Le credenziali sono crittografate con AES-256-GCM. Integrazione portachiavi di sistema attiva."
+    },
+    "actions": {
+      "setMasterPassword": "Imposta Password Principale",
+      "addCredential": "Aggiungi Credenziale",
+      "refresh": "Aggiorna",
+      "copyToClipboard": "Copia negli appunti",
+      "showValue": "Mostra valore",
+      "hideValue": "Nascondi valore",
+      "deleteCredential": "Elimina credenziale"
+    },
+    "search": {
+      "placeholder": "Cerca credenziali..."
+    },
+    "list": {
+      "title": "Credenziali Memorizzate",
+      "empty": "Nessuna credenziale memorizzata",
+      "noMatch": "Nessuna credenziale corrispondente",
+      "addFirst": "Aggiungi la tua prima credenziale"
+    },
+    "audit": {
+      "title": "Attivita Recente",
+      "empty": "Nessuna attivita registrata",
+      "loadFailed": "Impossibile caricare il registro di audit"
+    },
+    "dialog": {
+      "add": {
+        "title": "Aggiungi Credenziale",
+        "pluginId": "ID Plugin",
+        "pluginIdPlaceholder": "com.example.plugin",
+        "key": "Chiave",
+        "keyPlaceholder": "API_KEY",
+        "value": "Valore",
+        "valuePlaceholder": "Inserisci valore segreto",
+        "adding": "Aggiunta in corso...",
+        "submit": "Aggiungi Credenziale"
+      },
+      "password": {
+        "setTitle": "Imposta Password Principale",
+        "enterTitle": "Inserisci Password Principale",
+        "setDescription": "Imposta una password principale per proteggere le tue credenziali. Questa password sara richiesta per accedere ai dati sensibili.",
+        "enterDescription": "Inserisci la tua password principale per sbloccare l'accesso alle credenziali.",
+        "password": "Password",
+        "passwordPlaceholder": "Inserisci password",
+        "confirmPassword": "Conferma Password",
+        "confirmPlaceholder": "Conferma password",
+        "processing": "Elaborazione in corso...",
+        "setButton": "Imposta Password",
+        "unlockButton": "Sblocca"
+      }
+    },
+    "errors": {
+      "passwordMismatch": "Le password non corrispondono",
+      "passwordTooShort": "La password deve avere almeno 8 caratteri",
+      "invalidPassword": "Password non valida",
+      "setPasswordFailed": "Impossibile impostare la password"
+    },
+    "confirmDelete": "Eliminare le credenziali \"{{key}}\" da {{pluginId}}?"
+  },
+  "consent": {
+    "title": "Help Improve StratCraft",
+    "description": "StratCraft collects crash reports to fix critical issues. You can also opt in to share anonymous usage data. You can change these settings at any time in Settings > Advanced.",
+    "crashReports": "Crash Reports",
+    "crashReportsAlwaysOn": "Crash reports are always sent to help us fix critical issues. No personal data is included.",
+    "optionalDataSharing": "Optional data sharing:",
+    "analytics": "Send usage analytics",
+    "analyticsDescription": "Share anonymous usage data to help us understand how StratCraft is used and improve features.",
+    "privacyNote": "All data is anonymized before transmission. No personal information, trading data, or API keys are ever collected. You can change these preferences anytime in Settings > Advanced > Privacy.",
+    "noThanks": "No Thanks",
+    "enableSelected": "Enable Selected"
+  },
+  "secretsPanel": {
+    "verifyMissingApiKey": "Chiave API mancante",
+    "verifyMissingCompositeKey": "ID chiave API o segreto mancante",
+    "verifyRequestFailed": "Richiesta di convalida non riuscita",
+    "patternMismatch": "Value does not match expected pattern ({{pattern}})",
+    "failedToSaveKey": "Failed to save {{key}}",
+    "failedToClearKey": "Failed to clear {{key}}",
+    "failedToDeleteKey": "Failed to delete {{key}}",
+    "apiKey": {
+      "aria": {
+        "required": "obbligatorio",
+        "hideValue": "Nascondi valore",
+        "showValue": "Mostra valore"
+      }
+    }
+  },
+  "errors": {
+    "saveFailed": "Salvataggio fallito",
+    "loadFailed": "Impossibile caricare la configurazione"
+  },
+  "dataRouting": {
+    "loading": "Caricamento preferenze di routing del mercato...",
+    "instructions": "Per ogni mercato, il primo fornitore nell'elenco ha la priorita. I mercati con un solo fornitore sono di sola lettura.",
+    "noProvider": "nessun fornitore",
+    "singleProvider": "Singolo"
+  }
+}

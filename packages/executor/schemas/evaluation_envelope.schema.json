@@ -1,0 +1,194 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stratcraft.ai/schemas/evaluation_envelope.schema.json",
+  "title": "QuantNexus canonical evaluation envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evaluation_id",
+    "model_id",
+    "window",
+    "status",
+    "rows",
+    "statistics",
+    "verdict_inputs",
+    "progress",
+    "cancellation",
+    "missing_symbols",
+    "errors"
+  ],
+  "properties": {
+    "schema_version": { "const": "qnx.evaluation-envelope/1.0.0" },
+    "evaluation_id": { "$ref": "#/definitions/non_empty_identifier" },
+    "model_id": { "$ref": "#/definitions/non_empty_identifier" },
+    "window": { "$ref": "#/definitions/window" },
+    "status": { "enum": ["completed", "partial", "failed", "cancelled"] },
+    "rows": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/signal_row" }
+    },
+    "statistics": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/statistic" }
+    },
+    "verdict_inputs": { "$ref": "#/definitions/verdict_inputs" },
+    "progress": { "$ref": "#/definitions/progress" },
+    "cancellation": { "$ref": "#/definitions/cancellation" },
+    "missing_symbols": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/definitions/non_empty_identifier" }
+    },
+    "errors": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/error" }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "enum": ["failed", "partial"] } } },
+      "then": { "properties": { "errors": { "minItems": 1 } } }
+    },
+    {
+      "if": { "properties": { "status": { "const": "cancelled" } } },
+      "then": {
+        "properties": {
+          "cancellation": {
+            "properties": {
+              "requested": { "const": true },
+              "cancelled": { "const": true },
+              "reason": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "cancellation": {
+            "properties": { "cancelled": { "const": false } }
+          }
+        }
+      }
+    }
+  ],
+  "definitions": {
+    "non_empty_identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "finite_number": { "type": "number" },
+    "probability": {
+      "allOf": [
+        { "$ref": "#/definitions/finite_number" },
+        { "minimum": 0.0, "maximum": 1.0 }
+      ]
+    },
+    "window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start_ms", "end_ms", "end_inclusive"],
+      "properties": {
+        "start_ms": { "type": "integer", "minimum": 0 },
+        "end_ms": { "type": "integer", "minimum": 0 },
+        "end_inclusive": { "const": true }
+      }
+    },
+    "signal_row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["symbol", "timestamp_ms", "signal_score", "confidence", "forward_return"],
+      "properties": {
+        "symbol": { "$ref": "#/definitions/non_empty_identifier" },
+        "timestamp_ms": { "type": "integer", "minimum": 0 },
+        "signal_score": {
+          "allOf": [
+            { "$ref": "#/definitions/finite_number" },
+            { "minimum": -1.0, "maximum": 1.0 }
+          ]
+        },
+        "confidence": { "$ref": "#/definitions/probability" },
+        "forward_return": {
+          "oneOf": [
+            { "$ref": "#/definitions/finite_number" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "statistic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "value", "sample_count", "raw_p_value", "adjusted_p_value"],
+      "properties": {
+        "name": { "$ref": "#/definitions/non_empty_identifier" },
+        "value": { "$ref": "#/definitions/finite_number" },
+        "sample_count": { "type": "integer", "minimum": 0 },
+        "raw_p_value": {
+          "oneOf": [{ "$ref": "#/definitions/probability" }, { "type": "null" }]
+        },
+        "adjusted_p_value": {
+          "oneOf": [{ "$ref": "#/definitions/probability" }, { "type": "null" }]
+        }
+      }
+    },
+    "verdict_inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observed_sample_count",
+        "minimum_sample_count",
+        "effect_size",
+        "raw_p_value",
+        "adjusted_p_value",
+        "significance_level",
+        "passed"
+      ],
+      "properties": {
+        "observed_sample_count": { "type": "integer", "minimum": 0 },
+        "minimum_sample_count": { "type": "integer", "minimum": 1 },
+        "effect_size": { "$ref": "#/definitions/finite_number" },
+        "raw_p_value": {
+          "oneOf": [{ "$ref": "#/definitions/probability" }, { "type": "null" }]
+        },
+        "adjusted_p_value": {
+          "oneOf": [{ "$ref": "#/definitions/probability" }, { "type": "null" }]
+        },
+        "significance_level": { "$ref": "#/definitions/probability" },
+        "passed": { "type": "boolean" }
+      }
+    },
+    "progress": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["completed_units", "total_units", "stage"],
+      "properties": {
+        "completed_units": { "type": "integer", "minimum": 0 },
+        "total_units": { "type": "integer", "minimum": 0 },
+        "stage": { "$ref": "#/definitions/non_empty_identifier" }
+      }
+    },
+    "cancellation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested", "cancelled", "reason"],
+      "properties": {
+        "requested": { "type": "boolean" },
+        "cancelled": { "type": "boolean" },
+        "reason": { "type": ["string", "null"], "maxLength": 1024 }
+      }
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message", "field", "retryable"],
+      "properties": {
+        "code": { "$ref": "#/definitions/non_empty_identifier" },
+        "message": { "$ref": "#/definitions/non_empty_identifier" },
+        "field": { "type": ["string", "null"], "maxLength": 256 },
+        "retryable": { "type": "boolean" }
+      }
+    }
+  }
+}

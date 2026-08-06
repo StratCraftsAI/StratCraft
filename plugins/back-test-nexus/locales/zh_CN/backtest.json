@@ -1,0 +1,539 @@
+{
+  "workflow": {
+    "title": "回测工作流",
+    "selectStrategy": "选择策略",
+    "configureData": "配置数据",
+    "setParameters": "设置参数",
+    "runBacktest": "运行回测",
+    "viewResults": "查看结果",
+    "compiled": "C++ 已编译",
+    "compilationFailed": "C++ 编译失败"
+  },
+  "panel": {
+    "history": "回测历史",
+    "trades": "交易记录",
+    "logs": "日志",
+    "results": "结果"
+  },
+  "actions": {
+    "run": "运行回测",
+    "stop": "停止回测",
+    "export": "导出结果",
+    "compare": "对比结果",
+    "clear": "清除历史"
+  },
+  "status": {
+    "idle": "就绪",
+    "running": "运行中...",
+    "completed": "已完成",
+    "failed": "失败",
+    "cancelled": "已取消"
+  },
+  "results": {
+    "summary": "摘要",
+    "performance": "性能",
+    "trades": "交易列表",
+    "equity": "权益曲线",
+    "drawdown": "回撤",
+    "statistics": "统计"
+  },
+  "metrics": {
+    "totalReturn": "总收益",
+    "sharpeRatio": "夏普比率",
+    "maxDrawdown": "最大回撤",
+    "winRate": "胜率",
+    "profitFactor": "盈亏比",
+    "totalTrades": "总交易数"
+  },
+  "errors": {
+    "noStrategy": "未选择策略",
+    "noData": "无可用数据",
+    "runFailed": "回测执行失败",
+    "exportFailed": "导出结果失败",
+    "searchFailed": "搜索失败",
+    "coverageCheckFailed": "覆盖率检查失败",
+    "downloadFailed": "下载失败",
+    "fetchMarketDataFailed": "获取市场数据失败",
+    "resultNotFound": "未找到结果",
+    "fetchDataFailed": "获取数据失败",
+    "userNotAuthenticated": "用户未认证，请登录。",
+    "backtestAlreadyRunning": "回测已在运行中",
+    "maxDrawdownReached": "已达到最大回撤",
+    "exportFallback": "导出失败",
+    "resumeFailed": "恢复失败",
+    "startBacktestFailed": "启动回测失败"
+  },
+  "config": {
+    "title": "数据配置",
+    "dataSource": "数据源",
+    "symbol": "交易品种",
+    "searchSymbol": "搜索品种...",
+    "startDate": "开始日期",
+    "endDate": "结束日期",
+    "timeframe": "时间周期",
+    "initialCapital": "初始资金",
+    "orderSize": "订单大小",
+    "searchTruncated": "显示 {{total}} 中的 {{count}} 个 -- 请优化搜索",
+    "confidenceWeightedSizing": "Confidence-Weighted Sizing",
+    "confidenceWeightedSizingHint": "Scale position size by signal confidence"
+  },
+  "timeframes": {
+    "1m": "1分钟",
+    "5m": "5分钟",
+    "15m": "15分钟",
+    "30m": "30分钟",
+    "1h": "1小时",
+    "4h": "4小时",
+    "1d": "1天",
+    "1w": "1周",
+    "1M": "1月"
+  },
+  "orderUnits": {
+    "cash": "$",
+    "percent": "%",
+    "shares": "股"
+  },
+  "sidebar": {
+    "history": "历史",
+    "backtesting": "回测中",
+    "loading": "加载中...",
+    "noHistory": "暂无回测历史",
+    "testing": "测试中...",
+    "capLabel": "资金:",
+    "sizeLabel": "规模:",
+    "testedLabel": "测试:",
+    "delete": "删除",
+    "checkpointTooltip": "检查点: {{percent}}% 已完成"
+  },
+  "page": {
+    "loadingAlgorithms": "加载算法中...",
+    "workflowTitle": "工作流配置",
+    "noResults": "暂无回测结果",
+    "startBacktest": "请从配置页面启动回测",
+    "realtimeChartPending": "实时图表将在数据可用时显示",
+    "loadingResult": "正在加载结果..."
+  },
+  "buttons": {
+    "newBacktest": "新建回测",
+    "keep": "保留",
+    "discard": "丢弃",
+    "reset": "重置",
+    "execute": "执行",
+    "executing": "执行中...",
+    "cancel": "取消",
+    "delete": "删除",
+    "backToConfig": "返回配置",
+    "runInBackground": "后台运行",
+    "exportToQuantLab": "保存策略",
+    "exporting": "保存中...",
+    "return": "返回"
+  },
+  "workflowSteps": {
+    "marketAnalysis": "市场分析",
+    "entryFilter": "入场过滤",
+    "entrySignal": "入场信号",
+    "exitStrategy": "退出策略"
+  },
+  "statusBar": {
+    "running": "运行中",
+    "runningBacktests": "运行中的回测",
+    "backtestsRunning": "{{count}} 个回测运行中"
+  },
+  "executorStatus": {
+    "ready": "就绪",
+    "starting": "启动中...",
+    "executing": "执行中",
+    "completed": "已完成",
+    "failed": "失败",
+    "cancelled": "已取消"
+  },
+  "checkpoint": {
+    "available": "检查点可用",
+    "completed": "已完成 {{percent}}% ({{processed}}/{{total}} 根K线)",
+    "saved": "保存于 {{time}}",
+    "dataNotFound": "数据文件未找到",
+    "dataNotFoundDesc": "原始数据文件已被移动或删除，无法恢复。",
+    "dataNotFoundHint": "请丢弃此检查点并开始新的回测。",
+    "dataChanged": "数据文件已更改",
+    "dataChangedDesc": "数据文件自检查点创建以来已被修改。",
+    "dataChangedHint": "恢复可能产生不一致的结果，建议重新开始。",
+    "validating": "验证数据中...",
+    "validatingDesc": "正在检查数据文件完整性。",
+    "pnl": "盈亏",
+    "return": "收益率",
+    "trades": "交易",
+    "winRate": "胜率",
+    "openPositions": "检查点时的持仓",
+    "resume": "恢复回测",
+    "resuming": "恢复中...",
+    "discardStartNew": "丢弃并重新开始",
+    "percentSaved": "已保存 {{percent}}%",
+    "justNow": "刚刚",
+    "minutesAgo": "{{count}} 分钟前",
+    "hoursAgo": "{{count}} 小时前",
+    "daysAgo": "{{count}} 天前",
+    "recently": "最近"
+  },
+  "dialog": {
+    "deleteTitle": "删除历史记录",
+    "deleteMessage": "这将永久删除回测结果，包括所有交易记录和权益曲线数据。"
+  },
+  "cancelDialog": {
+    "title": "取消回测",
+    "message": "确定要取消正在运行的回测吗？此操作无法撤销。",
+    "confirm": "取消回测",
+    "keep": "继续运行"
+  },
+  "cancelledDialog": {
+    "title": "回测已取消",
+    "message": "回测已被取消。您想要做什么？",
+    "stay": "留在此页",
+    "goBack": "返回"
+  },
+  "workflowSelector": {
+    "selectAlgorithm": "市场分析",
+    "preCondition": "入场过滤",
+    "selectSteps": "入场信号",
+    "postCondition": "退出策略",
+    "search": "搜索..."
+  },
+  "breadcrumb": {
+    "backtestNexus": "回测系统",
+    "indicatorsCockpit": "Regime",
+    "kronosCockpit": "克洛诺斯",
+    "traderCockpit": "交易员",
+    "aiLiberoCockpit": "AI LIBERO",
+    "aiStudioCockpit": "AI STUDIO",
+    "catalogCockpit": "Catalog",
+    "result": "结果",
+    "backtestResult": "回测结果",
+    "home": "Nexus Hub"
+  },
+  "kronos": {
+    "title": "克洛诺斯策略",
+    "subtitle": "选择一个克洛诺斯生成的策略进行回测",
+    "noStrategies": "暂无克洛诺斯策略",
+    "noStrategiesHint": "使用策略构建器中的克洛诺斯功能生成策略后，将在此处显示。",
+    "columnName": "策略名称",
+    "columnType": "类型",
+    "columnCreated": "创建时间",
+    "columnAction": "选择",
+    "execute": "执行",
+    "executing": "执行中...",
+    "selectAlgorithmFirst": "请先选择一个策略",
+    "executionStarted": "执行已开始",
+    "executionFailed": "执行失败"
+  },
+  "locked": {
+    "requiresTier": "此功能需要 {{tier}} 订阅"
+  },
+  "auth": {
+    "loginToUnlock": "登录解锁",
+    "viewPlans": "查看方案"
+  },
+  "common": {
+    "cancel": "取消"
+  },
+  "notification": {
+    "backtestCompleted": "回测执行成功",
+    "backtestCompletedReturn": "回测完成: {{returnPercent}}% 收益率",
+    "backtestFailed": "回测失败: {{error}}",
+    "resultsCleared": "结果已清除",
+    "noDataSource": "没有可用的数据源。请配置数据提供者。",
+    "noResultsToExport": "没有可导出的结果"
+  },
+  "cockpitSelector": {
+    "title": "选择驾驶舱",
+    "subtitle": "选择回测模式继续",
+    "indicatorsCockpit": "Regime",
+    "indicatorsCockpitDesc": "基于指标的工作流配置回测",
+    "traderCockpit": "交易员",
+    "traderCockpitDesc": "观察列表 + LLM 交易者回测策略",
+    "aiLiberoCockpit": "Libero",
+    "aiLiberoCockpitDesc": "Libero 自主代理回测策略",
+    "aiStudioCockpit": "Studio",
+    "aiStudioCockpitDesc": "Studio 对话式规则回测策略",
+    "catalogCockpit": "Catalog",
+    "catalogCockpitDesc": "Strategy Catalog 策略回测",
+    "kronosCockpit": "克洛诺斯",
+    "kronosCockpitDesc": "Kronos 时间序列回测集成",
+    "free": "免费",
+    "pro": "专业版"
+  },
+  "tabBar": {
+    "prep": "准备中",
+    "wait": "等待中",
+    "closeTab": "关闭标签",
+    "close": "关闭",
+    "closeOthers": "关闭其他",
+    "closeAll": "全部关闭"
+  },
+  "messages": {
+    "resumeApiNotAvailable": "恢复API不可用",
+    "resumingFromCheckpoint": "正在从检查点恢复回测...",
+    "resumeFailed": "恢复失败: {{message}}",
+    "deleteCheckpointFailed": "删除检查点失败",
+    "noWorkflowConfig": "未找到工作流配置",
+    "missingAlgorithm": "缺少分析或入场算法",
+    "exportedToQuantLab": "策略 \"{{name}}\" 已保存",
+    "exportToQuantLabFailed": "保存策略失败",
+    "startDateAdjustedLookback": "开始日期已自动调整为 {{date}} (maxLookback 约束)",
+    "startDateAdjustedTimeframe": "开始日期已自动调整为 {{date}} (时间周期已更改)",
+    "generatingStrategy": "正在生成策略...",
+    "runningBacktest": "正在运行回测...",
+    "noWorkflowsConfigured": "未配置工作流。请至少添加一个算法选择。",
+    "missingMarketAnalysis": "需要市场分析（趋势识别）。请选择一个趋势识别算法。",
+    "missingEntrySignal": "需要入场信号。请选择一个入场信号算法。",
+    "loadingMarketData": "正在加载 {{symbol}} 的市场数据...",
+    "executionFailed": "回测执行失败。请检查日志。"
+  },
+  "validation": {
+    "symbolRequired": "交易品种为必填项",
+    "dataSourceRequired": "数据源为必填项",
+    "startDateRequired": "开始日期为必填项",
+    "endDateRequired": "结束日期为必填项",
+    "endDateAfterStart": "结束日期必须晚于开始日期",
+    "initialCapitalPositive": "初始资金必须为正数",
+    "orderSizePositive": "订单大小必须为正数",
+    "lookbackExceeded": "{{timeframe}} 周期: 最大回溯 {{lookback}} (已选 {{selected}}d)",
+    "lookbackWarning": "选择范围 ({{selected}}d) 超过最大回溯 ({{max}}d)"
+  },
+  "settings": {
+    "back": "返回",
+    "title": "设置",
+    "secrets": "密钥",
+    "deleteSecret": "删除密钥",
+    "deleteSecretConfirm": "确定要删除吗",
+    "deleteSecretWarning": "此操作无法撤销。",
+    "save": "保存",
+    "saving": "保存中...",
+    "secretsPageTitle": "密钥管理",
+    "secretsPageDescription": "管理数据提供商 API 密钥和凭证",
+    "refresh": "刷新",
+    "securityStatus": "安全状态",
+    "securityStatusDescription": "已配置 {{configured}} / {{total}} 个密钥。密钥使用 AES-256-GCM 加密并安全存储。",
+    "searchSecrets": "搜索密钥...",
+    "storedSecrets": "已存储的密钥",
+    "noSecretsMatch": "没有匹配的密钥",
+    "noSecretsConfigured": "暂无配置的密钥",
+    "recentActivity": "最近活动",
+    "noActivityRecorded": "暂无活动记录",
+    "navStatus": "状态",
+    "navCredentials": "凭证",
+    "navActivity": "活动",
+    "required": "必需",
+    "copyToClipboard": "复制到剪贴板",
+    "hideValue": "隐藏值",
+    "showValue": "显示值",
+    "editValue": "编辑",
+    "setValue": "设置值",
+    "testApiKey": "测试 API 密钥",
+    "deleteCredential": "删除凭证",
+    "testing": "测试中...",
+    "enterSecretValue": "输入密钥值",
+    "getApiKey": "获取 API 密钥",
+    "valueCannotBeEmpty": "值不能为空",
+    "failedToSave": "保存失败",
+    "missingCredential": "缺少凭证: {{key}}",
+    "failedToRetrieveApiKey": "获取 API 密钥失败",
+    "verifiedKeyType": "已验证 ({{keyType}})",
+    "verified": "已验证",
+    "invalidApiKey": "无效的 API 密钥",
+    "validationFailed": "验证失败",
+    "keyTypePaper": "模拟",
+    "keyTypeLive": "实盘",
+    "deleteButton": "删除"
+  },
+  "resultPanel": {
+    "tabs": {
+      "charts": "图表",
+      "trades": "交易",
+      "compare": "对比"
+    },
+    "charts": {
+      "equityCurve": "权益曲线",
+      "klineChart": "K线图",
+      "bars": "{{count}} 根K线",
+      "noEquityData": "无权益数据",
+      "noKlineData": "无K线数据",
+      "processing": "处理中... ({{count}} 点)",
+      "backtesting": "回测中...",
+      "noTrades": "无交易"
+    },
+    "summary": {
+      "equity": "权益: {{count}} 点",
+      "candles": "K线: {{count}} 根",
+      "trades": "交易: {{count}} 笔"
+    },
+    "tradesTable": {
+      "index": "#",
+      "entryTime": "入场时间",
+      "exitTime": "出场时间",
+      "side": "方向",
+      "entry": "入场价",
+      "exit": "出场价",
+      "qty": "数量",
+      "pnl": "盈亏",
+      "showingOf": "显示 {{shown}} / {{total}} 笔交易",
+      "noTrades": "无交易记录"
+    },
+    "llmEstimate": "LLM 调用估算 (模拟运行)",
+    "barsProcessed": "已处理K线数",
+    "calls": "次调用",
+    "totalLlmCalls": "LLM 调用总数",
+    "elapsed": "已用时间",
+    "status": {
+      "noResults": "暂无结果",
+      "case": "案例 {{index}}",
+      "testing": " - 测试中...",
+      "pending": " - 等待中",
+      "tradesCount": "({{count}} 笔交易)",
+      "collectingData": "收集数据中...",
+      "waiting": "等待中...",
+      "cancelled": "已取消"
+    },
+    "comparison": {
+      "title": "性能对比",
+      "metric": "指标",
+      "strategy": "策略 {{index}}",
+      "totalPnl": "总盈亏",
+      "totalReturn": "总收益率",
+      "sharpeRatio": "夏普比率",
+      "maxDrawdown": "最大回撤",
+      "winRate": "胜率",
+      "totalTrades": "总交易数",
+      "profitFactor": "盈亏比",
+      "equityOverlay": "权益曲线叠加",
+      "noResults": "无可对比结果"
+    }
+  },
+  "configSummary": {
+    "dataSource": "数据源",
+    "symbol": "交易品种",
+    "startDate": "开始日期",
+    "endDate": "结束日期",
+    "capital": "资金",
+    "orderSize": "订单大小",
+    "sharesUnit": "{{size}} 股",
+    "confidenceWeighted": "CWS"
+  },
+  "namingDialog": {
+    "titleBuilder": "命名策略",
+    "titleExport": "导出到 Sigma",
+    "titleBacktest": "命名回测",
+    "confirmBuilder": "确认并生成",
+    "confirmExport": "确认并导出",
+    "confirmBacktest": "确认并执行",
+    "suggestedName": "建议名称：",
+    "useThis": "使用此名称",
+    "or": "或",
+    "customName": "自定义名称：",
+    "placeholder": "输入您的自定义名称...",
+    "finalName": "最终名称：",
+    "cancel": "取消"
+  },
+  "dryRunExecute": {
+    "execute": "执行",
+    "executing": "执行中...",
+    "dryRun": "模拟运行",
+    "direct": "直接执行"
+  },
+  "workflowDropdown": {
+    "searchPlaceholder": "搜索...",
+    "noAlgorithmsFound": "未找到算法"
+  },
+  "backtestDataConfig": {
+    "placeholderSearchSymbol": "搜索品种...",
+    "placeholderInitialCapital": "10000"
+  },
+  "pipeline": {
+    "download": "下载",
+    "spawn": "启动",
+    "initialize": "初始化",
+    "loadData": "加载数据",
+    "backtest": "回测",
+    "finalize": "完成"
+  },
+  "manifest": {
+    "displayName": "回测器",
+    "description": "包含工作流界面与结果可视化的策略回测",
+    "viewsContainers": {
+      "sidebar": {
+        "backtestExplorer": "回测"
+      }
+    },
+    "views": {
+      "backtestExplorer": {
+        "backtestHistory": "回测历史"
+      },
+      "workbench": {
+        "backtestWorkflow": "回测工作流",
+        "backtestResults": "结果"
+      }
+    },
+    "bottomPanel": {
+      "trades": "交易记录",
+      "logs": "日志"
+    },
+    "commands": {
+      "run": "运行回测",
+      "stop": "停止回测",
+      "export": "导出结果"
+    },
+    "configuration": {
+      "title": "回测器设置",
+      "properties": {
+        "alpacaApiKeyId": {
+          "description": "Alpaca Markets API Key ID",
+          "category": "数据源"
+        },
+        "alpacaApiSecretKey": {
+          "description": "Alpaca Markets API Secret Key",
+          "category": "数据源"
+        }
+      }
+    }
+  },
+  "exportDialog": {
+    "title": "保存策略",
+    "nameLabel": "策略名称",
+    "namePlaceholder": "请输入策略名称...",
+    "nameHint": "此名称将用于在策略库中标识该策略。",
+    "cancel": "取消",
+    "saving": "正在保存...",
+    "confirm": "保存"
+  },
+  "result": {
+    "dryRunBadge": "DRY RUN",
+    "liveConfirm": {
+      "confirming": "确认中...",
+      "confirm": "确认"
+    }
+  },
+  "tree": {
+    "backtestWorkflow": "回测工作流",
+    "openWorkflow": "打开工作流",
+    "history": "历史记录",
+    "backtestResultN": "回测结果 #{{n}}"
+  },
+  "engine": {
+    "noDataInRange": "请求范围内没有数据",
+    "noPositionToSell": "没有可卖出的持仓（做空已禁用）",
+    "strategies": {
+      "smaCrossover": {
+        "name": "SMA交叉",
+        "description": "快速SMA上穿慢速SMA时买入，下穿时卖出",
+        "fastPeriod": "快速SMA周期",
+        "slowPeriod": "慢速SMA周期"
+      },
+      "rsiMeanReversion": {
+        "name": "RSI均值回归",
+        "description": "RSI超卖时买入，超买时卖出",
+        "period": "RSI周期",
+        "oversold": "超卖水平",
+        "overbought": "超买水平"
+      }
+    },
+    "insufficientFunds": "Insufficient funds"
+  }
+}

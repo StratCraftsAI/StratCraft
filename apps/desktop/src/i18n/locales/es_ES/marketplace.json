@@ -1,0 +1,192 @@
+{
+  "title": "Plugin Marketplace",
+  "subtitle": "Discover and install community plugins",
+  "search": {
+    "placeholder": "Search plugins...",
+    "noResults": "No plugins found"
+  },
+  "filters": {
+    "all": "All",
+    "installed": "Installed",
+    "updates": "Updates Available",
+    "category": "Category"
+  },
+  "categories": {
+    "all": "All",
+    "visualization": "Visualization",
+    "indicators": "Indicators",
+    "trading": "Trading",
+    "data": "Data",
+    "ai": "AI",
+    "tools": "Tools",
+    "strategy": "Strategy",
+    "analysis": "Analysis",
+    "integration": "Integration"
+  },
+  "sort": {
+    "mostDownloads": "Most Downloads",
+    "mostStars": "Most Stars",
+    "recentlyUpdated": "Recently Updated",
+    "name": "Name"
+  },
+  "plugin": {
+    "install": "Install",
+    "uninstall": "Uninstall",
+    "update": "Update",
+    "enable": "Enable",
+    "disable": "Disable",
+    "settings": "Settings",
+    "installed": "Installed",
+    "notInstalled": "Not Installed",
+    "version": "Version",
+    "author": "Author",
+    "downloads": "Downloads",
+    "lastUpdated": "Last Updated",
+    "purchase": "Purchase",
+    "enterLicense": "Enter License Key",
+    "licenseExpired": "License Expired",
+    "licenseActive": "License Active",
+    "owned": "Owned"
+  },
+  "results": {
+    "showing": "Showing {{count}} plugin",
+    "showingPlural": "Showing {{count}} plugins"
+  },
+  "install": {
+    "title": "Install Plugin",
+    "installingPlugin": "Installing Plugin",
+    "installing": "Installing \"{{name}}\"",
+    "installQuestion": "Install \"{{name}}\"?",
+    "confirm": "Are you sure you want to install this plugin?",
+    "progress": "Installing...",
+    "success": "Plugin installed successfully",
+    "successMessage": "Plugin installed successfully!",
+    "activateHint": "You can now activate the plugin from the Plugins panel.",
+    "error": "Failed to install plugin",
+    "errorMessage": "Installation failed",
+    "cancel": "Cancel",
+    "installAnyway": "Install Anyway",
+    "phases": {
+      "downloading": "Descargando paquete",
+      "verifying": "Verificando firma",
+      "validating": "Validando permisos",
+      "extracting": "Extrayendo archivos",
+      "copying": "Copiando archivos",
+      "registering": "Registrando plugin",
+      "initializing": "Inicializando",
+      "complete": "Instalacion completada",
+      "resolving_dependencies": "Resolviendo dependencias",
+      "installing_python_deps": "Instalando dependencias de Python",
+      "finalizing": "Finalizando",
+      "error": "Error"
+    },
+    "header": {
+      "complete": "Instalacion Completada",
+      "failed": "Instalacion Fallida",
+      "installing": "Instalando \"{{name}}\""
+    },
+    "buttons": {
+      "cancel": "Cancelar",
+      "close": "Cerrar"
+    },
+    "permissions": {
+      "title": "This plugin requests:",
+      "network": "Network access",
+      "networkDetail": "External APIs",
+      "filesystem": "File system access",
+      "filesystemNone": "None",
+      "filesystemPlugin": "Plugin directory only",
+      "filesystemUser": "User data directory",
+      "filesystemUnknown": "Unknown",
+      "native": "Native modules",
+      "nativeDetail": "Compiled extensions"
+    },
+    "author": {
+      "unverified": "(unverified)"
+    },
+    "warning": {
+      "riskyPermissions": "This plugin requests elevated permissions. Only install if you trust the author."
+    },
+    "progress": {
+      "validatingManifest": "Validando manifiesto del plugin...",
+      "verifyingBinary": "Verificando binario nativo...",
+      "binaryVerified": "Binario nativo verificado",
+      "copyingFiles": "Copiando archivos del plugin...",
+      "registeringPlugin": "Registrando plugin...",
+      "installationComplete": "Instalacion completada"
+    }
+  },
+  "uninstall": {
+    "title": "Uninstall Plugin",
+    "confirm": "Are you sure you want to uninstall this plugin?",
+    "success": "Plugin uninstalled successfully",
+    "error": "Failed to uninstall plugin"
+  },
+  "detail": {
+    "by": "by",
+    "description": "Description",
+    "repository": "Repository",
+    "permissions": "Permissions",
+    "networkAccess": "Network Access",
+    "fileSystem": "File System",
+    "nativeModules": "Native Modules",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "pythonDependencies": "Python Dependencies",
+    "changelog": "Changelog",
+    "installedVersion": "Installed: v{{version}}",
+    "updateAvailable": "(Update available: v{{version}})",
+    "updateTo": "Update to v{{version}}",
+    "yes": "Yes",
+    "no": "No",
+    "done": "Done"
+  },
+  "noPlugins": {
+    "title": "No se encontraron plugins",
+    "hint": "Intente ajustar su búsqueda o filtros"
+  },
+  "permissionValue": {
+    "enabled": "Activado",
+    "disabled": "Desactivado",
+    "yes": "Sí",
+    "no": "No"
+  },
+  "license": {
+    "title": "Enter License Key",
+    "keyLabel": "License Key",
+    "keyPlaceholder": "Enter your license key...",
+    "activate": "Activate",
+    "validating": "Validating...",
+    "noPurchaseLink": "Don't have a key? Purchase one",
+    "activated": "License key activated successfully",
+    "removed": "License key removed",
+    "invalid": "Invalid license key",
+    "expired": "License key has expired",
+    "error": "License validation failed"
+  },
+  "pricing": {
+    "title": "Pricing",
+    "price": "Price",
+    "type": "Billing",
+    "paid": "Paid",
+    "one-time": "One-time payment",
+    "monthly": "Monthly subscription",
+    "yearly": "Yearly subscription"
+  },
+  "lifecycle": {
+    "creatingStrategyDirs": "Creando directorios de estrategia...",
+    "initializingDatabase": "Inicializando base de datos...",
+    "creatingDefaultTemplates": "Creando plantillas predeterminadas...",
+    "templateIndicatorDesc": "Plantilla de estrategia con indicadores tecnicos",
+    "creatingConfiguration": "Creando configuracion...",
+    "installationComplete": "Instalacion completada",
+    "checkingUpgradeRequirements": "Verificando requisitos de actualizacion...",
+    "migratingDatabaseToV2": "Migrando esquema de base de datos a v2.0...",
+    "updatingConfiguration": "Actualizando configuracion...",
+    "creatingNewDirectories": "Creando nuevos directorios...",
+    "upgradeComplete": "Actualizacion completada",
+    "checkingConfiguration": "Verificando configuracion...",
+    "creatingBacktestDirs": "Creando directorios de backtest...",
+    "updatingDatabaseSchema": "Actualizando esquema de base de datos..."
+  }
+}

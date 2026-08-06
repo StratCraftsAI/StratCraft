@@ -1,0 +1,89 @@
+{
+  "timestamp": "2026-01-21T06:11:04",
+  "hostname": "dev-server",
+  "cpu_model": "Intel(R) Core(TM) i7-14700KF",
+  "cpu_freq_ghz": 5.500,
+  "is_virtualized": false,
+  "benchmarks": [
+    {
+      "name": "cache",
+      "success": true,
+      "duration_us": 19580,
+      "metrics": {
+      }
+    },
+    {
+      "name": "execution",
+      "success": true,
+      "duration_us": 164572,
+      "metrics": {
+        "per_bar_p50": {
+          "value": 0.964046,
+          "unit": "ns",
+          "status": "PASS"
+        },
+        "per_bar_p99": {
+          "value": 1.037427,
+          "unit": "ns",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "name": "memory",
+      "success": true,
+      "duration_us": 13,
+      "metrics": {
+        "allocation_count": {
+          "value": 0.000000,
+          "unit": "count",
+          "status": "OK"
+        },
+        "peak_bytes": {
+          "value": 0.000000,
+          "unit": "KB",
+          "status": "OK"
+        },
+        "hot_path_violations": {
+          "value": 0.000000,
+          "unit": "count",
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "name": "perf_counters",
+      "success": true,
+      "duration_us": 1707,
+      "metrics": {
+        "ipc": {
+          "value": 0.000000,
+          "unit": "ratio",
+          "status": "WARN"
+        },
+        "branch_miss_rate": {
+          "value": 0.000000,
+          "unit": "%",
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "name": "serialization",
+      "success": true,
+      "duration_us": 687,
+      "metrics": {
+        "serialize_p50": {
+          "value": 1.498750,
+          "unit": "us",
+          "status": "OK"
+        },
+        "json_size": {
+          "value": 25782.000000,
+          "unit": "bytes",
+          "status": "OK"
+        }
+      }
+    }
+  ]
+}

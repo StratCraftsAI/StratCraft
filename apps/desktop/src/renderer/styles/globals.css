@@ -1,0 +1,604 @@
+/**
+ * Professional Terminal Design Tokens (StratCraft)
+ * 
+ * Inspired by QMT, Thinktrader, and Modern IDEs.
+ * Blended with StratCraftsAI (newhome) visual aesthetic.
+ */
+
+:root {
+  /* High-Density Spacing */
+  --terminal-spacing-xxs: 2px;
+  --terminal-spacing-xs: 4px;
+  --terminal-spacing-sm: 8px;
+  --terminal-spacing-md: 12px;
+  --terminal-spacing-lg: 16px;
+  --terminal-spacing-xl: 24px;
+
+  /* Layout Constants */
+  --terminal-header-height: 40px;
+  --terminal-sidebar-width-min: 240px;
+  --terminal-sidebar-width-max: 400px;
+  --terminal-statusbar-height: 24px;
+
+  /* Specialized Typography */
+  --terminal-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --terminal-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --terminal-font-size-xs: 12px;
+  --terminal-font-size-sm: 12px;
+  --terminal-font-size-base: 12px;
+  --terminal-font-size-lg: 14px;
+
+  /* Component Density */
+  --terminal-row-height-compact: 24px;
+  --terminal-row-height-normal: 32px;
+
+  /* ==========================================================================
+   * PRIMARY THEME COLORS (Single Source of Truth)
+   * To change theme accent: ONLY modify --accent-primary-rgb below
+   * ========================================================================== */
+
+  /* >>> SINGLE SOURCE - Change ONLY this line to update entire theme <<< */
+  --accent-primary-rgb: 230, 241, 255;      /* #e6f1ff - Light Blue White */
+
+  /* Background Colors */
+  --color-terminal-bg: #0a192f;             /* Deep Sea Blue - Main background */
+  --color-terminal-panel: #112240;          /* Panel Background */
+  --color-terminal-surface: #112240;        /* Input/Card Surface */
+  --color-terminal-border: #233554;         /* Subtle Borders */
+
+  /* Accent Colors (derived from --accent-primary-rgb) */
+  --color-terminal-accent-primary: rgb(var(--accent-primary-rgb));
+  --color-terminal-accent-gold: var(--color-terminal-accent-primary); /* Alias */
+  --color-terminal-accent-teal: #64ffda;    /* Active/Success Accent */
+  --color-terminal-accent-red: #ff4d4d;     /* Risk/Error Accent */
+
+  /* Text Colors */
+  --color-terminal-text: #e6f1ff;           /* Primary Text */
+  --color-terminal-text-primary: #e6f1ff;   /* Primary White */
+  --color-terminal-text-secondary: #8892b0; /* Secondary Gray */
+  --color-terminal-text-muted: #495670;     /* Muted Gray */
+
+  /* Status Colors (Semantic) */
+  --color-status-success: var(--color-terminal-accent-teal);
+  --color-status-warning: var(--color-terminal-accent-primary);
+  --color-status-error: var(--color-terminal-accent-red);
+  --color-status-info: #60A5FA;             /* blue-400 */
+  --color-status-neutral: var(--color-terminal-text-secondary);
+
+  /* Data Visualization Colors */
+  --color-chart-primary: var(--color-terminal-accent-teal);
+  --color-chart-secondary: var(--color-terminal-accent-primary);
+  --color-chart-tertiary: #60A5FA;          /* blue-400 */
+  --color-chart-quaternary: #A78BFA;        /* purple-400 */
+
+  /* Workflow Role Colors (backtest pipeline stages) */
+  --color-workflow-purple: #A78BFA;         /* purple-400 - Entry Filter */
+  --color-workflow-blue: #60A5FA;           /* blue-400 - Entry Signal */
+  --color-workflow-gold: #FBBF24;           /* amber-400 - Exit Strategy */
+
+  /* Interactive State Colors (derived from --accent-primary-rgb) */
+  --color-interactive-hover: rgba(var(--accent-primary-rgb), 0.1);
+  --color-interactive-active: rgba(var(--accent-primary-rgb), 0.2);
+  --color-interactive-focus: rgba(var(--accent-primary-rgb), 0.3);
+
+  /* Depth Layer Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --shadow-glow-teal: 0 0 20px rgba(94, 234, 212, 0.2);
+  --shadow-glow-primary: 0 0 20px rgba(var(--accent-primary-rgb), 0.2);
+  --shadow-glow-gold: var(--shadow-glow-primary); /* Alias */
+
+  /* Typography Scale (Strict TICKET_060) */
+  --font-size-micro: 12px;  /* Metadata, timestamps, chart axes */
+  --font-size-tiny: 12px;   /* Breadcrumbs, side labels, mini buttons */
+  --font-size-small: 12px;  /* Tree nodes, table items, compact labels */
+  --font-size-base: 12px;   /* Default body text, inputs */
+  --font-size-large: 14px;  /* Section headers, component titles */
+  --font-size-xl: 18px;     /* Page titles (PageHeader) */
+  --font-size-2xl: 24px;    /* Critical metrics (Stat Values) */
+  --font-size-3xl: 32px;    /* Hero metrics / Dashboard values */
+}
+
+html,
+body,
+#root {
+  font-family: var(--terminal-font-sans);
+  font-size: var(--font-size-base);
+}
+
+/* Base Terminal Layer Aliases */
+.terminal-theme {
+  font-family: var(--terminal-font-sans);
+  font-size: var(--font-size-base);
+  background: var(--color-terminal-bg);
+  color: var(--color-terminal-text-primary);
+}
+
+.terminal-mono { font-family: var(--terminal-font-mono); }
+.text-micro { font-size: var(--font-size-micro); }
+.text-tiny { font-size: var(--font-size-tiny); }
+.text-small { font-size: var(--font-size-small); }
+.text-2xl-mono { font-size: var(--font-size-2xl); font-family: var(--terminal-font-mono); }
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* TICKET_614: Transparent body in immersive mode (B1 transparent window) */
+html.immersive-transparent,
+html.immersive-transparent body,
+html.immersive-transparent #root {
+  background: transparent !important;
+}
+
+/* Electron window drag region */
+.app-region-drag {
+  -webkit-app-region: drag;
+}
+
+.app-region-no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* TICKET_614: Transparent scrollbar track in immersive mode */
+html.immersive-transparent ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Disable text selection (except for input fields) */
+body {
+  user-select: none;
+}
+
+input, textarea, [contenteditable] {
+  user-select: text;
+}
+
+/* Professional Terminal Workbench Layouts */
+.workbench-layout {
+  display: grid;
+  grid-template-areas: 
+    "header header"
+    "sidebar main";
+  grid-template-rows: var(--terminal-header-height) 1fr;
+  grid-template-columns: var(--terminal-sidebar-width-min) 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.workbench-sidebar {
+  grid-area: sidebar;
+  border-right: 1px solid var(--color-terminal-border);
+  background: var(--color-terminal-panel);
+  display: flex;
+  flex-direction: column;
+}
+
+.workbench-main {
+  grid-area: main;
+  background: var(--color-terminal-bg);
+  overflow: auto;
+}
+
+.workbench-header {
+  grid-area: header;
+  border-bottom: 1px solid var(--color-terminal-border);
+  background: var(--color-terminal-panel);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--terminal-spacing-md);
+  -webkit-app-region: drag;
+}
+
+/* Dense DataGrid Styles */
+.terminal-grid {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.terminal-grid th {
+  text-align: left;
+  padding: var(--terminal-spacing-xs) var(--terminal-spacing-sm);
+  background: var(--color-terminal-panel);
+  color: var(--color-terminal-text-secondary);
+  font-size: var(--terminal-font-size-xs);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--color-terminal-border);
+}
+
+.terminal-grid td {
+  padding: var(--terminal-spacing-xxs) var(--terminal-spacing-sm);
+  border-bottom: 1px solid var(--color-terminal-border);
+  font-size: var(--terminal-font-size-sm);
+}
+
+.terminal-grid tr:hover {
+  background: rgba(100, 255, 218, 0.05);
+}
+
+
+/* Professional Gradient Patterns (StratCraftsAI) */
+.gradient-panel {
+  background: linear-gradient(
+    135deg,
+    var(--color-terminal-panel) 0%,
+    rgba(17, 34, 64, 0.8) 100%
+  );
+  backdrop-filter: blur(10px);
+}
+
+.gradient-active {
+  background: linear-gradient(
+    90deg,
+    rgba(59, 130, 246, 0.1) 0%,
+    transparent 100%
+  );
+  border-left: 2px solid var(--color-nexus-blue);
+}
+
+.gradient-hover {
+  background: linear-gradient(
+    90deg,
+    rgba(59, 130, 246, 0.05) 0%,
+    transparent 100%
+  );
+}
+
+/* StratCraftsAI Background Pattern (CyberGrid) */
+.bg-StratCraftsAI {
+  background-color: var(--color-terminal-bg);
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: rgba(21, 30, 50, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.glass-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Shadow Utilities */
+.shadow-glow-teal {
+  box-shadow: var(--shadow-glow-teal);
+}
+
+.shadow-glow-gold {
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.shadow-glow-blue {
+  box-shadow: var(--shadow-glow-blue);
+}
+
+/* Transition Utilities */
+.transition-fast {
+  transition: all var(--transition-fast);
+}
+
+.transition-base {
+  transition: all var(--transition-base);
+}
+
+.transition-slow {
+  transition: all var(--transition-slow);
+}
+
+/* Interactive Element Base */
+.interactive {
+  transition: all var(--transition-base);
+}
+
+.interactive:hover {
+  background: var(--color-interactive-hover);
+}
+
+.interactive:active {
+  background: var(--color-interactive-active);
+}
+
+/* ==========================================================================
+ * Message Notification Animations (TICKET_096)
+ * ========================================================================== */
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-right {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.2s ease-out forwards;
+}
+
+.animate-slide-out-right {
+  animation: slide-out-right 0.2s ease-out forwards;
+}
+
+/* ==========================================================================
+ * Pipeline Progress Pulse Animation (TICKET_321)
+ * ========================================================================== */
+
+@keyframes pipeline-pulse-glow {
+  0%, 100% {
+    opacity: 0.7;
+    text-shadow: 0 0 4px var(--color-terminal-accent-teal);
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 12px var(--color-terminal-accent-teal), 0 0 24px rgba(0, 200, 200, 0.3);
+  }
+}
+
+.animate-pipeline-pulse {
+  animation: pipeline-pulse-glow 2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+ * Pipeline Indeterminate Scanner Animation (TICKET_327_1)
+ * ========================================================================== */
+
+@keyframes pipeline-scan {
+  0%, 100% { -webkit-mask-position: 0% 0; }
+  50% { -webkit-mask-position: 100% 0; }
+}
+
+.pipeline-indeterminate {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* Base: all blocks at low brightness */
+  background: repeating-linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-terminal-accent-teal) 12%, transparent) 0px,
+    color-mix(in srgb, var(--color-terminal-accent-teal) 12%, transparent) 8px,
+    transparent 8px,
+    transparent 10px
+  );
+}
+
+.pipeline-indeterminate::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Full brightness blocks (same pattern) */
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-terminal-accent-teal) 0px,
+    var(--color-terminal-accent-teal) 8px,
+    transparent 8px,
+    transparent 10px
+  );
+  /* Spotlight mask: 10px fade + 30px full (3 blocks) + 10px fade = 50px */
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0px,
+    black 10px,
+    black 40px,
+    transparent 50px
+  );
+  -webkit-mask-size: 50px 100%;
+  -webkit-mask-repeat: no-repeat;
+  animation: pipeline-scan 6s steps(20) infinite;
+}
+
+/* ==========================================================================
+ * Pipeline Console Tooltip Animation (TICKET_328_P1)
+ * ========================================================================== */
+
+@keyframes pipeline-tooltip-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.animate-pipeline-tooltip-enter {
+  animation: pipeline-tooltip-enter 150ms ease-out forwards;
+}
+
+/* ==========================================================================
+ * Download Bounce Animation (TICKET_077_P3)
+ * ========================================================================== */
+
+@keyframes download-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+/* ==========================================================================
+ * Onboarding Tour Theme (TICKET_593: driver.js StratCraftsAI overrides)
+ * ========================================================================== */
+
+.stratcraft-onboarding-popover {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.95)) !important;
+  border: 1px solid rgba(45, 212, 191, 0.3) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(16px) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 1px rgba(45, 212, 191, 0.2) !important;
+  color: rgba(226, 232, 240, 0.9) !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+}
+
+.stratcraft-onboarding-popover .driver-popover-title {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: rgb(45, 212, 191) !important;
+  letter-spacing: 0.02em !important;
+}
+
+.stratcraft-onboarding-popover .driver-popover-description {
+  font-size: 12px !important;
+  color: rgba(226, 232, 240, 0.7) !important;
+  line-height: 1.5 !important;
+}
+
+.stratcraft-onboarding-popover .driver-popover-progress-text {
+  font-size: 10px !important;
+  color: rgba(148, 163, 184, 0.6) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.stratcraft-onboarding-popover button.driver-popover-next-btn,
+.stratcraft-onboarding-popover button.driver-popover-done-btn {
+  background: rgba(45, 212, 191, 0.15) !important;
+  border: 1px solid rgba(45, 212, 191, 0.4) !important;
+  color: rgb(45, 212, 191) !important;
+  border-radius: 6px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 6px 16px !important;
+  transition: all 200ms ease !important;
+}
+
+.stratcraft-onboarding-popover button.driver-popover-next-btn:hover,
+.stratcraft-onboarding-popover button.driver-popover-done-btn:hover {
+  background: rgba(45, 212, 191, 0.25) !important;
+}
+
+.stratcraft-onboarding-popover button.driver-popover-prev-btn {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: rgba(226, 232, 240, 0.6) !important;
+  border-radius: 6px !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 6px 16px !important;
+  transition: all 200ms ease !important;
+}
+
+.stratcraft-onboarding-popover button.driver-popover-prev-btn:hover {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: rgba(226, 232, 240, 0.9) !important;
+}
+
+.stratcraft-onboarding-popover .driver-popover-close-btn {
+  color: rgba(148, 163, 184, 0.5) !important;
+}
+
+.stratcraft-onboarding-popover .driver-popover-close-btn:hover {
+  color: rgba(226, 232, 240, 0.9) !important;
+}
+
+.stratcraft-onboarding-popover .driver-popover-arrow-side-left,
+.stratcraft-onboarding-popover .driver-popover-arrow-side-right,
+.stratcraft-onboarding-popover .driver-popover-arrow-side-top,
+.stratcraft-onboarding-popover .driver-popover-arrow-side-bottom {
+  border-color: rgba(45, 212, 191, 0.3) !important;
+}

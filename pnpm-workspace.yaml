@@ -1,0 +1,11 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+  - "!packages/bridge"
+  - "packages/sdk/*"
+  - "plugins/**"
+  # The CCXT marketplace plugin is an external development checkout exposed
+  # through a tracked symlink. It owns its dependency lock and build lifecycle;
+  # treating its real path as a workspace importer makes frozen root installs
+  # depend on whichever external checkout happens to be mounted locally.
+  - "!plugins/signal-generator-nexus/**"

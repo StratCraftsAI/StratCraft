@@ -1,0 +1,1084 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "messageType": {
+          "type": "string",
+          "const": "host-hello"
+        },
+        "protocolVersion": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "correlationId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "sequence": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "sentAt": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "hostProtocol": {
+          "type": "object",
+          "properties": {
+            "minimum": {
+              "$ref": "#/$defs/__schema4"
+            },
+            "current": {
+              "$ref": "#/$defs/__schema4"
+            }
+          },
+          "required": [
+            "minimum",
+            "current"
+          ],
+          "additionalProperties": false
+        },
+        "hostVersion": {
+          "$ref": "#/$defs/__schema4"
+        },
+        "expectedPackageId": {
+          "type": "string",
+          "const": "com.stratcraft.quant-lab"
+        },
+        "expectedPackageManifestSha256": {
+          "$ref": "#/$defs/__schema5"
+        }
+      },
+      "required": [
+        "messageType",
+        "protocolVersion",
+        "correlationId",
+        "sequence",
+        "sentAt",
+        "hostProtocol",
+        "hostVersion",
+        "expectedPackageId",
+        "expectedPackageManifestSha256"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "messageType": {
+          "type": "string",
+          "const": "worker-hello"
+        },
+        "protocolVersion": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "correlationId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "sequence": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "sentAt": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "selectedProtocolVersion": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "workerVersion": {
+          "$ref": "#/$defs/__schema4"
+        },
+        "packageManifestSha256": {
+          "$ref": "#/$defs/__schema5"
+        },
+        "capabilities": {
+          "minItems": 1,
+          "maxItems": 64,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema6"
+          }
+        }
+      },
+      "required": [
+        "messageType",
+        "protocolVersion",
+        "correlationId",
+        "sequence",
+        "sentAt",
+        "selectedProtocolVersion",
+        "workerVersion",
+        "packageManifestSha256",
+        "capabilities"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "messageType": {
+          "$ref": "#/$defs/__schema8"
+        },
+        "protocolVersion": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "correlationId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "sequence": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "sentAt": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "requestId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "decisionId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "capabilityId": {
+          "$ref": "#/$defs/__schema7"
+        },
+        "operationContractVersion": {
+          "$ref": "#/$defs/__schema4"
+        },
+        "dataReferences": {
+          "$ref": "#/$defs/__schema9"
+        },
+        "resourcePlan": {
+          "$ref": "#/$defs/__schema15"
+        },
+        "requestPayload": {
+          "$ref": "#/$defs/__schema22"
+        }
+      },
+      "required": [
+        "messageType",
+        "protocolVersion",
+        "correlationId",
+        "sequence",
+        "sentAt",
+        "requestId",
+        "decisionId",
+        "capabilityId",
+        "operationContractVersion",
+        "dataReferences",
+        "resourcePlan",
+        "requestPayload"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "messageType": {
+          "type": "string",
+          "const": "accepted"
+        },
+        "protocolVersion": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "correlationId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "sequence": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "sentAt": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "requestId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "decisionId": {
+          "$ref": "#/$defs/__schema1"
+        }
+      },
+      "required": [
+        "messageType",
+        "protocolVersion",
+        "correlationId",
+        "sequence",
+        "sentAt",
+        "requestId",
+        "decisionId"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "messageType": {
+          "$ref": "#/$defs/__schema23"
+        },
+        "protocolVersion": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "correlationId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "sequence": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "sentAt": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "requestId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "decisionId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "phase": {
+          "$ref": "#/$defs/__schema24"
+        },
+        "completedUnits": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "totalUnits": {
+          "$ref": "#/$defs/__schema18"
+        },
+        "statusText": {
+          "$ref": "#/$defs/__schema25"
+        }
+      },
+      "required": [
+        "messageType",
+        "protocolVersion",
+        "correlationId",
+        "sequence",
+        "sentAt",
+        "requestId",
+        "decisionId",
+        "phase",
+        "completedUnits",
+        "totalUnits",
+        "statusText"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "messageType": {
+          "type": "string",
+          "const": "cancel"
+        },
+        "protocolVersion": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "correlationId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "sequence": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "sentAt": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "requestId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "decisionId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "user-request",
+            "host-shutdown",
+            "resource-revocation",
+            "upgrade"
+          ]
+        }
+      },
+      "required": [
+        "messageType",
+        "protocolVersion",
+        "correlationId",
+        "sequence",
+        "sentAt",
+        "requestId",
+        "decisionId",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "messageType": {
+          "type": "string",
+          "const": "cancelled"
+        },
+        "protocolVersion": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "correlationId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "sequence": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "sentAt": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "requestId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "decisionId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "phase": {
+          "type": "string",
+          "enum": [
+            "queued",
+            "admission",
+            "data-load",
+            "matrix-construction",
+            "generation",
+            "training",
+            "kernel-execution",
+            "evaluation",
+            "checkpoint",
+            "persistence",
+            "publication"
+          ]
+        },
+        "artifactsPublished": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "messageType",
+        "protocolVersion",
+        "correlationId",
+        "sequence",
+        "sentAt",
+        "requestId",
+        "decisionId",
+        "phase",
+        "artifactsPublished"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "messageType": {
+          "type": "string",
+          "const": "artifact"
+        },
+        "protocolVersion": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "correlationId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "sequence": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "sentAt": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "requestId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "decisionId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "artifact": {
+          "$ref": "#/$defs/__schema26"
+        }
+      },
+      "required": [
+        "messageType",
+        "protocolVersion",
+        "correlationId",
+        "sequence",
+        "sentAt",
+        "requestId",
+        "decisionId",
+        "artifact"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "messageType": {
+          "type": "string",
+          "const": "artifact-published"
+        },
+        "protocolVersion": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "correlationId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "sequence": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "sentAt": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "requestId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "decisionId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "artifact": {
+          "$ref": "#/$defs/__schema26"
+        }
+      },
+      "required": [
+        "messageType",
+        "protocolVersion",
+        "correlationId",
+        "sequence",
+        "sentAt",
+        "requestId",
+        "decisionId",
+        "artifact"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "messageType": {
+          "$ref": "#/$defs/__schema29"
+        },
+        "protocolVersion": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "correlationId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "sequence": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "sentAt": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "requestId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "decisionId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "status": {
+          "$ref": "#/$defs/__schema30"
+        },
+        "artifacts": {
+          "$ref": "#/$defs/__schema31"
+        },
+        "resultPayload": {
+          "$ref": "#/$defs/__schema32"
+        }
+      },
+      "required": [
+        "messageType",
+        "protocolVersion",
+        "correlationId",
+        "sequence",
+        "sentAt",
+        "requestId",
+        "decisionId",
+        "status",
+        "artifacts",
+        "resultPayload"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "messageType": {
+          "$ref": "#/$defs/__schema33"
+        },
+        "protocolVersion": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "correlationId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "sequence": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "sentAt": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "requestId": {
+          "$ref": "#/$defs/__schema34"
+        },
+        "decisionId": {
+          "$ref": "#/$defs/__schema35"
+        },
+        "code": {
+          "$ref": "#/$defs/__schema36"
+        },
+        "phase": {
+          "$ref": "#/$defs/__schema37"
+        },
+        "message": {
+          "$ref": "#/$defs/__schema38"
+        },
+        "retryable": {
+          "$ref": "#/$defs/__schema39"
+        },
+        "remediation": {
+          "$ref": "#/$defs/__schema40"
+        },
+        "diagnosticsReference": {
+          "$ref": "#/$defs/__schema41"
+        }
+      },
+      "required": [
+        "messageType",
+        "protocolVersion",
+        "correlationId",
+        "sequence",
+        "sentAt",
+        "code",
+        "phase",
+        "message",
+        "retryable",
+        "remediation"
+      ],
+      "additionalProperties": false
+    }
+  ],
+  "$defs": {
+    "__schema0": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "__schema1": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "__schema2": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema3": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+    },
+    "__schema4": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "__schema5": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "__schema6": {
+      "type": "object",
+      "properties": {
+        "capabilityId": {
+          "$ref": "#/$defs/__schema7"
+        },
+        "contractVersion": {
+          "$ref": "#/$defs/__schema4"
+        }
+      },
+      "required": [
+        "capabilityId",
+        "contractVersion"
+      ],
+      "additionalProperties": false
+    },
+    "__schema7": {
+      "type": "string",
+      "enum": [
+        "research.discovery",
+        "research.factor-evaluation",
+        "research.fusion",
+        "research.scoring",
+        "research.promotion",
+        "research.governance",
+        "research.lstm-training"
+      ]
+    },
+    "__schema8": {
+      "type": "string",
+      "const": "execute"
+    },
+    "__schema9": {
+      "maxItems": 256,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema10"
+      }
+    },
+    "__schema10": {
+      "type": "object",
+      "properties": {
+        "referenceId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "relativePath": {
+          "$ref": "#/$defs/__schema11"
+        },
+        "format": {
+          "$ref": "#/$defs/__schema12"
+        },
+        "schemaId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "schemaVersion": {
+          "$ref": "#/$defs/__schema4"
+        },
+        "requestedWindow": {
+          "$ref": "#/$defs/__schema13"
+        },
+        "materializedWindow": {
+          "$ref": "#/$defs/__schema14"
+        },
+        "windowPushdownDecisionId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "rowCount": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "byteCount": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "sha256": {
+          "$ref": "#/$defs/__schema5"
+        }
+      },
+      "required": [
+        "referenceId",
+        "relativePath",
+        "format",
+        "schemaId",
+        "schemaVersion",
+        "requestedWindow",
+        "materializedWindow",
+        "windowPushdownDecisionId",
+        "rowCount",
+        "byteCount",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "__schema11": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "__schema12": {
+      "type": "string",
+      "enum": [
+        "arrow-ipc",
+        "parquet"
+      ]
+    },
+    "__schema13": {
+      "type": "object",
+      "properties": {
+        "startUtc": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "endUtc": {
+          "$ref": "#/$defs/__schema3"
+        }
+      },
+      "required": [
+        "startUtc",
+        "endUtc"
+      ],
+      "additionalProperties": false
+    },
+    "__schema14": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/__schema13"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "__schema15": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "$ref": "#/$defs/__schema16"
+        },
+        "decisionId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "effectiveCapacity": {
+          "$ref": "#/$defs/__schema17"
+        },
+        "workload": {
+          "$ref": "#/$defs/__schema19"
+        },
+        "backpressure": {
+          "$ref": "#/$defs/__schema20"
+        },
+        "enforcement": {
+          "$ref": "#/$defs/__schema21"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "decisionId",
+        "effectiveCapacity",
+        "workload",
+        "backpressure",
+        "enforcement"
+      ],
+      "additionalProperties": false
+    },
+    "__schema16": {
+      "type": "number",
+      "const": 1
+    },
+    "__schema17": {
+      "type": "object",
+      "properties": {
+        "hostAvailableCpuCores": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "effectiveCpuCores": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "hostAvailableMemoryBytes": {
+          "$ref": "#/$defs/__schema18"
+        },
+        "effectiveMemoryBytes": {
+          "$ref": "#/$defs/__schema18"
+        },
+        "reservedCpuCores": {
+          "type": "number",
+          "minimum": 0
+        },
+        "reservedMemoryBytes": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "cpuLimitSource": {
+          "type": "string",
+          "enum": [
+            "host",
+            "cgroup-v1",
+            "cgroup-v2",
+            "systemd",
+            "job-object"
+          ]
+        },
+        "memoryLimitSource": {
+          "type": "string",
+          "enum": [
+            "host",
+            "cgroup-v1",
+            "cgroup-v2",
+            "systemd",
+            "job-object"
+          ]
+        }
+      },
+      "required": [
+        "hostAvailableCpuCores",
+        "effectiveCpuCores",
+        "hostAvailableMemoryBytes",
+        "effectiveMemoryBytes",
+        "reservedCpuCores",
+        "reservedMemoryBytes",
+        "cpuLimitSource",
+        "memoryLimitSource"
+      ],
+      "additionalProperties": false
+    },
+    "__schema18": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema19": {
+      "type": "object",
+      "properties": {
+        "processCount": {
+          "$ref": "#/$defs/__schema18"
+        },
+        "threadsPerProcess": {
+          "$ref": "#/$defs/__schema18"
+        },
+        "totalThreadBudget": {
+          "$ref": "#/$defs/__schema18"
+        },
+        "measuredPeakBytesPerProcess": {
+          "$ref": "#/$defs/__schema18"
+        },
+        "memorySafetyMarginBytes": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "admittedPeakMemoryBytes": {
+          "$ref": "#/$defs/__schema18"
+        },
+        "bindingConstraint": {
+          "type": "string",
+          "enum": [
+            "cpu",
+            "memory",
+            "io",
+            "configured-cap",
+            "single-process-floor"
+          ]
+        }
+      },
+      "required": [
+        "processCount",
+        "threadsPerProcess",
+        "totalThreadBudget",
+        "measuredPeakBytesPerProcess",
+        "memorySafetyMarginBytes",
+        "admittedPeakMemoryBytes",
+        "bindingConstraint"
+      ],
+      "additionalProperties": false
+    },
+    "__schema20": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "const": true
+        },
+        "pauseAboveMemoryBytes": {
+          "$ref": "#/$defs/__schema18"
+        },
+        "resumeBelowMemoryBytes": {
+          "$ref": "#/$defs/__schema18"
+        }
+      },
+      "required": [
+        "enabled",
+        "pauseAboveMemoryBytes",
+        "resumeBelowMemoryBytes"
+      ],
+      "additionalProperties": false
+    },
+    "__schema21": {
+      "type": "object",
+      "properties": {
+        "decisionId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "cgroup-v1",
+            "cgroup-v2",
+            "systemd-scope",
+            "job-object",
+            "process-limits"
+          ]
+        },
+        "cpuLimitCores": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "memoryLimitBytes": {
+          "$ref": "#/$defs/__schema18"
+        }
+      },
+      "required": [
+        "decisionId",
+        "kind",
+        "cpuLimitCores",
+        "memoryLimitBytes"
+      ],
+      "additionalProperties": false
+    },
+    "__schema22": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      },
+      "additionalProperties": {}
+    },
+    "__schema23": {
+      "type": "string",
+      "const": "progress"
+    },
+    "__schema24": {
+      "type": "string",
+      "enum": [
+        "admission",
+        "data-load",
+        "matrix-construction",
+        "generation",
+        "training",
+        "kernel-execution",
+        "evaluation",
+        "checkpoint",
+        "persistence",
+        "publication"
+      ]
+    },
+    "__schema25": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "__schema26": {
+      "type": "object",
+      "properties": {
+        "artifactId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "artifactKind": {
+          "$ref": "#/$defs/__schema27"
+        },
+        "relativePath": {
+          "$ref": "#/$defs/__schema11"
+        },
+        "schemaId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "schemaVersion": {
+          "$ref": "#/$defs/__schema4"
+        },
+        "byteCount": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "sha256": {
+          "$ref": "#/$defs/__schema5"
+        },
+        "publicationTransactionId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "publicationState": {
+          "$ref": "#/$defs/__schema28"
+        }
+      },
+      "required": [
+        "artifactId",
+        "artifactKind",
+        "relativePath",
+        "schemaId",
+        "schemaVersion",
+        "byteCount",
+        "sha256",
+        "publicationTransactionId",
+        "publicationState"
+      ],
+      "additionalProperties": false
+    },
+    "__schema27": {
+      "type": "string",
+      "enum": [
+        "strategy",
+        "signal",
+        "model",
+        "checkpoint",
+        "evidence",
+        "result"
+      ]
+    },
+    "__schema28": {
+      "type": "string",
+      "enum": [
+        "staged",
+        "published"
+      ]
+    },
+    "__schema29": {
+      "type": "string",
+      "const": "result"
+    },
+    "__schema30": {
+      "type": "string",
+      "const": "succeeded"
+    },
+    "__schema31": {
+      "maxItems": 256,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema26"
+      }
+    },
+    "__schema32": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      },
+      "additionalProperties": {}
+    },
+    "__schema33": {
+      "type": "string",
+      "const": "error"
+    },
+    "__schema34": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "__schema35": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "__schema36": {
+      "type": "string",
+      "enum": [
+        "WORKER_NOT_INSTALLED",
+        "WORKER_SIGNATURE_INVALID",
+        "WORKER_PROTOCOL_INCOMPATIBLE",
+        "WORKER_ENTITLEMENT_REQUIRED",
+        "WORKER_REQUEST_INVALID",
+        "WORKER_DATA_INVALID",
+        "WORKER_RESOURCE_PLAN_INVALID",
+        "WORKER_CHECKPOINT_INCOMPATIBLE",
+        "WORKER_CANCELLED",
+        "WORKER_CRASHED",
+        "WORKER_STORAGE_FAILED",
+        "WORKER_INTERNAL_ERROR"
+      ]
+    },
+    "__schema37": {
+      "type": "string",
+      "enum": [
+        "discovery",
+        "verification",
+        "negotiation",
+        "admission",
+        "data-load",
+        "training",
+        "generation",
+        "kernel-execution",
+        "evaluation",
+        "persistence",
+        "publication",
+        "shutdown"
+      ]
+    },
+    "__schema38": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "__schema39": {
+      "type": "boolean"
+    },
+    "__schema40": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "__schema41": {
+      "$ref": "#/$defs/__schema1"
+    }
+  }
+}

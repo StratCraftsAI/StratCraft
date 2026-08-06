@@ -1,0 +1,46 @@
+{
+  "position": {
+    "long": "Largo",
+    "short": "Corto",
+    "flat": "Sin posici\u00f3n",
+    "open": "Abierta",
+    "closed": "Cerrada"
+  },
+  "order": {
+    "market": "Orden de mercado",
+    "limit": "Orden limitada",
+    "stop": "Orden stop",
+    "stopLimit": "Orden stop-limit"
+  },
+  "side": {
+    "buy": "Comprar",
+    "sell": "Vender"
+  },
+  "metrics": {
+    "sharpe": "Ratio de Sharpe",
+    "sortino": "Ratio de Sortino",
+    "maxDrawdown": "Drawdown m\u00e1ximo",
+    "winRate": "Tasa de acierto",
+    "profitFactor": "Factor de beneficio",
+    "totalReturn": "Retorno total",
+    "annualizedReturn": "Retorno anualizado",
+    "volatility": "Volatilidad",
+    "calmar": "Ratio de Calmar"
+  },
+  "timeframe": {
+    "1m": "1 Minuto",
+    "5m": "5 Minutos",
+    "15m": "15 Minutos",
+    "1h": "1 Hora",
+    "4h": "4 Horas",
+    "1d": "1 D\u00eda",
+    "1w": "1 Semana"
+  },
+  "asset": {
+    "stock": "Acci\u00f3n",
+    "crypto": "Criptomoneda",
+    "forex": "Forex",
+    "futures": "Futuros",
+    "options": "Opciones"
+  }
+}

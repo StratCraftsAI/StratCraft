@@ -1,0 +1,63 @@
+{
+  "view": {
+    "loading": "読み込み中...",
+    "refresh": "更新",
+    "retry": "再試行",
+    "loadingChartData": "チャートデータを読み込み中...",
+    "toggle": {
+      "volume": "出来高",
+      "grid": "グリッド"
+    },
+    "error": {
+      "chart": "チャートの読み込みエラー",
+      "loadData": "データの読み込みに失敗しました"
+    }
+  },
+  "settings": {
+    "section": {
+      "indicators": "インジケーター",
+      "style": "スタイル",
+      "drawingTools": "描画ツール"
+    },
+    "indicator": {
+      "sma": "SMA",
+      "ema": "EMA",
+      "rsi": "RSI",
+      "macd": "MACD",
+      "bb": "ボリンジャーバンド"
+    },
+    "param": {
+      "period": "期間",
+      "fast": "高速",
+      "slow": "低速",
+      "signal": "シグナル",
+      "stdDev": "標準偏差"
+    },
+    "chartType": {
+      "label": "チャート種別",
+      "option": {
+        "candlesticks": "ローソク足",
+        "hollowCandles": "中空ローソク足",
+        "ohlc": "OHLC",
+        "line": "ライン",
+        "area": "エリア"
+      }
+    },
+    "color": {
+      "up": "上昇色",
+      "down": "下落色"
+    },
+    "drawingTool": {
+      "line": "ライン",
+      "ray": "レイ",
+      "rect": "矩形",
+      "fib": "フィボナッチ"
+    },
+    "actions": {
+      "apply": "変更を適用"
+    }
+  },
+  "notification": {
+    "indicatorAdded": "インジケーター追加: {{indicator}}"
+  }
+}

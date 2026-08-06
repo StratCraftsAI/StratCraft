@@ -1,0 +1,3160 @@
+{
+  "_comment": "Stratforge SDK indicator mapping. Single source of truth for desktop validator + backend prompt injection. TICKET_724.",
+  "version": "1.0",
+  "sdk": "stratforge",
+  "default_accessor": "line",
+  "include_prefix": "stratforge/indicators/",
+  "_ignored_vendor_classes": [
+    {
+      "class_name": "Indicator",
+      "header": "indicator.hpp",
+      "reason": "Abstract base class; not directly instantiable"
+    },
+    {
+      "class_name": "FindFirstIndexBase",
+      "header": "findindex.hpp",
+      "reason": "Abstract base class; use FindFirstIndexHighest/FindFirstIndexLowest"
+    },
+    {
+      "class_name": "FindLastIndexBase",
+      "header": "findindex.hpp",
+      "reason": "Abstract base class; use FindLastIndexHighest/FindLastIndexLowest"
+    }
+  ],
+  "_reverse_uncovered_baseline": {
+    "value": 0,
+    "reason": "TICKET_7280_1 closed; all vendor classes covered"
+  },
+  "indicators": {
+    "DEMAEnvelope": {
+      "class_name": "DEMAEnvelope", "header": "envelope.hpp", "category": "volatility", "input": "source",
+      "constructor": "DEMAEnvelope(source, period, perc)", "accessors": ["src", "top", "bottom"],
+      "default_params": { "period": 30, "perc": 2.5 }
+    },
+    "DEMAOscillator": {
+      "class_name": "DEMAOscillator", "header": "oscillator.hpp", "category": "oscillator", "input": "source",
+      "constructor": "DEMAOscillator(source, period)", "accessors": ["line"], "default_params": { "period": 30 }
+    },
+    "EMAEnvelope": {
+      "class_name": "EMAEnvelope", "header": "envelope.hpp", "category": "volatility", "input": "source",
+      "constructor": "EMAEnvelope(source, period, perc)", "accessors": ["src", "top", "bottom"],
+      "default_params": { "period": 30, "perc": 2.5 }
+    },
+    "EMAOscillator": {
+      "class_name": "EMAOscillator", "header": "oscillator.hpp", "category": "oscillator", "input": "source",
+      "constructor": "EMAOscillator(source, period)", "accessors": ["line"], "default_params": { "period": 30 }
+    },
+    "HMAEnvelope": {
+      "class_name": "HMAEnvelope", "header": "envelope.hpp", "category": "volatility", "input": "source",
+      "constructor": "HMAEnvelope(source, period, perc)", "accessors": ["src", "top", "bottom"],
+      "default_params": { "period": 30, "perc": 2.5 }
+    },
+    "HMAOscillator": {
+      "class_name": "HMAOscillator", "header": "oscillator.hpp", "category": "oscillator", "input": "source",
+      "constructor": "HMAOscillator(source, period)", "accessors": ["line"], "default_params": { "period": 30 }
+    },
+    "SMAEnvelope": {
+      "class_name": "SMAEnvelope", "header": "envelope.hpp", "category": "volatility", "input": "source",
+      "constructor": "SMAEnvelope(source, period, perc)", "accessors": ["src", "top", "bottom"],
+      "default_params": { "period": 30, "perc": 2.5 }
+    },
+    "SMAOscillator": {
+      "class_name": "SMAOscillator", "header": "oscillator.hpp", "category": "oscillator", "input": "source",
+      "constructor": "SMAOscillator(source, period)", "accessors": ["line"], "default_params": { "period": 30 }
+    },
+    "SMMAEnvelope": {
+      "class_name": "SMMAEnvelope", "header": "envelope.hpp", "category": "volatility", "input": "source",
+      "constructor": "SMMAEnvelope(source, period, perc)", "accessors": ["src", "top", "bottom"],
+      "default_params": { "period": 30, "perc": 2.5 }
+    },
+    "SMMAOscillator": {
+      "class_name": "SMMAOscillator", "header": "oscillator.hpp", "category": "oscillator", "input": "source",
+      "constructor": "SMMAOscillator(source, period)", "accessors": ["line"], "default_params": { "period": 30 }
+    },
+    "TEMAEnvelope": {
+      "class_name": "TEMAEnvelope", "header": "envelope.hpp", "category": "volatility", "input": "source",
+      "constructor": "TEMAEnvelope(source, period, perc)", "accessors": ["src", "top", "bottom"],
+      "default_params": { "period": 30, "perc": 2.5 }
+    },
+    "TEMAOscillator": {
+      "class_name": "TEMAOscillator", "header": "oscillator.hpp", "category": "oscillator", "input": "source",
+      "constructor": "TEMAOscillator(source, period)", "accessors": ["line"], "default_params": { "period": 30 }
+    },
+    "WMAEnvelope": {
+      "class_name": "WMAEnvelope", "header": "envelope.hpp", "category": "volatility", "input": "source",
+      "constructor": "WMAEnvelope(source, period, perc)", "accessors": ["src", "top", "bottom"],
+      "default_params": { "period": 30, "perc": 2.5 }
+    },
+    "WMAOscillator": {
+      "class_name": "WMAOscillator", "header": "oscillator.hpp", "category": "oscillator", "input": "source",
+      "constructor": "WMAOscillator(source, period)", "accessors": ["line"], "default_params": { "period": 30 }
+    },
+    "ZLEMAEnvelope": {
+      "class_name": "ZLEMAEnvelope", "header": "envelope.hpp", "category": "volatility", "input": "source",
+      "constructor": "ZLEMAEnvelope(source, period, perc)", "accessors": ["src", "top", "bottom"],
+      "default_params": { "period": 30, "perc": 2.5 }
+    },
+    "ZLEMAOscillator": {
+      "class_name": "ZLEMAOscillator", "header": "oscillator.hpp", "category": "oscillator", "input": "source",
+      "constructor": "ZLEMAOscillator(source, period)", "accessors": ["line"], "default_params": { "period": 30 }
+    },
+    "SMA": {
+      "class_name": "SMA",
+      "header": "sma.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "SMA(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "EMA": {
+      "class_name": "EMA",
+      "header": "ema.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "EMA(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "WMA": {
+      "class_name": "WMA",
+      "header": "wma.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "WMA(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "DEMA": {
+      "class_name": "DoubleExponentialMovingAverage",
+      "header": "dema.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "DoubleExponentialMovingAverage(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 30
+      }
+    },
+    "TEMA": {
+      "class_name": "TripleExponentialMovingAverage",
+      "header": "tema.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "TripleExponentialMovingAverage(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 30
+      }
+    },
+    "SMMA": {
+      "class_name": "SMMA",
+      "header": "smma.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "SMMA(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "HMA": {
+      "class_name": "HMA",
+      "header": "hma.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "HMA(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "KAMA": {
+      "class_name": "AdaptiveMovingAverage",
+      "header": "kama.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "AdaptiveMovingAverage(source, period, fast, slow)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 30,
+        "fast": 2,
+        "slow": 30
+      }
+    },
+    "TRIMA": {
+      "class_name": "TRIMA",
+      "header": "trima.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "TRIMA(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "ZLEMA": {
+      "class_name": "ZLEMA",
+      "header": "zlema.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "ZLEMA(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "DMA": {
+      "class_name": "DMA",
+      "header": "dma.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "DMA(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "ExponentialSmoothing": {
+      "class_name": "ExponentialSmoothing",
+      "header": "exponentialsmoothing.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "ExponentialSmoothing(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "RSI": {
+      "class_name": "RSI",
+      "header": "rsi.hpp",
+      "category": "oscillator",
+      "input": "source",
+      "constructor": "RSI(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "Stochastic": {
+      "class_name": "Stochastic",
+      "header": "stochastic.hpp",
+      "category": "oscillator",
+      "input": "hlc",
+      "constructor": "Stochastic(high, low, close, period, period_dfast, period_dslow)",
+      "accessors": [
+        "percK",
+        "percD"
+      ],
+      "default_params": {
+        "period": 14,
+        "period_dfast": 3,
+        "period_dslow": 3
+      }
+    },
+    "StochasticFull": {
+      "class_name": "StochasticFull",
+      "header": "stochastic.hpp",
+      "category": "oscillator",
+      "input": "hlc",
+      "constructor": "StochasticFull(high, low, close, period, period_dfast, period_dslow)",
+      "accessors": [
+        "percK",
+        "percD"
+      ],
+      "default_params": {
+        "period": 14,
+        "period_dfast": 3,
+        "period_dslow": 3
+      }
+    },
+    "StochRSI": {
+      "class_name": "StochRSI",
+      "header": "stochrsi.hpp",
+      "category": "oscillator",
+      "input": "source",
+      "constructor": "StochRSI(source, rsi_period, stoch_period, period_d)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "rsi_period": 14,
+        "stoch_period": 14,
+        "period_d": 3
+      }
+    },
+    "CCI": {
+      "class_name": "CCI",
+      "header": "cci.hpp",
+      "category": "oscillator",
+      "input": "hlc",
+      "constructor": "CCI(high, low, close, period, factor)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20,
+        "factor": 0.015
+      }
+    },
+    "WilliamsR": {
+      "class_name": "WilliamsR",
+      "header": "williams.hpp",
+      "category": "oscillator",
+      "input": "hlc",
+      "constructor": "WilliamsR(high, low, close, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "UltimateOscillator": {
+      "class_name": "UltimateOscillator",
+      "header": "ultimateoscillator.hpp",
+      "category": "oscillator",
+      "input": "hlc",
+      "constructor": "UltimateOscillator(high, low, close, p1, p2, p3)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "p1": 7,
+        "p2": 14,
+        "p3": 28
+      }
+    },
+    "AwesomeOscillator": {
+      "class_name": "AwesomeOscillator",
+      "header": "awesomeoscillator.hpp",
+      "category": "oscillator",
+      "input": "hl",
+      "constructor": "AwesomeOscillator(high, low, fast, slow)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "fast": 5,
+        "slow": 34
+      }
+    },
+    "DPO": {
+      "class_name": "DetrendedPriceOscillator",
+      "header": "dpo.hpp",
+      "category": "oscillator",
+      "input": "source",
+      "constructor": "DetrendedPriceOscillator(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "DV2": {
+      "class_name": "DV2",
+      "header": "dv2.hpp",
+      "category": "oscillator",
+      "input": "hlc",
+      "constructor": "DV2(high, low, close, period, maperiod)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 252,
+        "maperiod": 2
+      }
+    },
+    "MACD": {
+      "class_name": "MACD",
+      "header": "macd.hpp",
+      "category": "trend",
+      "input": "source",
+      "constructor": "MACD(source, fast_period, slow_period, signal_period)",
+      "accessors": [
+        "macd",
+        "signal",
+        "histogram"
+      ],
+      "default_params": {
+        "fast_period": 12,
+        "slow_period": 26,
+        "signal_period": 9
+      }
+    },
+    "MACDExt": {
+      "class_name": "MACDExt",
+      "header": "macdext.hpp",
+      "category": "trend",
+      "input": "source",
+      "constructor": "MACDExt(source, fast_period, slow_period, signal_period)",
+      "accessors": [
+        "macd",
+        "signal",
+        "histogram"
+      ],
+      "default_params": {
+        "fast_period": 12,
+        "slow_period": 26,
+        "signal_period": 9
+      }
+    },
+    "MACDFix": {
+      "class_name": "MACDFix",
+      "header": "macdfix.hpp",
+      "category": "trend",
+      "input": "source",
+      "constructor": "MACDFix(source, signal_period)",
+      "accessors": [
+        "macd",
+        "signal",
+        "histogram"
+      ],
+      "default_params": {
+        "signal_period": 9
+      }
+    },
+    "DirectionalMovement": {
+      "class_name": "DirectionalMovement",
+      "header": "directionalmovement.hpp",
+      "category": "trend",
+      "input": "hlc",
+      "constructor": "DirectionalMovement(high, low, close, period)",
+      "accessors": [
+        "adx",
+        "adxr",
+        "dx",
+        "plus_di",
+        "minus_di"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "Aroon": {
+      "class_name": "Aroon",
+      "header": "aroon.hpp",
+      "category": "trend",
+      "input": "hl",
+      "constructor": "Aroon(high, low, period)",
+      "accessors": [
+        "aroon_up",
+        "aroon_down"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "Ichimoku": {
+      "class_name": "Ichimoku",
+      "header": "ichimoku.hpp",
+      "category": "trend",
+      "input": "hlc",
+      "constructor": "Ichimoku(high, low, close, tenkan, kijun, senkou, senkou_lead, chikou)",
+      "accessors": [
+        "tenkan",
+        "kijun",
+        "senkou_a",
+        "senkou_b",
+        "chikou"
+      ],
+      "default_params": {
+        "tenkan": 9,
+        "kijun": 26,
+        "senkou": 52,
+        "senkou_lead": 26,
+        "chikou": 26
+      }
+    },
+    "ParabolicSAR": {
+      "class_name": "ParabolicSAR",
+      "header": "psar.hpp",
+      "category": "trend",
+      "input": "hlc",
+      "constructor": "ParabolicSAR(high, low, close, period, af, afmax)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 2,
+        "af": 0.02,
+        "afmax": 0.2
+      }
+    },
+    "Vortex": {
+      "class_name": "Vortex",
+      "header": "vortex.hpp",
+      "category": "trend",
+      "input": "hlc",
+      "constructor": "Vortex(high, low, close, period)",
+      "accessors": [
+        "vi_plus",
+        "vi_minus"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "SuperTrend": {
+      "class_name": "SuperTrend",
+      "header": "trend.hpp",
+      "category": "trend",
+      "input": "hlc",
+      "constructor": "SuperTrend(high, low, close, period, multiplier)",
+      "accessors": [
+        "line",
+        "upper_band",
+        "lower_band"
+      ],
+      "default_params": {
+        "period": 10,
+        "multiplier": 3.0
+      }
+    },
+    "KST": {
+      "class_name": "KnowSureThing",
+      "header": "kst.hpp",
+      "category": "trend",
+      "input": "source",
+      "constructor": "KnowSureThing(source, ...)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "TSI": {
+      "class_name": "TrueStrengthIndicator",
+      "header": "tsi.hpp",
+      "category": "trend",
+      "input": "source",
+      "constructor": "TrueStrengthIndicator(source, ...)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "Trix": {
+      "class_name": "Trix",
+      "header": "trix.hpp",
+      "category": "trend",
+      "input": "source",
+      "constructor": "Trix(source, period, rocperiod)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 15,
+        "rocperiod": 1
+      }
+    },
+    "LaguerreRSI": {
+      "class_name": "LaguerreRSI",
+      "header": "laguerre.hpp",
+      "category": "trend",
+      "input": "source",
+      "constructor": "LaguerreRSI(source, gamma, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "gamma": 0.5,
+        "period": 6
+      }
+    },
+    "LaguerreFilter": {
+      "class_name": "LaguerreFilter",
+      "header": "laguerre.hpp",
+      "category": "trend",
+      "input": "source",
+      "constructor": "LaguerreFilter(source, gamma)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "gamma": 0.5
+      }
+    },
+    "ATR": {
+      "class_name": "ATR",
+      "header": "atr.hpp",
+      "category": "volatility",
+      "input": "hlc",
+      "constructor": "ATR(high, low, close, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "NATR": {
+      "class_name": "NATR",
+      "header": "natr.hpp",
+      "category": "volatility",
+      "input": "hlc",
+      "constructor": "NATR(high, low, close, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "TrueRange": {
+      "class_name": "TrueRange",
+      "header": "truerange.hpp",
+      "category": "volatility",
+      "input": "hlc",
+      "constructor": "TrueRange(high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "BollingerBands": {
+      "class_name": "BollingerBands",
+      "header": "bollinger.hpp",
+      "category": "volatility",
+      "input": "source",
+      "constructor": "BollingerBands(source, period, devfactor)",
+      "accessors": [
+        "mid",
+        "top",
+        "bottom"
+      ],
+      "default_params": {
+        "period": 20,
+        "devfactor": 2.0
+      }
+    },
+    "BollingerBandsPct": {
+      "class_name": "BollingerBandsPct",
+      "header": "bollingerpct.hpp",
+      "category": "volatility",
+      "input": "source",
+      "constructor": "BollingerBandsPct(source, period, devfactor)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20,
+        "devfactor": 2.0
+      }
+    },
+    "StdDev": {
+      "class_name": "StdDev",
+      "header": "stddev.hpp",
+      "category": "volatility",
+      "input": "source",
+      "constructor": "StdDev(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "Envelope": {
+      "class_name": "Envelope",
+      "header": "envelope.hpp",
+      "category": "volatility",
+      "input": "source",
+      "constructor": "Envelope(source, perc)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "perc": 2.5
+      }
+    },
+    "OBV": {
+      "class_name": "OBV",
+      "header": "obv.hpp",
+      "category": "volume",
+      "input": "cv",
+      "constructor": "OBV(close, volume)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "AccumulationDistribution": {
+      "class_name": "AccumulationDistribution",
+      "header": "volume.hpp",
+      "category": "volume",
+      "input": "hlcv",
+      "constructor": "AccumulationDistribution(high, low, close, volume)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "Momentum": {
+      "class_name": "Momentum",
+      "header": "momentum.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "Momentum(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 12
+      }
+    },
+    "ROC": {
+      "class_name": "ROC",
+      "header": "roc_variants.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "ROC(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 12
+      }
+    },
+    "PercentChange": {
+      "class_name": "PercentChange",
+      "header": "percentchange.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "PercentChange(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 1
+      }
+    },
+    "PercentRank": {
+      "class_name": "PercentRank",
+      "header": "pctrank.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "PercentRank(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 50
+      }
+    },
+    "CrossOver": {
+      "class_name": "CrossOver",
+      "header": "crossover.hpp",
+      "category": "signal",
+      "input": "dual_source",
+      "constructor": "CrossOver(source1, source2)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CrossUp": {
+      "class_name": "CrossUp",
+      "header": "crossover.hpp",
+      "category": "signal",
+      "input": "dual_source",
+      "constructor": "CrossUp(source1, source2)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CrossDown": {
+      "class_name": "CrossDown",
+      "header": "crossover.hpp",
+      "category": "signal",
+      "input": "dual_source",
+      "constructor": "CrossDown(source1, source2)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "LinearRegression": {
+      "class_name": "LinearRegression",
+      "header": "linearreg.hpp",
+      "category": "statistics",
+      "input": "source",
+      "constructor": "LinearRegression(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "Highest": {
+      "class_name": "Highest",
+      "header": "highest.hpp",
+      "category": "statistics",
+      "input": "source",
+      "constructor": "Highest(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "Lowest": {
+      "class_name": "Lowest",
+      "header": "lowest.hpp",
+      "category": "statistics",
+      "input": "source",
+      "constructor": "Lowest(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "AvgPrice": {
+      "class_name": "AvgPrice",
+      "header": "avgprice.hpp",
+      "category": "price_transform",
+      "input": "ohlc",
+      "constructor": "AvgPrice(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "MedPrice": {
+      "class_name": "MedPrice",
+      "header": "medprice.hpp",
+      "category": "price_transform",
+      "input": "hl",
+      "constructor": "MedPrice(high, low)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "TypPrice": {
+      "class_name": "TypPrice",
+      "header": "typprice.hpp",
+      "category": "price_transform",
+      "input": "hlc",
+      "constructor": "TypPrice(high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "WclPrice": {
+      "class_name": "WclPrice",
+      "header": "wclprice.hpp",
+      "category": "price_transform",
+      "input": "hlc",
+      "constructor": "WclPrice(high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "HeikinAshi": {
+      "class_name": "HeikinAshi",
+      "header": "heikinashi.hpp",
+      "category": "candle",
+      "input": "ohlc",
+      "constructor": "HeikinAshi(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "haDelta": {
+      "class_name": "haDelta",
+      "header": "hadelta.hpp",
+      "category": "candle",
+      "input": "ohlc",
+      "constructor": "haDelta(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "PivotPoint": {
+      "class_name": "PivotPoint",
+      "header": "pivotpoint.hpp",
+      "category": "other",
+      "input": "ohlc",
+      "constructor": "PivotPoint(open, high, low, close, use_open, use_close_twice)",
+      "accessors": [
+        "p",
+        "s1",
+        "s2",
+        "r1",
+        "r2"
+      ],
+      "default_params": {
+        "use_open": false,
+        "use_close_twice": false
+      }
+    },
+    "HurstExponent": {
+      "class_name": "HurstExponent",
+      "header": "hurst.hpp",
+      "category": "other",
+      "input": "source",
+      "constructor": "HurstExponent(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 100
+      }
+    },
+    "ChandelierExit": {
+      "class_name": "ChandelierExit",
+      "header": "trend.hpp",
+      "category": "trend",
+      "input": "hlc",
+      "constructor": "ChandelierExit(high, low, close, period, multiplier)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 22,
+        "multiplier": 3.0
+      }
+    },
+    "MACDHisto": {
+      "class_name": "MACDHisto",
+      "header": "macd.hpp",
+      "category": "trend",
+      "input": "source",
+      "constructor": "MACDHisto(source, fast_period, slow_period, signal_period)",
+      "accessors": [
+        "macd",
+        "signal",
+        "histogram"
+      ],
+      "default_params": {
+        "fast_period": 12,
+        "slow_period": 26,
+        "signal_period": 9
+      }
+    },
+    "AroonOscillator": {
+      "class_name": "AroonOscillator",
+      "header": "aroon.hpp",
+      "category": "trend",
+      "input": "hl",
+      "constructor": "AroonOscillator(high, low, period)",
+      "accessors": [
+        "up",
+        "down"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "BalanceOfPower": {
+      "class_name": "BalanceOfPower",
+      "header": "bop.hpp",
+      "category": "oscillator",
+      "input": "ohlc",
+      "constructor": "BalanceOfPower(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "PrettyGoodOscillator": {
+      "class_name": "PrettyGoodOscillator",
+      "header": "prettygoodoscillator.hpp",
+      "category": "oscillator",
+      "input": "source",
+      "constructor": "PrettyGoodOscillator(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "MoneyFlowIndex": {
+      "class_name": "MoneyFlowIndex",
+      "header": "volume.hpp",
+      "category": "volume",
+      "input": "hlcv",
+      "constructor": "MoneyFlowIndex(high, low, close, volume, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "MeanDeviation": {
+      "class_name": "MeanDeviation",
+      "header": "meandeviation.hpp",
+      "category": "volatility",
+      "input": "source",
+      "constructor": "MeanDeviation(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "Variance": {
+      "class_name": "Variance",
+      "header": "variance.hpp",
+      "category": "statistics",
+      "input": "source",
+      "constructor": "Variance(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "MinMax": {
+      "class_name": "MinMax",
+      "header": "minmax.hpp",
+      "category": "statistics",
+      "input": "source",
+      "constructor": "MinMax(source, period)",
+      "accessors": [
+        "max",
+        "min"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "SumN": {
+      "class_name": "SumN",
+      "header": "sumn.hpp",
+      "category": "statistics",
+      "input": "source",
+      "constructor": "SumN(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "PlusDirectionalIndicator": {
+      "class_name": "PlusDirectionalIndicator",
+      "header": "directionalmovement.hpp",
+      "category": "trend",
+      "input": "hlc",
+      "constructor": "PlusDirectionalIndicator(high, low, close, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "MinusDirectionalIndicator": {
+      "class_name": "MinusDirectionalIndicator",
+      "header": "directionalmovement.hpp",
+      "category": "trend",
+      "input": "hlc",
+      "constructor": "MinusDirectionalIndicator(high, low, close, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "ROC100": {
+      "class_name": "ROC100",
+      "header": "roc_variants.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "ROC100(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 12
+      }
+    },
+    "ROCP": {
+      "class_name": "ROCP",
+      "header": "roc_variants.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "ROCP(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 12
+      }
+    },
+    "ROCR": {
+      "class_name": "ROCR",
+      "header": "roc_variants.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "ROCR(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 12
+      }
+    },
+    "ROCR100": {
+      "class_name": "ROCR100",
+      "header": "roc_variants.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "ROCR100(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 12
+      }
+    },
+    "TrueHigh": {
+      "class_name": "TrueHigh",
+      "header": "truehigh.hpp",
+      "category": "other",
+      "input": "hlc",
+      "constructor": "TrueHigh(high, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "TrueLow": {
+      "class_name": "TrueLow",
+      "header": "truelow.hpp",
+      "category": "other",
+      "input": "hlc",
+      "constructor": "TrueLow(low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "UpDay": {
+      "class_name": "UpDay",
+      "header": "upday.hpp",
+      "category": "other",
+      "input": "source",
+      "constructor": "UpDay(source)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "DownDay": {
+      "class_name": "DownDay",
+      "header": "downday.hpp",
+      "category": "other",
+      "input": "source",
+      "constructor": "DownDay(source)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "UpMove": {
+      "class_name": "UpMove",
+      "header": "upmove.hpp",
+      "category": "other",
+      "input": "source",
+      "constructor": "UpMove(source)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "DownMove": {
+      "class_name": "DownMove",
+      "header": "downmove.hpp",
+      "category": "other",
+      "input": "source",
+      "constructor": "DownMove(source)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "MAVP": {
+      "class_name": "MAVP",
+      "header": "mavp.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "MAVP(source, periods)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "PeriodN": {
+      "class_name": "PeriodN",
+      "header": "periodn.hpp",
+      "category": "other",
+      "input": "source",
+      "constructor": "PeriodN(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 1
+      }
+    },
+    "Average": {
+      "class_name": "Average",
+      "header": "average.hpp",
+      "category": "statistics",
+      "input": "source",
+      "constructor": "Average(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "WeightedAverage": {
+      "class_name": "WeightedAverage",
+      "header": "weightedaverage.hpp",
+      "category": "statistics",
+      "input": "source",
+      "constructor": "WeightedAverage(source, period, coef, weights)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "ZeroLagIndicator": {
+      "class_name": "ZeroLagIndicator",
+      "header": "zerolag.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "ZeroLagIndicator(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "Accum": {
+      "class_name": "Accum",
+      "header": "accum.hpp",
+      "category": "statistics",
+      "input": "source",
+      "constructor": "Accum(source, seed)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "seed": 0.0
+      }
+    },
+    "CDLDoji": {
+      "class_name": "CDLDoji",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLDoji(open, high, low, close, body_threshold)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "body_threshold": 0.05
+      }
+    },
+    "CDLHammer": {
+      "class_name": "CDLHammer",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLHammer(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLEngulfing": {
+      "class_name": "CDLEngulfing",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLEngulfing(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLMorningStar": {
+      "class_name": "CDLMorningStar",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLMorningStar(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLEveningStar": {
+      "class_name": "CDLEveningStar",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLEveningStar(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLHarami": {
+      "class_name": "CDLHarami",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLHarami(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLShootingStar": {
+      "class_name": "CDLShootingStar",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLShootingStar(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLHangingMan": {
+      "class_name": "CDLHangingMan",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLHangingMan(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLMarubozu": {
+      "class_name": "CDLMarubozu",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLMarubozu(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLSpinningTop": {
+      "class_name": "CDLSpinningTop",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLSpinningTop(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLThreeWhiteSoldiers": {
+      "class_name": "CDLThreeWhiteSoldiers",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLThreeWhiteSoldiers(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLThreeBlackCrows": {
+      "class_name": "CDLThreeBlackCrows",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLThreeBlackCrows(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLPiercingLine": {
+      "class_name": "CDLPiercingLine",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLPiercingLine(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLDarkCloudCover": {
+      "class_name": "CDLDarkCloudCover",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLDarkCloudCover(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLAbandonedBaby": {
+      "class_name": "CDLAbandonedBaby",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLAbandonedBaby(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLThreeInside": {
+      "class_name": "CDLThreeInside",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLThreeInside(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLThreeOutside": {
+      "class_name": "CDLThreeOutside",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLThreeOutside(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLKicking": {
+      "class_name": "CDLKicking",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLKicking(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLBeltHold": {
+      "class_name": "CDLBeltHold",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLBeltHold(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLCounterAttack": {
+      "class_name": "CDLCounterAttack",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLCounterAttack(open, high, low, close, tolerance)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "tolerance": 0.005
+      }
+    },
+    "CDLHomingPigeon": {
+      "class_name": "CDLHomingPigeon",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLHomingPigeon(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLMatchingLow": {
+      "class_name": "CDLMatchingLow",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLMatchingLow(open, high, low, close, tolerance)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "tolerance": 0.001
+      }
+    },
+    "CDLTasukiGap": {
+      "class_name": "CDLTasukiGap",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLTasukiGap(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "CDLUpsideGap": {
+      "class_name": "CDLUpsideGap",
+      "header": "candlestick.hpp",
+      "category": "candlestick",
+      "input": "ohlc",
+      "constructor": "CDLUpsideGap(open, high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "PlusDM": {
+      "class_name": "PlusDM",
+      "header": "dm_standalone.hpp",
+      "category": "trend",
+      "input": "hl",
+      "constructor": "PlusDM(high, low)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "MinusDM": {
+      "class_name": "MinusDM",
+      "header": "dm_standalone.hpp",
+      "category": "trend",
+      "input": "hl",
+      "constructor": "MinusDM(high, low)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "AnyN": {
+      "class_name": "AnyN",
+      "header": "logicaln.hpp",
+      "category": "statistics",
+      "input": "source",
+      "constructor": "AnyN(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "AllN": {
+      "class_name": "AllN",
+      "header": "logicaln.hpp",
+      "category": "statistics",
+      "input": "source",
+      "constructor": "AllN(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "MidPoint": {
+      "class_name": "MidPoint",
+      "header": "midpoint.hpp",
+      "category": "statistics",
+      "input": "source",
+      "constructor": "MidPoint(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "MidPrice": {
+      "class_name": "MidPrice",
+      "header": "midpoint.hpp",
+      "category": "statistics",
+      "input": "hl",
+      "constructor": "MidPrice(high, low, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "ChandeMomentumOscillator": {
+      "class_name": "ChandeMomentumOscillator",
+      "header": "oscillator_extra.hpp",
+      "category": "oscillator",
+      "input": "source",
+      "constructor": "ChandeMomentumOscillator(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "T3MovingAverage": {
+      "class_name": "T3MovingAverage",
+      "header": "oscillator_extra.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "T3MovingAverage(source, period, vfactor)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 5,
+        "vfactor": 0.7
+      }
+    },
+    "CoppockCurve": {
+      "class_name": "CoppockCurve",
+      "header": "oscillator_extra.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "CoppockCurve(source, period1, period2, wma_period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period1": 11,
+        "period2": 14,
+        "wma_period": 10
+      }
+    },
+    "Oscillator": {
+      "class_name": "Oscillator",
+      "header": "oscillator.hpp",
+      "category": "oscillator",
+      "input": "dual_source",
+      "constructor": "Oscillator(source, osc)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "KAMAOscillator": {
+      "class_name": "KAMAOscillator",
+      "header": "oscillator.hpp",
+      "category": "oscillator",
+      "input": "source",
+      "constructor": "KAMAOscillator(source, period, fast, slow)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 30,
+        "fast": 2,
+        "slow": 30
+      }
+    },
+    "DMAOscillator": {
+      "class_name": "DMAOscillator",
+      "header": "oscillator.hpp",
+      "category": "oscillator",
+      "input": "source",
+      "constructor": "DMAOscillator(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "PriceOscillator": {
+      "class_name": "PriceOscillator",
+      "header": "oscillator.hpp",
+      "category": "oscillator",
+      "input": "source",
+      "constructor": "PriceOscillator(source, fast_period, slow_period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "fast_period": 12,
+        "slow_period": 26
+      }
+    },
+    "PercentagePriceOscillator": {
+      "class_name": "PercentagePriceOscillator",
+      "header": "oscillator.hpp",
+      "category": "oscillator",
+      "input": "source",
+      "constructor": "PercentagePriceOscillator(source, fast_period, slow_period, signal_period)",
+      "accessors": [
+        "ppo",
+        "signal",
+        "histogram"
+      ],
+      "default_params": {
+        "fast_period": 12,
+        "slow_period": 26,
+        "signal_period": 9
+      }
+    },
+    "FisherTransform": {
+      "class_name": "FisherTransform",
+      "header": "pattern.hpp",
+      "category": "oscillator",
+      "input": "hl",
+      "constructor": "FisherTransform(high, low, period)",
+      "accessors": [
+        "fisher",
+        "trigger"
+      ],
+      "default_params": {
+        "period": 10
+      }
+    },
+    "Fractal": {
+      "class_name": "Fractal",
+      "header": "pattern.hpp",
+      "category": "other",
+      "input": "hl",
+      "constructor": "Fractal(high, low)",
+      "accessors": [
+        "up_fractal",
+        "down_fractal"
+      ],
+      "default_params": {}
+    },
+    "ZigZag": {
+      "class_name": "ZigZag",
+      "header": "pattern.hpp",
+      "category": "other",
+      "input": "source",
+      "constructor": "ZigZag(source, retrace)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "retrace": 0.05
+      }
+    },
+    "Correlation": {
+      "class_name": "Correlation",
+      "header": "statistics.hpp",
+      "category": "statistics",
+      "input": "dual_source",
+      "constructor": "Correlation(data0, data1, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "RSquared": {
+      "class_name": "RSquared",
+      "header": "statistics.hpp",
+      "category": "statistics",
+      "input": "dual_source",
+      "constructor": "RSquared(data0, data1, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "DonchianChannels": {
+      "class_name": "DonchianChannels",
+      "header": "volatility.hpp",
+      "category": "volatility",
+      "input": "hl",
+      "constructor": "DonchianChannels(high, low, period)",
+      "accessors": [
+        "mid",
+        "top",
+        "bottom"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "KeltnerChannel": {
+      "class_name": "KeltnerChannel",
+      "header": "volatility.hpp",
+      "category": "volatility",
+      "input": "hlc",
+      "constructor": "KeltnerChannel(high, low, close, period, devfactor)",
+      "accessors": [
+        "mid",
+        "top",
+        "bottom"
+      ],
+      "default_params": {
+        "period": 20,
+        "devfactor": 2.0
+      }
+    },
+    "UlcerIndex": {
+      "class_name": "UlcerIndex",
+      "header": "volatility.hpp",
+      "category": "volatility",
+      "input": "source",
+      "constructor": "UlcerIndex(close, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "ChaikinVolatility": {
+      "class_name": "ChaikinVolatility",
+      "header": "volatility.hpp",
+      "category": "volatility",
+      "input": "hl",
+      "constructor": "ChaikinVolatility(high, low, ema_period, roc_period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "ema_period": 10,
+        "roc_period": 10
+      }
+    },
+    "PriceVolumeTrend": {
+      "class_name": "PriceVolumeTrend",
+      "header": "volume.hpp",
+      "category": "volume",
+      "input": "cv",
+      "constructor": "PriceVolumeTrend(close, volume)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "VolumeWeightedAveragePrice": {
+      "class_name": "VolumeWeightedAveragePrice",
+      "header": "volume.hpp",
+      "category": "volume",
+      "input": "hlcv",
+      "constructor": "VolumeWeightedAveragePrice(high, low, close, volume)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "ChaikinMoneyFlow": {
+      "class_name": "ChaikinMoneyFlow",
+      "header": "volume.hpp",
+      "category": "volume",
+      "input": "hlcv",
+      "constructor": "ChaikinMoneyFlow(high, low, close, volume, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "EaseOfMovement": {
+      "class_name": "EaseOfMovement",
+      "header": "volume.hpp",
+      "category": "volume",
+      "input": "hlv",
+      "constructor": "EaseOfMovement(high, low, volume, period, divisor)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14,
+        "divisor": 10000.0
+      }
+    },
+    "KlingerOscillator": {
+      "class_name": "KlingerOscillator",
+      "header": "volume.hpp",
+      "category": "volume",
+      "input": "hlcv",
+      "constructor": "KlingerOscillator(high, low, close, volume, fast_period, slow_period, signal_period)",
+      "accessors": [
+        "line",
+        "signal"
+      ],
+      "default_params": {
+        "fast_period": 34,
+        "slow_period": 55,
+        "signal_period": 13
+      }
+    },
+    "ADX": {
+      "class_name": "ADX",
+      "header": "directionalmovement.hpp",
+      "category": "directional",
+      "input": "hlc",
+      "constructor": "ADX(high, low, close, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "ADXR": {
+      "class_name": "ADXR",
+      "header": "directionalmovement.hpp",
+      "category": "directional",
+      "input": "hlc",
+      "constructor": "ADXR(high, low, close, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "AccelerationDecelerationOscillator": {
+      "class_name": "AccelerationDecelerationOscillator",
+      "header": "awesomeoscillator.hpp",
+      "category": "oscillator",
+      "input": "hl",
+      "constructor": "AccelerationDecelerationOscillator(high, low, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 5
+      }
+    },
+    "AdaptiveMovingAverage": {
+      "class_name": "AdaptiveMovingAverage",
+      "header": "kama.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "AdaptiveMovingAverage(source, period, fast, slow)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 30,
+        "fast": 2,
+        "slow": 30
+      }
+    },
+    "AroonDown": {
+      "class_name": "AroonDown",
+      "header": "aroon.hpp",
+      "category": "directional",
+      "input": "hl",
+      "constructor": "AroonDown(low, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "AroonUp": {
+      "class_name": "AroonUp",
+      "header": "aroon.hpp",
+      "category": "directional",
+      "input": "hl",
+      "constructor": "AroonUp(high, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "AroonUpDown": {
+      "class_name": "AroonUpDown",
+      "header": "aroon.hpp",
+      "category": "directional",
+      "input": "hl",
+      "constructor": "AroonUpDown(high, low, period)",
+      "accessors": [
+        "up",
+        "down",
+        "aroonup",
+        "aroondown"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "AroonUpDownOscillator": {
+      "class_name": "AroonUpDownOscillator",
+      "header": "aroon.hpp",
+      "category": "directional",
+      "input": "hl",
+      "constructor": "AroonUpDownOscillator(high, low, period)",
+      "accessors": [
+        "up",
+        "down"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "DMAEnvelope": {
+      "class_name": "DMAEnvelope",
+      "header": "envelope.hpp",
+      "category": "volatility",
+      "input": "source",
+      "constructor": "DMAEnvelope(source, period, gainlimit, hperiod, perc)",
+      "accessors": [
+        "src",
+        "top",
+        "bottom"
+      ],
+      "default_params": {
+        "period": 20,
+        "gainlimit": 50,
+        "hperiod": 7,
+        "perc": 2.5
+      }
+    },
+    "DemarkPivotPoint": {
+      "class_name": "DemarkPivotPoint",
+      "header": "pivotpoint.hpp",
+      "category": "support_resistance",
+      "input": "ohlc",
+      "constructor": "DemarkPivotPoint(open, high, low, close)",
+      "accessors": [
+        "p",
+        "s1",
+        "r1"
+      ],
+      "default_params": {}
+    },
+    "DetrendedPriceOscillator": {
+      "class_name": "DetrendedPriceOscillator",
+      "header": "dpo.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "DetrendedPriceOscillator(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20
+      }
+    },
+    "DicksonMovingAverage": {
+      "class_name": "DicksonMovingAverage",
+      "header": "dma.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "DicksonMovingAverage(source, period, gainlimit, hperiod)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20,
+        "gainlimit": 50,
+        "hperiod": 7
+      }
+    },
+    "DirectionalIndicator": {
+      "class_name": "DirectionalIndicator",
+      "header": "directionalmovement.hpp",
+      "category": "directional",
+      "input": "hlc",
+      "constructor": "DirectionalIndicator(high, low, close, period)",
+      "accessors": [
+        "plus_di",
+        "minus_di"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "DoubleExponentialMovingAverage": {
+      "class_name": "DoubleExponentialMovingAverage",
+      "header": "dema.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "DoubleExponentialMovingAverage(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 30
+      }
+    },
+    "DownDayBool": {
+      "class_name": "DownDayBool",
+      "header": "downday.hpp",
+      "category": "utility",
+      "input": "source",
+      "constructor": "DownDayBool(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 1
+      }
+    },
+    "ExponentialSmoothingDynamic": {
+      "class_name": "ExponentialSmoothingDynamic",
+      "header": "exponentialsmoothing.hpp",
+      "category": "utility",
+      "input": "source",
+      "constructor": "ExponentialSmoothingDynamic(source, alpha, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 1
+      }
+    },
+    "FRAMA": {
+      "class_name": "FRAMA",
+      "header": "adaptive.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "FRAMA(source, period, fast, slow)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 16,
+        "fast": 4,
+        "slow": 300
+      }
+    },
+    "FibonacciPivotPoint": {
+      "class_name": "FibonacciPivotPoint",
+      "header": "pivotpoint.hpp",
+      "category": "support_resistance",
+      "input": "ohlc",
+      "constructor": "FibonacciPivotPoint(open, high, low, close, use_open, use_close_twice, level1, level2, level3)",
+      "accessors": [
+        "p",
+        "s1",
+        "s2",
+        "s3",
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "default_params": {
+        "use_open": false,
+        "use_close_twice": false,
+        "level1": 0.382,
+        "level2": 0.618,
+        "level3": 1.0
+      }
+    },
+    "FindFirstIndexHighest": {
+      "class_name": "FindFirstIndexHighest",
+      "header": "findindex.hpp",
+      "category": "utility",
+      "input": "source",
+      "constructor": "FindFirstIndexHighest(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "FindFirstIndexLowest": {
+      "class_name": "FindFirstIndexLowest",
+      "header": "findindex.hpp",
+      "category": "utility",
+      "input": "source",
+      "constructor": "FindFirstIndexLowest(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "FindLastIndexHighest": {
+      "class_name": "FindLastIndexHighest",
+      "header": "findindex.hpp",
+      "category": "utility",
+      "input": "source",
+      "constructor": "FindLastIndexHighest(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "FindLastIndexLowest": {
+      "class_name": "FindLastIndexLowest",
+      "header": "findindex.hpp",
+      "category": "utility",
+      "input": "source",
+      "constructor": "FindLastIndexLowest(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "HT_Trendline": {
+      "class_name": "HT_Trendline",
+      "header": "hilbert.hpp",
+      "category": "trend",
+      "input": "source",
+      "constructor": "HT_Trendline(source)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "KAMAEnvelope": {
+      "class_name": "KAMAEnvelope",
+      "header": "envelope.hpp",
+      "category": "volatility",
+      "input": "source",
+      "constructor": "KAMAEnvelope(source, period, fast, slow, perc)",
+      "accessors": [
+        "src",
+        "top",
+        "bottom"
+      ],
+      "default_params": {
+        "period": 30,
+        "fast": 2,
+        "slow": 30,
+        "perc": 2.5
+      }
+    },
+    "KDJ": {
+      "class_name": "KDJ",
+      "header": "stochastic.hpp",
+      "category": "momentum",
+      "input": "hlc",
+      "constructor": "KDJ(high, low, close, period, period_dfast, period_dslow)",
+      "accessors": [
+        "k",
+        "d",
+        "j"
+      ],
+      "default_params": {
+        "period": 9,
+        "period_dfast": 3,
+        "period_dslow": 3
+      }
+    },
+    "KnowSureThing": {
+      "class_name": "KnowSureThing",
+      "header": "kst.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "KnowSureThing(source, rp1, rp2, rp3, rp4, rma1, rma2, rma3, rma4, rsignal)",
+      "accessors": [
+        "kst",
+        "signal"
+      ],
+      "default_params": {
+        "rp1": 10,
+        "rp2": 15,
+        "rp3": 20,
+        "rp4": 30,
+        "rma1": 10,
+        "rma2": 10,
+        "rma3": 10,
+        "rma4": 10,
+        "rsignal": 9
+      }
+    },
+    "LinearReg": {
+      "class_name": "LinearReg",
+      "header": "linearreg.hpp",
+      "category": "regression",
+      "input": "source",
+      "constructor": "LinearReg(source, period)",
+      "accessors": [
+        "slope",
+        "intercept"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "LinearRegAngle": {
+      "class_name": "LinearRegAngle",
+      "header": "linearreg.hpp",
+      "category": "regression",
+      "input": "source",
+      "constructor": "LinearRegAngle(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "LinearRegIntercept": {
+      "class_name": "LinearRegIntercept",
+      "header": "linearreg.hpp",
+      "category": "regression",
+      "input": "source",
+      "constructor": "LinearRegIntercept(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "LinearRegSlope": {
+      "class_name": "LinearRegSlope",
+      "header": "linearreg.hpp",
+      "category": "regression",
+      "input": "source",
+      "constructor": "LinearRegSlope(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "MAMA": {
+      "class_name": "MAMA",
+      "header": "hilbert.hpp",
+      "category": "trend",
+      "input": "source",
+      "constructor": "MAMA(source, fast_limit, slow_limit)",
+      "accessors": [
+        "mama",
+        "fama"
+      ],
+      "default_params": {
+        "fast_limit": 0.5,
+        "slow_limit": 0.05
+      }
+    },
+    "MaxIndex": {
+      "class_name": "MaxIndex",
+      "header": "minmax.hpp",
+      "category": "utility",
+      "input": "source",
+      "constructor": "MaxIndex(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "MinIndex": {
+      "class_name": "MinIndex",
+      "header": "minmax.hpp",
+      "category": "utility",
+      "input": "source",
+      "constructor": "MinIndex(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "MinMaxIndex": {
+      "class_name": "MinMaxIndex",
+      "header": "minmax.hpp",
+      "category": "utility",
+      "input": "source",
+      "constructor": "MinMaxIndex(source, period)",
+      "accessors": [
+        "max_index",
+        "min_index"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "MomentumOscillator": {
+      "class_name": "MomentumOscillator",
+      "header": "momentum.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "MomentumOscillator(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 12
+      }
+    },
+    "MovingAverageEnvelope": {
+      "class_name": "MovingAverageEnvelope",
+      "header": "envelope.hpp",
+      "category": "volatility",
+      "input": "source",
+      "constructor": "MovingAverageEnvelope(source, period, perc)",
+      "accessors": [
+        "src",
+        "top",
+        "bottom"
+      ],
+      "default_params": {
+        "period": 30,
+        "perc": 2.5
+      }
+    },
+    "MovingAverageOscillator": {
+      "class_name": "MovingAverageOscillator",
+      "header": "oscillator.hpp",
+      "category": "oscillator",
+      "input": "source",
+      "constructor": "MovingAverageOscillator(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 30
+      }
+    },
+    "NonZeroDifference": {
+      "class_name": "NonZeroDifference",
+      "header": "crossover.hpp",
+      "category": "utility",
+      "input": "dual_source",
+      "constructor": "NonZeroDifference(line1, line2)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "OLS_BetaN": {
+      "class_name": "OLS_BetaN",
+      "header": "ols.hpp",
+      "category": "regression",
+      "input": "dual_source",
+      "constructor": "OLS_BetaN(data0, data1, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 10
+      }
+    },
+    "OLS_Slope_InterceptN": {
+      "class_name": "OLS_Slope_InterceptN",
+      "header": "ols.hpp",
+      "category": "regression",
+      "input": "dual_source",
+      "constructor": "OLS_Slope_InterceptN(data0, data1, period)",
+      "accessors": [
+        "slope",
+        "intercept"
+      ],
+      "default_params": {
+        "period": 10
+      }
+    },
+    "OLS_TransformationN": {
+      "class_name": "OLS_TransformationN",
+      "header": "ols.hpp",
+      "category": "regression",
+      "input": "dual_source",
+      "constructor": "OLS_TransformationN(data0, data1, period)",
+      "accessors": [
+        "spread",
+        "spread_mean",
+        "spread_std",
+        "zscore"
+      ],
+      "default_params": {
+        "period": 10
+      }
+    },
+    "PercentagePriceOscillatorShort": {
+      "class_name": "PercentagePriceOscillatorShort",
+      "header": "oscillator.hpp",
+      "category": "oscillator",
+      "input": "source",
+      "constructor": "PercentagePriceOscillatorShort(source, period1, period2, period_signal)",
+      "accessors": [
+        "ppo",
+        "signal",
+        "histogram"
+      ],
+      "default_params": {
+        "period1": 12,
+        "period2": 26,
+        "period_signal": 9
+      }
+    },
+    "RSI_EMA": {
+      "class_name": "RSI_EMA",
+      "header": "rsi.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "RSI_EMA(source, period, safediv, safehigh, safelow, lookback)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14,
+        "safediv": false,
+        "safehigh": 100.0,
+        "safelow": 50.0,
+        "lookback": 1
+      }
+    },
+    "RSI_SMA": {
+      "class_name": "RSI_SMA",
+      "header": "rsi.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "RSI_SMA(source, period, safediv, safehigh, safelow, lookback)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14,
+        "safediv": false,
+        "safehigh": 100.0,
+        "safelow": 50.0,
+        "lookback": 1
+      }
+    },
+    "RSI_Safe": {
+      "class_name": "RSI_Safe",
+      "header": "rsi.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "RSI_Safe(source, period, movav, safehigh, safelow, lookback)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14,
+        "movav": "RsiMovAv::Smoothed",
+        "safehigh": 100.0,
+        "safelow": 50.0,
+        "lookback": 1
+      }
+    },
+    "RelativeMomentumIndex": {
+      "class_name": "RelativeMomentumIndex",
+      "header": "rsi.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "RelativeMomentumIndex(source, period, lookback)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20,
+        "lookback": 5
+      }
+    },
+    "StochasticFast": {
+      "class_name": "StochasticFast",
+      "header": "stochastic.hpp",
+      "category": "momentum",
+      "input": "hlc",
+      "constructor": "StochasticFast(high, low, close, period, period_dfast)",
+      "accessors": [
+        "percK",
+        "percD"
+      ],
+      "default_params": {
+        "period": 14,
+        "period_dfast": 3
+      }
+    },
+    "TSF": {
+      "class_name": "TSF",
+      "header": "linearreg.hpp",
+      "category": "regression",
+      "input": "source",
+      "constructor": "TSF(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14
+      }
+    },
+    "TripleExponentialMovingAverage": {
+      "class_name": "TripleExponentialMovingAverage",
+      "header": "tema.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "TripleExponentialMovingAverage(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 30
+      }
+    },
+    "TrixSignal": {
+      "class_name": "TrixSignal",
+      "header": "trix.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "TrixSignal(source, period, rocperiod, sigperiod)",
+      "accessors": [
+        "trix_line",
+        "signal"
+      ],
+      "default_params": {
+        "period": 15,
+        "rocperiod": 1,
+        "sigperiod": 9
+      }
+    },
+    "TrueStrengthIndicator": {
+      "class_name": "TrueStrengthIndicator",
+      "header": "tsi.hpp",
+      "category": "momentum",
+      "input": "source",
+      "constructor": "TrueStrengthIndicator(source, period1, period2, pchange)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period1": 25,
+        "period2": 13,
+        "pchange": 1
+      }
+    },
+    "UpDayBool": {
+      "class_name": "UpDayBool",
+      "header": "upday.hpp",
+      "category": "utility",
+      "input": "source",
+      "constructor": "UpDayBool(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 1
+      }
+    },
+    "VIDYA": {
+      "class_name": "VIDYA",
+      "header": "adaptive.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "VIDYA(source, period, momentum_period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 14,
+        "momentum_period": 9
+      }
+    },
+    "WilliamsAD": {
+      "class_name": "WilliamsAD",
+      "header": "williams.hpp",
+      "category": "momentum",
+      "input": "hlc",
+      "constructor": "WilliamsAD(high, low, close)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {}
+    },
+    "ZLIndicatorEnvelope": {
+      "class_name": "ZLIndicatorEnvelope",
+      "header": "envelope.hpp",
+      "category": "volatility",
+      "input": "source",
+      "constructor": "ZLIndicatorEnvelope(source, period, gainlimit, perc)",
+      "accessors": [
+        "src",
+        "top",
+        "bottom"
+      ],
+      "default_params": {
+        "period": 20,
+        "gainlimit": 50,
+        "perc": 2.5
+      }
+    },
+    "ZeroLagExponentialMovingAverage": {
+      "class_name": "ZeroLagExponentialMovingAverage",
+      "header": "zlema.hpp",
+      "category": "moving_average",
+      "input": "source",
+      "constructor": "ZeroLagExponentialMovingAverage(source, period)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 30
+      }
+    },
+    "ZeroLagIndicatorOscillator": {
+      "class_name": "ZeroLagIndicatorOscillator",
+      "header": "oscillator.hpp",
+      "category": "oscillator",
+      "input": "source",
+      "constructor": "ZeroLagIndicatorOscillator(source, period, gainlimit)",
+      "accessors": [
+        "line"
+      ],
+      "default_params": {
+        "period": 20,
+        "gainlimit": 50
+      }
+    }
+  },
+  "slug_aliases": {
+    "_comment": "Common LLM-hallucinated or TA-Lib names -> correct SDK indicator key",
+    "PctRank": "PercentRank",
+    "BBands": "BollingerBands",
+    "BBand": "BollingerBands",
+    "BB": "BollingerBands",
+    "Bollinger": "BollingerBands",
+    "BollingerBand": "BollingerBands",
+    "ADX": "DirectionalMovement",
+    "AverageDirectionalIndex": "DirectionalMovement",
+    "DirectionalMovementIndex": "DirectionalMovement",
+    "AverageTrueRange": "ATR",
+    "RelativeStrengthIndex": "RSI",
+    "SimpleMovingAverage": "SMA",
+    "ExponentialMovingAverage": "EMA",
+    "WeightedMovingAverage": "WMA",
+    "HullMovingAverage": "HMA",
+    "SmoothedMovingAverage": "SMMA",
+    "TriangularMovingAverage": "TRIMA",
+    "DisplacedMovingAverage": "DMA",
+    "ZeroLagEMA": "ZLEMA",
+    "PSAR": "ParabolicSAR",
+    "StochasticRSI": "StochRSI",
+    "StochRsi": "StochRSI",
+    "StochasticSlow": "Stochastic",
+    "Williams": "WilliamsR",
+    "WilliamsPercR": "WilliamsR",
+    "MFI": "MoneyFlowIndex",
+    "BOP": "BalanceOfPower",
+    "RateOfChange": "ROC",
+    "OnBalanceVolume": "OBV",
+    "AccumDist": "AccumulationDistribution",
+    "AD": "AccumulationDistribution",
+    "AccDist": "AccumulationDistribution",
+    "CommodityChannelIndex": "CCI",
+    "StandardDeviation": "StdDev",
+    "TrueStrengthIndex": "TSI",
+    "TRIX": "Trix",
+    "Laguerre": "LaguerreFilter",
+    "CumSum": "Accum",
+    "CumulativeSum": "Accum",
+    "PLUS_DM": "PlusDM",
+    "MINUS_DM": "MinusDM",
+    "CMO": "ChandeMomentumOscillator",
+    "T3": "T3MovingAverage",
+    "Coppock": "CoppockCurve",
+    "Fisher": "FisherTransform",
+    "MIDPOINT": "MidPoint",
+    "MIDPRICE": "MidPrice",
+    "Donchian": "DonchianChannels",
+    "Keltner": "KeltnerChannel",
+    "Ulcer": "UlcerIndex",
+    "Correl": "Correlation",
+    "PVT": "PriceVolumeTrend",
+    "VWAP": "VolumeWeightedAveragePrice",
+    "CMF": "ChaikinMoneyFlow",
+    "EMV": "EaseOfMovement",
+    "Klinger": "KlingerOscillator",
+    "PPO": "PercentagePriceOscillator",
+    "RelStrIndex": "RSI",
+    "SimpleMA": "SMA",
+    "ExpMA": "EMA",
+    "ExponentialMA": "EMA",
+    "KAMA": "AdaptiveMovingAverage",
+    "DEMA": "DoubleExponentialMovingAverage",
+    "TEMA": "TripleExponentialMovingAverage",
+    "DPO": "DetrendedPriceOscillator",
+    "RMI": "RelativeMomentumIndex",
+    "TSI": "TrueStrengthIndicator",
+    "PPO_Short": "PercentagePriceOscillatorShort",
+    "AdaptiveMA": "AdaptiveMovingAverage",
+    "DoubleEMA": "DoubleExponentialMovingAverage",
+    "TripleEMA": "TripleExponentialMovingAverage",
+    "PPOShort": "PercentagePriceOscillatorShort",
+    "HilbertTrendline": "HT_Trendline",
+    "HTTrendline": "HT_Trendline",
+    "FractalAdaptiveMA": "FRAMA",
+    "FractalAdaptiveMovingAverage": "FRAMA",
+    "VariableIndexDynamic": "VIDYA",
+    "VariableIndexDynamicAverage": "VIDYA",
+    "DicksonMA": "DicksonMovingAverage",
+    "TimeSeriesForecast": "TSF",
+    "LinReg": "LinearReg",
+    "LinRegSlope": "LinearRegSlope",
+    "LinRegIntercept": "LinearRegIntercept",
+    "LinRegAngle": "LinearRegAngle",
+    "MomentumOsc": "MomentumOscillator",
+    "AccDecOsc": "AccelerationDecelerationOscillator",
+    "AC": "AccelerationDecelerationOscillator",
+    "StochFast": "StochasticFast",
+    "FastStochastic": "StochasticFast",
+    "MAEnvelope": "MovingAverageEnvelope",
+    "MAOscillator": "MovingAverageOscillator",
+    "ZLOscillator": "ZeroLagIndicatorOscillator",
+    "WCLPrice": "WclPrice",
+    "HADelta": "haDelta",
+    "ACCDEOSC": "AccelerationDecelerationOscillator",
+    "AccDeOsc": "AccelerationDecelerationOscillator",
+    "ChaikinADLine": "AccumulationDistribution",
+    "AVERAGEDIRECTIONALINDEXRATING": "ADXR",
+    "AverageDirectionalIndexRating": "ADXR",
+    "AllNonZeroinPeriod": "AllN",
+    "AnyNonZeroinPeriod": "AnyN",
+    "AroonDownComponent": "AroonDown",
+    "AroonOsc": "AroonOscillator",
+    "AroonUpComponent": "AroonUp",
+    "AroonUpDownCombined": "AroonUpDown",
+    "AroonUpDownOsc": "AroonUpDownOscillator",
+    "ARITHMETICMEAN": "Average",
+    "ArithmeticMean": "Average",
+    "MEAN": "Average",
+    "Mean": "Average",
+    "AveragePrice": "AvgPrice",
+    "AO": "AwesomeOscillator",
+    "BBANDSPCT": "BollingerBandsPct",
+    "BBandsPct": "BollingerBandsPct",
+    "BollingerBandBandwidth": "BollingerBandsPct",
+    "ROCofEMA": "ChaikinVolatility",
+    "ATRBasedTrailingStop": "ChandelierExit",
+    "PearsonCorrelation": "Correlation",
+    "BearishCrossoverDetection": "CrossDown",
+    "CrossoverDetection": "CrossOver",
+    "BullishCrossoverDetection": "CrossUp",
+    "DEMARKPIVOT": "DemarkPivotPoint",
+    "DetrendedPriceOsc": "DetrendedPriceOscillator",
+    "DicksonMAEnvelope": "DMAEnvelope",
+    "DicksonMAOscillator": "DMAOscillator",
+    "DicksonMovingAverageOscillator": "DMAOscillator",
+    "DONCHIANCHANNEL": "DonchianChannels",
+    "DonchianBreakoutChannels": "DonchianChannels",
+    "DownDayDetector": "DownDay",
+    "DownDayBoolean": "DownDayBool",
+    "DownwardPriceMovement": "DownMove",
+    "DV2Indicator": "DV2",
+    "SimplePercentageEnvelope": "Envelope",
+    "ExpSmoothing": "ExponentialSmoothing",
+    "DynamicExponentialSmoothing": "ExponentialSmoothingDynamic",
+    "ExpSmoothingDynamic": "ExponentialSmoothingDynamic",
+    "FIBPIVOT": "FibonacciPivotPoint",
+    "FirstIndexofHighestValue": "FindFirstIndexHighest",
+    "FirstIndexofLowestValue": "FindFirstIndexLowest",
+    "LastIndexofHighestValue": "FindLastIndexHighest",
+    "LastIndexofLowestValue": "FindLastIndexLowest",
+    "BillWilliamsFractal": "Fractal",
+    "HeikinAshiDelta": "haDelta",
+    "haD": "haDelta",
+    "HeikinAshiCandles": "HeikinAshi",
+    "HighestValue": "Highest",
+    "HURST": "HurstExponent",
+    "Hurst": "HurstExponent",
+    "ICHIMOKUCLOUD": "Ichimoku",
+    "IchimokuCloud": "Ichimoku",
+    "KAUFMANADAPTIVEMOVINGAVERAGE": "KAMA",
+    "KaufmanAdaptiveMovingAverage": "KAMA",
+    "AdaptiveMovingAverageEnvelope": "KAMAEnvelope",
+    "AdaptiveMovingAverageOscillator": "KAMAOscillator",
+    "EMAATRBands": "KeltnerChannel",
+    "KVO": "KlingerOscillator",
+    "LAGF": "LaguerreFilter",
+    "LRSI": "LaguerreRSI",
+    "LINEARREG_ANGLE": "LinearRegAngle",
+    "LINEARREG_INTERCEPT": "LinearRegIntercept",
+    "LINEARREG_SLOPE": "LinearRegSlope",
+    "LowestValue": "Lowest",
+    "MOVINGAVERAGECONVERGENCEDIVERGENCE": "MACD",
+    "MovingAverageConvergenceDivergence": "MACD",
+    "MACDHIST": "MACDHisto",
+    "MACDHISTOGRAM": "MACDHisto",
+    "MACDHistogram": "MACDHisto",
+    "MESAAdaptiveMovingAverage": "MAMA",
+    "MedianPrice": "MedPrice",
+    "DI_MINUS": "MinusDirectionalIndicator",
+    "MINUSDI": "MinusDirectionalIndicator",
+    "NormalizedATR": "NATR",
+    "NormalizedAverageTrueRange": "NATR",
+    "NZD": "NonZeroDifference",
+    "BETA": "OLS_BetaN",
+    "OLSRegressionSlopeIntercept": "OLS_Slope_InterceptN",
+    "GenericOscillator": "Oscillator",
+    "ParabolicStopandReverse": "ParabolicSAR",
+    "SAR": "ParabolicSAR",
+    "PercPriceOsc": "PercentagePriceOscillator",
+    "PercPriceOscShort": "PercentagePriceOscillatorShort",
+    "PercentageChange": "PercentChange",
+    "PercentileRank": "PercentRank",
+    "DI_PLUS": "PlusDirectionalIndicator",
+    "PLUSDI": "PlusDirectionalIndicator",
+    "PGO": "PrettyGoodOscillator",
+    "ABSOLUTEPRICEOSCILLATOR": "PriceOscillator",
+    "APO": "PriceOscillator",
+    "AbsolutePriceOscillator": "PriceOscillator",
+    "PriceOsc": "PriceOscillator",
+    "RATEOFCHANGE100": "ROC100",
+    "RateOfChangePercentage": "ROCP",
+    "RateOfChangeRatio": "ROCR",
+    "RateOfChangeRatio100": "ROCR100",
+    "RSIwithExponentialMovingAverage": "RSI_EMA",
+    "SafeDivisionRSI": "RSI_Safe",
+    "RSIwithSimpleMovingAverage": "RSI_SMA",
+    "CoefficientofDetermination": "RSquared",
+    "MA": "SMA",
+    "MOVINGAVERAGE": "SMA",
+    "MovingAverage": "SMA",
+    "STOCH": "Stochastic",
+    "StochasticOscillator": "Stochastic",
+    "FullStochastic": "StochasticFull",
+    "STOCHFULL": "StochasticFull",
+    "RollingSum": "SumN",
+    "Sum": "SumN",
+    "ATRBasedTrendIndicator": "SuperTrend",
+    "TillsonT3": "T3MovingAverage",
+    "TripleExponentialAverage": "Trix",
+    "TRIXwithSignalLine": "TrixSignal",
+    "TR": "TrueRange",
+    "TypicalPrice": "TypPrice",
+    "DownsideVolatility": "UlcerIndex",
+    "ULTOSC": "UltimateOscillator",
+    "UpDayDetector": "UpDay",
+    "UpDayBoolean": "UpDayBool",
+    "UpwardPriceMovement": "UpMove",
+    "VAR": "Variance",
+    "VortexIndicator": "Vortex",
+    "WeightedClosePrice": "WclPrice",
+    "AVERAGEWEIGHTED": "WeightedAverage",
+    "AverageWeighted": "WeightedAverage",
+    "WAD": "WilliamsAD",
+    "WilliamsAccumulationDistribution": "WilliamsAD",
+    "WILLR": "WilliamsR",
+    "WR": "WilliamsR",
+    "EC": "ZeroLagIndicator",
+    "ERRORCORRECTING": "ZeroLagIndicator",
+    "ErrorCorrecting": "ZeroLagIndicator",
+    "ZLINDICATOR": "ZeroLagIndicator",
+    "ZLInd": "ZeroLagIndicator",
+    "ZLIndicator": "ZeroLagIndicator",
+    "ECOscillator": "ZeroLagIndicatorOscillator",
+    "ZLIndicatorOscillator": "ZeroLagIndicatorOscillator",
+    "ZeroLagIndicatorOsc": "ZeroLagIndicatorOscillator",
+    "PercentThresholdPivotDetector": "ZigZag",
+    "ZEROLAGINDICATOR_EMA": "ZLEMA",
+    "ZeroLagIndicatorEnvelope": "ZLIndicatorEnvelope"
+  },
+  "accessor_aliases": {
+    "_comment": "LLM-hallucinated accessor names -> correct SDK accessor names, per indicator",
+    "BollingerBands": {
+      "upper": "top",
+      "lower": "bottom",
+      "middle": "mid",
+      "upperband": "top",
+      "lowerband": "bottom",
+      "middleband": "mid"
+    },
+    "Stochastic": {
+      "k": "percK",
+      "d": "percD",
+      "slowk": "percK",
+      "slowd": "percD",
+      "fastk": "percK",
+      "fastd": "percD"
+    },
+    "MACD": {
+      "hist": "histogram",
+      "macd_line": "macd",
+      "signal_line": "signal",
+      "macdline": "macd",
+      "signalline": "signal"
+    },
+    "DirectionalMovement": {
+      "pdi": "plus_di",
+      "mdi": "minus_di",
+      "plus_dm": "plus_di",
+      "minus_dm": "minus_di"
+    },
+    "DonchianChannels": {
+      "upper": "top",
+      "lower": "bottom",
+      "middle": "mid"
+    },
+    "KeltnerChannel": {
+      "upper": "top",
+      "lower": "bottom",
+      "middle": "mid"
+    },
+    "PercentagePriceOscillator": {
+      "hist": "histogram",
+      "ppo_line": "ppo",
+      "signal_line": "signal"
+    },
+    "KDJ": {
+      "percent_k": "k",
+      "percent_d": "d"
+    },
+    "StochasticFast": {
+      "k": "percK",
+      "d": "percD",
+      "fastk": "percK",
+      "fastd": "percD"
+    },
+    "DMAEnvelope": {
+      "upper": "top",
+      "lower": "bottom"
+    },
+    "KAMAEnvelope": {
+      "upper": "top",
+      "lower": "bottom"
+    },
+    "MovingAverageEnvelope": {
+      "upper": "top",
+      "lower": "bottom"
+    },
+    "ZLIndicatorEnvelope": {
+      "upper": "top",
+      "lower": "bottom"
+    },
+    "MACDHisto": {
+      "hist": "histogram",
+      "macd_line": "macd",
+      "signal_line": "signal"
+    },
+    "PercentagePriceOscillatorShort": {
+      "hist": "histogram",
+      "ppo_line": "ppo",
+      "signal_line": "signal"
+    },
+    "MAMA": {
+      "mesa_mama": "mama",
+      "mesa_fama": "fama"
+    },
+    "AroonUpDown": {
+      "aroon_up": "up",
+      "aroon_down": "down"
+    },
+    "AroonUpDownOscillator": {
+      "aroon_up": "up",
+      "aroon_down": "down"
+    },
+    "DirectionalIndicator": {
+      "pdi": "plus_di",
+      "mdi": "minus_di"
+    },
+    "TrixSignal": {
+      "trix": "trix_line"
+    },
+    "KnowSureThing": {
+      "kst_line": "kst",
+      "signal_line": "signal"
+    },
+    "LinearReg": {
+      "regression": "slope"
+    },
+    "FibonacciPivotPoint": {
+      "support1": "s1",
+      "support2": "s2",
+      "support3": "s3",
+      "resistance1": "r1",
+      "resistance2": "r2",
+      "resistance3": "r3",
+      "pivot": "p"
+    },
+    "DemarkPivotPoint": {
+      "support1": "s1",
+      "resistance1": "r1",
+      "pivot": "p"
+    },
+    "MinMax": {
+      "maximum": "max",
+      "minimum": "min",
+      "high": "max",
+      "low": "min"
+    },
+    "MinMaxIndex": {
+      "maximum": "max_index",
+      "minimum": "min_index"
+    }
+  },
+  "include_file_aliases": {
+    "_comment": "LLM-hallucinated header file names -> correct SDK header file names",
+    "bbands.hpp": "bollinger.hpp",
+    "bband.hpp": "bollinger.hpp",
+    "bb.hpp": "bollinger.hpp",
+    "bollinger_bands.hpp": "bollinger.hpp",
+    "stochrsi.hpp": "stochrsi.hpp",
+    "adx.hpp": "directionalmovement.hpp",
+    "williams_r.hpp": "williams.hpp",
+    "williamsr.hpp": "williams.hpp",
+    "chandelier_exit.hpp": "trend.hpp",
+    "chandelierexit.hpp": "trend.hpp",
+    "supertrend.hpp": "trend.hpp",
+    "super_trend.hpp": "trend.hpp"
+  },
+  "input_patterns": {
+    "_comment": "How to pass OHLCV data to constructors based on input type",
+    "source": "data().close()",
+    "hl": "data().high(), data().low()",
+    "hlc": "data().high(), data().low(), data().close()",
+    "ohlc": "data().open(), data().high(), data().low(), data().close()",
+    "cv": "data().close(), data().volume()",
+    "hlcv": "data().high(), data().low(), data().close(), data().volume()",
+    "hlv": "data().high(), data().low(), data().volume()",
+    "dual_source": "<line1>, <line2>"
+  }
+}

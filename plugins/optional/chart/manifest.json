@@ -1,0 +1,143 @@
+{
+  "$schema": "https://StratCraft.io/schemas/plugin-manifest.json",
+  "id": "com.stratcraft.chart",
+  "name": "Chart",
+  "version": "1.0.0",
+  "description": "Interactive financial chart with candlesticks, technical indicators, and drawing tools",
+  "author": "StratCraft Team",
+  "homepage": "https://StratCraft.io/plugins/chart",
+  "license": "MIT",
+
+  "main": "./dist/index.js",
+  "type": "ui",
+  "category": "visualization",
+
+  "contributes": {
+    "i18n": {
+      "path": "./locales",
+      "namespaces": ["chart"]
+    },
+    "mainView": [
+      {
+        "id": "chart-view",
+        "title": "Chart",
+        "entry": "./dist/ChartView.js",
+        "icon": "chart-line",
+        "route": "/chart",
+        "order": 1
+      }
+    ],
+    "sidePanel": [
+      {
+        "id": "chart-settings",
+        "title": "Chart Settings",
+        "entry": "./dist/ChartSettings.js",
+        "icon": "settings",
+        "position": "right",
+        "order": 1
+      }
+    ],
+    "toolbar": [
+      {
+        "id": "chart-zoom-in",
+        "title": "Zoom In",
+        "icon": "zoom-in",
+        "command": "chart.zoomIn",
+        "group": "zoom"
+      },
+      {
+        "id": "chart-zoom-out",
+        "title": "Zoom Out",
+        "icon": "zoom-out",
+        "command": "chart.zoomOut",
+        "group": "zoom"
+      },
+      {
+        "id": "chart-reset",
+        "title": "Reset View",
+        "icon": "maximize",
+        "command": "chart.reset",
+        "group": "zoom"
+      }
+    ],
+    "commands": [
+      {
+        "id": "chart.zoomIn",
+        "title": "Zoom In",
+        "category": "Chart",
+        "keybinding": "Ctrl+Plus"
+      },
+      {
+        "id": "chart.zoomOut",
+        "title": "Zoom Out",
+        "category": "Chart",
+        "keybinding": "Ctrl+Minus"
+      },
+      {
+        "id": "chart.reset",
+        "title": "Reset Chart View",
+        "category": "Chart",
+        "keybinding": "Ctrl+0"
+      },
+      {
+        "id": "chart.addIndicator",
+        "title": "Add Indicator",
+        "category": "Chart",
+        "keybinding": "Ctrl+I"
+      }
+    ],
+    "settings": [
+      {
+        "id": "chart.candleStyle",
+        "title": "Candle Style",
+        "type": "string",
+        "default": "candles",
+        "enum": ["candles", "hollow", "ohlc", "line", "area"],
+        "description": "Chart display style"
+      },
+      {
+        "id": "chart.showVolume",
+        "title": "Show Volume",
+        "type": "boolean",
+        "default": true,
+        "description": "Display volume bars below chart"
+      },
+      {
+        "id": "chart.showGrid",
+        "title": "Show Grid",
+        "type": "boolean",
+        "default": true,
+        "description": "Display grid lines"
+      }
+    ]
+  },
+
+  "permissions": [
+    "network:internal"
+  ],
+
+  "isolation": "trusted",
+
+  "activationEvents": [
+    "onStartup",
+    "onCommand:chart.*"
+  ],
+
+  "configSchema": {
+    "type": "object",
+    "properties": {
+      "defaultInterval": {
+        "type": "string",
+        "title": "Default Interval",
+        "default": "1D",
+        "enum": ["1m", "5m", "15m", "1H", "4H", "1D", "1W"]
+      },
+      "theme": {
+        "type": "string",
+        "title": "Chart Theme",
+        "default": "dark",
+        "enum": ["light", "dark"]
+      }
+    }
+  }
+}

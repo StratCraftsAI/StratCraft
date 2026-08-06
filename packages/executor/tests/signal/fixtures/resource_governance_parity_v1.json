@@ -1,0 +1,492 @@
+{
+  "version": 1,
+  "note": "TICKET_1292_10 resource-governance golden parity. Generated from the live Python engines (resource_gate, resource_watchdog) + the cgroup-fence cap->limit arithmetic. Regenerate with make_resource_governance_golden.py after any threshold change.",
+  "swapPressure": [
+    {
+      "label": "comfortable_none",
+      "input": {
+        "kind": "swap-pressure",
+        "estimatedPeakMB": 1000.0,
+        "memAvailableMB": 8000.0,
+        "memTotalMB": 16000.0
+      },
+      "expected": {
+        "version": 1,
+        "pressure": "none"
+      }
+    },
+    {
+      "label": "peak_over_avail_likely",
+      "input": {
+        "kind": "swap-pressure",
+        "estimatedPeakMB": 9000.0,
+        "memAvailableMB": 8000.0,
+        "memTotalMB": 16000.0
+      },
+      "expected": {
+        "version": 1,
+        "pressure": "likely"
+      }
+    },
+    {
+      "label": "high_frac_unlikely",
+      "input": {
+        "kind": "swap-pressure",
+        "estimatedPeakMB": 7000.0,
+        "memAvailableMB": 8000.0,
+        "memTotalMB": 16000.0
+      },
+      "expected": {
+        "version": 1,
+        "pressure": "unlikely"
+      }
+    },
+    {
+      "label": "peak_plus_current_over_total",
+      "input": {
+        "kind": "swap-pressure",
+        "estimatedPeakMB": 6000.0,
+        "memAvailableMB": 8000.0,
+        "memTotalMB": 10000.0
+      },
+      "expected": {
+        "version": 1,
+        "pressure": "none"
+      }
+    },
+    {
+      "label": "just_below_frac_none",
+      "input": {
+        "kind": "swap-pressure",
+        "estimatedPeakMB": 6790.0,
+        "memAvailableMB": 8000.0,
+        "memTotalMB": 16000.0
+      },
+      "expected": {
+        "version": 1,
+        "pressure": "none"
+      }
+    }
+  ],
+  "hysteresis": [
+    {
+      "label": "mem_pause_then_resume",
+      "input": {
+        "kind": "hysteresis",
+        "config": {
+          "pausePct": 30.0,
+          "resumePct": 40.0,
+          "enabled": true
+        },
+        "samples": [
+          {
+            "memHeadroomPct": 50.0,
+            "cpuHeadroomPct": 50.0,
+            "swapUsedPct": 0.0
+          },
+          {
+            "memHeadroomPct": 20.0,
+            "cpuHeadroomPct": 50.0,
+            "swapUsedPct": 0.0
+          },
+          {
+            "memHeadroomPct": 35.0,
+            "cpuHeadroomPct": 50.0,
+            "swapUsedPct": 0.0
+          },
+          {
+            "memHeadroomPct": 45.0,
+            "cpuHeadroomPct": 50.0,
+            "swapUsedPct": 0.0
+          }
+        ]
+      },
+      "expected": {
+        "version": 1,
+        "transitions": [
+          "",
+          "pause",
+          "",
+          "resume"
+        ],
+        "paused": false,
+        "pollSeconds": 10.0,
+        "prevSwapMb": 0.0
+      }
+    },
+    {
+      "label": "cpu_pause",
+      "input": {
+        "kind": "hysteresis",
+        "config": {
+          "enabled": true
+        },
+        "samples": [
+          {
+            "memHeadroomPct": 80.0,
+            "cpuHeadroomPct": 80.0,
+            "swapUsedPct": 0.0
+          },
+          {
+            "memHeadroomPct": 80.0,
+            "cpuHeadroomPct": 10.0,
+            "swapUsedPct": 0.0
+          }
+        ]
+      },
+      "expected": {
+        "version": 1,
+        "transitions": [
+          "",
+          "pause"
+        ],
+        "paused": true,
+        "pollSeconds": 10.0,
+        "prevSwapMb": 0.0
+      }
+    },
+    {
+      "label": "swap_growth_pause",
+      "input": {
+        "kind": "hysteresis",
+        "config": {
+          "enabled": true
+        },
+        "samples": [
+          {
+            "memHeadroomPct": 80.0,
+            "cpuHeadroomPct": 80.0,
+            "swapUsedPct": 10.0,
+            "swapUsedMb": 1000.0
+          },
+          {
+            "memHeadroomPct": 80.0,
+            "cpuHeadroomPct": 80.0,
+            "swapUsedPct": 12.0,
+            "swapUsedMb": 1600.0
+          },
+          {
+            "memHeadroomPct": 80.0,
+            "cpuHeadroomPct": 80.0,
+            "swapUsedPct": 12.0,
+            "swapUsedMb": 1600.0
+          }
+        ]
+      },
+      "expected": {
+        "version": 1,
+        "transitions": [
+          "",
+          "pause",
+          "resume"
+        ],
+        "paused": false,
+        "pollSeconds": 10.0,
+        "prevSwapMb": 1600.0
+      }
+    },
+    {
+      "label": "swap_absolute_pause",
+      "input": {
+        "kind": "hysteresis",
+        "config": {
+          "enabled": true
+        },
+        "samples": [
+          {
+            "memHeadroomPct": 80.0,
+            "cpuHeadroomPct": 80.0,
+            "swapUsedPct": 75.0,
+            "swapUsedMb": 12000.0
+          }
+        ]
+      },
+      "expected": {
+        "version": 1,
+        "transitions": [
+          "pause"
+        ],
+        "paused": true,
+        "pollSeconds": 10.0,
+        "prevSwapMb": 12000.0
+      }
+    },
+    {
+      "label": "disabled_passthrough",
+      "input": {
+        "kind": "hysteresis",
+        "config": {
+          "enabled": false
+        },
+        "samples": [
+          {
+            "memHeadroomPct": 5.0,
+            "cpuHeadroomPct": 5.0,
+            "swapUsedPct": 95.0,
+            "swapUsedMb": 15000.0
+          }
+        ]
+      },
+      "expected": {
+        "version": 1,
+        "transitions": [
+          ""
+        ],
+        "paused": false,
+        "pollSeconds": 10.0,
+        "prevSwapMb": null
+      }
+    },
+    {
+      "label": "seeded_single_sample_resume",
+      "input": {
+        "kind": "hysteresis",
+        "config": {
+          "pausePct": 30.0,
+          "resumePct": 40.0,
+          "enabled": true
+        },
+        "initialPaused": true,
+        "prevSwapMb": 1000.0,
+        "samples": [
+          {
+            "memHeadroomPct": 90.0,
+            "cpuHeadroomPct": 90.0,
+            "swapUsedPct": 10.0,
+            "swapUsedMb": 1000.0
+          }
+        ]
+      },
+      "expected": {
+        "version": 1,
+        "transitions": [
+          "resume"
+        ],
+        "paused": false,
+        "pollSeconds": 10.0,
+        "prevSwapMb": 1000.0
+      }
+    }
+  ],
+  "budget": [
+    {
+      "label": "resolve_budget_large_box",
+      "input": {
+        "kind": "budget",
+        "resolveCellBudget": {
+          "memTotalBytes": 137438953472
+        }
+      },
+      "expected": {
+        "version": 1,
+        "budgetMb": 24576.0
+      }
+    },
+    {
+      "label": "resolve_budget_small_box",
+      "input": {
+        "kind": "budget",
+        "resolveCellBudget": {
+          "memTotalBytes": 34359738368
+        }
+      },
+      "expected": {
+        "version": 1,
+        "budgetMb": 13107.2
+      }
+    },
+    {
+      "label": "under_budget_ok",
+      "input": {
+        "kind": "budget",
+        "rssMb": 1000.0,
+        "budgetMb": 24000.0,
+        "alreadyDegraded": false
+      },
+      "expected": {
+        "version": 1,
+        "verdict": "ok"
+      }
+    },
+    {
+      "label": "over_first_degrade",
+      "input": {
+        "kind": "budget",
+        "rssMb": 30000.0,
+        "budgetMb": 24000.0,
+        "alreadyDegraded": false
+      },
+      "expected": {
+        "version": 1,
+        "verdict": "degrade"
+      }
+    },
+    {
+      "label": "over_after_degrade_abort",
+      "input": {
+        "kind": "budget",
+        "rssMb": 30000.0,
+        "budgetMb": 24000.0,
+        "alreadyDegraded": true
+      },
+      "expected": {
+        "version": 1,
+        "verdict": "abort"
+      }
+    }
+  ],
+  "capacity": [
+    {
+      "label": "cap30_62g_16cpu",
+      "input": {
+        "kind": "capacity",
+        "machine": {
+          "ncpu": 16,
+          "memTotalBytes": 66571993088.0
+        },
+        "capPct": 30.0
+      },
+      "expected": {
+        "version": 1,
+        "cgroupMemoryMaxGib": 18,
+        "cgroupMemoryHighGib": 16,
+        "cgroupSwapMaxGib": 3,
+        "cgroupCpuQuotaPct": 480,
+        "govPausePct": 30.0,
+        "govResumePct": 40.0
+      }
+    },
+    {
+      "label": "cap50_62g_16cpu",
+      "input": {
+        "kind": "capacity",
+        "machine": {
+          "ncpu": 16,
+          "memTotalBytes": 66571993088.0
+        },
+        "capPct": 50.0
+      },
+      "expected": {
+        "version": 1,
+        "cgroupMemoryMaxGib": 31,
+        "cgroupMemoryHighGib": 28,
+        "cgroupSwapMaxGib": 5,
+        "cgroupCpuQuotaPct": 800,
+        "govPausePct": 50.0,
+        "govResumePct": 60.0
+      }
+    },
+    {
+      "label": "cap40_32g_8cpu",
+      "input": {
+        "kind": "capacity",
+        "machine": {
+          "ncpu": 8,
+          "memTotalBytes": 34359738368.0
+        },
+        "capPct": 40.0
+      },
+      "expected": {
+        "version": 1,
+        "cgroupMemoryMaxGib": 12,
+        "cgroupMemoryHighGib": 11,
+        "cgroupSwapMaxGib": 2,
+        "cgroupCpuQuotaPct": 320,
+        "govPausePct": 40.0,
+        "govResumePct": 50.0
+      }
+    }
+  ],
+  "sweepAdmission": [
+    {
+      "label": "single_arm_never_parallelises",
+      "input": {
+        "kind": "sweep-admission",
+        "armCount": 1,
+        "ncpu": 16,
+        "maxConcurrency": 3
+      },
+      "expected": {
+        "version": 1,
+        "concurrency": 1,
+        "blasThreadsPerWorker": 16,
+        "memoryGateClamped": false,
+        "cpuBaseline": 1,
+        "memoryCap": 1
+      }
+    },
+    {
+      "label": "factor_sweep_no_memory_gate",
+      "input": {
+        "kind": "sweep-admission",
+        "armCount": 20,
+        "ncpu": 16,
+        "maxConcurrency": 3
+      },
+      "expected": {
+        "version": 1,
+        "concurrency": 3,
+        "blasThreadsPerWorker": 5,
+        "memoryGateClamped": false,
+        "cpuBaseline": 3,
+        "memoryCap": 3
+      }
+    },
+    {
+      "label": "cost_split_above_2x",
+      "input": {
+        "kind": "sweep-admission",
+        "armCount": 8,
+        "ncpu": 16,
+        "maxConcurrency": 6,
+        "maxArmCostFactor": 3.0
+      },
+      "expected": {
+        "version": 1,
+        "concurrency": 2,
+        "blasThreadsPerWorker": 8,
+        "memoryGateClamped": false,
+        "cpuBaseline": 2,
+        "memoryCap": 2
+      }
+    },
+    {
+      "label": "memory_gate_clamps_6_to_3",
+      "input": {
+        "kind": "sweep-admission",
+        "armCount": 10,
+        "ncpu": 16,
+        "maxConcurrency": 6,
+        "perArmBytes": 6000000000.0,
+        "memAvailableBytes": 40000000000.0
+      },
+      "expected": {
+        "version": 1,
+        "concurrency": 3,
+        "blasThreadsPerWorker": 5,
+        "memoryGateClamped": true,
+        "cpuBaseline": 6,
+        "memoryCap": 3
+      }
+    },
+    {
+      "label": "memory_gate_no_clamp",
+      "input": {
+        "kind": "sweep-admission",
+        "armCount": 4,
+        "ncpu": 16,
+        "maxConcurrency": 6,
+        "perArmBytes": 1000000000.0,
+        "memAvailableBytes": 40000000000.0
+      },
+      "expected": {
+        "version": 1,
+        "concurrency": 4,
+        "blasThreadsPerWorker": 4,
+        "memoryGateClamped": false,
+        "cpuBaseline": 4,
+        "memoryCap": 23
+      }
+    }
+  ]
+}

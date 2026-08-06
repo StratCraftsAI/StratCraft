@@ -1,0 +1,25 @@
+{
+  "strategyPath": "./tests/sample_main.py",
+  "outputDir": "./test_output",
+  "data": {
+    "symbol": "BTC/USDT",
+    "interval": "1h",
+    "startTime": 1704067200,
+    "endTime": 1706745600,
+    "dataPath": "",
+    "dataSourceType": "mock"
+  },
+  "strategy": {
+    "params": {
+      "fast_period": 10,
+      "slow_period": 20
+    }
+  },
+  "execution": {
+    "initialCapital": 100000.0,
+    "commission": 0.001,
+    "slippage": 0.0005,
+    "allowShort": false,
+    "maxPositionSize": 1.0
+  }
+}

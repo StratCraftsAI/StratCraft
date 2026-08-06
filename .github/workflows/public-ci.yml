@@ -1,0 +1,60 @@
+name: Public CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: public-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  repository-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: node scripts/ci/public-repository-gates.mjs
+      - run: >
+          node --experimental-test-coverage
+          --test-coverage-include=scripts/ci/public-repository-gates.mjs
+          --test-coverage-lines=100
+          --test scripts/ci/__tests__/public-repository-gates.test.mjs
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned gitleaks
+        run: |
+          GITLEAKS_VERSION="8.24.3"
+          curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" |
+            sudo tar -xz -C /usr/local/bin gitleaks
+      - run: gitleaks detect --source . --no-git --verbose --redact
+
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.0.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: npm ci
+        working-directory: apps/desktop/src/mcp/standalone
+      - name: Build public C++ executor
+        run: VCPKG_ROOT="$VCPKG_INSTALLATION_ROOT" bash packages/executor/build.sh --package
+      - run: pnpm build
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: bash scripts/check_license_compliance.sh

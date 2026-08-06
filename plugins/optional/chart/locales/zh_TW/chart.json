@@ -1,0 +1,63 @@
+{
+  "view": {
+    "loading": "載入中...",
+    "refresh": "重新整理",
+    "retry": "重試",
+    "loadingChartData": "正在載入圖表資料...",
+    "toggle": {
+      "volume": "成交量",
+      "grid": "網格"
+    },
+    "error": {
+      "chart": "圖表載入錯誤",
+      "loadData": "資料載入失敗"
+    }
+  },
+  "settings": {
+    "section": {
+      "indicators": "指標",
+      "style": "樣式",
+      "drawingTools": "繪圖工具"
+    },
+    "indicator": {
+      "sma": "SMA",
+      "ema": "EMA",
+      "rsi": "RSI",
+      "macd": "MACD",
+      "bb": "布林通道"
+    },
+    "param": {
+      "period": "週期",
+      "fast": "快線",
+      "slow": "慢線",
+      "signal": "訊號",
+      "stdDev": "標準差"
+    },
+    "chartType": {
+      "label": "圖表類型",
+      "option": {
+        "candlesticks": "K 線",
+        "hollowCandles": "空心 K 線",
+        "ohlc": "OHLC",
+        "line": "折線",
+        "area": "面積圖"
+      }
+    },
+    "color": {
+      "up": "上漲顏色",
+      "down": "下跌顏色"
+    },
+    "drawingTool": {
+      "line": "直線",
+      "ray": "射線",
+      "rect": "矩形",
+      "fib": "斐波那契"
+    },
+    "actions": {
+      "apply": "套用變更"
+    }
+  },
+  "notification": {
+    "indicatorAdded": "已新增指標: {{indicator}}"
+  }
+}

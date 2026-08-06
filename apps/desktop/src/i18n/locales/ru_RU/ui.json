@@ -1,0 +1,1120 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "initializing": "Initializing...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "dismiss": "Закрыть",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "reset": "Reset",
+    "search": "Search",
+    "filter": "Filter",
+    "refresh": "Refresh",
+    "export": "Export",
+    "import": "Import",
+    "enable": "Enable",
+    "disable": "Disable",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "apply": "Apply",
+    "retry": "Retry",
+    "later": "Later",
+    "tryAgain": "Try again",
+    "login": "Login",
+    "logout": "Logout",
+    "signOut": "Sign Out",
+    "upgradePlan": "Upgrade Plan",
+    "signingOut": "Signing out...",
+    "loggingIn": "Logging in...",
+    "home": "Home",
+    "pluginSettings": "Plugin Settings",
+    "loginSignup": "Login / Sign Up"
+  },
+  "compilation": {
+    "compiled": "Скомпилировано",
+    "failed": "Компиляция не удалась",
+    "noOutput": "Вывод компилятора не предоставлен.",
+    "retry": "Повторить",
+    "compiling": "Компиляция...",
+    "showRawOutput": "Показать необработанный вывод"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "strategies": "Strategies",
+    "backtest": "Backtest",
+    "marketplace": "Marketplace",
+    "settings": "Settings",
+    "data": "Data",
+    "nexusHub": "Nexus Hub",
+    "strategyStudio": "Strategy Studio",
+    "strategyBuilder": "StratForge",
+    "backtestNexus": "Backtester",
+    "dataNexus": "Data Nexus",
+    "pluginMarketplace": "Plugin Marketplace",
+    "chart": "Chart",
+    "aiAssistant": "AI Assistant",
+    "result": "Result"
+  },
+  "status": {
+    "online": "Online",
+    "offline": "Offline",
+    "connecting": "Connecting...",
+    "checking": "Checking...",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "error": "Error",
+    "ready": "Ready",
+    "pending": "Pending",
+    "running": "Running",
+    "completed": "Completed",
+    "failed": "Failed",
+    "notConfigured": "Учётные данные не настроены — перейдите в Настройки > Учётные данные"
+  },
+  "dialog": {
+    "confirmDelete": "Are you sure you want to delete this item?",
+    "unsavedChanges": "You have unsaved changes. Discard them?",
+    "confirmAction": "Are you sure you want to proceed?"
+  },
+  "time": {
+    "now": "Now",
+    "today": "Today",
+    "yesterday": "Вчера",
+    "ago": "ago"
+  },
+  "strategy": {
+    "categories": {
+      "regimeMode": "Regime Mode",
+      "kronosMode": "Kronos Mode",
+      "traderMode": "Trader Mode",
+      "riskManager": "Risk Manager",
+      "aiCommandCenter": "AI Command Center",
+      "autopilotMode": "Режим автопилота",
+      "aiStrategyStudio": "Strategy Studio",
+      "chatMode": "Режим чата",
+      "catalogMode": "Catalog Mode"
+    },
+    "descriptions": {
+      "regimeMode": "Market environment and regime classification units",
+      "kronosMode": "Time-series prediction and sequential analysis",
+      "traderMode": "Market observation and trade execution logic",
+      "riskManager": "Risk management and exit strategy generation",
+      "aiCommandCenter": "Centralized AI control and autonomous agents",
+      "autopilotMode": "Полностью автономные торговые решения на основе ИИ",
+      "aiStrategyStudio": "AI-powered strategy studio for comprehensive strategy creation",
+      "chatMode": "Создание стратегий через диалог с ИИ в чате",
+      "catalogMode": "Browse and generate C++ strategies from 63 proven trading strategies"
+    },
+    "hub": {
+      "loadingTopology": "Loading service topology...",
+      "noPlugins": "No plugins configured",
+      "installPlugins": "Install plugins from the Marketplace to enable services",
+      "active": "Active",
+      "syncWorkspace": "Sync Workspace",
+      "loginToNona": "Login to Nona",
+      "demo": {
+        "_comment": "Hub placeholder copy: unbuilt-feature demo data rendered by StrategyGroupList / ProviderStatusPanel / ProviderPortal. Remove these keys when the hub is wired to real strategy/provider registries.",
+        "generators": {
+          "regimeTrendX1": "Regime Trend X1",
+          "volAdaptiveBeta": "Vol-Adaptive Beta",
+          "crossSessArbitrage": "Cross-Sess Arbitrage",
+          "cnnSentimentAlpha": "CNN Sentiment Alpha",
+          "highFreqScalperV4": "High-Freq Scalper V4"
+        },
+        "lastRun": {
+          "twoMinAgo": "2m ago",
+          "oneHourAgo": "1h ago",
+          "active": "Active",
+          "failed": "Failed",
+          "fiveMinAgo": "5m ago",
+          "fifteenMinAgo": "15m ago"
+        },
+        "providers": {
+          "pro": "Pro",
+          "quant": "Quant",
+          "alpha": "Alpha"
+        },
+        "templates": {
+          "trendFollowing": "Trend Following",
+          "meanReversion": "Mean Reversion",
+          "marketMaking": "Market Making",
+          "statArbitrage": "Statistical Arbitrage"
+        }
+      }
+    },
+    "tier": {
+      "free": "Free",
+      "basic": "Basic",
+      "pro": "Pro",
+      "enterprise": "Enterprise"
+    },
+    "groupList": {
+      "groupTitle": "GROUP: TREND_FOLLOWING_PACK",
+      "providerRegion": "Provider: NONA // Region: ASIA_PACIFIC",
+      "runAll": "Run All",
+      "configPack": "Config Pack",
+      "colId": "ID",
+      "colName": "NAME",
+      "colStatus": "STATUS",
+      "col7dPnl": "7D PNL",
+      "colCpu": "CPU",
+      "colLastActivity": "LAST ACTIVITY",
+      "colActions": "ACTIONS"
+    },
+    "providerPortal": {
+      "licenseValid": "LICENSE VALID",
+      "availableStrategies": "Available Strategies",
+      "activeGenerators": "ACTIVE GENERATORS",
+      "deployment": "DEP.",
+      "executionLogs": "Execution logs",
+      "info": "INFO",
+      "initializedMessage": "Successfully initialized {{provider}} core engine environment...",
+      "moduleStatus": "Module Status",
+      "ready": "READY"
+    },
+    "performanceChart": {
+      "title": "Performance Overview",
+      "subtitle": "Last 30 days - All providers",
+      "chartPending": "Chart Integration Pending",
+      "chartPendingHint": "Integrate recharts or visx for data visualization",
+      "winRate": "Win Rate",
+      "sharpeRatio": "Sharpe Ratio",
+      "totalReturn": "Total Return"
+    },
+    "audit": {
+      "title": "Audit Report",
+      "description": "Strategy generation quality scoring",
+      "recentAudits": "Recent Audits",
+      "noData": "No audit data available yet",
+      "colProvider": "Provider",
+      "colModel": "Model",
+      "colAlgorithm": "Algorithm",
+      "colSignalSource": "Signal Source",
+      "colScore": "Score",
+      "colRating": "Rating",
+      "colDate": "Date"
+    }
+  },
+  "auth": {
+    "loginTo": "Login to {{provider}}",
+    "loginToUnlock": "Login to Unlock",
+    "viewPlans": "View Plans",
+    "plan": "{{plan}} Plan",
+    "needHelp": "Need help? Contact support at support@StratCraft.io",
+    "loginRequired": "Login required",
+    "loginRequiredBanner": "Login required to use this feature.",
+    "clickToLogin": "Log In",
+    "credits": "Credits: {{remaining}} / {{total}}",
+    "creditsRemaining": "Credits: {{remaining}}",
+    "renews": "Renews: {{date}}",
+    "passwordPlaceholder": "Пароль",
+    "inline": {
+      "hero": {
+        "badge": "Рабочее пространство квантовых исследований",
+        "heading": "Создавайте, тестируйте и развертывайте торговые системы из одного контролируемого рабочего пространства.",
+        "tagline": "Разработано для квантовых команд и независимых исследователей, которым нужна более быстрая валидация идей, более чистые рабочие процессы исполнения и поверхность продукта, ближе к операционной консоли, чем к маркетинговой странице.",
+        "pillars": {
+          "workflows": {
+            "title": "Рабочие процессы стратегий ИИ",
+            "description": "Превращайте рыночные идеи в структурированные исследования, сигналы и развертываемую торговую логику."
+          },
+          "backtesting": {
+            "title": "Встроенное бэктестирование",
+            "description": "Проверяйте идеи с данными, журналами аудита и симуляцией с учетом исполнения перед запуском."
+          },
+          "controls": {
+            "title": "Управление операторского уровня",
+            "description": "Используйте безопасное рабочее пространство для данных, учетных данных, плагинов и оркестрации исполнения."
+          }
+        },
+        "stats": {
+          "multistep": {
+            "value": "Многошаговый",
+            "label": "поток от исследований к исполнению"
+          },
+          "desktopNative": {
+            "value": "Нативный для рабочего стола",
+            "label": "рабочее пространство для серьезных квантов"
+          },
+          "secure": {
+            "value": "Защищенный",
+            "label": "аутентификация, плагины и локальный контроль"
+          }
+        }
+      },
+      "email": {
+        "heading": "Войдите или создайте бесплатный аккаунт",
+        "description": "Введите email для продолжения. Новые аккаунты создаются автоматически. Используйте вход по паролю, если у вас уже есть аккаунт с учетными данными.",
+        "secureAccess": "Безопасный доступ",
+        "emailVerification": "Проверка email",
+        "placeholder": "you@example.com",
+        "continueButton": "Продолжить с email",
+        "sending": "Отправка..."
+      },
+      "method": {
+        "password": {
+          "title": "Использовать пароль",
+          "description": "Для повторных пользователей, входящих с email + паролем."
+        },
+        "browser": {
+          "title": "Открыть вход в браузере",
+          "description": "Продолжите с размещенным потоком аутентификации и полным управлением аккаунтом."
+        }
+      },
+      "footer": "Начните бесплатно. Кредитная карта не требуется. Продолжая, вы входите в рабочее пространство StratCraft для проектирования стратегий, бэктестирования, расширения на основе плагинов и контролируемого исполнения.",
+      "code": {
+        "heading": "Проверьте свой email",
+        "sentTo": "Мы отправили 6-значный код на {{email}}",
+        "verifying": "Проверка...",
+        "changeEmail": "Изменить email",
+        "resendCountdown": "Отправить заново через {{seconds}}с",
+        "resendCode": "Отправить код заново",
+        "otherWays": "Другие способы входа",
+        "usePassword": "Использовать пароль",
+        "loginWithBrowser": "Войти через браузер"
+      },
+      "password": {
+        "heading": "Войти с паролем",
+        "description": "Введите email и пароль",
+        "emailPlaceholder": "you@example.com",
+        "loginButton": "Войти",
+        "loggingIn": "Вход...",
+        "switchToCode": "Использовать код подтверждения"
+      },
+      "errors": {
+        "invalidEmail": "Введите действительный адрес email",
+        "sendCodeFailed": "Не удалось отправить код подтверждения",
+        "networkError": "Ошибка сети",
+        "invalidCode": "Неверный код подтверждения",
+        "resendFailed": "Не удалось отправить заново",
+        "invalidCredentials": "Неверные учетные данные"
+      }
+    }
+  },
+  "plugin": {
+    "error": "Plugin Error",
+    "errorOccurred": "An error occurred in the plugin",
+    "loadingPlugin": "Loading {{title}}...",
+    "failedToLoad": "Failed to load plugin: {{error}}",
+    "sandboxError": "Sandbox error: {{error}}"
+  },
+  "permissions": {
+    "unknownPermission": "Неизвестное разрешение",
+    "title": "Permission Request",
+    "requestingPermissions": "This plugin is requesting the following permissions:",
+    "dangerousPermissions": "Dangerous Permissions",
+    "dangerousWarning": "This plugin requests elevated permissions that could affect your system security. Only approve if you trust the source.",
+    "deny": "Deny",
+    "approve": "Approve",
+    "approveAnyway": "Approve Anyway",
+    "pluginId": "Plugin ID",
+    "author": "Author",
+    "riskLevels": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "dangerous": "Dangerous",
+      "unknown": "Unknown"
+    }
+  },
+  "locked": {
+    "requiresTier": "This feature requires {{tier}} tier access",
+    "serviceEnabled": "You've enabled this service. It will automatically activate when you upgrade to {{tier}} tier."
+  },
+  "toolbar": {
+    "logo": "Logo",
+    "systemSettings": "System Settings",
+    "researchEnvironment": "Research Environment"
+  },
+  "error": {
+    "somethingWentWrong": "Something went wrong",
+    "unexpectedError": "An unexpected error occurred",
+    "viewNotFound": "View not found: {{view}}",
+    "editorNotFound": "Editor not found for: {{feature}}"
+  },
+  "view": {
+    "loadingView": "Loading view...",
+    "errorPrefix": "Error: {{error}}",
+    "unknownViewType": "Unknown view type",
+    "noProvider": "No provider for view: {{viewId}}",
+    "noViewSelected": "No view selected",
+    "failedToLoad": "Failed to load view"
+  },
+  "tier": {
+    "free": "FREE",
+    "basic": "BASIC",
+    "pro": "PRO",
+    "gold": "GOLD"
+  },
+  "nexusHub": {
+    "initializingSystems": "Initializing Core Systems...",
+    "connectTheAlpha": "CONNECT THE ALPHA",
+    "strategy": "STRATEGY",
+    "backtest": "BACKTEST",
+    "strategyModule": "Strategy Module",
+    "backtestModule": "Backtest Module",
+    "strategyDescription": "Algorithmic strategy generation and logic execution",
+    "backtestDescription": "High-performance C++ backtest engine with integrated data loading",
+    "noLink": "NO {{title}} LINK",
+    "noModulesAvailable": "No Modules Available",
+    "linking": "LINKING",
+    "registry": "Registry",
+    "deactivate": "Deactivate",
+    "systemActive": "SYSTEM_ACTIVE",
+    "moduleStandby": "MODULE_STANDBY",
+    "emptySlot": "EMPTY SLOT",
+    "modules": "Modules",
+    "modulesDescription": "Available plugins for strategy research, testing, and trading"
+  },
+  "strategyStudio": {
+    "strategyNona": "STRATEGY NONA",
+    "advanced": "ADVANCED",
+    "mode": "MODE",
+    "tierAccessRequired": "This feature requires {{tier}} tier access"
+  },
+  "settings": {
+    "title": "Settings",
+    "testButton": "Тест"
+  },
+  "breadcrumb": {
+    "nexusHub": "Nexus Hub"
+  },
+  "banner": {
+    "apiKey": {
+      "message": "AI features require API key setup or PRO subscription",
+      "configureKey": "Configure Key",
+      "loginUpgrade": "Login & Upgrade",
+      "upgrade": "Upgrade",
+      "dismiss": "Dismiss"
+    }
+  },
+  "symbolSearch": {
+    "placeholder": "Search symbol...",
+    "authRequired": "Please log in to search symbols",
+    "serviceUnavailable": "Service unavailable",
+    "credentialError": "Сбой аутентификации. Проверьте свои учётные данные API в Настройках.",
+    "truncated": "Показано {{count}} из {{total}} -- уточните поиск"
+  },
+  "llmSelector": {
+    "platformProvider": "Platform provider - no API key required",
+    "verified": "API key verified",
+    "unverified": "API key not verified - may fail",
+    "selectProvider": "Select LLM Provider",
+    "providerHeader": "Provider",
+    "modelHeader": "Model",
+    "customModelExpand": "Use custom model",
+    "customModelCollapse": "Hide custom model",
+    "customModelPlaceholder": "Enter model ID...",
+    "customModelEmpty": "Model ID cannot be empty",
+    "customModelNoSpaces": "Model ID cannot contain spaces",
+    "customModelAsciiOnly": "Model ID must use ASCII characters only",
+    "proFallback": "Pro"
+  },
+  "modal": {
+    "defaultConfirmTitle": "Confirm",
+    "defaultInfoTitle": "Notice",
+    "defaultOkText": "Ok",
+    "defaultCancelText": "Cancel",
+    "close": "Close",
+    "configureApiKey": "Настроить ключ API",
+    "defaultDestructiveTitle": "Confirm Delete"
+  },
+  "dataManagement": {
+    "title": "DATA MANAGEMENT",
+    "tabs": {
+      "catalog": "Catalog",
+      "downloadQueue": "Download Queue"
+    },
+    "stats": {
+      "totalSize": "Total Size",
+      "totalRows": "Total Rows",
+      "symbols": "Symbols",
+      "providers": "Providers",
+      "segments": "{{count}} segments"
+    },
+    "catalog": {
+      "searchSymbol": "Search symbol...",
+      "allProviders": "All Providers",
+      "allIntervals": "All Intervals",
+      "deleteCount": "Delete ({{count}})",
+      "refresh": "Refresh",
+      "totalSegments": "{{count}} segments",
+      "columnSymbol": "Symbol",
+      "columnInterval": "Interval",
+      "columnDateRange": "Date Range",
+      "columnRows": "Rows",
+      "columnSize": "Size",
+      "loading": "Loading...",
+      "noData": "No cached data segments found",
+      "deleteSegment": "Delete segment",
+      "groupSummary": "{{symbols}} symbol(s) | {{segments}} segment(s) | {{size}}"
+    },
+    "download": {
+      "newDownload": "New Download",
+      "provider": "Provider",
+      "symbol": "Symbol",
+      "searchSymbol": "Search symbol...",
+      "interval": "Interval",
+      "start": "Start",
+      "end": "End",
+      "addToQueue": "Add to Queue",
+      "noTasks": "No download tasks in queue",
+      "columnSymbol": "Symbol",
+      "columnInterval": "Interval",
+      "columnProvider": "Provider",
+      "columnStatus": "Status",
+      "columnProgress": "Progress",
+      "cancel": "Cancel",
+      "maxLookback": "Max {{limit}} lookback",
+      "intervalSetTo": "{{provider}}: interval set to {{interval}} for {{symbol}}",
+      "lookbackAdjusted": "{{provider}} {{interval}} max lookback: {{limit}} -- start date adjusted to {{date}}",
+      "switchedInterval": "Switched to {{interval}} -- {{oldInterval}} max lookback exceeded",
+      "lookbackError": "{{provider}} {{interval}} supports max lookback {{limit}}. Adjust start date or select a coarser interval."
+    },
+    "import": {
+      "table": {
+        "col": {
+          "symbol": "Символ",
+          "interval": "Интервал",
+          "from": "С",
+          "to": "По",
+          "rows": "Строки"
+        }
+      }
+    },
+    "maxLookback": "Макс. {{limit}} ретроспектива",
+    "callerBadge": {
+      "sweep": "Sweep",
+      "backtest": "Backtest",
+      "discovery": "Discovery",
+      "validation": "Validation",
+      "scoreboard": "Scoreboard",
+      "restore": "Restore"
+    }
+  },
+  "backtestConsole": {
+    "title": "Backtest Console",
+    "noTasks": "No backtest tasks",
+    "cancelAllQueued": "Cancel All Queued",
+    "clearFinished": "Clear Finished",
+    "stopBacktest": "Stop backtest",
+    "viewResult": "View result",
+    "removeFromQueue": "Remove from queue",
+    "removeFromList": "Remove from list",
+    "status": {
+      "preparing": "Preparing",
+      "running": "Running",
+      "queued": "Queued",
+      "queuedPosition": "Queued #{{position}}",
+      "completed": "Done",
+      "failed": "Failed",
+      "cancelled": "Cancelled"
+    },
+    "summary": {
+      "running": "Running",
+      "queued": "Queued",
+      "done": "Done",
+      "failed": "Failed"
+    },
+    "taskLabel": "Task:",
+    "openConsole": "Open Backtest Console",
+    "viewDownloadQueue": "View download queue",
+    "openAlphaFactoryConsole": "Open Alpha Factory Console",
+    "lstmStatus": {
+      "phase": {
+        "boot": "запуск",
+        "load_traces": "загрузка трасс",
+        "build_matrix": "построение матрицы",
+        "build_windows": "построение окон"
+      },
+      "foldEpoch": "фолд {{fold}}/{{totalFolds}} эпоха {{epoch}}/{{totalEpochs}}",
+      "training": "обучение",
+      "completed": "обучено",
+      "failed": "ошибка обучения",
+      "tooltip": "Обучение LSTM {{run}} - {{model}} - сигналов: {{signals}}",
+      "tooltipGeneric": "Показать прогресс обучения LSTM"
+    }
+  },
+  "installConsent": {
+    "trustLevels": {
+      "official": "Official",
+      "verified": "Verified",
+      "unverified": "Unverified",
+      "unsigned": "Unsigned"
+    },
+    "publisher": "Publisher",
+    "unknown": "Unknown",
+    "update": "Update",
+    "install": "Install",
+    "version": "Version",
+    "from": "from",
+    "unsignedPlugin": "Unsigned Plugin",
+    "unsignedMessage": "This plugin is not signed and cannot be verified. Only install if you created it yourself or received it from a trusted source.",
+    "unverifiedPublisher": "Unverified Publisher",
+    "unverifiedMessage": "This plugin is signed but the publisher is not verified by StratCraft. Proceed with caution.",
+    "highRiskPermissions": "High-Risk Permissions",
+    "highRiskMessage": "This plugin requests elevated permissions that could affect your system. Only install if you trust the publisher.",
+    "permissionsRequested": "Permissions Requested",
+    "noPermissions": "This plugin does not require any special permissions.",
+    "understandRisks": "I understand the risks",
+    "riskAcknowledgment": "Installing unsigned or native plugins can pose security risks. I have verified the source and take responsibility for this action.",
+    "iUnderstandInstall": "I Understand, Install",
+    "fileSystem": "File System",
+    "id": "ID:",
+    "publisherLabel": "Publisher:"
+  },
+  "alphaFactoryConsole": {
+    "title": "Alpha Factory Console",
+    "active": "Active:",
+    "total": "Total:",
+    "noTasks": "No tasks",
+    "clearFinished": "Clear Finished",
+    "viewTask": "View task",
+    "removeFromQueue": "Remove from queue",
+    "removeFromList": "Remove from list",
+    "status": {
+      "preparing": "PREPARING",
+      "queued": "QUEUED",
+      "running": "RUNNING",
+      "done": "DONE",
+      "failed": "FAILED",
+      "cancelled": "CANCELLED"
+    }
+  },
+  "backtestQueue": {
+    "title": "Backtest Queue",
+    "running": "Running",
+    "view": "View",
+    "cancel": "Cancel",
+    "pending": "Pending",
+    "remove": "Remove",
+    "noTasks": "No backtest tasks",
+    "cancelAll": "Cancel All"
+  },
+  "llmEstimate": {
+    "title": "LLM Call Estimate (Dry Run)",
+    "barsProcessed": "Bars Processed",
+    "calls": " calls",
+    "totalLlmCalls": "Total LLM Calls"
+  },
+  "quantLab": {
+    "title": "Sigma",
+    "pluginDescription": "Sigma is available as a plugin. Install it from the Marketplace to access the Alpha Factory, Signal Library, and more.",
+    "openMarketplace": "Open Marketplace",
+    "subpages": {
+      "batchGeneration": "Обнаружение сигналов",
+      "factory": "Фабрика Альфа",
+      "engineStore": "Магазин движков",
+      "trainingMonitor": "Монитор обучения",
+      "promotionPipeline": "Продвижение факторов",
+      "settings": "Настройки"
+    }
+  },
+  "dataDownload": {
+    "downloading": "DOWNLOADING",
+    "loading": "LOADING",
+    "caching": "CACHING",
+    "complete": "COMPLETE",
+    "error": "ERROR",
+    "chunkProgress": "chunk {{completed}}/{{total}}",
+    "barCount": "{{count}} bars"
+  },
+  "providerStatus": {
+    "title": "Provider Status",
+    "viewAll": "View All",
+    "active": "active",
+    "success": "Success:",
+    "latency": "Latency:"
+  },
+  "editor": {
+    "error": "Error",
+    "loading": "Loading editor...",
+    "unknownType": "Unknown editor type",
+    "noEditorsOpen": "No editors open",
+    "close": "Close",
+    "noProvider": "No editor provider for: {{viewType}}"
+  },
+  "tree": {
+    "noProvider": "No TreeDataProvider registered for view: {{viewId}}",
+    "loadFailed": "Failed to load tree data"
+  },
+  "accessibility": {
+    "dismiss": "Dismiss",
+    "close": "Close",
+    "strategyNavigator": "Strategy Navigator"
+  },
+  "onboarding": {
+    "toggleTooltip": "Replay Onboarding Guide",
+    "controls": {
+      "next": "Next",
+      "prev": "Back",
+      "done": "Done",
+      "progress": "{{current}} of {{total}}"
+    },
+    "welcome": {
+      "sidebar": {
+        "title": "Navigation Panel",
+        "description": "Use the sidebar to switch between StratForge, Backtester, Sigma, and other modules."
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Configure API keys, data providers, and system preferences here."
+      },
+      "auth": {
+        "title": "Account",
+        "description": "Log in to access Pro features, cloud sync, and AI-powered strategy generation."
+      },
+      "llm": {
+        "title": "LLM Provider",
+        "description": "Select the AI model used for strategy generation. Bring your own API key or use StratCraft Pro."
+      },
+      "language": {
+        "title": "Language",
+        "description": "Switch the application language. StratCraft supports 12 languages."
+      },
+      "finish": {
+        "title": "You are all set!",
+        "description": "Start by exploring the Hub or create your first strategy in StratForge. You can replay this guide from the help icon in the status bar."
+      }
+    }
+  },
+  "assistant": {
+    "panelTitle": "Помощник",
+    "noContent": "Для этой страницы нет доступной справки.",
+    "tooltip": "Режим помощника (Ctrl+L)",
+    "backToOverview": "Назад к обзору",
+    "closePanel": "Закрыть панель ассистента"
+  },
+  "navigationGuard": {
+    "title": "Generation In Progress",
+    "message": "Strategy generation is in progress. Leaving will cancel the current task.",
+    "confirm": "Leave Page",
+    "cancel": "Stay"
+  },
+  "validation": {
+    "backendReport": "Backend Validation Report",
+    "layer": "Layer",
+    "status": "Status",
+    "pass": "Pass",
+    "fail": "Fail",
+    "skip": "Skipped",
+    "noReport": "No backend validation report available",
+    "L1": "Contract Shape",
+    "L2": "Security Scan",
+    "L3": "Compilation",
+    "L4": "Symbol Verification",
+    "L5": "Isolated Load Test",
+    "L6": "Smoke Test",
+    "title": "Проверка бэкенда",
+    "failedAt": "Сбой: {{layer}}",
+    "stderrOutput": "Вывод stderr"
+  },
+  "notifications": {
+    "regionLabel": "Уведомления",
+    "sweep": {
+      "allCompleteTitle": "Все свипы завершены",
+      "allCompleteBody": "{{count}} свипов завершено. {{succeeded}} успешно, {{errors}} ошибок.",
+      "nextSweepTitle": "Запуск следующего свипа",
+      "nextSweepBody": "Автоматический переход к следующему свипу ({{remaining}} осталось в очереди)",
+      "sweepCompleteTitle": "Параметрический свип завершен",
+      "sweepCompleteBody": "{{succeeded}}/{{total}} arms успешно завершено",
+      "sweepCompleteBodyWithErrors": "{{succeeded}}/{{total}} arms успешно завершено ({{errors}} ошибок)",
+      "downloadCompleteTitle": "Data Download Complete",
+      "downloadCompleteBody": "{{total}} symbols downloaded. Sweep fitting started.",
+      "downloadCompleteBodyWithFailures": "{{total}} symbols processed ({{failures}} failed). Sweep fitting started."
+    }
+  },
+  "errorState": {
+    "technicalDetails": "Технические подробности"
+  },
+  "viewRegistry": {
+    "nexus": {
+      "label": "Центр Nexus",
+      "shortLabel": "Центр"
+    },
+    "marketplace": {
+      "label": "Магазин плагинов",
+      "shortLabel": "Магазин"
+    },
+    "dataManagement": {
+      "label": "Управление данными",
+      "shortLabel": "Данные"
+    },
+    "settings": {
+      "label": "Настройки",
+      "shortLabel": "Настройки"
+    },
+    "researchEnvironment": {
+      "label": "Среда исследований",
+      "shortLabel": "Среда иссл."
+    },
+    "strategy": {
+      "label": "StratForge",
+      "shortLabel": "StratForge"
+    },
+    "backtest": {
+      "label": "Бэктестер",
+      "shortLabel": "Бэктестер"
+    },
+    "backtestResult": {
+      "label": "Результат бэктеста",
+      "shortLabel": "Результат"
+    },
+    "quantLab": {
+      "label": "Sigma",
+      "shortLabel": "Sigma"
+    },
+    "chart": {
+      "label": "График",
+      "shortLabel": "График"
+    },
+    "ai": {
+      "label": "ИИ-ассистент",
+      "shortLabel": "ИИ"
+    },
+    "scoreboard": {
+      "label": "Таблица сигналов",
+      "shortLabel": "Таблица"
+    },
+    "signalGenerator": {
+      "label": "Signal Generator",
+      "shortLabel": "Signal Gen"
+    }
+  },
+  "researchEnvironment": {
+    "loading": "Чтение состояния среды...",
+    "approvalDeclined": "Операция не была подтверждена, поэтому ничего не изменилось.",
+    "sharedEnvironmentNotice": "Эти компоненты ({{count}}) используют одну зафиксированную среду, поэтому устанавливаются, восстанавливаются и проверяются вместе, а не по отдельности.",
+    "states": {
+      "absent": "Не установлено",
+      "installing": "Установка",
+      "repairing": "Восстановление",
+      "verifying": "Проверка",
+      "uninstalling": "Uninstalling",
+      "ready": "Готово",
+      "failed": "Ошибка"
+    },
+    "layerStates": {
+      "ready": "Готово",
+      "failed": "Ошибка",
+      "pending": "Не проверено"
+    },
+    "jobStates": {
+      "queued": "В очереди",
+      "running": "Выполняется",
+      "succeeded": "Успешно",
+      "failed": "Ошибка"
+    },
+    "actions": {
+      "install": "Установить среду",
+      "repair": "Восстановить среду",
+      "verify": "Проверить снова",
+    "uninstall": "Удалить среду",
+      "remove_capability": "Удалить возможность",
+      "restore_capability": "Восстановить возможность"
+    },
+    "progress": {
+      "install": "Ход установки",
+      "repair": "Ход восстановления",
+      "verify": "Ход проверки",
+    "uninstall": "Ход удаления",
+      "remove_capability": "Ход удаления возможности",
+      "restore_capability": "Ход восстановления возможности"
+    },
+    "stages": {
+      "admission": "Проверка предварительных условий",
+      "install": "Установка пакетов",
+      "repair": "Пересборка установки",
+      "uninstall": "Удаление локальной среды",
+      "transition": "Обновление возможностей среды",
+      "python_verify": "Проверка пакетов Python",
+      "julia_verify": "Инициализация серверной части Julia"
+    },
+    "causes": {
+      "unsupported": "Неподдерживаемая система",
+      "missing_executable": "Исполняемый файл не найден",
+      "missing_lock": "Файл блокировки не найден",
+      "manifest_drift": "Манифест и файл блокировки не совпадают",
+      "lock_io": "Не удалось прочитать файл блокировки",
+      "invalid_lock_metadata": "Метаданные файла блокировки некорректны",
+      "database": "Не удалось обновить локальную запись",
+      "network": "Сетевой запрос завершился ошибкой",
+      "process_exit": "Процесс завершился с ошибкой",
+      "process_lost": "Процесс завершился неожиданно",
+      "import": "Не удалось импортировать пакет",
+      "probe": "Функциональная проверка не пройдена",
+      "backend_init": "Не удалось инициализировать серверную часть"
+    },
+    "failureCategory": {
+      "unsupported_platform": "Платформа не поддерживается",
+      "pixi_missing": "Pixi недоступен",
+      "lock_missing": "Отсутствует файл блокировки",
+      "lock_drift": "Манифест и файл блокировки разошлись",
+      "lifecycle_coordination_failed": "Не удалось согласовать запись о среде",
+      "network_failed": "Ошибка загрузки",
+      "install_failed": "Ошибка установки",
+      "repair_failed": "Ошибка восстановления",
+      "uninstall_failed": "Uninstall failed",
+      "workload_active": "Research workload is active",
+      "operation_interrupted": "Операция была прервана",
+      "verification_failed": "Ошибка проверки"
+    },
+    "failure": {
+      "stage": "Этап",
+      "cause": "Причина",
+      "capability": "Пакет"
+    },
+    "capabilityCause": {
+      "import": "Не удалось импортировать этот пакет",
+      "probe": "Этот пакет не прошёл функциональную проверку",
+      "backend_init": "Не удалось инициализировать серверную часть Julia"
+    },
+    "capability": {
+      "expected": "Ожидается",
+      "installed": "Установлено",
+      "notInstalled": "--"
+    },
+    "pysr": {
+      "python": "Пакет Python",
+      "julia": "Серверная часть Julia"
+    },
+    "capabilities": {
+      "histdata": {
+        "name": "HistData",
+        "description": "Offline-verified parser and Parquet converter for separately reviewed Forex acquisition."
+      },
+      "duckdb": {
+        "name": "DuckDB",
+        "description": "Встроенная аналитическая база данных для исследовательских запросов."
+      },
+      "gplearn": {
+        "name": "gplearn",
+        "description": "Генетическое программирование для символьного поиска факторов."
+      },
+      "gpquant": {
+        "name": "GPQuant",
+        "description": "Генетическое программирование, настроенное на количественный поиск факторов."
+      },
+      "pysr": {
+        "name": "PySR",
+        "description": "Символьная регрессия с серверной частью Julia, инициализируемой при первом использовании."
+      },
+      "pandas_ta": {
+        "name": "pandas-ta",
+        "description": "Библиотека технических индикаторов, лежащая в основе факторного движка TA-Lib."
+      }
+    },
+    "summary": {
+      "interpreter": "Интерпретатор",
+      "lastVerified": "Последняя проверка",
+      "pixiVersion": "Версия Pixi",
+      "technicalDetails": "Технические сведения",
+      "manifestHash": "SHA-256 манифеста",
+      "lockHash": "SHA-256 файла блокировки",
+      "liveWorkloadNotice": "Подготовленную среду используют только исследовательские запуски, начатые после завершения этой операции. Ничто из выполняемого сейчас не перезапускается и не прерывается."
+    },
+    "regions": {
+      "summary": "Сводка по среде"
+    },
+    "announce": {
+      "succeeded": "{{operation}}: успешно завершено.",
+      "failed": "{{operation}}: завершилось ошибкой.",
+      "failedState": "Исследовательская среда находится в состоянии ошибки."
+    },
+    "a11y": {
+      "environmentState": "Состояние среды: {{state}}",
+      "capabilityState": "Состояние {{capability}}: {{state}}",
+      "platform": "Платформа: {{platform}} {{architecture}}",
+      "elapsed": "Прошло времени: {{elapsed}}",
+      "logTail": "Последний вывод операции со средой"
+    }
+  },
+  "scoreboard": {
+    "title": "Таблица сигналов",
+    "empty": "Сигналы ещё не оценены. Создайте сигнал, чтобы заполнить таблицу.",
+    "disclaimer": "Прошлая результативность за {{windowBars}} баров. Не является рекомендацией.",
+    "columns": {
+      "button": "Столбцы",
+      "menuTitle": "Показывать столбцы"
+    },
+    "col": {
+      "algorithm": "Алгоритм",
+      "recentIc": "Недавний IC",
+      "liveIc": "Live IC",
+      "sharpeLong": "Недавний Sharpe (long)",
+      "sharpeShort": "Недавний Sharpe (short)",
+      "hitRate": "Процент попаданий",
+      "trades": "Сделки",
+      "asOf": "По состоянию на"
+    },
+    "cell": {
+      "liveOnlySince": "только live -- наблюдается с {{date}}",
+      "liveOnlyTooltip": "Live-наблюдение начато {{date}}. Исторический бэктест недоступен -- причина в TICKET_196_7_7."
+    }
+  },
+  "llmProvider": {
+    "badge": {
+      "pro": "Pro",
+      "byok": "BYOK"
+    }
+  },
+  "signalGenerator": {
+    "title": "Signal Generator",
+    "pluginDescription": "Signal Generator enables live trading signal production. Install it from the Marketplace to access live signal generation and auto-execution.",
+    "openMarketplace": "Open Marketplace"
+  },
+  "entitlement": {
+    "buyout": {
+      "badge": {
+        "freeUntil": "FREE UNTIL {{date}}",
+        "freeAccessEnds": "FREE ACCESS ENDS {{date}}",
+        "lifetime": "LIFETIME",
+        "freeAccessEnded": "FREE ACCESS ENDED",
+        "revoked": "REVOKED"
+      }
+    },
+    "ownership": {
+      "badge": {
+        "owned": "OWNED"
+      }
+    }
+  },
+  "brand": {
+    "tagline": "Connect the Alpha"
+  },
+  "statusDot": {
+    "running": "Работает",
+    "warning": "Предупреждение",
+    "error": "Ошибка",
+    "idle": "Простой",
+    "online": "Онлайн",
+    "offline": "Офлайн",
+    "degraded": "Ухудшение"
+  },
+  "persistence": {
+    "saveFailed": "Ошибка сохранения",
+    "restoreFailed": "Ошибка восстановления",
+    "deleteFailed": "Ошибка удаления",
+    "fallback": "Ошибка сохранения данных"
+  },
+  "comingSoon": {
+    "chartView": "Просмотр графика - Скоро",
+    "aiAssistant": "ИИ-ассистент - Скоро"
+  },
+  "moduleNames": {
+    "optimizer": "Optimizer",
+    "riskEngine": "RiskEngine",
+    "dataFeed": "DataFeed",
+    "backtester": "Backtester"
+  },
+  "pluginPermissions": {
+    "network": {
+      "name": "Network Access",
+      "description": "Access external network resources and APIs"
+    },
+    "networkInternal": {
+      "name": "Internal Network",
+      "description": "Access internal API endpoints only"
+    },
+    "filesystem": {
+      "name": "Sandboxed File Access",
+      "description": "Read and write files within plugin sandbox"
+    },
+    "filesystemFull": {
+      "name": "Full File System Access",
+      "description": "Access any file on the system"
+    },
+    "database": {
+      "name": "Database Access",
+      "description": "Read and write to the application database"
+    },
+    "notification": {
+      "name": "Notifications",
+      "description": "Show system notifications to the user"
+    },
+    "clipboard": {
+      "name": "Clipboard Access",
+      "description": "Read from and write to system clipboard"
+    },
+    "shell": {
+      "name": "Shell Execution",
+      "description": "Execute shell commands on the system"
+    },
+    "native": {
+      "name": "Native Modules",
+      "description": "Load and use native Node.js modules"
+    }
+  },
+  "downloadQueue": {
+    "queued": "Queued",
+    "queuedResumed": "Queued (resumed)",
+    "downloading": "Downloading...",
+    "cancelled": "Cancelled",
+    "yieldedPriority": "Yielded to higher priority",
+    "yieldedPriorityMultiTf": "Yielded to higher priority (multi-TF)",
+    "partial": "Partial: {{rowCount}} bars, missing {{dayCount}} day(s) ({{dayList}})",
+    "complete": "Complete: {{rowCount}} bars",
+    "completeMultiTf": "Complete: {{count}} timeframes"
+  },
+  "dataCache": {
+    "dataReadyCached": "Data ready (cached)",
+    "mergingData": "Merging data...",
+    "fetchingFromProvider": "Fetching data from {{provider}}...",
+    "writingRows": "Writing {{count}} rows...",
+    "providerStartsAt": "Data from {{provider}} starts at {{actualStart}} (requested {{requestedStart}})",
+    "dataReadyAggregated": "Data ready ({{rowCount}} rows, {{target}} aggregated from {{baseInterval}})",
+    "checkingCache": "Checking cache for {{symbol}}/{{interval}}...",
+    "fetchingEarlierData": "Fetching earlier data ({{start}}~{{end}})...",
+    "fetchingNewerData": "Fetching newer data ({{start}}~{{end}})...",
+    "dataReady": "Data ready ({{count}} rows)",
+    "refetchingBackfill": "Re-fetching {{symbol}}/{{interval}} to backfill interior gap...",
+    "dataReadyBackfilled": "Data ready ({{count}} rows, interior gap backfilled)"
+  },
+  "keychainWarning": {
+    "message": "Связка ключей ОС недоступна -- ключи API не могут быть сохранены безопасно."
+  },
+  "assistantHelp": {
+    "strategyStudioGuide": "Руководство Strategy Studio",
+    "bollingerMacd": "Стратегия Полосы Боллинджера + MACD",
+    "rsiMa": "Стратегия RSI + Скользящая средняя",
+    "macdRsiDivergence": "Стратегия MACD + RSI Дивергенция",
+    "emaCrossover": "Стратегия пересечения EMA",
+    "ichimokuCloud": "Стратегия Облако Ишимоку",
+    "fibonacciTrend": "Стратегия тренда Фибоначчи",
+    "vwapStrategy": "Стратегия VWAP",
+    "supertrend": "Стратегия Супертренд",
+    "dualMaVolume": "Стратегия двойная MA + объем"
+  },
+  "configService": {
+    "loadedSuccessfully": "Конфигурация успешно загружена"
+  },
+  "installProgress": {
+    "extractingPackage": "Extracting package...",
+    "backingUpExisting": "Backing up existing...",
+    "installingFiles": "Installing files...",
+    "registeringPermissions": "Registering permissions...",
+    "runningLifecycleHooks": "Running lifecycle hooks...",
+    "initializing": "Initializing...",
+    "installationComplete": "Installation complete!"
+  },
+  "marketplace": {
+    "fetchingMetadata": "Fetching plugin metadata...",
+    "downloadingPlugin": "Downloading plugin...",
+    "verifyingChecksum": "Verifying checksum...",
+    "resolvingDependencies": "Resolving dependencies...",
+    "extractingPlugin": "Extracting plugin...",
+    "installingPythonDeps": "Installing Python dependencies...",
+    "finalizingInstallation": "Finalizing installation...",
+    "installationComplete": "Installation complete!",
+    "installingFromBundled": "Installing from bundled package...",
+    "copyingBundledPlugin": "Copying bundled plugin..."
+  }
+}

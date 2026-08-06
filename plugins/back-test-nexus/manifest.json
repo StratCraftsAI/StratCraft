@@ -1,0 +1,98 @@
+{
+  "$schema": "https://StratCraft.io/schemas/plugin-manifest.json",
+  "id": "com.stratcraft.back-test-nexus",
+  "name": "back-test-nexus",
+  "displayName": "Backtester",
+  "displayNameKey": "manifest.displayName",
+  "version": "1.2.0",
+  "description": "Strategy backtesting with workflow UI and results visualization",
+  "descriptionKey": "manifest.description",
+  "type": "nexus",
+  "tier": 1,
+  "dependencies": {
+    "plugins": ["data-plugin"]
+  },
+  "lifecycle": {
+    "onInstall": "./scripts/install.js",
+    "onUpgrade": "./scripts/upgrade.js",
+    "onUninstall": "./scripts/uninstall.js"
+  },
+  "category": "execution",
+  "protocols": ["backtest-nexus"],
+  "main": "./ui/dist/index.js",
+  "contributes": {
+    "i18n": {
+      "path": "./locales",
+      "namespaces": ["backtest"]
+    },
+    "configuration": {
+      "title": "Backtester Settings",
+      "titleKey": "manifest.configuration.title",
+      "properties": {
+        "alpaca.apiKeyId": {
+          "type": "string",
+          "default": "",
+          "description": "Alpaca Markets API Key ID",
+          "descriptionKey": "manifest.configuration.properties.alpacaApiKeyId.description",
+          "secret": true,
+          "category": "Data Providers",
+          "categoryKey": "manifest.configuration.properties.alpacaApiKeyId.category",
+          "order": 1
+        },
+        "alpaca.apiSecretKey": {
+          "type": "string",
+          "default": "",
+          "description": "Alpaca Markets API Secret Key",
+          "descriptionKey": "manifest.configuration.properties.alpacaApiSecretKey.description",
+          "secret": true,
+          "category": "Data Providers",
+          "categoryKey": "manifest.configuration.properties.alpacaApiSecretKey.category",
+          "order": 2
+        }
+      }
+    },
+    "viewsContainers": {
+      "sidebar": [{
+        "id": "backtestExplorer",
+        "title": "BACKTEST",
+        "titleKey": "manifest.viewsContainers.sidebar.backtestExplorer",
+        "icon": "resources/backtest-icon.svg"
+      }]
+    },
+    "views": {
+      "backtestExplorer": [{
+        "id": "backtest.history",
+        "name": "Backtest History",
+        "nameKey": "manifest.views.backtestExplorer.backtestHistory"
+      }],
+      "workbench": [{
+        "id": "backtest.workflow",
+        "name": "Backtest Workflow",
+        "nameKey": "manifest.views.workbench.backtestWorkflow"
+      }, {
+        "id": "backtest.results",
+        "name": "Results",
+        "nameKey": "manifest.views.workbench.backtestResults"
+      }]
+    },
+    "bottomPanel": [{
+      "id": "backtest.trades",
+      "title": "Trades",
+      "titleKey": "manifest.bottomPanel.trades",
+      "icon": "list"
+    }, {
+      "id": "backtest.logs",
+      "title": "Logs",
+      "titleKey": "manifest.bottomPanel.logs",
+      "icon": "terminal"
+    }],
+    "commands": [
+      { "id": "backtest.run", "title": "Run Backtest", "titleKey": "manifest.commands.run", "keybinding": "F5" },
+      { "id": "backtest.stop", "title": "Stop Backtest", "titleKey": "manifest.commands.stop", "keybinding": "Shift+F5" },
+      { "id": "backtest.export", "title": "Export Results", "titleKey": "manifest.commands.export" }
+    ]
+  },
+  "permissions": ["network:internal", "database", "filesystem"],
+  "isolation": "trusted",
+  "activationEvents": ["*"]
+}

@@ -1,0 +1,22 @@
+export const SECURE_STORE_ENVELOPE_VERSION = 2;
+export const SECURE_STORE_WRITER_PROTOCOL = 1;
+export const SECURE_STORE_KEY_ACCOUNT_PREFIX = 'secure-store-master-v2';
+export const SECURE_STORE_KEY_ID_BYTES = 16;
+export const SECURE_STORE_STORE_ID_BYTES = 16;
+export const SECURE_STORE_CUSTODY_LOCATOR_BYTES = 16;
+export const SECURE_STORE_WRITER_LEASE_MS = 30_000;
+export const SECURE_STORE_MAX_ACCOUNT_CREATE_ATTEMPTS = 8;
+
+export const RECOVERY_BUNDLE_VERSION = 1;
+export const RECOVERY_KDF_VERSION = 1;
+export const RECOVERY_SCRYPT_N = 2 ** 17;
+export const RECOVERY_SCRYPT_R = 8;
+export const RECOVERY_SCRYPT_P = 1;
+export const RECOVERY_SCRYPT_MAXMEM = 256 * 1024 * 1024;
+export const RECOVERY_DERIVED_KEY_BYTES = 32;
+export const RECOVERY_SALT_BYTES = 16;
+export const RECOVERY_IV_BYTES = 12;
+export const RECOVERY_TAG_BYTES = 16;
+export const RECOVERY_MAX_BUNDLE_BYTES = 1024 * 1024;
+export const RECOVERY_MAX_KEY_COUNT = 256;
+export const RECOVERY_MAX_STRING_BYTES = 512;

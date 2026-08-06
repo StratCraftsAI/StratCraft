@@ -1,0 +1,160 @@
+{
+  "$schema": "https://StratCraft.io/schemas/plugin-manifest.json",
+  "id": "com.stratcraft.ai-analyzer",
+  "name": "AI Analyzer",
+  "version": "1.0.0",
+  "description": "AI-powered strategy analysis, optimization suggestions, and natural language trading insights",
+  "author": "StratCraft Team",
+  "homepage": "https://StratCraft.io/plugins/ai-analyzer",
+  "license": "MIT",
+
+  "main": "./dist/index.js",
+  "type": "analysis",
+  "category": "ai",
+
+  "contributes": {
+    "mainView": [
+      {
+        "id": "ai-chat",
+        "title": "AI Assistant",
+        "entry": "./dist/AIChat.js",
+        "icon": "bot",
+        "route": "/ai",
+        "order": 3
+      }
+    ],
+    "sidePanel": [
+      {
+        "id": "ai-insights",
+        "title": "AI Insights",
+        "entry": "./dist/AIInsights.js",
+        "icon": "lightbulb",
+        "position": "right",
+        "order": 2
+      }
+    ],
+    "bottomPanel": [
+      {
+        "id": "ai-suggestions",
+        "title": "Suggestions",
+        "entry": "./dist/AISuggestions.js",
+        "icon": "sparkles",
+        "order": 4
+      }
+    ],
+    "toolbar": [
+      {
+        "id": "ai-analyze",
+        "title": "Analyze Strategy",
+        "icon": "scan",
+        "command": "ai.analyze",
+        "group": "ai"
+      },
+      {
+        "id": "ai-optimize",
+        "title": "Optimize Parameters",
+        "icon": "wand-2",
+        "command": "ai.optimize",
+        "group": "ai"
+      }
+    ],
+    "commands": [
+      {
+        "id": "ai.analyze",
+        "title": "Analyze Current Strategy",
+        "category": "AI",
+        "keybinding": "Ctrl+Shift+A"
+      },
+      {
+        "id": "ai.optimize",
+        "title": "Suggest Optimizations",
+        "category": "AI",
+        "keybinding": "Ctrl+Shift+O"
+      },
+      {
+        "id": "ai.explain",
+        "title": "Explain Results",
+        "category": "AI"
+      },
+      {
+        "id": "ai.chat",
+        "title": "Open AI Chat",
+        "category": "AI",
+        "keybinding": "Ctrl+Shift+C"
+      }
+    ],
+    "menus": [
+      {
+        "id": "ai-context-analyze",
+        "title": "Analyze with AI",
+        "command": "ai.analyze",
+        "menu": "context",
+        "when": "editorHasSelection"
+      }
+    ],
+    "settings": [
+      {
+        "id": "ai.provider",
+        "title": "AI Provider",
+        "type": "string",
+        "default": "openai",
+        "enum": ["openai", "anthropic", "local"],
+        "description": "AI model provider"
+      },
+      {
+        "id": "ai.model",
+        "title": "Model",
+        "type": "string",
+        "default": "gpt-4",
+        "description": "AI model to use"
+      },
+      {
+        "id": "ai.autoAnalyze",
+        "title": "Auto-analyze",
+        "type": "boolean",
+        "default": false,
+        "description": "Automatically analyze strategies after backtest"
+      }
+    ]
+  },
+
+  "permissions": [
+    "network",
+    "database",
+    "clipboard"
+  ],
+
+  "isolation": "trusted",
+
+  "activationEvents": [
+    "onCommand:ai.*"
+  ],
+
+  "configSchema": {
+    "type": "object",
+    "properties": {
+      "apiKey": {
+        "type": "string",
+        "title": "API Key",
+        "description": "API key for the selected AI provider"
+      },
+      "temperature": {
+        "type": "number",
+        "title": "Temperature",
+        "default": 0.7,
+        "minimum": 0,
+        "maximum": 2,
+        "description": "Controls randomness of AI responses"
+      },
+      "maxTokens": {
+        "type": "number",
+        "title": "Max Tokens",
+        "default": 4096,
+        "minimum": 256,
+        "maximum": 32768,
+        "description": "Maximum response length"
+      }
+    },
+    "required": ["apiKey"]
+  }
+}

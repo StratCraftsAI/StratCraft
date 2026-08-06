@@ -1,0 +1,553 @@
+{
+  "version": 1,
+  "migrations": {
+    "1": {
+      "name": "initial schema",
+      "hash": "sha256:e8013a7ad64e39d3a983fc04d24a67e082f1e805a302d3783e3a9f89790602c6"
+    },
+    "2": {
+      "name": "add algorithm fields",
+      "hash": "sha256:edbda0270c9f3305b0079ea5263b00bb69032bf401621c0f5ec896a695a4fe7f"
+    },
+    "3": {
+      "name": "add versioning and registry",
+      "hash": "sha256:6180eb876fd9cd99351a958c3d52e59a851b44fd2ab21ca49a124441286bdb30"
+    },
+    "4": {
+      "name": "file sharing hub",
+      "hash": "sha256:ea62dabad81018683ebc0f6e3ea71602a5318830c96841061d2177f81d9f0d2b"
+    },
+    "5": {
+      "name": "backtest engine tables",
+      "hash": "sha256:2b8282bdc84d60a20d0b8f1c50a7d2c35513105464e89c71c2cca88906bf4058"
+    },
+    "6": {
+      "name": "desktop backtest results",
+      "hash": "sha256:845c2103a104b35af8793422adbfd8d8178f14da7da711107aa86efe74e0eb8d"
+    },
+    "7": {
+      "name": "remove deprecated tables",
+      "hash": "sha256:63c2a8198d56792c69d432df1a59053d4f60005c87f043b787a0c00c5c6e53cf"
+    },
+    "8": {
+      "name": "add order size columns",
+      "hash": "sha256:c067ab23c3d094b6a8e957bc12930a9bea8c831a81d9b715837b7f10464ad21e"
+    },
+    "9": {
+      "name": "extend strategy type range",
+      "hash": "sha256:3f5a05ace785cfaa33f8c931b8c13e5f7eb58285f4f4eb85b2053a6a97058590"
+    },
+    "10": {
+      "name": "ai conversations",
+      "hash": "sha256:bfb2bc10b8ca138fc4ca23673b96b0962e8ab1c57d0914459652ed41f94db912"
+    },
+    "11": {
+      "name": "signal source registry",
+      "hash": "sha256:578664498284f4711ba9d747380fa9ec48f393908dd706a6b1e8c47dd9a99a9e"
+    },
+    "12": {
+      "name": "PLUGIN_TICKET_011: Alpha Factory configuration persistence",
+      "hash": "sha256:d039ed580916786641c296974f90bad6420b030b7c7900d0e53681b400f17d29"
+    },
+    "13": {
+      "name": "TICKET_273: Add usage_type to signal_source_registry",
+      "hash": "sha256:28cc34e05c5a369b21b1d727f2edc88ba4fea8839b6e16a56ddcbb044dee7515"
+    },
+    "14": {
+      "name": "TICKET_276: Add factor columns to alpha_factory_config",
+      "hash": "sha256:3d53d1e352cc52781790d5550c31702f362bc141815af9ae4f78d04f6b26a206"
+    },
+    "15": {
+      "name": "TICKET_279: Expand nona_factors source CHECK for backend values",
+      "hash": "sha256:c66ee3f2b212c5d4bac2e41dc5fc5506d5bad2a0b5fe6907dc714cdf9668d649"
+    },
+    "16": {
+      "name": "TICKET_281: Add factor_type to nona_factors",
+      "hash": "sha256:4045907be2ee9db424716d4a9f221959cea6ecea968e36a3a1a616b09ecaa1a0"
+    },
+    "17": {
+      "name": "TICKET_285: Add cs_pipeline fields to nona_factors",
+      "hash": "sha256:61cd83e68a3c4f150a6298975c0d8ef6ac5886ee3dcd2a04e4eddba68d9fa5e0"
+    },
+    "18": {
+      "name": "TICKET_286: Factor engine registry table",
+      "hash": "sha256:017791a468a9d3f9e22d67fc68c26ec6ada19261652bdf7d6fb628f43464b7e7"
+    },
+    "19": {
+      "name": "TICKET_290: Cleanup orphaned factors from uninstalled engines",
+      "hash": "sha256:09bc772c6bb99438e3a9b84458f3138a5e13bfc0c06b46296b9d36f6172c5253"
+    },
+    "20": {
+      "name": "TICKET_329: Data cache segments for incremental download",
+      "hash": "sha256:68ad3905d2224c1917da4c071e63b8315721415b9ded10720cb5b28432dc8352"
+    },
+    "21": {
+      "name": "TICKET_345: Download queue persistence for checkpoint resume",
+      "hash": "sha256:44421b8308a729f491ea0111b89e0a7d74ed95d7081d8136d2885746037bcee2"
+    },
+    "22": {
+      "name": "TICKET_346: Add status column to data_cache_segments",
+      "hash": "sha256:9080ad89db1712feb5e8d1840081b5e30c65a9f18c16f409725bda17d52c4a37"
+    },
+    "23": {
+      "name": "TICKET_345: Add chunk-index columns to download_queue",
+      "hash": "sha256:6ae33429f326f6faa06a24c0ff66cddf159073df88ed9778ec6864e29abdc0cf"
+    },
+    "24": {
+      "name": "TICKET_360 GAP-2: Add candles_json to backtest results",
+      "hash": "sha256:8cdf5606d6dd983c1394e2649265596252de10fe65cc90aa9d51463e5bf7badd"
+    },
+    "25": {
+      "name": "TICKET_360 GAP-3: Open tabs persistence across app restart",
+      "hash": "sha256:b826940c265d95160a1d59944d9278d1dd3ff0688ff6f3c794e728dc0ccf8e56"
+    },
+    "26": {
+      "name": "TICKET_362: Single-file append data cache (replaces segments)",
+      "hash": "sha256:69e627db928238fb394a7b7fcc20acc6fae2443adff42b4700fe67a07e3d90c9"
+    },
+    "27": {
+      "name": "TICKET_363: Add data_path column to backtest results",
+      "hash": "sha256:9e754458d35ae656317f58a46dca0bf3be50b3655da498f536bb808c0e2e85fa"
+    },
+    "28": {
+      "name": "TICKET_371: Backtest task history for terminal-state tasks",
+      "hash": "sha256:e0ed76dfd3db640ec6b9ec24e83de02388ab979c9ee900064a034cd49866c924"
+    },
+    "29": {
+      "name": "TICKET_351_P2: Download queue priority, caller, and multi-timeframe support",
+      "hash": "sha256:dff6519721985b6b54d50dd071b4f9920bb6900414089013ba73f742a471cb66"
+    },
+    "30": {
+      "name": "TICKET_437: Unique constraint on strategy_name + user_id",
+      "hash": "sha256:c5662d0ffee4fbadb926627830b7b5745c0f16e66b72ab5b922f3729853155a7"
+    },
+    "31": {
+      "name": "TICKET_498: Add dry run info columns to backtest results",
+      "hash": "sha256:1d952970d9dd6de22cc8187f1558b08ff545d5049980ba2b9c82cb6ff1899f85"
+    },
+    "32": {
+      "name": "TICKET_546: Strategy audit scoring table",
+      "hash": "sha256:db1a2023db9c0161002202616e9b33f9c1e5464fa8efaaa1cb0e521493edd1d2"
+    },
+    "33": {
+      "name": "TICKET_580_6: Soft-delete columns for recycle bin",
+      "hash": "sha256:c442a935dd19db75dc0518c171b034f02e2db1aa50e3d1e35dddb2943ccfc3cf"
+    },
+    "34": {
+      "name": "signal_generator_tables",
+      "hash": "sha256:0a38f1fc7ed17258964cfd7ab0a4733c2eba62447fd89f47e8d20ab607685502"
+    },
+    "35": {
+      "name": "TICKET_612: Saved strategy table normalization",
+      "hash": "sha256:80d4c15bd8cf52c1b6cc5a59d1a2adbad82dc33b7d3a1a8445eaf4ec53ad07cc"
+    },
+    "36": {
+      "name": "TICKET_613: Signal engine strategy_id widening and strategy_type",
+      "hash": "sha256:19b3def9ff0468640c30b93f58843258919c3df7abda140e184fb9d91c32e12b"
+    },
+    "37": {
+      "name": "NONABT_TICKET_011: C++ strategy compilation status",
+      "hash": "sha256:7cf7c34c57e6ff737b1499f40c9ad94649e339b88f3b7b172eb77e33ea1e69d3"
+    },
+    "38": {
+      "name": "TICKET_641_8: audit_status column for nona_algorithms",
+      "hash": "sha256:7967d88e76c961a68316ac28dd4dfeb15e6e8e01fdf9371b69fb642d1766f39a"
+    },
+    "39": {
+      "name": "TICKET_650_P4: backend_validation_report column for nona_algorithms",
+      "hash": "sha256:61a235c51a68e11d774eca7840fc6cf69e826a24dfe65bf090be6b4054a3b78d"
+    },
+    "40": {
+      "name": "TICKET_560_2: Startup audit persistence table",
+      "hash": "sha256:0e8181e933f65f186620e99c07ca61495bfcdbffc49a68aad8c21c021d5013f4"
+    },
+    "41": {
+      "name": "TICKET_762: Create nona_signal table mirroring nona_algorithms",
+      "hash": "sha256:ffc34a214d3bf32a2bc1308d9b3f92c800749b5f159dfb0a1da6c77e52d76cce"
+    },
+    "42": {
+      "name": "TICKET_762: Sibling tables, read-side views, and backfill discovery rows",
+      "hash": "sha256:dc0647b0b6e5759975f2593000277f48e93e1a81b3062d1b5859efbba8189fcc"
+    },
+    "43": {
+      "name": "TICKET_741: desktop_discovery_run_history table",
+      "hash": "sha256:30d359a673d1d15133b997a73c69b4e896d6f1c49350416484a1cb70df559afe"
+    },
+    "44": {
+      "name": "TICKET_773: Heal desktop_discovery_run_history.snapshot_json column",
+      "hash": "sha256:606ed0201bb1ccaf2557f242c885401b71579088434cb848420e014a2c0fbaed"
+    },
+    "45": {
+      "name": "TICKET_776: Heal missing strategy_audit_signal / strategy_runs_signal tables and views",
+      "hash": "sha256:07ada567d28833560b7561c65a7b6939c8c7f3b385e05c88bd7ccb91b6bf0c68"
+    },
+    "46": {
+      "name": "TICKET_783_3: Add cached_stats_json column on nona_signal",
+      "hash": "sha256:32e4df7aba6fad90cce54e9e301b95bdfd6a5c5254f50f4e6ebdd4e2c50c83c9"
+    },
+    "47": {
+      "name": "TICKET_196_6_1: signal_scoreboard table for Scoreboard persistence",
+      "hash": "sha256:27b27865083ff51936cbc6821612deff3e8868881007bbc745dbf5d226696bb6"
+    },
+    "48": {
+      "name": "TICKET_196_6_2: Add forward_test_started_at column on signal_scoreboard",
+      "hash": "sha256:e0a93b9b5ea427e6ef96d87021f11c043f61ceafa554545477470710bba3f6c5"
+    },
+    "49": {
+      "name": "TICKET_196_6_3: Heal v_algorithms_all and v_strategy_audit_all -- explicit columns over UNION ALL",
+      "hash": "sha256:b1fbff0f9afcf43c61cd59db3907a93c620fbb43a1423c35eceaba2eda254414"
+    },
+    "50": {
+      "name": "TICKET_568_5_1: Widen nona_factors.source CHECK for Layer 3 alt-data categories",
+      "hash": "sha256:6b6d44c664bee26964ade25fe8d845d142c83a25b55f3657a5adb50037acabf9"
+    },
+    "51": {
+      "name": "TICKET_196_7_0_2: Add artifact_path column on nona_signal",
+      "hash": "sha256:f98cbe8173dc9728b0e16e673885c7fcdc8ef95f2af0051b09e5ddcbc8b3bf82"
+    },
+    "52": {
+      "name": "TICKET_196_7_7: alt_data_history persistence for live IC replay",
+      "hash": "sha256:102f2f5f6388ad9e88327a5f932a77187c38e3a1222a24e127d9149b63fb743d"
+    },
+    "53": {
+      "name": "TICKET_196_7_5_2_1: Add universe_id + symbol_breakdown columns on signal_scoreboard",
+      "hash": "sha256:f1c20b34396091d61903dab52403d8f5023f0ad4a24eeb2564144b6d0014eee2"
+    },
+    "54": {
+      "name": "TICKET_804: signal lineage skeleton (nona_signal_definition + signal_run); lineage starts at v54, pre-v54 nona_signal rows not migrated by design (see ticket section 3.2)",
+      "hash": "sha256:8c98dfe46333e8a0b325b49f340e2076078c5c1ce028137ba0bd6a697e8a6d97"
+    },
+    "55": {
+      "name": "TICKET_804_1: structured IS/OOS + walk-forward + data_snapshot_json on signal_run; defaults (walk_forward_folds=5, embargo_bars=5) match policy from ticket section 3.3",
+      "hash": "sha256:14f29d6ec5c1ef53ca15f599acdfeacd655a14a980662d94d2a107c2cda90fdb"
+    },
+    "56": {
+      "name": "TICKET_804_2: structured OOS statistics on signal_run (per-row + denormalised group-aggregate columns + verdict + indexes); legacy rows stay NULL / insufficient_data",
+      "hash": "sha256:7f44937b599b615300434e59130d083ae03f3d2dc27c6a17a3c412111561a40b"
+    },
+    "57": {
+      "name": "TICKET_804_3: signal_definition_rollup VIEW -- per-definition aggregates over signal_run (run_count, significant_runs, mean/min/max oos_sharpe, first/last_run_at). stddev / latest_oos_sharpe / historical_median computed in the Node read path (ticket Q4): SQLite forbids outer references in correlated LIMIT/OFFSET, and pushing median into Node also keeps the threshold logic out of the schema.",
+      "hash": "sha256:9e6c49e71341b277505e40e829cacf11eda887947d75e49284bac6fe2ceb120e"
+    },
+    "58": {
+      "name": "TICKET_804_3: family-level BH columns on signal_run (p_value_bh_family_adjusted, statistical_verdict_family); populated by recomputeFamilyBH service in a follow-up step",
+      "hash": "sha256:a4f5b86065de122befb89229a0eaddb3f4daa9c801dd30b67578e4548f827112"
+    },
+    "59": {
+      "name": "TICKET_805_2: plugin_telemetry_state for promo first_run + converted persistence (once-only emit timestamps; UNIX epoch millis to match repo convention)",
+      "hash": "sha256:8d84ab178fba3b44ab3c60b9d04b2799945d0fa34ee10b009372c740ffe65656"
+    },
+    "60": {
+      "name": "TICKET_815: signal_run.code_version for cache-key code-aware invalidation; nullable for legacy rows (NULL never matches a non-null lookup so legacy rows safely fall out of cache after migration)",
+      "hash": "sha256:43c7ee3f5a5c8f05f238e8c0eeb4ad9b466282f406075752b3699c446010860a"
+    },
+    "62": {
+      "name": "TICKET_827: signal_canonical_score table for per-bar canonical score persistence (Medallion Step 1.5 -- immutable scores keyed by (signal_id, ts); INSERT OR IGNORE semantics enforced at the write path layer)",
+      "hash": "sha256:a8f2b16373b3675292fb0eb3aa6a0ebd92ed14e1ca4507fbdcd9577299a72cc7"
+    },
+    "63": {
+      "name": "TICKET_823: behavioral_fingerprint + soft-dedup columns on nona_signal (Medallion Step 2 -- identity follows behavior; duplicate_kind tags configurational / behavioral collisions for the combinator instead of hard-blocking insertion)",
+      "hash": "sha256:fc759227271cf37fe4e25f2ed11b3830c9743e3d2d4552c23942220b0831247f"
+    },
+    "64": {
+      "name": "TICKET_843 Phase 3: fold_count + rep_count columns on signal_run (rollup-writer populated, additive to group_member_count which stays the source-of-truth row count); backfill fold_count = group_member_count, rep_count = 1 so pre-migration rows replay identically in the Tool Sweep history sidebar",
+      "hash": "sha256:64bc29505a3a27457a775716047b759dc837de3a2d5d38360427c4cc0391130f"
+    },
+    "65": {
+      "name": "TICKET_844 Phase C: signal_training_coverage table (records realized trained bar ranges per (signal_id, bar_interval) so the walker can subtract overlap and refuse to refit already-trained bars; PK (signal_id, bar_interval, bar_start_ts) serves the walker range query directly, idx_training_coverage_run keeps audit \"which run trained this segment?\" cheap)",
+      "hash": "sha256:ac0d7a1f009d7117305825e855c508414a93b26ebdd4dcd5e7e4484ab8309762"
+    },
+    "66": {
+      "name": "TICKET_862_1: verdict_diagnostics_json TEXT column on signal_run (schema-versioned JSON envelope persisting the four group-derived gate inputs -- group_bh_p, max_abs_effect_size, sum_oos_trades, cv -- so the renderer can show the per-gate dossier popover without recomputing medians/sums client-side; nullable so pre-migration historic rows stay readable)",
+      "hash": "sha256:be29d91128f894f254c5f14f54e68cc93e9fc7596be883b0308428f53680561e"
+    },
+    "67": {
+      "name": "TICKET_862_2: sweep_mode TEXT column on signal_run (denormalised session-level Preview vs Confirmatory mode; same value across all rows of one session_id; nullable for pre-migration rows -- FUTURE: move to a dedicated session metadata table when TICKET_840 grows one and drop this column)",
+      "hash": "sha256:bb27b52fd7f0d47676bae196a4024d0b7267a94854fa30a1c0ae92dcb78df10e"
+    },
+    "68": {
+      "name": "TICKET_863_0_7: oos_bars_per_fold INTEGER column on signal_run (per-fold OOS bar count denormalised from cv-sizing-contract.planPaths() so L1 stationarity gate can evaluate min-N refusal in O(1) instead of re-deriving from the planner)",
+      "hash": "sha256:d82b0b95e0367e0e125cb5fcaf20f597f1c7f9cfac7ad63b423df1f8351cc951"
+    },
+    "69": {
+      "name": "TICKET_863 L1/L3 substrate: signal_quality_metrics table (per-arm normalised metric store, additive -- new metrics need an INSERT not an ALTER) + l1_verdict/l2_verdict/l3_verdict/funnel_terminal_layer/funnel_diagnostics columns on signal_run (small fixed enums + dossier-cache JSON for renderer filter/sort without a join; shadow-mode only -- BH family scope at group-rollup.ts:248-256 is unchanged)",
+      "hash": "sha256:59ea23b141e714ce93e537c944570f47d5523abcb45ce62d3fef323cb65e283a"
+    },
+    "70": {
+      "name": "TICKET_863_9_A: signal_quality_audit table -- stat-axis mirror of strategy_audit_signal; INSERT-only; q1..q4 nullable until L2 substrate lands (TICKET_863_2_A); joined to strategy_audit_signal via algorithm_id at read time (TICKET_863_9_B), never merged into a composite score",
+      "hash": "sha256:ec07d1e412773883c32baa13fde0cdbe5e71310a38338f3a6ee4cb63c6e30b9d"
+    },
+    "71": {
+      "name": "TICKET_863_0_2: signal_forward_return table for per-bar r[t+H] persistence aligned to signal_canonical_score; primary key (signal_id, ts) mirrors the score table so the L2 IC join is index-only; horizon_bars stored per-row so heterogeneous horizons across signals stay queryable without a sibling lookup; the trailing H bars of every series are OMITTED (never inserted with shifted values) so missing forward windows surface as JOIN nulls rather than silent lookahead leakage.",
+      "hash": "sha256:b784a093805098c9df3322bb6bca01bf840dd4e9b0e004ebe6e2c51196231398"
+    },
+    "72": {
+      "name": "TICKET_863_0_5: signal_cv_path table for per-signal planned CPCV / walk-forward path persistence. Stores the exact PlannedPath[] returned by cv-sizing-contract.planPaths() at run-creation time so L3 robustness metrics can ask for OOS subperiod boundaries by signal without re-deriving split geometry. Each row is one path: walk_forward emits N-1 rows per signal (one per fold), single_split emits 1, CPCV emits C(N,k). Bar-space columns (is_start_bar / oos_start_bar / etc.) are relative to data_window_start_ms; ms-space columns are absolute UTC. Contract metadata (scheme / total_segments / test_segments / embargo_bars / horizon_bars / warmup_bars / net_new_bars / total_bars) duplicated per row so any single row is self-describing for the recovery helper without an extra join. test_segment_indices is canonical-JSON [int,...] -- CPCV stores the lex-ordered k-tuple, walk_forward stores [pathIndex+1] (the single segment tested), single_split stores [0]. PK (signal_id, path_index) keys to the same signal_id used by signal_canonical_score / signal_forward_return so the three tables co-key. INSERT OR IGNORE semantics enforced at the writer layer per Strategy A immutability.",
+      "hash": "sha256:c4832069acebe5e4b8f82686781e44931f71adde3bf39907a77375883ea7f940"
+    },
+    "73": {
+      "name": "TICKET_863_0_6: signal_run_refusal sibling table for arms refused BEFORE a signal_run row exists. Captures the (session_id, dispatch_id, template_id, fingerprint) identity of the refused arm + (reason, message, payload_json, refused_at) so DSR honest trial-population accounting can compute attempted = COUNT(signal_run) + COUNT(signal_run_refusal). Why a sibling table (not widening signal_run.status): signal_run has nine NOT NULL columns (user_id / definition_id / data_snapshot_id / ...) populated by the per-fold dispatch; a refused arm never enters that dispatch and therefore has no honest value for any of them. Loosening the CHECK + nulling those columns would silently break every existing reader. Sibling-table additive risk is bounded to \"new readers join in\"; old readers see no schema delta. PK (session_id, fingerprint) so reruns of the same dispatch are idempotent (one refusal row per arm per session). dispatch_id denormalised so the coarser dispatch axis is queryable without parsing the session_id slug. payload_json stores the structured failure payload (totalBars / perFoldIsBars / floorRequired / embargoBars / walkForwardFolds for below_min_training_bars; reason-specific shape otherwise) so the renderer dossier can show the same chip data the IPC event carries today. NOTE: \"not attempted\" arms are NOT stored -- absence-of-row is the representation per the ticket Implementation Notes.",
+      "hash": "sha256:9045c38dd5a1bef9c029c06d0ecfd093bffb2b377ab6dba1ecc6db8e43b1b5b7"
+    },
+    "74": {
+      "name": "TICKET_863_0_8: signal_regime_state sidecar table for per-bar HMM regime state persistence. Keyed by (signal_id, ts) where signal_id is the canonical `nona_signal.id` of an HMM regime arm (same key space as signal_canonical_score / signal_forward_return so the L3_3_B regime-conditional IC gate can join (signal_value, r_next) observations from one signal to regime labels from the HMM arm without a second index). `state` is the HMM argmax hidden state (integer in [0, n_states-1]); `posterior` is the posterior mass on that state at this bar. `regime_directions_json` snapshots the {state_id: direction} map at fit time so the renderer can recover semantic regime semantics (bull / sideways / bear) without re-loading the artifact. `regime_directions_source` distinguishes auto-labelled vs user-supplied directions (TICKET_836 lineage). `template_id` + `n_states` denormalised per-row so any single row is self-describing for the L3 lookup path. Writes are immutable (Strategy A) -- re-running an HMM fit with the same fingerprint is a silent no-op so the L3 join sees a stable label series. The trailing WARMUP_BARS prefix and any NaN-posterior rows are OMITTED here (never inserted with a synthetic state) so the L3 gate sees a JOIN-null for \"regime unknown for this bar\" rather than a fabricated zero. PK (signal_id, ts) co-keys with signal_canonical_score so the planned L3 lookup is a single index probe.",
+      "hash": "sha256:6061499b156444eb9b781acc2493b919c435f950d88ccd530d9137ba15b26622"
+    },
+    "75": {
+      "name": "TICKET_196_7_5_3_1: add `symbol` column to signal_canonical_score / signal_forward_return PK so universe-mode arms can fan out per-symbol rows without colliding under INSERT OR IGNORE. Pre-v75 single-symbol rows migrate to `symbol = ''` (the explicit arm-aggregate sentinel); universe-mode arms write the manifest symbol verbatim. The C++ factor universe path (TICKET_196_7_5_3 B5/B6) and the Python fit_universe.py path share this schema -- one persistence layer serves both producers. SQLite cannot ALTER PK in place; we use the canonical \"new table, copy, drop, rename\" pattern inside the migration transaction.",
+      "hash": "sha256:e076a70cc5022d7b35749374b5715b7d028cd9e59fcedf21f118449d7af700e4"
+    },
+    "76": {
+      "name": "TICKET_308_1: imported_packages catalog table for BYOD (user-provided) data imports. Each user-imported package (e.g. the TICKET_307 CN A-share MySQL dump) is modeled as its own named data source; this table is its catalog entry. package_name is the PK and is exactly the value written into data_cache_files.provider for every COPY-produced Parquet file of that package -- it is the join key between the catalog and the on-disk inventory (an unregistered file is invisible to the picker). adjust_mode is the load-bearing field: A-share adjustment is a package-level property -- a dump is imported under exactly one of none (unadjusted) / qfq (forward-adjusted) / hfq (backward-adjusted), declared once at import time, NOT inferred and NOT pushed into the per-row OHLCVRow (the TICKET_812 six-field Parquet schema stays untouched -- Gate 1 of the Phase 1 resolution confirmed package-level metadata is the strictly-correct altitude). This is the home that resolves the adjustment-has-no-home open question. source_dialect records the DuckDB ATTACH TYPE the package was read from (mysql/sqlite/postgres) for provenance and re-import. created_at is epoch milliseconds, matching the v74/v75 timestamp convention. This is the ONLY new table the TICKET_308 import introduces; the rest reuses data_cache_files via upsertMetadata.",
+      "hash": "sha256:27107ecdf53f914c158a83802606efa02c8ff7115d95caebb8da67cb7e1fb455"
+    },
+    "77": {
+      "name": "TICKET_880_5: Universe Editor. user_universe + user_universe_symbol tables for user-editable symbol subsets. Curated presets (sp500_top50, sp500_top500, crypto_top50, g10_fx, us_sector_etfs) seeded per-provider as regular editable rows -- no \"clone to edit\" indirection. based_on column records the curated origin for a future \"Reset to default\" action (not this ticket).",
+      "hash": "sha256:7e5d25102b1c7fd11b5fc6a73ece422ef2f89b145ec223349e88903d8b3e69d3"
+    },
+    "78": {
+      "name": "TICKET_880_5_11: Universe overselection. Add target_size column to user_universe, expand sp500_top50 to 65 candidates (target_size=50), expand crypto_top50 to 40 candidates (target_size=30).",
+      "hash": "sha256:7a643b0c67f50339cc15d7c0141a8ec28694390d244c72a3de6447dc2e9a2da3"
+    },
+    "79": {
+      "name": "TICKET_880_5_9_5: Add trained_symbol_count and requested_symbol_count columns to signal_scoreboard and signal_run",
+      "hash": "sha256:e4b11e093a251e637fe0b08702900016029a6e0dfe6c3d89ecbacd12e6981dfb"
+    },
+    "80": {
+      "name": "TICKET_308_2: Expand imported_packages.source_dialect CHECK to include csv and parquet. SQLite CHECK constraints cannot be ALTER-ed; recreate the table with the wider constraint while preserving all existing rows.",
+      "hash": "sha256:7b3125ab6fa050852b1c962b57328e6c200ba4c398d74da09e1f36ede2deebcb"
+    },
+    "81": {
+      "name": "TICKET_308_3_2: Expand imported_packages.source_dialect CHECK to include duckdb. SQLite CHECK constraints cannot be ALTER-ed; recreate the table with the wider constraint while preserving all existing rows.",
+      "hash": "sha256:1723846b4c53f9d0d78bcf563805e00eb965ab87a38be9ab4ce832049779f50e"
+    },
+    "82": {
+      "name": "TICKET_907_1_1: Add nullable bar_interval column to nona_signal and backfill from metadata.bar_interval",
+      "hash": "sha256:dc9087e08ca25eef4f047067127215a11e636353f3b3eba3d524359b4a82b7a9"
+    },
+    "83": {
+      "name": "TICKET_912 Phase 2: Add run_number column to desktop_discovery_run_history and backfill with sequential numbers",
+      "hash": "sha256:961d61e8f0428617c5a72403428433178e836e45a97e4f5582cf344d24dcc6b5"
+    },
+    "84": {
+      "name": "TICKET_919_6: Promote bar_interval to a first-class column on nona_signal_definition + backfill from signal_run.data_snapshot_json",
+      "hash": "sha256:fcacb4cb960f334c854a36ca8741bfbc344472feb93ae97cd8ef5c0b8a60a37b"
+    },
+    "85": {
+      "name": "TICKET_919_9: Add imported_packages.calendar_padding_ratio_json + backfill from data_cache_files",
+      "hash": "sha256:b0ea6424f5a251045a6609729f63c728416878c8524387de8c17be9f07ade4b3"
+    },
+    "86": {
+      "name": "TICKET_919_10: Add imported_packages.archival_cadence + conservative back-fill (monthly_archive when disk evidence is unambiguous; snapshot otherwise)",
+      "hash": "sha256:ce3fd00627bfd6b0fe7772ca2d2a6c8aceae0ebf330bd47299a1c2f77976fcf9"
+    },
+    "87": {
+      "name": "TICKET_927_1_2: Add nona_signal.market_scope column (nullable JSON; backfilled by scripts/backfill_market_scope.py; new rows written by persistSignal in TICKET_927_1_2_A)",
+      "hash": "sha256:fc2801ff90260ac0cca4285e8a774e7ad5b4edf182761e8620f706cadd6a7ba2"
+    },
+    "88": {
+      "name": "TICKET_927_1_2_B: Create nona_universe registry with market_sleeves JSON (per-sleeve {providerId, marketIds, symbols}); single source of truth for TICKET_927_1_2 backfill rule #2",
+      "hash": "sha256:ad822471b774a756524f8b2ca08ecf14f9d0c5e1f17a8dad84734b9d0a063834"
+    },
+    "89": {
+      "name": "TICKET_927_1_4_E: nona_backtest_run + nona_backtest_book tables for per-market persistence",
+      "hash": "sha256:26e48aeb92966e34c54c8c55af93da1435633f60369d9ba79b154330b3c037b9"
+    },
+    "90": {
+      "name": "TICKET_935_3: signal_quality_audit.tier_schema_version column -- explicit algorithm-version identity so IPC reader (v3-handlers.ts:1721) can prefer fresher-algorithm rows over stale-algorithm rows regardless of authority",
+      "hash": "sha256:c6fc5503af560bea7dc335745756dddb21a7fb78c4ea2c7f9dcb69f9a8d03be7"
+    },
+    "91": {
+      "name": "TICKET_935_2: expand signal_quality_audit.tier CHECK to include `stability_compromised` (v2 algorithm). SQLite CHECK constraints cannot be ALTER-ed; recreate the table with the wider constraint while preserving all rows including the v90 tier_schema_version column.",
+      "hash": "sha256:0fd4843b46dc21c0d5641636503932f87c0923b70d23f679fbcb6c90b3ce3709"
+    },
+    "92": {
+      "name": "TICKET_935_4_1: signal_composition_audit table for composition-axis evidence",
+      "hash": "sha256:534d32587806d0ea890d1d7cb4ac56e2b24ab3c17be67d2a6e9dfed3b3d8edb4"
+    },
+    "93": {
+      "name": "TICKET_196_8_1: signal_roster_state + signal_roster_transitions for Bench-Active rotation",
+      "hash": "sha256:89c4ad301136f7a84ce19476f775bc7cb4a511bff85aa09a4a670ebc93d0aa0d"
+    },
+    "94": {
+      "name": "TICKET_196_8: relegation_config single-row table for rotation-cycle parameters",
+      "hash": "sha256:05526938beffc068f8893ba76673a41181c62b140480f1ee99ea125f7cbff658"
+    },
+    "95": {
+      "name": "TICKET_941: Add nona_signal.deleted_reason column (nullable TEXT; written by scripts/soft_delete_signals_by_cohort.ts to record which cohort triggered the soft-delete)",
+      "hash": "sha256:fc572b5ae8ac4d720d941d6b561b5a0af02b64645a9082c3702264cb2079acda"
+    },
+    "96": {
+      "name": "TICKET_947_3: Drop signal_canonical_score + signal_forward_return after parquet migration",
+      "hash": "sha256:5cc45660a8d2716b39c3def71cb2f248823092f536ce7bdbe35b2d0bc46b7a8a"
+    },
+    "97": {
+      "name": "TICKET_950: Purge dangling nona_signal references from alpha_factory_config.signals",
+      "hash": "sha256:356505a0e5bd8034e479bc54ec4c3f324034cd8f9930fa85c9bf38cb884905c6"
+    },
+    "98": {
+      "name": "TICKET_954_1: Multi-window scores + agreement + staleness on signal_scoreboard; 4-state roster_state on signal_roster_state",
+      "hash": "sha256:93efdad7f2b3bc6cc507d53d054d277171544289521274fc6b6cf38efccf3393"
+    },
+    "99": {
+      "name": "TICKET_962: Add data_cache_files.actual_first_timestamp / actual_last_timestamp (parquet-truth coverage, split from metadata-virtual coverage)",
+      "hash": "sha256:aff5af95ed5caef16fd7d01dbd15487f1da2056e79f5b1d823b0429c9e2e572e"
+    },
+    "100": {
+      "name": "TICKET_975_1_3: expression index on nona_signal metadata fingerprint for leaderboard join performance",
+      "hash": "sha256:12eb02f95c0e60bcd05fb1334584dee8b7388692877569e6e4853d9d7f009193"
+    },
+    "101": {
+      "name": "TICKET_991_5: LSTM training runs table for dashboard and dedup",
+      "hash": "sha256:5c4497cf39c093af9283d94df540fef1b602c00034f2ec0101708a7054a90221"
+    },
+    "102": {
+      "name": "TICKET_998_1_1: Add model_param_count to lstm_training_runs",
+      "hash": "sha256:5941f9d09eed57991a45a9b79b3a2a2f4b45cc00835f3ffc92253612d711408a"
+    },
+    "103": {
+      "name": "TICKET_1005: Add feed_lstm and combinator_mode to alpha_factory_config",
+      "hash": "sha256:1c80d6b632a05ae6a4c5cf632e0343d5d149449a8846ee1c8371f2a30b5b0704"
+    },
+    "104": {
+      "name": "TICKET_1010: Create desktop_backtest_telemetry table",
+      "hash": "sha256:a5cac9237406c1b3106609c2f35a0dc360b6054fd1ffe210f7e61a8d7bea2ea0"
+    },
+    "105": {
+      "name": "TICKET_1014: nona_backtest_run_signal + nona_backtest_run_combinator + extend nona_backtest_book",
+      "hash": "sha256:f747e44f5f56dafd3e5396c286257b17685c639a7bb50b849f2abb3fcefc331f"
+    },
+    "106": {
+      "name": "TICKET_1018_1: Add training_ic column to nona_backtest_run_signal",
+      "hash": "sha256:b53122dcb3e2e447b6c4a3addf8be1879a3c49c672f78ccf58f8e3ca0cc7e260"
+    },
+    "107": {
+      "name": "TICKET_1028_1: Make nona_signal name+user unique index partial (exclude soft-deleted rows)",
+      "hash": "sha256:6733d562a78f9677fd2ed9a2dcb18c2def7cec1d3201805473c13442dd3c95c5"
+    },
+    "108": {
+      "name": "TICKET_1072_1: Add completeness + missing_days columns to data_cache_files",
+      "hash": "sha256:5a3f8f326a1f35eca7239e0cd295bd7a357e7c17fbac7b4f100a89b884f5dfe0"
+    },
+    "109": {
+      "name": "TICKET_1095: Add asset_class column to imported_packages; migrate duckdb_import_forex -> byod_forex",
+      "hash": "sha256:4dcc3cd84481707c0d59195572ff567db2e9cd7ab780fac17de30cca532c799d"
+    },
+    "110": {
+      "name": "TICKET_1098: re-migrate residual duckdb_import_forex -> byod_forex in nona_signal.market_scope",
+      "hash": "sha256:3fb2f217fba2f52d8812ca29cfd8c8c5c94c6c477a04f3c3570676caa4273c17"
+    },
+    "111": {
+      "name": "TICKET_1099: Persist parquet codec in data_cache_files to avoid per-file footer inspection",
+      "hash": "sha256:546feebefe740bf0659064009b0efd7e81c606b97ba17d8346cadd7fce844a80"
+    },
+    "112": {
+      "name": "TICKET_1126: data_quality_event table + backtest run/book status + L1 content revision + invalidate metric-invariant-violating runs",
+      "hash": "sha256:dde26e884e83eb0435bd096e907dfc94ba012eca02fbea818daa4767bca9508a"
+    },
+    "113": {
+      "name": "TICKET_1140: per-book daily hit rate (gross/net) -- the defined portfolio-replay analog of trade win rate",
+      "hash": "sha256:f14d8895b3183a8cd9e4df4c18a6f8c1170b61dd6b7d22d1f05f1250566308f8"
+    },
+    "114": {
+      "name": "TICKET_1142: sharpe_ann_basis marker for frequency-aware annualisation",
+      "hash": "sha256:e1c44508021d29144569fc2a93c8ee9300aaa31e2e0490c0953ee82f2a016f43"
+    },
+    "115": {
+      "name": "TICKET_1147 Phase 2: ASHA screening lifecycle -- screening_status on nona_signal (arm level) and signal_run (row level)",
+      "hash": "sha256:00b31303384e148436c312d93c81ecad0a3ff08a2f98da18d998f75430ddef72"
+    },
+    "116": {
+      "name": "TICKET_1165_2 AC4: backfill hypothesis_output_type on existing hypothesis signals",
+      "hash": "sha256:c409c088fdeb8c3fef28cd37d340fae1eeba348887b2ce67bd9ce477787afef7"
+    },
+    "117": {
+      "name": "TICKET_1187: Add retry_count to download_queue for zombie task prevention",
+      "hash": "sha256:00a363e6a2c81a71d08c675bcf03b73bd6661d9856f648a30f5bc89730905ea4"
+    },
+    "118": {
+      "name": "TICKET_1195 F4: Add memory_estimate_mb to lstm_training_runs",
+      "hash": "sha256:bbe94a1536737ead0a9cbdf9a09f59f5c0f784f4fd8c8745adca1b2f5d5fc1a1"
+    },
+    "119": {
+      "name": "TICKET_1243 D0: Convert absolute artifact_path to relative (portable across root relocation)",
+      "hash": "sha256:faf16b25c97c8455623f48a4ec5957783a03cf4c6289f7cf1ec1c1fde45d15aa"
+    },
+    "120": {
+      "name": "TICKET_1272_1 W1: Add d_embed to lstm_training_runs",
+      "hash": "sha256:8f9cb00bd09bfd4a30f3ed2eccd93dc6b0eeb22f1a8bef273d9f1aa4e721da6e"
+    },
+    "121": {
+      "name": "TICKET_1274: detached-trainer supervision + journal columns for lstm_training_runs",
+      "hash": "sha256:e751897d6bc5ab14550797dc88c19d84aae064e5dd65843724118adee4cf357f"
+    },
+    "122": {
+      "name": "TICKET_1277: registration-gate + selection-bias columns for lstm_training_runs",
+      "hash": "sha256:3d108cbebeea045cc5569da9e8048d62f0f7c2ce60d4fad48bda00b2d0f083a3"
+    },
+    "123": {
+      "name": "TICKET_1272_4: pre-training phase columns for lstm_training_runs",
+      "hash": "sha256:3d1b7296fcec83fc1eb14c8e2c3adb96d3deee4315d2bcb1253d4a5bd01de766"
+    },
+    "124": {
+      "name": "TICKET_1272_4 F4c: resume_attempts for lstm_training_runs checkpoint/resume",
+      "hash": "sha256:2dec132845b0675315e49d835caece2af2e93ad526745e6a68cc0fa532e19fb7"
+    },
+    "125": {
+      "name": "TICKET_1278_3: idx_signal_scoreboard_score for inner-LIMIT-first scoreboard query",
+      "hash": "sha256:b577a88253110b3120be1595fad5ef8dcbf96cf95461fb8aeb740602107dde25"
+    },
+    "126": {
+      "name": "TICKET_1287 P2: chain_id + chain_position on nona_backtest_run, run_mode on alpha_factory_config, idx_backtest_run_chain",
+      "hash": "sha256:9a3ecef61ea547cfc0d24eaaad3127e40da882f9a2f2d3c358768be70bd999ad"
+    },
+    "127": {
+      "name": "TICKET_1287 F1a: nona_backtest_chain_entry durable per-signal chain-outcome table",
+      "hash": "sha256:2f1b779a1c736880426a4e271a6ccaafe387a0359a7d5a533415c0d86bf8ce0a"
+    },
+    "128": {
+      "name": "TICKET_1287_1 B2: alpha_factory_config_trash reversible delete table",
+      "hash": "sha256:6b319f76ebc54613e91b209b4789f1e348898d01d2d2d3fe53d4683f03872f2c"
+    },
+    "129": {
+      "name": "TICKET_1302 U6: shared data-provider defaults store",
+      "hash": "sha256:039be5b8e7fd4a44d35dd399ed623a75a7a577673ee9e22ff5691b4c11244c2d"
+    },
+    "130": {
+      "name": "TICKET_1303_1_2: canonical research-task catalog and immutable task index",
+      "hash": "sha256:2e31aa610f302d24fd2da515680762c6f14e5b97425ad57e5b54376c46cb000d"
+    },
+    "131": {
+      "name": "TICKET_1303_1_2: deterministic Artifact admission registry",
+      "hash": "sha256:31cb511031addc383e04b28277a2f2dbd608f7eb6ca2c328ad407dbfd1424a44"
+    },
+    "132": {
+      "name": "TICKET_1303_1_8: immutable local attribution and governance outbox",
+      "hash": "sha256:c29bd50abf5cadbff86cbbb3078fc5da82137ab196d68ba1b49af9a8ac9d3368"
+    },
+    "133": {
+      "name": "TICKET_1303_1_8_1: register the default Guide chat research task",
+      "hash": "sha256:87a5ceadf26e58ef4aa2d86ac98d6fbb8ab43a3948d575e9ed10fa39943af3db"
+    },
+    "134": {
+      "name": "TICKET_1314: SecureStore master-key lifecycle, recovery, backup, and writer fencing",
+      "hash": "sha256:7404d129b862fccd2ec7a93360e151d8a9315f4f9f4eb30e66426bb087ec9b99"
+    },
+    "135": {
+      "name": "TICKET_1317: durable AI Studio workflow binding per subject and Guide conversation",
+      "hash": "sha256:b9953504d2a859d816054cf2d7d8a5033e02e4890e4c9e25a935d2b55bfd29f5"
+    },
+    "136": {
+      "name": "TICKET_1317: purge orphaned AI Studio bindings keyed by synthetic new:<turnId>",
+      "hash": "sha256:fd2261bc042860f1f010835ff900cf0003848b41e7d27c4bffa62d19ececc3f9"
+    },
+    "137": {
+      "name": "TICKET_1277_2: lineage_epoch on lstm_training_runs for lineage-scoped champion provenance",
+      "hash": "sha256:a4c4a2dabd199e3fe21cb8df28da44c9289d79f39b7cacf9ab71e32aceede53b"
+    },
+    "141": {
+      "name": "TICKET_661_1: additive legacy-strategy migration schema (inventory snapshot, attempts, lineage)",
+      "hash": "sha256:7d9c444f55c7db09c5a78604395e32a9e737c8beb850d6b0a3cffa4e1066dcff"
+    }
+  }
+}

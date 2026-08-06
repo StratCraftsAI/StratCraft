@@ -1,0 +1,65 @@
+{
+  "zones": [
+    {
+      "id": "underfit",
+      "label": "Underfit",
+      "color": {
+        "bar": "rgba(239,68,68,0.25)",
+        "border": "rgba(248,113,113,0.3)",
+        "text": "rgba(252,165,165,1)",
+        "marker": "rgba(248,113,113,1)",
+        "glow": "rgba(239,68,68,0.6)"
+      },
+      "barWidthPercent": 20
+    },
+    {
+      "id": "marginal",
+      "label": "Marginal",
+      "color": {
+        "bar": "rgba(249,115,22,0.25)",
+        "border": "rgba(251,146,60,0.3)",
+        "text": "rgba(253,186,116,1)",
+        "marker": "rgba(251,146,60,1)",
+        "glow": "rgba(249,115,22,0.6)"
+      },
+      "barWidthPercent": 20
+    },
+    {
+      "id": "well_fitted",
+      "label": "Well-Fitted",
+      "color": {
+        "bar": "rgba(34,197,94,0.25)",
+        "border": "rgba(74,222,128,0.3)",
+        "text": "rgba(134,239,172,1)",
+        "marker": "rgba(74,222,128,1)",
+        "glow": "rgba(34,197,94,0.6)"
+      },
+      "barWidthPercent": 30
+    },
+    {
+      "id": "overfit",
+      "label": "Overfit",
+      "color": {
+        "bar": "rgba(245,158,11,0.25)",
+        "border": "rgba(251,191,36,0.3)",
+        "text": "rgba(252,211,77,1)",
+        "marker": "rgba(251,191,36,1)",
+        "glow": "rgba(245,158,11,0.6)"
+      },
+      "barWidthPercent": 30
+    }
+  ],
+  "thresholds": {
+    "sharpe_underfit_ceil": 0.02,
+    "sharpe_marginal_ceil": 0.15,
+    "cv_marginal_floor": 0.8,
+    "cv_overfit_floor": 1.2,
+    "min_sample_param_ratio": 5.0
+  },
+  "positionMapping": {
+    "underfit": [0, 20],
+    "marginal": [20, 40],
+    "well_fitted": [40, 70],
+    "overfit": [70, 100]
+  }
+}

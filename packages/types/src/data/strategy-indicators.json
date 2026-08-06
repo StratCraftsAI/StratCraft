@@ -1,0 +1,4917 @@
+[
+  {
+    "name": "ATR-Based Trailing Stop",
+    "slug": "ChandelierExit",
+    "aliases": [
+      "ChandelierExit",
+      "ATRBasedTrailingStop"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 22
+      },
+      {
+        "name": "multiplier",
+        "label": "Multiplier",
+        "type": "number",
+        "default": 3.0
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "long_exit",
+      "short_exit"
+    ],
+    "display_name": "Chandelier Exit"
+  },
+  {
+    "name": "ATR-Based Trend Indicator",
+    "slug": "SuperTrend",
+    "aliases": [
+      "SuperTrend",
+      "ATRBasedTrendIndicator",
+      "SUPERTREND"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "multiplier",
+        "label": "Multiplier",
+        "type": "number",
+        "default": 3.0
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line",
+      "upper_band",
+      "lower_band"
+    ],
+    "display_name": "SuperTrend"
+  },
+  {
+    "name": "Absolute Price Oscillator",
+    "slug": "PriceOscillator",
+    "aliases": [
+      "PriceOscillator",
+      "PriceOsc",
+      "APO",
+      "AbsolutePriceOscillator",
+      "ABSOLUTEPRICEOSCILLATOR"
+    ],
+    "params": [
+      {
+        "name": "period1",
+        "label": "Period1",
+        "type": "number",
+        "default": 12
+      },
+      {
+        "name": "period2",
+        "label": "Period2",
+        "type": "number",
+        "default": 26
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "po"
+    ],
+    "display_name": "Price Oscillator"
+  },
+  {
+    "name": "All Non-Zero in Period",
+    "slug": "AllN",
+    "aliases": [
+      "AllN",
+      "AllNonZeroinPeriod",
+      "ALLN"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "All N"
+  },
+  {
+    "name": "Any Non-Zero in Period",
+    "slug": "AnyN",
+    "aliases": [
+      "AnyN",
+      "AnyNonZeroinPeriod",
+      "ANYN"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Any N"
+  },
+  {
+    "name": "Arithmetic Mean",
+    "slug": "Average",
+    "aliases": [
+      "Average",
+      "ArithmeticMean",
+      "Mean",
+      "ARITHMETICMEAN",
+      "MEAN"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Average"
+  },
+  {
+    "name": "Aroon Down Component",
+    "slug": "AroonDown",
+    "aliases": [
+      "AroonDown",
+      "AroonDownComponent"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "trend",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Aroon Down"
+  },
+  {
+    "name": "Aroon Indicator",
+    "slug": "Aroon",
+    "aliases": [
+      "Aroon",
+      "AroonIndicator"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 25
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "trend",
+    "output_lines": [
+      "up",
+      "down"
+    ],
+    "display_name": "Aroon"
+  },
+  {
+    "name": "Aroon Oscillator",
+    "slug": "AroonOscillator",
+    "aliases": [
+      "AroonOscillator",
+      "AroonOsc"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "trend",
+    "output_lines": [
+      "up",
+      "down"
+    ],
+    "display_name": "Aroon Oscillator"
+  },
+  {
+    "name": "Aroon Up Component",
+    "slug": "AroonUp",
+    "aliases": [
+      "AroonUp",
+      "AroonUpComponent"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "trend",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Aroon Up"
+  },
+  {
+    "name": "Aroon Up/Down Combined",
+    "slug": "AroonUpDown",
+    "aliases": [
+      "AroonUpDown",
+      "AroonIndicator",
+      "AroonUpDownCombined"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "trend",
+    "output_lines": [
+      "up",
+      "down",
+      "aroonup",
+      "aroondown"
+    ],
+    "display_name": "Aroon Up Down"
+  },
+  {
+    "name": "Aroon Up/Down Oscillator",
+    "slug": "AroonUpDownOscillator",
+    "aliases": [
+      "AroonUpDownOscillator",
+      "AroonUpDownOsc"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "trend",
+    "output_lines": [
+      "up",
+      "down"
+    ],
+    "display_name": "Aroon Up Down Oscillator"
+  },
+  {
+    "name": "Average Directional Index",
+    "slug": "ADX",
+    "aliases": [
+      "ADX",
+      "AverageDirectionalIndex",
+      "AVERAGEDIRECTIONALINDEX"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "trend",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "ADX"
+  },
+  {
+    "name": "Average Directional Index Rating",
+    "slug": "ADXR",
+    "aliases": [
+      "ADXR",
+      "AverageDirectionalIndexRating",
+      "AVERAGEDIRECTIONALINDEXRATING"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "trend",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "ADXR"
+  },
+  {
+    "name": "Average True Range",
+    "slug": "ATR",
+    "aliases": [
+      "ATR",
+      "AverageTrueRange",
+      "AVERAGETRUERANGE"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "volatility_threshold"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "volatility",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "ATR"
+  },
+  {
+    "name": "Awesome Oscillator",
+    "slug": "AwesomeOscillator",
+    "aliases": [
+      "AwesomeOscillator",
+      "AO"
+    ],
+    "params": [
+      {
+        "name": "fast",
+        "label": "Fast",
+        "type": "number",
+        "default": 5
+      },
+      {
+        "name": "slow",
+        "label": "Slow",
+        "type": "number",
+        "default": 34
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Awesome Oscillator"
+  },
+  {
+    "name": "Bearish Crossover Detection",
+    "slug": "CrossDown",
+    "aliases": [
+      "CrossDown",
+      "BearishCrossoverDetection"
+    ],
+    "params": [],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Cross Down"
+  },
+  {
+    "name": "Bill Williams Fractal",
+    "slug": "Fractal",
+    "aliases": [
+      "Fractal",
+      "BillWilliamsFractal"
+    ],
+    "params": [],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "up_fractal",
+      "down_fractal"
+    ],
+    "display_name": "Fractal"
+  },
+  {
+    "name": "Bollinger %B and Bandwidth",
+    "slug": "BollingerBandsPct",
+    "aliases": [
+      "BollingerBandsPct",
+      "BBandsPct",
+      "BollingerBandBandwidth",
+      "BBANDSPCT"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 20
+      },
+      {
+        "name": "devfactor",
+        "label": "Devfactor",
+        "type": "number",
+        "default": 2.0
+      }
+    ],
+    "template_keys": [
+      "volatility_threshold"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "volatility",
+    "output_lines": [
+      "mid",
+      "top",
+      "bottom",
+      "pctb"
+    ],
+    "display_name": "Bollinger Bands Pct"
+  },
+  {
+    "name": "Bollinger Bands",
+    "slug": "BollingerBands",
+    "aliases": [
+      "BollingerBands",
+      "BBands",
+      "BB",
+      "BBANDS"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 20
+      },
+      {
+        "name": "devfactor",
+        "label": "Devfactor",
+        "type": "number",
+        "default": 2.0
+      }
+    ],
+    "template_keys": [
+      "volatility_threshold"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "volatility",
+    "output_lines": [
+      "mid",
+      "top",
+      "bottom"
+    ],
+    "display_name": "Bollinger Bands"
+  },
+  {
+    "name": "Bullish Crossover Detection",
+    "slug": "CrossUp",
+    "aliases": [
+      "CrossUp",
+      "BullishCrossoverDetection"
+    ],
+    "params": [],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Cross Up"
+  },
+  {
+    "name": "CMF",
+    "slug": "ChaikinMoneyFlow",
+    "aliases": [
+      "ChaikinMoneyFlow",
+      "CMF"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 20
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Chaikin Money Flow"
+  },
+  {
+    "name": "CMO",
+    "slug": "ChandeMomentumOscillator",
+    "aliases": [
+      "ChandeMomentumOscillator",
+      "CMO"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Chande Momentum Oscillator"
+  },
+  {
+    "name": "Chaikin A/D Line",
+    "slug": "AccumulationDistribution",
+    "aliases": [
+      "AccumulationDistribution",
+      "AD",
+      "AccDist",
+      "ChaikinADLine",
+      "ACCDIST"
+    ],
+    "params": [],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Accumulation Distribution"
+  },
+  {
+    "name": "Coefficient of Determination",
+    "slug": "RSquared",
+    "aliases": [
+      "RSquared",
+      "CoefficientofDetermination"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 20
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "R Squared"
+  },
+  {
+    "name": "Commodity Channel Index",
+    "slug": "CCI",
+    "aliases": [
+      "CCI",
+      "CommodityChannelIndex",
+      "COMMODITYCHANNELINDEX"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 20
+      },
+      {
+        "name": "factor",
+        "label": "Factor",
+        "type": "number",
+        "default": 0.015
+      },
+      {
+        "name": "upperband",
+        "label": "Upperband",
+        "type": "number",
+        "default": 100
+      },
+      {
+        "name": "lowerband",
+        "label": "Lowerband",
+        "type": "number",
+        "default": -100
+      }
+    ],
+    "template_keys": [
+      "boundary_comparison_oscillator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "CCI"
+  },
+  {
+    "name": "Coppock Curve",
+    "slug": "CoppockCurve",
+    "aliases": [
+      "CoppockCurve",
+      "Coppock",
+      "COPPOCK"
+    ],
+    "params": [
+      {
+        "name": "period1",
+        "label": "Period1",
+        "type": "number",
+        "default": 11
+      },
+      {
+        "name": "period2",
+        "label": "Period2",
+        "type": "number",
+        "default": 14
+      },
+      {
+        "name": "wma_period",
+        "label": "Wma Period",
+        "type": "number",
+        "default": 10
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Coppock Curve"
+  },
+  {
+    "name": "Crossover Detection",
+    "slug": "CrossOver",
+    "aliases": [
+      "CrossOver",
+      "CrossoverDetection"
+    ],
+    "params": [],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Cross Over"
+  },
+  {
+    "name": "Cumulative Sum",
+    "slug": "CumSum",
+    "aliases": [
+      "CumSum",
+      "Accum",
+      "CumulativeSum",
+      "ACCUM",
+      "CUMULATIVESUM"
+    ],
+    "params": [
+      {
+        "name": "seed",
+        "label": "Seed",
+        "type": "number",
+        "default": 0.0
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Cum Sum"
+  },
+  {
+    "name": "DEMA Envelope",
+    "slug": "DEMAEnvelope",
+    "aliases": [
+      "DEMAEnvelope"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      },
+      {
+        "name": "perc",
+        "label": "Perc",
+        "type": "number",
+        "default": 2.5
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "band_break_bollinger"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "src",
+      "top",
+      "bottom"
+    ],
+    "display_name": "DEMA Envelope"
+  },
+  {
+    "name": "DEMA Oscillator",
+    "slug": "DEMAOscillator",
+    "aliases": [
+      "DEMAOscillator",
+      "DoubleExponentialMovingAverageOscillator"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "DEMA Oscillator"
+  },
+  {
+    "name": "DMA Envelope",
+    "slug": "DMAEnvelope",
+    "aliases": [
+      "DMAEnvelope",
+      "DicksonMAEnvelope"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 20
+      },
+      {
+        "name": "gainlimit",
+        "label": "Gainlimit",
+        "type": "number",
+        "default": 50
+      },
+      {
+        "name": "hperiod",
+        "label": "Hperiod",
+        "type": "number",
+        "default": 7
+      },
+      {
+        "name": "perc",
+        "label": "Perc",
+        "type": "number",
+        "default": 2.5
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "band_break_bollinger"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "src",
+      "top",
+      "bottom"
+    ],
+    "display_name": "DMA Envelope"
+  },
+  {
+    "name": "DMA Oscillator",
+    "slug": "DMAOscillator",
+    "aliases": [
+      "DMAOscillator",
+      "DicksonMAOscillator"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 20
+      },
+      {
+        "name": "gainlimit",
+        "label": "Gainlimit",
+        "type": "number",
+        "default": 50
+      },
+      {
+        "name": "hperiod",
+        "label": "Hperiod",
+        "type": "number",
+        "default": 7
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "DMA Oscillator"
+  },
+  {
+    "name": "DPO",
+    "slug": "DetrendedPriceOscillator",
+    "aliases": [
+      "DetrendedPriceOscillator",
+      "DPO",
+      "DetrendedPriceOsc"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 20
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Detrended Price Oscillator"
+  },
+  {
+    "name": "DV2 Indicator",
+    "slug": "DV2",
+    "aliases": [
+      "DV2",
+      "DV2Indicator"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 252
+      },
+      {
+        "name": "maperiod",
+        "label": "Maperiod",
+        "type": "number",
+        "default": 2
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "DV2"
+  },
+  {
+    "name": "DeMark Pivot Point",
+    "slug": "DemarkPivotPoint",
+    "aliases": [
+      "DemarkPivotPoint",
+      "DeMarkPivotPoint",
+      "DEMARKPIVOT"
+    ],
+    "params": [],
+    "template_keys": [
+      "crossover_price_indicator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "p",
+      "s1",
+      "r1"
+    ],
+    "display_name": "Demark Pivot Point"
+  },
+  {
+    "name": "Dickson Moving Average",
+    "slug": "DMA",
+    "aliases": [
+      "DMA",
+      "DicksonMovingAverage",
+      "DicksonMA",
+      "DICKSONMA",
+      "DICKSONMOVINGAVERAGE"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 20
+      },
+      {
+        "name": "gainlimit",
+        "label": "Gainlimit",
+        "type": "number",
+        "default": 50
+      },
+      {
+        "name": "hperiod",
+        "label": "Hperiod",
+        "type": "number",
+        "default": 7
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "DMA"
+  },
+  {
+    "name": "Directional Indicator (+DI/-DI)",
+    "slug": "DirectionalIndicator",
+    "aliases": [
+      "DirectionalIndicator"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "trend",
+    "output_lines": [
+      "plus_di",
+      "minus_di"
+    ],
+    "display_name": "Directional Indicator"
+  },
+  {
+    "name": "Directional Movement",
+    "slug": "DirectionalMovement",
+    "aliases": [
+      "DirectionalMovement",
+      "DMI"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "trend",
+    "output_lines": [
+      "plus_di",
+      "minus_di",
+      "adx",
+      "adxr"
+    ],
+    "display_name": "Directional Movement"
+  },
+  {
+    "name": "Donchian/Breakout Channels",
+    "slug": "DonchianChannels",
+    "aliases": [
+      "DonchianChannels",
+      "Donchian",
+      "DonchianBreakoutChannels",
+      "DONCHIANCHANNEL",
+      "DONCHIAN"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 20
+      }
+    ],
+    "template_keys": [
+      "volatility_threshold"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "volatility",
+    "output_lines": [
+      "mid",
+      "top",
+      "bottom"
+    ],
+    "display_name": "Donchian Channels"
+  },
+  {
+    "name": "Double Exponential Moving Average",
+    "slug": "DEMA",
+    "aliases": [
+      "DEMA",
+      "DoubleExponentialMovingAverage",
+      "DOUBLEEXPONENTIALMOVINGAVERAGE"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "DEMA"
+  },
+  {
+    "name": "Down Day Boolean",
+    "slug": "DownDayBool",
+    "aliases": [
+      "DownDayBool",
+      "DownDayBoolean"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 1
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Down Day Bool"
+  },
+  {
+    "name": "Down Day Detector",
+    "slug": "DownDay",
+    "aliases": [
+      "DownDay",
+      "DownDayDetector"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 1
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Down Day"
+  },
+  {
+    "name": "Downside Volatility",
+    "slug": "UlcerIndex",
+    "aliases": [
+      "UlcerIndex",
+      "Ulcer",
+      "DownsideVolatility",
+      "ULCER"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "volatility_threshold"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "volatility",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Ulcer Index"
+  },
+  {
+    "name": "Downward Price Movement",
+    "slug": "DownMove",
+    "aliases": [
+      "DownMove",
+      "DownwardPriceMovement"
+    ],
+    "params": [],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Down Move"
+  },
+  {
+    "name": "Dynamic Exponential Smoothing",
+    "slug": "ExponentialSmoothingDynamic",
+    "aliases": [
+      "ExponentialSmoothingDynamic",
+      "ExpSmoothingDynamic",
+      "DynamicExponentialSmoothing"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 1
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Exponential Smoothing Dynamic"
+  },
+  {
+    "name": "EMA + ATR Bands",
+    "slug": "KeltnerChannel",
+    "aliases": [
+      "KeltnerChannel",
+      "Keltner",
+      "EMAATRBands",
+      "KELTNER"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 20
+      },
+      {
+        "name": "devfactor",
+        "label": "Devfactor",
+        "type": "number",
+        "default": 2.0
+      }
+    ],
+    "template_keys": [
+      "volatility_threshold"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "volatility",
+    "output_lines": [
+      "mid",
+      "top",
+      "bottom"
+    ],
+    "display_name": "Keltner Channel"
+  },
+  {
+    "name": "EMA Envelope",
+    "slug": "EMAEnvelope",
+    "aliases": [
+      "EMAEnvelope",
+      "ExponentialMovingAverageEnvelope"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      },
+      {
+        "name": "perc",
+        "label": "Perc",
+        "type": "number",
+        "default": 2.5
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "band_break_bollinger"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "src",
+      "top",
+      "bottom"
+    ],
+    "display_name": "EMA Envelope"
+  },
+  {
+    "name": "EMA Oscillator",
+    "slug": "EMAOscillator",
+    "aliases": [
+      "EMAOscillator",
+      "ExponentialMovingAverageOscillator"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "EMA Oscillator"
+  },
+  {
+    "name": "EMV",
+    "slug": "EaseOfMovement",
+    "aliases": [
+      "EaseOfMovement",
+      "EMV"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      },
+      {
+        "name": "divisor",
+        "label": "Divisor",
+        "type": "number",
+        "default": 10000.0
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Ease Of Movement"
+  },
+  {
+    "name": "Exponential Moving Average",
+    "slug": "EMA",
+    "aliases": [
+      "EMA",
+      "ExponentialMovingAverage",
+      "EXPONENTIALMOVINGAVERAGE"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "EMA"
+  },
+  {
+    "name": "Exponential Smoothing",
+    "slug": "ExponentialSmoothing",
+    "aliases": [
+      "ExponentialSmoothing",
+      "ExpSmoothing"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 1
+      },
+      {
+        "name": "alpha",
+        "label": "Alpha",
+        "type": "number",
+        "default": 0.5
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Exponential Smoothing"
+  },
+  {
+    "name": "Fast Stochastic",
+    "slug": "StochasticFast",
+    "aliases": [
+      "StochasticFast",
+      "FastStochastic",
+      "STOCHFAST"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      },
+      {
+        "name": "period_dfast",
+        "label": "Period Dfast",
+        "type": "number",
+        "default": 3
+      },
+      {
+        "name": "upperband",
+        "label": "Upperband",
+        "type": "number",
+        "default": 80
+      },
+      {
+        "name": "lowerband",
+        "label": "Lowerband",
+        "type": "number",
+        "default": 20
+      }
+    ],
+    "template_keys": [
+      "boundary_comparison_oscillator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "percK",
+      "percD"
+    ],
+    "display_name": "Stochastic Fast"
+  },
+  {
+    "name": "Fibonacci Pivot Point",
+    "slug": "FibonacciPivotPoint",
+    "aliases": [
+      "FibonacciPivotPoint",
+      "FIBPIVOT"
+    ],
+    "params": [
+      {
+        "name": "use_open",
+        "label": "Use Open",
+        "type": "select",
+        "default": false,
+        "options": [
+          {
+            "value": "true",
+            "label": "True"
+          },
+          {
+            "value": "false",
+            "label": "False"
+          }
+        ]
+      },
+      {
+        "name": "use_close_twice",
+        "label": "Use Close Twice",
+        "type": "select",
+        "default": false,
+        "options": [
+          {
+            "value": "true",
+            "label": "True"
+          },
+          {
+            "value": "false",
+            "label": "False"
+          }
+        ]
+      },
+      {
+        "name": "level1",
+        "label": "Level1",
+        "type": "number",
+        "default": 0.382
+      },
+      {
+        "name": "level2",
+        "label": "Level2",
+        "type": "number",
+        "default": 0.618
+      },
+      {
+        "name": "level3",
+        "label": "Level3",
+        "type": "number",
+        "default": 1.0
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "p",
+      "s1",
+      "s2",
+      "s3",
+      "r1",
+      "r2",
+      "r3"
+    ],
+    "display_name": "Fibonacci Pivot Point"
+  },
+  {
+    "name": "First Index of Highest Value",
+    "slug": "FindFirstIndexHighest",
+    "aliases": [
+      "FindFirstIndexHighest",
+      "FirstIndexofHighestValue"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Find First Index Highest"
+  },
+  {
+    "name": "First Index of Lowest Value",
+    "slug": "FindFirstIndexLowest",
+    "aliases": [
+      "FindFirstIndexLowest",
+      "FirstIndexofLowestValue"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Find First Index Lowest"
+  },
+  {
+    "name": "Fisher Transform",
+    "slug": "FisherTransform",
+    "aliases": [
+      "FisherTransform",
+      "Fisher",
+      "FISHER"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 10
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "fisher",
+      "trigger"
+    ],
+    "display_name": "Fisher Transform"
+  },
+  {
+    "name": "Fractal Adaptive Moving Average",
+    "slug": "FRAMA",
+    "aliases": [
+      "FRAMA",
+      "FractalAdaptiveMovingAverage"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 16
+      },
+      {
+        "name": "fast",
+        "label": "Fast",
+        "type": "number",
+        "default": 4
+      },
+      {
+        "name": "slow",
+        "label": "Slow",
+        "type": "number",
+        "default": 300
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "FRAMA"
+  },
+  {
+    "name": "Full Stochastic",
+    "slug": "StochasticFull",
+    "aliases": [
+      "StochasticFull",
+      "FullStochastic",
+      "STOCHFULL"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      },
+      {
+        "name": "period_dfast",
+        "label": "Period Dfast",
+        "type": "number",
+        "default": 3
+      },
+      {
+        "name": "period_dslow",
+        "label": "Period Dslow",
+        "type": "number",
+        "default": 3
+      },
+      {
+        "name": "upperband",
+        "label": "Upperband",
+        "type": "number",
+        "default": 80
+      },
+      {
+        "name": "lowerband",
+        "label": "Lowerband",
+        "type": "number",
+        "default": 20
+      }
+    ],
+    "template_keys": [
+      "boundary_comparison_oscillator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "percK",
+      "percD",
+      "percDSlow"
+    ],
+    "display_name": "Stochastic Full"
+  },
+  {
+    "name": "Generic Oscillator",
+    "slug": "Oscillator",
+    "aliases": [
+      "Oscillator",
+      "GenericOscillator"
+    ],
+    "params": [],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Oscillator"
+  },
+  {
+    "name": "HMA Envelope",
+    "slug": "HMAEnvelope",
+    "aliases": [
+      "HMAEnvelope"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      },
+      {
+        "name": "perc",
+        "label": "Perc",
+        "type": "number",
+        "default": 2.5
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "band_break_bollinger"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "src",
+      "top",
+      "bottom"
+    ],
+    "display_name": "HMA Envelope"
+  },
+  {
+    "name": "HMA Oscillator",
+    "slug": "HMAOscillator",
+    "aliases": [
+      "HMAOscillator",
+      "HullMAOscillator"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "HMA Oscillator"
+  },
+  {
+    "name": "Heikin-Ashi Candles",
+    "slug": "HeikinAshi",
+    "aliases": [
+      "HeikinAshi",
+      "HeikinAshiCandles"
+    ],
+    "params": [],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "ha_open",
+      "ha_high",
+      "ha_low",
+      "ha_close"
+    ],
+    "display_name": "Heikin Ashi"
+  },
+  {
+    "name": "Heikin-Ashi Delta",
+    "slug": "haDelta",
+    "aliases": [
+      "haDelta",
+      "haD",
+      "HeikinAshiDelta",
+      "HADELTA"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 3
+      },
+      {
+        "name": "autoheikin",
+        "label": "Autoheikin",
+        "type": "select",
+        "default": true,
+        "options": [
+          {
+            "value": "true",
+            "label": "True"
+          },
+          {
+            "value": "false",
+            "label": "False"
+          }
+        ]
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "ha_delta",
+      "smoothed"
+    ],
+    "display_name": "haDelta"
+  },
+  {
+    "name": "Highest Value",
+    "slug": "Highest",
+    "aliases": [
+      "Highest",
+      "HighestValue"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Highest"
+  },
+  {
+    "name": "Hull Moving Average",
+    "slug": "HMA",
+    "aliases": [
+      "HMA",
+      "HullMovingAverage",
+      "HULLMOVINGAVERAGE"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "HMA"
+  },
+  {
+    "name": "Hurst Exponent",
+    "slug": "HurstExponent",
+    "aliases": [
+      "HurstExponent",
+      "Hurst",
+      "HURST"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 40
+      },
+      {
+        "name": "lag_start",
+        "label": "Lag Start",
+        "type": "number",
+        "default": 2
+      },
+      {
+        "name": "lag_end",
+        "label": "Lag End",
+        "type": "number",
+        "default": 0
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Hurst Exponent"
+  },
+  {
+    "name": "Ichimoku Cloud",
+    "slug": "Ichimoku",
+    "aliases": [
+      "Ichimoku",
+      "IchimokuCloud",
+      "ICHIMOKUCLOUD"
+    ],
+    "params": [
+      {
+        "name": "tenkan",
+        "label": "Tenkan",
+        "type": "number",
+        "default": 9
+      },
+      {
+        "name": "kijun",
+        "label": "Kijun",
+        "type": "number",
+        "default": 26
+      },
+      {
+        "name": "senkou",
+        "label": "Senkou",
+        "type": "number",
+        "default": 52
+      },
+      {
+        "name": "senkou_lead",
+        "label": "Senkou Lead",
+        "type": "number",
+        "default": 26
+      },
+      {
+        "name": "chikou",
+        "label": "Chikou",
+        "type": "number",
+        "default": 26
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "tenkan_sen",
+      "kijun_sen",
+      "senkou_span_a",
+      "senkou_span_b",
+      "chikou_span"
+    ],
+    "display_name": "Ichimoku"
+  },
+  {
+    "name": "KAMA Envelope",
+    "slug": "KAMAEnvelope",
+    "aliases": [
+      "KAMAEnvelope",
+      "AdaptiveMovingAverageEnvelope"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      },
+      {
+        "name": "fast",
+        "label": "Fast",
+        "type": "number",
+        "default": 2
+      },
+      {
+        "name": "slow",
+        "label": "Slow",
+        "type": "number",
+        "default": 30
+      },
+      {
+        "name": "perc",
+        "label": "Perc",
+        "type": "number",
+        "default": 2.5
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "band_break_bollinger"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "src",
+      "top",
+      "bottom"
+    ],
+    "display_name": "KAMA Envelope"
+  },
+  {
+    "name": "KAMA Oscillator",
+    "slug": "KAMAOscillator",
+    "aliases": [
+      "KAMAOscillator",
+      "AdaptiveMovingAverageOscillator"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      },
+      {
+        "name": "fast",
+        "label": "Fast",
+        "type": "number",
+        "default": 2
+      },
+      {
+        "name": "slow",
+        "label": "Slow",
+        "type": "number",
+        "default": 30
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "KAMA Oscillator"
+  },
+  {
+    "name": "KVO",
+    "slug": "KlingerOscillator",
+    "aliases": [
+      "KlingerOscillator",
+      "Klinger",
+      "KVO",
+      "KLINGER"
+    ],
+    "params": [
+      {
+        "name": "fast_period",
+        "label": "Fast Period",
+        "type": "number",
+        "default": 34
+      },
+      {
+        "name": "slow_period",
+        "label": "Slow Period",
+        "type": "number",
+        "default": 55
+      },
+      {
+        "name": "signal_period",
+        "label": "Signal Period",
+        "type": "number",
+        "default": 13
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "kvo",
+      "signal"
+    ],
+    "display_name": "Klinger Oscillator"
+  },
+  {
+    "name": "Kaufman Adaptive Moving Average",
+    "slug": "KAMA",
+    "aliases": [
+      "KAMA",
+      "KaufmanAdaptiveMovingAverage",
+      "ADAPTIVEMOVINGAVERAGE",
+      "KAUFMANADAPTIVEMOVINGAVERAGE"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      },
+      {
+        "name": "fast",
+        "label": "Fast",
+        "type": "number",
+        "default": 2
+      },
+      {
+        "name": "slow",
+        "label": "Slow",
+        "type": "number",
+        "default": 30
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "KAMA"
+  },
+  {
+    "name": "Know Sure Thing",
+    "slug": "KST",
+    "aliases": [
+      "KST",
+      "KnowSureThing",
+      "KNOWSURETHING"
+    ],
+    "params": [
+      {
+        "name": "r1",
+        "label": "R1",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "r2",
+        "label": "R2",
+        "type": "number",
+        "default": 15
+      },
+      {
+        "name": "r3",
+        "label": "R3",
+        "type": "number",
+        "default": 20
+      },
+      {
+        "name": "r4",
+        "label": "R4",
+        "type": "number",
+        "default": 30
+      },
+      {
+        "name": "n1",
+        "label": "N1",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "n2",
+        "label": "N2",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "n3",
+        "label": "N3",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "n4",
+        "label": "N4",
+        "type": "number",
+        "default": 15
+      },
+      {
+        "name": "nsig",
+        "label": "Nsig",
+        "type": "number",
+        "default": 9
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "kst",
+      "signal"
+    ],
+    "display_name": "KST"
+  },
+  {
+    "name": "Laguerre Filter",
+    "slug": "LaguerreFilter",
+    "aliases": [
+      "LaguerreFilter",
+      "LAGF"
+    ],
+    "params": [
+      {
+        "name": "gamma",
+        "label": "Gamma",
+        "type": "number",
+        "default": 0.5
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Laguerre Filter"
+  },
+  {
+    "name": "Laguerre RSI",
+    "slug": "LaguerreRSI",
+    "aliases": [
+      "LaguerreRSI",
+      "LRSI"
+    ],
+    "params": [
+      {
+        "name": "gamma",
+        "label": "Gamma",
+        "type": "number",
+        "default": 0.5
+      },
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 6
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Laguerre RSI"
+  },
+  {
+    "name": "Last Index of Highest Value",
+    "slug": "FindLastIndexHighest",
+    "aliases": [
+      "FindLastIndexHighest",
+      "LastIndexofHighestValue"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Find Last Index Highest"
+  },
+  {
+    "name": "Last Index of Lowest Value",
+    "slug": "FindLastIndexLowest",
+    "aliases": [
+      "FindLastIndexLowest",
+      "LastIndexofLowestValue"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Find Last Index Lowest"
+  },
+  {
+    "name": "Lowest Value",
+    "slug": "Lowest",
+    "aliases": [
+      "Lowest",
+      "LowestValue"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Lowest"
+  },
+  {
+    "name": "MA Envelope (Template)",
+    "slug": "MovingAverageEnvelope",
+    "aliases": [
+      "MovingAverageEnvelope",
+      "MAEnvelope"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      },
+      {
+        "name": "perc",
+        "label": "Perc",
+        "type": "number",
+        "default": 2.5
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "band_break_bollinger"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "src",
+      "top",
+      "bottom"
+    ],
+    "display_name": "Moving Average Envelope"
+  },
+  {
+    "name": "MACD Histogram",
+    "slug": "MACDHisto",
+    "aliases": [
+      "MACDHisto",
+      "MACDHistogram",
+      "MACDHIST",
+      "MACDHISTOGRAM"
+    ],
+    "params": [
+      {
+        "name": "fast_period",
+        "label": "Fast Period",
+        "type": "number",
+        "default": 12
+      },
+      {
+        "name": "slow_period",
+        "label": "Slow Period",
+        "type": "number",
+        "default": 26
+      },
+      {
+        "name": "signal_period",
+        "label": "Signal Period",
+        "type": "number",
+        "default": 9
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "macd",
+      "signal",
+      "histogram",
+      "histo"
+    ],
+    "display_name": "MACD Histo"
+  },
+  {
+    "name": "MFI",
+    "slug": "MoneyFlowIndex",
+    "aliases": [
+      "MoneyFlowIndex",
+      "MFI"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Money Flow Index"
+  },
+  {
+    "name": "Mean Deviation",
+    "slug": "MeanDeviation",
+    "aliases": [
+      "MeanDeviation"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Mean Deviation"
+  },
+  {
+    "name": "Minus Directional Indicator (-DI)",
+    "slug": "MinusDirectionalIndicator",
+    "aliases": [
+      "MinusDirectionalIndicator",
+      "MINUSDI",
+      "DI_MINUS"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "trend",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Minus Directional Indicator"
+  },
+  {
+    "name": "Momentum Oscillator",
+    "slug": "MomentumOscillator",
+    "aliases": [
+      "MomentumOscillator"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 12
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Momentum Oscillator"
+  },
+  {
+    "name": "Moving Average (alias for SMA)",
+    "slug": "MA",
+    "aliases": [
+      "MA",
+      "SMA",
+      "MovingAverage",
+      "MOVINGAVERAGE"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "MA"
+  },
+  {
+    "name": "Moving Average Convergence Divergence",
+    "slug": "MACD",
+    "aliases": [
+      "MACD",
+      "MovingAverageConvergenceDivergence",
+      "MOVINGAVERAGECONVERGENCEDIVERGENCE"
+    ],
+    "params": [
+      {
+        "name": "fast_period",
+        "label": "Fast Period",
+        "type": "number",
+        "default": 12
+      },
+      {
+        "name": "slow_period",
+        "label": "Slow Period",
+        "type": "number",
+        "default": 26
+      },
+      {
+        "name": "signal_period",
+        "label": "Signal Period",
+        "type": "number",
+        "default": 9
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "macd",
+      "signal",
+      "histogram"
+    ],
+    "display_name": "MACD"
+  },
+  {
+    "name": "Non-Zero Difference",
+    "slug": "NonZeroDifference",
+    "aliases": [
+      "NonZeroDifference",
+      "NZD"
+    ],
+    "params": [],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Non Zero Difference"
+  },
+  {
+    "name": "OLS Regression Slope & Intercept",
+    "slug": "OLS_Slope_InterceptN",
+    "aliases": [
+      "OLS_Slope_InterceptN",
+      "OLSRegressionSlopeIntercept"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 10
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "slope",
+      "intercept"
+    ],
+    "display_name": "OLS Slope Intercept N"
+  },
+  {
+    "name": "On Balance Volume",
+    "slug": "OBV",
+    "aliases": [
+      "OBV",
+      "OnBalanceVolume",
+      "ONBALANCEVOLUME"
+    ],
+    "params": [],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "OBV"
+  },
+  {
+    "name": "PPO Short",
+    "slug": "PercentagePriceOscillatorShort",
+    "aliases": [
+      "PercentagePriceOscillatorShort",
+      "PPOShort",
+      "PercPriceOscShort",
+      "PPOSHORT"
+    ],
+    "params": [
+      {
+        "name": "period1",
+        "label": "Period1",
+        "type": "number",
+        "default": 12
+      },
+      {
+        "name": "period2",
+        "label": "Period2",
+        "type": "number",
+        "default": 26
+      },
+      {
+        "name": "period_signal",
+        "label": "Period Signal",
+        "type": "number",
+        "default": 9
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "ppo",
+      "signal",
+      "histo"
+    ],
+    "display_name": "Percentage Price Oscillator Short"
+  },
+  {
+    "name": "PVT",
+    "slug": "PriceVolumeTrend",
+    "aliases": [
+      "PriceVolumeTrend",
+      "PVT"
+    ],
+    "params": [],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Price Volume Trend"
+  },
+  {
+    "name": "Parabolic Stop and Reverse",
+    "slug": "ParabolicSAR",
+    "aliases": [
+      "ParabolicSAR",
+      "ParabolicStopandReverse",
+      "SAR",
+      "PSAR"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 2
+      },
+      {
+        "name": "af",
+        "label": "Af",
+        "type": "number",
+        "default": 0.02
+      },
+      {
+        "name": "afmax",
+        "label": "Afmax",
+        "type": "number",
+        "default": 0.2
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Parabolic SAR"
+  },
+  {
+    "name": "Pearson Correlation",
+    "slug": "Correlation",
+    "aliases": [
+      "Correlation",
+      "Correl",
+      "PearsonCorrelation",
+      "CORREL"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 20
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Correlation"
+  },
+  {
+    "name": "Percent-Threshold Pivot Detector",
+    "slug": "ZigZag",
+    "aliases": [
+      "ZigZag",
+      "PercentThresholdPivotDetector"
+    ],
+    "params": [
+      {
+        "name": "retrace",
+        "label": "Retrace",
+        "type": "number",
+        "default": 0.05
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Zig Zag"
+  },
+  {
+    "name": "Percentage Change",
+    "slug": "PercentChange",
+    "aliases": [
+      "PercentChange",
+      "PercentageChange"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Percent Change"
+  },
+  {
+    "name": "Percentage Price Oscillator",
+    "slug": "PercentagePriceOscillator",
+    "aliases": [
+      "PercentagePriceOscillator",
+      "PPO",
+      "PercPriceOsc"
+    ],
+    "params": [
+      {
+        "name": "period1",
+        "label": "Period1",
+        "type": "number",
+        "default": 12
+      },
+      {
+        "name": "period2",
+        "label": "Period2",
+        "type": "number",
+        "default": 26
+      },
+      {
+        "name": "period_signal",
+        "label": "Period Signal",
+        "type": "number",
+        "default": 9
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "ppo",
+      "signal",
+      "histo"
+    ],
+    "display_name": "Percentage Price Oscillator"
+  },
+  {
+    "name": "Percentile Rank",
+    "slug": "PctRank",
+    "aliases": [
+      "PctRank",
+      "PercentileRank"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Pct Rank"
+  },
+  {
+    "name": "Pivot Point",
+    "slug": "PivotPoint",
+    "aliases": [
+      "PivotPoint"
+    ],
+    "params": [
+      {
+        "name": "use_open",
+        "label": "Use Open",
+        "type": "select",
+        "default": false,
+        "options": [
+          {
+            "value": "true",
+            "label": "True"
+          },
+          {
+            "value": "false",
+            "label": "False"
+          }
+        ]
+      },
+      {
+        "name": "use_close_twice",
+        "label": "Use Close Twice",
+        "type": "select",
+        "default": false,
+        "options": [
+          {
+            "value": "true",
+            "label": "True"
+          },
+          {
+            "value": "false",
+            "label": "False"
+          }
+        ]
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "p",
+      "r1",
+      "r2",
+      "s1",
+      "s2"
+    ],
+    "display_name": "Pivot Point"
+  },
+  {
+    "name": "Plus Directional Indicator (+DI)",
+    "slug": "PlusDirectionalIndicator",
+    "aliases": [
+      "PlusDirectionalIndicator",
+      "PLUSDI",
+      "DI_PLUS"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "trend",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Plus Directional Indicator"
+  },
+  {
+    "name": "Pretty Good Oscillator",
+    "slug": "PrettyGoodOscillator",
+    "aliases": [
+      "PrettyGoodOscillator",
+      "PGO"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Pretty Good Oscillator"
+  },
+  {
+    "name": "ROC of EMA(High-Low)",
+    "slug": "ChaikinVolatility",
+    "aliases": [
+      "ChaikinVolatility",
+      "ROCofEMA"
+    ],
+    "params": [
+      {
+        "name": "ema_period",
+        "label": "Ema Period",
+        "type": "number",
+        "default": 10
+      },
+      {
+        "name": "roc_period",
+        "label": "Roc Period",
+        "type": "number",
+        "default": 10
+      }
+    ],
+    "template_keys": [
+      "volatility_threshold"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "volatility",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Chaikin Volatility"
+  },
+  {
+    "name": "RSI with Exponential Moving Average",
+    "slug": "RSI_EMA",
+    "aliases": [
+      "RSI_EMA",
+      "RSIwithExponentialMovingAverage"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      },
+      {
+        "name": "upperband",
+        "label": "Upperband",
+        "type": "number",
+        "default": 70
+      },
+      {
+        "name": "lowerband",
+        "label": "Lowerband",
+        "type": "number",
+        "default": 30
+      }
+    ],
+    "template_keys": [
+      "boundary_comparison_oscillator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "RSI EMA"
+  },
+  {
+    "name": "RSI with Simple Moving Average",
+    "slug": "RSI_SMA",
+    "aliases": [
+      "RSI_SMA",
+      "RSIwithSimpleMovingAverage"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      },
+      {
+        "name": "upperband",
+        "label": "Upperband",
+        "type": "number",
+        "default": 70
+      },
+      {
+        "name": "lowerband",
+        "label": "Lowerband",
+        "type": "number",
+        "default": 30
+      }
+    ],
+    "template_keys": [
+      "boundary_comparison_oscillator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "RSI SMA"
+  },
+  {
+    "name": "Rate of Change",
+    "slug": "Momentum",
+    "aliases": [
+      "Momentum",
+      "RateofChange"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Momentum"
+  },
+  {
+    "name": "Rate of Change",
+    "slug": "ROC",
+    "aliases": [
+      "ROC",
+      "RateofChange",
+      "RATEOFCHANGE"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 12
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "ROC"
+  },
+  {
+    "name": "Rate of Change (x100)",
+    "slug": "ROC100",
+    "aliases": [
+      "ROC100",
+      "RateofChange",
+      "RATEOFCHANGE100"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 12
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "ROC100"
+  },
+  {
+    "name": "Relative Momentum Index",
+    "slug": "RelativeMomentumIndex",
+    "aliases": [
+      "RelativeMomentumIndex",
+      "RMI"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 20
+      },
+      {
+        "name": "lookback",
+        "label": "Lookback",
+        "type": "number",
+        "default": 5
+      },
+      {
+        "name": "upperband",
+        "label": "Upperband",
+        "type": "number",
+        "default": 70
+      },
+      {
+        "name": "lowerband",
+        "label": "Lowerband",
+        "type": "number",
+        "default": 30
+      }
+    ],
+    "template_keys": [
+      "boundary_comparison_oscillator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Relative Momentum Index"
+  },
+  {
+    "name": "Relative Strength Index",
+    "slug": "RSI",
+    "aliases": [
+      "RSI",
+      "RelativeStrengthIndex",
+      "RELATIVESTRENGTHINDEX"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      },
+      {
+        "name": "upperband",
+        "label": "Upperband",
+        "type": "number",
+        "default": 70
+      },
+      {
+        "name": "lowerband",
+        "label": "Lowerband",
+        "type": "number",
+        "default": 30
+      }
+    ],
+    "template_keys": [
+      "boundary_comparison_oscillator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "RSI"
+  },
+  {
+    "name": "Rolling Sum",
+    "slug": "SumN",
+    "aliases": [
+      "SumN",
+      "Sum",
+      "RollingSum",
+      "SUMN"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Sum N"
+  },
+  {
+    "name": "SMA Envelope",
+    "slug": "SMAEnvelope",
+    "aliases": [
+      "SMAEnvelope",
+      "SimpleMovingAverageEnvelope"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      },
+      {
+        "name": "perc",
+        "label": "Perc",
+        "type": "number",
+        "default": 2.5
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "band_break_bollinger"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "src",
+      "top",
+      "bottom"
+    ],
+    "display_name": "SMA Envelope"
+  },
+  {
+    "name": "SMA Oscillator",
+    "slug": "SMAOscillator",
+    "aliases": [
+      "SMAOscillator",
+      "SimpleMovingAverageOscillator"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "SMA Oscillator"
+  },
+  {
+    "name": "SMMA Envelope",
+    "slug": "SMMAEnvelope",
+    "aliases": [
+      "SMMAEnvelope"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      },
+      {
+        "name": "perc",
+        "label": "Perc",
+        "type": "number",
+        "default": 2.5
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "band_break_bollinger"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "src",
+      "top",
+      "bottom"
+    ],
+    "display_name": "SMMA Envelope"
+  },
+  {
+    "name": "SMMA Oscillator",
+    "slug": "SMMAOscillator",
+    "aliases": [
+      "SMMAOscillator",
+      "SmoothedMovingAverageOscillator"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "SMMA Oscillator"
+  },
+  {
+    "name": "Safe Division RSI",
+    "slug": "RSI_Safe",
+    "aliases": [
+      "RSI_Safe",
+      "SafeDivisionRSI"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      },
+      {
+        "name": "upperband",
+        "label": "Upperband",
+        "type": "number",
+        "default": 70
+      },
+      {
+        "name": "lowerband",
+        "label": "Lowerband",
+        "type": "number",
+        "default": 30
+      }
+    ],
+    "template_keys": [
+      "boundary_comparison_oscillator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "RSI Safe"
+  },
+  {
+    "name": "Simple Moving Average",
+    "slug": "SMA",
+    "aliases": [
+      "SMA",
+      "SimpleMovingAverage",
+      "SIMPLEMOVINGAVERAGE"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "SMA"
+  },
+  {
+    "name": "Simple Percentage Envelope",
+    "slug": "Envelope",
+    "aliases": [
+      "Envelope",
+      "SimplePercentageEnvelope"
+    ],
+    "params": [
+      {
+        "name": "perc",
+        "label": "Perc",
+        "type": "number",
+        "default": 2.5
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "band_break_bollinger"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "src",
+      "top",
+      "bottom"
+    ],
+    "display_name": "Envelope"
+  },
+  {
+    "name": "Smoothed Moving Average",
+    "slug": "SMMA",
+    "aliases": [
+      "SMMA",
+      "SmoothedMovingAverage",
+      "SMOOTHEDMOVINGAVERAGE"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "SMMA"
+  },
+  {
+    "name": "Standard Deviation",
+    "slug": "StdDev",
+    "aliases": [
+      "StdDev",
+      "StandardDeviation"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "volatility_threshold"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "volatility",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Std Dev"
+  },
+  {
+    "name": "Stochastic Oscillator",
+    "slug": "Stochastic",
+    "aliases": [
+      "Stochastic",
+      "StochasticOscillator",
+      "STOCH",
+      "STOCHASTIC",
+      "STOCHASTICSLOW"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      },
+      {
+        "name": "period_dfast",
+        "label": "Period Dfast",
+        "type": "number",
+        "default": 3
+      },
+      {
+        "name": "period_dslow",
+        "label": "Period Dslow",
+        "type": "number",
+        "default": 3
+      },
+      {
+        "name": "upperband",
+        "label": "Upperband",
+        "type": "number",
+        "default": 80
+      },
+      {
+        "name": "lowerband",
+        "label": "Lowerband",
+        "type": "number",
+        "default": 20
+      }
+    ],
+    "template_keys": [
+      "boundary_comparison_oscillator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "percK",
+      "percD"
+    ],
+    "display_name": "Stochastic"
+  },
+  {
+    "name": "TEMA Envelope",
+    "slug": "TEMAEnvelope",
+    "aliases": [
+      "TEMAEnvelope"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      },
+      {
+        "name": "perc",
+        "label": "Perc",
+        "type": "number",
+        "default": 2.5
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "band_break_bollinger"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "src",
+      "top",
+      "bottom"
+    ],
+    "display_name": "TEMA Envelope"
+  },
+  {
+    "name": "TEMA Oscillator",
+    "slug": "TEMAOscillator",
+    "aliases": [
+      "TEMAOscillator",
+      "TripleExponentialMovingAverageOscillator"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "TEMA Oscillator"
+  },
+  {
+    "name": "TRIX with Signal Line",
+    "slug": "TrixSignal",
+    "aliases": [
+      "TrixSignal",
+      "TRIXSignal",
+      "TRIXwithSignalLine",
+      "TRIXSIGNAL"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 15
+      },
+      {
+        "name": "rocperiod",
+        "label": "Rocperiod",
+        "type": "number",
+        "default": 1
+      },
+      {
+        "name": "sigperiod",
+        "label": "Sigperiod",
+        "type": "number",
+        "default": 9
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line",
+      "signal"
+    ],
+    "display_name": "Trix Signal"
+  },
+  {
+    "name": "Tillson T3",
+    "slug": "T3MovingAverage",
+    "aliases": [
+      "T3MovingAverage",
+      "T3",
+      "TillsonT3"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 5
+      },
+      {
+        "name": "vfactor",
+        "label": "Vfactor",
+        "type": "number",
+        "default": 0.7
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "T3 Moving Average"
+  },
+  {
+    "name": "Triple Exponential Average",
+    "slug": "TRIX",
+    "aliases": [
+      "TRIX",
+      "TripleExponentialAverage"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "TRIX"
+  },
+  {
+    "name": "Triple Exponential Moving Average",
+    "slug": "TEMA",
+    "aliases": [
+      "TEMA",
+      "TripleExponentialMovingAverage",
+      "TRIPLEEXPONENTIALMOVINGAVERAGE"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "TEMA"
+  },
+  {
+    "name": "True High",
+    "slug": "TrueHigh",
+    "aliases": [
+      "TrueHigh"
+    ],
+    "params": [],
+    "template_keys": [
+      "volatility_threshold"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "volatility",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "True High"
+  },
+  {
+    "name": "True Low",
+    "slug": "TrueLow",
+    "aliases": [
+      "TrueLow"
+    ],
+    "params": [],
+    "template_keys": [
+      "volatility_threshold"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "volatility",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "True Low"
+  },
+  {
+    "name": "True Range",
+    "slug": "TrueRange",
+    "aliases": [
+      "TrueRange",
+      "TR"
+    ],
+    "params": [],
+    "template_keys": [
+      "volatility_threshold"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "volatility",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "True Range"
+  },
+  {
+    "name": "True Strength Index",
+    "slug": "TSI",
+    "aliases": [
+      "TSI",
+      "TrueStrengthIndex"
+    ],
+    "params": [
+      {
+        "name": "period1",
+        "label": "Period1",
+        "type": "number",
+        "default": 25
+      },
+      {
+        "name": "period2",
+        "label": "Period2",
+        "type": "number",
+        "default": 13
+      },
+      {
+        "name": "pchange",
+        "label": "Pchange",
+        "type": "number",
+        "default": 1
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "TSI"
+  },
+  {
+    "name": "Ultimate Oscillator",
+    "slug": "UltimateOscillator",
+    "aliases": [
+      "UltimateOscillator",
+      "ULTOSC"
+    ],
+    "params": [
+      {
+        "name": "period1",
+        "label": "Period1",
+        "type": "number",
+        "default": 7
+      },
+      {
+        "name": "period2",
+        "label": "Period2",
+        "type": "number",
+        "default": 14
+      },
+      {
+        "name": "period3",
+        "label": "Period3",
+        "type": "number",
+        "default": 28
+      },
+      {
+        "name": "upperband",
+        "label": "Upperband",
+        "type": "number",
+        "default": 70
+      },
+      {
+        "name": "lowerband",
+        "label": "Lowerband",
+        "type": "number",
+        "default": 30
+      }
+    ],
+    "template_keys": [
+      "boundary_comparison_oscillator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Ultimate Oscillator"
+  },
+  {
+    "name": "Up Day Boolean",
+    "slug": "UpDayBool",
+    "aliases": [
+      "UpDayBool",
+      "UpDayBoolean"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 1
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Up Day Bool"
+  },
+  {
+    "name": "Up Day Detector",
+    "slug": "UpDay",
+    "aliases": [
+      "UpDay",
+      "UpDayDetector"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 1
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Up Day"
+  },
+  {
+    "name": "Upward Price Movement",
+    "slug": "UpMove",
+    "aliases": [
+      "UpMove",
+      "UpwardPriceMovement"
+    ],
+    "params": [],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Up Move"
+  },
+  {
+    "name": "VWAP",
+    "slug": "VolumeWeightedAveragePrice",
+    "aliases": [
+      "VolumeWeightedAveragePrice",
+      "VWAP"
+    ],
+    "params": [],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Volume Weighted Average Price"
+  },
+  {
+    "name": "Variable Index Dynamic Average",
+    "slug": "VIDYA",
+    "aliases": [
+      "VIDYA",
+      "VariableIndexDynamicAverage"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      },
+      {
+        "name": "momentum_period",
+        "label": "Momentum Period",
+        "type": "number",
+        "default": 9
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "VIDYA"
+  },
+  {
+    "name": "Vortex Indicator",
+    "slug": "Vortex",
+    "aliases": [
+      "Vortex",
+      "VortexIndicator"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "trend",
+    "output_lines": [
+      "vi_plus",
+      "vi_minus"
+    ],
+    "display_name": "Vortex"
+  },
+  {
+    "name": "WMA Envelope",
+    "slug": "WMAEnvelope",
+    "aliases": [
+      "WMAEnvelope"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      },
+      {
+        "name": "perc",
+        "label": "Perc",
+        "type": "number",
+        "default": 2.5
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "band_break_bollinger"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "src",
+      "top",
+      "bottom"
+    ],
+    "display_name": "WMA Envelope"
+  },
+  {
+    "name": "WMA Oscillator",
+    "slug": "WMAOscillator",
+    "aliases": [
+      "WMAOscillator",
+      "WeightedMovingAverageOscillator"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "WMA Oscillator"
+  },
+  {
+    "name": "Weighted Average",
+    "slug": "WeightedAverage",
+    "aliases": [
+      "WeightedAverage",
+      "AverageWeighted",
+      "AVERAGEWEIGHTED"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      },
+      {
+        "name": "coef",
+        "label": "Coef",
+        "type": "number",
+        "default": 1.0
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Weighted Average"
+  },
+  {
+    "name": "Weighted Moving Average",
+    "slug": "WMA",
+    "aliases": [
+      "WMA",
+      "WeightedMovingAverage",
+      "WEIGHTEDMOVINGAVERAGE"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "WMA"
+  },
+  {
+    "name": "Williams %R",
+    "slug": "WilliamsR",
+    "aliases": [
+      "WilliamsR",
+      "WR",
+      "WILLR"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      },
+      {
+        "name": "upperband",
+        "label": "Upperband",
+        "type": "number",
+        "default": -20
+      },
+      {
+        "name": "lowerband",
+        "label": "Lowerband",
+        "type": "number",
+        "default": -80
+      }
+    ],
+    "template_keys": [
+      "boundary_comparison_oscillator",
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Williams R"
+  },
+  {
+    "name": "Williams Accumulation/Distribution",
+    "slug": "WilliamsAD",
+    "aliases": [
+      "WilliamsAD",
+      "WAD",
+      "WilliamsAccumulationDistribution"
+    ],
+    "params": [],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "other",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Williams AD"
+  },
+  {
+    "name": "ZLEMA Envelope",
+    "slug": "ZLEMAEnvelope",
+    "aliases": [
+      "ZLEMAEnvelope",
+      "ZeroLagEmaEnvelope"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      },
+      {
+        "name": "perc",
+        "label": "Perc",
+        "type": "number",
+        "default": 2.5
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "band_break_bollinger"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "src",
+      "top",
+      "bottom"
+    ],
+    "display_name": "ZLEMA Envelope"
+  },
+  {
+    "name": "ZLEMA Oscillator",
+    "slug": "ZLEMAOscillator",
+    "aliases": [
+      "ZLEMAOscillator",
+      "ZeroLagEmaOscillator"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 30
+      }
+    ],
+    "template_keys": [
+      "threshold_simple"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "oscillator",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "ZLEMA Oscillator"
+  },
+  {
+    "name": "Zero Lag Exponential Moving Average",
+    "slug": "ZLEMA",
+    "aliases": [
+      "ZLEMA",
+      "ZeroLagExponentialMovingAverage",
+      "ZEROLAGINDICATOR_EMA"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 14
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "ZLEMA"
+  },
+  {
+    "name": "Zero Lag Indicator",
+    "slug": "ZeroLagIndicator",
+    "aliases": [
+      "ZeroLagIndicator",
+      "ZLIndicator",
+      "ZLInd",
+      "EC",
+      "ErrorCorrecting",
+      "ZLINDICATOR",
+      "ERRORCORRECTING"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 20
+      },
+      {
+        "name": "gainlimit",
+        "label": "Gainlimit",
+        "type": "number",
+        "default": 50
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "line"
+    ],
+    "display_name": "Zero Lag Indicator"
+  },
+  {
+    "name": "ZeroLag Indicator Envelope",
+    "slug": "ZLIndicatorEnvelope",
+    "aliases": [
+      "ZLIndicatorEnvelope",
+      "ZeroLagIndicatorEnvelope",
+      "ZLINDICATORENVELOPE"
+    ],
+    "params": [
+      {
+        "name": "period",
+        "label": "Period",
+        "type": "number",
+        "default": 20
+      },
+      {
+        "name": "gainlimit",
+        "label": "Gainlimit",
+        "type": "number",
+        "default": 50
+      },
+      {
+        "name": "perc",
+        "label": "Perc",
+        "type": "number",
+        "default": 2.5
+      }
+    ],
+    "template_keys": [
+      "crossover_price_indicator",
+      "band_break_bollinger"
+    ],
+    "usage_modes": {
+      "standalone": true,
+      "strategy_template": true
+    },
+    "category": "moving_average",
+    "output_lines": [
+      "src",
+      "top",
+      "bottom"
+    ],
+    "display_name": "ZL Indicator Envelope"
+  }
+]

@@ -1,0 +1,1120 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "initializing": "Initializing...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "dismiss": "Ignora",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "reset": "Reset",
+    "search": "Search",
+    "filter": "Filter",
+    "refresh": "Refresh",
+    "export": "Export",
+    "import": "Import",
+    "enable": "Enable",
+    "disable": "Disable",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "apply": "Apply",
+    "retry": "Retry",
+    "later": "Later",
+    "tryAgain": "Try again",
+    "login": "Login",
+    "logout": "Logout",
+    "signOut": "Sign Out",
+    "upgradePlan": "Upgrade Plan",
+    "signingOut": "Signing out...",
+    "loggingIn": "Logging in...",
+    "home": "Home",
+    "pluginSettings": "Impostazioni Plugin",
+    "loginSignup": "Accedi / Registrati"
+  },
+  "compilation": {
+    "compiled": "Compilato",
+    "failed": "Compilazione fallita",
+    "noOutput": "Nessun output del compilatore fornito.",
+    "retry": "Riprova",
+    "compiling": "Compilazione...",
+    "showRawOutput": "Mostra output non elaborato"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "strategies": "Strategies",
+    "backtest": "Backtest",
+    "marketplace": "Marketplace",
+    "settings": "Settings",
+    "data": "Data",
+    "nexusHub": "Nexus Hub",
+    "strategyStudio": "Strategy Studio",
+    "strategyBuilder": "StratForge",
+    "backtestNexus": "Backtester",
+    "dataNexus": "Data Nexus",
+    "pluginMarketplace": "Plugin Marketplace",
+    "chart": "Chart",
+    "aiAssistant": "AI Assistant",
+    "result": "Result"
+  },
+  "status": {
+    "online": "Online",
+    "offline": "Offline",
+    "connecting": "Connecting...",
+    "checking": "Verifica...",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "error": "Error",
+    "ready": "Ready",
+    "pending": "Pending",
+    "running": "Running",
+    "completed": "Completed",
+    "failed": "Failed",
+    "notConfigured": "Credenziali non configurate — vai su Impostazioni > Credenziali"
+  },
+  "dialog": {
+    "confirmDelete": "Are you sure you want to delete this item?",
+    "unsavedChanges": "You have unsaved changes. Discard them?",
+    "confirmAction": "Are you sure you want to proceed?"
+  },
+  "time": {
+    "now": "Now",
+    "today": "Today",
+    "yesterday": "Ieri",
+    "ago": "ago"
+  },
+  "auth": {
+    "loginTo": "Login to {{provider}}",
+    "loginToUnlock": "Login to Unlock",
+    "loginRequired": "Accesso richiesto",
+    "viewPlans": "View Plans",
+    "plan": "{{plan}} Plan",
+    "needHelp": "Need help? Contact support at support@StratCraft.io",
+    "loginRequiredBanner": "Login required to use this feature.",
+    "clickToLogin": "Log In",
+    "credits": "Credits: {{remaining}} / {{total}}",
+    "creditsRemaining": "Credits: {{remaining}}",
+    "renews": "Renews: {{date}}",
+    "passwordPlaceholder": "Password",
+    "inline": {
+      "hero": {
+        "badge": "Spazio di Ricerca Quantitativa",
+        "heading": "Costruisci, testa e distribuisci sistemi di trading da un unico spazio di lavoro controllato.",
+        "tagline": "Progettato per team quantitativi e ricercatori indipendenti che hanno bisogno di una validazione delle idee piu rapida, flussi di esecuzione piu puliti e una superficie di prodotto piu vicina a una console operativa che a una pagina di marketing.",
+        "pillars": {
+          "workflows": {
+            "title": "Flussi di strategia IA",
+            "description": "Trasforma idee di mercato in ricerca strutturata, segnali e logica di trading distribuibile."
+          },
+          "backtesting": {
+            "title": "Backtesting integrato",
+            "description": "Valida le idee con dati, audit trail e simulazione consapevole dell'esecuzione prima di andare in produzione."
+          },
+          "controls": {
+            "title": "Controlli di livello operatore",
+            "description": "Usa uno spazio di lavoro desktop sicuro per dati, credenziali, plugin e orchestrazione dell'esecuzione."
+          }
+        },
+        "stats": {
+          "multistep": {
+            "value": "Multi-step",
+            "label": "flusso dalla ricerca all'esecuzione"
+          },
+          "desktopNative": {
+            "value": "Nativo desktop",
+            "label": "spazio per quants seri"
+          },
+          "secure": {
+            "value": "Sicuro",
+            "label": "auth, plugin e controllo locale"
+          }
+        }
+      },
+      "email": {
+        "heading": "Accedi o crea il tuo account gratuito",
+        "description": "Inserisci la tua email per continuare. I nuovi account vengono creati automaticamente. Usa l'accesso con password se hai gia un account basato su credenziali.",
+        "secureAccess": "Accesso sicuro",
+        "emailVerification": "Verifica email",
+        "placeholder": "you@example.com",
+        "continueButton": "Continua con email",
+        "sending": "Invio..."
+      },
+      "method": {
+        "password": {
+          "title": "Usa password",
+          "description": "Per utenti abituali che accedono con email + password."
+        },
+        "browser": {
+          "title": "Apri login da browser",
+          "description": "Continua con il flusso di autenticazione ospitato e i controlli completi dell'account."
+        }
+      },
+      "footer": "Gratuito per iniziare. Nessuna carta di credito richiesta. Continuando, entri nello spazio di lavoro StratCraft per la progettazione di strategie, backtesting, espansione tramite plugin ed esecuzione controllata.",
+      "code": {
+        "heading": "Controlla la tua email",
+        "sentTo": "Abbiamo inviato un codice a 6 cifre a {{email}}",
+        "verifying": "Verifica in corso...",
+        "changeEmail": "Cambia email",
+        "resendCountdown": "Reinvia tra {{seconds}}s",
+        "resendCode": "Reinvia codice",
+        "otherWays": "Altri modi per accedere",
+        "usePassword": "Usa la tua password",
+        "loginWithBrowser": "Accedi con browser"
+      },
+      "password": {
+        "heading": "Accedi con password",
+        "description": "Inserisci email e password",
+        "emailPlaceholder": "you@example.com",
+        "loginButton": "Accedi",
+        "loggingIn": "Accesso...",
+        "switchToCode": "Usa codice di verifica"
+      },
+      "errors": {
+        "invalidEmail": "Inserisci un indirizzo email valido",
+        "sendCodeFailed": "Invio del codice di verifica fallito",
+        "networkError": "Errore di rete",
+        "invalidCode": "Codice di verifica non valido",
+        "resendFailed": "Reinvio fallito",
+        "invalidCredentials": "Credenziali non valide"
+      }
+    }
+  },
+  "plugin": {
+    "error": "Plugin Error",
+    "errorOccurred": "An error occurred in the plugin",
+    "loadingPlugin": "Loading {{title}}...",
+    "failedToLoad": "Failed to load plugin: {{error}}",
+    "sandboxError": "Sandbox error: {{error}}"
+  },
+  "permissions": {
+    "unknownPermission": "Permesso sconosciuto",
+    "title": "Permission Request",
+    "requestingPermissions": "This plugin is requesting the following permissions:",
+    "dangerousPermissions": "Dangerous Permissions",
+    "dangerousWarning": "This plugin requests elevated permissions that could affect your system security. Only approve if you trust the source.",
+    "deny": "Deny",
+    "approve": "Approve",
+    "approveAnyway": "Approve Anyway",
+    "pluginId": "Plugin ID",
+    "author": "Author",
+    "riskLevels": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "dangerous": "Dangerous",
+      "unknown": "Unknown"
+    }
+  },
+  "locked": {
+    "requiresTier": "This feature requires {{tier}} tier access",
+    "serviceEnabled": "You've enabled this service. It will automatically activate when you upgrade to {{tier}} tier."
+  },
+  "toolbar": {
+    "logo": "Logo",
+    "systemSettings": "System Settings",
+    "researchEnvironment": "Research Environment"
+  },
+  "error": {
+    "somethingWentWrong": "Something went wrong",
+    "unexpectedError": "An unexpected error occurred",
+    "viewNotFound": "View not found: {{view}}",
+    "editorNotFound": "Editor not found for: {{feature}}"
+  },
+  "view": {
+    "loadingView": "Caricamento vista...",
+    "errorPrefix": "Errore: {{error}}",
+    "unknownViewType": "Tipo di vista sconosciuto",
+    "noProvider": "Nessun provider per la vista: {{viewId}}",
+    "noViewSelected": "Nessuna vista selezionata",
+    "failedToLoad": "Impossibile caricare la vista"
+  },
+  "tier": {
+    "free": "FREE",
+    "basic": "BASIC",
+    "pro": "PRO",
+    "gold": "GOLD"
+  },
+  "nexusHub": {
+    "initializingSystems": "Initializing Core Systems...",
+    "connectTheAlpha": "CONNECT THE ALPHA",
+    "strategy": "STRATEGY",
+    "backtest": "BACKTEST",
+    "strategyModule": "Strategy Module",
+    "backtestModule": "Backtest Module",
+    "strategyDescription": "Algorithmic strategy generation and logic execution",
+    "backtestDescription": "High-performance C++ backtest engine with integrated data loading",
+    "noLink": "NO {{title}} LINK",
+    "noModulesAvailable": "No Modules Available",
+    "linking": "LINKING",
+    "registry": "Registry",
+    "deactivate": "Deactivate",
+    "systemActive": "SYSTEM_ACTIVE",
+    "moduleStandby": "MODULE_STANDBY",
+    "emptySlot": "EMPTY SLOT",
+    "modules": "Modules",
+    "modulesDescription": "Available plugins for strategy research, testing, and trading"
+  },
+  "strategyStudio": {
+    "strategyNona": "STRATEGY NONA",
+    "advanced": "ADVANCED",
+    "mode": "MODE",
+    "tierAccessRequired": "This feature requires {{tier}} tier access"
+  },
+  "breadcrumb": {
+    "nexusHub": "Nexus Hub"
+  },
+  "banner": {
+    "apiKey": {
+      "message": "Le funzionalita AI richiedono configurazione chiave API o abbonamento PRO",
+      "configureKey": "Configura Chiave",
+      "loginUpgrade": "Accedi e Aggiorna",
+      "upgrade": "Aggiorna",
+      "dismiss": "Chiudi"
+    }
+  },
+  "modal": {
+    "defaultConfirmTitle": "Conferma",
+    "defaultInfoTitle": "Avviso",
+    "defaultOkText": "OK",
+    "defaultCancelText": "Annulla",
+    "close": "Chiudi",
+    "configureApiKey": "Configura chiave API",
+    "defaultDestructiveTitle": "Confirm Delete"
+  },
+  "dataManagement": {
+    "title": "GESTIONE DATI",
+    "tabs": {
+      "catalog": "Catalogo",
+      "downloadQueue": "Coda di Download"
+    },
+    "stats": {
+      "totalSize": "Dimensione Totale",
+      "totalRows": "Righe Totali",
+      "symbols": "Simboli",
+      "providers": "Fornitori",
+      "segments": "{{count}} segmenti"
+    },
+    "catalog": {
+      "searchSymbol": "Cerca simbolo...",
+      "allProviders": "Tutti i Fornitori",
+      "allIntervals": "Tutti gli Intervalli",
+      "deleteCount": "Elimina ({{count}})",
+      "refresh": "Aggiorna",
+      "totalSegments": "{{count}} segmenti",
+      "columnSymbol": "Simbolo",
+      "columnInterval": "Intervallo",
+      "columnDateRange": "Intervallo di Date",
+      "columnRows": "Righe",
+      "columnSize": "Dimensione",
+      "loading": "Caricamento...",
+      "noData": "Nessun segmento di dati memorizzato nella cache trovato",
+      "deleteSegment": "Elimina segmento",
+      "groupSummary": "{{symbols}} simbolo(i) | {{segments}} segmento(i) | {{size}}"
+    },
+    "download": {
+      "newDownload": "Nuovo Download",
+      "provider": "Fornitore",
+      "symbol": "Simbolo",
+      "searchSymbol": "Cerca simbolo...",
+      "interval": "Intervallo",
+      "start": "Inizio",
+      "end": "Fine",
+      "addToQueue": "Aggiungi alla Coda",
+      "noTasks": "Nessun compito di download nella coda",
+      "columnSymbol": "Simbolo",
+      "columnInterval": "Intervallo",
+      "columnProvider": "Fornitore",
+      "columnStatus": "Stato",
+      "columnProgress": "Progresso",
+      "cancel": "Annulla",
+      "maxLookback": "Ritorno massimo {{limit}}",
+      "intervalSetTo": "{{provider}}: intervallo impostato su {{interval}} per {{symbol}}",
+      "lookbackAdjusted": "{{provider}} {{interval}} ritorno massimo: {{limit}} -- data di inizio regolata su {{date}}",
+      "switchedInterval": "Passato a {{interval}} -- {{oldInterval}} ritorno massimo superato",
+      "lookbackError": "{{provider}} {{interval}} supporta un ritorno massimo di {{limit}}. Regolare la data di inizio o selezionare un intervallo piu grossolano."
+    },
+    "import": {
+      "table": {
+        "col": {
+          "symbol": "Simbolo",
+          "interval": "Intervallo",
+          "from": "Da",
+          "to": "A",
+          "rows": "Righe"
+        }
+      }
+    },
+    "maxLookback": "Max. {{limit}} di retrospettiva",
+    "callerBadge": {
+      "sweep": "Sweep",
+      "backtest": "Backtest",
+      "discovery": "Discovery",
+      "validation": "Validation",
+      "scoreboard": "Scoreboard",
+      "restore": "Restore"
+    }
+  },
+  "backtestConsole": {
+    "title": "Console di Backtest",
+    "noTasks": "Nessun compito di backtest",
+    "cancelAllQueued": "Annulla Tutti in Coda",
+    "clearFinished": "Cancella Finiti",
+    "stopBacktest": "Ferma Backtest",
+    "viewResult": "Vedi Risultato",
+    "removeFromQueue": "Rimuovi dalla Coda",
+    "removeFromList": "Rimuovi dalla Lista",
+    "status": {
+      "preparing": "Preparazione",
+      "running": "In Esecuzione",
+      "queued": "In Coda",
+      "queuedPosition": "In Coda #{{position}}",
+      "completed": "Completato",
+      "failed": "Fallito",
+      "cancelled": "Annullato"
+    },
+    "summary": {
+      "running": "In Esecuzione",
+      "queued": "In Coda",
+      "done": "Completato",
+      "failed": "Fallito"
+    },
+    "taskLabel": "Compito:",
+    "openConsole": "Apri Console di Backtest",
+    "viewDownloadQueue": "Vedi Coda di Download",
+    "openAlphaFactoryConsole": "Apri Console Alpha Factory",
+    "lstmStatus": {
+      "phase": {
+        "boot": "avvio",
+        "load_traces": "caricamento tracce",
+        "build_matrix": "costruzione matrice",
+        "build_windows": "costruzione finestre"
+      },
+      "foldEpoch": "fold {{fold}}/{{totalFolds}} epoca {{epoch}}/{{totalEpochs}}",
+      "training": "addestramento",
+      "completed": "addestrato",
+      "failed": "addestramento fallito",
+      "tooltip": "Addestramento LSTM {{run}} - {{model}} - {{signals}} segnali",
+      "tooltipGeneric": "Visualizza avanzamento addestramento LSTM"
+    }
+  },
+  "symbolSearch": {
+    "placeholder": "Cerca simbolo...",
+    "authRequired": "Accedi per cercare simboli",
+    "serviceUnavailable": "Servizio non disponibile",
+    "credentialError": "Autenticazione fallita. Controlla le tue credenziali API nelle Impostazioni.",
+    "truncated": "Visualizzando {{count}} di {{total}} -- affina la tua ricerca"
+  },
+  "llmSelector": {
+    "platformProvider": "Fornitore piattaforma - nessuna chiave API richiesta",
+    "verified": "Chiave API verificata",
+    "unverified": "Chiave API non verificata - potrebbe fallire",
+    "selectProvider": "Seleziona Fornitore LLM",
+    "providerHeader": "Fornitore",
+    "modelHeader": "Modello",
+    "customModelExpand": "Usa modello personalizzato",
+    "customModelCollapse": "Nascondi modello personalizzato",
+    "customModelPlaceholder": "Inserisci ID modello...",
+    "customModelEmpty": "L'ID del modello non puo essere vuoto",
+    "customModelNoSpaces": "L'ID del modello non puo contenere spazi",
+    "customModelAsciiOnly": "L'ID del modello deve usare solo caratteri ASCII",
+    "proFallback": "Pro"
+  },
+  "installConsent": {
+    "trustLevels": {
+      "official": "Ufficiale",
+      "verified": "Verificato",
+      "unverified": "Non Verificato",
+      "unsigned": "Non Firmato"
+    },
+    "publisher": "Editore",
+    "unknown": "Sconosciuto",
+    "update": "Aggiornamento",
+    "install": "Installa",
+    "version": "Versione",
+    "from": "da",
+    "unsignedPlugin": "Plugin Non Firmato",
+    "unsignedMessage": "Questo plugin non e firmato e non puo essere verificato. Installa solo se lo hai creato tu stesso o l'hai ricevuto da una fonte attendibile.",
+    "unverifiedPublisher": "Editore Non Verificato",
+    "unverifiedMessage": "Questo plugin e firmato ma l'editore non e verificato da StratCraft. Procedi con cautela.",
+    "highRiskPermissions": "Autorizzazioni ad Alto Rischio",
+    "highRiskMessage": "Questo plugin richiede autorizzazioni elevate che potrebbero influire sul tuo sistema. Installa solo se ti fidi dell'editore.",
+    "permissionsRequested": "Autorizzazioni Richieste",
+    "noPermissions": "Questo plugin non richiede autorizzazioni speciali.",
+    "understandRisks": "Comprendo i rischi",
+    "riskAcknowledgment": "L'installazione di plugin non firmati o nativi puo rappresentare rischi per la sicurezza. Ho verificato la fonte e mi assumo la responsabilita di questa azione.",
+    "iUnderstandInstall": "Comprendo, Installa",
+    "fileSystem": "File System",
+    "id": "ID:",
+    "publisherLabel": "Editore:"
+  },
+  "strategy": {
+    "categories": {
+      "regimeMode": "Regime Mode",
+      "kronosMode": "Kronos Mode",
+      "traderMode": "Trader Mode",
+      "riskManager": "Risk Manager",
+      "aiCommandCenter": "AI Command Center",
+      "autopilotMode": "Modalita Autopilota",
+      "aiStrategyStudio": "Strategy Studio",
+      "chatMode": "Modalita Chat",
+      "catalogMode": "Catalog Mode"
+    },
+    "descriptions": {
+      "regimeMode": "Market environment and regime classification units",
+      "kronosMode": "Time-series prediction and sequential analysis",
+      "traderMode": "Market observation and trade execution logic",
+      "riskManager": "Risk management and exit strategy generation",
+      "aiCommandCenter": "Centralized AI control and autonomous agents",
+      "autopilotMode": "Decisioni di trading completamente autonome basate sull'IA",
+      "aiStrategyStudio": "AI-powered strategy studio for comprehensive strategy creation",
+      "chatMode": "Creazione conversazionale di strategie IA tramite chat",
+      "catalogMode": "Browse and generate C++ strategies from 63 proven trading strategies"
+    },
+    "hub": {
+      "loadingTopology": "Loading service topology...",
+      "noPlugins": "No plugins configured",
+      "installPlugins": "Install plugins from the Marketplace to enable services",
+      "active": "Active",
+      "syncWorkspace": "Sync Workspace",
+      "loginToNona": "Login to Nona",
+      "demo": {
+        "_comment": "Hub placeholder copy: unbuilt-feature demo data rendered by StrategyGroupList / ProviderStatusPanel / ProviderPortal. Remove these keys when the hub is wired to real strategy/provider registries.",
+        "generators": {
+          "regimeTrendX1": "Regime Trend X1",
+          "volAdaptiveBeta": "Vol-Adaptive Beta",
+          "crossSessArbitrage": "Cross-Sess Arbitrage",
+          "cnnSentimentAlpha": "CNN Sentiment Alpha",
+          "highFreqScalperV4": "High-Freq Scalper V4"
+        },
+        "lastRun": {
+          "twoMinAgo": "2m ago",
+          "oneHourAgo": "1h ago",
+          "active": "Active",
+          "failed": "Failed",
+          "fiveMinAgo": "5m ago",
+          "fifteenMinAgo": "15m ago"
+        },
+        "providers": {
+          "pro": "Pro",
+          "quant": "Quant",
+          "alpha": "Alpha"
+        },
+        "templates": {
+          "trendFollowing": "Trend Following",
+          "meanReversion": "Mean Reversion",
+          "marketMaking": "Market Making",
+          "statArbitrage": "Statistical Arbitrage"
+        }
+      }
+    },
+    "tier": {
+      "free": "Free",
+      "basic": "Basic",
+      "pro": "Pro",
+      "enterprise": "Enterprise"
+    },
+    "groupList": {
+      "groupTitle": "GROUP: TREND_FOLLOWING_PACK",
+      "providerRegion": "Provider: NONA // Region: ASIA_PACIFIC",
+      "runAll": "Esegui Tutti",
+      "configPack": "Pacchetto di Configurazione",
+      "colId": "ID",
+      "colName": "NOME",
+      "colStatus": "STATO",
+      "col7dPnl": "PNL 7G",
+      "colCpu": "CPU",
+      "colLastActivity": "ULTIMA ATTIVITA",
+      "colActions": "AZIONI"
+    },
+    "providerPortal": {
+      "licenseValid": "LICENZA VALIDA",
+      "availableStrategies": "Strategie Disponibili",
+      "activeGenerators": "GENERATORI ATTIVI",
+      "deployment": "DISTRIBUZIONE",
+      "executionLogs": "Log di Esecuzione",
+      "info": "INFO",
+      "initializedMessage": "Ambiente del motore {{provider}} inizializzato con successo...",
+      "moduleStatus": "Stato del Modulo",
+      "ready": "PRONTO"
+    },
+    "performanceChart": {
+      "title": "Panoramica delle Prestazioni",
+      "subtitle": "Ultimi 30 giorni - Tutti i fornitori",
+      "chartPending": "Integrazione Grafico in Sospeso",
+      "chartPendingHint": "Integra recharts o visx per la visualizzazione dei dati",
+      "winRate": "Tasso di Vincita",
+      "sharpeRatio": "Rapporto di Sharpe",
+      "totalReturn": "Rendimento Totale"
+    },
+    "audit": {
+      "title": "Audit Report",
+      "description": "Strategy generation quality scoring",
+      "recentAudits": "Recent Audits",
+      "noData": "No audit data available yet",
+      "colProvider": "Provider",
+      "colModel": "Model",
+      "colAlgorithm": "Algorithm",
+      "colSignalSource": "Signal Source",
+      "colScore": "Score",
+      "colRating": "Rating",
+      "colDate": "Date"
+    }
+  },
+  "alphaFactoryConsole": {
+    "title": "Console Alpha Factory",
+    "active": "Attivo:",
+    "total": "Totale:",
+    "noTasks": "Nessun compito",
+    "clearFinished": "Cancella Finiti",
+    "viewTask": "Visualizza compito",
+    "removeFromQueue": "Rimuovi dalla coda",
+    "removeFromList": "Rimuovi dalla lista",
+    "status": {
+      "preparing": "PREPARAZIONE",
+      "queued": "IN CODA",
+      "running": "IN ESECUZIONE",
+      "done": "COMPLETATO",
+      "failed": "NON RIUSCITO",
+      "cancelled": "ANNULLATO"
+    }
+  },
+  "backtestQueue": {
+    "title": "Coda di Backtest",
+    "running": "In Esecuzione",
+    "view": "Visualizza",
+    "cancel": "Annulla",
+    "pending": "In Sospeso",
+    "remove": "Rimuovi",
+    "noTasks": "Nessun compito di backtest",
+    "cancelAll": "Annulla Tutti"
+  },
+  "llmEstimate": {
+    "title": "Stima Chiamate LLM (Esecuzione a Vuoto)",
+    "barsProcessed": "Barre Elaborate",
+    "calls": " chiamate",
+    "totalLlmCalls": "Totale Chiamate LLM"
+  },
+  "quantLab": {
+    "title": "Sigma",
+    "pluginDescription": "Sigma e disponibile come plugin. Installalo dal Marketplace per accedere all'Alpha Factory, alla Signal Library e altro.",
+    "openMarketplace": "Apri Marketplace",
+    "subpages": {
+      "batchGeneration": "Scoperta di segnali",
+      "factory": "Fabbrica Alpha",
+      "engineStore": "Negozio di motori",
+      "trainingMonitor": "Monitor di addestramento",
+      "promotionPipeline": "Promozione fattori",
+      "settings": "Impostazioni"
+    }
+  },
+  "dataDownload": {
+    "downloading": "SCARICAMENTO",
+    "loading": "CARICAMENTO",
+    "caching": "MEMORIZZAZIONE IN CACHE",
+    "complete": "COMPLETATO",
+    "error": "ERRORE",
+    "chunkProgress": "chunk {{completed}}/{{total}}",
+    "barCount": "{{count}} bars"
+  },
+  "providerStatus": {
+    "title": "Stato del Fornitore",
+    "viewAll": "Visualizza Tutti",
+    "active": "attivo",
+    "success": "Successo:",
+    "latency": "Latenza:"
+  },
+  "editor": {
+    "error": "Errore",
+    "loading": "Caricamento editor...",
+    "unknownType": "Tipo di editor sconosciuto",
+    "noEditorsOpen": "Nessun editor aperto",
+    "close": "Chiudi",
+    "noProvider": "Nessun fornitore di editor per: {{viewType}}"
+  },
+  "tree": {
+    "noProvider": "Nessun TreeDataProvider registrato per la vista: {{viewId}}",
+    "loadFailed": "Caricamento dei dati dell'albero non riuscito"
+  },
+  "accessibility": {
+    "dismiss": "Ignora",
+    "close": "Chiudi",
+    "strategyNavigator": "Navigatore Strategie"
+  },
+  "settings": {
+    "title": "Settings",
+    "testButton": "Verifica"
+  },
+  "onboarding": {
+    "toggleTooltip": "Replay Onboarding Guide",
+    "controls": {
+      "next": "Next",
+      "prev": "Back",
+      "done": "Done",
+      "progress": "{{current}} of {{total}}"
+    },
+    "welcome": {
+      "sidebar": {
+        "title": "Navigation Panel",
+        "description": "Use the sidebar to switch between StratForge, Backtester, Sigma, and other modules."
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Configure API keys, data providers, and system preferences here."
+      },
+      "auth": {
+        "title": "Account",
+        "description": "Log in to access Pro features, cloud sync, and AI-powered strategy generation."
+      },
+      "llm": {
+        "title": "LLM Provider",
+        "description": "Select the AI model used for strategy generation. Bring your own API key or use StratCraft Pro."
+      },
+      "language": {
+        "title": "Language",
+        "description": "Switch the application language. StratCraft supports 12 languages."
+      },
+      "finish": {
+        "title": "You are all set!",
+        "description": "Start by exploring the Hub or create your first strategy in StratForge. You can replay this guide from the help icon in the status bar."
+      }
+    }
+  },
+  "assistant": {
+    "panelTitle": "Assistente",
+    "noContent": "Nessun aiuto disponibile per questa pagina.",
+    "tooltip": "Modalità assistente (Ctrl+L)",
+    "backToOverview": "Torna alla panoramica",
+    "closePanel": "Chiudi pannello assistente"
+  },
+  "navigationGuard": {
+    "title": "Generation In Progress",
+    "message": "Strategy generation is in progress. Leaving will cancel the current task.",
+    "confirm": "Leave Page",
+    "cancel": "Stay"
+  },
+  "validation": {
+    "backendReport": "Backend Validation Report",
+    "layer": "Layer",
+    "status": "Status",
+    "pass": "Pass",
+    "fail": "Fail",
+    "skip": "Skipped",
+    "noReport": "No backend validation report available",
+    "L1": "Contract Shape",
+    "L2": "Security Scan",
+    "L3": "Compilation",
+    "L4": "Symbol Verification",
+    "L5": "Isolated Load Test",
+    "L6": "Smoke Test",
+    "title": "Validazione Backend",
+    "failedAt": "Fallito: {{layer}}",
+    "stderrOutput": "Output stderr"
+  },
+  "notifications": {
+    "regionLabel": "Notifiche",
+    "sweep": {
+      "allCompleteTitle": "Tutti gli sweep completati",
+      "allCompleteBody": "{{count}} sweep terminati. {{succeeded}} riusciti, {{errors}} errori.",
+      "nextSweepTitle": "Avvio del prossimo sweep",
+      "nextSweepBody": "Passaggio automatico al prossimo sweep ({{remaining}} rimanenti in coda)",
+      "sweepCompleteTitle": "Sweep parametri completato",
+      "sweepCompleteBody": "{{succeeded}}/{{total}} arms completati con successo",
+      "sweepCompleteBodyWithErrors": "{{succeeded}}/{{total}} arms completati con successo ({{errors}} errori)",
+      "downloadCompleteTitle": "Download dati completato",
+      "downloadCompleteBody": "{{total}} simboli scaricati. Fitting dello sweep avviato.",
+      "downloadCompleteBodyWithFailures": "{{total}} simboli elaborati ({{failures}} falliti). Fitting dello sweep avviato."
+    }
+  },
+  "errorState": {
+    "technicalDetails": "Dettagli tecnici"
+  },
+  "viewRegistry": {
+    "nexus": {
+      "label": "Hub Nexus",
+      "shortLabel": "Hub"
+    },
+    "marketplace": {
+      "label": "Marketplace plugin",
+      "shortLabel": "Marketplace"
+    },
+    "dataManagement": {
+      "label": "Gestione dati",
+      "shortLabel": "Dati"
+    },
+    "settings": {
+      "label": "Impostazioni",
+      "shortLabel": "Impostazioni"
+    },
+    "researchEnvironment": {
+      "label": "Ambiente di ricerca",
+      "shortLabel": "Ambiente ric."
+    },
+    "strategy": {
+      "label": "StratForge",
+      "shortLabel": "StratForge"
+    },
+    "backtest": {
+      "label": "Backtester",
+      "shortLabel": "Backtester"
+    },
+    "backtestResult": {
+      "label": "Risultato backtest",
+      "shortLabel": "Risultato"
+    },
+    "quantLab": {
+      "label": "Sigma",
+      "shortLabel": "Sigma"
+    },
+    "chart": {
+      "label": "Grafico",
+      "shortLabel": "Grafico"
+    },
+    "ai": {
+      "label": "Assistente IA",
+      "shortLabel": "IA"
+    },
+    "scoreboard": {
+      "label": "Classifica Segnali",
+      "shortLabel": "Classifica"
+    },
+    "signalGenerator": {
+      "label": "Signal Generator",
+      "shortLabel": "Signal Gen"
+    }
+  },
+  "researchEnvironment": {
+    "loading": "Lettura dello stato dell'ambiente...",
+    "approvalDeclined": "L'operazione non è stata approvata, quindi non è stato modificato nulla.",
+    "sharedEnvironmentNotice": "Queste {{count}} funzionalità condividono un unico ambiente bloccato, quindi vengono installate, riparate e verificate insieme e non singolarmente.",
+    "states": {
+      "absent": "Non installato",
+      "installing": "Installazione in corso",
+      "repairing": "Riparazione in corso",
+      "verifying": "Verifica in corso",
+      "uninstalling": "Uninstalling",
+      "ready": "Pronto",
+      "failed": "Non riuscito"
+    },
+    "layerStates": {
+      "ready": "Pronto",
+      "failed": "Non riuscito",
+      "pending": "Non verificato"
+    },
+    "jobStates": {
+      "queued": "In coda",
+      "running": "In esecuzione",
+      "succeeded": "Completato",
+      "failed": "Non riuscito"
+    },
+    "actions": {
+      "install": "Installa ambiente",
+      "repair": "Ripara ambiente",
+      "verify": "Verifica di nuovo",
+    "uninstall": "Disinstalla ambiente",
+      "remove_capability": "Rimuovi funzionalità",
+      "restore_capability": "Ripristina funzionalità"
+    },
+    "progress": {
+      "install": "Avanzamento dell'installazione",
+      "repair": "Avanzamento della riparazione",
+      "verify": "Avanzamento della verifica",
+    "uninstall": "Avanzamento della disinstallazione",
+      "remove_capability": "Avanzamento della rimozione della funzionalità",
+      "restore_capability": "Avanzamento del ripristino della funzionalità"
+    },
+    "stages": {
+      "admission": "Controllo dei prerequisiti",
+      "install": "Installazione dei pacchetti",
+      "repair": "Ricostruzione dell'installazione",
+      "uninstall": "Rimozione dell'ambiente locale",
+      "transition": "Aggiornamento delle funzionalità dell'ambiente",
+      "python_verify": "Verifica dei pacchetti Python",
+      "julia_verify": "Inizializzazione del backend Julia"
+    },
+    "causes": {
+      "unsupported": "Sistema non supportato",
+      "missing_executable": "Eseguibile non trovato",
+      "missing_lock": "File di lock non trovato",
+      "manifest_drift": "Manifest e lock non concordano",
+      "lock_io": "Impossibile leggere il file di lock",
+      "invalid_lock_metadata": "I metadati del lock non sono validi",
+      "database": "Impossibile aggiornare il record locale",
+      "network": "Richiesta di rete non riuscita",
+      "process_exit": "Il processo è terminato con un errore",
+      "process_lost": "Il processo è terminato in modo imprevisto",
+      "import": "Impossibile importare il pacchetto",
+      "probe": "Controllo funzionale non riuscito",
+      "backend_init": "Inizializzazione del backend non riuscita"
+    },
+    "failureCategory": {
+      "unsupported_platform": "Piattaforma non supportata",
+      "pixi_missing": "Pixi non è disponibile",
+      "lock_missing": "Il file di lock è mancante",
+      "lock_drift": "Manifest e lock sono divergenti",
+      "lifecycle_coordination_failed": "Impossibile coordinare il record dell'ambiente",
+      "network_failed": "Download non riuscito",
+      "install_failed": "Installazione non riuscita",
+      "repair_failed": "Riparazione non riuscita",
+      "uninstall_failed": "Uninstall failed",
+      "workload_active": "Research workload is active",
+      "operation_interrupted": "Operazione interrotta",
+      "verification_failed": "Verifica non riuscita"
+    },
+    "failure": {
+      "stage": "Fase",
+      "cause": "Causa",
+      "capability": "Pacchetto"
+    },
+    "capabilityCause": {
+      "import": "Impossibile importare questo pacchetto",
+      "probe": "Questo pacchetto non ha superato il controllo funzionale",
+      "backend_init": "Non è stato possibile inizializzare il backend Julia"
+    },
+    "capability": {
+      "expected": "Prevista",
+      "installed": "Installata",
+      "notInstalled": "--"
+    },
+    "pysr": {
+      "python": "Pacchetto Python",
+      "julia": "Backend Julia"
+    },
+    "capabilities": {
+      "histdata": {
+        "name": "HistData",
+        "description": "Parser verificato offline e convertitore Parquet per l'acquisizione Forex revisionata separatamente."
+      },
+      "duckdb": {
+        "name": "DuckDB",
+        "description": "Database analitico in-process usato per le query di ricerca."
+      },
+      "gplearn": {
+        "name": "gplearn",
+        "description": "Programmazione genetica per la scoperta simbolica di fattori."
+      },
+      "gpquant": {
+        "name": "GPQuant",
+        "description": "Programmazione genetica ottimizzata per la ricerca quantitativa di fattori."
+      },
+      "pysr": {
+        "name": "PySR",
+        "description": "Regressione simbolica con un backend Julia che si inizializza al primo utilizzo."
+      },
+      "pandas_ta": {
+        "name": "pandas-ta",
+        "description": "Libreria di indicatori tecnici alla base del motore di fattori TA-Lib."
+      }
+    },
+    "summary": {
+      "interpreter": "Interprete",
+      "lastVerified": "Ultima verifica",
+      "pixiVersion": "Versione di Pixi",
+      "technicalDetails": "Dettagli tecnici",
+      "manifestHash": "SHA-256 del manifest",
+      "lockHash": "SHA-256 del lock",
+      "liveWorkloadNotice": "Solo le esecuzioni di ricerca avviate dopo il termine di questa operazione usano l'ambiente preparato. Nulla di ciò che è in esecuzione ora viene riavviato o interrotto."
+    },
+    "regions": {
+      "summary": "Riepilogo dell'ambiente"
+    },
+    "announce": {
+      "succeeded": "{{operation}}: completata correttamente.",
+      "failed": "{{operation}}: non riuscita.",
+      "failedState": "L'ambiente di ricerca si trova in uno stato di errore."
+    },
+    "a11y": {
+      "environmentState": "Stato dell'ambiente: {{state}}",
+      "capabilityState": "Stato di {{capability}}: {{state}}",
+      "platform": "Piattaforma: {{platform}} {{architecture}}",
+      "elapsed": "Tempo trascorso: {{elapsed}}",
+      "logTail": "Output recente dell'operazione sull'ambiente"
+    }
+  },
+  "scoreboard": {
+    "title": "Classifica Segnali",
+    "empty": "Nessun segnale valutato. Genera un segnale per popolare la classifica.",
+    "disclaimer": "Performance passata su {{windowBars}} barre. Non e una raccomandazione.",
+    "columns": {
+      "button": "Colonne",
+      "menuTitle": "Mostra colonne"
+    },
+    "col": {
+      "algorithm": "Algoritmo",
+      "recentIc": "IC recente",
+      "liveIc": "IC live",
+      "sharpeLong": "Sharpe recente (long)",
+      "sharpeShort": "Sharpe recente (short)",
+      "hitRate": "Tasso di successo",
+      "trades": "Operazioni",
+      "asOf": "Al"
+    },
+    "cell": {
+      "liveOnlySince": "solo live -- in osservazione dal {{date}}",
+      "liveOnlyTooltip": "Osservazione live avviata il {{date}}. Nessun backtest storico disponibile -- vedere TICKET_196_7_7 per il motivo."
+    }
+  },
+  "llmProvider": {
+    "badge": {
+      "pro": "Pro",
+      "byok": "BYOK"
+    }
+  },
+  "signalGenerator": {
+    "title": "Signal Generator",
+    "pluginDescription": "Signal Generator enables live trading signal production. Install it from the Marketplace to access live signal generation and auto-execution.",
+    "openMarketplace": "Open Marketplace"
+  },
+  "entitlement": {
+    "buyout": {
+      "badge": {
+        "freeUntil": "FREE UNTIL {{date}}",
+        "freeAccessEnds": "FREE ACCESS ENDS {{date}}",
+        "lifetime": "LIFETIME",
+        "freeAccessEnded": "FREE ACCESS ENDED",
+        "revoked": "REVOKED"
+      }
+    },
+    "ownership": {
+      "badge": {
+        "owned": "OWNED"
+      }
+    }
+  },
+  "brand": {
+    "tagline": "Connetti l'Alpha"
+  },
+  "statusDot": {
+    "running": "In esecuzione",
+    "warning": "Avvertenza",
+    "error": "Errore",
+    "idle": "Inattivo",
+    "online": "Online",
+    "offline": "Offline",
+    "degraded": "Degradato"
+  },
+  "persistence": {
+    "saveFailed": "Salvataggio fallito",
+    "restoreFailed": "Ripristino fallito",
+    "deleteFailed": "Eliminazione fallita",
+    "fallback": "Persistenza fallita"
+  },
+  "comingSoon": {
+    "chartView": "Vista grafico - Prossimamente",
+    "aiAssistant": "Assistente IA - Prossimamente"
+  },
+  "moduleNames": {
+    "optimizer": "Optimizer",
+    "riskEngine": "RiskEngine",
+    "dataFeed": "DataFeed",
+    "backtester": "Backtester"
+  },
+  "pluginPermissions": {
+    "network": {
+      "name": "Network Access",
+      "description": "Access external network resources and APIs"
+    },
+    "networkInternal": {
+      "name": "Internal Network",
+      "description": "Access internal API endpoints only"
+    },
+    "filesystem": {
+      "name": "Sandboxed File Access",
+      "description": "Read and write files within plugin sandbox"
+    },
+    "filesystemFull": {
+      "name": "Full File System Access",
+      "description": "Access any file on the system"
+    },
+    "database": {
+      "name": "Database Access",
+      "description": "Read and write to the application database"
+    },
+    "notification": {
+      "name": "Notifications",
+      "description": "Show system notifications to the user"
+    },
+    "clipboard": {
+      "name": "Clipboard Access",
+      "description": "Read from and write to system clipboard"
+    },
+    "shell": {
+      "name": "Shell Execution",
+      "description": "Execute shell commands on the system"
+    },
+    "native": {
+      "name": "Native Modules",
+      "description": "Load and use native Node.js modules"
+    }
+  },
+  "downloadQueue": {
+    "queued": "Queued",
+    "queuedResumed": "Queued (resumed)",
+    "downloading": "Downloading...",
+    "cancelled": "Cancelled",
+    "yieldedPriority": "Yielded to higher priority",
+    "yieldedPriorityMultiTf": "Yielded to higher priority (multi-TF)",
+    "partial": "Partial: {{rowCount}} bars, missing {{dayCount}} day(s) ({{dayList}})",
+    "complete": "Complete: {{rowCount}} bars",
+    "completeMultiTf": "Complete: {{count}} timeframes"
+  },
+  "dataCache": {
+    "dataReadyCached": "Data ready (cached)",
+    "mergingData": "Merging data...",
+    "fetchingFromProvider": "Fetching data from {{provider}}...",
+    "writingRows": "Writing {{count}} rows...",
+    "providerStartsAt": "Data from {{provider}} starts at {{actualStart}} (requested {{requestedStart}})",
+    "dataReadyAggregated": "Data ready ({{rowCount}} rows, {{target}} aggregated from {{baseInterval}})",
+    "checkingCache": "Checking cache for {{symbol}}/{{interval}}...",
+    "fetchingEarlierData": "Fetching earlier data ({{start}}~{{end}})...",
+    "fetchingNewerData": "Fetching newer data ({{start}}~{{end}})...",
+    "dataReady": "Data ready ({{count}} rows)",
+    "refetchingBackfill": "Re-fetching {{symbol}}/{{interval}} to backfill interior gap...",
+    "dataReadyBackfilled": "Data ready ({{count}} rows, interior gap backfilled)"
+  },
+  "keychainWarning": {
+    "message": "Portachiavi del sistema non disponibile -- le chiavi API non possono essere archiviate in modo sicuro."
+  },
+  "assistantHelp": {
+    "strategyStudioGuide": "Guida Strategy Studio",
+    "bollingerMacd": "Strategia Bande di Bollinger + MACD",
+    "rsiMa": "Strategia RSI + Media Mobile",
+    "macdRsiDivergence": "Strategia MACD + RSI Divergenza",
+    "emaCrossover": "Strategia Incrocio EMA",
+    "ichimokuCloud": "Strategia Ichimoku Cloud",
+    "fibonacciTrend": "Strategia Trend Fibonacci",
+    "vwapStrategy": "Strategia VWAP",
+    "supertrend": "Strategia Supertrend",
+    "dualMaVolume": "Strategia Doppia MA + Volume"
+  },
+  "configService": {
+    "loadedSuccessfully": "Configurazione caricata con successo"
+  },
+  "installProgress": {
+    "extractingPackage": "Extracting package...",
+    "backingUpExisting": "Backing up existing...",
+    "installingFiles": "Installing files...",
+    "registeringPermissions": "Registering permissions...",
+    "runningLifecycleHooks": "Running lifecycle hooks...",
+    "initializing": "Initializing...",
+    "installationComplete": "Installation complete!"
+  },
+  "marketplace": {
+    "fetchingMetadata": "Fetching plugin metadata...",
+    "downloadingPlugin": "Downloading plugin...",
+    "verifyingChecksum": "Verifying checksum...",
+    "resolvingDependencies": "Resolving dependencies...",
+    "extractingPlugin": "Extracting plugin...",
+    "installingPythonDeps": "Installing Python dependencies...",
+    "finalizingInstallation": "Finalizing installation...",
+    "installationComplete": "Installation complete!",
+    "installingFromBundled": "Installing from bundled package...",
+    "copyingBundledPlugin": "Copying bundled plugin..."
+  }
+}

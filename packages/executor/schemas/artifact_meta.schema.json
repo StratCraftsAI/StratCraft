@@ -1,0 +1,308 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stratcraft.ai/schemas/artifact_meta.schema.json",
+  "title": "Signal Source v2 Artifact Metadata",
+  "description": "Schema for _meta.json files written by v2 signal sources (TICKET_196_7_0 Q3, TICKET_196_7_0_1 Q2). Single source of truth shared by Python writers (nona_algorithm.signal_sources.*) and commercial C++ loaders (packages/research-kernels/src/signal/*_artifact_loader.cpp). TICKET_196_7_6_3 D3 extends the schema with a oneOf over signal_kind: factor artifacts use the factor_meta branch, existing kinds (HMM, n-gram, ML) keep their current shape under default_meta.",
+  "$defs": {
+    "factor_meta": {
+      "type": "object",
+      "description": "Factor signal artifact (TICKET_196_7_6_3 D2). signal_kind=factor is the discriminator. files MUST be empty: a factor is a stateless C++ formula with no on-disk fit state -- _meta.json is the entire artifact.",
+      "required": [
+        "template_id",
+        "artifact_version",
+        "fit_timestamp",
+        "fit_params",
+        "warmup_bars",
+        "files",
+        "signal_kind",
+        "engine",
+        "factor_id",
+        "cpp_indicator_id",
+        "params",
+        "reducer",
+        "lookback"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "template_id": {
+          "type": "string",
+          "pattern": "^factor_(talib|alpha158)_",
+          "minLength": 1,
+          "description": "Registry key for the live loader (factor_<engine>_<factor_id>). TICKET_196_7_6_3 D1; TICKET_196_7_6_6 Slice S8 extended the prefix to cover alpha158 composites."
+        },
+        "artifact_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Template-author semver. Major-version mismatch is fatal at load."
+        },
+        "fit_timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "RFC 3339 UTC timestamp captured by the factor_eval plugin at result-write time."
+        },
+        "fit_params": {
+          "type": "object",
+          "description": "Verbatim params used at fit time. For factor artifacts this is the resolved factor.params (post cross-walk merge)."
+        },
+        "warmup_bars": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "max(lookback, indicator-specific warmup) per TICKET_196_7_6_3 D2."
+        },
+        "files": {
+          "type": "object",
+          "description": "Empty for factor artifacts -- no on-disk fit state.",
+          "maxProperties": 0,
+          "additionalProperties": false
+        },
+        "signal_kind": {
+          "const": "factor",
+          "description": "Discriminator for the oneOf branch. TICKET_196_7_6_3 D2."
+        },
+        "engine": {
+          "type": "string",
+          "enum": ["talib", "alpha158"],
+          "description": "Phase 1 (TICKET_196_7_6_2/3): talib. Phase 2 (TICKET_196_7_6_6 Slice S8): alpha158 composite factors. alpha101 reserved for later phases."
+        },
+        "factor_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Cross-walk catalog key, e.g. ta_rsi_14."
+        },
+        "cpp_indicator_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Phase 1 (talib): denormalized from talib_factors.json at save time; loader cross-checks against live cross-walk and fail-fasts on mismatch (TICKET_196_7_6_3 Open Q2). Phase 2 (alpha158, TICKET_196_7_6_6 Slice S8): the literal 'composite' sentinel -- a composite factor has no single cpp_indicator_id (descriptor lists N primitives); the loader uses factor_id for dispatch instead."
+        },
+        "params": {
+          "type": "object",
+          "description": "Runtime parameter binding for the indicator (post-Tool-Sweep resolved)."
+        },
+        "reducer": {
+          "type": "string",
+          "enum": ["zscore", "rank", "raw"],
+          "description": "Reducer applied to per-bar indicator output (TICKET_196_7_6_2 Decision 1)."
+        },
+        "lookback": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Window for the reducer. ZScore/Rank are degenerate when <= 1; the plugin fail-fasts in that case."
+        }
+      }
+    },
+    "default_meta": {
+      "type": "object",
+      "description": "Pre-existing artifact shape consumed by HMM / n-gram / ML loaders (TICKET_196_7_0_1 Q2, TICKET_196_7_3 Decision 5). signal_kind is OPTIONAL here; when present it must be one of the non-factor values. TICKET_196_7_6_3 D3 leaves these kinds free to add signal_kind at their next artifact version bump without coordinating here.",
+      "required": [
+        "template_id",
+        "artifact_version",
+        "fit_timestamp",
+        "fit_params",
+        "warmup_bars",
+        "files"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "required": ["ml"],
+            "not": {
+              "required": ["portable"]
+            }
+          },
+          "then": {
+            "properties": {
+              "ml": {
+                "required": [
+                  "onnx_opset_version",
+                  "onnxruntime_min_version"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "properties": {
+        "template_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Registry key matching SignalSourceBaseV2.TEMPLATE_ID, e.g. 'sklearn_ridge_return_v1'."
+        },
+        "artifact_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Template-author semver per TICKET_196_7_3 Decision 4. Major-version mismatch is fatal at load."
+        },
+        "fit_timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "RFC 3339 UTC timestamp captured by save_artifact()."
+        },
+        "fit_params": {
+          "type": "object",
+          "description": "Verbatim PARAM_SCHEMA-validated params used at fit time. Shape is per-template; loaders pass this dict to the class constructor. C++ OnnxArtifactLoader reads: observable, lookback, z, window."
+        },
+        "warmup_bars": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "First N predict outputs are NaN (TICKET_196_7_0 Q5). Equal to the instance's WARMUP_BARS class attr at save time."
+        },
+        "files": {
+          "type": "object",
+          "description": "Logical-name -> relative-filename map for all artifact data files in the same directory. The C++ loader reads only the files declared here.",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "signal_kind": {
+          "type": "string",
+          "enum": ["hmm", "ngram", "ml", "llm"],
+          "description": "Optional in this branch -- pre-existing fixtures predate this field. Excludes 'factor' because factor artifacts must match the factor_meta branch."
+        },
+        "portable": {
+          "type": "object",
+          "description": "TICKET_1292_21 Phase E portable fitted state consumed by the MC-17 C++ inference owner. Pickle files may coexist only as Python fit/reference artifacts.",
+          "required": ["schema_version", "files"],
+          "additionalProperties": false,
+          "properties": {
+            "schema_version": {
+              "const": "1.0.0"
+            },
+            "files": {
+              "type": "object",
+              "minProperties": 2,
+              "additionalProperties": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "kernel": {
+              "type": "object",
+              "required": ["kind", "constant", "length_scale"],
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "enum": ["rbf", "matern", "rationalquadratic"]
+                },
+                "constant": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "length_scale": {
+                  "oneOf": [
+                    {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                      },
+                      "minItems": 1
+                    }
+                  ]
+                },
+                "nu": {
+                  "type": "number"
+                },
+                "alpha": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              }
+            },
+            "n_neighbors": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "weights": {
+              "enum": ["uniform", "distance"]
+            },
+            "metric": {
+              "enum": ["euclidean", "manhattan", "cosine"]
+            },
+            "max_samples": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "offset": {
+              "type": "number"
+            }
+          }
+        },
+        "ml": {
+          "type": "object",
+          "description": "ML-specific sub-object per TICKET_196_7_3 Decision 5. Present only when the artifact was produced by an ML signal source (sklearn / xgboost / pytorch). HMM / n-gram artifacts omit this field entirely.",
+          "required": [
+            "stack",
+            "feature_dim",
+            "target_sigma"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "stack": {
+              "type": "string",
+              "enum": ["sklearn", "pykalman", "xgboost", "pytorch", "lightgbm", "catboost"],
+              "description": "Originating ML framework -- telemetry only; the model.onnx itself is stack-agnostic at the runtime layer."
+            },
+            "onnx_opset_version": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "ONNX opset emitted by the export tool. C++ loader rejects if > runtime_max_supported_opset."
+            },
+            "onnxruntime_min_version": {
+              "type": "string",
+              "pattern": "^\\d+\\.\\d+\\.\\d+$",
+              "description": "Minimum onnxruntime version required at live runtime. Captured at fit time from the installed Python onnxruntime."
+            },
+            "feature_dim": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Number of features per input row. C++ loader validates session input shape [*, feature_dim] at construction; mismatch raises ArtifactShapeMismatch."
+            },
+            "feature_mean": {
+              "description": "Optional per-feature mean used by an out-of-graph standardization step. Null when standardization is baked into the ONNX graph (sklearn StandardScaler in Pipeline, PyTorch buffer tensor) or absent (XGBoost). Escape-hatch field reserved for future stacks per Decision 5.",
+              "oneOf": [
+                { "type": "null" },
+                {
+                  "type": "array",
+                  "items": { "type": "number" },
+                  "minItems": 1
+                }
+              ]
+            },
+            "feature_std": {
+              "description": "Optional per-feature stdev paired with feature_mean. Same null-vs-array rules.",
+              "oneOf": [
+                { "type": "null" },
+                {
+                  "type": "array",
+                  "items": { "type": "number" },
+                  "minItems": 1
+                }
+              ]
+            },
+            "target_sigma": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "description": "In-sample stdev of the regression target; sigma in tanh(z * raw / sigma) output mapping. C++ loader reads this and applies the same tanh post-processing -- the only non-ONNX math per Decision 5."
+            },
+            "d_common": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "TICKET_1096 Phase 2: embedding output dimension. When present, the ONNX model has dual-head output (score + embedding[d_common]). Absent or 0 means scalar-only output (backward compatible)."
+            }
+          }
+        }
+      }
+    }
+  },
+  "oneOf": [
+    { "$ref": "#/$defs/factor_meta" },
+    { "$ref": "#/$defs/default_meta" }
+  ]
+}

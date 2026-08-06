@@ -1,0 +1,275 @@
+{
+  "title": "Settings",
+  "sections": {
+    "general": "General",
+    "appearance": "Appearance",
+    "language": "Language",
+    "network": "Network",
+    "security": "Security",
+    "plugins": "Plugins",
+    "advanced": "Advanced",
+    "about": "About",
+    "config": "Config",
+    "credentials": "Credentials",
+    "system": "System"
+  },
+  "language": {
+    "title": "Language",
+    "description": "Select your preferred language",
+    "system": "Use system language",
+    "restart": "Restart required to apply language changes"
+  },
+  "theme": {
+    "title": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
+  },
+  "plugins": {
+    "title": "Plugin Settings",
+    "config": "Configuration",
+    "secrets": "Secrets",
+    "noConfig": "No configuration options available",
+    "noSecrets": "No secrets configured"
+  },
+  "actions": {
+    "save": "Save Settings",
+    "reset": "Reset to Defaults",
+    "export": "Export Settings",
+    "import": "Import Settings",
+    "reload": "Reload",
+    "retry": "Retry"
+  },
+  "config": {
+    "title": "System Configuration",
+    "description": "Manage application settings and preferences",
+    "configFilePath": "Configuration file path",
+    "nav": {
+      "performance": "Performance",
+      "sync": "Sync",
+      "scoreboard": "시그널 스코어보드",
+      "diagnostics": "Diagnostics",
+      "onboarding": "온보딩",
+      "privacy": "Privacy",
+      "dataRouting": "데이터 라우팅",
+      "resourceGovernance": "Resource Governance"
+    },
+    "performance": {
+      "maxBacktestTasks": "Max Backtest Tasks",
+      "maxBacktestDescription": "Concurrent backtest limit (1-32)",
+      "autoDetectTitle": "CPU core based auto-detection",
+      "autoDetect": "Auto Detect"
+    },
+    "sync": {
+      "title": "Workspace Sync",
+      "description": "Sync your workspace to a local folder (e.g., OneDrive, Google Drive, Dropbox mount)",
+      "targetFolder": "Target Folder",
+      "targetFolderDescription": "Folder path for workspace sync. Use a cloud drive mount for cross-device sync.",
+      "targetFolderPlaceholder": "Select a sync folder...",
+      "browse": "Browse",
+      "lastSynced": "Last Synced",
+      "neverSynced": "Never synced",
+      "syncNow": "Sync Now",
+      "syncing": "Syncing...",
+      "restoreFromSync": "Restore from Sync",
+      "restoring": "Restoring...",
+      "exportSuccess": "Workspace exported successfully ({{strategies}} strategies, {{algorithms}} algorithms, {{results}} results)",
+      "importSuccess": "Workspace imported successfully ({{strategies}} strategies, {{algorithms}} algorithms, {{results}} results)",
+      "confirmRestore": "This will import workspace data from the sync folder. Existing data with the same IDs will be overwritten. Continue?",
+      "errors": {
+        "noTargetDir": "Please select a target folder first",
+        "exportFailed": "Export failed: {{error}}",
+        "importFailed": "Import failed: {{error}}"
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "restore": "Restore"
+      }
+    },
+    "health": {
+      "parseError": "구성 파일 오류",
+      "parseWarning": "구성 파일 경고",
+      "usingFallback": "응용 프로그램이 마지막으로 알려진 정상 구성으로 실행 중입니다. 구성 파일을 수정하고 다시 로드하세요.",
+      "reloadFailed": "구문 분석 오류로 인해 구성을 다시 로드하지 못했습니다."
+    },
+    "scoreboard": {
+      "title": "시그널 스코어보드",
+      "description": "시그널 성능 스코어보드 설정. 변경 사항은 다음 재계산 시 적용됩니다 -- 앱 재시작이 필요하지 않습니다.",
+      "windowBars": "윈도우 바",
+      "windowBarsDescription": "IC / 샤프 / 적중률에 사용하는 롤링 윈도우 길이 ({{min}}-{{max}} 바)."
+    },
+    "dataRouting": {
+      "title": "Data routing",
+      "descriptionPrefix": "For each market, choose which data provider should be tried first. Markets with multiple eligible providers (for example,",
+      "descriptionMiddle": "served by both",
+      "descriptionAnd": "and",
+      "descriptionSuffix": ") expose a reorderable list. Single-provider markets are read-only.",
+      "moveUp": "Move {{provider}} up",
+      "moveDown": "Move {{provider}} down"
+    },
+    "resourceGovernance": {
+      "title": "Resource Governance",
+      "description": "Per-workload CPU / memory caps for sweep, factor mining, and LSTM training. Gate thresholds hot-reload; cgroup hard caps apply on the next launch of each workload.",
+      "enabled": "Enable resource governance",
+      "sweepCap": "Sweep cap (%)",
+      "miningCap": "Factor mining cap (%)",
+      "lstmCap": "LSTM training cap (%)",
+      "capDescription": "Maximum share of machine resources on the tighter of CPU / memory ({{min}}-{{max}}%).",
+      "applyNote": "Gate thresholds apply immediately. cgroup hard caps apply on the next launch of each workload.",
+      "aggregateExceeded": "Combined caps must not exceed {{max}}%.",
+      "admissionCeiling": "System admission ceiling (%)",
+      "admissionCeilingDesc": "Maximum combined peak memory including other workloads and the operating system ({{min}}-{{max}}%)."
+    }
+  },
+  "advanced": {
+    "diagnostics": {
+      "title": "Diagnostics",
+      "openLogFolder": "Open Log Folder",
+      "openLogFolderDescription": "Opens the log directory in your file manager"
+    },
+    "onboarding": {
+      "title": "온보딩",
+      "showGuides": "온보딩 가이드 표시",
+      "showGuidesDescription": "페이지를 처음 방문할 때 대화형 가이드 투어를 표시합니다.",
+      "assistantMode": "도우미 모드",
+      "assistantModeDescription": "현재 페이지에 대한 교육 콘텐츠가 포함된 도움말 패널을 표시합니다.",
+      "resetProgress": "온보딩 진행 상황 재설정",
+      "resetProgressDescription": "완료된 모든 투어를 지워서 다음 방문 시 다시 재생되도록 합니다.",
+      "resetButton": "재설정"
+    },
+    "privacy": {
+      "title": "Privacy",
+      "description": "Control what data is shared with StratCraft to help improve the application.",
+      "crashReports": "Crash Reports",
+      "crashReportsDescription": "Automatically send error and crash data to help us fix bugs. No personal data is included.",
+      "crashReportsAlwaysOn": "Crash reports are always sent to help us fix critical issues. No personal data is included.",
+      "alwaysOn": "Always On",
+      "analytics": "Send Usage Analytics",
+      "analyticsDescription": "Share anonymous usage statistics to help us improve features and performance."
+    }
+  },
+  "permissions": {
+    "title": "Permission Request",
+    "requestingPermissions": "This plugin is requesting the following permissions:",
+    "dangerousPermissions": "Dangerous Permissions",
+    "dangerousWarning": "This plugin requests elevated permissions that could affect your system security. Only approve if you trust the source.",
+    "deny": "Deny",
+    "approve": "Approve",
+    "approveAnyway": "Approve Anyway",
+    "pluginId": "Plugin ID: {{id}}",
+    "author": "Author: {{author}}"
+  },
+  "credentials": {
+    "title": "자격 증명 관리자",
+    "description": "플러그인 자격 증명을 안전하게 관리",
+    "nav": {
+      "security": "보안",
+      "credentials": "자격 증명",
+      "auditLog": "감사 로그"
+    },
+    "security": {
+      "title": "보안 상태",
+      "description": "자격 증명은 AES-256-GCM으로 암호화됩니다. 시스템 키체인 통합이 활성화되어 있습니다."
+    },
+    "actions": {
+      "setMasterPassword": "마스터 비밀번호 설정",
+      "addCredential": "자격 증명 추가",
+      "refresh": "새로고침",
+      "copyToClipboard": "클립보드에 복사",
+      "showValue": "값 표시",
+      "hideValue": "값 숨기기",
+      "deleteCredential": "자격 증명 삭제"
+    },
+    "search": {
+      "placeholder": "자격 증명 검색..."
+    },
+    "list": {
+      "title": "저장된 자격 증명",
+      "empty": "저장된 자격 증명이 없습니다",
+      "noMatch": "일치하는 자격 증명이 없습니다",
+      "addFirst": "첫 번째 자격 증명을 추가하세요"
+    },
+    "audit": {
+      "title": "최근 활동",
+      "empty": "기록된 활동이 없습니다"
+    },
+    "dialog": {
+      "add": {
+        "title": "자격 증명 추가",
+        "pluginId": "플러그인 ID",
+        "pluginIdPlaceholder": "com.example.plugin",
+        "key": "키",
+        "keyPlaceholder": "API_KEY",
+        "value": "값",
+        "valuePlaceholder": "비밀 값 입력",
+        "adding": "추가 중...",
+        "submit": "자격 증명 추가"
+      },
+      "password": {
+        "setTitle": "마스터 비밀번호 설정",
+        "enterTitle": "마스터 비밀번호 입력",
+        "setDescription": "자격 증명을 보호하기 위한 마스터 비밀번호를 설정하세요. 민감한 데이터에 접근하려면 이 비밀번호가 필요합니다.",
+        "enterDescription": "자격 증명 접근을 해제하려면 마스터 비밀번호를 입력하세요.",
+        "password": "비밀번호",
+        "passwordPlaceholder": "비밀번호 입력",
+        "confirmPassword": "비밀번호 확인",
+        "confirmPlaceholder": "비밀번호 확인",
+        "processing": "처리 중...",
+        "setButton": "비밀번호 설정",
+        "unlockButton": "잠금 해제"
+      }
+    },
+    "errors": {
+      "passwordMismatch": "비밀번호가 일치하지 않습니다",
+      "passwordTooShort": "비밀번호는 최소 8자 이상이어야 합니다",
+      "invalidPassword": "잘못된 비밀번호",
+      "setPasswordFailed": "비밀번호 설정 실패"
+    },
+    "confirmDelete": "Delete credential \"{{key}}\" from {{pluginId}}?"
+  },
+  "consent": {
+    "title": "Help Improve StratCraft",
+    "description": "StratCraft collects crash reports to fix critical issues. You can also opt in to share anonymous usage data. You can change these settings at any time in Settings > Advanced.",
+    "crashReports": "Crash Reports",
+    "crashReportsAlwaysOn": "Crash reports are always sent to help us fix critical issues. No personal data is included.",
+    "optionalDataSharing": "Optional data sharing:",
+    "analytics": "Send usage analytics",
+    "analyticsDescription": "Share anonymous usage data to help us understand how StratCraft is used and improve features.",
+    "privacyNote": "All data is anonymized before transmission. No personal information, trading data, or API keys are ever collected. You can change these preferences anytime in Settings > Advanced > Privacy.",
+    "noThanks": "No Thanks",
+    "enableSelected": "Enable Selected"
+  },
+  "secretsPanel": {
+    "verifyMissingApiKey": "API 키가 없습니다",
+    "verifyMissingCompositeKey": "API 키 ID 또는 비밀 값이 없습니다",
+    "verifyRequestFailed": "검증 요청에 실패했습니다",
+    "patternMismatch": "Value does not match expected pattern ({{pattern}})",
+    "failedToSaveKey": "Failed to save {{key}}",
+    "failedToClearKey": "Failed to clear {{key}}",
+    "failedToDeleteKey": "Failed to delete {{key}}",
+    "audit": {
+      "title": "자격 증명 감사 로그",
+      "refresh": "새로고침",
+      "loading": "로딩 중...",
+      "empty": "기록된 자격 증명 작업이 없습니다.",
+      "loadFailed": "감사 로그를 불러오지 못했습니다"
+    },
+    "apiKey": {
+      "aria": {
+        "required": "필수",
+        "hideValue": "값 숨기기",
+        "showValue": "값 표시"
+      }
+    }
+  },
+  "errors": {
+    "saveFailed": "Save failed",
+    "loadFailed": "Failed to load configuration"
+  },
+  "dataRouting": {
+    "loading": "마켓 라우팅 설정을 불러오는 중...",
+    "instructions": "각 마켓에서 목록의 첫 번째 제공자가 우선합니다. 제공자가 하나인 마켓은 읽기 전용입니다.",
+    "noProvider": "제공자 없음",
+    "singleProvider": "단일"
+  }
+}

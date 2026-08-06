@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "repositoryAliases": {
+    "@": "src/renderer",
+    "@shared": "src/shared",
+    "@plugins/data-plugin": "../../plugins/data-plugin/ui/data-nexus/src",
+    "@plugins/strategy-builder-nexus": "../../plugins/strategy-builder-nexus/src",
+    "@plugins/back-test-nexus/ui": "../../plugins/back-test-nexus/ui/src",
+    "@host/secrets": "src/renderer/components/settings/SecretsPanel/index.ts"
+  },
+  "profiles": {
+    "full": {
+      "main": {
+        "index": "src/main/index.ts",
+        "trace-copy-worker": "src/main/trace-copy-worker.ts"
+      },
+      "preload": {
+        "index": "src/preload/index.ts"
+      },
+      "renderer": {
+        "index": "src/renderer/index.html"
+      }
+    },
+    "public": {
+      "main": {
+        "index": "src/main/public-index.ts",
+        "trace-copy-worker": "src/main/trace-copy-worker.ts"
+      },
+      "preload": {
+        "index": "src/preload/index.ts"
+      },
+      "renderer": {
+        "index": "src/renderer/public-index.html"
+      }
+    }
+  }
+}

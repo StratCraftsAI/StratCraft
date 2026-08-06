@@ -1,0 +1,8 @@
+{
+    "dataFile": "fixture_data.csv",
+    "initialCash": 100000.0,
+    "commission": 0.001,
+    "fastPeriod": 10,
+    "slowPeriod": 30,
+    "symbol": "FIXTURE"
+}

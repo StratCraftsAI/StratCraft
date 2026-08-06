@@ -1,0 +1,617 @@
+{
+  "$id": "https://stratcraft.ai/schemas/research-task-spec-v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "taskId": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "projectId": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "objective": {
+      "$ref": "#/$defs/__schema2"
+    },
+    "artifactKind": {
+      "$ref": "#/$defs/__schema3"
+    },
+    "workspaceId": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "inputArtifactRefs": {
+      "$ref": "#/$defs/__schema4"
+    },
+    "dataCapabilityManifest": {
+      "$ref": "#/$defs/__schema7"
+    },
+    "toolCapabilityRequest": {
+      "$ref": "#/$defs/__schema9"
+    },
+    "commandPolicy": {
+      "$ref": "#/$defs/__schema10"
+    },
+    "resourceBudget": {
+      "$ref": "#/$defs/__schema10"
+    },
+    "researchPolicyBundle": {
+      "$ref": "#/$defs/__schema7"
+    },
+    "acceptanceProfile": {
+      "$ref": "#/$defs/__schema11"
+    },
+    "evidenceRequirements": {
+      "$ref": "#/$defs/__schema12"
+    },
+    "completionCriteria": {
+      "$ref": "#/$defs/__schema14"
+    },
+    "title": {
+      "$ref": "#/$defs/__schema16"
+    },
+    "locale": {
+      "$ref": "#/$defs/__schema17"
+    },
+    "hypothesis": {
+      "$ref": "#/$defs/__schema18"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "taskId",
+    "projectId",
+    "objective",
+    "artifactKind",
+    "workspaceId",
+    "inputArtifactRefs",
+    "dataCapabilityManifest",
+    "toolCapabilityRequest",
+    "commandPolicy",
+    "resourceBudget",
+    "researchPolicyBundle",
+    "acceptanceProfile",
+    "evidenceRequirements",
+    "completionCriteria"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "type": "number",
+      "const": 1
+    },
+    "__schema1": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "__schema2": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4000
+    },
+    "__schema3": {
+      "type": "string",
+      "enum": [
+        "strategy",
+        "signal"
+      ]
+    },
+    "__schema4": {
+      "maxItems": 128,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema5"
+      }
+    },
+    "__schema5": {
+      "type": "object",
+      "properties": {
+        "artifactId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "artifactKind": {
+          "type": "string",
+          "enum": [
+            "strategy",
+            "signal"
+          ]
+        },
+        "rootContentHash": {
+          "$ref": "#/$defs/__schema6"
+        }
+      },
+      "required": [
+        "artifactId",
+        "artifactKind",
+        "rootContentHash"
+      ],
+      "additionalProperties": false
+    },
+    "__schema6": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "__schema7": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "version": {
+          "$ref": "#/$defs/__schema8"
+        },
+        "contentHash": {
+          "$ref": "#/$defs/__schema6"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "contentHash"
+      ],
+      "additionalProperties": false
+    },
+    "__schema8": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]*$"
+    },
+    "__schema9": {
+      "type": "object",
+      "properties": {
+        "profileId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "profileVersion": {
+          "$ref": "#/$defs/__schema8"
+        },
+        "requiredSemanticCapabilities": {
+          "minItems": 1,
+          "maxItems": 256,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema1"
+          }
+        }
+      },
+      "required": [
+        "profileId",
+        "profileVersion",
+        "requiredSemanticCapabilities"
+      ],
+      "additionalProperties": false
+    },
+    "__schema10": {
+      "type": "object",
+      "properties": {
+        "policyId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "version": {
+          "$ref": "#/$defs/__schema8"
+        }
+      },
+      "required": [
+        "policyId",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "__schema11": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "version": {
+          "$ref": "#/$defs/__schema8"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "__schema12": {
+      "minItems": 1,
+      "maxItems": 256,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema13"
+      }
+    },
+    "__schema13": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "requirementId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "type": {
+              "type": "string",
+              "const": "unit_test"
+            },
+            "suiteId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "requiredPassCount": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "requirementId",
+            "type",
+            "suiteId",
+            "requiredPassCount"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "requirementId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "type": {
+              "type": "string",
+              "const": "integration_test"
+            },
+            "suiteId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "requiredPassCount": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "requirementId",
+            "type",
+            "suiteId",
+            "requiredPassCount"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "requirementId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "type": {
+              "type": "string",
+              "const": "compile"
+            },
+            "language": {
+              "type": "string",
+              "const": "cpp"
+            },
+            "standard": {
+              "type": "string",
+              "const": "c++23"
+            },
+            "abi": {
+              "type": "string",
+              "const": "v2"
+            }
+          },
+          "required": [
+            "requirementId",
+            "type",
+            "language",
+            "standard",
+            "abi"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "requirementId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "type": {
+              "type": "string",
+              "const": "backtest"
+            },
+            "benchmarkId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "requiredMetrics": {
+              "minItems": 1,
+              "maxItems": 64,
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/__schema1"
+              }
+            }
+          },
+          "required": [
+            "requirementId",
+            "type",
+            "benchmarkId",
+            "requiredMetrics"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "requirementId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "type": {
+              "type": "string",
+              "const": "statistical_validation"
+            },
+            "method": {
+              "type": "string",
+              "enum": [
+                "bh",
+                "dsr",
+                "cpcv"
+              ]
+            },
+            "policyReference": {
+              "$ref": "#/$defs/__schema10"
+            }
+          },
+          "required": [
+            "requirementId",
+            "type",
+            "method",
+            "policyReference"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "requirementId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "type": {
+              "type": "string",
+              "const": "leakage_check"
+            },
+            "policyReference": {
+              "$ref": "#/$defs/__schema10"
+            }
+          },
+          "required": [
+            "requirementId",
+            "type",
+            "policyReference"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "requirementId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "type": {
+              "type": "string",
+              "const": "resource_measurement"
+            },
+            "metric": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "boundReference": {
+              "$ref": "#/$defs/__schema10"
+            }
+          },
+          "required": [
+            "requirementId",
+            "type",
+            "metric",
+            "boundReference"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "requirementId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "type": {
+              "type": "string",
+              "const": "provenance"
+            },
+            "requiredFields": {
+              "minItems": 1,
+              "maxItems": 64,
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/__schema1"
+              }
+            }
+          },
+          "required": [
+            "requirementId",
+            "type",
+            "requiredFields"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "__schema14": {
+      "minItems": 1,
+      "maxItems": 256,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema15"
+      }
+    },
+    "__schema15": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "criterionId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "requirementId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "predicate": {
+              "type": "string",
+              "const": "passed"
+            },
+            "value": {
+              "type": "boolean",
+              "const": true
+            }
+          },
+          "required": [
+            "criterionId",
+            "requirementId",
+            "predicate",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "criterionId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "requirementId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "predicate": {
+              "type": "string",
+              "const": "gte"
+            },
+            "value": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "criterionId",
+            "requirementId",
+            "predicate",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "criterionId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "requirementId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "predicate": {
+              "type": "string",
+              "const": "lte"
+            },
+            "value": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "criterionId",
+            "requirementId",
+            "predicate",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "criterionId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "requirementId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "predicate": {
+              "type": "string",
+              "const": "equals"
+            },
+            "value": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            }
+          },
+          "required": [
+            "criterionId",
+            "requirementId",
+            "predicate",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "criterionId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "requirementId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "predicate": {
+              "type": "string",
+              "const": "present"
+            },
+            "value": {
+              "type": "boolean",
+              "const": true
+            }
+          },
+          "required": [
+            "criterionId",
+            "requirementId",
+            "predicate",
+            "value"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "__schema16": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "__schema17": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 35,
+      "pattern": "^[A-Za-z]{2,3}(?:[-_][A-Za-z0-9]{2,8})*$"
+    },
+    "__schema18": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4000
+    }
+  }
+}

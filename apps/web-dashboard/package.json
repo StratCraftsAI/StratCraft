@@ -1,0 +1,37 @@
+{
+  "name": "@stratcraft/web-dashboard",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bash start-dev.sh",
+    "dev:vite": "vite --host 0.0.0.0 --port 7790",
+    "build": "tsc --project tsconfig.build.json && vite build",
+    "typecheck": "tsc --project tsconfig.build.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@StratCraft/chat-markdown": "workspace:*",
+    "@StratCraft/types": "workspace:*",
+    "@StratCraft/workload-prelaunch": "workspace:*",
+    "@simplewebauthn/browser": "^13.2.2",
+    "i18next": "^23.16.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-i18next": "^14.1.0",
+    "zustand": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.5.2",
+    "jsdom": "^25.0.1",
+    "playwright": "1.59.0",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vitest": "^3.2.4"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "envelope": {
+    "envelopeVersion": "1",
+    "schemaVersion": "1.0.0",
+    "mandateId": "mandate-1303-100",
+    "taskId": "task-1303-100-a",
+    "taskKind": "strategy-research",
+    "objectiveClassification": "risk-controlled-alpha",
+    "artifact": {
+      "type": "strategy",
+      "rootHash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "runtime": {
+      "runtimeId": "stratcraft",
+      "adapterClass": "StratCraftAgentAdapter",
+      "adapterVersion": "1.0.0",
+      "nativeVersion": "1.0.0"
+    },
+    "policies": [
+      {
+        "id": "standard_signal",
+        "version": "v2026.07.1",
+        "hash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    ],
+    "gates": [
+      {
+        "gateName": "schema",
+        "version": "1.0",
+        "passed": true,
+        "evidenceHash": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "summary": {
+          "checkedFields": 8,
+          "violations": 0
+        }
+      }
+    ],
+    "dependencyHashes": [
+      "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+    ],
+    "privacyClassification": "internal-metadata",
+    "envelopeByteCount": 1004
+  },
+  "canonical": "{\"artifact\":{\"rootHash\":\"sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"type\":\"strategy\"},\"dependencyHashes\":[\"sha256:1111111111111111111111111111111111111111111111111111111111111111\",\"sha256:2222222222222222222222222222222222222222222222222222222222222222\"],\"envelopeByteCount\":1004,\"envelopeVersion\":\"1\",\"gates\":[{\"evidenceHash\":\"sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\",\"gateName\":\"schema\",\"passed\":true,\"summary\":{\"checkedFields\":8,\"violations\":0},\"version\":\"1.0\"}],\"mandateId\":\"mandate-1303-100\",\"objectiveClassification\":\"risk-controlled-alpha\",\"policies\":[{\"hash\":\"sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"id\":\"standard_signal\",\"version\":\"v2026.07.1\"}],\"privacyClassification\":\"internal-metadata\",\"runtime\":{\"adapterClass\":\"StratCraftAgentAdapter\",\"adapterVersion\":\"1.0.0\",\"nativeVersion\":\"1.0.0\",\"runtimeId\":\"stratcraft\"},\"schemaVersion\":\"1.0.0\",\"taskId\":\"task-1303-100-a\",\"taskKind\":\"strategy-research\"}",
+  "hash": "sha256:f7bd371c214f5741b92f3865f40149cacbd578a805379aa3e7ddd80542b23662"
+}

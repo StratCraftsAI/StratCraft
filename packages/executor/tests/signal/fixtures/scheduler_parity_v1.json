@@ -1,0 +1,442 @@
+{
+  "version": 1,
+  "note": "MC-12 scheduler golden: plan_batch envelopes + retry/resume decisions",
+  "plan": [
+    {
+      "label": "nonasha_fresh_dispatch_head",
+      "input": {
+        "kind": "plan",
+        "request": {
+          "armCount": 5,
+          "concurrency": 2
+        },
+        "outcomes": []
+      },
+      "expected": {
+        "version": 1,
+        "phase": "rung0",
+        "dispatch": [
+          1,
+          2
+        ],
+        "barrierKept": [],
+        "barrierKilled": [],
+        "barrier": null,
+        "failed": [],
+        "resolved": 0,
+        "total": 5
+      }
+    },
+    {
+      "label": "asha_fresh_rung0",
+      "input": {
+        "kind": "plan",
+        "request": {
+          "armCount": 15,
+          "concurrency": 3,
+          "ashaKill": true
+        },
+        "outcomes": []
+      },
+      "expected": {
+        "version": 1,
+        "phase": "rung0",
+        "dispatch": [
+          1,
+          2,
+          3
+        ],
+        "barrierKept": [],
+        "barrierKilled": [],
+        "barrier": null,
+        "failed": [],
+        "resolved": 0,
+        "total": 15
+      }
+    },
+    {
+      "label": "asha_barrier_to_rung1",
+      "input": {
+        "kind": "plan",
+        "request": {
+          "armCount": 15,
+          "concurrency": 3,
+          "ashaKill": true
+        },
+        "outcomes": [
+          {
+            "armOrdinal": 1,
+            "status": "ok",
+            "rung": 0,
+            "fold0Score": 0.99,
+            "fold0Trades": 100.0
+          },
+          {
+            "armOrdinal": 2,
+            "status": "ok",
+            "rung": 0,
+            "fold0Score": 0.98,
+            "fold0Trades": 100.0
+          },
+          {
+            "armOrdinal": 3,
+            "status": "ok",
+            "rung": 0,
+            "fold0Score": 0.97,
+            "fold0Trades": 100.0
+          },
+          {
+            "armOrdinal": 4,
+            "status": "ok",
+            "rung": 0,
+            "fold0Score": 0.96,
+            "fold0Trades": 100.0
+          },
+          {
+            "armOrdinal": 5,
+            "status": "ok",
+            "rung": 0,
+            "fold0Score": 0.95,
+            "fold0Trades": 100.0
+          },
+          {
+            "armOrdinal": 6,
+            "status": "ok",
+            "rung": 0,
+            "fold0Score": 0.94,
+            "fold0Trades": 100.0
+          },
+          {
+            "armOrdinal": 7,
+            "status": "ok",
+            "rung": 0,
+            "fold0Score": 0.9299999999999999,
+            "fold0Trades": 100.0
+          },
+          {
+            "armOrdinal": 8,
+            "status": "ok",
+            "rung": 0,
+            "fold0Score": 0.92,
+            "fold0Trades": 100.0
+          },
+          {
+            "armOrdinal": 9,
+            "status": "ok",
+            "rung": 0,
+            "fold0Score": 0.91,
+            "fold0Trades": 100.0
+          },
+          {
+            "armOrdinal": 10,
+            "status": "ok",
+            "rung": 0,
+            "fold0Score": 0.9,
+            "fold0Trades": 100.0
+          },
+          {
+            "armOrdinal": 11,
+            "status": "ok",
+            "rung": 0,
+            "fold0Score": 0.89,
+            "fold0Trades": 100.0
+          },
+          {
+            "armOrdinal": 12,
+            "status": "ok",
+            "rung": 0,
+            "fold0Score": 0.88,
+            "fold0Trades": 100.0
+          },
+          {
+            "armOrdinal": 13,
+            "status": "ok",
+            "rung": 0,
+            "fold0Score": 0.87,
+            "fold0Trades": 100.0
+          },
+          {
+            "armOrdinal": 14,
+            "status": "ok",
+            "rung": 0,
+            "fold0Score": 0.86,
+            "fold0Trades": 100.0
+          },
+          {
+            "armOrdinal": 15,
+            "status": "ok",
+            "rung": 0,
+            "fold0Score": 0.85,
+            "fold0Trades": 100.0
+          }
+        ]
+      },
+      "expected": {
+        "version": 1,
+        "phase": "rung1",
+        "dispatch": [
+          1,
+          2,
+          3
+        ],
+        "barrierKept": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "barrierKilled": [
+          13,
+          14,
+          15
+        ],
+        "barrier": {
+          "rankedCount": 15,
+          "unscoredCount": 0,
+          "keepCount": 12,
+          "floor": 12,
+          "guardBar": null,
+          "guardSavedCount": 0
+        },
+        "failed": [],
+        "resolved": 3,
+        "total": 15
+      }
+    },
+    {
+      "label": "cancelled_drains",
+      "input": {
+        "kind": "plan",
+        "request": {
+          "armCount": 8,
+          "concurrency": 3,
+          "cancelled": true
+        },
+        "outcomes": []
+      },
+      "expected": {
+        "version": 1,
+        "phase": "cancelled",
+        "dispatch": [],
+        "barrierKept": [],
+        "barrierKilled": [],
+        "barrier": null,
+        "failed": [],
+        "resolved": 0,
+        "total": 8
+      }
+    },
+    {
+      "label": "nonasha_all_done",
+      "input": {
+        "kind": "plan",
+        "request": {
+          "armCount": 3,
+          "concurrency": 2
+        },
+        "outcomes": [
+          {
+            "armOrdinal": 1,
+            "status": "ok",
+            "rung": 0
+          },
+          {
+            "armOrdinal": 2,
+            "status": "ok",
+            "rung": 0
+          },
+          {
+            "armOrdinal": 3,
+            "status": "ok",
+            "rung": 0
+          }
+        ]
+      },
+      "expected": {
+        "version": 1,
+        "phase": "done",
+        "dispatch": [],
+        "barrierKept": [],
+        "barrierKilled": [],
+        "barrier": null,
+        "failed": [],
+        "resolved": 3,
+        "total": 3
+      }
+    }
+  ],
+  "retryClassify": [
+    {
+      "label": "io_failed_retryable",
+      "input": {
+        "kind": "retry-classify",
+        "status": "io_failed"
+      },
+      "expected": {
+        "version": 1,
+        "retryable": true
+      }
+    },
+    {
+      "label": "timeout_retryable",
+      "input": {
+        "kind": "retry-classify",
+        "status": "timeout"
+      },
+      "expected": {
+        "version": 1,
+        "retryable": true
+      }
+    },
+    {
+      "label": "spawn_failed_retryable",
+      "input": {
+        "kind": "retry-classify",
+        "status": "spawn_failed"
+      },
+      "expected": {
+        "version": 1,
+        "retryable": true
+      }
+    },
+    {
+      "label": "fit_failed_not",
+      "input": {
+        "kind": "retry-classify",
+        "status": "fit_failed"
+      },
+      "expected": {
+        "version": 1,
+        "retryable": false
+      }
+    },
+    {
+      "label": "invalid_params_not",
+      "input": {
+        "kind": "retry-classify",
+        "status": "invalid_params"
+      },
+      "expected": {
+        "version": 1,
+        "retryable": false
+      }
+    },
+    {
+      "label": "failed_not",
+      "input": {
+        "kind": "retry-classify",
+        "status": "failed"
+      },
+      "expected": {
+        "version": 1,
+        "retryable": false
+      }
+    },
+    {
+      "label": "manifest_invalid_not",
+      "input": {
+        "kind": "retry-classify",
+        "status": "manifest_invalid"
+      },
+      "expected": {
+        "version": 1,
+        "retryable": false
+      }
+    },
+    {
+      "label": "insufficient_symbols_not",
+      "input": {
+        "kind": "retry-classify",
+        "status": "insufficient_symbols"
+      },
+      "expected": {
+        "version": 1,
+        "retryable": false
+      }
+    },
+    {
+      "label": "mixed_calendar_rejected_not",
+      "input": {
+        "kind": "retry-classify",
+        "status": "mixed_calendar_rejected"
+      },
+      "expected": {
+        "version": 1,
+        "retryable": false
+      }
+    },
+    {
+      "label": "cancelled_not",
+      "input": {
+        "kind": "retry-classify",
+        "status": "cancelled"
+      },
+      "expected": {
+        "version": 1,
+        "retryable": false
+      }
+    }
+  ],
+  "resumeSkip": [
+    {
+      "label": "ok_match_skips",
+      "input": {
+        "kind": "resume-skip",
+        "hasPrior": true,
+        "priorOk": true,
+        "fingerprintMatch": true
+      },
+      "expected": {
+        "version": 1,
+        "skip": true
+      }
+    },
+    {
+      "label": "no_prior_runs",
+      "input": {
+        "kind": "resume-skip",
+        "hasPrior": false,
+        "priorOk": true,
+        "fingerprintMatch": true
+      },
+      "expected": {
+        "version": 1,
+        "skip": false
+      }
+    },
+    {
+      "label": "prior_failed_refits",
+      "input": {
+        "kind": "resume-skip",
+        "hasPrior": true,
+        "priorOk": false,
+        "fingerprintMatch": true
+      },
+      "expected": {
+        "version": 1,
+        "skip": false
+      }
+    },
+    {
+      "label": "fp_mismatch_refits",
+      "input": {
+        "kind": "resume-skip",
+        "hasPrior": true,
+        "priorOk": true,
+        "fingerprintMatch": false
+      },
+      "expected": {
+        "version": 1,
+        "skip": false
+      }
+    }
+  ]
+}

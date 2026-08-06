@@ -1,0 +1,1150 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "initializing": "Initializing...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "dismiss": "關閉",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "reset": "Reset",
+    "search": "Search",
+    "filter": "Filter",
+    "refresh": "Refresh",
+    "export": "Export",
+    "import": "Import",
+    "enable": "Enable",
+    "disable": "Disable",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "apply": "Apply",
+    "retry": "Retry",
+    "later": "Later",
+    "tryAgain": "Try again",
+    "login": "Login",
+    "logout": "Logout",
+    "signOut": "Sign Out",
+    "upgradePlan": "Upgrade Plan",
+    "signingOut": "Signing out...",
+    "loggingIn": "Logging in...",
+    "home": "Home",
+    "pluginSettings": "Plugin Settings",
+    "loginSignup": "Login / Sign Up"
+  },
+  "compilation": {
+    "compiled": "已編譯",
+    "failed": "編譯失敗",
+    "noOutput": "未提供編譯器輸出。",
+    "retry": "重試",
+    "compiling": "編譯中...",
+    "showRawOutput": "顯示原始輸出"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "strategies": "Strategies",
+    "backtest": "Backtest",
+    "marketplace": "Marketplace",
+    "settings": "Settings",
+    "data": "Data",
+    "nexusHub": "Nexus Hub",
+    "strategyStudio": "Strategy Studio",
+    "strategyBuilder": "StratForge",
+    "backtestNexus": "Backtester",
+    "dataNexus": "Data Nexus",
+    "pluginMarketplace": "Plugin Marketplace",
+    "chart": "Chart",
+    "aiAssistant": "AI Assistant",
+    "result": "Result"
+  },
+  "status": {
+    "online": "Online",
+    "offline": "Offline",
+    "connecting": "Connecting...",
+    "checking": "檢查中...",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "error": "Error",
+    "ready": "Ready",
+    "pending": "Pending",
+    "running": "Running",
+    "completed": "Completed",
+    "failed": "Failed",
+    "notConfigured": "憑證未設定 — 前往 設定 > 憑證"
+  },
+  "dialog": {
+    "confirmDelete": "Are you sure you want to delete this item?",
+    "unsavedChanges": "You have unsaved changes. Discard them?",
+    "confirmAction": "Are you sure you want to proceed?"
+  },
+  "time": {
+    "now": "Now",
+    "today": "Today",
+    "yesterday": "昨天",
+    "ago": "ago"
+  },
+  "auth": {
+    "loginTo": "Login to {{provider}}",
+    "loginToUnlock": "Login to Unlock",
+    "loginRequired": "需要登入",
+    "viewPlans": "View Plans",
+    "plan": "{{plan}} Plan",
+    "needHelp": "Need help? Contact support at support@StratCraft.io",
+    "loginRequiredBanner": "Login required to use this feature.",
+    "clickToLogin": "Log In",
+    "credits": "Credits: {{remaining}} / {{total}}",
+    "creditsRemaining": "Credits: {{remaining}}",
+    "renews": "Renews: {{date}}",
+    "passwordPlaceholder": "密碼",
+    "inline": {
+      "hero": {
+        "badge": "量化研究工作台",
+        "heading": "在單一受控的工作台中建構、測試並交付交易系統。",
+        "tagline": "為需要更快驗證想法、更清晰執行流程,以及更貼近操作控制台 (而非行銷頁面) 的量化團隊與獨立研究者所設計。",
+        "pillars": {
+          "workflows": {
+            "title": "AI 策略工作流",
+            "description": "將市場想法轉化為結構化研究、訊號與可部署的交易邏輯。"
+          },
+          "backtesting": {
+            "title": "內建回測",
+            "description": "上線前以資料、稽核軌跡與執行感知模擬驗證想法。"
+          },
+          "controls": {
+            "title": "營運級控管",
+            "description": "在安全的桌面工作台中管理資料、憑證、外掛與執行編排。"
+          }
+        },
+        "stats": {
+          "multistep": {
+            "value": "多步驟",
+            "label": "從研究到執行的全流程"
+          },
+          "desktopNative": {
+            "value": "桌面原生",
+            "label": "為嚴謹量化打造的工作台"
+          },
+          "secure": {
+            "value": "安全可控",
+            "label": "認證、外掛與本機控制"
+          }
+        }
+      },
+      "email": {
+        "heading": "登入或免費註冊帳號",
+        "description": "輸入電子郵件以繼續。新帳號將自動建立。若已有密碼帳號,可改用密碼登入。",
+        "secureAccess": "安全存取",
+        "emailVerification": "電子郵件驗證",
+        "placeholder": "you@example.com",
+        "continueButton": "使用電子郵件繼續",
+        "sending": "正在傳送..."
+      },
+      "method": {
+        "password": {
+          "title": "使用密碼",
+          "description": "適用於使用電子郵件 + 密碼登入的回訪使用者。"
+        },
+        "browser": {
+          "title": "在瀏覽器中登入",
+          "description": "透過託管的驗證流程繼續,並使用完整的帳號控制。"
+        }
+      },
+      "footer": "免費開始使用,無需信用卡。繼續即表示您進入 StratCraft 工作台,用於策略設計、回測、外掛擴充與受控執行。",
+      "code": {
+        "heading": "請查收電子郵件",
+        "sentTo": "我們已向 {{email}} 寄送 6 位驗證碼",
+        "verifying": "正在驗證...",
+        "changeEmail": "更換電子郵件",
+        "resendCountdown": "{{seconds}} 秒後可重新傳送",
+        "resendCode": "重新傳送",
+        "otherWays": "其他登入方式",
+        "usePassword": "使用密碼登入",
+        "loginWithBrowser": "在瀏覽器中登入"
+      },
+      "password": {
+        "heading": "使用密碼登入",
+        "description": "輸入您的電子郵件與密碼",
+        "emailPlaceholder": "you@example.com",
+        "loginButton": "登入",
+        "loggingIn": "登入中...",
+        "switchToCode": "改用驗證碼"
+      },
+      "errors": {
+        "invalidEmail": "請輸入有效的電子郵件地址",
+        "sendCodeFailed": "驗證碼傳送失敗",
+        "networkError": "網路錯誤",
+        "invalidCode": "驗證碼無效",
+        "resendFailed": "重新傳送失敗",
+        "invalidCredentials": "認證資訊無效"
+      }
+    }
+  },
+  "plugin": {
+    "error": "Plugin Error",
+    "errorOccurred": "An error occurred in the plugin",
+    "loadingPlugin": "Loading {{title}}...",
+    "failedToLoad": "Failed to load plugin: {{error}}",
+    "sandboxError": "Sandbox error: {{error}}"
+  },
+  "permissions": {
+    "unknownPermission": "未知權限",
+    "title": "Permission Request",
+    "requestingPermissions": "This plugin is requesting the following permissions:",
+    "dangerousPermissions": "Dangerous Permissions",
+    "dangerousWarning": "This plugin requests elevated permissions that could affect your system security. Only approve if you trust the source.",
+    "deny": "Deny",
+    "approve": "Approve",
+    "approveAnyway": "Approve Anyway",
+    "pluginId": "Plugin ID",
+    "author": "Author",
+    "riskLevels": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "dangerous": "Dangerous",
+      "unknown": "Unknown"
+    }
+  },
+  "locked": {
+    "requiresTier": "This feature requires {{tier}} tier access",
+    "serviceEnabled": "You've enabled this service. It will automatically activate when you upgrade to {{tier}} tier."
+  },
+  "toolbar": {
+    "logo": "Logo",
+    "systemSettings": "System Settings",
+    "researchEnvironment": "Research Environment"
+  },
+  "error": {
+    "somethingWentWrong": "Something went wrong",
+    "unexpectedError": "An unexpected error occurred",
+    "viewNotFound": "View not found: {{view}}",
+    "editorNotFound": "Editor not found for: {{feature}}"
+  },
+  "view": {
+    "loadingView": "載入視圖中...",
+    "errorPrefix": "錯誤: {{error}}",
+    "unknownViewType": "未知的視圖類型",
+    "noProvider": "沒有視圖提供者: {{viewId}}",
+    "noViewSelected": "未設置視圖",
+    "failedToLoad": "視圖載入失敗"
+  },
+  "tier": {
+    "free": "FREE",
+    "basic": "BASIC",
+    "pro": "PRO",
+    "gold": "GOLD"
+  },
+  "nexusHub": {
+    "initializingSystems": "Initializing Core Systems...",
+    "connectTheAlpha": "CONNECT THE ALPHA",
+    "strategy": "STRATEGY",
+    "backtest": "BACKTEST",
+    "strategyModule": "Strategy Module",
+    "backtestModule": "Backtest Module",
+    "strategyDescription": "Algorithmic strategy generation and logic execution",
+    "backtestDescription": "High-performance C++ backtest engine with integrated data loading",
+    "noLink": "NO {{title}} LINK",
+    "noModulesAvailable": "No Modules Available",
+    "linking": "LINKING",
+    "registry": "Registry",
+    "deactivate": "Deactivate",
+    "systemActive": "SYSTEM_ACTIVE",
+    "moduleStandby": "MODULE_STANDBY",
+    "emptySlot": "EMPTY SLOT",
+    "modules": "Modules",
+    "modulesDescription": "Available plugins for strategy research, testing, and trading"
+  },
+  "strategyStudio": {
+    "strategyNona": "STRATEGY NONA",
+    "advanced": "ADVANCED",
+    "mode": "MODE"
+  },
+  "breadcrumb": {
+    "nexusHub": "Nexus Hub"
+  },
+  "banner": {
+    "apiKey": {
+      "message": "AI 功能需要設定 API 金鑰或訂閱 PRO 版本",
+      "configureKey": "設定金鑰",
+      "loginUpgrade": "登入並升級",
+      "upgrade": "升級",
+      "dismiss": "關閉"
+    }
+  },
+  "modal": {
+    "defaultConfirmTitle": "確認",
+    "defaultInfoTitle": "提示",
+    "defaultOkText": "確定",
+    "defaultCancelText": "取消",
+    "close": "關閉",
+    "configureApiKey": "設定API金鑰",
+    "defaultDestructiveTitle": "Confirm Delete"
+  },
+  "dataManagement": {
+    "title": "資料管理",
+    "tabs": {
+      "catalog": "資料目錄",
+      "downloadQueue": "下載佇列",
+      "import": "匯入"
+    },
+    "stats": {
+      "totalSize": "總大小",
+      "totalRows": "總列數",
+      "symbols": "標的數",
+      "providers": "資料源",
+      "segments": "{{count}} 個分片"
+    },
+    "catalog": {
+      "searchSymbol": "搜尋標的...",
+      "allProviders": "全部資料源",
+      "allIntervals": "全部週期",
+      "deleteCount": "刪除 ({{count}})",
+      "refresh": "重新整理",
+      "totalSegments": "{{count}} 個分片",
+      "columnSymbol": "標的",
+      "columnInterval": "週期",
+      "columnDateRange": "日期範圍",
+      "columnRows": "列數",
+      "columnSize": "大小",
+      "loading": "載入中...",
+      "noData": "未找到快取資料分片",
+      "deleteSegment": "刪除分片",
+      "groupSummary": "{{symbols}} 個標的 | {{segments}} 個分片 | {{size}}"
+    },
+    "download": {
+      "newDownload": "新增下載",
+      "provider": "資料源",
+      "symbol": "標的",
+      "searchSymbol": "搜尋標的...",
+      "interval": "週期",
+      "start": "開始",
+      "end": "結束",
+      "addToQueue": "加入佇列",
+      "noTasks": "下載佇列為空",
+      "columnSymbol": "標的",
+      "columnInterval": "週期",
+      "columnProvider": "資料源",
+      "columnStatus": "狀態",
+      "columnProgress": "進度",
+      "cancel": "取消",
+      "maxLookback": "最大回溯 {{limit}}",
+      "intervalSetTo": "{{provider}}: 已為 {{symbol}} 設定週期為 {{interval}}",
+      "lookbackAdjusted": "{{provider}} {{interval}} 最大回溯: {{limit}} -- 開始日期已調整為 {{date}}",
+      "switchedInterval": "已切換為 {{interval}} -- {{oldInterval}} 超出最大回溯",
+      "lookbackError": "{{provider}} {{interval}} 最大回溯為 {{limit}}。請調整開始日期或選擇更粗的週期。"
+    },
+    "import": {
+      "title": "匯入資料包",
+      "subtitle": "將使用者提供的歷史資料包（MySQL / SQLite / PostgreSQL）一次性匯入本機快取。匯入後該資料包即可在 Alpha Factory 中作為資料源選擇。",
+      "packageName": "資料包名稱",
+      "packageNamePlaceholder": "例如 cn-a-share-2024",
+      "dialect": "來源資料庫類型",
+      "connection": "連線",
+      "connectionPlaceholder": "SQLite 檔案路徑，或 host=... user=... database=...",
+      "adjustMode": "復權模式",
+      "adjustModeHint": "每個資料包僅聲明一次。回測通常選擇 hfq（後復權）。",
+      "adjustModes": {
+        "none": "none（不復權）",
+        "qfq": "qfq（前復權）",
+        "hfq": "hfq（後復權）"
+      },
+      "run": "匯入",
+      "importing": "匯入中...",
+      "progressSeries": "{{symbol}} {{interval}}（{{index}}/{{total}}）",
+      "complete": "已匯入 {{count}} 條序列",
+      "importedPackages": "已匯入資料包",
+      "empty": "暫無已匯入的資料包。",
+      "table": {
+        "col": {
+          "symbol": "代碼",
+          "interval": "週期",
+          "from": "開始",
+          "to": "結束",
+          "rows": "列數"
+        }
+      }
+    },
+    "importPackage": {
+      "title": "匯入資料包",
+      "subtitle": "從 Parquet 檔案目錄或 DuckDB 檔案匯入資料包。在資料包目錄中放置 manifest.json 以聲明 schema、時區和復權模式。",
+      "selectDirectory": "選擇目錄",
+      "selectDuckDb": "選擇 DuckDB 檔案",
+      "comingSoon": "目錄和 DuckDB 匯入將在 TICKET_308_3_3 實現。",
+      "importFailed": "Import failed."
+    },
+    "maxLookback": "最多回溯 {{limit}}",
+    "callerBadge": {
+      "sweep": "Sweep",
+      "backtest": "Backtest",
+      "discovery": "Discovery",
+      "validation": "Validation",
+      "scoreboard": "Scoreboard",
+      "restore": "Restore"
+    }
+  },
+  "backtestConsole": {
+    "title": "回測控制台",
+    "noTasks": "無回測任務",
+    "cancelAllQueued": "取消所有排隊",
+    "clearFinished": "清除已完成",
+    "stopBacktest": "停止回測",
+    "viewResult": "查看結果",
+    "removeFromQueue": "從隊列移除",
+    "removeFromList": "從列表移除",
+    "status": {
+      "preparing": "準備中",
+      "running": "運行中",
+      "queued": "排隊中",
+      "queuedPosition": "排隊 #{{position}}",
+      "completed": "已完成",
+      "failed": "失敗",
+      "cancelled": "已取消"
+    },
+    "summary": {
+      "running": "運行中",
+      "queued": "排隊中",
+      "done": "已完成",
+      "failed": "失敗"
+    },
+    "taskLabel": "任務:",
+    "openConsole": "打開回測控制台",
+    "viewDownloadQueue": "查看下載隊列",
+    "openAlphaFactoryConsole": "打開 Alpha Factory 控制台",
+    "lstmStatus": {
+      "phase": {
+        "boot": "啟動中",
+        "load_traces": "載入軌跡",
+        "build_matrix": "建構矩陣",
+        "build_windows": "建構視窗"
+      },
+      "foldEpoch": "折 {{fold}}/{{totalFolds}} 輪次 {{epoch}}/{{totalEpochs}}",
+      "training": "訓練中",
+      "completed": "已訓練",
+      "failed": "訓練失敗",
+      "tooltip": "LSTM 訓練 {{run}} - {{model}} - {{signals}} 個訊號",
+      "tooltipGeneric": "檢視 LSTM 訓練進度"
+    }
+  },
+  "symbolSearch": {
+    "placeholder": "Search symbol...",
+    "authRequired": "Please log in to search symbols",
+    "serviceUnavailable": "Service unavailable",
+    "credentialError": "驗證失敗。請在設定中檢查您的 API 憑證。",
+    "truncated": "顯示 {{total}} 中的 {{count}} 項 -- 請細化搜尋"
+  },
+  "llmSelector": {
+    "platformProvider": "Platform provider - no API key required",
+    "verified": "API key verified",
+    "unverified": "API key not verified - may fail",
+    "selectProvider": "Select LLM Provider",
+    "providerHeader": "Provider",
+    "modelHeader": "Model",
+    "customModelExpand": "使用自訂模型",
+    "customModelCollapse": "隱藏自訂模型",
+    "customModelPlaceholder": "輸入模型ID...",
+    "customModelEmpty": "模型ID不能為空",
+    "customModelNoSpaces": "模型ID不能包含空格",
+    "customModelAsciiOnly": "模型ID只能使用ASCII字元",
+    "proFallback": "Pro"
+  },
+  "installConsent": {
+    "trustLevels": {
+      "official": "官方",
+      "verified": "已驗証",
+      "unverified": "未驗証",
+      "unsigned": "未簽章"
+    },
+    "publisher": "發布者",
+    "unknown": "未知",
+    "update": "更新",
+    "install": "安裝",
+    "version": "版本",
+    "from": "來自",
+    "unsignedPlugin": "未簽章的外掛程式",
+    "unsignedMessage": "此外掛程式未簽章，無法驗証。僅當您自己建立或從可信來源收到時才安裝。",
+    "unverifiedPublisher": "未驗証的發布者",
+    "unverifiedMessage": "此外掛程式已簽章，但發布者未經 StratCraft 驗証。請謹慎進行。",
+    "highRiskPermissions": "高風險權限",
+    "highRiskMessage": "此外掛程式要求可能影響系統的提升權限。僅當您信任發布者時才安裝。",
+    "permissionsRequested": "要求的權限",
+    "noPermissions": "此外掛程式不需要任何特殊權限。",
+    "understandRisks": "我了解這些風險",
+    "riskAcknowledgment": "安裝未簽章或原生的外掛程式可能會帶來安全風險。我已驗証來源並對此操作負責。",
+    "iUnderstandInstall": "我了解了，安裝",
+    "fileSystem": "檔案系統",
+    "id": "ID:",
+    "publisherLabel": "發布者:"
+  },
+  "strategy": {
+    "categories": {
+      "regimeMode": "Regime Mode",
+      "kronosMode": "Kronos Mode",
+      "traderMode": "Trader Mode",
+      "riskManager": "Risk Manager",
+      "aiCommandCenter": "AI Command Center",
+      "autopilotMode": "自動駕駛模式",
+      "aiStrategyStudio": "Strategy Studio",
+      "chatMode": "聊天模式",
+      "catalogMode": "策略目錄"
+    },
+    "descriptions": {
+      "regimeMode": "Market environment and regime classification units",
+      "kronosMode": "Time-series prediction and sequential analysis",
+      "traderMode": "Market observation and trade execution logic",
+      "riskManager": "Risk management and exit strategy generation",
+      "aiCommandCenter": "Centralized AI control and autonomous agents",
+      "autopilotMode": "AI 驅動的全自主交易決策",
+      "aiStrategyStudio": "AI-powered strategy studio for comprehensive strategy creation",
+      "chatMode": "透過聊天進行對話式 AI 策略創建",
+      "catalogMode": "瀏覽並從 63 個成熟交易策略中生成 C++ 策略代碼"
+    },
+    "hub": {
+      "loadingTopology": "Loading service topology...",
+      "noPlugins": "No plugins configured",
+      "installPlugins": "Install plugins from the Marketplace to enable services",
+      "active": "Active",
+      "syncWorkspace": "Sync Workspace",
+      "loginToNona": "Login to Nona",
+      "demo": {
+        "_comment": "Hub placeholder copy: unbuilt-feature demo data rendered by StrategyGroupList / ProviderStatusPanel / ProviderPortal. Remove these keys when the hub is wired to real strategy/provider registries.",
+        "generators": {
+          "regimeTrendX1": "Regime Trend X1",
+          "volAdaptiveBeta": "Vol-Adaptive Beta",
+          "crossSessArbitrage": "Cross-Sess Arbitrage",
+          "cnnSentimentAlpha": "CNN Sentiment Alpha",
+          "highFreqScalperV4": "High-Freq Scalper V4"
+        },
+        "lastRun": {
+          "twoMinAgo": "2m ago",
+          "oneHourAgo": "1h ago",
+          "active": "Active",
+          "failed": "Failed",
+          "fiveMinAgo": "5m ago",
+          "fifteenMinAgo": "15m ago"
+        },
+        "providers": {
+          "pro": "Pro",
+          "quant": "Quant",
+          "alpha": "Alpha"
+        },
+        "templates": {
+          "trendFollowing": "Trend Following",
+          "meanReversion": "Mean Reversion",
+          "marketMaking": "Market Making",
+          "statArbitrage": "Statistical Arbitrage"
+        }
+      }
+    },
+    "tier": {
+      "free": "Free",
+      "basic": "Basic",
+      "pro": "Pro",
+      "enterprise": "Enterprise"
+    },
+    "groupList": {
+      "groupTitle": "GROUP: TREND_FOLLOWING_PACK",
+      "providerRegion": "Provider: NONA // Region: ASIA_PACIFIC",
+      "runAll": "全部執行",
+      "configPack": "設定套件",
+      "colId": "ID",
+      "colName": "名稱",
+      "colStatus": "狀態",
+      "col7dPnl": "7日損益",
+      "colCpu": "CPU",
+      "colLastActivity": "最後活動",
+      "colActions": "操作"
+    },
+    "providerPortal": {
+      "licenseValid": "授權有效",
+      "availableStrategies": "可用的策略",
+      "activeGenerators": "活躍生成器",
+      "deployment": "部署",
+      "executionLogs": "執行日誌",
+      "info": "資訊",
+      "initializedMessage": "{{provider}} 核心引擎環境初始化成功...",
+      "moduleStatus": "模組狀態",
+      "ready": "就緒"
+    },
+    "performanceChart": {
+      "title": "績效概覽",
+      "subtitle": "過去30天 - 全部提供者",
+      "chartPending": "圖表整合待處理",
+      "chartPendingHint": "整合 recharts 或 visx 進行資料視覺化",
+      "winRate": "勝率",
+      "sharpeRatio": "夏普比率",
+      "totalReturn": "總收益"
+    },
+    "audit": {
+      "title": "Audit Report",
+      "description": "Strategy generation quality scoring",
+      "recentAudits": "Recent Audits",
+      "noData": "No audit data available yet",
+      "colProvider": "Provider",
+      "colModel": "Model",
+      "colAlgorithm": "Algorithm",
+      "colSignalSource": "Signal Source",
+      "colScore": "Score",
+      "colRating": "Rating",
+      "colDate": "Date"
+    }
+  },
+  "alphaFactoryConsole": {
+    "title": "Alpha Factory 控制台",
+    "active": "活躍:",
+    "total": "總計:",
+    "noTasks": "無任務",
+    "clearFinished": "清除已完成",
+    "viewTask": "檢視任務",
+    "removeFromQueue": "從佇列移除",
+    "removeFromList": "從列表移除",
+    "status": {
+      "preparing": "準備中",
+      "queued": "排隊中",
+      "running": "執行中",
+      "done": "已完成",
+      "failed": "失敗",
+      "cancelled": "已取消"
+    }
+  },
+  "backtestQueue": {
+    "title": "回測佇列",
+    "running": "執行中",
+    "view": "檢視",
+    "cancel": "取消",
+    "pending": "待處理",
+    "remove": "移除",
+    "noTasks": "無回測任務",
+    "cancelAll": "全部取消"
+  },
+  "llmEstimate": {
+    "title": "LLM 呼叫估算 (模擬執行)",
+    "barsProcessed": "已處理K線數",
+    "calls": " 次呼叫",
+    "totalLlmCalls": "LLM 呼叫總數"
+  },
+  "quantLab": {
+    "title": "Sigma",
+    "pluginDescription": "Sigma 可作為外掛程式使用。請從市集安裝，以存取 Alpha Factory、Signal Library 等功能。",
+    "openMarketplace": "開啟市集",
+    "subpages": {
+      "batchGeneration": "訊號發現",
+      "factory": "Alpha 工廠",
+      "engineStore": "引擎商店",
+      "trainingMonitor": "訓練監控",
+      "promotionPipeline": "因子晉升",
+      "settings": "設定"
+    }
+  },
+  "dataDownload": {
+    "downloading": "下載中",
+    "loading": "載入中",
+    "caching": "快取中",
+    "complete": "已完成",
+    "error": "錯誤",
+    "chunkProgress": "chunk {{completed}}/{{total}}",
+    "barCount": "{{count}} bars"
+  },
+  "providerStatus": {
+    "title": "資料源狀態",
+    "viewAll": "檢視全部",
+    "active": "活躍",
+    "success": "成功:",
+    "latency": "延遲:"
+  },
+  "editor": {
+    "error": "錯誤",
+    "loading": "正在載入編輯器...",
+    "unknownType": "未知的編輯器類型",
+    "noEditorsOpen": "沒有開啟的編輯器",
+    "close": "關閉",
+    "noProvider": "沒有編輯器提供者: {{viewType}}"
+  },
+  "tree": {
+    "noProvider": "未為視圖註冊 TreeDataProvider: {{viewId}}",
+    "loadFailed": "載入樹狀資料失敗"
+  },
+  "accessibility": {
+    "dismiss": "忽略",
+    "close": "關閉",
+    "strategyNavigator": "策略導覽器"
+  },
+  "settings": {
+    "title": "Settings",
+    "testButton": "測試"
+  },
+  "onboarding": {
+    "toggleTooltip": "Replay Onboarding Guide",
+    "controls": {
+      "next": "Next",
+      "prev": "Back",
+      "done": "Done",
+      "progress": "{{current}} of {{total}}"
+    },
+    "welcome": {
+      "sidebar": {
+        "title": "Navigation Panel",
+        "description": "Use the sidebar to switch between StratForge, Backtester, Sigma, and other modules."
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Configure API keys, data providers, and system preferences here."
+      },
+      "auth": {
+        "title": "Account",
+        "description": "Log in to access Pro features, cloud sync, and AI-powered strategy generation."
+      },
+      "llm": {
+        "title": "LLM Provider",
+        "description": "Select the AI model used for strategy generation. Bring your own API key or use StratCraft Pro."
+      },
+      "language": {
+        "title": "Language",
+        "description": "Switch the application language. StratCraft supports 12 languages."
+      },
+      "finish": {
+        "title": "You are all set!",
+        "description": "Start by exploring the Hub or create your first strategy in StratForge. You can replay this guide from the help icon in the status bar."
+      }
+    }
+  },
+  "assistant": {
+    "panelTitle": "助手",
+    "noContent": "此頁面沒有可用的幫助內容。",
+    "tooltip": "助手模式 (Ctrl+L)",
+    "backToOverview": "返回概覽",
+    "closePanel": "關閉助理面板"
+  },
+  "navigationGuard": {
+    "title": "Generation In Progress",
+    "message": "Strategy generation is in progress. Leaving will cancel the current task.",
+    "confirm": "Leave Page",
+    "cancel": "Stay"
+  },
+  "validation": {
+    "backendReport": "Backend Validation Report",
+    "layer": "Layer",
+    "status": "Status",
+    "pass": "Pass",
+    "fail": "Fail",
+    "skip": "Skipped",
+    "noReport": "No backend validation report available",
+    "L1": "Contract Shape",
+    "L2": "Security Scan",
+    "L3": "Compilation",
+    "L4": "Symbol Verification",
+    "L5": "Isolated Load Test",
+    "L6": "Smoke Test",
+    "title": "後端驗證",
+    "failedAt": "失敗: {{layer}}",
+    "stderrOutput": "stderr 輸出"
+  },
+  "notifications": {
+    "regionLabel": "通知",
+    "sweep": {
+      "allCompleteTitle": "所有掃描已完成",
+      "allCompleteBody": "{{count}}個掃描已完成。{{succeeded}}個成功，{{errors}}個錯誤。",
+      "nextSweepTitle": "正在啟動下一個掃描",
+      "nextSweepBody": "正在自動切換到下一個掃描（佇列中剩餘{{remaining}}個）",
+      "sweepCompleteTitle": "參數掃描完成",
+      "sweepCompleteBody": "{{succeeded}}/{{total}} arms已成功完成",
+      "sweepCompleteBodyWithErrors": "{{succeeded}}/{{total}} arms已成功完成（{{errors}}個錯誤）",
+      "downloadCompleteTitle": "Data Download Complete",
+      "downloadCompleteBody": "{{total}} symbols downloaded. Sweep fitting started.",
+      "downloadCompleteBodyWithFailures": "{{total}} symbols processed ({{failures}} failed). Sweep fitting started."
+    }
+  },
+  "errorState": {
+    "technicalDetails": "技術詳情"
+  },
+  "viewRegistry": {
+    "nexus": {
+      "label": "樞紐中心",
+      "shortLabel": "樞紐"
+    },
+    "marketplace": {
+      "label": "外掛市集",
+      "shortLabel": "市集"
+    },
+    "dataManagement": {
+      "label": "資料管理",
+      "shortLabel": "資料"
+    },
+    "settings": {
+      "label": "設定",
+      "shortLabel": "設定"
+    },
+    "researchEnvironment": {
+      "label": "研究環境",
+      "shortLabel": "研究環境"
+    },
+    "strategy": {
+      "label": "StratForge",
+      "shortLabel": "StratForge"
+    },
+    "backtest": {
+      "label": "回測器",
+      "shortLabel": "回測器"
+    },
+    "backtestResult": {
+      "label": "回測結果",
+      "shortLabel": "結果"
+    },
+    "quantLab": {
+      "label": "Sigma",
+      "shortLabel": "Sigma"
+    },
+    "chart": {
+      "label": "圖表",
+      "shortLabel": "圖表"
+    },
+    "ai": {
+      "label": "AI 助手",
+      "shortLabel": "AI"
+    },
+    "scoreboard": {
+      "label": "訊號評分榜",
+      "shortLabel": "評分榜"
+    },
+    "signalGenerator": {
+      "label": "Signal Generator",
+      "shortLabel": "Signal Gen"
+    }
+  },
+  "researchEnvironment": {
+    "loading": "正在讀取環境狀態...",
+    "approvalDeclined": "作業未獲核准，因此未做任何變更。",
+    "sharedEnvironmentNotice": "這 {{count}} 項能力共用同一個鎖定環境，因此會一起安裝、修復與驗證，而不是逐一進行。",
+    "states": {
+      "absent": "未安裝",
+      "installing": "正在安裝",
+      "repairing": "正在修復",
+      "verifying": "正在驗證",
+      "uninstalling": "正在解除安裝",
+      "ready": "就緒",
+      "failed": "失敗"
+    },
+    "layerStates": {
+      "ready": "就緒",
+      "failed": "失敗",
+      "pending": "未驗證"
+    },
+    "jobStates": {
+      "queued": "排隊中",
+      "running": "執行中",
+      "succeeded": "成功",
+      "failed": "失敗"
+    },
+    "actions": {
+      "install": "安裝環境",
+      "repair": "修復環境",
+      "verify": "重新驗證",
+      "uninstall": "解除安裝研究環境",
+      "remove_capability": "移除功能",
+      "restore_capability": "還原功能"
+    },
+    "progress": {
+      "install": "安裝進度",
+      "repair": "修復進度",
+      "verify": "驗證進度",
+      "uninstall": "解除安裝進度",
+      "remove_capability": "功能移除進度",
+      "restore_capability": "功能還原進度"
+    },
+    "stages": {
+      "admission": "正在檢查前置條件",
+      "install": "正在安裝套件",
+      "repair": "正在重建安裝",
+      "uninstall": "正在移除本機環境",
+      "transition": "正在更新環境功能",
+      "python_verify": "正在驗證 Python 套件",
+      "julia_verify": "正在初始化 Julia 後端"
+    },
+    "causes": {
+      "unsupported": "主機不受支援",
+      "missing_executable": "找不到可執行檔",
+      "missing_lock": "找不到鎖定檔",
+      "manifest_drift": "資訊清單與鎖定檔不一致",
+      "lock_io": "無法讀取鎖定檔",
+      "invalid_lock_metadata": "鎖定檔中繼資料無效",
+      "database": "無法更新本機記錄",
+      "network": "網路要求失敗",
+      "process_exit": "處理程序以錯誤結束",
+      "process_lost": "處理程序意外結束",
+      "import": "無法匯入套件",
+      "probe": "功能檢查失敗",
+      "backend_init": "後端初始化失敗"
+    },
+    "failureCategory": {
+      "unsupported_platform": "平台不受支援",
+      "pixi_missing": "Pixi 無法使用",
+      "lock_missing": "缺少鎖定檔",
+      "lock_drift": "資訊清單與鎖定檔已偏離",
+      "lifecycle_coordination_failed": "無法協調環境記錄",
+      "network_failed": "下載失敗",
+      "install_failed": "安裝失敗",
+      "repair_failed": "修復失敗",
+      "uninstall_failed": "解除安裝失敗",
+      "workload_active": "研究工作正在執行",
+      "operation_interrupted": "作業已中斷",
+      "verification_failed": "驗證失敗"
+    },
+    "failure": {
+      "stage": "階段",
+      "cause": "原因",
+      "capability": "套件"
+    },
+    "capabilityCause": {
+      "import": "無法匯入此套件",
+      "probe": "此套件未通過功能檢查",
+      "backend_init": "Julia 後端初始化失敗"
+    },
+    "capability": {
+      "expected": "預期版本",
+      "installed": "已安裝版本",
+      "notInstalled": "--"
+    },
+    "pysr": {
+      "python": "Python 套件",
+      "julia": "Julia 後端"
+    },
+    "capabilities": {
+      "histdata": {
+        "name": "HistData",
+        "description": "用於獨立審核外匯資料擷取的離線驗證解析器與 Parquet 轉換器。"
+      },
+      "duckdb": {
+        "name": "DuckDB",
+        "description": "用於研究查詢的處理程序內分析型資料庫。"
+      },
+      "gplearn": {
+        "name": "gplearn",
+        "description": "用於符號化因子探索的遺傳程式設計。"
+      },
+      "gpquant": {
+        "name": "GPQuant",
+        "description": "針對量化因子搜尋調校的遺傳程式設計。"
+      },
+      "pysr": {
+        "name": "PySR",
+        "description": "符號迴歸，其 Julia 後端會在首次使用時初始化。"
+      },
+      "pandas_ta": {
+        "name": "pandas-ta",
+        "description": "支撐 TA-Lib 因子引擎的技術指標函式庫。"
+      }
+    },
+    "summary": {
+      "interpreter": "直譯器",
+      "lastVerified": "上次驗證",
+      "pixiVersion": "Pixi 版本",
+      "technicalDetails": "技術細節",
+      "manifestHash": "資訊清單 SHA-256",
+      "lockHash": "鎖定檔 SHA-256",
+      "liveWorkloadNotice": "只有在此作業完成之後啟動的研究執行才會使用準備好的環境。目前正在執行的任何工作都不會被重新啟動或中斷。"
+    },
+    "regions": {
+      "summary": "環境摘要"
+    },
+    "announce": {
+      "succeeded": "{{operation}}：已成功完成。",
+      "failed": "{{operation}}：失敗。",
+      "failedState": "研究環境處於失敗狀態。"
+    },
+    "a11y": {
+      "environmentState": "環境狀態：{{state}}",
+      "capabilityState": "{{capability}} 狀態：{{state}}",
+      "platform": "平台：{{platform}} {{architecture}}",
+      "elapsed": "已耗用時間：{{elapsed}}",
+      "logTail": "環境作業的最近輸出"
+    }
+  },
+  "scoreboard": {
+    "title": "訊號評分榜",
+    "empty": "尚無評分訊號。產生一個訊號以填入評分榜。",
+    "disclaimer": "基於 {{windowBars}} 根 K 線的歷史表現。不構成投資建議。",
+    "columns": {
+      "button": "欄位",
+      "menuTitle": "顯示欄位"
+    },
+    "col": {
+      "algorithm": "演算法",
+      "recentIc": "近期 IC",
+      "liveIc": "實盤 IC",
+      "sharpeLong": "近期夏普 (多頭)",
+      "sharpeShort": "近期夏普 (空頭)",
+      "hitRate": "命中率",
+      "trades": "交易數",
+      "asOf": "截至"
+    },
+    "cell": {
+      "liveOnlySince": "僅實盤 -- 自 {{date}} 起觀測",
+      "liveOnlyTooltip": "實盤觀測自 {{date}} 起。無可用的歷史回測 -- 原因見 TICKET_196_7_7。",
+      "symbols": "個標的",
+      "trainingScaleTooltip": "訓練使用了 {{requested}} 個標的中的 {{trained}} 個 -- 部分標的因歷史數據不足被排除"
+    }
+  },
+  "llmProvider": {
+    "badge": {
+      "pro": "Pro",
+      "byok": "自備金鑰"
+    }
+  },
+  "signalGenerator": {
+    "title": "Signal Generator",
+    "pluginDescription": "Signal Generator enables live trading signal production. Install it from the Marketplace to access live signal generation and auto-execution.",
+    "openMarketplace": "Open Marketplace"
+  },
+  "entitlement": {
+    "buyout": {
+      "badge": {
+        "freeUntil": "FREE UNTIL {{date}}",
+        "freeAccessEnds": "FREE ACCESS ENDS {{date}}",
+        "lifetime": "LIFETIME",
+        "freeAccessEnded": "FREE ACCESS ENDED",
+        "revoked": "REVOKED"
+      }
+    },
+    "ownership": {
+      "badge": {
+        "owned": "OWNED"
+      }
+    }
+  },
+  "brand": {
+    "tagline": "Connect the Alpha"
+  },
+  "statusDot": {
+    "running": "執行中",
+    "warning": "警告",
+    "error": "錯誤",
+    "idle": "閒置",
+    "online": "線上",
+    "offline": "離線",
+    "degraded": "降級"
+  },
+  "persistence": {
+    "saveFailed": "儲存失敗",
+    "restoreFailed": "還原失敗",
+    "deleteFailed": "刪除失敗",
+    "fallback": "持久化失敗"
+  },
+  "comingSoon": {
+    "chartView": "圖表檢視 - 即將推出",
+    "aiAssistant": "AI 助理 - 即將推出"
+  },
+  "moduleNames": {
+    "optimizer": "Optimizer",
+    "riskEngine": "RiskEngine",
+    "dataFeed": "DataFeed",
+    "backtester": "Backtester"
+  },
+  "pluginPermissions": {
+    "network": {
+      "name": "Network Access",
+      "description": "Access external network resources and APIs"
+    },
+    "networkInternal": {
+      "name": "Internal Network",
+      "description": "Access internal API endpoints only"
+    },
+    "filesystem": {
+      "name": "Sandboxed File Access",
+      "description": "Read and write files within plugin sandbox"
+    },
+    "filesystemFull": {
+      "name": "Full File System Access",
+      "description": "Access any file on the system"
+    },
+    "database": {
+      "name": "Database Access",
+      "description": "Read and write to the application database"
+    },
+    "notification": {
+      "name": "Notifications",
+      "description": "Show system notifications to the user"
+    },
+    "clipboard": {
+      "name": "Clipboard Access",
+      "description": "Read from and write to system clipboard"
+    },
+    "shell": {
+      "name": "Shell Execution",
+      "description": "Execute shell commands on the system"
+    },
+    "native": {
+      "name": "Native Modules",
+      "description": "Load and use native Node.js modules"
+    }
+  },
+  "downloadQueue": {
+    "queued": "Queued",
+    "queuedResumed": "Queued (resumed)",
+    "downloading": "Downloading...",
+    "cancelled": "Cancelled",
+    "yieldedPriority": "Yielded to higher priority",
+    "yieldedPriorityMultiTf": "Yielded to higher priority (multi-TF)",
+    "partial": "Partial: {{rowCount}} bars, missing {{dayCount}} day(s) ({{dayList}})",
+    "complete": "Complete: {{rowCount}} bars",
+    "completeMultiTf": "Complete: {{count}} timeframes"
+  },
+  "dataCache": {
+    "dataReadyCached": "Data ready (cached)",
+    "mergingData": "Merging data...",
+    "fetchingFromProvider": "Fetching data from {{provider}}...",
+    "writingRows": "Writing {{count}} rows...",
+    "providerStartsAt": "Data from {{provider}} starts at {{actualStart}} (requested {{requestedStart}})",
+    "dataReadyAggregated": "Data ready ({{rowCount}} rows, {{target}} aggregated from {{baseInterval}})",
+    "checkingCache": "Checking cache for {{symbol}}/{{interval}}...",
+    "fetchingEarlierData": "Fetching earlier data ({{start}}~{{end}})...",
+    "fetchingNewerData": "Fetching newer data ({{start}}~{{end}})...",
+    "dataReady": "Data ready ({{count}} rows)",
+    "refetchingBackfill": "Re-fetching {{symbol}}/{{interval}} to backfill interior gap...",
+    "dataReadyBackfilled": "Data ready ({{count}} rows, interior gap backfilled)"
+  },
+  "keychainWarning": {
+    "message": "作業系統鑰匙圈無法使用 -- API 金鑰無法安全儲存。"
+  },
+  "assistantHelp": {
+    "strategyStudioGuide": "Strategy Studio 指南",
+    "bollingerMacd": "布林通道 + MACD 策略",
+    "rsiMa": "RSI + 移動平均線策略",
+    "macdRsiDivergence": "MACD + RSI 背離策略",
+    "emaCrossover": "EMA 交叉策略",
+    "ichimokuCloud": "一目均衡表策略",
+    "fibonacciTrend": "費波那契趨勢策略",
+    "vwapStrategy": "VWAP 策略",
+    "supertrend": "超級趨勢策略",
+    "dualMaVolume": "雙均線 + 成交量策略"
+  },
+  "configService": {
+    "loadedSuccessfully": "設定載入成功"
+  },
+  "installProgress": {
+    "extractingPackage": "Extracting package...",
+    "backingUpExisting": "Backing up existing...",
+    "installingFiles": "Installing files...",
+    "registeringPermissions": "Registering permissions...",
+    "runningLifecycleHooks": "Running lifecycle hooks...",
+    "initializing": "Initializing...",
+    "installationComplete": "Installation complete!"
+  },
+  "marketplace": {
+    "fetchingMetadata": "Fetching plugin metadata...",
+    "downloadingPlugin": "Downloading plugin...",
+    "verifyingChecksum": "Verifying checksum...",
+    "resolvingDependencies": "Resolving dependencies...",
+    "extractingPlugin": "Extracting plugin...",
+    "installingPythonDeps": "Installing Python dependencies...",
+    "finalizingInstallation": "Finalizing installation...",
+    "installationComplete": "Installation complete!",
+    "installingFromBundled": "Installing from bundled package...",
+    "copyingBundledPlugin": "Copying bundled plugin..."
+  }
+}

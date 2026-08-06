@@ -1,0 +1,30 @@
+{
+  "schema_version": "qnx.evaluation-arrow/1.0.0",
+  "timestamp_semantics": {
+    "logical_type": "timestamp",
+    "unit": "millisecond",
+    "timezone": "UTC",
+    "meaning": "bar_close",
+    "window": "start_ms <= timestamp_ms <= end_ms"
+  },
+  "ordering": ["symbol ascending by UTF-8 byte order", "timestamp_ms ascending"],
+  "null_semantics": {
+    "forward_return": "null when the forward horizon is unavailable",
+    "signal_score": "never null; non-finite producer values canonicalize to 0.0",
+    "confidence": "never null; non-finite producer values canonicalize to 0.0"
+  },
+  "fields": [
+    { "name": "symbol", "arrow_type": "utf8", "nullable": false },
+    { "name": "timestamp_ms", "arrow_type": "timestamp[ms, tz=UTC]", "nullable": false },
+    { "name": "signal_score", "arrow_type": "float64", "nullable": false, "minimum": -1.0, "maximum": 1.0 },
+    { "name": "confidence", "arrow_type": "float64", "nullable": false, "minimum": 0.0, "maximum": 1.0 },
+    { "name": "forward_return", "arrow_type": "float64", "nullable": true }
+  ],
+  "parquet": {
+    "timestamp_physical_type": "INT64",
+    "timestamp_logical_type": "TIMESTAMP(MILLIS,true)",
+    "required_file_metadata": {
+      "qnx.schema_version": "qnx.evaluation-arrow/1.0.0"
+    }
+  }
+}

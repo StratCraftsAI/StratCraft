@@ -1,0 +1,197 @@
+{
+  "title": "插件市场",
+  "subtitle": "发现并安装社区插件",
+  "search": {
+    "placeholder": "搜索插件...",
+    "noResults": "未找到插件"
+  },
+  "filters": {
+    "all": "全部",
+    "installed": "已安装",
+    "updates": "有更新",
+    "category": "分类"
+  },
+  "categories": {
+    "all": "全部",
+    "visualization": "可视化",
+    "indicators": "指标",
+    "trading": "交易",
+    "data": "数据",
+    "ai": "AI",
+    "tools": "工具",
+    "strategy": "策略",
+    "analysis": "分析",
+    "integration": "集成"
+  },
+  "sort": {
+    "mostDownloads": "下载最多",
+    "mostStars": "最多收藏",
+    "recentlyUpdated": "最近更新",
+    "name": "名称"
+  },
+  "plugin": {
+    "install": "安装",
+    "uninstall": "卸载",
+    "update": "更新",
+    "enable": "启用",
+    "disable": "禁用",
+    "settings": "设置",
+    "installed": "已安装",
+    "notInstalled": "未安装",
+    "version": "版本",
+    "author": "作者",
+    "downloads": "下载量",
+    "lastUpdated": "最后更新",
+    "purchase": "Purchase",
+    "enterLicense": "Enter License Key",
+    "licenseExpired": "License Expired",
+    "licenseActive": "License Active",
+    "owned": "Owned"
+  },
+  "results": {
+    "showing": "显示 {{count}} 个插件",
+    "showingPlural": "显示 {{count}} 个插件"
+  },
+  "install": {
+    "title": "安装插件",
+    "installingPlugin": "正在安装插件",
+    "installing": "正在安装 \"{{name}}\"",
+    "installQuestion": "安装 \"{{name}}\"?",
+    "confirm": "确定要安装此插件吗?",
+    "progress": "安装中...",
+    "success": "插件安装成功",
+    "successMessage": "插件安装成功!",
+    "activateHint": "您现在可以从插件面板激活此插件。",
+    "error": "插件安装失败",
+    "errorMessage": "安装失败",
+    "cancel": "取消",
+    "installAnyway": "仍然安装",
+    "phases": {
+      "downloading": "正在下载安装包",
+      "verifying": "正在验证签名",
+      "validating": "正在验证权限",
+      "extracting": "正在解压文件",
+      "copying": "正在复制文件",
+      "registering": "正在注册插件",
+      "initializing": "正在初始化",
+      "complete": "安装完成",
+      "resolving_dependencies": "解析依赖",
+      "installing_python_deps": "安装 Python 依赖",
+      "finalizing": "完成中",
+      "error": "错误"
+    },
+    "header": {
+      "complete": "安装完成",
+      "failed": "安装失败",
+      "installing": "正在安装 \"{{name}}\""
+    },
+    "buttons": {
+      "cancel": "取消",
+      "close": "关闭"
+    },
+    "permissions": {
+      "title": "此插件请求以下权限:",
+      "network": "网络访问",
+      "networkDetail": "外部 API",
+      "filesystem": "文件系统访问",
+      "filesystemNone": "无",
+      "filesystemPlugin": "仅插件目录",
+      "filesystemUser": "用户数据目录",
+      "filesystemUnknown": "未知",
+      "native": "原生模块",
+      "nativeDetail": "编译扩展"
+    },
+    "author": {
+      "unverified": "(未验证)"
+    },
+    "warning": {
+      "riskyPermissions": "此插件请求高级权限。请仅在信任作者的情况下安装。"
+    },
+    "progress": {
+      "validatingManifest": "正在验证插件清单...",
+      "verifyingBinary": "正在验证原生二进制文件...",
+      "binaryVerified": "原生二进制文件已验证",
+      "copyingFiles": "正在复制插件文件...",
+      "registeringPlugin": "正在注册插件...",
+      "installationComplete": "安装完成"
+    }
+  },
+  "uninstall": {
+    "title": "卸载插件",
+    "confirm": "确定要卸载此插件吗?",
+    "success": "插件卸载成功",
+    "error": "插件卸载失败"
+  },
+  "detail": {
+    "by": "作者:",
+    "description": "描述",
+    "repository": "代码仓库",
+    "permissions": "权限",
+    "networkAccess": "网络访问",
+    "fileSystem": "文件系统",
+    "nativeModules": "原生模块",
+    "enabled": "启用",
+    "disabled": "禁用",
+    "pythonDependencies": "Python 依赖",
+    "changelog": "更新日志",
+    "installedVersion": "已安装: v{{version}}",
+    "updateAvailable": "(有新版本: v{{version}})",
+    "updateTo": "更新到 v{{version}}",
+    "yes": "是",
+    "no": "否",
+    "done": "完成"
+  },
+  "noPlugins": {
+    "title": "未找到插件",
+    "hint": "尝试调整您的搜索或过滤器"
+  },
+  "permissionValue": {
+    "enabled": "已启用",
+    "disabled": "已禁用",
+    "yes": "是",
+    "no": "否"
+  },
+  "license": {
+    "title": "Enter License Key",
+    "keyLabel": "License Key",
+    "keyPlaceholder": "Enter your license key...",
+    "activate": "Activate",
+    "validating": "Validating...",
+    "noPurchaseLink": "Don't have a key? Purchase one",
+    "activated": "License key activated successfully",
+    "removed": "License key removed",
+    "invalid": "Invalid license key",
+    "expired": "License key has expired",
+    "error": "License validation failed"
+  },
+  "authGate": {
+    "title": "Login required",
+    "description": "Log in to browse and install plugins.",
+    "cta": "Login / Sign Up"
+  },
+  "pricing": {
+    "title": "Pricing",
+    "price": "Price",
+    "type": "Billing",
+    "paid": "Paid",
+    "one-time": "One-time payment",
+    "monthly": "Monthly subscription",
+    "yearly": "Yearly subscription"
+  },
+  "lifecycle": {
+    "creatingStrategyDirs": "正在创建策略目录...",
+    "initializingDatabase": "正在初始化数据库...",
+    "creatingDefaultTemplates": "正在创建默认模板...",
+    "templateIndicatorDesc": "使用技术指标的策略模板",
+    "creatingConfiguration": "正在创建配置...",
+    "installationComplete": "安装完成",
+    "checkingUpgradeRequirements": "正在检查升级要求...",
+    "migratingDatabaseToV2": "正在迁移数据库架构到 v2.0...",
+    "updatingConfiguration": "正在更新配置...",
+    "creatingNewDirectories": "正在创建新目录...",
+    "upgradeComplete": "升级完成",
+    "checkingConfiguration": "正在检查配置...",
+    "creatingBacktestDirs": "正在创建回测目录...",
+    "updatingDatabaseSchema": "正在更新数据库架构..."
+  }
+}

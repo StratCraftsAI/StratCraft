@@ -1,0 +1,75 @@
+version: 2
+updates:
+  # Enable npm dependency updates for desktop app
+  - package-ecosystem: "npm"
+    directory: "/apps/desktop"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "StratCraftsAI/maintainers"
+    # TICKET_534: Enhanced commit message for better tracking
+    commit-message:
+      prefix: "deps(desktop)"
+      include: "scope"
+    # Use lockfile-only to ensure pnpm-lock.yaml is updated atomically
+    versioning-strategy: "lockfile-only"
+    labels:
+      - "dependencies"
+      - "security"
+      - "requires-lockfile-check"
+    # Group minor/patch updates to reduce PR noise
+    groups:
+      production-dependencies:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "@types/*"
+          - "*-types"
+          - "eslint*"
+          - "prettier"
+        update-types:
+          - "minor"
+          - "patch"
+      development-dependencies:
+        patterns:
+          - "@types/*"
+          - "*-types"
+          - "eslint*"
+          - "prettier"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Enable GitHub Actions updates
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    labels:
+      - "dependencies"
+      - "ci"
+
+  # Enable npm dependency updates for root workspace
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 5
+    # TICKET_534: Prevent auto-merge on lockfile conflicts
+    # All PRs must pass lockfile-validation workflow before merge
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    # Use lockfile-only to ensure pnpm-lock.yaml is updated atomically
+    versioning-strategy: "lockfile-only"
+    labels:
+      - "dependencies"
+      - "workspace"
+      - "requires-lockfile-check"

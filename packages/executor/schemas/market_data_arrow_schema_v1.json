@@ -1,0 +1,31 @@
+{
+  "schema_version": "qnx.market-data-arrow/1.0.0",
+  "timestamp_semantics": {
+    "logical_type": "timestamp",
+    "unit": "millisecond",
+    "timezone": "UTC",
+    "meaning": "bar_close",
+    "window": "start_ms <= timestamp_ms <= end_ms"
+  },
+  "ordering": ["symbol ascending by UTF-8 byte order", "timestamp_ms ascending"],
+  "fields": [
+    { "name": "symbol", "arrow_type": "utf8", "nullable": false },
+    { "name": "timestamp_ms", "arrow_type": "timestamp[ms, tz=UTC]", "nullable": false },
+    { "name": "open", "arrow_type": "float64", "nullable": false, "semantic_type": "finite_price" },
+    { "name": "high", "arrow_type": "float64", "nullable": false, "semantic_type": "finite_price" },
+    { "name": "low", "arrow_type": "float64", "nullable": false, "semantic_type": "finite_price" },
+    { "name": "close", "arrow_type": "float64", "nullable": false, "semantic_type": "finite_price" },
+    { "name": "volume", "arrow_type": "float64", "nullable": false, "minimum": 0.0 }
+  ],
+  "row_invariants": [
+    "low <= open <= high",
+    "low <= close <= high"
+  ],
+  "parquet": {
+    "timestamp_physical_type": "INT64",
+    "timestamp_logical_type": "TIMESTAMP(MILLIS,true)",
+    "required_file_metadata": {
+      "qnx.schema_version": "qnx.market-data-arrow/1.0.0"
+    }
+  }
+}

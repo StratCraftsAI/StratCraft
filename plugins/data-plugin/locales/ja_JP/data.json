@@ -1,0 +1,22 @@
+{
+  "manifest": {
+    "displayName": "データ基盤",
+    "description": "共有データソースコンポーネントと型を提供する基盤プラグイン"
+  },
+  "fitQuality": {
+    "insufficientData": "データ不足",
+    "needTwoFoldResults": "2つ以上のフォールド結果が必要",
+    "dataStarved": "データ不足 ({{sampleCount}}サンプル / {{paramCount}}パラメータ = {{ratio}}:1、{{targetRatio}}:1以上が必要)",
+    "dataSufficiency": "データ充足度",
+    "needRatio": "サンプル/パラメータ比 {{targetRatio}}:1 が必要、現在 {{currentRatio}}:1",
+    "modelFitQuality": "モデル適合品質"
+  },
+  "dataSource": {
+    "region": {
+      "usGlobal": "米国・グローバル",
+      "crypto": "暗号資産",
+      "cnAShare": "中国A株",
+      "myData": "マイデータ"
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "name": "com.stratcraft.strategy-builder-nexus",
+  "displayName": "Strategy Studio",
+  "version": "2.0.0",
+  "description": "Strategy management and generation plugin for StratCraft",
+  "main": "./dist/extension.js",
+  "type": "strategy",
+  "lifecycle": {
+    "onInstall": "./scripts/install.js",
+    "onUpgrade": "./scripts/upgrade.js",
+    "onUninstall": "./scripts/uninstall.js"
+  },
+  "category": "trading",
+  "author": "StratCraft Team",
+  "license": "Apache-2.0",
+  "engines": {
+    "nexus": "^1.0.0"
+  },
+  "activationEvents": [
+    "onView:strategy.tree",
+    "onCommand:strategy.openHub"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "sidebar": [
+        {
+          "id": "strategyExplorer",
+          "title": "STRATEGY",
+          "icon": "resources/strategy-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "strategyExplorer": [
+        {
+          "id": "strategy.tree",
+          "name": "Strategy Tree"
+        }
+      ],
+      "workbench": [
+        {
+          "id": "strategy.hub",
+          "name": "Strategy Hub"
+        },
+        {
+          "id": "strategy.providerPortal",
+          "name": "Provider Portal"
+        },
+        {
+          "id": "strategy.groupList",
+          "name": "Strategy Groups"
+        }
+      ]
+    },
+    "editors": [
+      {
+        "viewType": "strategy.regimeEditor",
+        "displayName": "Regime Editor",
+        "selector": [
+          {
+            "resourceScheme": "strategy"
+          }
+        ]
+      }
+    ],
+    "treeDataProviders": [
+      {
+        "id": "strategyTreeProvider",
+        "viewId": "strategy.tree"
+      }
+    ],
+    "commands": [
+      {
+        "id": "strategy.openHub",
+        "title": "Open Strategy Hub"
+      },
+      {
+        "id": "strategy.selectNode",
+        "title": "Select Strategy Node"
+      },
+      {
+        "id": "strategy.refresh",
+        "title": "Refresh Strategy Tree"
+      }
+    ]
+  },
+  "permissions": [
+    "network:internal",
+    "database"
+  ],
+  "isolation": "trusted",
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "tsc --noEmit && vite build",
+    "watch": "vite build --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@radix-ui/react-dropdown-menu": "^2.1.16",
+    "@StratCraft/ai-studio-operations": "workspace:*",
+    "@StratCraft/chat-markdown": "workspace:*",
+    "@StratCraft/shared-ui": "workspace:*",
+    "@StratCraft/types": "workspace:*",
+    "i18next": "^23.11.0",
+    "react-i18next": "^14.1.0",
+    "zustand": "^5.0.0"
+  },
+  "devDependencies": {
+    "@StratCraft/db-migrations": "workspace:*",
+    "@StratCraft/secure-store": "workspace:*",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "lucide-react": "^0.469.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "typescript": "^5.3.0",
+    "vite": "^5.4.0",
+    "vitest": "^3.1.1"
+  }
+}

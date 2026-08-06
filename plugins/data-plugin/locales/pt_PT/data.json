@@ -1,0 +1,22 @@
+{
+  "manifest": {
+    "displayName": "Data Foundation",
+    "description": "Foundation plugin providing shared data source components and types"
+  },
+  "fitQuality": {
+    "insufficientData": "Dados insuficientes",
+    "needTwoFoldResults": "Necessarios 2+ resultados de fold",
+    "dataStarved": "dados insuficientes ({{sampleCount}} amostras / {{paramCount}} parametros = {{ratio}}:1, necessarios {{targetRatio}}:1+)",
+    "dataSufficiency": "Suficiencia de dados",
+    "needRatio": "racio {{targetRatio}}:1 amostras/parametros necessario, atual {{currentRatio}}:1",
+    "modelFitQuality": "Qualidade de ajuste do modelo"
+  },
+  "dataSource": {
+    "region": {
+      "usGlobal": "EUA e Global",
+      "crypto": "Cripto",
+      "cnAShare": "CN A-Share",
+      "myData": "Meus dados"
+    }
+  }
+}

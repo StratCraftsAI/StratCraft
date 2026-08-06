@@ -1,0 +1,5 @@
+{
+  "kind": "plan",
+  "request": { "armCount": 15, "concurrency": 3, "ashaKill": true },
+  "outcomes": []
+}

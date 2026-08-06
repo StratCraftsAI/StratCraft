@@ -1,0 +1,63 @@
+{
+  "view": {
+    "loading": "Загрузка...",
+    "refresh": "Обновить",
+    "retry": "Повторить",
+    "loadingChartData": "Загрузка данных графика...",
+    "toggle": {
+      "volume": "Объем",
+      "grid": "Сетка"
+    },
+    "error": {
+      "chart": "Ошибка загрузки графика",
+      "loadData": "Не удалось загрузить данные"
+    }
+  },
+  "settings": {
+    "section": {
+      "indicators": "Индикаторы",
+      "style": "Стиль",
+      "drawingTools": "Инструменты рисования"
+    },
+    "indicator": {
+      "sma": "SMA",
+      "ema": "EMA",
+      "rsi": "RSI",
+      "macd": "MACD",
+      "bb": "Полосы Боллинджера"
+    },
+    "param": {
+      "period": "Период",
+      "fast": "Быстрый",
+      "slow": "Медленный",
+      "signal": "Сигнал",
+      "stdDev": "Стд. откл."
+    },
+    "chartType": {
+      "label": "Тип графика",
+      "option": {
+        "candlesticks": "Свечи",
+        "hollowCandles": "Пустые свечи",
+        "ohlc": "OHLC",
+        "line": "Линия",
+        "area": "Область"
+      }
+    },
+    "color": {
+      "up": "Цвет роста",
+      "down": "Цвет падения"
+    },
+    "drawingTool": {
+      "line": "Линия",
+      "ray": "Луч",
+      "rect": "Прям.",
+      "fib": "Фибо"
+    },
+    "actions": {
+      "apply": "Применить изменения"
+    }
+  },
+  "notification": {
+    "indicatorAdded": "Индикатор добавлен: {{indicator}}"
+  }
+}

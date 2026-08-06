@@ -1,0 +1,539 @@
+{
+  "workflow": {
+    "title": "Рабочий процесс бэктеста",
+    "selectStrategy": "Выбрать стратегию",
+    "configureData": "Настроить данные",
+    "setParameters": "Задать параметры",
+    "runBacktest": "Запустить бэктест",
+    "viewResults": "Посмотреть результаты",
+    "compiled": "C++ скомпилировано",
+    "compilationFailed": "Ошибка компиляции C++"
+  },
+  "panel": {
+    "history": "История бэктестов",
+    "trades": "Сделки",
+    "logs": "Журналы",
+    "results": "Результаты"
+  },
+  "actions": {
+    "run": "Запустить бэктест",
+    "stop": "Остановить бэктест",
+    "export": "Экспортировать результаты",
+    "compare": "Сравнить результаты",
+    "clear": "Очистить историю"
+  },
+  "status": {
+    "idle": "Готово",
+    "running": "Выполняется...",
+    "completed": "Завершено",
+    "failed": "Ошибка",
+    "cancelled": "Отменено"
+  },
+  "results": {
+    "summary": "Сводка",
+    "performance": "Эффективность",
+    "trades": "Список сделок",
+    "equity": "Кривая капитала",
+    "drawdown": "Просадка",
+    "statistics": "Статистика"
+  },
+  "metrics": {
+    "totalReturn": "Общая доходность",
+    "sharpeRatio": "Коэффициент Шарпа",
+    "maxDrawdown": "Максимальная просадка",
+    "winRate": "Доля прибыльных",
+    "profitFactor": "Профит-фактор",
+    "totalTrades": "Всего сделок"
+  },
+  "errors": {
+    "noStrategy": "Стратегия не выбрана",
+    "noData": "Данные недоступны",
+    "runFailed": "Запуск бэктеста завершился ошибкой",
+    "exportFailed": "Не удалось экспортировать результаты",
+    "searchFailed": "Поиск не удался",
+    "coverageCheckFailed": "Проверка покрытия не удалась",
+    "downloadFailed": "Загрузка не удалась",
+    "fetchMarketDataFailed": "Не удалось получить рыночные данные",
+    "resultNotFound": "Результат не найден",
+    "fetchDataFailed": "Не удалось получить данные",
+    "userNotAuthenticated": "Пользователь не аутентифицирован. Пожалуйста, войдите в систему.",
+    "backtestAlreadyRunning": "Бэктест уже выполняется",
+    "maxDrawdownReached": "Достигнута максимальная просадка",
+    "exportFallback": "Экспорт не удался",
+    "resumeFailed": "Возобновление не удалось",
+    "startBacktestFailed": "Не удалось запустить бэктест"
+  },
+  "config": {
+    "title": "Конфигурация данных",
+    "dataSource": "Источник данных",
+    "symbol": "Символ",
+    "searchSymbol": "Поиск символа...",
+    "startDate": "Дата начала",
+    "endDate": "Дата окончания",
+    "timeframe": "Таймфрейм",
+    "initialCapital": "Начальный капитал",
+    "orderSize": "Размер ордера",
+    "searchTruncated": "Показано {{count}} из {{total}} -- уточните поиск",
+    "confidenceWeightedSizing": "Confidence-Weighted Sizing",
+    "confidenceWeightedSizingHint": "Scale position size by signal confidence"
+  },
+  "timeframes": {
+    "1m": "1 минута",
+    "5m": "5 минут",
+    "15m": "15 минут",
+    "30m": "30 минут",
+    "1h": "1 час",
+    "4h": "4 часа",
+    "1d": "1 день",
+    "1w": "1 неделя",
+    "1M": "1 месяц"
+  },
+  "orderUnits": {
+    "cash": "$",
+    "percent": "%",
+    "shares": "Акции"
+  },
+  "sidebar": {
+    "history": "История",
+    "backtesting": "Бэктест",
+    "loading": "Загрузка...",
+    "noHistory": "История бэктестов пуста",
+    "testing": "тестируется...",
+    "capLabel": "Кап.:",
+    "sizeLabel": "Размер:",
+    "testedLabel": "Тестировано:",
+    "delete": "Удалить",
+    "checkpointTooltip": "Контрольная точка: {{percent}}% завершено"
+  },
+  "page": {
+    "loadingAlgorithms": "Загрузка алгоритмов...",
+    "workflowTitle": "Конфигурация рабочего процесса",
+    "noResults": "Результаты бэктеста недоступны.",
+    "startBacktest": "Запустите бэктест со страницы конфигурации.",
+    "realtimeChartPending": "График в реальном времени появится, когда станут доступны данные",
+    "loadingResult": "Loading result..."
+  },
+  "buttons": {
+    "newBacktest": "Новый бэктест",
+    "keep": "Оставить",
+    "discard": "Отбросить",
+    "reset": "Сбросить",
+    "execute": "Выполнить",
+    "executing": "Выполняется...",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "backToConfig": "Назад к конфигурации",
+    "runInBackground": "Запустить в фоне",
+    "exportToQuantLab": "Сохранить стратегию",
+    "exporting": "Сохранение...",
+    "return": "Назад"
+  },
+  "workflowSteps": {
+    "marketAnalysis": "Анализ рынка",
+    "entryFilter": "Фильтр входа",
+    "entrySignal": "Сигнал входа",
+    "exitStrategy": "Стратегия выхода"
+  },
+  "statusBar": {
+    "running": "Выполняется",
+    "runningBacktests": "Запущенные бэктесты",
+    "backtestsRunning": "Выполняется бэктестов: {{count}}"
+  },
+  "executorStatus": {
+    "ready": "Готово",
+    "starting": "Запуск...",
+    "executing": "Выполняется",
+    "completed": "Завершено",
+    "failed": "Ошибка",
+    "cancelled": "Отменено"
+  },
+  "checkpoint": {
+    "available": "Доступна контрольная точка",
+    "completed": "{{percent}}% завершено ({{processed}}/{{total}} баров)",
+    "saved": "Сохранено {{time}}",
+    "dataNotFound": "Файл данных не найден",
+    "dataNotFoundDesc": "Исходный файл данных перемещён или удалён. Возобновление невозможно.",
+    "dataNotFoundHint": "Пожалуйста, отбросьте эту контрольную точку и запустите новый бэктест.",
+    "dataChanged": "Файл данных изменён",
+    "dataChangedDesc": "Файл данных был изменён после создания контрольной точки.",
+    "dataChangedHint": "Возобновление может дать несогласованные результаты. Рекомендуется начать заново.",
+    "validating": "Проверка данных...",
+    "validatingDesc": "Проверка целостности файла данных.",
+    "pnl": "PnL",
+    "return": "Доходность",
+    "trades": "Сделки",
+    "winRate": "Доля прибыльных",
+    "openPositions": "Открытые позиции на контрольной точке",
+    "resume": "Возобновить бэктест",
+    "resuming": "Возобновление...",
+    "discardStartNew": "Отбросить и начать заново",
+    "percentSaved": "Сохранено {{percent}}%",
+    "justNow": "только что",
+    "minutesAgo": "{{count}} мин. назад",
+    "hoursAgo": "{{count}} ч. назад",
+    "daysAgo": "{{count}} дн. назад",
+    "recently": "недавно"
+  },
+  "dialog": {
+    "deleteTitle": "Удалить запись истории",
+    "deleteMessage": "Это безвозвратно удалит результат бэктеста, включая все записи сделок и данные кривой капитала."
+  },
+  "cancelDialog": {
+    "title": "Отменить бэктест",
+    "message": "Вы уверены, что хотите отменить выполняющийся бэктест? Это действие нельзя отменить.",
+    "confirm": "Отменить бэктест",
+    "keep": "Продолжить выполнение"
+  },
+  "cancelledDialog": {
+    "title": "Бэктест отменён",
+    "message": "Бэктест отменён. Что вы хотите сделать?",
+    "stay": "Остаться здесь",
+    "goBack": "Вернуться"
+  },
+  "workflowSelector": {
+    "selectAlgorithm": "Анализ рынка",
+    "preCondition": "Фильтр входа",
+    "selectSteps": "Сигнал входа",
+    "postCondition": "Стратегия выхода",
+    "search": "Поиск..."
+  },
+  "breadcrumb": {
+    "backtestNexus": "Backtester",
+    "indicatorsCockpit": "Режим",
+    "kronosCockpit": "Kronos",
+    "traderCockpit": "Trader",
+    "aiLiberoCockpit": "Libero",
+    "aiStudioCockpit": "Studio",
+    "catalogCockpit": "Catalog",
+    "result": "Результат",
+    "backtestResult": "Результат бэктеста",
+    "home": "Nexus Hub"
+  },
+  "kronos": {
+    "title": "Стратегии Kronos",
+    "subtitle": "Выберите стратегию, созданную Kronos, для бэктеста",
+    "noStrategies": "Нет стратегий Kronos",
+    "noStrategiesHint": "Создайте стратегии с помощью функции Kronos в Strategy Builder, чтобы увидеть их здесь.",
+    "columnName": "Название стратегии",
+    "columnType": "Тип",
+    "columnCreated": "Создано",
+    "columnAction": "Выбрать",
+    "execute": "Выполнить",
+    "executing": "Выполняется...",
+    "selectAlgorithmFirst": "Пожалуйста, сначала выберите стратегию",
+    "executionStarted": "Выполнение начато",
+    "executionFailed": "Ошибка выполнения"
+  },
+  "locked": {
+    "requiresTier": "Эта функция требует подписки {{tier}}"
+  },
+  "auth": {
+    "loginToUnlock": "Войти, чтобы разблокировать",
+    "viewPlans": "Посмотреть тарифы"
+  },
+  "common": {
+    "cancel": "Отмена"
+  },
+  "notification": {
+    "backtestCompleted": "Бэктест успешно завершён",
+    "backtestCompletedReturn": "Бэктест завершён: {{returnPercent}}% доходность",
+    "backtestFailed": "Бэктест не удался: {{error}}",
+    "resultsCleared": "Результаты очищены",
+    "noDataSource": "Источник данных недоступен. Пожалуйста, настройте поставщика данных.",
+    "noResultsToExport": "Нет результатов для экспорта"
+  },
+  "cockpitSelector": {
+    "title": "Выберите кокпит",
+    "subtitle": "Выберите режим бэктеста, чтобы продолжить",
+    "indicatorsCockpit": "Режим",
+    "indicatorsCockpitDesc": "Бэктест на основе индикаторов с конфигурацией рабочего процесса",
+    "traderCockpit": "Trader",
+    "traderCockpitDesc": "Список наблюдения + стратегии LLM Trader для бэктеста",
+    "aiLiberoCockpit": "Libero",
+    "aiLiberoCockpitDesc": "Стратегии бэктеста автономного агента Libero",
+    "aiStudioCockpit": "Studio",
+    "aiStudioCockpitDesc": "Диалоговые стратегии бэктеста на правилах Studio",
+    "catalogCockpit": "Catalog",
+    "catalogCockpitDesc": "Стратегии бэктеста из каталога стратегий",
+    "kronosCockpit": "Kronos",
+    "kronosCockpitDesc": "Интеграция бэктеста временных рядов Kronos",
+    "free": "БЕСПЛАТНО",
+    "pro": "PRO"
+  },
+  "tabBar": {
+    "prep": "Подготовка",
+    "wait": "Ожидание",
+    "closeTab": "Закрыть вкладку",
+    "close": "Закрыть",
+    "closeOthers": "Закрыть другие",
+    "closeAll": "Закрыть все"
+  },
+  "messages": {
+    "resumeApiNotAvailable": "API возобновления недоступен",
+    "resumingFromCheckpoint": "Возобновление бэктеста с контрольной точки...",
+    "resumeFailed": "Ошибка возобновления: {{message}}",
+    "deleteCheckpointFailed": "Не удалось удалить контрольную точку",
+    "noWorkflowConfig": "Конфигурация рабочего процесса не найдена",
+    "missingAlgorithm": "Отсутствует алгоритм анализа или входа",
+    "exportedToQuantLab": "Стратегия \"{{name}}\" сохранена",
+    "exportToQuantLabFailed": "Не удалось сохранить стратегию",
+    "startDateAdjustedLookback": "Дата начала автоматически изменена на {{date}} (ограничение maxLookback)",
+    "startDateAdjustedTimeframe": "Дата начала автоматически изменена на {{date}} (изменён таймфрейм)",
+    "generatingStrategy": "Генерация стратегии...",
+    "runningBacktest": "Выполнение бэктеста...",
+    "noWorkflowsConfigured": "Рабочие процессы не настроены. Пожалуйста, добавьте хотя бы один выбор алгоритма.",
+    "missingMarketAnalysis": "Требуется анализ рынка (определение режима). Пожалуйста, выберите алгоритм определения режима.",
+    "missingEntrySignal": "Требуется сигнал входа. Пожалуйста, выберите алгоритм сигнала входа.",
+    "loadingMarketData": "Загрузка рыночных данных для {{symbol}}...",
+    "executionFailed": "Не удалось выполнить бэктест. Проверьте журналы."
+  },
+  "validation": {
+    "symbolRequired": "Требуется символ",
+    "dataSourceRequired": "Требуется источник данных",
+    "startDateRequired": "Требуется дата начала",
+    "endDateRequired": "Требуется дата окончания",
+    "endDateAfterStart": "Дата окончания должна быть позже даты начала",
+    "initialCapitalPositive": "Начальный капитал должен быть положительным",
+    "orderSizePositive": "Размер ордера должен быть положительным",
+    "lookbackExceeded": "Интервал {{timeframe}}: макс. ретроспектива {{lookback}} (выбрано {{selected}}д)",
+    "lookbackWarning": "Выбранный диапазон ({{selected}}д) превышает макс. ретроспективу ({{max}}д)"
+  },
+  "settings": {
+    "back": "Назад",
+    "title": "Настройки",
+    "secrets": "Секреты",
+    "deleteSecret": "Удалить секрет",
+    "deleteSecretConfirm": "Вы уверены, что хотите удалить",
+    "deleteSecretWarning": "Это действие нельзя отменить.",
+    "save": "Сохранить",
+    "saving": "Сохранение...",
+    "secretsPageTitle": "Секреты",
+    "secretsPageDescription": "Управляйте API-ключами и учётными данными провайдеров данных",
+    "refresh": "Обновить",
+    "securityStatus": "Состояние безопасности",
+    "securityStatusDescription": "Настроено {{configured}} из {{total}} секретов. Секреты зашифрованы AES-256-GCM и хранятся безопасно.",
+    "searchSecrets": "Поиск секретов...",
+    "storedSecrets": "Сохранённые секреты",
+    "noSecretsMatch": "Секретов, соответствующих поиску, нет",
+    "noSecretsConfigured": "Секреты не настроены",
+    "recentActivity": "Недавняя активность",
+    "noActivityRecorded": "Активность не зарегистрирована",
+    "navStatus": "Статус",
+    "navCredentials": "Учётные данные",
+    "navActivity": "Активность",
+    "required": "Обязательно",
+    "copyToClipboard": "Копировать в буфер",
+    "hideValue": "Скрыть значение",
+    "showValue": "Показать значение",
+    "editValue": "Изменить",
+    "setValue": "Задать значение",
+    "testApiKey": "Проверить API-ключ",
+    "deleteCredential": "Удалить учётные данные",
+    "testing": "Проверка...",
+    "enterSecretValue": "Введите значение секрета",
+    "getApiKey": "Получить API-ключ",
+    "valueCannotBeEmpty": "Значение не может быть пустым",
+    "failedToSave": "Не удалось сохранить",
+    "missingCredential": "Отсутствуют учётные данные: {{key}}",
+    "failedToRetrieveApiKey": "Не удалось получить API-ключ",
+    "verifiedKeyType": "Проверено ({{keyType}})",
+    "verified": "Проверено",
+    "invalidApiKey": "Недействительный API-ключ",
+    "validationFailed": "Проверка не пройдена",
+    "keyTypePaper": "Бумажный",
+    "keyTypeLive": "Реальный",
+    "deleteButton": "Удалить"
+  },
+  "resultPanel": {
+    "tabs": {
+      "charts": "Графики",
+      "trades": "Сделки",
+      "compare": "Сравнение"
+    },
+    "charts": {
+      "equityCurve": "Кривая капитала",
+      "klineChart": "График K-Line",
+      "bars": "Баров: {{count}}",
+      "noEquityData": "Нет данных капитала",
+      "noKlineData": "Нет данных K-Line",
+      "processing": "Обработка... (точек: {{count}})",
+      "backtesting": "Бэктест...",
+      "noTrades": "Сделок нет"
+    },
+    "summary": {
+      "equity": "Капитал: {{count}} точек",
+      "candles": "Свечи: {{count}} баров",
+      "trades": "Сделок: {{count}}"
+    },
+    "tradesTable": {
+      "index": "#",
+      "entryTime": "Время входа",
+      "exitTime": "Время выхода",
+      "side": "Сторона",
+      "entry": "Вход",
+      "exit": "Выход",
+      "qty": "Кол-во",
+      "pnl": "P&L",
+      "showingOf": "Показано {{shown}} из {{total}} сделок",
+      "noTrades": "Сделок нет"
+    },
+    "llmEstimate": "Оценка вызовов LLM (пробный прогон)",
+    "barsProcessed": "Обработано баров",
+    "calls": "вызовов",
+    "totalLlmCalls": "Всего вызовов LLM",
+    "elapsed": "Прошло",
+    "status": {
+      "noResults": "Результаты недоступны",
+      "case": "Случай {{index}}",
+      "testing": " - Тестируется...",
+      "pending": " - Ожидание",
+      "tradesCount": "(сделок: {{count}})",
+      "collectingData": "Сбор данных...",
+      "waiting": "Ожидание...",
+      "cancelled": "Отменено"
+    },
+    "comparison": {
+      "title": "Сравнение эффективности",
+      "metric": "Метрика",
+      "strategy": "Стратегия {{index}}",
+      "totalPnl": "Общий P&L",
+      "totalReturn": "Общая доходность",
+      "sharpeRatio": "Коэффициент Шарпа",
+      "maxDrawdown": "Максимальная просадка",
+      "winRate": "Доля прибыльных",
+      "totalTrades": "Всего сделок",
+      "profitFactor": "Профит-фактор",
+      "equityOverlay": "Наложение кривых капитала",
+      "noResults": "Нет результатов для сравнения"
+    }
+  },
+  "configSummary": {
+    "dataSource": "Источник данных",
+    "symbol": "Символ",
+    "startDate": "Дата начала",
+    "endDate": "Дата окончания",
+    "capital": "Капитал",
+    "orderSize": "Размер ордера",
+    "sharesUnit": "{{size}} акций",
+    "confidenceWeighted": "CWS"
+  },
+  "namingDialog": {
+    "titleBuilder": "Назовите свою стратегию",
+    "titleExport": "Экспортировать в Sigma",
+    "titleBacktest": "Назовите свой бэктест",
+    "confirmBuilder": "Подтвердить и сгенерировать",
+    "confirmExport": "Подтвердить и экспортировать",
+    "confirmBacktest": "Подтвердить и выполнить",
+    "suggestedName": "Предлагаемое имя:",
+    "useThis": "Использовать это",
+    "or": "или",
+    "customName": "Своё имя:",
+    "placeholder": "Введите своё имя...",
+    "finalName": "Итоговое имя:",
+    "cancel": "Отмена"
+  },
+  "dryRunExecute": {
+    "execute": "Выполнить",
+    "executing": "Выполняется",
+    "dryRun": "Пробный прогон",
+    "direct": "Напрямую"
+  },
+  "workflowDropdown": {
+    "searchPlaceholder": "Поиск...",
+    "noAlgorithmsFound": "Алгоритмы не найдены"
+  },
+  "backtestDataConfig": {
+    "placeholderSearchSymbol": "Поиск символа...",
+    "placeholderInitialCapital": "10000"
+  },
+  "pipeline": {
+    "download": "Скачать",
+    "spawn": "Запустить",
+    "initialize": "Инициализация",
+    "loadData": "Загрузить данные",
+    "backtest": "Бэктест",
+    "finalize": "Завершить"
+  },
+  "manifest": {
+    "displayName": "Backtester",
+    "description": "Strategy backtesting with workflow UI and results visualization",
+    "viewsContainers": {
+      "sidebar": {
+        "backtestExplorer": "BACKTEST"
+      }
+    },
+    "views": {
+      "backtestExplorer": {
+        "backtestHistory": "Backtest History"
+      },
+      "workbench": {
+        "backtestWorkflow": "Backtest Workflow",
+        "backtestResults": "Results"
+      }
+    },
+    "bottomPanel": {
+      "trades": "Trades",
+      "logs": "Logs"
+    },
+    "commands": {
+      "run": "Run Backtest",
+      "stop": "Stop Backtest",
+      "export": "Export Results"
+    },
+    "configuration": {
+      "title": "Backtester Settings",
+      "properties": {
+        "alpacaApiKeyId": {
+          "description": "Alpaca Markets API Key ID",
+          "category": "Data Providers"
+        },
+        "alpacaApiSecretKey": {
+          "description": "Alpaca Markets API Secret Key",
+          "category": "Data Providers"
+        }
+      }
+    }
+  },
+  "exportDialog": {
+    "title": "Save Strategy",
+    "nameLabel": "Strategy Name",
+    "namePlaceholder": "Enter strategy name...",
+    "nameHint": "This name will be used to identify the strategy in your library.",
+    "cancel": "Cancel",
+    "saving": "Saving...",
+    "confirm": "Save"
+  },
+  "result": {
+    "dryRunBadge": "DRY RUN",
+    "liveConfirm": {
+      "confirming": "ПОДТВЕРЖДЕНИЕ...",
+      "confirm": "ПОДТВЕРДИТЬ"
+    }
+  },
+  "tree": {
+    "backtestWorkflow": "РАБОЧИЙ ПРОЦЕСС БЭКТЕСТА",
+    "openWorkflow": "Открыть рабочий процесс",
+    "history": "ИСТОРИЯ",
+    "backtestResultN": "Результат бэктеста #{{n}}"
+  },
+  "engine": {
+    "noDataInRange": "Нет данных в запрошенном диапазоне",
+    "noPositionToSell": "Нет позиции для продажи (короткие продажи отключены)",
+    "strategies": {
+      "smaCrossover": {
+        "name": "Пересечение SMA",
+        "description": "Покупка когда быстрая SMA пересекает медленную SMA сверху, продажа когда снизу",
+        "fastPeriod": "Период быстрой SMA",
+        "slowPeriod": "Период медленной SMA"
+      },
+      "rsiMeanReversion": {
+        "name": "Возврат к среднему RSI",
+        "description": "Покупка когда RSI перепродан, продажа когда перекуплен",
+        "period": "Период RSI",
+        "oversold": "Уровень перепроданности",
+        "overbought": "Уровень перекупленности"
+      }
+    },
+    "insufficientFunds": "Insufficient funds"
+  }
+}

@@ -1,0 +1,288 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "contractVersion": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "requestId": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "operationId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "status": {
+          "type": "string",
+          "const": "succeeded"
+        },
+        "entitlementDecisionId": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "resourceDecisionId": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/__schema0"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "output": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema2"
+          }
+        },
+        "artifacts": {
+          "maxItems": 256,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema3"
+          }
+        }
+      },
+      "required": [
+        "contractVersion",
+        "requestId",
+        "operationId",
+        "status",
+        "entitlementDecisionId",
+        "resourceDecisionId",
+        "output",
+        "artifacts"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "contractVersion": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "requestId": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "operationId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "status": {
+          "type": "string",
+          "const": "failed"
+        },
+        "code": {
+          "type": "string",
+          "enum": [
+            "COMMERCIAL_PACKAGE_ABSENT",
+            "COMMERCIAL_CONTRACT_INCOMPATIBLE",
+            "COMMERCIAL_ENTITLEMENT_DENIED",
+            "COMMERCIAL_REQUEST_INVALID",
+            "COMMERCIAL_BOUNDED_DATA_FAILED",
+            "COMMERCIAL_RESOURCE_ADMISSION_FAILED",
+            "COMMERCIAL_WORKER_UNAVAILABLE",
+            "COMMERCIAL_OPERATION_FAILED",
+            "COMMERCIAL_OPERATION_CANCELLED",
+            "COMMERCIAL_STORAGE_FAILED"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "remediation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "entitlementDecisionId": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/__schema0"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "resourceDecisionId": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/__schema0"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "contractVersion",
+        "requestId",
+        "operationId",
+        "status",
+        "code",
+        "message",
+        "remediation",
+        "retryable",
+        "entitlementDecisionId",
+        "resourceDecisionId"
+      ],
+      "additionalProperties": false
+    }
+  ],
+  "$defs": {
+    "__schema0": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "__schema1": {
+      "type": "string",
+      "enum": [
+        "worker.capabilities.discover",
+        "research.discovery.execute",
+        "research.discovery.generate",
+        "research.discovery.assemble",
+        "research.discovery.status",
+        "research.discovery.cancel",
+        "research.sweep.launch",
+        "research.sweep.status",
+        "research.sweep.cancel",
+        "research.scoreboard.read",
+        "research.scoreboard.refresh",
+        "research.roster.read",
+        "research.roster.transition",
+        "research.roster.remove",
+        "research.relegation.config.read",
+        "research.relegation.config.write",
+        "research.relegation.cycle",
+        "research.promotion.status",
+        "research.promotion.register",
+        "alpha-factory.config.read",
+        "alpha-factory.config.write",
+        "alpha-factory.signals.add",
+        "alpha-factory.execute",
+        "alpha-factory.status",
+        "alpha-factory.cancel",
+        "research.factor-evaluation.execute",
+        "research.progress.subscribe",
+        "research.storage.read",
+        "research.storage.write",
+        "research.sweep.queue.read",
+        "research.sweep.queue.enqueue",
+        "research.sweep.queue.cancel",
+        "research.sweep.queue.clear",
+        "research.sweep.history.read",
+        "research.sweep.coverage.read",
+        "research.leaderboard.read",
+        "research.definition-rollup.read",
+        "research.signal-run.update",
+        "research.signal-run.delete",
+        "research.signal-source.read",
+        "research.signal-source.confirm",
+        "research.signal-source.delete",
+        "research.custom-factor.save",
+        "research.custom-factor.delete",
+        "research.remediation.family-bh",
+        "research.chip-regimes.read",
+        "research.chip-regimes.write",
+        "lstm.manifest.read",
+        "lstm.version.activate",
+        "lstm.version.delete",
+        "lstm.snapshot.list",
+        "lstm.snapshot.save",
+        "lstm.snapshot.restore",
+        "lstm.snapshot.delete",
+        "lstm.training.start",
+        "lstm.training.status",
+        "lstm.training.cancel",
+        "lstm.training.history",
+        "lstm.fit-quality.read",
+        "factor-mining.review",
+        "factor-mining.edit",
+        "factor-mining.confirm",
+        "factor-mining.start",
+        "factor-mining.status",
+        "factor-mining.sessions.list",
+        "factor-mining.catalog.list",
+        "factor-mining.catalog.activate",
+        "factor-mining.catalog.deactivate",
+        "factor-mining.formula.generate",
+        "factor-mining.formula.persist"
+      ]
+    },
+    "__schema2": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema2"
+          }
+        },
+        {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema2"
+          }
+        }
+      ]
+    },
+    "__schema3": {
+      "type": "object",
+      "properties": {
+        "artifactId": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "artifactKind": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "schemaId": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "artifactId",
+        "artifactKind",
+        "schemaId",
+        "schemaVersion",
+        "sha256"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "decisionId": "resource-governance-cli-fixture",
+  "kind": "capacity",
+  "machine": { "ncpu": 16, "memTotalBytes": 66571993088.0 },
+  "capPct": 30.0
+}

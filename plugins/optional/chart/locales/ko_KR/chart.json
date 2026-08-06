@@ -1,0 +1,63 @@
+{
+  "view": {
+    "loading": "로딩 중...",
+    "refresh": "새로고침",
+    "retry": "다시 시도",
+    "loadingChartData": "차트 데이터 로딩 중...",
+    "toggle": {
+      "volume": "거래량",
+      "grid": "그리드"
+    },
+    "error": {
+      "chart": "차트 로딩 오류",
+      "loadData": "데이터를 불러오지 못했습니다"
+    }
+  },
+  "settings": {
+    "section": {
+      "indicators": "지표",
+      "style": "스타일",
+      "drawingTools": "그리기 도구"
+    },
+    "indicator": {
+      "sma": "SMA",
+      "ema": "EMA",
+      "rsi": "RSI",
+      "macd": "MACD",
+      "bb": "볼린저 밴드"
+    },
+    "param": {
+      "period": "기간",
+      "fast": "빠름",
+      "slow": "느림",
+      "signal": "신호",
+      "stdDev": "표준편차"
+    },
+    "chartType": {
+      "label": "차트 유형",
+      "option": {
+        "candlesticks": "캔들스틱",
+        "hollowCandles": "할로우 캔들",
+        "ohlc": "OHLC",
+        "line": "라인",
+        "area": "영역"
+      }
+    },
+    "color": {
+      "up": "상승 색상",
+      "down": "하락 색상"
+    },
+    "drawingTool": {
+      "line": "라인",
+      "ray": "레이",
+      "rect": "사각형",
+      "fib": "피보나치"
+    },
+    "actions": {
+      "apply": "변경 적용"
+    }
+  },
+  "notification": {
+    "indicatorAdded": "지표 추가됨: {{indicator}}"
+  }
+}

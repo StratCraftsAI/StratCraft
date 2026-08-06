@@ -1,0 +1,22 @@
+{
+  "manifest": {
+    "displayName": "Data Foundation",
+    "description": "Foundation plugin providing shared data source components and types"
+  },
+  "fitQuality": {
+    "insufficientData": "Yetersiz Veri",
+    "needTwoFoldResults": "2+ katlanma sonucu gerekli",
+    "dataStarved": "veri yetersiz ({{sampleCount}} ornek / {{paramCount}} parametre = {{ratio}}:1, {{targetRatio}}:1+ gerekli)",
+    "dataSufficiency": "Veri Yeterliligi",
+    "needRatio": "{{targetRatio}}:1 ornek/parametre orani gerekli, mevcut {{currentRatio}}:1",
+    "modelFitQuality": "Model Uyum Kalitesi"
+  },
+  "dataSource": {
+    "region": {
+      "usGlobal": "ABD ve Kuresel",
+      "crypto": "Kripto",
+      "cnAShare": "CN A-Hisse",
+      "myData": "Verilerim"
+    }
+  }
+}

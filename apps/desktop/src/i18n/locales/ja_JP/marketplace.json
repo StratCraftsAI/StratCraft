@@ -1,0 +1,197 @@
+{
+  "title": "Plugin Marketplace",
+  "subtitle": "Discover and install community plugins",
+  "search": {
+    "placeholder": "Search plugins...",
+    "noResults": "No plugins found"
+  },
+  "filters": {
+    "all": "All",
+    "installed": "Installed",
+    "updates": "Updates Available",
+    "category": "Category"
+  },
+  "categories": {
+    "all": "All",
+    "visualization": "Visualization",
+    "indicators": "Indicators",
+    "trading": "Trading",
+    "data": "Data",
+    "ai": "AI",
+    "tools": "Tools",
+    "strategy": "Strategy",
+    "analysis": "Analysis",
+    "integration": "Integration"
+  },
+  "sort": {
+    "mostDownloads": "Most Downloads",
+    "mostStars": "Most Stars",
+    "recentlyUpdated": "Recently Updated",
+    "name": "Name"
+  },
+  "plugin": {
+    "install": "Install",
+    "uninstall": "Uninstall",
+    "update": "Update",
+    "enable": "Enable",
+    "disable": "Disable",
+    "settings": "Settings",
+    "installed": "Installed",
+    "notInstalled": "Not Installed",
+    "version": "Version",
+    "author": "Author",
+    "downloads": "Downloads",
+    "lastUpdated": "Last Updated",
+    "purchase": "Purchase",
+    "enterLicense": "Enter License Key",
+    "licenseExpired": "License Expired",
+    "licenseActive": "License Active",
+    "owned": "Owned"
+  },
+  "results": {
+    "showing": "Showing {{count}} plugin",
+    "showingPlural": "Showing {{count}} plugins"
+  },
+  "install": {
+    "title": "Install Plugin",
+    "installingPlugin": "Installing Plugin",
+    "installing": "Installing \"{{name}}\"",
+    "installQuestion": "Install \"{{name}}\"?",
+    "confirm": "Are you sure you want to install this plugin?",
+    "progress": "Installing...",
+    "success": "Plugin installed successfully",
+    "successMessage": "Plugin installed successfully!",
+    "activateHint": "You can now activate the plugin from the Plugins panel.",
+    "error": "Failed to install plugin",
+    "errorMessage": "Installation failed",
+    "cancel": "Cancel",
+    "installAnyway": "Install Anyway",
+    "phases": {
+      "downloading": "パッケージをダウンロード中",
+      "verifying": "署名を検証中",
+      "validating": "権限を検証中",
+      "extracting": "ファイルを展開中",
+      "copying": "ファイルをコピー中",
+      "registering": "プラグインを登録中",
+      "initializing": "初期化中",
+      "complete": "インストール完了",
+      "resolving_dependencies": "依存関係を解決中",
+      "installing_python_deps": "Python依存関係をインストール中",
+      "finalizing": "完了処理中",
+      "error": "エラー"
+    },
+    "header": {
+      "complete": "インストール完了",
+      "failed": "インストール失敗",
+      "installing": "\"{{name}}\"をインストール中"
+    },
+    "buttons": {
+      "cancel": "キャンセル",
+      "close": "閉じる"
+    },
+    "permissions": {
+      "title": "This plugin requests:",
+      "network": "Network access",
+      "networkDetail": "External APIs",
+      "filesystem": "File system access",
+      "filesystemNone": "None",
+      "filesystemPlugin": "Plugin directory only",
+      "filesystemUser": "User data directory",
+      "filesystemUnknown": "Unknown",
+      "native": "Native modules",
+      "nativeDetail": "Compiled extensions"
+    },
+    "author": {
+      "unverified": "(unverified)"
+    },
+    "warning": {
+      "riskyPermissions": "This plugin requests elevated permissions. Only install if you trust the author."
+    },
+    "progress": {
+      "validatingManifest": "プラグインマニフェストを検証中...",
+      "verifyingBinary": "ネイティブバイナリを検証中...",
+      "binaryVerified": "ネイティブバイナリ検証済み",
+      "copyingFiles": "プラグインファイルをコピー中...",
+      "registeringPlugin": "プラグインを登録中...",
+      "installationComplete": "インストール完了"
+    }
+  },
+  "uninstall": {
+    "title": "Uninstall Plugin",
+    "confirm": "Are you sure you want to uninstall this plugin?",
+    "success": "Plugin uninstalled successfully",
+    "error": "Failed to uninstall plugin"
+  },
+  "detail": {
+    "by": "by",
+    "description": "Description",
+    "repository": "Repository",
+    "permissions": "Permissions",
+    "networkAccess": "Network Access",
+    "fileSystem": "File System",
+    "nativeModules": "Native Modules",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "pythonDependencies": "Python Dependencies",
+    "changelog": "Changelog",
+    "installedVersion": "Installed: v{{version}}",
+    "updateAvailable": "(Update available: v{{version}})",
+    "updateTo": "Update to v{{version}}",
+    "yes": "Yes",
+    "no": "No",
+    "done": "Done"
+  },
+  "noPlugins": {
+    "title": "プラグインが見つかりません",
+    "hint": "検索またはフィルターを調整してください"
+  },
+  "permissionValue": {
+    "enabled": "有効",
+    "disabled": "無効",
+    "yes": "はい",
+    "no": "いいえ"
+  },
+  "license": {
+    "title": "Enter License Key",
+    "keyLabel": "License Key",
+    "keyPlaceholder": "Enter your license key...",
+    "activate": "Activate",
+    "validating": "Validating...",
+    "noPurchaseLink": "Don't have a key? Purchase one",
+    "activated": "License key activated successfully",
+    "removed": "License key removed",
+    "invalid": "Invalid license key",
+    "expired": "License key has expired",
+    "error": "License validation failed"
+  },
+  "authGate": {
+    "title": "Login required",
+    "description": "Log in to browse and install plugins.",
+    "cta": "Login / Sign Up"
+  },
+  "pricing": {
+    "title": "Pricing",
+    "price": "Price",
+    "type": "Billing",
+    "paid": "Paid",
+    "one-time": "One-time payment",
+    "monthly": "Monthly subscription",
+    "yearly": "Yearly subscription"
+  },
+  "lifecycle": {
+    "creatingStrategyDirs": "戦略ディレクトリを作成中...",
+    "initializingDatabase": "データベースを初期化中...",
+    "creatingDefaultTemplates": "デフォルトテンプレートを作成中...",
+    "templateIndicatorDesc": "テクニカル指標を使用した戦略テンプレート",
+    "creatingConfiguration": "設定を作成中...",
+    "installationComplete": "インストール完了",
+    "checkingUpgradeRequirements": "アップグレード要件を確認中...",
+    "migratingDatabaseToV2": "データベーススキーマをv2.0に移行中...",
+    "updatingConfiguration": "設定を更新中...",
+    "creatingNewDirectories": "新しいディレクトリを作成中...",
+    "upgradeComplete": "アップグレード完了",
+    "checkingConfiguration": "設定を確認中...",
+    "creatingBacktestDirs": "バックテストディレクトリを作成中...",
+    "updatingDatabaseSchema": "データベーススキーマを更新中..."
+  }
+}

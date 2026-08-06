@@ -1,0 +1,63 @@
+{
+  "view": {
+    "loading": "Wird geladen...",
+    "refresh": "Aktualisieren",
+    "retry": "Wiederholen",
+    "loadingChartData": "Chartdaten werden geladen...",
+    "toggle": {
+      "volume": "Volumen",
+      "grid": "Raster"
+    },
+    "error": {
+      "chart": "Fehler beim Laden des Charts",
+      "loadData": "Daten konnten nicht geladen werden"
+    }
+  },
+  "settings": {
+    "section": {
+      "indicators": "Indikatoren",
+      "style": "Stil",
+      "drawingTools": "Zeichenwerkzeuge"
+    },
+    "indicator": {
+      "sma": "SMA",
+      "ema": "EMA",
+      "rsi": "RSI",
+      "macd": "MACD",
+      "bb": "Bollinger-Bänder"
+    },
+    "param": {
+      "period": "Periode",
+      "fast": "Schnell",
+      "slow": "Langsam",
+      "signal": "Signal",
+      "stdDev": "Std.-Abw."
+    },
+    "chartType": {
+      "label": "Charttyp",
+      "option": {
+        "candlesticks": "Kerzen",
+        "hollowCandles": "Hohle Kerzen",
+        "ohlc": "OHLC",
+        "line": "Linie",
+        "area": "Fläche"
+      }
+    },
+    "color": {
+      "up": "Aufwärtsfarbe",
+      "down": "Abwärtsfarbe"
+    },
+    "drawingTool": {
+      "line": "Linie",
+      "ray": "Strahl",
+      "rect": "Rechteck",
+      "fib": "Fib"
+    },
+    "actions": {
+      "apply": "Änderungen übernehmen"
+    }
+  },
+  "notification": {
+    "indicatorAdded": "Indikator hinzugefügt: {{indicator}}"
+  }
+}

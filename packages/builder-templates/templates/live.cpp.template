@@ -1,0 +1,113 @@
+// Auto-generated C++ live strategy: {{STRATEGY_NAME}}
+// Generated: {{GENERATED_TIME}}
+
+#include <cstdlib>
+#include <memory>
+#include <string>
+#include <string_view>
+
+namespace qnx_live {
+
+struct Bar {
+    long long timestamp = 0;
+    double open = 0.0;
+    double high = 0.0;
+    double low = 0.0;
+    double close = 0.0;
+    double volume = 0.0;
+    unsigned int bar_index = 0;
+};
+
+class LiveStrategy {
+public:
+    virtual ~LiveStrategy() = default;
+    virtual int on_bar(const Bar& bar) = 0;
+    virtual double confidence() const { return 1.0; }
+    virtual std::string reason() const { return "cpp_live_strategy"; }
+};
+
+// Maximum digits in a JSON numeric literal (sign + 17 significant + decimal + exponent)
+constexpr std::size_t MAX_JSON_NUMBER_LENGTH = 48;
+
+inline double number_field(std::string_view json, std::string_view key, double fallback = 0.0) {
+    const std::string search = "\"" + std::string(key) + "\"";
+    auto pos = json.find(search);
+    if (pos == std::string_view::npos) {
+        return fallback;
+    }
+    pos = json.find(':', pos + search.size());
+    if (pos == std::string_view::npos) {
+        return fallback;
+    }
+    ++pos;
+    while (pos < json.size() && (json[pos] == ' ' || json[pos] == '\t')) {
+        ++pos;
+    }
+    return std::strtod(std::string(json.substr(pos, MAX_JSON_NUMBER_LENGTH)).c_str(), nullptr);
+}
+
+inline Bar parse_bar(std::string_view json) {
+    return Bar{
+        .timestamp = static_cast<long long>(number_field(json, "t")),
+        .open = number_field(json, "o"),
+        .high = number_field(json, "h"),
+        .low = number_field(json, "l"),
+        .close = number_field(json, "c"),
+        .volume = number_field(json, "v"),
+        .bar_index = static_cast<unsigned int>(number_field(json, "bar_index")),
+    };
+}
+
+inline std::string escape_json(std::string_view value) {
+    std::string escaped;
+    escaped.reserve(value.size());
+    for (char ch : value) {
+        if (ch == '"' || ch == '\\') {
+            escaped += '\\';
+        }
+        escaped += ch;
+    }
+    return escaped;
+}
+
+inline std::string signal_json(int direction, const Bar& bar, double confidence, std::string_view reason) {
+    if (direction == 0) {
+        return {};
+    }
+    return std::string("{\"type\":\"signal\",\"data\":{") +
+        "\"direction\":" + std::to_string(direction) +
+        ",\"value\":" + std::to_string(bar.close) +
+        ",\"confidence\":" + std::to_string(confidence) +
+        ",\"reason\":\"" + escape_json(reason) + "\"" +
+        ",\"bar_index\":" + std::to_string(bar.bar_index) +
+        ",\"timestamp\":" + std::to_string(bar.timestamp) +
+        "}}";
+}
+
+} // namespace qnx_live
+
+{{STRATEGY_CODE}}
+
+namespace {
+std::unique_ptr<{{STRATEGY_CLASS}}> strategy;
+std::string last_response;
+}
+
+extern "C" int qnx_live_strategy_abi_version() {
+    return 1;
+}
+
+extern "C" void qnx_live_strategy_reset() {
+    strategy = std::make_unique<{{STRATEGY_CLASS}}>();
+    last_response.clear();
+}
+
+extern "C" const char* qnx_live_strategy_on_bar(const char* bar_json) {
+    if (!strategy) {
+        qnx_live_strategy_reset();
+    }
+    const auto bar = qnx_live::parse_bar(bar_json == nullptr ? "{}" : std::string_view(bar_json));
+    const int direction = strategy->on_bar(bar);
+    last_response = qnx_live::signal_json(direction, bar, strategy->confidence(), strategy->reason());
+    return last_response.c_str();
+}

@@ -1,0 +1,55 @@
+{
+  "note": "TICKET_1292_09 MC-09 golden parity: blocking-verdict baseline captured from the retained Python owner cpp_strategy_code_integrity.py (phase_validate, the CV* errors[] branch that algorithm-post-insert-pipeline.ts treats as CODE_INTEGRITY_FAILED). The C++ strategy-admission owner must (a) reject (admitted=false) every case Python rejected, and (b) emit each rule id in requiredBlockingRuleIds. CV2 is emitted by both owners only when a strategy class is present (Python: not specialized_base and no next(); C++: strategy class present and generic base and no next()); when no class exists CV1 already blocks, so CV2 is not required for verdict parity and is listed in optionalBlockingRuleIds.",
+  "cases": [
+    {
+      "name": "structural_no_class_with_main",
+      "code": "#include <stratforge/strategy/strategy.hpp>\n\nint main() {\n    return 0;\n}\n",
+      "pythonErrors": [
+        "CV1: No class inheriting from stratforge::Strategy found",
+        "CV2: next() method not found",
+        "CV3: main() function found (strategy code should not contain main())"
+      ],
+      "admitted": false,
+      "requiredBlockingRuleIds": ["CV1", "CV3"],
+      "optionalBlockingRuleIds": ["CV2"]
+    },
+    {
+      "name": "unbalanced_braces",
+      "code": "#include <stratforge/strategy/strategy.hpp>\n\nclass BraceStrategy : public stratforge::Strategy {\npublic:\n    void next() override {\n        if (true) {\n    }\n};\nQNX_STRATEGY_FACTORY_EXPORT(BraceStrategy)\n",
+      "pythonErrors": [
+        "CV6: Unbalanced braces (difference: 1)"
+      ],
+      "admitted": false,
+      "requiredBlockingRuleIds": ["CV6"],
+      "optionalBlockingRuleIds": []
+    },
+    {
+      "name": "multiple_inheritance_strategy",
+      "code": "#include <stratforge/strategy/strategy.hpp>\nclass Helper {};\nclass MultiStrategy : public stratforge::Strategy, public Helper {\npublic:\n    void next() override {}\n};\nQNX_STRATEGY_FACTORY_EXPORT(MultiStrategy)\n",
+      "pythonErrors": [
+        "CV7: Multiple inheritance detected in class MultiStrategy: public stratforge::Strategy, public Helper"
+      ],
+      "admitted": false,
+      "requiredBlockingRuleIds": ["CV7"],
+      "optionalBlockingRuleIds": []
+    },
+    {
+      "name": "generic_strategy_missing_next",
+      "code": "#include <stratforge/strategy/strategy.hpp>\nclass NoNextStrategy : public stratforge::Strategy {\npublic:\n    void init() override {}\n};\nQNX_STRATEGY_FACTORY_EXPORT(NoNextStrategy)\n",
+      "pythonErrors": [
+        "CV2: next() method not found"
+      ],
+      "admitted": false,
+      "requiredBlockingRuleIds": ["CV2"],
+      "optionalBlockingRuleIds": []
+    },
+    {
+      "name": "valid_strategy",
+      "code": "#include <stratforge/strategy/strategy.hpp>\n#include <qnx_strategy_sdk/qnx_strategy_sdk.hpp>\nclass GoodStrategy : public stratforge::Strategy {\npublic:\n    void init() override {}\n    void next() override {}\n};\nQNX_STRATEGY_FACTORY_EXPORT(GoodStrategy)\n",
+      "pythonErrors": [],
+      "admitted": true,
+      "requiredBlockingRuleIds": [],
+      "optionalBlockingRuleIds": []
+    }
+  ]
+}

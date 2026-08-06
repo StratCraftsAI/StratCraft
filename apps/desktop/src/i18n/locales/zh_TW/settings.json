@@ -1,0 +1,285 @@
+{
+  "title": "Settings",
+  "sections": {
+    "general": "General",
+    "appearance": "Appearance",
+    "language": "Language",
+    "network": "Network",
+    "security": "Security",
+    "plugins": "Plugins",
+    "advanced": "Advanced",
+    "about": "About",
+    "config": "Config",
+    "credentials": "Credentials",
+    "system": "System"
+  },
+  "language": {
+    "title": "Language",
+    "description": "Select your preferred language",
+    "system": "Use system language",
+    "restart": "Restart required to apply language changes"
+  },
+  "theme": {
+    "title": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
+  },
+  "plugins": {
+    "title": "Plugin Settings",
+    "config": "Configuration",
+    "secrets": "Secrets",
+    "noConfig": "No configuration options available",
+    "noSecrets": "No secrets configured"
+  },
+  "actions": {
+    "save": "Save Settings",
+    "reset": "Reset to Defaults",
+    "export": "Export Settings",
+    "import": "Import Settings",
+    "reload": "Reload",
+    "retry": "Retry"
+  },
+  "config": {
+    "title": "System Configuration",
+    "description": "Manage application settings and preferences",
+    "configFilePath": "Configuration file path",
+    "nav": {
+      "performance": "Performance",
+      "sync": "Sync",
+      "scoreboard": "訊號評分板",
+      "diagnostics": "Diagnostics",
+      "onboarding": "新手引導",
+      "privacy": "Privacy",
+      "dataRouting": "資料路由",
+      "resourceGovernance": "資源治理"
+    },
+    "performance": {
+      "maxBacktestTasks": "Max Backtest Tasks",
+      "maxBacktestDescription": "Concurrent backtest limit (1-32)",
+      "autoDetectTitle": "CPU core based auto-detection",
+      "autoDetect": "Auto Detect"
+    },
+    "sync": {
+      "title": "Workspace Sync",
+      "description": "Sync your workspace to a local folder (e.g., OneDrive, Google Drive, Dropbox mount)",
+      "targetFolder": "Target Folder",
+      "targetFolderDescription": "Folder path for workspace sync. Use a cloud drive mount for cross-device sync.",
+      "targetFolderPlaceholder": "Select a sync folder...",
+      "browse": "Browse",
+      "lastSynced": "Last Synced",
+      "neverSynced": "Never synced",
+      "syncNow": "Sync Now",
+      "syncing": "Syncing...",
+      "restoreFromSync": "Restore from Sync",
+      "restoring": "Restoring...",
+      "exportSuccess": "Workspace exported successfully ({{strategies}} strategies, {{algorithms}} algorithms, {{results}} results)",
+      "importSuccess": "Workspace imported successfully ({{strategies}} strategies, {{algorithms}} algorithms, {{results}} results)",
+      "confirmRestore": "This will import workspace data from the sync folder. Existing data with the same IDs will be overwritten. Continue?",
+      "errors": {
+        "noTargetDir": "Please select a target folder first",
+        "exportFailed": "Export failed: {{error}}",
+        "importFailed": "Import failed: {{error}}"
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "restore": "Restore"
+      }
+    },
+    "health": {
+      "parseError": "組態檔錯誤",
+      "parseWarning": "組態檔警告",
+      "usingFallback": "應用程式正在使用上次已知的有效組態執行。請修正組態檔並重新載入。",
+      "reloadFailed": "由於解析錯誤，組態重新載入失敗。"
+    },
+    "scoreboard": {
+      "title": "訊號評分板",
+      "description": "訊號績效評分板的設定。修改將在下次重算時生效 -- 不需重啟應用程式。",
+      "windowBars": "視窗K線數",
+      "windowBarsDescription": "IC / 夏普 / 命中率使用的滾動視窗長度（{{min}}-{{max}} 根K線）。"
+    },
+    "dataRouting": {
+      "title": "Data routing",
+      "descriptionPrefix": "For each market, choose which data provider should be tried first. Markets with multiple eligible providers (for example,",
+      "descriptionMiddle": "served by both",
+      "descriptionAnd": "and",
+      "descriptionSuffix": ") expose a reorderable list. Single-provider markets are read-only.",
+      "moveUp": "Move {{provider}} up",
+      "moveDown": "Move {{provider}} down"
+    },
+    "resourceGovernance": {
+      "title": "資源治理",
+      "description": "為 sweep、因子挖掘與 LSTM 訓練分別設定 CPU / 記憶體上限。閘門閾值可熱重載；cgroup 硬上限於各工作負載下次啟動時生效。",
+      "enabled": "啟用資源治理",
+      "sweepCap": "Sweep 上限（%）",
+      "miningCap": "因子挖掘上限（%）",
+      "lstmCap": "LSTM 訓練上限（%）",
+      "capDescription": "在 CPU / 記憶體中較緊的一項上佔用機器資源的最大比例（{{min}}-{{max}}%）。",
+      "applyNote": "閘門閾值立即生效。cgroup 硬上限於各工作負載下次啟動時生效。",
+      "aggregateExceeded": "三項上限之和不得超過 {{max}}%。",
+      "admissionCeiling": "System admission ceiling (%)",
+      "admissionCeilingDesc": "Maximum combined peak memory including other workloads and the operating system ({{min}}-{{max}}%)."
+    }
+  },
+  "advanced": {
+    "diagnostics": {
+      "title": "Diagnostics",
+      "openLogFolder": "Open Log Folder",
+      "openLogFolderDescription": "Opens the log directory in your file manager"
+    },
+    "onboarding": {
+      "title": "新手引導",
+      "showGuides": "顯示新手引導",
+      "showGuidesDescription": "首次造訪頁面時顯示互動式引導教學。",
+      "assistantMode": "助手模式",
+      "assistantModeDescription": "顯示當前頁面的情境幫助面板，包含教學內容。",
+      "resetProgress": "重設引導進度",
+      "resetProgressDescription": "清除所有已完成的引導教學，使其在下次造訪時重新播放。",
+      "resetButton": "重設"
+    },
+    "privacy": {
+      "title": "Privacy",
+      "description": "Control what data is shared with StratCraft to help improve the application.",
+      "crashReports": "Crash Reports",
+      "crashReportsDescription": "Automatically send error and crash data to help us fix bugs. No personal data is included.",
+      "crashReportsAlwaysOn": "Crash reports are always sent to help us fix critical issues. No personal data is included.",
+      "alwaysOn": "Always On",
+      "analytics": "Send Usage Analytics",
+      "analyticsDescription": "Share anonymous usage statistics to help us improve features and performance."
+    }
+  },
+  "permissions": {
+    "title": "Permission Request",
+    "requestingPermissions": "This plugin is requesting the following permissions:",
+    "dangerousPermissions": "Dangerous Permissions",
+    "dangerousWarning": "This plugin requests elevated permissions that could affect your system security. Only approve if you trust the source.",
+    "deny": "Deny",
+    "approve": "Approve",
+    "approveAnyway": "Approve Anyway",
+    "pluginId": "Plugin ID: {{id}}",
+    "author": "Author: {{author}}"
+  },
+  "credentials": {
+    "title": "憑證管理器",
+    "description": "安全管理外掛憑證",
+    "nav": {
+      "security": "安全",
+      "credentials": "憑證",
+      "auditLog": "稽核日誌"
+    },
+    "security": {
+      "title": "安全狀態",
+      "description": "憑證使用 AES-256-GCM 加密。系統金鑰鏈整合已啟用。"
+    },
+    "actions": {
+      "setMasterPassword": "設定主密碼",
+      "addCredential": "新增憑證",
+      "refresh": "重新整理",
+      "copyToClipboard": "複製到剪貼簿",
+      "showValue": "顯示值",
+      "hideValue": "隱藏值",
+      "deleteCredential": "刪除憑證"
+    },
+    "search": {
+      "placeholder": "搜尋憑證..."
+    },
+    "list": {
+      "title": "已儲存的憑證",
+      "empty": "尚無儲存的憑證",
+      "noMatch": "沒有符合的憑證",
+      "addFirst": "新增您的第一個憑證"
+    },
+    "audit": {
+      "title": "最近活動",
+      "empty": "尚無活動記錄",
+      "loadFailed": "無法載入稽核日誌"
+    },
+    "dialog": {
+      "add": {
+        "title": "新增憑證",
+        "pluginId": "外掛 ID",
+        "pluginIdPlaceholder": "com.example.plugin",
+        "key": "金鑰名稱",
+        "keyPlaceholder": "API_KEY",
+        "value": "金鑰值",
+        "valuePlaceholder": "輸入金鑰值",
+        "adding": "新增中...",
+        "submit": "新增憑證"
+      },
+      "password": {
+        "setTitle": "設定主密碼",
+        "enterTitle": "輸入主密碼",
+        "setDescription": "設定主密碼以保護您的憑證。存取敏感資料時需要此密碼。",
+        "enterDescription": "輸入主密碼以解鎖憑證存取。",
+        "password": "密碼",
+        "passwordPlaceholder": "輸入密碼",
+        "confirmPassword": "確認密碼",
+        "confirmPlaceholder": "確認密碼",
+        "processing": "處理中...",
+        "setButton": "設定密碼",
+        "unlockButton": "解鎖"
+      }
+    },
+    "errors": {
+      "passwordMismatch": "密碼不符",
+      "passwordTooShort": "密碼至少需要8個字元",
+      "invalidPassword": "密碼無效",
+      "setPasswordFailed": "設定密碼失敗"
+    },
+    "confirmDelete": "Delete credential \"{{key}}\" from {{pluginId}}?"
+  },
+  "consent": {
+    "title": "Help Improve StratCraft",
+    "description": "StratCraft collects crash reports to fix critical issues. You can also opt in to share anonymous usage data. You can change these settings at any time in Settings > Advanced.",
+    "crashReports": "Crash Reports",
+    "crashReportsAlwaysOn": "Crash reports are always sent to help us fix critical issues. No personal data is included.",
+    "optionalDataSharing": "Optional data sharing:",
+    "analytics": "Send usage analytics",
+    "analyticsDescription": "Share anonymous usage data to help us understand how StratCraft is used and improve features.",
+    "privacyNote": "All data is anonymized before transmission. No personal information, trading data, or API keys are ever collected. You can change these preferences anytime in Settings > Advanced > Privacy.",
+    "noThanks": "No Thanks",
+    "enableSelected": "Enable Selected"
+  },
+  "secretsPanel": {
+    "verifyMissingApiKey": "缺少 API 金鑰",
+    "verifyMissingCompositeKey": "缺少 API 金鑰 ID 或 Secret",
+    "verifyRequestFailed": "驗證請求失敗",
+    "patternMismatch": "Value does not match expected pattern ({{pattern}})",
+    "failedToSaveKey": "Failed to save {{key}}",
+    "failedToClearKey": "Failed to clear {{key}}",
+    "failedToDeleteKey": "Failed to delete {{key}}",
+    "apiKey": {
+      "aria": {
+        "required": "必填",
+        "hideValue": "隱藏值",
+        "showValue": "顯示值"
+      }
+    },
+    "providers": {
+      "lino": {
+        "name": "LinoAPI",
+        "description": "中國 API 中轉閘道 — 500+ 模型，OpenAI 協議",
+        "apiKey": "API 金鑰",
+        "apiKeyPlaceholder": "your-lino-api-key"
+      },
+      "openaiCompatible": {
+        "name": "OpenAI 相容介面",
+        "description": "任何支援 OpenAI 聊天補全協議的服務",
+        "baseUrl": "API 基礎位址",
+        "baseUrlPlaceholder": "https://api.example.com/v1",
+        "apiKey": "API 金鑰",
+        "apiKeyPlaceholder": "sk-..."
+      }
+    }
+  },
+  "errors": {
+    "saveFailed": "Save failed",
+    "loadFailed": "Failed to load configuration"
+  },
+  "dataRouting": {
+    "loading": "正在載入市場路由偏好...",
+    "instructions": "對於每個市場，清單中的第一個資料源優先。僅有一個資料源的市場為唯讀。",
+    "noProvider": "無資料源",
+    "singleProvider": "單一"
+  }
+}

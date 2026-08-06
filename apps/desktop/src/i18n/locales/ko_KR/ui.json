@@ -1,0 +1,1120 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "initializing": "Initializing...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "dismiss": "닫기",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "reset": "Reset",
+    "search": "Search",
+    "filter": "Filter",
+    "refresh": "Refresh",
+    "export": "Export",
+    "import": "Import",
+    "enable": "Enable",
+    "disable": "Disable",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "apply": "Apply",
+    "retry": "Retry",
+    "later": "Later",
+    "tryAgain": "Try again",
+    "login": "Login",
+    "logout": "Logout",
+    "signOut": "Sign Out",
+    "upgradePlan": "Upgrade Plan",
+    "signingOut": "Signing out...",
+    "loggingIn": "Logging in...",
+    "home": "Home",
+    "pluginSettings": "Plugin Settings",
+    "loginSignup": "Login / Sign Up"
+  },
+  "compilation": {
+    "compiled": "컴파일됨",
+    "failed": "컴파일 실패",
+    "noOutput": "컴파일러 출력이 제공되지 않았습니다.",
+    "retry": "재시도",
+    "compiling": "컴파일 중...",
+    "showRawOutput": "원시 출력 표시"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "strategies": "Strategies",
+    "backtest": "Backtest",
+    "marketplace": "Marketplace",
+    "settings": "Settings",
+    "data": "Data",
+    "nexusHub": "Nexus Hub",
+    "strategyStudio": "Strategy Studio",
+    "strategyBuilder": "StratForge",
+    "backtestNexus": "Backtester",
+    "dataNexus": "Data Nexus",
+    "pluginMarketplace": "Plugin Marketplace",
+    "chart": "Chart",
+    "aiAssistant": "AI Assistant",
+    "result": "Result"
+  },
+  "status": {
+    "online": "Online",
+    "offline": "Offline",
+    "connecting": "Connecting...",
+    "checking": "확인중...",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "error": "Error",
+    "ready": "Ready",
+    "pending": "Pending",
+    "running": "Running",
+    "completed": "Completed",
+    "failed": "Failed",
+    "notConfigured": "자격 증명이 구성되지 않았습니다 — 설정 > 자격 증명으로 이동하세요"
+  },
+  "dialog": {
+    "confirmDelete": "Are you sure you want to delete this item?",
+    "unsavedChanges": "You have unsaved changes. Discard them?",
+    "confirmAction": "Are you sure you want to proceed?"
+  },
+  "time": {
+    "now": "Now",
+    "today": "Today",
+    "yesterday": "어제",
+    "ago": "ago"
+  },
+  "auth": {
+    "loginTo": "Login to {{provider}}",
+    "loginToUnlock": "Login to Unlock",
+    "loginRequired": "로그인 필요",
+    "viewPlans": "View Plans",
+    "plan": "{{plan}} Plan",
+    "needHelp": "Need help? Contact support at support@StratCraft.io",
+    "loginRequiredBanner": "Login required to use this feature.",
+    "clickToLogin": "Log In",
+    "credits": "Credits: {{remaining}} / {{total}}",
+    "creditsRemaining": "Credits: {{remaining}}",
+    "renews": "Renews: {{date}}",
+    "passwordPlaceholder": "비밀번호",
+    "inline": {
+      "hero": {
+        "badge": "퀀트 리서치 워크스페이스",
+        "heading": "하나의 통제된 워크스페이스에서 트레이딩 시스템을 구축, 테스트, 배포하세요.",
+        "tagline": "아이디어 검증을 더 빠르게, 실행 워크플로를 더 깔끔하게, 그리고 마케팅 페이지가 아닌 운영 콘솔에 가까운 제품 표면을 원하는 퀀트 팀과 독립 연구자를 위해 설계되었습니다.",
+        "pillars": {
+          "workflows": {
+            "title": "AI 전략 워크플로",
+            "description": "시장 아이디어를 구조화된 리서치, 시그널, 배포 가능한 트레이딩 로직으로 변환합니다."
+          },
+          "backtesting": {
+            "title": "내장 백테스팅",
+            "description": "라이브 전에 데이터, 감사 추적, 실행을 고려한 시뮬레이션으로 아이디어를 검증합니다."
+          },
+          "controls": {
+            "title": "운영자급 제어",
+            "description": "데이터, 자격 증명, 플러그인, 실행 오케스트레이션을 위한 안전한 데스크톱 워크스페이스를 사용합니다."
+          }
+        },
+        "stats": {
+          "multistep": {
+            "value": "다단계",
+            "label": "리서치에서 실행까지의 흐름"
+          },
+          "desktopNative": {
+            "value": "데스크톱 네이티브",
+            "label": "본격적인 퀀트를 위한 워크스페이스"
+          },
+          "secure": {
+            "value": "보안",
+            "label": "인증, 플러그인, 로컬 제어"
+          }
+        }
+      },
+      "email": {
+        "heading": "로그인하거나 무료 계정 만들기",
+        "description": "계속하려면 이메일을 입력하세요. 새 계정은 자동으로 생성됩니다. 이미 자격 증명 기반 계정이 있는 경우 비밀번호 로그인을 사용하세요.",
+        "secureAccess": "보안 액세스",
+        "emailVerification": "이메일 인증",
+        "placeholder": "you@example.com",
+        "continueButton": "이메일로 계속",
+        "sending": "전송 중..."
+      },
+      "method": {
+        "password": {
+          "title": "비밀번호 사용",
+          "description": "이메일 + 비밀번호로 로그인하는 기존 사용자용입니다."
+        },
+        "browser": {
+          "title": "브라우저에서 로그인",
+          "description": "호스팅된 인증 흐름과 전체 계정 제어 기능으로 계속합니다."
+        }
+      },
+      "footer": "신용 카드 없이 무료로 시작하세요. 계속 진행하면 전략 설계, 백테스팅, 플러그인 기반 확장, 통제된 실행을 위한 StratCraft 워크스페이스에 진입합니다.",
+      "code": {
+        "heading": "이메일을 확인하세요",
+        "sentTo": "{{email}} 으로 6자리 코드를 전송했습니다",
+        "verifying": "확인 중...",
+        "changeEmail": "이메일 변경",
+        "resendCountdown": "{{seconds}}초 후 재전송",
+        "resendCode": "코드 재전송",
+        "otherWays": "다른 로그인 방법",
+        "usePassword": "비밀번호 사용",
+        "loginWithBrowser": "브라우저에서 로그인"
+      },
+      "password": {
+        "heading": "비밀번호로 로그인",
+        "description": "이메일과 비밀번호를 입력하세요",
+        "emailPlaceholder": "you@example.com",
+        "loginButton": "로그인",
+        "loggingIn": "로그인 중...",
+        "switchToCode": "인증 코드 사용"
+      },
+      "errors": {
+        "invalidEmail": "유효한 이메일 주소를 입력하세요",
+        "sendCodeFailed": "인증 코드 전송 실패",
+        "networkError": "네트워크 오류",
+        "invalidCode": "유효하지 않은 인증 코드",
+        "resendFailed": "재전송 실패",
+        "invalidCredentials": "유효하지 않은 자격 증명"
+      }
+    }
+  },
+  "plugin": {
+    "error": "Plugin Error",
+    "errorOccurred": "An error occurred in the plugin",
+    "loadingPlugin": "Loading {{title}}...",
+    "failedToLoad": "Failed to load plugin: {{error}}",
+    "sandboxError": "Sandbox error: {{error}}"
+  },
+  "permissions": {
+    "unknownPermission": "알 수 없는 권한",
+    "title": "Permission Request",
+    "requestingPermissions": "This plugin is requesting the following permissions:",
+    "dangerousPermissions": "Dangerous Permissions",
+    "dangerousWarning": "This plugin requests elevated permissions that could affect your system security. Only approve if you trust the source.",
+    "deny": "Deny",
+    "approve": "Approve",
+    "approveAnyway": "Approve Anyway",
+    "pluginId": "Plugin ID",
+    "author": "Author",
+    "riskLevels": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "dangerous": "Dangerous",
+      "unknown": "Unknown"
+    }
+  },
+  "locked": {
+    "requiresTier": "This feature requires {{tier}} tier access",
+    "serviceEnabled": "You've enabled this service. It will automatically activate when you upgrade to {{tier}} tier."
+  },
+  "toolbar": {
+    "logo": "Logo",
+    "systemSettings": "System Settings",
+    "researchEnvironment": "Research Environment"
+  },
+  "error": {
+    "somethingWentWrong": "Something went wrong",
+    "unexpectedError": "An unexpected error occurred",
+    "viewNotFound": "View not found: {{view}}",
+    "editorNotFound": "Editor not found for: {{feature}}"
+  },
+  "view": {
+    "loadingView": "뷰 로딩 중...",
+    "errorPrefix": "오류: {{error}}",
+    "unknownViewType": "알 수 없는 뷰 유형",
+    "noProvider": "뷰 제공자가 없습니다: {{viewId}}",
+    "noViewSelected": "뷰가 선택되지 않았습니다",
+    "failedToLoad": "뷰 로딩 실패"
+  },
+  "tier": {
+    "free": "FREE",
+    "basic": "BASIC",
+    "pro": "PRO",
+    "gold": "GOLD"
+  },
+  "nexusHub": {
+    "initializingSystems": "Initializing Core Systems...",
+    "connectTheAlpha": "CONNECT THE ALPHA",
+    "strategy": "STRATEGY",
+    "backtest": "BACKTEST",
+    "strategyModule": "Strategy Module",
+    "backtestModule": "Backtest Module",
+    "strategyDescription": "Algorithmic strategy generation and logic execution",
+    "backtestDescription": "High-performance C++ backtest engine with integrated data loading",
+    "noLink": "NO {{title}} LINK",
+    "noModulesAvailable": "No Modules Available",
+    "linking": "LINKING",
+    "registry": "Registry",
+    "deactivate": "Deactivate",
+    "systemActive": "SYSTEM_ACTIVE",
+    "moduleStandby": "MODULE_STANDBY",
+    "emptySlot": "EMPTY SLOT",
+    "modules": "Modules",
+    "modulesDescription": "Available plugins for strategy research, testing, and trading"
+  },
+  "strategyStudio": {
+    "strategyNona": "STRATEGY NONA",
+    "advanced": "ADVANCED",
+    "mode": "MODE",
+    "tierAccessRequired": "This feature requires {{tier}} tier access"
+  },
+  "breadcrumb": {
+    "nexusHub": "Nexus Hub"
+  },
+  "banner": {
+    "apiKey": {
+      "message": "AI 기능을 사용하려면 API 키 설정 또는 PRO 구독이 필요합니다",
+      "configureKey": "키 설정",
+      "loginUpgrade": "로그인 및 업그레이드",
+      "upgrade": "업그레이드",
+      "dismiss": "닫기"
+    }
+  },
+  "modal": {
+    "defaultConfirmTitle": "확인",
+    "defaultInfoTitle": "알림",
+    "defaultOkText": "확인",
+    "defaultCancelText": "취소",
+    "close": "닫기",
+    "configureApiKey": "API 키 설정",
+    "defaultDestructiveTitle": "Confirm Delete"
+  },
+  "dataManagement": {
+    "title": "데이터 관리",
+    "tabs": {
+      "catalog": "카탈로그",
+      "downloadQueue": "다운로드 큐"
+    },
+    "stats": {
+      "totalSize": "총 크기",
+      "totalRows": "총 행 수",
+      "symbols": "심볼 수",
+      "providers": "데이터 제공업체",
+      "segments": "{{count}} 세그먼트"
+    },
+    "catalog": {
+      "searchSymbol": "심볼 검색...",
+      "allProviders": "모든 제공업체",
+      "allIntervals": "모든 시간봉",
+      "deleteCount": "삭제 ({{count}})",
+      "refresh": "새로고침",
+      "totalSegments": "{{count}} 세그먼트",
+      "columnSymbol": "심볼",
+      "columnInterval": "시간봉",
+      "columnDateRange": "날짜 범위",
+      "columnRows": "행 수",
+      "columnSize": "크기",
+      "loading": "로딩 중...",
+      "noData": "캐시된 데이터 세그먼트가 없습니다",
+      "deleteSegment": "세그먼트 삭제",
+      "groupSummary": "{{symbols}} 심볼 | {{segments}} 세그먼트 | {{size}}"
+    },
+    "download": {
+      "newDownload": "새 다운로드",
+      "provider": "제공업체",
+      "symbol": "심볼",
+      "searchSymbol": "심볼 검색...",
+      "interval": "시간봉",
+      "start": "시작",
+      "end": "종료",
+      "addToQueue": "큐에 추가",
+      "noTasks": "큐에 다운로드 작업이 없습니다",
+      "columnSymbol": "심볼",
+      "columnInterval": "시간봉",
+      "columnProvider": "제공업체",
+      "columnStatus": "상태",
+      "columnProgress": "진행률",
+      "cancel": "취소",
+      "maxLookback": "최대 {{limit}} 까지",
+      "intervalSetTo": "{{provider}}: {{symbol}} 의 시간봉을 {{interval}} 로 설정",
+      "lookbackAdjusted": "{{provider}} {{interval}} 최대 조회 기간: {{limit}} -- 시작 날짜가 {{date}} 로 조정됨",
+      "switchedInterval": "{{interval}} 로 전환 -- {{oldInterval}} 최대 조회 기간 초과",
+      "lookbackError": "{{provider}} {{interval}} 는 최대 {{limit}} 까지 지원합니다. 시작 날짜를 조정하거나 더 큰 시간봉을 선택하세요."
+    },
+    "import": {
+      "table": {
+        "col": {
+          "symbol": "심볼",
+          "interval": "간격",
+          "from": "시작",
+          "to": "종료",
+          "rows": "행"
+        }
+      }
+    },
+    "maxLookback": "최대 {{limit}} 룩백",
+    "callerBadge": {
+      "sweep": "Sweep",
+      "backtest": "Backtest",
+      "discovery": "Discovery",
+      "validation": "Validation",
+      "scoreboard": "Scoreboard",
+      "restore": "Restore"
+    }
+  },
+  "backtestConsole": {
+    "title": "백테스트 콘솔",
+    "noTasks": "백테스트 작업이 없습니다",
+    "cancelAllQueued": "모든 대기열 취소",
+    "clearFinished": "완료 항목 지우기",
+    "stopBacktest": "백테스트 중지",
+    "viewResult": "결과 보기",
+    "removeFromQueue": "대기열에서 제거",
+    "removeFromList": "목록에서 제거",
+    "status": {
+      "preparing": "준비 중",
+      "running": "실행 중",
+      "queued": "대기열",
+      "queuedPosition": "대기열 #{{position}}",
+      "completed": "완료",
+      "failed": "실패",
+      "cancelled": "취소됨"
+    },
+    "summary": {
+      "running": "실행 중",
+      "queued": "대기열",
+      "done": "완료",
+      "failed": "실패"
+    },
+    "taskLabel": "작업:",
+    "openConsole": "백테스트 콘솔 열기",
+    "viewDownloadQueue": "다운로드 대기열 보기",
+    "openAlphaFactoryConsole": "Alpha Factory 콘솔 열기",
+    "lstmStatus": {
+      "phase": {
+        "boot": "시작 중",
+        "load_traces": "트레이스 로딩",
+        "build_matrix": "행렬 구축",
+        "build_windows": "윈도우 구축"
+      },
+      "foldEpoch": "폴드 {{fold}}/{{totalFolds}} 에폭 {{epoch}}/{{totalEpochs}}",
+      "training": "학습 중",
+      "completed": "학습 완료",
+      "failed": "학습 실패",
+      "tooltip": "LSTM 학습 {{run}} - {{model}} - {{signals}}개 시그널",
+      "tooltipGeneric": "LSTM 학습 진행 상황 보기"
+    }
+  },
+  "symbolSearch": {
+    "placeholder": "Search symbol...",
+    "authRequired": "Please log in to search symbols",
+    "serviceUnavailable": "Service unavailable",
+    "credentialError": "인증에 실패했습니다. 설정에서 API 자격 증명을 확인하세요.",
+    "truncated": "{{total}}개 중 {{count}}개 표시 중 -- 검색을 좁히세요"
+  },
+  "llmSelector": {
+    "platformProvider": "Platform provider - no API key required",
+    "verified": "API key verified",
+    "unverified": "API key not verified - may fail",
+    "selectProvider": "Select LLM Provider",
+    "providerHeader": "Provider",
+    "modelHeader": "Model",
+    "customModelExpand": "사용자 정의 모델 사용",
+    "customModelCollapse": "사용자 정의 모델 숨기기",
+    "customModelPlaceholder": "모델 ID 입력...",
+    "customModelEmpty": "모델 ID는 비워둘 수 없습니다",
+    "customModelNoSpaces": "모델 ID에 공백을 포함할 수 없습니다",
+    "customModelAsciiOnly": "모델 ID는 ASCII 문자만 사용해야 합니다",
+    "proFallback": "Pro"
+  },
+  "installConsent": {
+    "trustLevels": {
+      "official": "공식",
+      "verified": "검증됨",
+      "unverified": "검증 안됨",
+      "unsigned": "서명 안됨"
+    },
+    "publisher": "게시자",
+    "unknown": "알 수 없음",
+    "update": "업데이트",
+    "install": "설치",
+    "version": "버전",
+    "from": "출처",
+    "unsignedPlugin": "서명되지 않은 플러그인",
+    "unsignedMessage": "이 플러그인은 서명되지 않았으므로 검증할 수 없습니다. 직접 작성했거나 신뢰할 수 있는 출처에서 받은 경우에만 설치하세요.",
+    "unverifiedPublisher": "검증되지 않은 게시자",
+    "unverifiedMessage": "이 플러그인은 서명되었지만 게시자가 StratCraft에서 검증되지 않았습니다. 주의하여 진행하세요.",
+    "highRiskPermissions": "높은 위험도 권한",
+    "highRiskMessage": "이 플러그인은 시스템에 영향을 미칠 수 있는 상승된 권한을 요청합니다. 게시자를 신뢰하는 경우에만 설치하세요.",
+    "permissionsRequested": "요청된 권한",
+    "noPermissions": "이 플러그인은 특별한 권한이 필요하지 않습니다.",
+    "understandRisks": "위험을 이해합니다",
+    "riskAcknowledgment": "서명되지 않은 플러그인 또는 네이티브 플러그인을 설치하면 보안 위험이 발생할 수 있습니다. 출처를 확인했으며 이 작업에 대해 책임을 집니다.",
+    "iUnderstandInstall": "이해했습니다, 설치",
+    "fileSystem": "파일 시스템",
+    "id": "ID:",
+    "publisherLabel": "게시자:"
+  },
+  "strategy": {
+    "categories": {
+      "regimeMode": "Regime Mode",
+      "kronosMode": "Kronos Mode",
+      "traderMode": "Trader Mode",
+      "riskManager": "Risk Manager",
+      "aiCommandCenter": "AI Command Center",
+      "autopilotMode": "오토파일럿 모드",
+      "aiStrategyStudio": "Strategy Studio",
+      "chatMode": "채팅 모드",
+      "catalogMode": "Catalog Mode"
+    },
+    "descriptions": {
+      "regimeMode": "Market environment and regime classification units",
+      "kronosMode": "Time-series prediction and sequential analysis",
+      "traderMode": "Market observation and trade execution logic",
+      "riskManager": "Risk management and exit strategy generation",
+      "aiCommandCenter": "Centralized AI control and autonomous agents",
+      "autopilotMode": "AI 기반 완전 자율 트레이딩 의사결정",
+      "aiStrategyStudio": "AI-powered strategy studio for comprehensive strategy creation",
+      "chatMode": "채팅을 통한 대화형 AI 전략 생성",
+      "catalogMode": "Browse and generate C++ strategies from 63 proven trading strategies"
+    },
+    "hub": {
+      "loadingTopology": "Loading service topology...",
+      "noPlugins": "No plugins configured",
+      "installPlugins": "Install plugins from the Marketplace to enable services",
+      "active": "Active",
+      "syncWorkspace": "Sync Workspace",
+      "loginToNona": "Login to Nona",
+      "demo": {
+        "_comment": "Hub placeholder copy: unbuilt-feature demo data rendered by StrategyGroupList / ProviderStatusPanel / ProviderPortal. Remove these keys when the hub is wired to real strategy/provider registries.",
+        "generators": {
+          "regimeTrendX1": "Regime Trend X1",
+          "volAdaptiveBeta": "Vol-Adaptive Beta",
+          "crossSessArbitrage": "Cross-Sess Arbitrage",
+          "cnnSentimentAlpha": "CNN Sentiment Alpha",
+          "highFreqScalperV4": "High-Freq Scalper V4"
+        },
+        "lastRun": {
+          "twoMinAgo": "2m ago",
+          "oneHourAgo": "1h ago",
+          "active": "Active",
+          "failed": "Failed",
+          "fiveMinAgo": "5m ago",
+          "fifteenMinAgo": "15m ago"
+        },
+        "providers": {
+          "pro": "Pro",
+          "quant": "Quant",
+          "alpha": "Alpha"
+        },
+        "templates": {
+          "trendFollowing": "Trend Following",
+          "meanReversion": "Mean Reversion",
+          "marketMaking": "Market Making",
+          "statArbitrage": "Statistical Arbitrage"
+        }
+      }
+    },
+    "tier": {
+      "free": "Free",
+      "basic": "Basic",
+      "pro": "Pro",
+      "enterprise": "Enterprise"
+    },
+    "groupList": {
+      "groupTitle": "GROUP: TREND_FOLLOWING_PACK",
+      "providerRegion": "Provider: NONA // Region: ASIA_PACIFIC",
+      "runAll": "모두 실행",
+      "configPack": "설정 팩",
+      "colId": "ID",
+      "colName": "이름",
+      "colStatus": "상태",
+      "col7dPnl": "7일 수익",
+      "colCpu": "CPU",
+      "colLastActivity": "최근 활동",
+      "colActions": "작업"
+    },
+    "providerPortal": {
+      "licenseValid": "라이선스 유효",
+      "availableStrategies": "사용 가능한 전략",
+      "activeGenerators": "활성 생성기",
+      "deployment": "배포",
+      "executionLogs": "실행 로그",
+      "info": "정보",
+      "initializedMessage": "{{provider}} 코어 엔진 환경이 성공적으로 초기화되었습니다...",
+      "moduleStatus": "모듈 상태",
+      "ready": "준비 완료"
+    },
+    "performanceChart": {
+      "title": "성능 개요",
+      "subtitle": "지난 30일 - 모든 제공자",
+      "chartPending": "차트 통합 대기 중",
+      "chartPendingHint": "데이터 시각화를 위해 recharts 또는 visx 통합",
+      "winRate": "승률",
+      "sharpeRatio": "샤프 지수",
+      "totalReturn": "총 수익"
+    },
+    "audit": {
+      "title": "Audit Report",
+      "description": "Strategy generation quality scoring",
+      "recentAudits": "Recent Audits",
+      "noData": "No audit data available yet",
+      "colProvider": "Provider",
+      "colModel": "Model",
+      "colAlgorithm": "Algorithm",
+      "colSignalSource": "Signal Source",
+      "colScore": "Score",
+      "colRating": "Rating",
+      "colDate": "Date"
+    }
+  },
+  "alphaFactoryConsole": {
+    "title": "Alpha Factory 콘솔",
+    "active": "활성:",
+    "total": "총계:",
+    "noTasks": "작업 없음",
+    "clearFinished": "완료 항목 지우기",
+    "viewTask": "작업 보기",
+    "removeFromQueue": "대기열에서 제거",
+    "removeFromList": "목록에서 제거",
+    "status": {
+      "preparing": "준비 중",
+      "queued": "대기열",
+      "running": "실행 중",
+      "done": "완료",
+      "failed": "실패",
+      "cancelled": "취소됨"
+    }
+  },
+  "backtestQueue": {
+    "title": "백테스트 대기열",
+    "running": "실행 중",
+    "view": "보기",
+    "cancel": "취소",
+    "pending": "대기 중",
+    "remove": "제거",
+    "noTasks": "백테스트 작업 없음",
+    "cancelAll": "모두 취소"
+  },
+  "llmEstimate": {
+    "title": "LLM 호출 추정 (드라이 런)",
+    "barsProcessed": "처리된 바 수",
+    "calls": " 호출",
+    "totalLlmCalls": "총 LLM 호출 수"
+  },
+  "quantLab": {
+    "title": "Sigma",
+    "pluginDescription": "Sigma는 플러그인으로 사용할 수 있습니다. 마켓플레이스에서 설치하여 Alpha Factory, Signal Library 등에 접근하세요.",
+    "openMarketplace": "마켓플레이스 열기",
+    "subpages": {
+      "batchGeneration": "신호 발견",
+      "factory": "알파 팩토리",
+      "engineStore": "엔진 스토어",
+      "trainingMonitor": "훈련 모니터",
+      "promotionPipeline": "팩터 승격",
+      "settings": "설정"
+    }
+  },
+  "dataDownload": {
+    "downloading": "다운로드 중",
+    "loading": "로딩 중",
+    "caching": "캐싱 중",
+    "complete": "완료",
+    "error": "오류",
+    "chunkProgress": "chunk {{completed}}/{{total}}",
+    "barCount": "{{count}} bars"
+  },
+  "providerStatus": {
+    "title": "제공자 상태",
+    "viewAll": "모두 보기",
+    "active": "활성",
+    "success": "성공:",
+    "latency": "지연 시간:"
+  },
+  "editor": {
+    "error": "오류",
+    "loading": "에디터 로딩 중...",
+    "unknownType": "알 수 없는 에디터 유형",
+    "noEditorsOpen": "열린 에디터가 없습니다",
+    "close": "닫기",
+    "noProvider": "에디터 제공자가 없습니다: {{viewType}}"
+  },
+  "tree": {
+    "noProvider": "뷰에 대한 TreeDataProvider가 등록되지 않았습니다: {{viewId}}",
+    "loadFailed": "트리 데이터를 불러오지 못했습니다"
+  },
+  "accessibility": {
+    "dismiss": "닫기",
+    "close": "닫기",
+    "strategyNavigator": "전략 탐색기"
+  },
+  "settings": {
+    "title": "Settings",
+    "testButton": "테스트"
+  },
+  "onboarding": {
+    "toggleTooltip": "Replay Onboarding Guide",
+    "controls": {
+      "next": "Next",
+      "prev": "Back",
+      "done": "Done",
+      "progress": "{{current}} of {{total}}"
+    },
+    "welcome": {
+      "sidebar": {
+        "title": "Navigation Panel",
+        "description": "Use the sidebar to switch between StratForge, Backtester, Sigma, and other modules."
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Configure API keys, data providers, and system preferences here."
+      },
+      "auth": {
+        "title": "Account",
+        "description": "Log in to access Pro features, cloud sync, and AI-powered strategy generation."
+      },
+      "llm": {
+        "title": "LLM Provider",
+        "description": "Select the AI model used for strategy generation. Bring your own API key or use StratCraft Pro."
+      },
+      "language": {
+        "title": "Language",
+        "description": "Switch the application language. StratCraft supports 12 languages."
+      },
+      "finish": {
+        "title": "You are all set!",
+        "description": "Start by exploring the Hub or create your first strategy in StratForge. You can replay this guide from the help icon in the status bar."
+      }
+    }
+  },
+  "assistant": {
+    "panelTitle": "도우미",
+    "noContent": "이 페이지에 대한 도움말이 없습니다.",
+    "tooltip": "도우미 모드 (Ctrl+L)",
+    "backToOverview": "개요로 돌아가기",
+    "closePanel": "도우미 패널 닫기"
+  },
+  "navigationGuard": {
+    "title": "Generation In Progress",
+    "message": "Strategy generation is in progress. Leaving will cancel the current task.",
+    "confirm": "Leave Page",
+    "cancel": "Stay"
+  },
+  "validation": {
+    "backendReport": "Backend Validation Report",
+    "layer": "Layer",
+    "status": "Status",
+    "pass": "Pass",
+    "fail": "Fail",
+    "skip": "Skipped",
+    "noReport": "No backend validation report available",
+    "L1": "Contract Shape",
+    "L2": "Security Scan",
+    "L3": "Compilation",
+    "L4": "Symbol Verification",
+    "L5": "Isolated Load Test",
+    "L6": "Smoke Test",
+    "title": "백엔드 검증",
+    "failedAt": "실패: {{layer}}",
+    "stderrOutput": "stderr 출력"
+  },
+  "notifications": {
+    "regionLabel": "알림",
+    "sweep": {
+      "allCompleteTitle": "모든 스윕 완료",
+      "allCompleteBody": "{{count}}개 스윕 완료. {{succeeded}}개 성공, {{errors}}개 오류.",
+      "nextSweepTitle": "다음 스윕 시작 중",
+      "nextSweepBody": "다음 스윕으로 자동 전환 중 (대기열에 {{remaining}}개 남음)",
+      "sweepCompleteTitle": "매개변수 스윕 완료",
+      "sweepCompleteBody": "{{succeeded}}/{{total}} arms 성공적으로 완료",
+      "sweepCompleteBodyWithErrors": "{{succeeded}}/{{total}} arms 성공적으로 완료 ({{errors}}개 오류)",
+      "downloadCompleteTitle": "Data Download Complete",
+      "downloadCompleteBody": "{{total}} symbols downloaded. Sweep fitting started.",
+      "downloadCompleteBodyWithFailures": "{{total}} symbols processed ({{failures}} failed). Sweep fitting started."
+    }
+  },
+  "errorState": {
+    "technicalDetails": "기술 세부 정보"
+  },
+  "viewRegistry": {
+    "nexus": {
+      "label": "넥서스 허브",
+      "shortLabel": "허브"
+    },
+    "marketplace": {
+      "label": "플러그인 마켓",
+      "shortLabel": "마켓"
+    },
+    "dataManagement": {
+      "label": "데이터 관리",
+      "shortLabel": "데이터"
+    },
+    "settings": {
+      "label": "설정",
+      "shortLabel": "설정"
+    },
+    "researchEnvironment": {
+      "label": "연구 환경",
+      "shortLabel": "연구 환경"
+    },
+    "strategy": {
+      "label": "StratForge",
+      "shortLabel": "StratForge"
+    },
+    "backtest": {
+      "label": "백테스터",
+      "shortLabel": "백테스터"
+    },
+    "backtestResult": {
+      "label": "백테스트 결과",
+      "shortLabel": "결과"
+    },
+    "quantLab": {
+      "label": "Sigma",
+      "shortLabel": "Sigma"
+    },
+    "chart": {
+      "label": "차트",
+      "shortLabel": "차트"
+    },
+    "ai": {
+      "label": "AI 어시스턴트",
+      "shortLabel": "AI"
+    },
+    "scoreboard": {
+      "label": "시그널 스코어보드",
+      "shortLabel": "스코어보드"
+    },
+    "signalGenerator": {
+      "label": "Signal Generator",
+      "shortLabel": "Signal Gen"
+    }
+  },
+  "researchEnvironment": {
+    "loading": "환경 상태를 읽는 중...",
+    "approvalDeclined": "작업이 승인되지 않아 아무것도 변경되지 않았습니다.",
+    "sharedEnvironmentNotice": "이 {{count}}개 기능은 하나의 잠긴 환경을 공유하므로 개별적으로가 아니라 함께 설치, 복구, 검증됩니다.",
+    "states": {
+      "absent": "설치되지 않음",
+      "installing": "설치 중",
+      "repairing": "복구 중",
+      "verifying": "검증 중",
+      "uninstalling": "Uninstalling",
+      "ready": "준비됨",
+      "failed": "실패"
+    },
+    "layerStates": {
+      "ready": "준비됨",
+      "failed": "실패",
+      "pending": "검증되지 않음"
+    },
+    "jobStates": {
+      "queued": "대기 중",
+      "running": "실행 중",
+      "succeeded": "성공",
+      "failed": "실패"
+    },
+    "actions": {
+      "install": "환경 설치",
+      "repair": "환경 복구",
+      "verify": "다시 검증",
+    "uninstall": "환경 제거",
+      "remove_capability": "기능 제거",
+      "restore_capability": "기능 복원"
+    },
+    "progress": {
+      "install": "설치 진행 상황",
+      "repair": "복구 진행 상황",
+      "verify": "검증 진행 상황",
+    "uninstall": "제거 진행 상황",
+      "remove_capability": "기능 제거 진행 상황",
+      "restore_capability": "기능 복원 진행 상황"
+    },
+    "stages": {
+      "admission": "사전 조건 확인 중",
+      "install": "패키지 설치 중",
+      "repair": "설치 재구성 중",
+      "uninstall": "로컬 환경 제거 중",
+      "transition": "환경 기능 업데이트 중",
+      "python_verify": "Python 패키지 검증 중",
+      "julia_verify": "Julia 백엔드 초기화 중"
+    },
+    "causes": {
+      "unsupported": "지원되지 않는 호스트",
+      "missing_executable": "실행 파일을 찾을 수 없음",
+      "missing_lock": "잠금 파일을 찾을 수 없음",
+      "manifest_drift": "매니페스트와 잠금 파일이 일치하지 않음",
+      "lock_io": "잠금 파일을 읽을 수 없음",
+      "invalid_lock_metadata": "잠금 메타데이터가 유효하지 않음",
+      "database": "로컬 기록을 업데이트할 수 없음",
+      "network": "네트워크 요청 실패",
+      "process_exit": "프로세스가 오류와 함께 종료됨",
+      "process_lost": "프로세스가 예기치 않게 종료됨",
+      "import": "패키지를 가져올 수 없음",
+      "probe": "기능 확인 실패",
+      "backend_init": "백엔드 초기화 실패"
+    },
+    "failureCategory": {
+      "unsupported_platform": "지원되지 않는 플랫폼",
+      "pixi_missing": "Pixi를 사용할 수 없음",
+      "lock_missing": "잠금 파일 없음",
+      "lock_drift": "매니페스트와 잠금 파일이 어긋남",
+      "lifecycle_coordination_failed": "환경 기록을 조정할 수 없음",
+      "network_failed": "다운로드 실패",
+      "install_failed": "설치 실패",
+      "repair_failed": "복구 실패",
+      "uninstall_failed": "Uninstall failed",
+      "workload_active": "Research workload is active",
+      "operation_interrupted": "작업이 중단됨",
+      "verification_failed": "검증 실패"
+    },
+    "failure": {
+      "stage": "단계",
+      "cause": "원인",
+      "capability": "패키지"
+    },
+    "capabilityCause": {
+      "import": "이 패키지를 가져올 수 없습니다",
+      "probe": "이 패키지가 기능 확인을 통과하지 못했습니다",
+      "backend_init": "Julia 백엔드를 초기화하지 못했습니다"
+    },
+    "capability": {
+      "expected": "예상",
+      "installed": "설치됨",
+      "notInstalled": "--"
+    },
+    "pysr": {
+      "python": "Python 패키지",
+      "julia": "Julia 백엔드"
+    },
+    "capabilities": {
+      "histdata": {
+        "name": "HistData",
+        "description": "Offline-verified parser and Parquet converter for separately reviewed Forex acquisition."
+      },
+      "duckdb": {
+        "name": "DuckDB",
+        "description": "리서치 쿼리에 사용되는 인프로세스 분석 데이터베이스."
+      },
+      "gplearn": {
+        "name": "gplearn",
+        "description": "기호적 팩터 탐색을 위한 유전 프로그래밍."
+      },
+      "gpquant": {
+        "name": "GPQuant",
+        "description": "정량적 팩터 탐색에 맞춰 조정된 유전 프로그래밍."
+      },
+      "pysr": {
+        "name": "PySR",
+        "description": "첫 사용 시 초기화되는 Julia 백엔드를 갖춘 기호 회귀."
+      },
+      "pandas_ta": {
+        "name": "pandas-ta",
+        "description": "TA-Lib 팩터 엔진을 뒷받침하는 기술적 지표 라이브러리."
+      }
+    },
+    "summary": {
+      "interpreter": "인터프리터",
+      "lastVerified": "마지막 검증",
+      "pixiVersion": "Pixi 버전",
+      "technicalDetails": "기술 세부 정보",
+      "manifestHash": "매니페스트 SHA-256",
+      "lockHash": "잠금 파일 SHA-256",
+      "liveWorkloadNotice": "이 작업이 완료된 후에 시작된 리서치 실행만 준비된 환경을 사용합니다. 현재 실행 중인 작업은 재시작되거나 중단되지 않습니다."
+    },
+    "regions": {
+      "summary": "환경 요약"
+    },
+    "announce": {
+      "succeeded": "{{operation}}: 성공적으로 완료되었습니다.",
+      "failed": "{{operation}}: 실패했습니다.",
+      "failedState": "리서치 환경이 실패 상태입니다."
+    },
+    "a11y": {
+      "environmentState": "환경 상태: {{state}}",
+      "capabilityState": "{{capability}} 상태: {{state}}",
+      "platform": "플랫폼: {{platform}} {{architecture}}",
+      "elapsed": "경과 시간: {{elapsed}}",
+      "logTail": "환경 작업의 최근 출력"
+    }
+  },
+  "scoreboard": {
+    "title": "시그널 스코어보드",
+    "empty": "아직 채점된 시그널이 없습니다. 시그널을 생성하여 스코어보드를 채우세요.",
+    "disclaimer": "{{windowBars}}개 바에 대한 과거 성과입니다. 추천이 아닙니다.",
+    "columns": {
+      "button": "열",
+      "menuTitle": "열 표시"
+    },
+    "col": {
+      "algorithm": "알고리즘",
+      "recentIc": "최근 IC",
+      "liveIc": "라이브 IC",
+      "sharpeLong": "최근 샤프 (롱)",
+      "sharpeShort": "최근 샤프 (숏)",
+      "hitRate": "적중률",
+      "trades": "거래 수",
+      "asOf": "기준"
+    },
+    "cell": {
+      "liveOnlySince": "라이브 전용 -- {{date}}부터 관측 중",
+      "liveOnlyTooltip": "{{date}}에 라이브 관측을 시작했습니다. 과거 백테스트를 사용할 수 없습니다 -- 이유는 TICKET_196_7_7 을 참고하세요."
+    }
+  },
+  "llmProvider": {
+    "badge": {
+      "pro": "Pro",
+      "byok": "개인 키"
+    }
+  },
+  "signalGenerator": {
+    "title": "Signal Generator",
+    "pluginDescription": "Signal Generator enables live trading signal production. Install it from the Marketplace to access live signal generation and auto-execution.",
+    "openMarketplace": "Open Marketplace"
+  },
+  "entitlement": {
+    "buyout": {
+      "badge": {
+        "freeUntil": "FREE UNTIL {{date}}",
+        "freeAccessEnds": "FREE ACCESS ENDS {{date}}",
+        "lifetime": "LIFETIME",
+        "freeAccessEnded": "FREE ACCESS ENDED",
+        "revoked": "REVOKED"
+      }
+    },
+    "ownership": {
+      "badge": {
+        "owned": "OWNED"
+      }
+    }
+  },
+  "brand": {
+    "tagline": "Connect the Alpha"
+  },
+  "statusDot": {
+    "running": "실행 중",
+    "warning": "경고",
+    "error": "오류",
+    "idle": "유휴",
+    "online": "온라인",
+    "offline": "오프라인",
+    "degraded": "저하됨"
+  },
+  "persistence": {
+    "saveFailed": "저장 실패",
+    "restoreFailed": "복원 실패",
+    "deleteFailed": "삭제 실패",
+    "fallback": "영속성 실패"
+  },
+  "comingSoon": {
+    "chartView": "차트 뷰 - 곧 출시",
+    "aiAssistant": "AI 어시스턴트 - 곧 출시"
+  },
+  "moduleNames": {
+    "optimizer": "Optimizer",
+    "riskEngine": "RiskEngine",
+    "dataFeed": "DataFeed",
+    "backtester": "Backtester"
+  },
+  "pluginPermissions": {
+    "network": {
+      "name": "Network Access",
+      "description": "Access external network resources and APIs"
+    },
+    "networkInternal": {
+      "name": "Internal Network",
+      "description": "Access internal API endpoints only"
+    },
+    "filesystem": {
+      "name": "Sandboxed File Access",
+      "description": "Read and write files within plugin sandbox"
+    },
+    "filesystemFull": {
+      "name": "Full File System Access",
+      "description": "Access any file on the system"
+    },
+    "database": {
+      "name": "Database Access",
+      "description": "Read and write to the application database"
+    },
+    "notification": {
+      "name": "Notifications",
+      "description": "Show system notifications to the user"
+    },
+    "clipboard": {
+      "name": "Clipboard Access",
+      "description": "Read from and write to system clipboard"
+    },
+    "shell": {
+      "name": "Shell Execution",
+      "description": "Execute shell commands on the system"
+    },
+    "native": {
+      "name": "Native Modules",
+      "description": "Load and use native Node.js modules"
+    }
+  },
+  "downloadQueue": {
+    "queued": "Queued",
+    "queuedResumed": "Queued (resumed)",
+    "downloading": "Downloading...",
+    "cancelled": "Cancelled",
+    "yieldedPriority": "Yielded to higher priority",
+    "yieldedPriorityMultiTf": "Yielded to higher priority (multi-TF)",
+    "partial": "Partial: {{rowCount}} bars, missing {{dayCount}} day(s) ({{dayList}})",
+    "complete": "Complete: {{rowCount}} bars",
+    "completeMultiTf": "Complete: {{count}} timeframes"
+  },
+  "dataCache": {
+    "dataReadyCached": "Data ready (cached)",
+    "mergingData": "Merging data...",
+    "fetchingFromProvider": "Fetching data from {{provider}}...",
+    "writingRows": "Writing {{count}} rows...",
+    "providerStartsAt": "Data from {{provider}} starts at {{actualStart}} (requested {{requestedStart}})",
+    "dataReadyAggregated": "Data ready ({{rowCount}} rows, {{target}} aggregated from {{baseInterval}})",
+    "checkingCache": "Checking cache for {{symbol}}/{{interval}}...",
+    "fetchingEarlierData": "Fetching earlier data ({{start}}~{{end}})...",
+    "fetchingNewerData": "Fetching newer data ({{start}}~{{end}})...",
+    "dataReady": "Data ready ({{count}} rows)",
+    "refetchingBackfill": "Re-fetching {{symbol}}/{{interval}} to backfill interior gap...",
+    "dataReadyBackfilled": "Data ready ({{count}} rows, interior gap backfilled)"
+  },
+  "keychainWarning": {
+    "message": "OS 키체인을 사용할 수 없습니다 -- API 키를 안전하게 저장할 수 없습니다."
+  },
+  "assistantHelp": {
+    "strategyStudioGuide": "Strategy Studio 가이드",
+    "bollingerMacd": "볼린저 밴드 + MACD 전략",
+    "rsiMa": "RSI + 이동평균 전략",
+    "macdRsiDivergence": "MACD + RSI 다이버전스 전략",
+    "emaCrossover": "EMA 크로스오버 전략",
+    "ichimokuCloud": "일목균형표 전략",
+    "fibonacciTrend": "피보나치 추세 전략",
+    "vwapStrategy": "VWAP 전략",
+    "supertrend": "슈퍼트렌드 전략",
+    "dualMaVolume": "이중 MA + 거래량 전략"
+  },
+  "configService": {
+    "loadedSuccessfully": "설정이 성공적으로 로드되었습니다"
+  },
+  "installProgress": {
+    "extractingPackage": "Extracting package...",
+    "backingUpExisting": "Backing up existing...",
+    "installingFiles": "Installing files...",
+    "registeringPermissions": "Registering permissions...",
+    "runningLifecycleHooks": "Running lifecycle hooks...",
+    "initializing": "Initializing...",
+    "installationComplete": "Installation complete!"
+  },
+  "marketplace": {
+    "fetchingMetadata": "Fetching plugin metadata...",
+    "downloadingPlugin": "Downloading plugin...",
+    "verifyingChecksum": "Verifying checksum...",
+    "resolvingDependencies": "Resolving dependencies...",
+    "extractingPlugin": "Extracting plugin...",
+    "installingPythonDeps": "Installing Python dependencies...",
+    "finalizingInstallation": "Finalizing installation...",
+    "installationComplete": "Installation complete!",
+    "installingFromBundled": "Installing from bundled package...",
+    "copyingBundledPlugin": "Copying bundled plugin..."
+  }
+}

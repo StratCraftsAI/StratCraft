@@ -1,0 +1,35 @@
+# CODEOWNERS — StratCraft public repository
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default: maintainers team owns everything not covered below
+* @StratCraftsAI/maintainers
+
+# Release workflows and CI gates
+.github/workflows/ @StratCraftsAI/maintainers
+scripts/ci/ @StratCraftsAI/maintainers
+
+# Security-sensitive code
+apps/desktop/src/main/services/secure-store*.ts @StratCraftsAI/maintainers
+apps/desktop/src/main/services/credential*.ts @StratCraftsAI/maintainers
+apps/desktop/src/preload/ @StratCraftsAI/maintainers
+SECURITY.md @StratCraftsAI/maintainers
+
+# Public-boundary policy
+docs/architecture/open-source-boundary/ @StratCraftsAI/maintainers
+scripts/ci/release-capability-matrix.mjs @StratCraftsAI/maintainers
+scripts/ci/public-release-allowlist.mjs @StratCraftsAI/maintainers
+scripts/ci/public-release-gates.mjs @StratCraftsAI/maintainers
+scripts/ci/public-release-metadata.mjs @StratCraftsAI/maintainers
+
+# Package metadata
+package.json @StratCraftsAI/maintainers
+apps/desktop/package.json @StratCraftsAI/maintainers
+pnpm-workspace.yaml @StratCraftsAI/maintainers
+
+# Community templates and governance
+LICENSE @StratCraftsAI/maintainers
+CONTRIBUTING.md @StratCraftsAI/maintainers
+CHANGELOG.md @StratCraftsAI/maintainers
+.github/ISSUE_TEMPLATE/ @StratCraftsAI/maintainers
+.github/PULL_REQUEST_TEMPLATE.md @StratCraftsAI/maintainers
+.github/CODEOWNERS @StratCraftsAI/maintainers
