@@ -33,11 +33,9 @@ interface Props {
     approved: boolean,
     payload?: Record<string, unknown>,
   ) => void
-  /** TICKET_1375: send a user message through the agent chat (BYOK agent turn). */
-  onSend?: (text: string) => void
 }
 
-export function MessageBubble({ message, onGuidedAction, onAgentConfirm, onSend }: Props) {
+export function MessageBubble({ message, onGuidedAction, onAgentConfirm }: Props) {
   const { t } = useTranslation('dashboard')
   const isUser = message.role === 'user'
   const handleAction = onGuidedAction ?? (async () => ({ ok: false as const, error: 'Guided actions are unavailable.' }))
@@ -235,10 +233,10 @@ export function MessageBubble({ message, onGuidedAction, onAgentConfirm, onSend 
         />
       )}
 
-      {message.visualization?.type === 'ai_studio_action' && message.visualization.guided?.type === 'ai_studio_action' && onSend && (
+      {message.visualization?.type === 'ai_studio_action' && message.visualization.guided?.type === 'ai_studio_action' && (
         <AIStudioActionCard
           data={message.visualization.guided as GuidedAIStudioAction}
-          onSend={onSend}
+          onAction={handleAction}
         />
       )}
     </div>

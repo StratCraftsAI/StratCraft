@@ -27,7 +27,7 @@ describe('TICKET_1375: AI Studio tool visualization projection', () => {
   it('registers AI Studio session tools as visual', () => {
     expect(AGENT_VISUAL_TOOL_NAMES).toContain('start_ai_studio_session');
     expect(AGENT_VISUAL_TOOL_NAMES).toContain('continue_ai_studio_session');
-    expect(AGENT_VISUAL_TOOL_NAMES).toContain('run_ai_studio_action');
+    expect(AGENT_VISUAL_TOOL_NAMES).not.toContain('run_ai_studio_action');
   });
 
   it('projects start_ai_studio_session with available_actions as ai_studio_action', () => {
@@ -48,7 +48,7 @@ describe('TICKET_1375: AI Studio tool visualization projection', () => {
     expect(result.kind).toBe('ai_studio_action');
   });
 
-  it('projects run_ai_studio_action with available_actions (save after generate)', () => {
+  it('does not project legacy save_strategy chatter after generation', () => {
     const actionResult = {
       session_id: 'sess_abc123',
       action: 'generate_code',
@@ -57,11 +57,7 @@ describe('TICKET_1375: AI Studio tool visualization projection', () => {
       available_actions: ['save_strategy'],
     };
     const result = projectAgentToolVisualization(actionResult, 'run_ai_studio_action');
-    expect(result.ok).toBe(true);
-    if (!result.ok) return;
-    expect(result.kind).toBe('ai_studio_action');
-    expect(result.payload.strategy_code).toBe('class MyStrategy { ... }');
-    expect(result.payload.available_actions).toEqual(['save_strategy']);
+    expect(result.ok).toBe(false);
   });
 
   it('does NOT project when available_actions is empty', () => {
@@ -69,12 +65,20 @@ describe('TICKET_1375: AI Studio tool visualization projection', () => {
     const result = projectAgentToolVisualization(noActions, 'start_ai_studio_session');
     expect(result.ok).toBe(false);
     if (result.ok) return;
-    expect(result.reason).toContain('no actionable available_actions');
+    expect(result.reason).toContain('does not offer generate_code');
   });
 
   it('does NOT project when available_actions is absent', () => {
     const { available_actions: _, ...noField } = SESSION_RESULT;
     const result = projectAgentToolVisualization(noField, 'start_ai_studio_session');
+    expect(result.ok).toBe(false);
+  });
+
+  it('does NOT project a session result that offers only legacy save_strategy', () => {
+    const result = projectAgentToolVisualization(
+      { ...SESSION_RESULT, available_actions: ['save_strategy'] },
+      'continue_ai_studio_session',
+    );
     expect(result.ok).toBe(false);
   });
 

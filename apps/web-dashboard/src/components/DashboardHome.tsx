@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ChatInput } from './ChatInput.tsx'
 import { MessageBubble } from './MessageBubble.tsx'
-import { TypingDots } from './TypingDots.tsx'
+import { shouldRenderStandaloneTypingDots, TypingDots } from './TypingDots.tsx'
 import { subscribe } from '../event-stream.ts'
 import {
   projectResearchEnvironmentJobMessage,
@@ -27,7 +27,7 @@ import {
 import { handleGuidedOnboarding } from '../chat-router.ts'
 import {
   isConfirmSubmissionAllowed,
-  supersedeStalePrelaunchReviews,
+  mergeGuidedActionResponse,
   type AgentEvent,
   type ChatMessage,
   type GuidedAction,
@@ -424,7 +424,7 @@ export function DashboardHome({
     setIsProcessing(true)
     try {
       const response = await onGuidedAction(action)
-      setMessages((prev) => [...supersedeStalePrelaunchReviews(prev, response), response])
+      setMessages((prev) => mergeGuidedActionResponse(prev, response))
       return { ok: true as const }
     } catch (err) {
       const error = err instanceof Error ? err.message : String(err)
@@ -508,10 +508,13 @@ export function DashboardHome({
                 message={msg}
                 onGuidedAction={dispatchGuidedAction}
                 onAgentConfirm={handleAgentConfirm}
-                onSend={handleSend}
               />
             ))}
-            {isProcessing && <TypingDots />}
+            {shouldRenderStandaloneTypingDots(
+              isProcessing,
+              activeTurnId,
+              turnMessageIdRef.current,
+            ) && <TypingDots />}
           </div>
         </div>
         {agentBlocker}

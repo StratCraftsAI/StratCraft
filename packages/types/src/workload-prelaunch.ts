@@ -1,4 +1,5 @@
 /** TICKET_1363: surface-neutral workload pre-launch contract. */
+import { z } from 'zod';
 
 export const WORKLOAD_PRELAUNCH_CONTRACT_VERSION = '1.0.0' as const;
 
@@ -91,6 +92,8 @@ export interface MissingWorkloadParameter {
 }
 
 export interface WorkloadPrelaunchReview {
+  /** Stable interaction identity; revisions retain this while fingerprints change. */
+  readonly reviewSessionId?: string;
   readonly contractVersion: typeof WORKLOAD_PRELAUNCH_CONTRACT_VERSION;
   readonly specificationId: string;
   readonly specificationVersion: string;
@@ -139,5 +142,32 @@ export interface WorkloadPrelaunchErrorResult {
   readonly message: string;
   readonly remediation: string;
   readonly retryable: boolean;
+  readonly correlationId?: string;
+  readonly fieldErrors?: readonly StructuredWorkloadValidationError[];
   readonly freshReview?: WorkloadPrelaunchReview;
 }
+
+export const workloadJsonValueSchema: z.ZodType<WorkloadJsonValue> = z.lazy(() => z.union([
+  z.string(), z.number().finite(), z.boolean(), z.null(),
+  z.array(workloadJsonValueSchema), z.record(z.string(), workloadJsonValueSchema),
+]));
+
+export const resolvedWorkloadParameterSchema = z.object({
+  id: z.string(), label: z.string(),
+  control: z.enum(['select', 'multi-select', 'tags', 'date', 'datetime', 'number', 'text', 'readonly']),
+  value: workloadJsonValueSchema,
+  provenance: z.enum(['explicit', 'persisted', 'default', 'derived']),
+  defaultSource: z.string().optional(), editable: z.boolean(),
+  impact: z.array(z.enum(['scope', 'cost', 'duration', 'safety', 'output'])),
+  supportedChoices: z.array(workloadJsonValueSchema).optional(),
+  validation: z.object({ minimum: z.number().optional(), maximum: z.number().optional(), step: z.number().optional() }).strict().optional(),
+  visibleWhen: z.object({ parameterId: z.string(), equals: z.array(workloadJsonValueSchema) }).strict().optional(),
+  dateBounds: z.object({ minimumDate: z.string().optional(), maximumDate: z.string().optional() }).strict().optional(),
+}).strict();
+
+export const confirmedWorkloadPlanSchema = z.object({
+  contractVersion: z.literal(WORKLOAD_PRELAUNCH_CONTRACT_VERSION),
+  specificationId: z.string(), specificationVersion: z.string(), derivedContextVersion: z.string().min(1),
+  parameters: z.array(resolvedWorkloadParameterSchema),
+  planFingerprint: z.string().regex(/^[a-f0-9]{64}$/), confirmedAtUtc: z.string().datetime(),
+}).strict();

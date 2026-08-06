@@ -219,6 +219,7 @@
       ],
       "mcpTools": [
         "list_factors",
+        "confirm_and_start_factor_mining",
         "start_factor_mining",
         "get_factor_mining_status",
         "list_factor_sessions"
@@ -3427,6 +3428,10 @@
     },
     {
       "name": "compile_strategy",
+      "level": "none"
+    },
+    {
+      "name": "confirm_and_start_factor_mining",
       "level": "none"
     },
     {

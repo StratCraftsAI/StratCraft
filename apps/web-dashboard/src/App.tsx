@@ -34,7 +34,9 @@ import {
   enterLocalMode,
   restoreServerSession,
 } from './auth-session.ts'
-import { projectAgentToolVisualization } from '@StratCraft/types'
+import {
+  projectAgentToolVisualization,
+} from '@StratCraft/types'
 import type { ChatMessage, GuidedAction, GuidedResponse } from './types.ts'
 import { WEB_DASHBOARD_POLL_INTERVAL_MS, SESSION_EXPIRED_EVENT } from './constants.ts'
 
@@ -195,16 +197,17 @@ function AppContent() {
         }
       } else if (action.type === 'tool') {
         const result = await callTool(action.tool_name, action.args)
+        const toolName = action.tool_name
         // TICKET_1370 R6/AC16: a card-originated tool call must project its
         // result through the SAME authority as an Agent-initiated call. This
         // branch used to hardcode `json`/`table`, which stranded the edited
         // workload review as a JSON blob and left the stale card actionable --
         // the pre-launch review could then never clear its own errors.
-        const visual = projectAgentToolVisualization(result, action.tool_name)
+        const visual = projectAgentToolVisualization(result, toolName)
         response = {
           id: crypto.randomUUID(),
           role: 'assistant',
-          content: t('chat.calledTool', { toolName: action.tool_name }),
+          content: t('chat.calledTool', { toolName }),
           timestamp: Date.now(),
           visualization: visual.ok
             ? {
@@ -214,7 +217,7 @@ function AppContent() {
             : {
                 type: Array.isArray(result) ? 'table' : 'json',
                 data: result,
-                title: action.tool_name,
+                title: toolName,
               },
         }
       } else if (isPageId(action.page)) {

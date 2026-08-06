@@ -180,6 +180,20 @@ export interface FactorMiningLaunchRequest {
   readonly confirmedPlan: ConfirmedWorkloadPlan;
 }
 
+export interface FactorMiningConfirmAndLaunchRequest {
+  readonly review: WorkloadPrelaunchReview;
+  readonly planFingerprint: string;
+  readonly idempotencyKey: string;
+}
+
+export interface FactorMiningLaunchReceipt {
+  readonly taskId: string;
+  readonly acceptedPlanFingerprint: string;
+  readonly confirmedAtUtc: string;
+  readonly launchedAtUtc: string;
+  readonly idempotencyKey: string;
+}
+
 export type FactorMiningTaskState =
   | 'queued' | 'running' | 'completed' | 'completed-no-candidate' | 'failed' | 'cancelled';
 
@@ -201,13 +215,14 @@ export interface FactorMiningLaunchSuccess {
   readonly ok: true;
   readonly taskId: string;
   readonly engine: 'gpquant';
-  readonly state: 'queued' | 'running';
+  readonly state: FactorMiningTaskState;
   readonly normalizedPlan: ConfirmedWorkloadPlan;
   readonly planFingerprint: string;
   readonly specificationVersion: typeof FACTOR_MINING_PLAN_SPECIFICATION_VERSION;
   readonly resourceDecision: FactorMiningResourceGeometry;
   readonly governanceDecisionId: string;
   readonly requestId: string;
+  readonly receipt: FactorMiningLaunchReceipt;
 }
 
 export interface FactorMiningFailure extends Omit<WorkloadPrelaunchErrorResult, 'code'> {
@@ -230,6 +245,8 @@ export interface FactorMiningTaskStatus {
   readonly resourceDecision: FactorMiningResourceGeometry;
   readonly governanceDecisionId: string;
   readonly requestId: string;
+  readonly idempotencyKey?: string;
+  readonly receipt?: FactorMiningLaunchReceipt;
   readonly createdAtUtc: string;
   readonly updatedAtUtc: string;
   readonly processId?: number;

@@ -223,18 +223,22 @@ describe('AlpacaProvider', () => {
         limiter.schedule(async () => { await block; })
       );
 
-      // Bottleneck dispatches via setTimeout(0); poll briefly until it stabilizes.
-      let counts = limiter.counts();
-      for (let i = 0; i < 20 && counts.EXECUTING < 8; i++) {
-        await new Promise((r) => setTimeout(r, 5));
-        counts = limiter.counts();
+      try {
+        // Wait for every submitted job to leave Bottleneck's asynchronous
+        // RECEIVED/RUNNING transitions before asserting the stable split.
+        await vi.waitFor(() => {
+          expect(limiter.counts()).toMatchObject({
+            RECEIVED: 0,
+            QUEUED: 2,
+            RUNNING: 0,
+            EXECUTING: 8,
+          });
+        });
+      } finally {
+        // Never leave scheduled jobs blocked when the assertion fails.
+        resolveBlock();
+        await Promise.all(jobs);
       }
-
-      expect(counts.EXECUTING).toBe(8);
-      expect(counts.QUEUED).toBeGreaterThanOrEqual(1);
-
-      resolveBlock();
-      await Promise.all(jobs);
     });
   });
 

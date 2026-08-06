@@ -467,6 +467,13 @@ export interface CommercialOperationHostServices {
     readonly review: (draft: FactorMiningDraft) => Promise<WorkloadPrelaunchReview>;
     readonly edit: (review: WorkloadPrelaunchReview, planFingerprint: string, edits: Record<string, WorkloadJsonValue>) => Promise<WorkloadPrelaunchReview>;
     readonly confirm: (review: WorkloadPrelaunchReview, planFingerprint: string) => ConfirmedWorkloadPlan;
+    readonly confirmAndLaunch: (input: {
+      readonly review: WorkloadPrelaunchReview;
+      readonly planFingerprint: string;
+      readonly idempotencyKey: string;
+      readonly requestId: string;
+      readonly governanceDecisionId: string;
+    }) => Promise<CommercialJsonObject>;
     readonly launch: (input: {
       readonly confirmedPlan: ConfirmedWorkloadPlan;
       readonly requestId: string;

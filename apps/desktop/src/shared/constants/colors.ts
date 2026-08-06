@@ -374,15 +374,11 @@ export const CSS_VAR_FALLBACKS = {
 /**
  * TICKET_1318: `SYNTAX_COLORS` is owned by `@StratCraft/chat-markdown`, which
  * also owns the token kinds and the canonical `token token-${kind}` class
- * contract these colors style. Import it directly from that package.
- *
- * TICKET_1378: it is deliberately NOT re-exported from here. `shared/` is
- * compiled wholesale by plugin renderers via the `@shared/*` alias, so a
- * re-export made every such plugin's typecheck require
- * `packages/chat-markdown/dist` to exist even when the plugin neither uses
- * SYNTAX_COLORS nor declares the dependency -- turbo then had no edge to order
- * the builds by, and the typecheck failed with TS2307 on a clean checkout.
+ * contract these colors style. It is re-exported here so TICKET_179
+ * single-source-of-truth holds and existing `@shared/constants/colors` import
+ * paths keep resolving.
  */
+export { SYNTAX_COLORS } from '@StratCraft/chat-markdown';
 
 // =============================================================================
 // Gray Scale -- neutral grayscale palette

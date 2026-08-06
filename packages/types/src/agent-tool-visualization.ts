@@ -35,9 +35,9 @@ export const AGENT_VISUAL_TOOL_NAMES: readonly string[] = [
   'get_guided_action',
   'review_factor_mining',
   'edit_workload_review',
+  'confirm_and_start_factor_mining',
   'start_ai_studio_session',
   'continue_ai_studio_session',
-  'run_ai_studio_action',
 ];
 
 /**
@@ -57,7 +57,6 @@ const BARE_REVIEW_TOOL_NAMES: readonly string[] = [
 const AI_STUDIO_SESSION_TOOL_NAMES: readonly string[] = [
   'start_ai_studio_session',
   'continue_ai_studio_session',
-  'run_ai_studio_action',
 ];
 
 const VISUALIZATION_KINDS: ReadonlySet<string> = new Set(AGENT_VISUALIZATION_KINDS);
@@ -91,14 +90,34 @@ export function projectAgentToolVisualization(
   if (toolName !== undefined && AI_STUDIO_SESSION_TOOL_NAMES.includes(toolName)) {
     const record = parsed as Record<string, unknown>;
     const actions = record.available_actions;
-    if (Array.isArray(actions) && actions.length > 0) {
+    if (Array.isArray(actions) && actions.includes('generate_code')) {
       return {
         ok: true,
         kind: 'ai_studio_action',
         payload: { type: 'ai_studio_action', ...record },
       };
     }
-    return { ok: false, reason: 'AI Studio result has no actionable available_actions' };
+    return { ok: false, reason: 'AI Studio result does not offer generate_code' };
+  }
+  if (toolName === 'confirm_and_start_factor_mining') {
+    const record = parsed as Record<string, unknown>;
+    const receipt = record.receipt as Record<string, unknown> | undefined;
+    if (record.ok !== true || receipt === undefined || typeof receipt.taskId !== 'string'
+      || typeof receipt.acceptedPlanFingerprint !== 'string') {
+      return { ok: false, reason: 'launch result carries no typed task receipt' };
+    }
+    return {
+      ok: true,
+      kind: 'info_panel',
+      payload: {
+        type: 'info_panel',
+        title: 'Factor mining launched',
+        sections: [{
+          heading: 'Durable launch receipt',
+          body: `Task ID: ${receipt.taskId}\n\nAccepted plan: ${receipt.acceptedPlanFingerprint}\n\nState: ${String(record.state)}`,
+        }],
+      },
+    };
   }
   const kind = (parsed as Record<string, unknown>).type;
   if (typeof kind !== 'string') {
@@ -110,6 +129,67 @@ export function projectAgentToolVisualization(
     return { ok: false, reason: `\`${kind}\` is not a renderable visualization kind` };
   }
   return { ok: true, kind: kind as AgentVisualizationKind, payload: parsed as Record<string, unknown> };
+}
+
+/**
+ * TICKET_1379: `confirm_factor_mining` does not launch anything.
+ *
+ * Per its own tool description it "returns the immutable plan required by
+ * start_factor_mining" -- the launch is a SEPARATE tool that consumes that
+ * plan. A surface that dispatches confirm and stops has not started a mining
+ * run; it has produced a plan document and thrown it away.
+ *
+ * That is exactly what the Guide WebUI card did: `handleConfirm` fired
+ * `confirm_factor_mining` through `void onAction(...)`, discarding the result,
+ * with no `start_factor_mining` call anywhere in the surface. The user saw the
+ * plan render as a raw JSON blob and reasonably concluded nothing had started
+ * -- nothing had.
+ *
+ * The continuation lives here rather than in the card because both surfaces
+ * (Guide WebUI and the Electron renderer) must chain identically per
+ * TICKET_1306, and because only the dispatch site holds the confirm *result*.
+ * The card's dispatch contract returns `{ok}` with no payload, so the card
+ * structurally cannot chain -- pushing this into the card would require
+ * widening that contract and would still leave the Electron path unchained.
+ */
+export const FACTOR_MINING_CONFIRM_TOOL = 'confirm_factor_mining' as const;
+export const FACTOR_MINING_START_TOOL = 'start_factor_mining' as const;
+
+/** The confirmed plan `start_factor_mining` requires, or why it is absent. */
+export type FactorMiningLaunchContinuation =
+  | { ok: true; toolName: typeof FACTOR_MINING_START_TOOL; args: { plan: Record<string, unknown> } }
+  | { ok: false; reason: string };
+
+/**
+ * Derive the `start_factor_mining` call that must follow a confirm result.
+ *
+ * The plan is forwarded EXACTLY as the confirm step returned it. The launch
+ * schema is `.strict()` over a fingerprinted document, so merging defaults,
+ * re-deriving parameters, or reshaping keys would either fail admission or --
+ * worse -- launch a plan the user never saw. TICKET_1370's whole point is that
+ * the fingerprint the user accepted is the fingerprint that executes.
+ *
+ * A confirm result that carries no usable plan returns a typed refusal naming
+ * the missing field rather than launching a reconstructed one (TICKET_856,
+ * TICKET_858). Silence here would reproduce the original defect.
+ */
+export function deriveFactorMiningLaunch(confirmResult: unknown): FactorMiningLaunchContinuation {
+  if (!confirmResult || typeof confirmResult !== 'object' || Array.isArray(confirmResult)) {
+    return { ok: false, reason: 'confirm result is not a JSON object' };
+  }
+  const record = confirmResult as Record<string, unknown>;
+  // The confirm response either IS the plan or carries it under `plan`; both
+  // shapes are identified by the fingerprint the launch schema requires.
+  const candidate = (typeof record.plan === 'object' && record.plan !== null)
+    ? record.plan as Record<string, unknown>
+    : record;
+  if (typeof candidate.planFingerprint !== 'string' || !/^[a-f0-9]{64}$/.test(candidate.planFingerprint)) {
+    return { ok: false, reason: 'confirm result carries no `planFingerprint`; refusing to launch an unconfirmed plan' };
+  }
+  if (!Array.isArray(candidate.parameters)) {
+    return { ok: false, reason: 'confirm result carries no `parameters` array; refusing to reconstruct them' };
+  }
+  return { ok: true, toolName: FACTOR_MINING_START_TOOL, args: { plan: candidate } };
 }
 
 /**

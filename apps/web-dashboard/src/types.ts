@@ -190,6 +190,33 @@ export function supersedeStalePrelaunchReviews(
   ))
 }
 
+/** Replace the active revision in place; immutable revisions remain owner-side audit records. */
+export function mergeGuidedActionResponse(
+  messages: ChatMessage[],
+  replacement: ChatMessage,
+): ChatMessage[] {
+  if (replacement.visualization?.type !== 'workload_prelaunch_review') {
+    return [...messages, replacement]
+  }
+  const sessionId = replacement.visualization.guided?.type === 'workload_prelaunch_review'
+    ? replacement.visualization.guided.review.reviewSessionId
+    : undefined
+  let index = -1
+  for (let current = messages.length - 1; current >= 0; current -= 1) {
+    const message = messages[current]
+    if (message.visualization?.type !== 'workload_prelaunch_review') continue
+    const matches = sessionId === undefined
+      ? !message.visualization.superseded
+      : message.visualization.guided?.type === 'workload_prelaunch_review'
+        && message.visualization.guided.review.reviewSessionId === sessionId
+    if (matches) { index = current; break }
+  }
+  if (index < 0) return [...messages, replacement]
+  return messages.map((message, current) => current === index
+    ? { ...replacement, id: message.id }
+    : message)
+}
+
 export interface ToolCallInfo {
   name: string
   args: Record<string, unknown>
@@ -223,6 +250,7 @@ export type GuidedResponse =
 export interface GuidedWorkloadPrelaunchReview {
   type: 'workload_prelaunch_review'
   review: {
+    reviewSessionId?: string
     contractVersion: string
     specificationId: string
     specificationVersion: string

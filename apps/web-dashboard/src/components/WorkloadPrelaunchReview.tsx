@@ -292,6 +292,7 @@ export function WorkloadPrelaunchReview({ data, onAction, superseded = false }: 
   const review = data.review
   const [edits, setEdits] = useState<Record<string, ParamValue>>({})
   const [confirmed, setConfirmed] = useState(false)
+  const [launchInFlight, setLaunchInFlight] = useState(false)
   const [editInFlight, setEditInFlight] = useState(false)
   const [actionError, setActionError] = useState<string | null>(null)
 
@@ -299,6 +300,7 @@ export function WorkloadPrelaunchReview({ data, onAction, superseded = false }: 
     setEdits({})
     setEditInFlight(false)
     setConfirmed(false)
+    setLaunchInFlight(false)
     setActionError(null)
   }, [data])
 
@@ -359,7 +361,7 @@ export function WorkloadPrelaunchReview({ data, onAction, superseded = false }: 
   const visibleMissing = review.missingRequired.filter(item => isVisible(item.visibleWhen))
   const hasMissing = visibleMissing.length > 0
   const hasErrors = review.validationErrors.length > 0
-  const settled = confirmed || editInFlight || superseded
+  const settled = confirmed || editInFlight || launchInFlight || superseded
   // TICKET_1370 AC16: `Confirm & launch` requires a clean review, but
   // `Apply edits & review` is precisely the control that repairs an unclean
   // one -- gating both on `canConfirm` made the errors unfixable, which is the
@@ -406,15 +408,20 @@ export function WorkloadPrelaunchReview({ data, onAction, superseded = false }: 
         setActionError(result.error)
       }
     } else {
-      setConfirmed(true)
-      void onAction({
+      setLaunchInFlight(true)
+      setActionError(null)
+      const result = await onAction({
         type: 'tool',
-        tool_name: 'confirm_factor_mining',
+        tool_name: 'confirm_and_start_factor_mining',
         args: {
           review,
           plan_fingerprint: review.planFingerprint,
+          idempotency_key: `factor-mining:${review.reviewSessionId ?? review.planFingerprint}:${review.planFingerprint}`,
         },
       })
+      setLaunchInFlight(false)
+      if (result?.ok === false) setActionError(result.error)
+      else setConfirmed(true)
     }
   }
 
@@ -527,11 +534,13 @@ export function WorkloadPrelaunchReview({ data, onAction, superseded = false }: 
         </>
       )}
 
-      {pendingValidationCount > 0 && (
+      {pendingValidationCount > 0 && !editInFlight && (
         <div className="agent-note" style={{ marginTop: 12 }}>
-          Changes entered. Waiting for server validation.
+          Changes are pending submission.
         </div>
       )}
+
+      {editInFlight && <div className="agent-note" style={{ marginTop: 12 }}>Validating changes...</div>}
 
       {actionError && (
         <div className="agent-note error" style={{ marginTop: 12 }} role="alert">
@@ -539,9 +548,10 @@ export function WorkloadPrelaunchReview({ data, onAction, superseded = false }: 
         </div>
       )}
 
-      <div style={{ marginTop: 12, fontSize: 11, color: 'var(--text-muted)', fontFamily: 'var(--mono)' }}>
-        fingerprint: {review.planFingerprint.slice(0, 16)}...
-      </div>
+      <details style={{ marginTop: 12, fontSize: 11, color: 'var(--text-muted)' }}>
+        <summary>Diagnostic details</summary>
+        <div style={{ fontFamily: 'var(--mono)' }}>fingerprint: {review.planFingerprint}</div>
+      </details>
 
       <div className="wz-actions">
         <button
@@ -555,6 +565,8 @@ export function WorkloadPrelaunchReview({ data, onAction, superseded = false }: 
               ? 'Submitted'
               : editInFlight
                 ? 'Applying...'
+                : launchInFlight
+                  ? 'Launching...'
                 : hasEdits ? 'Apply edits & review' : 'Confirm & launch'}
         </button>
       </div>

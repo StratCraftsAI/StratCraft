@@ -13,8 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { Copy, Check, AlertCircle, Code } from 'lucide-react';
 import { tokenClassName, tokenizeCode } from '@StratCraft/chat-markdown';
 import { cn } from '../../lib/utils';
-import { THEME_COLORS, CSS_VAR_FALLBACKS, STATUS_PLATE_COLORS } from '@shared/constants/colors';
-import { SYNTAX_COLORS } from '@StratCraft/chat-markdown';
+import { THEME_COLORS, CSS_VAR_FALLBACKS, SYNTAX_COLORS, STATUS_PLATE_COLORS } from '@shared/constants/colors';
 
 // -----------------------------------------------------------------------------
 // Types

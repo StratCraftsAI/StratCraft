@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import type { GuidedAIStudioAction } from '../types.ts'
+import type { GuidedAction, GuidedActionDispatchResult, GuidedAIStudioAction } from '../types.ts'
 
 interface Props {
   data: GuidedAIStudioAction
-  onSend: (text: string) => void
+  onAction: (action: GuidedAction) => Promise<GuidedActionDispatchResult>
 }
 
 function formatRuleValue(value: unknown): string {
@@ -13,20 +13,20 @@ function formatRuleValue(value: unknown): string {
   return String(value)
 }
 
-export function AIStudioActionCard({ data, onSend }: Props) {
+export function AIStudioActionCard({ data, onAction }: Props) {
   const { t } = useTranslation('dashboard')
   const [dispatched, setDispatched] = useState(false)
 
   const hasGenerate = data.available_actions.includes('generate_code')
-  const hasSave = data.available_actions.includes('save_strategy')
   const rules = data.strategy_rules
 
-  const handleAction = (action: string) => {
+  const handleGenerate = () => {
     setDispatched(true)
-    const message = action === 'generate_code'
-      ? 'Generate the strategy code now.'
-      : 'Save the generated strategy now.'
-    onSend(message)
+    void onAction({
+      type: 'tool',
+      tool_name: 'run_ai_studio_action',
+      args: { action: 'generate_code' },
+    })
   }
 
   return (
@@ -42,9 +42,7 @@ export function AIStudioActionCard({ data, onSend }: Props) {
           <h3>
             {hasGenerate
               ? t('agentChat.aiStudioAction.titleGenerate')
-              : hasSave
-                ? t('agentChat.aiStudioAction.titleSave')
-                : t('agentChat.aiStudioAction.eyebrow')}
+              : t('agentChat.aiStudioAction.eyebrow')}
           </h3>
         </div>
         <span className="regime-config-status">
@@ -92,19 +90,9 @@ export function AIStudioActionCard({ data, onSend }: Props) {
               className="btn solid"
               type="button"
               data-testid="ai-studio-generate"
-              onClick={() => handleAction('generate_code')}
+              onClick={handleGenerate}
             >
               {t('agentChat.aiStudioAction.generate')}
-            </button>
-          )}
-          {hasSave && (
-            <button
-              className="btn solid"
-              type="button"
-              data-testid="ai-studio-save"
-              onClick={() => handleAction('save_strategy')}
-            >
-              {t('agentChat.aiStudioAction.save')}
             </button>
           )}
         </div>

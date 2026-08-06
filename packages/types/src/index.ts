@@ -64,8 +64,14 @@ export {
   AGENT_VISUAL_TOOL_NAMES,
   projectAgentToolVisualization,
   projectAgentToolVisualizationText,
+  deriveFactorMiningLaunch,
+  FACTOR_MINING_CONFIRM_TOOL,
+  FACTOR_MINING_START_TOOL,
 } from './agent-tool-visualization';
-export type { AgentToolVisualization } from './agent-tool-visualization';
+export type {
+  AgentToolVisualization,
+  FactorMiningLaunchContinuation,
+} from './agent-tool-visualization';
 export {
   RESEARCH_TASK_SCHEMA_VERSION,
   RESEARCH_TASK_SPEC_SCHEMA_ID,
