@@ -56,6 +56,22 @@ describe('TICKET_1383 Vibing Chat failed-task parity', () => {
     });
   });
 
+  it('maps an empty model result to the dedicated Electron presentation identity', async () => {
+    const failure = Object.assign(new Error('No visible model content'), {
+      code: 'LLM_EMPTY_RESPONSE',
+    });
+    executeWithPolling.mockRejectedValueOnce(failure);
+
+    await expect(executeVibingChat({
+      session_id: 'session-empty',
+      message: '<generate_code>',
+    })).rejects.toMatchObject({
+      message: 'strategy-builder:errorCodes.EMPTY_RESPONSE',
+      code: 'LLM_EMPTY_RESPONSE',
+      cause: failure,
+    });
+  });
+
   it('does not relabel an unknown backend failure', async () => {
     const failure = Object.assign(new Error('Unknown provider failure'), {
       code: 'UNKNOWN_PROVIDER_CODE',

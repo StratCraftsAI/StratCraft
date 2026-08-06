@@ -1,7 +1,9 @@
 import type {
+  ConfirmedWorkloadPlan,
   FactorMiningCoverageWindow,
   FactorMiningDraft,
   FactorMiningResourceGeometry,
+  ResolvedWorkloadParameter,
   StructuredWorkloadValidationError,
   WorkloadJsonValue,
   WorkloadPrelaunchReview,
@@ -21,7 +23,6 @@ import {
   FACTOR_MINING_TIMEFRAMES,
 } from '@StratCraft/types';
 import {
-  applyPrelaunchEdits,
   assertEditableParameters,
   resolvePrelaunchReview,
   type WorkloadParameterSpecification,
@@ -30,9 +31,12 @@ import {
 import { resolveMarketScope } from './market-scope';
 import { resolveHorizonByTimeframe } from './horizon';
 import { WorkloadDateWindowError, toExecutionWindow } from './date-window';
+import { validateWorkloadParameters } from './validation';
 
 export const FACTOR_MINING_DEFAULT_SOURCE = 'scripts/factor_mining/tf_params.py:ENGINE_DEFAULTS:v1';
 export const FACTOR_MINING_MAX_CONCURRENCY = 6;
+export const FACTOR_MINING_PERSISTENCE_DESTINATION = 'canonical-factor-registry';
+export const FACTOR_MINING_COVERAGE_DEFAULT_SOURCE = 'factor-mining-physical-coverage';
 
 export const FACTOR_MINING_PARAMETER_SPECIFICATION: WorkloadParameterSpecification = {
   id: FACTOR_MINING_PLAN_SPECIFICATION_ID,
@@ -56,24 +60,24 @@ export const FACTOR_MINING_PARAMETER_SPECIFICATION: WorkloadParameterSpecificati
     // card: editing the timeframes re-derives it, which is the only way an
     // assignment can change without desynchronizing from what executes.
     { id: 'horizonByTimeframe', label: 'Forecast horizon per timeframe', required: true, editable: false, impact: ['scope'], control: 'readonly', defaultSource: FACTOR_MINING_HORIZON_SOURCE_REF },
+    { id: 'gpquant.generations', label: 'GPQuant generations', required: true, editable: true, impact: ['cost', 'duration'], control: 'number', validation: { minimum: 1, step: 1 }, defaultValue: 15, defaultSource: FACTOR_MINING_DEFAULT_SOURCE },
+    { id: 'gpquant.population', label: 'GPQuant population', required: true, editable: true, impact: ['cost', 'duration'], control: 'number', validation: { minimum: 10, step: 1 }, defaultValue: 500, defaultSource: FACTOR_MINING_DEFAULT_SOURCE },
+    { id: 'gpquant.runs', label: 'GPQuant runs', required: true, editable: true, impact: ['cost', 'duration'], control: 'number', validation: { minimum: 1, step: 1 }, defaultValue: 10, defaultSource: FACTOR_MINING_DEFAULT_SOURCE },
+    { id: 'gpquant.hallOfFame', label: 'GPQuant hall of fame', required: true, editable: true, impact: ['cost', 'output'], control: 'number', validation: { minimum: 1, step: 1 }, defaultValue: 30, defaultSource: FACTOR_MINING_DEFAULT_SOURCE },
+    { id: 'gpquant.seed', label: 'Random seed', required: true, editable: true, impact: ['output'], control: 'number', validation: { step: 1 }, defaultValue: 42, defaultSource: FACTOR_MINING_DEFAULT_SOURCE },
+    { id: 'gpquant.minIc', label: 'Minimum IC', required: true, editable: true, impact: ['output'], control: 'number', validation: { minimum: 0, maximum: 1, step: 0.01 }, defaultValue: 0.02, defaultSource: 'scripts/factor_mining/cli.py:v1' },
+    { id: 'gpquant.maxCorrelation', label: 'Maximum correlation', required: true, editable: true, impact: ['output'], control: 'number', validation: { minimum: 0, maximum: 1, step: 0.01 }, defaultValue: 0.7, defaultSource: 'scripts/factor_mining/cli.py:v1' },
+    { id: 'gpquant.oosRatio', label: 'OOS ratio', required: true, editable: true, impact: ['scope', 'output'], control: 'number', validation: { minimum: 0, maximum: 1, step: 0.01 }, defaultValue: 0.2, defaultSource: 'scripts/factor_mining/cli.py:v1' },
+    { id: 'gpquant.maxTrainBars', label: 'Maximum train bars', required: true, editable: true, impact: ['scope', 'cost', 'duration'], control: 'number', validation: { minimum: 1, step: 1 }, nullable: true, defaultValue: null, defaultSource: FACTOR_MINING_DEFAULT_SOURCE },
+    { id: 'concurrency', label: 'Process concurrency', required: true, editable: true, impact: ['cost', 'duration', 'safety'], control: 'number', validation: { minimum: 1, maximum: FACTOR_MINING_MAX_CONCURRENCY, step: 1 } },
+    { id: 'blasThreads', label: 'BLAS threads per process', required: true, editable: true, impact: ['cost', 'duration', 'safety'], control: 'number', validation: { minimum: 1, step: 1 } },
+    { id: 'memoryBudgetMb', label: 'Memory budget', required: true, editable: true, impact: ['cost', 'safety'], control: 'number', validation: { minimum: 1000, step: 1 } },
+    { id: 'persistenceDestination', label: 'Persistence destination', required: true, editable: false, impact: ['output'], control: 'readonly', defaultValue: FACTOR_MINING_PERSISTENCE_DESTINATION, defaultSource: 'TICKET_1239:registry-owner' },
     // TICKET_1370 R10/AC25: native date pickers on both surfaces. The user
     // selects inclusive calendar dates; `toExecutionWindow` owns the
     // conversion to the canonical half-open UTC interval.
     { id: 'startDate', label: 'Data window start', required: true, editable: true, impact: ['scope', 'cost', 'duration'], control: 'date' },
     { id: 'endDate', label: 'Data window end', required: true, editable: true, impact: ['scope', 'cost', 'duration'], control: 'date' },
-    { id: 'gpquant.generations', label: 'GPQuant generations', required: true, editable: true, impact: ['cost', 'duration'], control: 'number', validation: { minimum: 1 }, defaultValue: 15, defaultSource: FACTOR_MINING_DEFAULT_SOURCE },
-    { id: 'gpquant.population', label: 'GPQuant population', required: true, editable: true, impact: ['cost', 'duration'], control: 'number', validation: { minimum: 10 }, defaultValue: 500, defaultSource: FACTOR_MINING_DEFAULT_SOURCE },
-    { id: 'gpquant.runs', label: 'GPQuant runs', required: true, editable: true, impact: ['cost', 'duration'], control: 'number', validation: { minimum: 1 }, defaultValue: 10, defaultSource: FACTOR_MINING_DEFAULT_SOURCE },
-    { id: 'gpquant.hallOfFame', label: 'GPQuant hall of fame', required: true, editable: true, impact: ['cost', 'output'], control: 'number', validation: { minimum: 1 }, defaultValue: 30, defaultSource: FACTOR_MINING_DEFAULT_SOURCE },
-    { id: 'gpquant.seed', label: 'Random seed', required: true, editable: true, impact: ['output'], control: 'number', defaultValue: 42, defaultSource: FACTOR_MINING_DEFAULT_SOURCE },
-    { id: 'gpquant.minIc', label: 'Minimum IC', required: true, editable: true, impact: ['output'], control: 'number', validation: { minimum: 0, maximum: 1, step: 0.01 }, defaultValue: 0.02, defaultSource: 'scripts/factor_mining/cli.py:v1' },
-    { id: 'gpquant.maxCorrelation', label: 'Maximum correlation', required: true, editable: true, impact: ['output'], control: 'number', validation: { minimum: 0, maximum: 1, step: 0.01 }, defaultValue: 0.7, defaultSource: 'scripts/factor_mining/cli.py:v1' },
-    { id: 'gpquant.oosRatio', label: 'OOS ratio', required: true, editable: true, impact: ['scope', 'output'], control: 'number', validation: { minimum: 0, maximum: 1, step: 0.01 }, defaultValue: 0.2, defaultSource: 'scripts/factor_mining/cli.py:v1' },
-    { id: 'gpquant.maxTrainBars', label: 'Maximum train bars', required: true, editable: true, impact: ['scope', 'cost', 'duration'], control: 'number', defaultValue: null, defaultSource: FACTOR_MINING_DEFAULT_SOURCE },
-    { id: 'concurrency', label: 'Process concurrency', required: true, editable: true, impact: ['cost', 'duration', 'safety'], control: 'number', validation: { minimum: 1, maximum: 6 } },
-    { id: 'blasThreads', label: 'BLAS threads per process', required: true, editable: true, impact: ['cost', 'duration', 'safety'], control: 'number', validation: { minimum: 1 } },
-    { id: 'memoryBudgetMb', label: 'Memory budget', required: true, editable: true, impact: ['cost', 'safety'], control: 'number', validation: { minimum: 1000 } },
-    { id: 'persistenceDestination', label: 'Persistence destination', required: true, editable: false, impact: ['output'], control: 'readonly', defaultValue: 'canonical-factor-registry', defaultSource: 'TICKET_1239:registry-owner' },
   ],
 };
 
@@ -102,56 +106,6 @@ function flattenDraft(draft: FactorMiningDraft): Record<string, WorkloadJsonValu
   };
 }
 
-function validateFactorMining(values: Readonly<Record<string, WorkloadJsonValue>>): readonly StructuredWorkloadValidationError[] {
-  const errors: StructuredWorkloadValidationError[] = [];
-  // TICKET_1370 R9/AC22: one owner decides whether the market scope is
-  // resolvable. The validator reports its verdict rather than re-deriving an
-  // exclusive-or rule that could disagree with the executed universe.
-  errors.push(...resolveMarketScope(values).errors);
-  // TICKET_1370 R11/AC33+AC34: the horizon owner reports whether the resolved
-  // map covers exactly the selected timeframes. Confirming a plan whose map
-  // disagrees with its timeframes is what would let execution re-derive a
-  // different answer than the one reviewed.
-  const horizon = resolveHorizonByTimeframe(values.timeframes);
-  errors.push(...horizon.errors);
-  if (horizon.horizonByTimeframe !== undefined) {
-    const expected = Object.keys(horizon.horizonByTimeframe).sort().join(',');
-    const actual = values.horizonByTimeframe === undefined || values.horizonByTimeframe === null
-      || typeof values.horizonByTimeframe !== 'object' || Array.isArray(values.horizonByTimeframe)
-      ? ''
-      : Object.keys(values.horizonByTimeframe).sort().join(',');
-    if (expected !== actual) {
-      errors.push({
-        code: 'MINING_HORIZON_INVALID',
-        parameterIds: ['horizonByTimeframe', 'timeframes'],
-        message: 'The forecast horizon map does not cover exactly the selected timeframes.',
-        remediation: 'Resolve a fresh review so the horizon map is re-derived from the current timeframes.',
-      });
-    }
-  }
-  if (values.engine !== 'gpquant') errors.push({ code: 'MINING_ENGINE_NOT_GPQUANT', parameterIds: ['engine'], message: 'This launch contract requires engine gpquant.', remediation: 'Select gpquant for this operation.' });
-  // TICKET_1370 R10/AC26: the date adapter owns the boundary semantics, so an
-  // invalid or reversed calendar range surfaces its remediation verbatim
-  // instead of a second, possibly divergent, date rule here.
-  if (typeof values.startDate !== 'string' || typeof values.endDate !== 'string') {
-    errors.push({ code: 'MINING_WINDOW_INVALID', parameterIds: ['startDate', 'endDate'], message: 'Select the data window start and end dates.', remediation: 'Pick both dates within the advertised coverage bounds.' });
-  } else {
-    try {
-      toExecutionWindow(values.startDate, values.endDate);
-    } catch (error) {
-      errors.push({
-        code: 'MINING_WINDOW_INVALID',
-        parameterIds: ['startDate', 'endDate'],
-        message: error instanceof Error ? error.message : String(error),
-        remediation: error instanceof WorkloadDateWindowError ? error.remediation : 'Select a valid calendar date range.',
-      });
-    }
-  }
-  const concurrency = values.concurrency;
-  if (!Number.isInteger(concurrency) || Number(concurrency) < 1 || Number(concurrency) > FACTOR_MINING_MAX_CONCURRENCY) errors.push({ code: 'MINING_CONCURRENCY_INVALID', parameterIds: ['concurrency'], message: `Concurrency must be between 1 and ${FACTOR_MINING_MAX_CONCURRENCY}.`, remediation: 'Use the resource geometry returned by the owner.' });
-  return errors;
-}
-
 export interface FactorMiningDerivedContext {
   readonly version: string;
   readonly concurrency: number;
@@ -171,6 +125,175 @@ export interface FactorMiningDerivedContext {
    * filled with an invented default.
    */
   readonly coverageError?: StructuredWorkloadValidationError;
+}
+
+export interface FactorMiningParameterValidationResult {
+  readonly valid: boolean;
+  readonly errors: readonly StructuredWorkloadValidationError[];
+}
+
+function contextualSpecification(
+  context: FactorMiningDerivedContext,
+): WorkloadParameterSpecification {
+  const dateBounds = context.coverage === undefined ? undefined : {
+    minimumDate: context.coverage.minimumDate,
+    maximumDate: context.coverage.maximumDate,
+  };
+  return {
+    ...FACTOR_MINING_PARAMETER_SPECIFICATION,
+    parameters: FACTOR_MINING_PARAMETER_SPECIFICATION.parameters.map(definition => (
+      definition.id === 'startDate' || definition.id === 'endDate'
+        ? {
+          ...definition,
+          dateBounds,
+          defaultSource: context.coverage === undefined
+            ? undefined
+            : `${FACTOR_MINING_COVERAGE_DEFAULT_SOURCE}:${context.coverage.snapshotVersion}`,
+          defaultRole: context.coverage === undefined ? undefined : 'calculated-from-coverage' as const,
+        }
+        : definition
+    )),
+  };
+}
+
+function miningError(
+  code: string,
+  parameterIds: readonly string[],
+  message: string,
+  remediation: string,
+): StructuredWorkloadValidationError {
+  return { code, parameterIds, message, remediation };
+}
+
+/** The only complete factor-mining parameter validation operation. */
+export function validateFactorMiningParameters(
+  parameters: readonly ResolvedWorkloadParameter[],
+  currentContext: FactorMiningDerivedContext,
+): FactorMiningParameterValidationResult {
+  const errors = [...validateWorkloadParameters(contextualSpecification(currentContext), parameters)];
+  const values = Object.fromEntries(parameters.map(parameter => [parameter.id, parameter.value]));
+  errors.push(...resolveMarketScope(values).errors);
+
+  const horizon = resolveHorizonByTimeframe(values.timeframes, values.horizonByTimeframe);
+  errors.push(...horizon.errors);
+  if (values.engine !== 'gpquant') {
+    errors.push(miningError('MINING_ENGINE_NOT_GPQUANT', ['engine'], 'This launch contract requires engine gpquant.', 'Select gpquant for this operation.'));
+  }
+
+  if (typeof values.startDate === 'string' && typeof values.endDate === 'string') {
+    try {
+      toExecutionWindow(values.startDate, values.endDate);
+      if (currentContext.coverage !== undefined
+        && (values.startDate < currentContext.coverage.minimumDate
+          || values.endDate > currentContext.coverage.maximumDate)) {
+        errors.push(miningError(
+          'MINING_WINDOW_INVALID', ['startDate', 'endDate'],
+          `The selected data window ${values.startDate} through ${values.endDate} is outside the authoritative physical coverage ${currentContext.coverage.minimumDate} through ${currentContext.coverage.maximumDate}.`,
+          'Select inclusive start and end dates within the advertised physical coverage bounds.',
+        ));
+      }
+    } catch (reason) {
+      errors.push(miningError(
+        'MINING_WINDOW_INVALID', ['startDate', 'endDate'],
+        reason instanceof Error ? reason.message : String(reason),
+        reason instanceof WorkloadDateWindowError ? reason.remediation : 'Select a valid calendar date range.',
+      ));
+    }
+  }
+
+  for (const id of ['startDate', 'endDate'] as const) {
+    const parameter = parameters.find(item => item.id === id);
+    if (parameter?.provenance === 'derived' && currentContext.coverage !== undefined) {
+      const expectedSource = `${FACTOR_MINING_COVERAGE_DEFAULT_SOURCE}:${currentContext.coverage.snapshotVersion}`;
+      if (parameter.defaultRole !== 'calculated-from-coverage' || parameter.defaultSource !== expectedSource) {
+        errors.push(miningError('MINING_COVERAGE_DEFAULT_METADATA_INVALID', [id], `Calculated coverage default metadata for '${id}' is invalid.`, 'Resolve a fresh review from the physical coverage owner.'));
+      }
+    }
+  }
+
+  const population = values['gpquant.population'];
+  const hallOfFame = values['gpquant.hallOfFame'];
+  if (typeof population === 'number' && typeof hallOfFame === 'number' && hallOfFame > population) {
+    errors.push(miningError('MINING_HALL_OF_FAME_INVALID', ['gpquant.hallOfFame', 'gpquant.population'], 'Hall of fame cannot exceed the GPQuant population.', 'Reduce hall of fame or increase the population.'));
+  }
+  if (values['gpquant.oosRatio'] === 1) {
+    errors.push(miningError('MINING_OOS_RATIO_INVALID', ['gpquant.oosRatio'], 'OOS ratio must leave at least part of the data for training.', 'Use an OOS ratio below 1.'));
+  }
+
+  const concurrency = values.concurrency;
+  const blasThreads = values.blasThreads;
+  const memoryBudgetMb = values.memoryBudgetMb;
+  if (typeof concurrency === 'number' && concurrency > currentContext.concurrency) {
+    errors.push(miningError('MINING_CONCURRENCY_INVALID', ['concurrency'], `Concurrency exceeds the current limit ${currentContext.concurrency}.`, 'Use the current resource geometry returned by the owner.'));
+  }
+  if (typeof blasThreads === 'number' && blasThreads > currentContext.blasThreads) {
+    errors.push(miningError('MINING_BLAS_THREADS_INVALID', ['blasThreads'], `BLAS threads exceed the current limit ${currentContext.blasThreads}.`, 'Use the current resource geometry returned by the owner.'));
+  }
+  if (typeof concurrency === 'number' && typeof blasThreads === 'number'
+    && concurrency * blasThreads > currentContext.concurrency * currentContext.blasThreads) {
+    errors.push(miningError('MINING_CPU_GEOMETRY_INVALID', ['concurrency', 'blasThreads'], 'Process and BLAS thread demand exceeds the current CPU geometry.', 'Reduce process concurrency or BLAS threads.'));
+  }
+  if (typeof memoryBudgetMb === 'number' && memoryBudgetMb > currentContext.memoryBudgetMb) {
+    errors.push(miningError('MINING_MEMORY_BUDGET_INVALID', ['memoryBudgetMb'], `Memory budget exceeds the current limit ${currentContext.memoryBudgetMb} MB.`, 'Use a memory budget within the current resource geometry.'));
+  }
+  if (values.persistenceDestination !== FACTOR_MINING_PERSISTENCE_DESTINATION) {
+    errors.push(miningError('MINING_PERSISTENCE_DESTINATION_INVALID', ['persistenceDestination'], 'Factor output must use the canonical factor registry.', 'Resolve a fresh review with the authoritative persistence destination.'));
+  }
+  return { valid: errors.length === 0, errors };
+}
+
+/** Recover the immutable reviewed validation context without surface logic. */
+export function factorMiningValidationContextFromReview(
+  review: WorkloadPrelaunchReview,
+): FactorMiningDerivedContext {
+  const byId = new Map(review.parameters.map(parameter => [parameter.id, parameter]));
+  const bounds = byId.get('startDate')?.dateBounds ?? byId.get('endDate')?.dateBounds;
+  const minimumDate = bounds?.minimumDate;
+  const maximumDate = bounds?.maximumDate;
+  const coverage = minimumDate === undefined || maximumDate === undefined
+    ? undefined
+    : {
+      ...toExecutionWindow(minimumDate, maximumDate),
+      minimumDate,
+      maximumDate,
+      snapshotVersion: (byId.get('startDate')?.defaultSource ?? byId.get('endDate')?.defaultSource
+        ?? review.derivedContextVersion).replace(`${FACTOR_MINING_COVERAGE_DEFAULT_SOURCE}:`, ''),
+    };
+  const numeric = (id: string): number => {
+    const value = byId.get(id)?.value;
+    return typeof value === 'number' && Number.isFinite(value) ? value : 0;
+  };
+  const binding = review.estimatedWork.bindingConstraint;
+  return {
+    version: review.derivedContextVersion,
+    concurrency: numeric('concurrency'),
+    blasThreads: numeric('blasThreads'),
+    memoryBudgetMb: numeric('memoryBudgetMb'),
+    bindingConstraint: binding === 'cpu' || binding === 'memory' || binding === 'repository-cap'
+      ? binding
+      : 'repository-cap',
+    coverage: coverage === undefined ? undefined : {
+      startUtc: coverage.startUtc,
+      endUtcExclusive: coverage.endUtcExclusive,
+      minimumDate: coverage.minimumDate,
+      maximumDate: coverage.maximumDate,
+      snapshotVersion: coverage.snapshotVersion,
+    },
+  };
+}
+
+/**
+ * TICKET_1370 AC27 / TICKET_1382 AC15: one owner composes the complete
+ * factor-mining derived-context identity for review, edit, and launch. The
+ * physical coverage snapshot is deliberately part of this value because it
+ * determines the reviewed executable window.
+ */
+export function factorMiningDerivedContextVersion(
+  context: Pick<FactorMiningDerivedContext, 'version' | 'coverage'>,
+): string {
+  return context.coverage === undefined
+    ? context.version
+    : `${context.version}:${context.coverage.snapshotVersion}`;
 }
 
 /**
@@ -221,9 +344,7 @@ function resolutionInput(
     },
     // AC27: the coverage snapshot version participates in the derived context
     // version, so re-deriving a different window invalidates the fingerprint.
-    derivedContextVersion: context.coverage === undefined
-      ? context.version
-      : `${context.version}:${context.coverage.snapshotVersion}`,
+    derivedContextVersion: factorMiningDerivedContextVersion(context),
   };
 }
 
@@ -238,12 +359,40 @@ function withCoverageMetadata(
     ...review,
     parameters: review.parameters.map(parameter => (
       bounds !== undefined && (parameter.id === 'startDate' || parameter.id === 'endDate')
-        ? { ...parameter, dateBounds: bounds }
+        ? {
+          ...parameter,
+          dateBounds: bounds,
+          defaultSource: parameter.provenance === 'derived'
+            ? `${FACTOR_MINING_COVERAGE_DEFAULT_SOURCE}:${context.coverage?.snapshotVersion}`
+            : parameter.defaultSource,
+          defaultRole: parameter.provenance === 'derived'
+            ? 'calculated-from-coverage' as const
+            : undefined,
+        }
         : parameter
     )),
-    validationErrors: context.coverageError === undefined
-      ? review.validationErrors
-      : [...review.validationErrors, context.coverageError],
+  };
+}
+
+function withFactorMiningValidation(
+  review: WorkloadPrelaunchReview,
+  context: FactorMiningDerivedContext,
+): WorkloadPrelaunchReview {
+  const validation = validateFactorMiningParameters(review.parameters, context);
+  const combined = [
+    ...review.validationErrors,
+    ...validation.errors,
+    ...(context.coverageError === undefined ? [] : [context.coverageError]),
+  ];
+  const seen = new Set<string>();
+  return {
+    ...review,
+    validationErrors: combined.filter(item => {
+      const identity = `${item.code}:${item.parameterIds.join(',')}:${item.message}`;
+      if (seen.has(identity)) return false;
+      seen.add(identity);
+      return true;
+    }),
   };
 }
 
@@ -282,11 +431,36 @@ export function resolveFactorMiningReview(
   context: FactorMiningDerivedContext,
 ): WorkloadPrelaunchReview {
   const explicit = flattenDraft(draft);
-  const review = resolvePrelaunchReview(FACTOR_MINING_PARAMETER_SPECIFICATION, {
+  const review = resolvePrelaunchReview(contextualSpecification(context), {
     ...resolutionInput(context, { ...explicit, horizonByTimeframe: draft.horizonByTimeframe }),
     explicit,
-  }, validateFactorMining);
-  return withCoverageMetadata(withReviewSummary(review, context), context);
+  });
+  return withFactorMiningValidation(withCoverageMetadata(withReviewSummary(review, context), context), context);
+}
+
+/**
+ * Re-resolve a serialized confirmed plan against the current derived context.
+ * Existing explicit and persisted choices remain choices; defaults and
+ * derived values are reacquired from their authoritative owners. This is the
+ * launch-time half of TICKET_1370 AC27 and also supplies the actionable fresh
+ * review required when physical coverage changed after confirmation.
+ */
+export function resolveCurrentFactorMiningReview(
+  confirmedPlan: ConfirmedWorkloadPlan,
+  context: FactorMiningDerivedContext,
+): WorkloadPrelaunchReview {
+  const explicit = Object.fromEntries(confirmedPlan.parameters
+    .filter(parameter => parameter.provenance === 'explicit')
+    .map(parameter => [parameter.id, parameter.value]));
+  const persisted = Object.fromEntries(confirmedPlan.parameters
+    .filter(parameter => parameter.provenance === 'persisted')
+    .map(parameter => [parameter.id, parameter.value]));
+  const review = resolvePrelaunchReview(contextualSpecification(context), {
+    ...resolutionInput(context, { ...persisted, ...explicit }),
+    explicit,
+    persisted,
+  });
+  return withFactorMiningValidation(withCoverageMetadata(withReviewSummary(review, context), context), context);
 }
 
 export function editFactorMiningReview(
@@ -301,7 +475,7 @@ export function editFactorMiningReview(
   // TICKET_1370 R9/AC21: switching the market-scope source drops the other
   // mode's input, so an edit cannot leave both a preset and a custom list in
   // the plan for a later layer to choose between.
-  const normalized: Record<string, WorkloadJsonValue> = { ...edits };
+  const normalized: Record<string, WorkloadJsonValue | undefined> = { ...edits };
   if (edits.marketScopeSource === 'preset') normalized.symbols = undefined as unknown as WorkloadJsonValue;
   if (edits.marketScopeSource === 'custom') normalized.preset = undefined as unknown as WorkloadJsonValue;
   // TICKET_1370 R11/AC35: clear the previous horizon map so the freshly derived
@@ -309,19 +483,28 @@ export function editFactorMiningReview(
   // forward as `explicit`, which outranks `derived` -- without this the map
   // would keep describing the timeframes the user just replaced.
   normalized.horizonByTimeframe = undefined as unknown as WorkloadJsonValue;
+  if (edits.marketScopeSource !== undefined || edits.preset !== undefined
+    || edits.symbols !== undefined || edits.timeframes !== undefined) {
+    if (edits.startDate === undefined) normalized.startDate = undefined;
+    if (edits.endDate === undefined) normalized.endDate = undefined;
+  }
   // TICKET_1370 R11/AC35: the horizon map is derived from the POST-edit
   // timeframes. Deriving it from the pre-edit review would confirm a plan whose
   // horizons describe the timeframe set the user just replaced.
-  const current = Object.fromEntries(review.parameters.map(parameter => [parameter.id, parameter.value]));
-  const edited = applyPrelaunchEdits(
-    FACTOR_MINING_PARAMETER_SPECIFICATION,
-    review,
-    normalized,
-    resolutionInput(context, { ...current, ...normalized }),
-    validateFactorMining,
-  );
+  const priorExplicit = Object.fromEntries(review.parameters
+    .filter(parameter => parameter.provenance === 'explicit')
+    .map(parameter => [parameter.id, parameter.value]));
+  const persisted = Object.fromEntries(review.parameters
+    .filter(parameter => parameter.provenance === 'persisted')
+    .map(parameter => [parameter.id, parameter.value]));
+  const explicit = { ...priorExplicit, ...normalized };
+  const edited = resolvePrelaunchReview(contextualSpecification(context), {
+    ...resolutionInput(context, { ...persisted, ...explicit }),
+    explicit,
+    persisted,
+  });
   // AC29/AC35: changing market scope or timeframes re-derives estimated work,
   // the resolved universe, and the horizon map as part of the same replacement
   // review the user confirms.
-  return withCoverageMetadata(withReviewSummary(edited, context), context);
+  return withFactorMiningValidation(withCoverageMetadata(withReviewSummary(edited, context), context), context);
 }

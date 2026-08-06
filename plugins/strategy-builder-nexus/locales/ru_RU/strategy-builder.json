@@ -1285,6 +1285,7 @@
     "GENERATION_TIMEOUT": "Vremya generatsii strategii isteklo. Poprobuyteye snova.",
     "RATE_LIMIT_EXCEEDED": "Prevyshen limit zaprosov. Podozhdite pered povtornoy popytkoy.",
     "CODE_GENERATION_ERROR": "Ne udalos' sgenerirovat' kod strategii. Poprobuyteye snova.",
+    "EMPTY_RESPONSE": "Model' II ne vernula kod strategii. Nichego ne bylo sokhraneno ili skompilirovano. Poprobuyte sgenerirovat' snova.",
     "RATE_LIMIT": "Prevyshen limit zaprosov. Podozhdite i poprobuyteye snova.",
     "INVALID_SESSION": "Nedeystvitel'naya sessiya. Nachnite novyy razgovor.",
     "AUTH_REQUIRED": "Voyidite v sistemu dlya prodolzheniya."

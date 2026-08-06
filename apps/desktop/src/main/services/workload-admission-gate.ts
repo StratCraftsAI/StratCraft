@@ -11,6 +11,10 @@ import os from 'os';
 import path from 'path';
 import { app } from 'electron';
 import log from 'electron-log';
+import type {
+  WorkloadAdmissionBreakdown,
+  WorkloadAdmissionRefusal,
+} from '@StratCraft/types';
 import {
   MINING_PEAK_RSS_MB,
   SWEEP_ADMISSION_CONCURRENCY,
@@ -34,12 +38,7 @@ export interface RunningWorkloadAdmissionInput {
   estimatedPeakMB: number | null;
 }
 
-export interface AdmissionBreakdown {
-  id: WorkloadId;
-  currentMB: number;
-  peakMB: number;
-  admittedPeakMB: number;
-}
+export type AdmissionBreakdown = WorkloadAdmissionBreakdown;
 
 export interface AdmissionAccepted {
   admitted: true;
@@ -51,19 +50,7 @@ export interface AdmissionAccepted {
   runningBreakdown: AdmissionBreakdown[];
 }
 
-export interface AdmissionRefusal {
-  admitted: false;
-  errorCode: typeof ADMISSION_ERROR_CODE;
-  reason: string;
-  candidateId: WorkloadId;
-  candidatePeakMB: number | null;
-  ceilingMB: number;
-  baselineRssMB: number;
-  combinedPeakMB: number | null;
-  runningBreakdown: AdmissionBreakdown[];
-  suggestion: 'enqueue' | 'stop-other' | 'raise-ceiling';
-  enqueueAvailable: true;
-}
+export type AdmissionRefusal = WorkloadAdmissionRefusal;
 
 export type AdmissionVerdict = AdmissionAccepted | AdmissionRefusal;
 

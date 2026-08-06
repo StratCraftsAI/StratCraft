@@ -260,12 +260,12 @@ export interface GuidedWorkloadPrelaunchReview {
     // shared owner rather than by surface-local parameter-name logic.
     // TICKET_1370 R12/AC38: `label` is the authoritative user-facing name; `id`
     // is a contract identifier and must never reach the user as a label.
-    parameters: Array<{ id: string; label: string; control: string; value: unknown; provenance: 'explicit' | 'persisted' | 'default' | 'derived'; defaultSource?: string; editable: boolean; impact: string[]; supportedChoices?: unknown[]; validation?: { minimum?: number; maximum?: number; step?: number }; visibleWhen?: { parameterId: string; equals: unknown[] }; dateBounds?: { minimumDate?: string; maximumDate?: string } }>
-    missingRequired: Array<{ id: string; control: string; label: string; supportedChoices?: unknown[]; validationRequirements?: string; validation?: { minimum?: number; maximum?: number; step?: number }; visibleWhen?: { parameterId: string; equals: unknown[] }; dateBounds?: { minimumDate?: string; maximumDate?: string } }>
+    parameters: Array<{ id: string; label: string; control: string; value: unknown; provenance: 'explicit' | 'persisted' | 'default' | 'derived'; defaultSource?: string; defaultRole?: 'calculated-from-coverage'; editable: boolean; impact: string[]; supportedChoices?: unknown[]; validation?: { minimum?: number; maximum?: number; step?: number }; nullable?: boolean; visibleWhen?: { parameterId: string; equals: unknown[] }; dateBounds?: { minimumDate?: string; maximumDate?: string } }>
+    missingRequired: Array<{ id: string; control: string; label: string; supportedChoices?: unknown[]; validationRequirements?: string; validation?: { minimum?: number; maximum?: number; step?: number }; nullable?: boolean; visibleWhen?: { parameterId: string; equals: unknown[] }; dateBounds?: { minimumDate?: string; maximumDate?: string } }>
     // TICKET_1370 R12/AC37: inactive input modes of a conditional decision, so
     // switching the source reveals the other control without a round trip.
     // Optional on the wire: an older review document simply has no alternatives.
-    availableAlternatives?: Array<{ id: string; control: string; label: string; supportedChoices?: unknown[]; validationRequirements?: string; validation?: { minimum?: number; maximum?: number; step?: number }; visibleWhen?: { parameterId: string; equals: unknown[] }; dateBounds?: { minimumDate?: string; maximumDate?: string } }>
+    availableAlternatives?: Array<{ id: string; control: string; label: string; supportedChoices?: unknown[]; validationRequirements?: string; validation?: { minimum?: number; maximum?: number; step?: number }; nullable?: boolean; visibleWhen?: { parameterId: string; equals: unknown[] }; dateBounds?: { minimumDate?: string; maximumDate?: string } }>
     validationErrors: Array<{ code: string; parameterIds: string[]; message: string; remediation: string }>
     estimatedWork: Record<string, unknown>
     planFingerprint: string

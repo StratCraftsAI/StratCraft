@@ -9,6 +9,10 @@
  */
 
 import i18n from 'i18next';
+import {
+  formatWorkloadCalendarDate,
+  resolveWorkloadFormattingLocale,
+} from '@StratCraft/workload-prelaunch';
 
 const LOCALE_MAP: Record<string, string> = {
   en_US: 'en-US',
@@ -27,7 +31,10 @@ const LOCALE_MAP: Record<string, string> = {
  * Get Intl-compatible locale string from current i18n language.
  */
 export function getIntlLocale(): string {
-  return LOCALE_MAP[i18n.language] || 'en-US';
+  return resolveWorkloadFormattingLocale(
+    LOCALE_MAP[i18n.language] ?? i18n.language,
+    Intl.DateTimeFormat().resolvedOptions().locale,
+  );
 }
 
 /**
@@ -42,6 +49,9 @@ export function getApiLocale(): string {
  * Format a date as short date display (e.g. "01/15/2024" or "2024/01/15").
  */
 export function formatDate(date: Date | string | number): string {
+  if (typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    return formatWorkloadCalendarDate(date, getIntlLocale());
+  }
   return new Intl.DateTimeFormat(getIntlLocale(), {
     year: 'numeric',
     month: '2-digit',

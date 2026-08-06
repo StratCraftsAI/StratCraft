@@ -451,4 +451,24 @@ describe('the committed pixi.lock', () => {
     expect(versions.gplearn).not.toContain('>=');
     expect(versions.gplearn).toMatch(/^\d+\.\d+/);
   });
+
+  it('locks nona-algorithm and its owning psutil dependency in both projections', () => {
+    const manifest = readFileSync(resolve(REPO_ROOT, 'pixi.toml'), 'utf8');
+    const setup = readFileSync(resolve(REPO_ROOT, 'packages/nona-algorithm/setup.py'), 'utf8');
+    const lock = readFileSync(resolve(REPO_ROOT, 'pixi.lock'), 'utf8');
+    const defaultStart = lock.indexOf('  default:\n');
+    const withoutStart = lock.indexOf('  without-gpquant:\n');
+    const packagesStart = lock.indexOf('\npackages:\n');
+    const defaultProjection = lock.slice(defaultStart, withoutStart);
+    const withoutProjection = lock.slice(withoutStart, packagesStart);
+
+    expect(manifest).toContain(
+      'nona-algorithm = { path = "packages/nona-algorithm", editable = true }',
+    );
+    expect(setup).toContain('"psutil>=5.9,<8.0"');
+    for (const projection of [defaultProjection, withoutProjection]) {
+      expect(projection).toContain('- pypi: ./packages/nona-algorithm');
+      expect(projection).toMatch(/psutil-\d+\.\d+\.\d+/);
+    }
+  });
 });

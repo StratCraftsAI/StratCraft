@@ -6,9 +6,18 @@ import type {
   WorkloadJsonValue,
 } from './workload-prelaunch';
 import { WORKLOAD_PRELAUNCH_ERROR_CODES } from './workload-prelaunch';
+import type {
+  ResearchCapabilityStatus,
+  ResearchEnvironmentFailure,
+  ResearchEnvironmentProjection,
+  ResearchEnvironmentState,
+} from './research-environment';
 
 export const FACTOR_MINING_PLAN_SPECIFICATION_ID = 'quantnexus.factor-mining' as const;
 export const FACTOR_MINING_PLAN_SPECIFICATION_VERSION = '1.0.0' as const;
+/** Durable child diagnostics are tail-only and bounded at the shared contract. */
+export const FACTOR_MINING_STDERR_MAX_LINES = 80;
+export const FACTOR_MINING_STDERR_MAX_LINE_CHARS = 2_048;
 export const FACTOR_MINING_ENGINES = ['gplearn', 'gpquant', 'pysr'] as const;
 export type FactorMiningEngine = typeof FACTOR_MINING_ENGINES[number];
 
@@ -231,6 +240,55 @@ export interface FactorMiningFailure extends Omit<WorkloadPrelaunchErrorResult, 
   readonly requestId: string;
   readonly governanceDecisionId?: string;
   readonly resourceDecisionId?: string;
+  /** Child exit evidence, present for a terminal execution failure. */
+  readonly exitCode?: number | null;
+  /** Bounded, redacted tail captured from the governed child process. */
+  readonly stderrTail?: readonly string[];
+  /** Complete TICKET_1301 decision evidence for a resource-admission refusal. */
+  readonly admissionRefusal?: WorkloadAdmissionRefusal;
+  /**
+   * TICKET_1382_1: preserve the authoritative research-environment refusal
+   * instead of collapsing lock drift, an intentional projection, and a probe
+   * failure into the same GPQuant message.
+   */
+  readonly researchEnvironment?: FactorMiningResearchEnvironmentEvidence;
+}
+
+export type WorkloadAdmissionId = 'sweep' | 'mining' | 'lstm' | 'research-env';
+
+export interface WorkloadAdmissionBreakdown {
+  readonly id: WorkloadAdmissionId;
+  readonly currentMB: number;
+  readonly peakMB: number;
+  readonly admittedPeakMB: number;
+}
+
+/**
+ * Shared, serialization-safe TICKET_1301 refusal. Launch owners, commercial
+ * operations, MCP, and Guide transport this exact result without rebuilding it.
+ */
+export interface WorkloadAdmissionRefusal {
+  readonly admitted: false;
+  readonly errorCode: 'WORKLOAD_ADMISSION_REFUSED';
+  readonly reason: string;
+  readonly candidateId: WorkloadAdmissionId;
+  readonly candidatePeakMB: number | null;
+  readonly ceilingMB: number;
+  readonly baselineRssMB: number;
+  readonly combinedPeakMB: number | null;
+  readonly runningBreakdown: readonly WorkloadAdmissionBreakdown[];
+  readonly suggestion: 'enqueue' | 'stop-other' | 'raise-ceiling';
+  readonly enqueueAvailable: true;
+}
+
+export interface FactorMiningResearchEnvironmentEvidence {
+  readonly state: ResearchEnvironmentState;
+  readonly projection: ResearchEnvironmentProjection;
+  readonly manifestSha256?: string;
+  readonly lockSha256?: string;
+  readonly lastVerifiedAt?: string;
+  readonly gpquant: ResearchCapabilityStatus;
+  readonly failure?: ResearchEnvironmentFailure;
 }
 
 export type FactorMiningLaunchResult = FactorMiningLaunchSuccess | FactorMiningFailure;
@@ -251,7 +309,7 @@ export interface FactorMiningTaskStatus {
   readonly updatedAtUtc: string;
   readonly processId?: number;
   readonly systemdUnit?: string;
-  readonly exitCode?: number;
+  readonly exitCode?: number | null;
   readonly result?: Readonly<Record<string, WorkloadJsonValue>>;
   readonly failure?: FactorMiningFailure;
 }

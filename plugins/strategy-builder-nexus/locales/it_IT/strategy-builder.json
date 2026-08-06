@@ -1296,6 +1296,7 @@
     "GENERATION_TIMEOUT": "La generazione della strategia e' scaduta. Riprovare.",
     "RATE_LIMIT_EXCEEDED": "Limite di frequenza superato. Attendere prima di riprovare.",
     "CODE_GENERATION_ERROR": "Generazione del codice strategia fallita. Riprovare.",
+    "EMPTY_RESPONSE": "Il modello IA non ha restituito codice strategia. Non e stato salvato o compilato nulla. Provare a generarlo di nuovo.",
     "RATE_LIMIT": "Limite di frequenza superato. Attendere e riprovare.",
     "INVALID_SESSION": "Sessione non valida. Avviare una nuova conversazione.",
     "AUTH_REQUIRED": "Effettuare l'accesso per continuare."

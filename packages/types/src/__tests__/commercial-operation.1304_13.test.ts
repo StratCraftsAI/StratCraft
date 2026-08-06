@@ -175,6 +175,29 @@ describe('TICKET_1304_13 shared commercial operation contract', () => {
       resourceDecisionId: null,
     } as const;
     expect(commercialOperationResultSchema.parse(failure)).toEqual(failure);
+
+    const admissionFailure = {
+      ...failure,
+      requestId: 'request-3',
+      operationId: 'factor-mining.start',
+      code: 'WORKLOAD_ADMISSION_REFUSED',
+      message: 'Combined peak exceeds ceiling.',
+      remediation: 'Queue the workload.',
+      data: {
+        admitted: false,
+        errorCode: 'WORKLOAD_ADMISSION_REFUSED',
+        reason: 'Combined peak exceeds ceiling.',
+        candidateId: 'mining',
+        candidatePeakMB: 27_000,
+        ceilingMB: 54_512,
+        baselineRssMB: 13_000,
+        combinedPeakMB: 60_000,
+        runningBreakdown: [],
+        suggestion: 'enqueue',
+        enqueueAvailable: true,
+      },
+    } as const;
+    expect(commercialOperationResultSchema.parse(admissionFailure)).toEqual(admissionFailure);
   });
 
   it('validates progress bounds and typed package absence', () => {

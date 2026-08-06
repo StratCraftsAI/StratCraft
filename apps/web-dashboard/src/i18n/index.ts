@@ -48,32 +48,26 @@ const resources = {
  */
 function detectLocale(): string {
   const browserLang = navigator.language || 'en';
+  try {
+    const canonical = Intl.getCanonicalLocales(browserLang.replaceAll('_', '-'))[0];
+    const language = new Intl.Locale(canonical).language;
+    return ['en', 'zh', 'ja', 'ko', 'de', 'es', 'fr', 'it', 'pt', 'ru', 'tr'].includes(language)
+      ? canonical
+      : 'en-US';
+  } catch {
+    return 'en-US';
+  }
+}
 
-  // Direct match (e.g. "ja" -> "ja_JP")
-  const mapping: Record<string, string> = {
-    en: 'en_US',
-    zh: 'zh_CN',
-    'zh-TW': 'zh_TW',
-    'zh-HK': 'zh_TW',
-    ja: 'ja_JP',
-    ko: 'ko_KR',
-    de: 'de_DE',
-    es: 'es_ES',
-    fr: 'fr_FR',
-    it: 'it_IT',
-    pt: 'pt_PT',
-    ru: 'ru_RU',
-    tr: 'tr_TR',
+function translationFallback(locale?: string): string[] {
+  const canonical = locale?.replaceAll('_', '-') ?? 'en-US';
+  const language = canonical.split('-')[0];
+  if (language === 'zh') return [canonical.toLowerCase().includes('tw') || canonical.toLowerCase().includes('hk') ? 'zh_TW' : 'zh_CN', 'en_US'];
+  const byLanguage: Record<string, string> = {
+    en: 'en_US', ja: 'ja_JP', ko: 'ko_KR', de: 'de_DE', es: 'es_ES',
+    fr: 'fr_FR', it: 'it_IT', pt: 'pt_PT', ru: 'ru_RU', tr: 'tr_TR',
   };
-
-  // Try exact match first (e.g. "zh-TW")
-  if (mapping[browserLang]) return mapping[browserLang];
-
-  // Try base language (e.g. "en-GB" -> "en")
-  const base = browserLang.split('-')[0];
-  if (mapping[base]) return mapping[base];
-
-  return 'en_US';
+  return [byLanguage[language] ?? 'en_US'];
 }
 
 i18n
@@ -81,7 +75,7 @@ i18n
   .init({
     resources,
     lng: detectLocale(),
-    fallbackLng: 'en_US',
+    fallbackLng: translationFallback,
     ns: ['dashboard'],
     defaultNS: 'dashboard',
 

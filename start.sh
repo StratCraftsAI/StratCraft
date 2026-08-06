@@ -506,7 +506,9 @@ pixi_install() {
         log_error "Otherwise fix the cause (network / pixi.toml constraints) and re-run."
         return 1
     fi
-    log_info "Research Python env is in sync with pixi.lock."
+    log_info "Research Python env is materialized from the current pixi.lock."
+    log_warn "Materialization is not governed readiness: it does not create lifecycle verification evidence."
+    log_warn "Before GPQuant workloads, use Research Environment Verify/Repair and require a ready status for the current manifest and lock."
 }
 
 # Install dependencies
@@ -1099,19 +1101,17 @@ quant_lab_dev_install() {
         "$SCRIPTS_DIR/assemble-research-worker-package.mjs") || return 1
     version="${base_version}-dev.${package_input_fp:0:12}"
 
-    local current_status current_version
+    local current_status assembly_upgrades_from
     current_status=$(run_lifecycle_script \
         "$SCRIPTS_DIR/lifecycle-dev-package-status.cjs" \
         --trust-store "$trust_store" \
         2>/dev/null || true)
-    current_version=$(printf '%s' "$current_status" | node -e '
-      const input = require("fs").readFileSync(0, "utf8");
-      if (!input) process.exit(0);
-      const value = JSON.parse(input);
-      if (value.state === "ready" && typeof value.packageVersion === "string") {
-        process.stdout.write(value.packageVersion);
-      }
-    ')
+    assembly_upgrades_from=$(printf '%s' "$current_status" \
+        | node "$SCRIPTS_DIR/dev-package-assembly-context.cjs" \
+            --target-version "$version") || {
+        log_error "Could not resolve immutable development package assembly metadata"
+        return 1
+    }
 
     local package_output="$staging_dir/research-worker-package"
     local assembly_args=(
@@ -1124,8 +1124,8 @@ quant_lab_dev_install() {
         --key-id "$key_id"
         --signing-key "$signing_key"
     )
-    if [ -n "$current_version" ] && [ "$current_version" != "$version" ]; then
-        assembly_args+=(--upgrades-from "$current_version")
+    if [ -n "$assembly_upgrades_from" ]; then
+        assembly_args+=(--upgrades-from "$assembly_upgrades_from")
     fi
     node "$SCRIPTS_DIR/assemble-research-worker-package.mjs" \
         "${assembly_args[@]}" \

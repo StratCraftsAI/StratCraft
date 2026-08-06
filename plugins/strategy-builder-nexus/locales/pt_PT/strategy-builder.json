@@ -1296,6 +1296,7 @@
     "GENERATION_TIMEOUT": "A geracao de estrategia excedeu o tempo limite. Tente novamente.",
     "RATE_LIMIT_EXCEEDED": "Limite de taxa excedido. Aguarde antes de tentar novamente.",
     "CODE_GENERATION_ERROR": "Falha ao gerar o codigo de estrategia. Tente novamente.",
+    "EMPTY_RESPONSE": "O modelo de IA nao devolveu codigo de estrategia. Nada foi guardado ou compilado. Tente gerar novamente.",
     "RATE_LIMIT": "Limite de taxa excedido. Aguarde e tente novamente.",
     "INVALID_SESSION": "Sessao invalida. Inicie uma nova conversa.",
     "AUTH_REQUIRED": "Faca login para continuar."

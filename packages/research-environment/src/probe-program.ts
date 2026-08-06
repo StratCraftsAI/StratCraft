@@ -74,6 +74,7 @@ DISTRIBUTIONS = {
 }
 
 results = {}
+production_entry = {}
 progress_count = 0
 
 
@@ -261,6 +262,50 @@ except Exception as exc:
 
 
 # -----------------------------------------------------------------------------
+# factor-mining production entry -- TICKET_1382_3 AC3/AC4
+# -----------------------------------------------------------------------------
+# Mirror scripts/run-factor-mining.py exactly: the executable adds the scripts
+# directory to sys.path, then imports factor_mining.cli. The repository root is
+# intentionally not added, so nona_algorithm and every package it owns must be
+# provided by the locked environment rather than ambient source paths.
+try:
+    scripts_dir = Path.cwd() / "scripts"
+    sys.path.insert(0, str(scripts_dir))
+    from factor_mining.cli import build_parser
+    from factor_mining.engines.gpquant_engine import GpquantEngine
+
+    parser = build_parser()
+    adapter = GpquantEngine(generations=2, population=10, runs=1, hall_of_fame=1)
+    if parser.prog == "" or adapter.name != "gpquant":
+        production_entry = {
+            "ok": False,
+            "cause": "probe",
+            "stage": "production_entry",
+            "message": "The factor-mining parser or GPQuant adapter returned an invalid identity.",
+        }
+    else:
+        production_entry = {
+            "ok": True,
+            "stage": "production_entry",
+            "verification": "Imported factor_mining.cli, constructed its parser, resolved nona_algorithm governance, and validated GpquantEngine without launching work.",
+        }
+except ImportError as exc:
+    production_entry = {
+        "ok": False,
+        "cause": "import",
+        "stage": "production_entry",
+        "message": "{0}: {1}".format(type(exc).__name__, exc)[:1800],
+    }
+except Exception as exc:
+    production_entry = {
+        "ok": False,
+        "cause": "probe",
+        "stage": "production_entry",
+        "message": "{0}: {1}".format(type(exc).__name__, exc)[:1800],
+    }
+
+
+# -----------------------------------------------------------------------------
 # pysr -- D5 steps 1 and 5. Two runtime layers, reported separately.
 # -----------------------------------------------------------------------------
 # The Python wheel importing proves nothing about the Julia backend: on a cold
@@ -358,6 +403,7 @@ except Exception as exc:
 payload = {
     "interpreter": sys.executable,
     "pythonVersion": "{0}.{1}.{2}".format(*sys.version_info[:3]),
+    "productionEntry": production_entry,
     "capabilities": results,
 }
 sys.stdout.write("\n" + BEGIN + "\n" + json.dumps(payload) + "\n" + END + "\n")

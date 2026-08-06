@@ -32,19 +32,13 @@
           ]
         },
         "output": {
-          "type": "object",
-          "propertyNames": {
-            "type": "string"
-          },
-          "additionalProperties": {
-            "$ref": "#/$defs/__schema2"
-          }
+          "$ref": "#/$defs/__schema2"
         },
         "artifacts": {
           "maxItems": 256,
           "type": "array",
           "items": {
-            "$ref": "#/$defs/__schema3"
+            "$ref": "#/$defs/__schema4"
           }
         }
       },
@@ -89,7 +83,8 @@
             "COMMERCIAL_WORKER_UNAVAILABLE",
             "COMMERCIAL_OPERATION_FAILED",
             "COMMERCIAL_OPERATION_CANCELLED",
-            "COMMERCIAL_STORAGE_FAILED"
+            "COMMERCIAL_STORAGE_FAILED",
+            "WORKLOAD_ADMISSION_REFUSED"
           ]
         },
         "message": {
@@ -124,6 +119,9 @@
               "type": "null"
             }
           ]
+        },
+        "data": {
+          "$ref": "#/$defs/__schema2"
         }
       },
       "required": [
@@ -224,6 +222,15 @@
       ]
     },
     "__schema2": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/__schema3"
+      }
+    },
+    "__schema3": {
       "anyOf": [
         {
           "type": "string"
@@ -240,7 +247,7 @@
         {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/__schema2"
+            "$ref": "#/$defs/__schema3"
           }
         },
         {
@@ -249,12 +256,12 @@
             "type": "string"
           },
           "additionalProperties": {
-            "$ref": "#/$defs/__schema2"
+            "$ref": "#/$defs/__schema3"
           }
         }
       ]
     },
-    "__schema3": {
+    "__schema4": {
       "type": "object",
       "properties": {
         "artifactId": {

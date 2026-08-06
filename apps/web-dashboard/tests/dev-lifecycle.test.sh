@@ -232,6 +232,8 @@ if (!start.includes('version="${base_version}-dev.${package_input_fp:0:12}"')) p
 if (start.includes('--skip-health')) process.exit(11);
 if (!start.includes('status.packageManifestSha256 !== expectedManifest')) process.exit(12);
 if (start.includes('$PLUGIN_ROOT/assets/factor-engines')) process.exit(13);
+if (!start.includes('dev-package-assembly-context.cjs')) process.exit(14);
+if (!start.includes('--upgrades-from "$assembly_upgrades_from"')) process.exit(15);
 NODE
 pass "Build reconciles the signed commercial package before one fail-fast supervised Guide start"
 
@@ -606,6 +608,7 @@ ELECTRON_DEV_OWNER_FILE="\$BUILD_CACHE_DIR/electron-dev-owner.json"
 ELECTRON_DEV_TOKEN_VAR="$OWNERSHIP_TOKEN_VAR"
 ensure_build_cache_dir() { mkdir -p "\$BUILD_CACHE_DIR"; }
 log_error() { echo "\$*" >&2; }
+# shellcheck source=apps/web-dashboard/dev-lifecycle.sh
 source "$ROOT/apps/web-dashboard/dev-lifecycle.sh"
 $(sed -n '/^process_start_time()/,/^}/p;/^electron_dev_owner_token()/,/^}/p;/^electron_dev_pid_carries_token()/,/^}/p;/^claim_electron_dev_ownership()/,/^}/p;/^release_electron_dev_ownership()/,/^}/p;/^find_running_pids()/,/^}/p' "$ROOT/start.sh")
 write_claim() {
@@ -839,6 +842,7 @@ INOTIFY_PROBE="$TEST_TMP/inotify-probe.sh"
 cat > "$INOTIFY_PROBE" <<PROBE
 #!/usr/bin/env bash
 set -e
+# shellcheck source=scripts/start-constants.sh
 source "$START_CONSTANTS"
 $(sed -n '/^electron_dev_inotify_headroom_is_sufficient()/,/^}/p' "$ROOT/start.sh")
 electron_dev_inotify_headroom_is_sufficient "\$1"

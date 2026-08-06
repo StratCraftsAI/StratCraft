@@ -239,6 +239,8 @@ export interface ApiResponse<T = unknown> {
   data?: T;
   error?: string;
   errorCode?: string;
+  failedStage?: string;
+  validatorErrorCode?: string;
   remediation?: string;
   retryable?: boolean;
   errorDetails?: LstmFitQualityConstructionErrorPayload;

@@ -1296,6 +1296,7 @@
     "GENERATION_TIMEOUT": "策略產生逾時。請重試。",
     "RATE_LIMIT_EXCEEDED": "超出速率限制。請稍後重試。",
     "CODE_GENERATION_ERROR": "策略程式碼產生失敗。請重試。",
+    "EMPTY_RESPONSE": "AI模型未傳回任何策略程式碼。未儲存或編譯任何內容。請重新嘗試產生。",
     "RATE_LIMIT": "超出速率限制。請稍候再試。",
     "INVALID_SESSION": "無效工作階段。請開始新對話。",
     "AUTH_REQUIRED": "請登入以繼續。"

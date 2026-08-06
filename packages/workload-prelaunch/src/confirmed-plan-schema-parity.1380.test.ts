@@ -36,12 +36,15 @@ const CONFIRMED_PARAMETER_SCHEMA = z.object({
   id: z.string(), label: z.string(),
   control: z.enum(['select', 'multi-select', 'tags', 'date', 'datetime', 'number', 'text', 'readonly']),
   value: z.unknown(), provenance: z.enum(['explicit', 'persisted', 'default', 'derived']),
-  defaultSource: z.string().optional(), editable: z.boolean(),
+  defaultSource: z.string().optional(),
+  defaultRole: z.literal('calculated-from-coverage').optional(),
+  editable: z.boolean(),
   impact: z.array(z.enum(['scope', 'cost', 'duration', 'safety', 'output'])),
   supportedChoices: z.array(z.unknown()).optional(),
   validation: z.object({
     minimum: z.number().optional(), maximum: z.number().optional(), step: z.number().optional(),
   }).strict().optional(),
+  nullable: z.boolean().optional(),
   visibleWhen: z.object({
     parameterId: z.string(), equals: z.array(z.unknown()),
   }).strict().optional(),
@@ -66,6 +69,10 @@ const context = {
   blasThreads: 1,
   memoryBudgetMb: 12000,
   bindingConstraint: 'cpu' as const,
+  coverage: {
+    startUtc: '2025-01-01T00:00:00Z', endUtcExclusive: '2025-02-01T00:00:00Z',
+    minimumDate: '2025-01-01', maximumDate: '2025-01-31', snapshotVersion: 'schema:snap:v1',
+  },
 };
 
 const completeDraft = {

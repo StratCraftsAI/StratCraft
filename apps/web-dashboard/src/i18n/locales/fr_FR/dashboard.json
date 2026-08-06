@@ -194,11 +194,13 @@
     "vibingChat": {
       "llmError": "Le modele IA a rencontre une erreur. Veuillez reessayer.",
       "codeGenerationError": "Echec de la generation du code de strategie. Veuillez reessayer.",
+      "emptyResponse": "Le modele IA n'a renvoye aucun code de strategie. Rien n'a ete enregistre ni compile. Veuillez relancer la generation.",
       "timeout": "La requete a expire. Veuillez reessayer.",
       "networkError": "Erreur reseau survenue. Veuillez verifier votre connexion.",
       "rateLimit": "Limite de debit depassee. Veuillez patienter et reessayer.",
       "invalidSession": "Session non valide. Veuillez demarrer une nouvelle conversation.",
-      "authRequired": "Veuillez vous connecter pour continuer."
+      "authRequired": "Veuillez vous connecter pour continuer.",
+      "strategyAdmissionFailed": "Le C++ genere n'a pas reussi l'admission locale de strategie. Verifiez la regle de validation et regenerez-le."
     }
   },
   "agentChat": {

@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { WorkloadJsonValue } from '@StratCraft/types'
 // TICKET_1370 R12/AC38+AC39: presentation of reviewed values is owned by the
 // shared package, so the Guide WebUI and the Electron renderer cannot describe
 // one confirmed plan differently. The surface formats; it never re-derives.
 import {
   formatWorkloadMapAssignments,
+  formatWorkloadCalendarDate,
   formatWorkloadScalar,
   isDisplayableMap,
+  resolveWorkloadFormattingLocale,
 } from '@StratCraft/workload-prelaunch'
 import type {
   GuidedWorkloadPrelaunchReview,
@@ -35,7 +38,7 @@ export function validationErrorIsPending(
 }
 
 function ParameterControl({
-  id, value, editable, control, supportedChoices, validation, dateBounds, onChange,
+  id, value, editable, control, supportedChoices, validation, dateBounds, formattingLocale, onChange,
 }: {
   id: string
   value: ParamValue
@@ -44,6 +47,7 @@ function ParameterControl({
   supportedChoices?: unknown[]
   validation?: { minimum?: number; maximum?: number; step?: number }
   dateBounds?: { minimumDate?: string; maximumDate?: string }
+  formattingLocale: string
   onChange: (id: string, value: ParamValue) => void
 }) {
   // TICKET_1370 R12/AC39: a non-editable value is still a value the user is
@@ -130,14 +134,26 @@ function ParameterControl({
   // the conversion to the canonical half-open UTC interval, so no surface asks
   // anyone to type a transport timestamp.
   if (control === 'date' || control === 'datetime') {
+    let localizedValue = ''
+    if (typeof value === 'string' && value.length > 0) {
+      try {
+        localizedValue = formatWorkloadCalendarDate(value, formattingLocale)
+      } catch {
+        localizedValue = value
+      }
+    }
     return (
-      <input
-        type="date"
-        value={String(value ?? '')}
-        min={dateBounds?.minimumDate}
-        max={dateBounds?.maximumDate}
-        onChange={e => onChange(id, e.target.value)}
-      />
+      <div className="wz-date-control">
+        <span className="wz-localized-date">{localizedValue}</span>
+        <input
+          type="date"
+          lang={formattingLocale}
+          value={String(value ?? '')}
+          min={dateBounds?.minimumDate}
+          max={dateBounds?.maximumDate}
+          onChange={e => onChange(id, e.target.value)}
+        />
+      </div>
     )
   }
 
@@ -165,7 +181,7 @@ function ParameterControl({
 }
 
 function MissingParameterControl({
-  id, label, control, supportedChoices, validationRequirements, validation, dateBounds, onChange,
+  id, label, control, supportedChoices, validationRequirements, validation, dateBounds, formattingLocale, onChange,
 }: {
   id: string
   label: string
@@ -174,6 +190,7 @@ function MissingParameterControl({
   validationRequirements?: string
   validation?: { minimum?: number; maximum?: number; step?: number }
   dateBounds?: { minimumDate?: string; maximumDate?: string }
+  formattingLocale: string
   onChange: (id: string, value: ParamValue) => void
 }) {
   if (control === 'select' && supportedChoices && supportedChoices.length > 0) {
@@ -246,6 +263,7 @@ function MissingParameterControl({
         <span>{label}{validationRequirements ? ` (${validationRequirements})` : ''}</span>
         <input
           type="date"
+          lang={formattingLocale}
           min={dateBounds?.minimumDate}
           max={dateBounds?.maximumDate}
           onChange={e => {
@@ -289,7 +307,12 @@ function MissingParameterControl({
 }
 
 export function WorkloadPrelaunchReview({ data, onAction, superseded = false }: Props) {
+  const { i18n } = useTranslation()
   const review = data.review
+  const formattingLocale = resolveWorkloadFormattingLocale(
+    i18n.resolvedLanguage ?? i18n.language,
+    typeof navigator === 'undefined' ? undefined : navigator.language,
+  )
   const [edits, setEdits] = useState<Record<string, ParamValue>>({})
   const [confirmed, setConfirmed] = useState(false)
   const [launchInFlight, setLaunchInFlight] = useState(false)
@@ -459,7 +482,11 @@ export function WorkloadPrelaunchReview({ data, onAction, superseded = false }: 
               */}
               {parameter.label}
               {parameter.provenance !== 'explicit' && (
-                <span style={{ marginLeft: 6, fontSize: 9, opacity: 0.6 }}>{parameter.provenance}</span>
+                <span style={{ marginLeft: 6, fontSize: 9, opacity: 0.6 }}>
+                  {parameter.defaultRole === 'calculated-from-coverage'
+                    ? 'Default (calculated from coverage)'
+                    : parameter.provenance}
+                </span>
               )}
             </span>
             <ParameterControl
@@ -470,6 +497,7 @@ export function WorkloadPrelaunchReview({ data, onAction, superseded = false }: 
               supportedChoices={parameter.supportedChoices}
               validation={parameter.validation}
               dateBounds={parameter.dateBounds}
+              formattingLocale={formattingLocale}
               onChange={handleChange}
             />
           </div>
@@ -491,6 +519,7 @@ export function WorkloadPrelaunchReview({ data, onAction, superseded = false }: 
             validationRequirements={item.validationRequirements}
             validation={item.validation}
             dateBounds={item.dateBounds}
+            formattingLocale={formattingLocale}
             onChange={handleChange}
           />
         ))}
@@ -516,6 +545,7 @@ export function WorkloadPrelaunchReview({ data, onAction, superseded = false }: 
                 validationRequirements={item.validationRequirements}
                 validation={item.validation}
                 dateBounds={item.dateBounds}
+                formattingLocale={formattingLocale}
                 onChange={handleChange}
               />
             ))}

@@ -42,12 +42,20 @@ const EXPECTED_VERSIONS: Record<ResearchCapability, string> = {
 /** Representative stdout captured from the locked interpreter after AC24. */
 const LIVE_PROBE_STDOUT = `
 ${PROBE_RESULT_BEGIN}
-{"interpreter": "/workspace/StratCraft/.pixi/envs/default/bin/python", "pythonVersion": "3.12.13", "capabilities": {"histdata": {"ok": true, "version": "0.1.0", "verification": "Offline fixture parsed and converted to two canonical OHLCV rows with timestamp[ms]; temporary output removed."}, "duckdb": {"ok": true, "version": "1.5.3", "verification": "In-memory query returned 42; numpy 2.2.6 and pyarrow 18.1.0 imported."}, "gplearn": {"ok": true, "version": "0.4.3", "verification": "Deterministic fit/predict correlation 1.0000; scikit-learn 1.8.0, scipy 1.14.1."}, "gpquant": {"ok": true, "version": "0.1.6", "verification": "Imported and constructed SymbolicRegressor with the repository's argument shape."}, "pysr": {"ok": true, "version": "1.5.10", "verification": "Julia backend initialized; bounded regression correlation 1.0000.", "backend_ok": true}, "pandas_ta": {"ok": true, "version": "0.4.71b0", "verification": "Accessor '.ta.rsi(14)' returned 139 finite values against pandas 2.3.3."}}}
+{"interpreter": "/workspace/StratCraft/.pixi/envs/default/bin/python", "pythonVersion": "3.12.13", "productionEntry": {"ok": true, "stage": "production_entry", "verification": "Imported the production CLI."}, "capabilities": {"histdata": {"ok": true, "version": "0.1.0", "verification": "Offline fixture parsed and converted to two canonical OHLCV rows with timestamp[ms]; temporary output removed."}, "duckdb": {"ok": true, "version": "1.5.3", "verification": "In-memory query returned 42; numpy 2.2.6 and pyarrow 18.1.0 imported."}, "gplearn": {"ok": true, "version": "0.4.3", "verification": "Deterministic fit/predict correlation 1.0000; scikit-learn 1.8.0, scipy 1.14.1."}, "gpquant": {"ok": true, "version": "0.1.6", "verification": "Imported and constructed SymbolicRegressor with the repository's argument shape."}, "pysr": {"ok": true, "version": "1.5.10", "verification": "Julia backend initialized; bounded regression correlation 1.0000.", "backend_ok": true}, "pandas_ta": {"ok": true, "version": "0.4.71b0", "verification": "Accessor '.ta.rsi(14)' returned 139 finite values against pandas 2.3.3."}}}
 ${PROBE_RESULT_END}
 `;
 
 function wrap(payload: unknown): string {
-  return `noise\n${PROBE_RESULT_BEGIN}\n${JSON.stringify(payload)}\n${PROBE_RESULT_END}\ntrailing\n`;
+  const normalized = typeof payload === 'object' && payload !== null
+    && typeof (payload as { capabilities?: unknown }).capabilities === 'object'
+    && !('productionEntry' in payload)
+    ? {
+        ...(payload as Record<string, unknown>),
+        productionEntry: { ok: true, stage: 'production_entry', verification: 'ok' },
+      }
+    : payload;
+  return `noise\n${PROBE_RESULT_BEGIN}\n${JSON.stringify(normalized)}\n${PROBE_RESULT_END}\ntrailing\n`;
 }
 
 function allOk(): Record<string, unknown> {
@@ -151,6 +159,13 @@ describe('parseProbeOutput', () => {
     }))).toThrow(ResearchEnvironmentProbeError);
   });
 
+  it('rejects a payload that omits the production-entry result', () => {
+    const output = `${PROBE_RESULT_BEGIN}\n${JSON.stringify({
+      interpreter: '/i', pythonVersion: '3.12.13', capabilities: allOk(),
+    })}\n${PROBE_RESULT_END}`;
+    expect(() => parseProbeOutput(output)).toThrow(/production-entry/);
+  });
+
   it('drops an unrecognized cause rather than passing it through', () => {
     const capabilities = allOk();
     capabilities.pysr = { ok: false, cause: 'meltdown', message: 'x' };
@@ -179,6 +194,43 @@ describe('stageForProbeCause', () => {
 });
 
 describe('projectProbeResults', () => {
+  it.each([
+    ['nona_algorithm', "ModuleNotFoundError: No module named 'nona_algorithm'"],
+    ['psutil', "ModuleNotFoundError: No module named 'psutil'"],
+  ])('fails readiness at the production-entry stage when %s is absent', (_dependency, message) => {
+    const parsed = parseProbeOutput(LIVE_PROBE_STDOUT);
+    parsed.productionEntry = { ok: false, cause: 'import', stage: 'production_entry', message };
+
+    const projection = projectProbeResults({ parsed, expectedVersions: EXPECTED_VERSIONS });
+
+    expect(projection.capabilities.gpquant).toMatchObject({
+      state: 'failed', verification: expect.stringContaining(message),
+    });
+    expect(projection.failure).toMatchObject({
+      category: 'verification_failed', capability: 'gpquant',
+      stage: 'python_verify', cause: 'import',
+      message: expect.stringContaining('production_entry'),
+    });
+  });
+
+  it('does not hide a broken shared production entry in the without-gpquant projection', () => {
+    const parsed = parseProbeOutput(LIVE_PROBE_STDOUT);
+    parsed.capabilities.gpquant = {
+      ok: false, cause: 'import', message: "No module named 'gpquant'",
+    };
+    parsed.productionEntry = {
+      ok: false, cause: 'import', stage: 'production_entry',
+      message: "ModuleNotFoundError: No module named 'psutil'",
+    };
+
+    const projection = projectProbeResults({
+      parsed, expectedVersions: EXPECTED_VERSIONS, projection: 'without-gpquant',
+    });
+
+    expect(projection.failure?.message).toContain('psutil');
+    expect(projection.capabilities.gpquant.state).toBe('failed');
+  });
+
   it('attributes a HistData converter failure specifically to histdata', () => {
     const capabilities = allOk();
     capabilities.histdata = {

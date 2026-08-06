@@ -1296,6 +1296,7 @@
     "GENERATION_TIMEOUT": "La generation de strategie a expire. Veuillez reessayer.",
     "RATE_LIMIT_EXCEEDED": "Limite de debit depassee. Veuillez patienter avant de reessayer.",
     "CODE_GENERATION_ERROR": "Echec de la generation du code de strategie. Veuillez reessayer.",
+    "EMPTY_RESPONSE": "Le modele IA n'a renvoye aucun code de strategie. Rien n'a ete enregistre ni compile. Veuillez relancer la generation.",
     "RATE_LIMIT": "Limite de debit depassee. Veuillez patienter et reessayer.",
     "INVALID_SESSION": "Session non valide. Veuillez demarrer une nouvelle conversation.",
     "AUTH_REQUIRED": "Veuillez vous connecter pour continuer."

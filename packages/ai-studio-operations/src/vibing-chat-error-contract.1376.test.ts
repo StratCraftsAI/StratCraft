@@ -25,6 +25,7 @@ import {
   decodeVibingChatTaskFailure,
   isKnownVibingChatErrorCode,
   normalizeVibingChatErrorCode,
+  classifyAIStudioLocalFailure,
   vibingChatPresentationKey,
 } from './vibing-chat-protocol';
 
@@ -60,6 +61,7 @@ describe('single declaration site', () => {
     expect(CODES.sort()).toEqual([
       'AUTH_REQUIRED',
       'CODE_GENERATION_ERROR',
+      'EMPTY_RESPONSE',
       'INVALID_SESSION',
       'LLM_ERROR',
       'NETWORK_ERROR',
@@ -134,7 +136,7 @@ describe('backend error normalization', () => {
   it.each([
     ['LLM_SERVICE_ERROR', 'LLM_ERROR'],
     ['LLM_SERVICE_UNAVAILABLE', 'NETWORK_ERROR'],
-    ['LLM_EMPTY_RESPONSE', 'CODE_GENERATION_ERROR'],
+    ['LLM_EMPTY_RESPONSE', 'EMPTY_RESPONSE'],
     ['LLM_PARSE_ERROR', 'CODE_GENERATION_ERROR'],
     ['LLM_SCHEMA_VALIDATION', 'CODE_GENERATION_ERROR'],
     ['LLM_RESPONSE_FORMAT_REJECTED', 'CODE_GENERATION_ERROR'],
@@ -157,6 +159,24 @@ describe('backend error normalization', () => {
   it('does not assign a presentation identity to unknown input', () => {
     expect(normalizeVibingChatErrorCode(undefined)).toBeUndefined();
     expect(normalizeVibingChatErrorCode('UNKNOWN_BACKEND_CODE')).toBeUndefined();
+  });
+
+  it('keeps empty-generation distinct from neighboring generation failures', () => {
+    expect(normalizeVibingChatErrorCode('LLM_EMPTY_RESPONSE')).toBe('EMPTY_RESPONSE');
+    expect(vibingChatPresentationKey('LLM_EMPTY_RESPONSE'))
+      .toBe('agentOutcome.vibingChat.emptyResponse');
+    for (const code of [
+      'LLM_PARSE_ERROR',
+      'LLM_SCHEMA_VALIDATION',
+      'LLM_RESPONSE_FORMAT_REJECTED',
+    ]) {
+      expect(normalizeVibingChatErrorCode(code)).toBe('CODE_GENERATION_ERROR');
+      expect(vibingChatPresentationKey(code))
+        .toBe('agentOutcome.vibingChat.codeGenerationError');
+    }
+    expect(normalizeVibingChatErrorCode('LLM_SERVICE_ERROR')).toBe('LLM_ERROR');
+    expect(vibingChatPresentationKey('LLM_SERVICE_ERROR'))
+      .toBe('agentOutcome.vibingChat.llmError');
   });
 });
 
@@ -244,6 +264,14 @@ describe('decodeVibingChatTaskFailure', () => {
     expect(decodeVibingChatTaskFailure({ data: { status: 'processing' } })).toBeUndefined();
   });
 
+  it('does not classify empty transport payloads as semantic empty responses', () => {
+    for (const payload of [undefined, '', {}, { data: {} }]) {
+      const failure = decodeVibingChatTaskFailure(payload);
+      expect(failure).toBeUndefined();
+      expect(vibingChatPresentationKey(failure?.backendCode)).toBeUndefined();
+    }
+  });
+
   it('drops unbounded diagnostic identities while preserving the safe message', () => {
     expect(decodeVibingChatTaskFailure({
       status: 'failed',
@@ -293,11 +321,87 @@ describe('vibingChatPresentationKey', () => {
   });
 });
 
+describe('classifyAIStudioLocalFailure', () => {
+  it('maps local code-integrity rejection to the stable admission outcome', () => {
+    expect(classifyAIStudioLocalFailure({
+      errorCode: 'CODE_INTEGRITY_FAILED',
+      failedStage: 'strategy_admission',
+      fallbackOutcomeCode: 'ai_studio_persistence_failed',
+    })).toEqual({
+      outcomeCode: 'ai_studio_strategy_admission_failed',
+      failedStage: 'strategy_admission',
+      presentationKey: 'agentOutcome.vibingChat.strategyAdmissionFailed',
+      recoveryKey: 'agentOutcome.reviewDiagnostics',
+    });
+  });
+
+  it('uses the caller-owned stable fallback without laundering a service code', () => {
+    expect(classifyAIStudioLocalFailure({
+      errorCode: 'SOME_FUTURE_LOCAL_CODE',
+      failedStage: 'persistence',
+      fallbackOutcomeCode: 'ai_studio_persistence_failed',
+    })).toEqual({
+      outcomeCode: 'ai_studio_persistence_failed',
+      failedStage: 'persistence',
+    });
+  });
+
+  it('omits an absent stage on the fallback path', () => {
+    expect(classifyAIStudioLocalFailure({
+      fallbackOutcomeCode: 'ai_studio_save_failed',
+    })).toEqual({ outcomeCode: 'ai_studio_save_failed' });
+  });
+
+  it('preserves the batch-generation fallback identity', () => {
+    expect(classifyAIStudioLocalFailure({
+      fallbackOutcomeCode: 'ai_studio_batch_generation_failed',
+    })).toEqual({ outcomeCode: 'ai_studio_batch_generation_failed' });
+  });
+});
+
 // ---------------------------------------------------------------------------
 // 4. Both surfaces resolve every code, in all 12 locales
 // ---------------------------------------------------------------------------
 
 describe('cross-surface locale coverage', () => {
+  it('the same failed-task envelope produces equivalent Electron and Guide presentation', () => {
+    const failure = decodeVibingChatTaskFailure({
+      success: false,
+      data: {
+        task_id: 'vibing_chat_empty_contract',
+        status: 'failed',
+        result: {
+          error: {
+            error_code: 'LLM_EMPTY_RESPONSE',
+            error_message: 'Raw provider prose is not a presentation contract.',
+            retry_suggested: false,
+            failed_layer: 'generation',
+          },
+        },
+      },
+    });
+    expect(failure).toMatchObject({
+      backendCode: 'LLM_EMPTY_RESPONSE',
+      failedStage: 'generation',
+      taskId: 'vibing_chat_empty_contract',
+      retryable: false,
+    });
+
+    const electronIdentity = normalizeVibingChatErrorCode(failure?.backendCode);
+    const guideKey = vibingChatPresentationKey(failure?.backendCode)!;
+    expect(electronIdentity).toBe('EMPTY_RESPONSE');
+    expect(guideKey).toBe('agentOutcome.vibingChat.emptyResponse');
+
+    const plugin = readJson(path.join(PLUGIN_LOCALES, 'en_US', 'strategy-builder.json'));
+    const dashboard = readJson(path.join(DASHBOARD_LOCALES, 'en_US', 'dashboard.json'));
+    const electronMessage = (plugin.errorCodes as Record<string, string>)[electronIdentity!];
+    const guideMessage = ((dashboard.agentOutcome as Record<string, unknown>)
+      .vibingChat as Record<string, string>)[
+        guideKey.slice(VIBING_CHAT_PRESENTATION_PREFIX.length)
+      ];
+    expect(guideMessage).toBe(electronMessage);
+  });
+
   for (const locale of LOCALE_IDS) {
     it(`${locale}: Electron plugin translates all codes`, () => {
       const data = readJson(path.join(PLUGIN_LOCALES, locale, 'strategy-builder.json'));
@@ -320,6 +424,8 @@ describe('cross-surface locale coverage', () => {
         expect(typeof vibingChat?.[key]).toBe('string');
         expect(vibingChat[key].length).toBeGreaterThan(0);
       }
+      expect(typeof vibingChat?.strategyAdmissionFailed).toBe('string');
+      expect(vibingChat.strategyAdmissionFailed.length).toBeGreaterThan(0);
     });
 
     it(`${locale}: the same failure reads the same way on both surfaces`, () => {

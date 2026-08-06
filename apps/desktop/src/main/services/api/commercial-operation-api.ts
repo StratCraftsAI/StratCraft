@@ -69,5 +69,6 @@ export function projectCommercialRouteResult(
     remediation: result.remediation,
     retryable: result.retryable,
     requestId: result.requestId,
+    ...(result.data === undefined ? {} : { data: result.data }),
   };
 }

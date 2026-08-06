@@ -33,6 +33,7 @@
 export const VIBING_CHAT_ERROR_CODES: ReadonlySet<string> = new Set([
   'LLM_ERROR',
   'CODE_GENERATION_ERROR',
+  'EMPTY_RESPONSE',
   'TIMEOUT',
   'NETWORK_ERROR',
   'RATE_LIMIT',
@@ -43,6 +44,7 @@ export const VIBING_CHAT_ERROR_CODES: ReadonlySet<string> = new Set([
 export type VibingChatPresentationCode =
   | 'LLM_ERROR'
   | 'CODE_GENERATION_ERROR'
+  | 'EMPTY_RESPONSE'
   | 'TIMEOUT'
   | 'NETWORK_ERROR'
   | 'RATE_LIMIT'
@@ -53,6 +55,7 @@ export type VibingChatPresentationCode =
 const VIBING_CHAT_BACKEND_ERROR_PRESENTATION: Readonly<Record<string, VibingChatPresentationCode>> = {
   LLM_ERROR: 'LLM_ERROR',
   CODE_GENERATION_ERROR: 'CODE_GENERATION_ERROR',
+  EMPTY_RESPONSE: 'EMPTY_RESPONSE',
   TIMEOUT: 'TIMEOUT',
   NETWORK_ERROR: 'NETWORK_ERROR',
   RATE_LIMIT: 'RATE_LIMIT',
@@ -60,7 +63,7 @@ const VIBING_CHAT_BACKEND_ERROR_PRESENTATION: Readonly<Record<string, VibingChat
   AUTH_REQUIRED: 'AUTH_REQUIRED',
   LLM_SERVICE_ERROR: 'LLM_ERROR',
   LLM_SERVICE_UNAVAILABLE: 'NETWORK_ERROR',
-  LLM_EMPTY_RESPONSE: 'CODE_GENERATION_ERROR',
+  LLM_EMPTY_RESPONSE: 'EMPTY_RESPONSE',
   LLM_PARSE_ERROR: 'CODE_GENERATION_ERROR',
   LLM_SCHEMA_VALIDATION: 'CODE_GENERATION_ERROR',
   LLM_RESPONSE_FORMAT_REJECTED: 'CODE_GENERATION_ERROR',
@@ -115,6 +118,7 @@ export const VIBING_CHAT_PRESENTATION_PREFIX = 'agentOutcome.vibingChat.';
 const VIBING_CHAT_PRESENTATION_SEGMENTS: Readonly<Record<string, string>> = {
   LLM_ERROR: 'llmError',
   CODE_GENERATION_ERROR: 'codeGenerationError',
+  EMPTY_RESPONSE: 'emptyResponse',
   TIMEOUT: 'timeout',
   NETWORK_ERROR: 'networkError',
   RATE_LIMIT: 'rateLimit',
@@ -136,6 +140,43 @@ export function vibingChatPresentationKey(code: string | undefined): string | un
   if (!normalized) return undefined;
   const segment = VIBING_CHAT_PRESENTATION_SEGMENTS[normalized];
   return `${VIBING_CHAT_PRESENTATION_PREFIX}${segment}`;
+}
+
+export interface AIStudioLocalFailureContract {
+  readonly outcomeCode: string;
+  readonly failedStage?: string;
+  readonly presentationKey?: string;
+  readonly recoveryKey?: string;
+}
+
+/**
+ * Classify Electron-local AI Studio failures before they enter the MCP outcome
+ * vocabulary. Service error codes are not outcome codes: the latter are a
+ * lowercase browser-safety contract. Both surfaces consume this shared mapping.
+ */
+export function classifyAIStudioLocalFailure(input: {
+  readonly errorCode?: string;
+  readonly failedStage?: string;
+  readonly fallbackOutcomeCode:
+    | 'ai_studio_batch_generation_failed'
+    | 'ai_studio_save_failed'
+    | 'ai_studio_persistence_failed';
+}): AIStudioLocalFailureContract {
+  if (
+    input.errorCode === 'CODE_INTEGRITY_FAILED'
+    && input.failedStage === 'strategy_admission'
+  ) {
+    return {
+      outcomeCode: 'ai_studio_strategy_admission_failed',
+      failedStage: 'strategy_admission',
+      presentationKey: 'agentOutcome.vibingChat.strategyAdmissionFailed',
+      recoveryKey: 'agentOutcome.reviewDiagnostics',
+    };
+  }
+  return {
+    outcomeCode: input.fallbackOutcomeCode,
+    ...(input.failedStage ? { failedStage: input.failedStage } : {}),
+  };
 }
 
 export interface VibingChatTaskFailure {

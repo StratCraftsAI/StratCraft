@@ -777,11 +777,13 @@
     "vibingChat": {
       "llmError": "AI模型遇到错误。请重试。",
       "codeGenerationError": "策略代码生成失败。请重试。",
+      "emptyResponse": "AI模型未返回任何策略代码。未保存或编译任何内容。请重新尝试生成。",
       "timeout": "请求超时。请重试。",
       "networkError": "发生网络错误。请检查您的连接。",
       "rateLimit": "超出速率限制。请稍候再试。",
       "invalidSession": "无效会话。请开始新对话。",
-      "authRequired": "请登录以继续。"
+      "authRequired": "请登录以继续。",
+      "strategyAdmissionFailed": "生成的 C++ 未通过本地策略准入检查。请查看验证规则并重新生成。"
     }
   },
   "agentChat": {

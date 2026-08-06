@@ -1285,6 +1285,7 @@
     "GENERATION_TIMEOUT": "Strateji olusturma zaman asimina ugradi. Lutfen tekrar deneyin.",
     "RATE_LIMIT_EXCEEDED": "Istek limiti asildi. Tekrar denemeden once lutfen bekleyin.",
     "CODE_GENERATION_ERROR": "Strateji kodu olusturulamadi. Lutfen tekrar deneyin.",
+    "EMPTY_RESPONSE": "AI modeli strateji kodu dondurmedi. Hicbir sey kaydedilmedi veya derlenmedi. Lutfen yeniden olusturmayi deneyin.",
     "RATE_LIMIT": "Istek limiti asildi. Lutfen bekleyin ve tekrar deneyin.",
     "INVALID_SESSION": "Gecersiz oturum. Lutfen yeni bir konusma baslatin.",
     "AUTH_REQUIRED": "Devam etmek icin lutfen giris yapin."

@@ -194,11 +194,13 @@
     "vibingChat": {
       "llmError": "O modelo de IA encontrou um erro. Tente novamente.",
       "codeGenerationError": "Falha ao gerar o codigo de estrategia. Tente novamente.",
+      "emptyResponse": "O modelo de IA nao devolveu codigo de estrategia. Nada foi guardado ou compilado. Tente gerar novamente.",
       "timeout": "O pedido expirou. Tente novamente.",
       "networkError": "Erro de rede. Verifique a sua ligacao.",
       "rateLimit": "Limite de taxa excedido. Aguarde e tente novamente.",
       "invalidSession": "Sessao invalida. Inicie uma nova conversa.",
-      "authRequired": "Faca login para continuar."
+      "authRequired": "Faca login para continuar.",
+      "strategyAdmissionFailed": "O C++ gerado falhou a admissao local da estrategia. Reveja a regra de validacao e volte a gerar."
     }
   },
   "agentChat": {

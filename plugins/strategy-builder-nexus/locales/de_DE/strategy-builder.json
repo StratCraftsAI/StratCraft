@@ -1296,6 +1296,7 @@
     "GENERATION_TIMEOUT": "Strategiegenerierung hat das Zeitlimit ueberschritten. Bitte versuchen Sie es erneut.",
     "RATE_LIMIT_EXCEEDED": "Ratenlimit ueberschritten. Bitte warten Sie, bevor Sie es erneut versuchen.",
     "CODE_GENERATION_ERROR": "Strategiecode konnte nicht generiert werden. Bitte versuchen Sie es erneut.",
+    "EMPTY_RESPONSE": "Das KI-Modell hat keinen Strategiecode zuruckgegeben. Es wurde nichts gespeichert oder kompiliert. Bitte starten Sie die Generierung erneut.",
     "RATE_LIMIT": "Ratenlimit ueberschritten. Bitte warten Sie und versuchen Sie es erneut.",
     "INVALID_SESSION": "Ungueltige Sitzung. Bitte starten Sie eine neue Konversation.",
     "AUTH_REQUIRED": "Bitte melden Sie sich an, um fortzufahren."

@@ -12,4 +12,8 @@ export interface ApiResponse<T = unknown> {
   error?: string;
   /** Stable machine identity preserved across the Service API boundary. */
   errorCode?: string;
+  /** Owning operation stage for a structured local failure. */
+  failedStage?: string;
+  /** Bounded validator/admission rule identity; never generated source. */
+  validatorErrorCode?: string;
 }

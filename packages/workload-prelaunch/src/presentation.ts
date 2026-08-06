@@ -15,6 +15,49 @@
  */
 import type { WorkloadJsonValue } from '@StratCraft/types';
 import { FACTOR_MINING_TIMEFRAMES } from '@StratCraft/types';
+import { parseCalendarDateUtc } from './date-window';
+
+const WORKLOAD_LOCALE_FALLBACK = 'en-US';
+
+function canonicalLocale(value: string | undefined): Intl.Locale | undefined {
+  if (value === undefined || value.trim().length === 0) return undefined;
+  try {
+    return new Intl.Locale(value.trim().replaceAll('_', '-'));
+  } catch {
+    return undefined;
+  }
+}
+
+/** Resolve one validated BCP 47 language-region tag for every UI surface. */
+export function resolveWorkloadFormattingLocale(
+  appLocale: string | undefined,
+  runtimeLocale: string | undefined,
+): string {
+  const app = canonicalLocale(appLocale);
+  const runtime = canonicalLocale(runtimeLocale);
+  if (app?.region !== undefined) return app.toString();
+  if (app !== undefined && runtime?.language === app.language && runtime.region !== undefined) {
+    return runtime.toString();
+  }
+  if (app !== undefined) {
+    const maximized = app.maximize();
+    if (maximized.region !== undefined) return `${app.language}-${maximized.region}`;
+  }
+  if (runtime?.region !== undefined) return runtime.toString();
+  return WORKLOAD_LOCALE_FALLBACK;
+}
+
+/** Format a canonical date without allowing the host timezone to move its day. */
+export function formatWorkloadCalendarDate(
+  canonicalDate: string,
+  formattingLocale: string,
+): string {
+  const instant = parseCalendarDateUtc(canonicalDate, 'calendarDate');
+  const locale = resolveWorkloadFormattingLocale(formattingLocale, undefined);
+  return new Intl.DateTimeFormat(locale, {
+    year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'UTC',
+  }).format(new Date(instant));
+}
 
 /** A single readable `key -> value` assignment from a reviewed map parameter. */
 export interface WorkloadDisplayAssignment {

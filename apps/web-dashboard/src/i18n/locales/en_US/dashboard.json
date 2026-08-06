@@ -884,11 +884,13 @@
     "vibingChat": {
       "llmError": "AI model encountered an error. Please try again.",
       "codeGenerationError": "Failed to generate strategy code. Please try again.",
+      "emptyResponse": "The AI model returned no strategy code. Nothing was saved or compiled. Please try generating again.",
       "timeout": "Request timed out. Please try again.",
       "networkError": "Network error occurred. Please check your connection.",
       "rateLimit": "Rate limit exceeded. Please wait and try again.",
       "invalidSession": "Invalid session. Please start a new conversation.",
-      "authRequired": "Please log in to continue."
+      "authRequired": "Please log in to continue.",
+      "strategyAdmissionFailed": "Generated C++ failed local strategy admission. Review the validator rule and regenerate."
     }
   },
   "agentChat": {

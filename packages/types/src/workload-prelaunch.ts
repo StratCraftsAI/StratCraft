@@ -10,6 +10,7 @@ export type WorkloadJsonValue =
   | { readonly [key: string]: WorkloadJsonValue };
 
 export type ParameterValueProvenance = 'explicit' | 'persisted' | 'default' | 'derived';
+export type WorkloadParameterDefaultRole = 'calculated-from-coverage';
 export type WorkloadParameterImpact = 'scope' | 'cost' | 'duration' | 'safety' | 'output';
 
 export interface StructuredWorkloadValidationError {
@@ -66,10 +67,13 @@ export interface ResolvedWorkloadParameter {
   readonly value: WorkloadJsonValue;
   readonly provenance: ParameterValueProvenance;
   readonly defaultSource?: string;
+  /** Presentation-only role; provenance remains the canonical value origin. */
+  readonly defaultRole?: WorkloadParameterDefaultRole;
   readonly editable: boolean;
   readonly impact: readonly WorkloadParameterImpact[];
   readonly supportedChoices?: readonly WorkloadJsonValue[];
   readonly validation?: { readonly minimum?: number; readonly maximum?: number; readonly step?: number };
+  readonly nullable?: boolean;
   readonly visibleWhen?: WorkloadParameterVisibility;
   readonly dateBounds?: WorkloadDateBounds;
 }
@@ -81,6 +85,7 @@ export interface MissingWorkloadParameter {
   readonly supportedChoices?: readonly WorkloadJsonValue[];
   readonly validationRequirements?: string;
   readonly validation?: { readonly minimum?: number; readonly maximum?: number; readonly step?: number };
+  readonly nullable?: boolean;
   /**
    * TICKET_1370 R9: superseded the R4 `requiredGroup` either/or repair UI for
    * market scope. A domain choice with two input modes is modelled as one
@@ -157,10 +162,13 @@ export const resolvedWorkloadParameterSchema = z.object({
   control: z.enum(['select', 'multi-select', 'tags', 'date', 'datetime', 'number', 'text', 'readonly']),
   value: workloadJsonValueSchema,
   provenance: z.enum(['explicit', 'persisted', 'default', 'derived']),
-  defaultSource: z.string().optional(), editable: z.boolean(),
+  defaultSource: z.string().optional(),
+  defaultRole: z.literal('calculated-from-coverage').optional(),
+  editable: z.boolean(),
   impact: z.array(z.enum(['scope', 'cost', 'duration', 'safety', 'output'])),
   supportedChoices: z.array(workloadJsonValueSchema).optional(),
   validation: z.object({ minimum: z.number().optional(), maximum: z.number().optional(), step: z.number().optional() }).strict().optional(),
+  nullable: z.boolean().optional(),
   visibleWhen: z.object({ parameterId: z.string(), equals: z.array(workloadJsonValueSchema) }).strict().optional(),
   dateBounds: z.object({ minimumDate: z.string().optional(), maximumDate: z.string().optional() }).strict().optional(),
 }).strict();

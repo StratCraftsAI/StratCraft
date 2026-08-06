@@ -40,10 +40,12 @@ export interface WorkloadParameterDefinition {
   readonly impact: readonly WorkloadParameterImpact[];
   readonly defaultValue?: WorkloadJsonValue;
   readonly defaultSource?: string;
+  readonly defaultRole?: 'calculated-from-coverage';
   readonly supportedChoices?: readonly WorkloadJsonValue[];
   readonly validationRequirements?: string;
   readonly control?: WorkloadParameterControl;
   readonly validation?: { readonly minimum?: number; readonly maximum?: number; readonly step?: number };
+  readonly nullable?: boolean;
   /**
    * TICKET_1370 R9: renders this parameter only when the named controlling
    * parameter holds one of `equals`. This replaced the R4 `requiredGroup`
@@ -190,7 +192,9 @@ export function resolvePrelaunchReview(
         supportedChoices: definition.supportedChoices,
         validationRequirements: definition.validationRequirements,
         validation: definition.validation,
+        ...(definition.nullable === undefined ? {} : { nullable: definition.nullable }),
         visibleWhen: definition.visibleWhen,
+        dateBounds: definition.dateBounds,
       };
       // A hidden parameter is not part of this plan, so it is not a gap the
       // user can be asked to fill.
@@ -235,12 +239,17 @@ export function resolvePrelaunchReview(
       control: inferredControl,
       value: resolvedValue,
       provenance: selected[0],
-      defaultSource: selected[0] === 'default' ? definition.defaultSource : undefined,
+      defaultSource: selected[0] === 'default' || selected[0] === 'derived'
+        ? definition.defaultSource
+        : undefined,
+      defaultRole: selected[0] === 'derived' ? definition.defaultRole : undefined,
       editable: definition.editable,
       impact: definition.impact,
       supportedChoices: definition.supportedChoices,
       validation: definition.validation,
+      ...(definition.nullable === undefined ? {} : { nullable: definition.nullable }),
       visibleWhen: definition.visibleWhen,
+      dateBounds: definition.dateBounds,
     });
   }
   const values = Object.fromEntries(parameters.map(parameter => [parameter.id, parameter.value]));
@@ -328,8 +337,14 @@ export function confirmPrelaunchReview(
       review,
     );
   }
+  const expectedFingerprint = fingerprint(
+    specification,
+    review.derivedContextVersion,
+    review.parameters,
+  );
   if (
     confirmation.planFingerprint !== review.planFingerprint
+    || review.planFingerprint !== expectedFingerprint
     || confirmation.specificationVersion !== review.specificationVersion
     || review.specificationId !== specification.id
     || review.specificationVersion !== specification.version
@@ -403,6 +418,7 @@ export * from './date-window';
 export * from './coverage-window';
 export * from './factor-mining';
 export * from './data-download';
+export * from './validation';
 // TICKET_1370 R12/AC38+AC39: display formatting for reviewed values, shared so
 // both surfaces render one confirmed plan identically.
 export * from './presentation';

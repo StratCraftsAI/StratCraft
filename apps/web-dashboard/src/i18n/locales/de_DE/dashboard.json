@@ -191,11 +191,13 @@
     "vibingChat": {
       "llmError": "KI-Modell hat einen Fehler festgestellt. Bitte versuchen Sie es erneut.",
       "codeGenerationError": "Strategiecode konnte nicht generiert werden. Bitte versuchen Sie es erneut.",
+      "emptyResponse": "Das KI-Modell hat keinen Strategiecode zuruckgegeben. Es wurde nichts gespeichert oder kompiliert. Bitte starten Sie die Generierung erneut.",
       "timeout": "Zeitueberschreitung der Anfrage. Bitte versuchen Sie es erneut.",
       "networkError": "Netzwerkfehler aufgetreten. Bitte ueberpruefen Sie Ihre Verbindung.",
       "rateLimit": "Ratenlimit ueberschritten. Bitte warten Sie und versuchen Sie es erneut.",
       "invalidSession": "Ungueltige Sitzung. Bitte starten Sie eine neue Konversation.",
-      "authRequired": "Bitte melden Sie sich an, um fortzufahren."
+      "authRequired": "Bitte melden Sie sich an, um fortzufahren.",
+      "strategyAdmissionFailed": "Der generierte C++-Code hat die lokale Strategiepruefung nicht bestanden. Pruefen Sie die Validierungsregel und generieren Sie ihn erneut."
     }
   },
   "agentChat": {

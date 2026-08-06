@@ -194,11 +194,13 @@
     "vibingChat": {
       "llmError": "AI modeli bir hatayla karsilasti. Tekrar deneyin.",
       "codeGenerationError": "Strateji kodu olusturulamadi. Lutfen tekrar deneyin.",
+      "emptyResponse": "AI modeli strateji kodu dondurmedi. Hicbir sey kaydedilmedi veya derlenmedi. Lutfen yeniden olusturmayi deneyin.",
       "timeout": "Istek zamani asimi. Tekrar deneyin.",
       "networkError": "Ag hatasi olustu. Baglantinizi kontrol edin.",
       "rateLimit": "Istek limiti asildi. Lutfen bekleyin ve tekrar deneyin.",
       "invalidSession": "Gecersiz oturum. Lutfen yeni bir konusma baslatin.",
-      "authRequired": "Devam etmek icin lutfen giris yapin."
+      "authRequired": "Devam etmek icin lutfen giris yapin.",
+      "strategyAdmissionFailed": "Olusturulan C++, yerel strateji kabul denetimini gecemedi. Dogrulama kuralini inceleyip yeniden olusturun."
     }
   },
   "agentChat": {

@@ -1299,6 +1299,7 @@
     "GENERATION_TIMEOUT": "Strategy generation timed out. Please try again.",
     "RATE_LIMIT_EXCEEDED": "Rate limit exceeded. Please wait before trying again.",
     "CODE_GENERATION_ERROR": "Failed to generate strategy code. Please try again.",
+    "EMPTY_RESPONSE": "The AI model returned no strategy code. Nothing was saved or compiled. Please try generating again.",
     "RATE_LIMIT": "Rate limit exceeded. Please wait and try again.",
     "INVALID_SESSION": "Invalid session. Please start a new conversation.",
     "AUTH_REQUIRED": "Please log in to continue."

@@ -194,11 +194,13 @@
     "vibingChat": {
       "llmError": "Model' II obnaruzhila oshibku. Poprobuyteye snova.",
       "codeGenerationError": "Ne udalos' sgenerirovat' kod strategii. Poprobuyteye snova.",
+      "emptyResponse": "Model' II ne vernula kod strategii. Nichego ne bylo sokhraneno ili skompilirovano. Poprobuyte sgenerirovat' snova.",
       "timeout": "Vremya zaprosa isteklo. Poprobuyteye snova.",
       "networkError": "Proizoshla setevaya oshibka. Prover'te podklyucheniye.",
       "rateLimit": "Prevyshen limit zaprosov. Podozhdite i poprobuyteye snova.",
       "invalidSession": "Nedeystvitel'naya sessiya. Nachnite novyy razgovor.",
-      "authRequired": "Voyidite v sistemu dlya prodolzheniya."
+      "authRequired": "Voyidite v sistemu dlya prodolzheniya.",
+      "strategyAdmissionFailed": "Sgenerirovannyy C++ ne proshel lokalnuyu proverku dopuska strategii. Proverte pravilo validatsii i sozdayte kod zanovo."
     }
   },
   "agentChat": {

@@ -105,6 +105,10 @@ pandas-ta = "==0.4.71b0"
 histdata-supplementary = { git = "https://github.com/StratCraftsAI/histdata.git", rev = "86bd632b030c23cf3a0e8dbe4246f02f43bce067" }
 
 research-contracts = { path = "packages/research-contracts", editable = true }
+# TICKET_1382_3: the unified factor-mining production entry imports governance
+# from this repository package. Keep it in both locked projections instead of
+# relying on launcher-specific PYTHONPATH mutation.
+nona-algorithm = { path = "packages/nona-algorithm", editable = true }
 
 # TICKET_1355_1: GPQuant is an optional, repository-governed capability. Both
 # supported projections are solved into pixi.lock; runtime lifecycle operations
@@ -119,5 +123,5 @@ without-gpquant = []
 [tasks]
 # Research-import smoke: every manifest package must import together. This is
 # the AC5 validation gate once the env is materialised (`pixi run smoke`).
-smoke = "python -c \"import numpy, pandas, scipy, sklearn, pyarrow, duckdb, catboost, lightgbm, xgboost, torch, onnx, onnxruntime, optuna, gplearn, gpquant, pysr, pandas_ta, histdata_supplementary; print('research stack OK')\""
-smoke-without-gpquant = "python -c \"import importlib.util, numpy, pandas, scipy, sklearn, pyarrow, duckdb, catboost, lightgbm, xgboost, torch, onnx, onnxruntime, optuna, gplearn, pysr, pandas_ta, histdata_supplementary; assert importlib.util.find_spec('gpquant') is None; print('research stack without GPQuant OK')\""
+smoke = "python -c \"import numpy, pandas, scipy, sklearn, pyarrow, duckdb, catboost, lightgbm, xgboost, torch, onnx, onnxruntime, optuna, gplearn, gpquant, pysr, pandas_ta, histdata_supplementary, nona_algorithm, psutil; print('research stack OK')\""
+smoke-without-gpquant = "python -c \"import importlib.util, numpy, pandas, scipy, sklearn, pyarrow, duckdb, catboost, lightgbm, xgboost, torch, onnx, onnxruntime, optuna, gplearn, pysr, pandas_ta, histdata_supplementary, nona_algorithm, psutil; assert importlib.util.find_spec('gpquant') is None; print('research stack without GPQuant OK')\""

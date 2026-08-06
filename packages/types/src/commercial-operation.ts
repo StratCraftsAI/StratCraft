@@ -185,12 +185,14 @@ const commercialOperationFailureSchema = z.object({
     'COMMERCIAL_OPERATION_FAILED',
     'COMMERCIAL_OPERATION_CANCELLED',
     'COMMERCIAL_STORAGE_FAILED',
+    'WORKLOAD_ADMISSION_REFUSED',
   ]),
   message: z.string().min(1).max(2_048),
   remediation: z.string().min(1).max(2_048),
   retryable: z.boolean(),
   entitlementDecisionId: identifierSchema.nullable(),
   resourceDecisionId: identifierSchema.nullable(),
+  data: jsonObjectSchema.optional(),
 }).strict();
 
 export const commercialOperationResultSchema = z.discriminatedUnion('status', [

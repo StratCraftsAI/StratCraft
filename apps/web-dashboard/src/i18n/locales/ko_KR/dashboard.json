@@ -194,11 +194,13 @@
     "vibingChat": {
       "llmError": "AI 모델에서 오류가 발생했습니다. 다시 시도하세요.",
       "codeGenerationError": "전략 코드 생성에 실패했습니다. 다시 시도하세요.",
+      "emptyResponse": "AI 모델이 전략 코드를 반환하지 않았습니다. 저장되거나 컴파일된 내용이 없습니다. 다시 생성을 시도하세요.",
       "timeout": "요청 시간이 초과되었습니다. 다시 시도하세요.",
       "networkError": "네트워크 오류가 발생했습니다. 연결을 확인하세요.",
       "rateLimit": "요청 한도를 초과했습니다. 잠시 기다린 후 다시 시도하세요.",
       "invalidSession": "유효하지 않은 세션입니다. 새 대화를 시작하세요.",
-      "authRequired": "계속하려면 로그인하세요."
+      "authRequired": "계속하려면 로그인하세요.",
+      "strategyAdmissionFailed": "생성된 C++가 로컬 전략 승인 검사를 통과하지 못했습니다. 검증 규칙을 확인하고 다시 생성하세요."
     }
   },
   "agentChat": {

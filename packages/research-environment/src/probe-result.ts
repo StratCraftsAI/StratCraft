@@ -43,9 +43,18 @@ interface RawCapabilityResult {
   backend_ok?: boolean;
 }
 
+interface RawProductionEntryResult {
+  ok: boolean;
+  cause?: Exclude<ProbeCause, 'backend_init'>;
+  message?: string;
+  verification?: string;
+  stage: 'production_entry';
+}
+
 export interface ParsedProbeOutput {
   interpreter: string;
   pythonVersion: string;
+  productionEntry: RawProductionEntryResult;
   capabilities: Record<ResearchCapability, RawCapabilityResult>;
 }
 
@@ -125,6 +134,29 @@ export function parseProbeOutput(stdout: string): ParsedProbeOutput {
     );
   }
   const capabilityRecord = rawCapabilities as Record<string, unknown>;
+  const rawProductionEntry = record.productionEntry;
+  if (typeof rawProductionEntry !== 'object' || rawProductionEntry === null
+    || typeof (rawProductionEntry as { ok?: unknown }).ok !== 'boolean'
+    || (rawProductionEntry as { stage?: unknown }).stage !== 'production_entry') {
+    throw new ResearchEnvironmentProbeError(
+      RESEARCH_ENV_PROBE_ERROR_CODES.MALFORMED_PAYLOAD,
+      'The readiness verifier result payload carried no production-entry result.',
+    );
+  }
+  const productionEntryRecord = rawProductionEntry as Record<string, unknown>;
+  const productionEntry: RawProductionEntryResult = {
+    ok: productionEntryRecord.ok as boolean,
+    cause: productionEntryRecord.cause === 'import' || productionEntryRecord.cause === 'probe'
+      ? productionEntryRecord.cause
+      : undefined,
+    message: typeof productionEntryRecord.message === 'string'
+      ? productionEntryRecord.message
+      : undefined,
+    verification: typeof productionEntryRecord.verification === 'string'
+      ? productionEntryRecord.verification
+      : undefined,
+    stage: 'production_entry',
+  };
 
   // Every contract capability must be present. A capability the probe simply
   // omitted is treated as malformed output rather than as absent or ready:
@@ -160,6 +192,7 @@ export function parseProbeOutput(stdout: string): ParsedProbeOutput {
   return {
     interpreter: typeof record.interpreter === 'string' ? record.interpreter : '',
     pythonVersion: typeof record.pythonVersion === 'string' ? record.pythonVersion : '',
+    productionEntry,
     capabilities: capabilities as Record<ResearchCapability, RawCapabilityResult>,
   };
 }
@@ -210,10 +243,17 @@ export function projectProbeResults(input: {
   let failure: ResearchEnvironmentFailure | undefined;
 
   for (const capability of RESEARCH_CAPABILITIES) {
-    const raw = parsed.capabilities[capability];
+    const productionEntryFailure = capability === 'gpquant' && !parsed.productionEntry.ok;
+    const raw = productionEntryFailure
+      ? {
+          ok: false,
+          cause: parsed.productionEntry.cause ?? 'probe',
+          message: `Factor-mining production-entry ${parsed.productionEntry.stage} failed: ${parsed.productionEntry.message ?? 'no diagnostic was reported.'}`,
+        }
+      : parsed.capabilities[capability];
     const expected = expectedVersions[capability];
 
-    if (projection === 'without-gpquant' && capability === 'gpquant') {
+    if (projection === 'without-gpquant' && capability === 'gpquant' && !productionEntryFailure) {
       if (raw.ok) {
         const message = 'GPQuant imported in the without-gpquant projection; the locked removal postcondition failed.';
         capabilities[capability] = {

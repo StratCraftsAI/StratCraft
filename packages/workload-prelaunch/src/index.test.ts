@@ -8,7 +8,12 @@ import {
   resolvePrelaunchReview,
   WorkloadPrelaunchError,
 } from './index';
-import { editFactorMiningReview, resolveFactorMiningReview } from './factor-mining';
+import {
+  FACTOR_MINING_PARAMETER_SPECIFICATION,
+  editFactorMiningReview,
+  resolveCurrentFactorMiningReview,
+  resolveFactorMiningReview,
+} from './factor-mining';
 import { resolveMarketScope } from './market-scope';
 import { WorkloadDateWindowError, toExecutionWindow } from './date-window';
 import { WorkloadCoverageError, deriveCoverageWindow } from './coverage-window';
@@ -158,9 +163,10 @@ describe('GPQuant factor mining integration', () => {
       engine: 'pysr', marketScopeSource: 'preset', timeframes: ['5m'],
       startDate: '2025-02-01', endDate: '2025-01-01', concurrency: 7,
     }, context);
-    expect(review.validationErrors.map(error => error.code)).toEqual([
-      'MINING_ENGINE_NOT_GPQUANT', 'MINING_WINDOW_INVALID', 'MINING_CONCURRENCY_INVALID',
-    ]);
+    expect(review.validationErrors.map(error => error.code)).toEqual(expect.arrayContaining([
+      'PARAMETER_NUMBER_ABOVE_MAXIMUM', 'MINING_ENGINE_NOT_GPQUANT',
+      'MINING_WINDOW_INVALID', 'MINING_CONCURRENCY_INVALID',
+    ]));
   });
 });
 
@@ -172,6 +178,10 @@ describe('TICKET_1370 R9 market scope', () => {
   const context = {
     version: 'ctx:v1', concurrency: 6, blasThreads: 1,
     memoryBudgetMb: 43288, bindingConstraint: 'memory' as const,
+    coverage: {
+      startUtc: '2020-01-01T00:00:00Z', endUtcExclusive: '2025-01-02T00:00:00Z',
+      minimumDate: '2020-01-01', maximumDate: '2025-01-01', snapshotVersion: 'scope:snap:v1',
+    },
   };
   const complete = { timeframes: ['1h'], startDate: '2020-01-01', endDate: '2025-01-01' } as const;
 
@@ -262,6 +272,37 @@ describe('TICKET_1370 R10 date window', () => {
     });
   });
 
+  it.each([
+    ['below the lower bound', '2020-12-31', '2024-01-01'],
+    ['above the upper bound', '2021-01-01', '2024-01-02'],
+  ])('rejects a selected date %s with MINING_WINDOW_INVALID', (_label, startDate, endDate) => {
+    const coverage = deriveCoverageWindow([
+      { symbol: 'EURUSD', timeframe: '1h', firstTimestampMs: Date.UTC(2021, 0, 1), lastTimestampMs: Date.UTC(2024, 0, 1) },
+    ], 'snap:bounds');
+    const review = resolveFactorMiningReview({
+      engine: 'gpquant', marketScopeSource: 'custom', symbols: ['EURUSD'], timeframes: ['1h'],
+      startDate, endDate,
+    }, { ...context, coverage });
+
+    expect(review.validationErrors).toContainEqual(expect.objectContaining({
+      code: 'MINING_WINDOW_INVALID',
+      parameterIds: ['startDate', 'endDate'],
+      message: expect.stringContaining('authoritative physical coverage'),
+    }));
+  });
+
+  it('accepts the exact inclusive physical coverage boundaries', () => {
+    const coverage = deriveCoverageWindow([
+      { symbol: 'EURUSD', timeframe: '1h', firstTimestampMs: Date.UTC(2021, 0, 1), lastTimestampMs: Date.UTC(2024, 0, 1) },
+    ], 'snap:inclusive');
+    const review = resolveFactorMiningReview({
+      engine: 'gpquant', marketScopeSource: 'custom', symbols: ['EURUSD'], timeframes: ['1h'],
+      startDate: coverage.minimumDate, endDate: coverage.maximumDate,
+    }, { ...context, coverage });
+
+    expect(review.validationErrors.map(error => error.code)).not.toContain('MINING_WINDOW_INVALID');
+  });
+
   it('handles month, year, and leap-day boundaries', () => {
     expect(toExecutionWindow('2024-02-29', '2024-02-29').endUtcExclusive).toBe('2024-03-01T00:00:00Z');
     expect(toExecutionWindow('2024-12-31', '2024-12-31').endUtcExclusive).toBe('2025-01-01T00:00:00Z');
@@ -315,6 +356,70 @@ describe('TICKET_1370 R10 date window', () => {
     expect(start?.dateBounds).toEqual({ minimumDate: '2021-01-01', maximumDate: '2024-01-01' });
     // AC27: the coverage snapshot participates in the fingerprint.
     expect(review.derivedContextVersion).toContain('snap:v1');
+  });
+
+  it('re-resolves a confirmed plan against the same complete coverage context', () => {
+    const coverage = deriveCoverageWindow([
+      { symbol: 'EURUSD', timeframe: '1h', firstTimestampMs: Date.UTC(2021, 0, 1), lastTimestampMs: Date.UTC(2024, 0, 1) },
+    ], 'snap:v1');
+    const currentContext = { ...context, coverage };
+    const review = resolveFactorMiningReview({
+      engine: 'gpquant', marketScopeSource: 'custom', symbols: ['EURUSD'], timeframes: ['1h'],
+    }, currentContext);
+    const confirmed = confirmPrelaunchReview(
+      FACTOR_MINING_PARAMETER_SPECIFICATION,
+      review,
+      {
+        planFingerprint: review.planFingerprint,
+        specificationVersion: review.specificationVersion,
+        confirmedAtUtc: '2026-08-06T00:00:00Z',
+      },
+    );
+
+    const currentReview = resolveCurrentFactorMiningReview(confirmed, currentContext);
+
+    expect(currentReview.planFingerprint).toBe(confirmed.planFingerprint);
+    expect(currentReview.derivedContextVersion).toBe(confirmed.derivedContextVersion);
+    expect(() => assertCurrentConfirmedPlan(
+      FACTOR_MINING_PARAMETER_SPECIFICATION, confirmed, currentReview,
+    )).not.toThrow();
+  });
+
+  it('reacquires derived coverage while retaining persisted parameter provenance', () => {
+    const firstCoverage = deriveCoverageWindow([
+      { symbol: 'EURUSD', timeframe: '1h', firstTimestampMs: Date.UTC(2021, 0, 1), lastTimestampMs: Date.UTC(2024, 0, 1) },
+    ], 'snap:v1');
+    const review = resolveFactorMiningReview({
+      engine: 'gpquant', marketScopeSource: 'custom', symbols: ['EURUSD'], timeframes: ['1h'],
+    }, { ...context, coverage: firstCoverage });
+    const confirmed = confirmPrelaunchReview(
+      FACTOR_MINING_PARAMETER_SPECIFICATION,
+      review,
+      {
+        planFingerprint: review.planFingerprint,
+        specificationVersion: review.specificationVersion,
+        confirmedAtUtc: '2026-08-06T00:00:00Z',
+      },
+    );
+    const serializedWithPersistedEngine = {
+      ...confirmed,
+      parameters: confirmed.parameters.map(parameter => parameter.id === 'engine'
+        ? { ...parameter, provenance: 'persisted' as const }
+        : parameter),
+    };
+    const changedCoverage = { ...firstCoverage, snapshotVersion: 'snap:v2' };
+
+    const freshReview = resolveCurrentFactorMiningReview(
+      serializedWithPersistedEngine,
+      { ...context, coverage: changedCoverage },
+    );
+
+    expect(freshReview.parameters.find(parameter => parameter.id === 'engine'))
+      .toMatchObject({ value: 'gpquant', provenance: 'persisted' });
+    expect(freshReview.parameters.find(parameter => parameter.id === 'startDate'))
+      .toMatchObject({ provenance: 'derived' });
+    expect(freshReview.derivedContextVersion).toContain('snap:v2');
+    expect(freshReview.planFingerprint).not.toBe(confirmed.planFingerprint);
   });
 
   it('surfaces a coverage failure as an actionable error with the window unresolved', () => {

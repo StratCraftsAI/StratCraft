@@ -40,6 +40,11 @@ describe('getIntlLocale', () => {
     expect(getIntlLocale()).toBe('ja-JP');
   });
 
+  it('canonicalizes a regional locale not listed in the translation catalog', () => {
+    setLanguage('en_GB');
+    expect(getIntlLocale()).toBe('en-GB');
+  });
+
   it('falls back to en-US for unmapped locale', () => {
     setLanguage('unknown');
     expect(getIntlLocale()).toBe('en-US');
@@ -86,6 +91,14 @@ describe('formatDate', () => {
   it('formats string input', () => {
     const result = formatDate('2024-06-01');
     expect(result).toMatch(/06.*01.*2024/);
+  });
+
+  it('keeps a canonical calendar date stable in an extreme host timezone', () => {
+    const originalTimezone = process.env.TZ;
+    process.env.TZ = 'Etc/GMT+12';
+    setLanguage('en_GB');
+    expect(formatDate('2026-06-26')).toBe('26/06/2026');
+    process.env.TZ = originalTimezone;
   });
 
   it('formats number (timestamp ms) input', () => {
