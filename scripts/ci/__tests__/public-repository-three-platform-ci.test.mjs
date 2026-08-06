@@ -86,14 +86,59 @@ test('rejects matrix execution drift and cancellation masking', () => {
   assert.match(result, /fail-fast disabled/);
 });
 
+test('rejects setup-node package-manager cache bootstrap regressions', () => {
+  const implicitRepositoryCache = workflow.replace('          package-manager-cache: false\n', '');
+  assert.match(errors(implicitRepositoryCache), /repository contract must disable/);
+
+  const pnpmStep = [
+    '      - uses: pnpm/action-setup@v6',
+    '        with:',
+    '          version: 9.0.0',
+  ].join('\n');
+  const nodeStep = [
+    '      - uses: actions/setup-node@v5',
+    '        with:',
+    '          node-version-file: .nvmrc',
+    '          cache: pnpm',
+  ].join('\n');
+  const wrongOrder = workflow.replace(`${pnpmStep}\n\n${nodeStep}`, `${nodeStep}\n\n${pnpmStep}`);
+  assert.match(errors(wrongOrder), /install pnpm before setup-node/);
+
+  const pythonStep = '      - uses: actions/setup-python@v6';
+  const missingExplicitCache = workflow.replace(
+    `${nodeStep}\n\n${pythonStep}`,
+    `${nodeStep.replace('\n          cache: pnpm', '')}\n\n${pythonStep}`,
+  );
+  assert.match(errors(missingExplicitCache), /install pnpm before setup-node/);
+});
+
+test('rejects diagnostic evidence initialized after package-manager setup', () => {
+  const evidenceStep = [
+    '      - name: Initialize public native diagnostic evidence',
+    '        run: |',
+    '          mkdir -p artifacts/evidence',
+    '          {',
+    '            echo "source-revision=$GITHUB_SHA"',
+    '            echo "platform=${{ matrix.platform }}"',
+    '            echo "runner.os=${{ runner.os }}"',
+    '            echo "runner.arch=${{ runner.arch }}"',
+    '            echo "vcpkg.triplet=${{ matrix.triplet }}"',
+    '          } > artifacts/evidence/ci-context.txt',
+  ].join('\n');
+  const candidate = workflow
+    .replace(`${evidenceStep}\n\n`, '')
+    .replace('      - uses: actions/setup-python@v6', `${evidenceStep}\n\n      - uses: actions/setup-python@v6`);
+  assert.match(errors(candidate), /initialize diagnostic evidence before package-manager setup/);
+});
+
 test('rejects checkout overrides and recipes outside start.sh', () => {
   const candidate = workflow
-    .replace('      - uses: actions/checkout@v5\n\n      - uses: actions/setup-node@v5', [
+    .replace('      - uses: actions/checkout@v5\n\n      - name: Initialize public native diagnostic evidence', [
       '      - uses: actions/checkout@v5',
       '        with:',
       '          repository: ${{ github.repository }}',
       '',
-      '      - uses: actions/setup-node@v5',
+      '      - name: Initialize public native diagnostic evidence',
     ].join('\n'))
     .replace('bash ./start.sh build 2>&1', 'cmake --build packages/executor/build 2>&1')
     .replace('bash ./start.sh verify-ci 2>&1', 'pnpm test 2>&1');

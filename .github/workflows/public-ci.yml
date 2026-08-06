@@ -26,6 +26,7 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version-file: .nvmrc
+          package-manager-cache: false
       - run: node scripts/ci/public-repository-gates.mjs
       - run: node scripts/ci/public-repository-three-platform-ci.mjs
       - run: >
@@ -85,13 +86,25 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v5
-        with:
-          node-version-file: .nvmrc
+      - name: Initialize public native diagnostic evidence
+        run: |
+          mkdir -p artifacts/evidence
+          {
+            echo "source-revision=$GITHUB_SHA"
+            echo "platform=${{ matrix.platform }}"
+            echo "runner.os=${{ runner.os }}"
+            echo "runner.arch=${{ runner.arch }}"
+            echo "vcpkg.triplet=${{ matrix.triplet }}"
+          } > artifacts/evidence/ci-context.txt
 
       - uses: pnpm/action-setup@v6
         with:
           version: 9.0.0
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
 
       - uses: actions/setup-python@v6
         with:
@@ -151,7 +164,6 @@ jobs:
 
       - name: Record native toolchain and public revision
         run: |
-          mkdir -p artifacts/evidence
           {
             echo "source-revision=$GITHUB_SHA"
             echo "platform=${{ matrix.platform }}"

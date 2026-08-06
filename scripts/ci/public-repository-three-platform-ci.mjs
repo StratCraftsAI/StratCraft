@@ -17,6 +17,7 @@ function jobBody(workflow, jobName, nextJobName) {
 
 export function validatePublicRepositoryThreePlatformCi(workflow, platforms) {
   const errors = [];
+  const repositoryContract = jobBody(workflow, 'repository-contract', 'secrets');
   const nativeBuild = jobBody(workflow, 'native-build', 'public-ci-result');
   const aggregate = jobBody(workflow, 'public-ci-result');
 
@@ -32,6 +33,9 @@ export function validatePublicRepositoryThreePlatformCi(workflow, platforms) {
   if (!/native-matrix:[\s\S]*native-platform-matrix\.mjs[\s\S]*GITHUB_OUTPUT/.test(workflow)) {
     errors.push('public CI must load the authoritative native platform matrix');
   }
+  if (!/uses: actions\/setup-node@v\d+[\s\S]*?package-manager-cache: false/.test(repositoryContract)) {
+    errors.push('repository contract must disable setup-node package-manager caching');
+  }
   if (!/needs: native-matrix/.test(nativeBuild)
       || !/matrix: \$\{\{ fromJSON\(needs\.native-matrix\.outputs\.matrix\) \}\}/.test(nativeBuild)) {
     errors.push('native build must expand the authoritative matrix output');
@@ -41,6 +45,17 @@ export function validatePublicRepositoryThreePlatformCi(workflow, platforms) {
   }
   if (!/strategy:\s*\n\s*fail-fast: false/.test(nativeBuild)) {
     errors.push('native build matrix must keep fail-fast disabled');
+  }
+  const pnpmSetup = nativeBuild.indexOf('uses: pnpm/action-setup@');
+  const nodeSetup = nativeBuild.indexOf('uses: actions/setup-node@');
+  if (pnpmSetup < 0 || nodeSetup < 0 || pnpmSetup > nodeSetup
+      || !/uses: actions\/setup-node@v\d+[\s\S]*?cache: pnpm/.test(nativeBuild)) {
+    errors.push('native build must install pnpm before setup-node enables the pnpm cache');
+  }
+  const evidenceSetup = nativeBuild.indexOf('name: Initialize public native diagnostic evidence');
+  if (evidenceSetup < 0 || evidenceSetup > pnpmSetup
+      || !/artifacts\/evidence\/ci-context\.txt/.test(nativeBuild)) {
+    errors.push('native build must initialize diagnostic evidence before package-manager setup');
   }
   if (!/uses: actions\/checkout@v\d+/.test(nativeBuild)
       || /^\s+(?:repository|ref|token):/m.test(nativeBuild)) {
