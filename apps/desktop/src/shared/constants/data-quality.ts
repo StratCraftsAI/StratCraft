@@ -176,15 +176,17 @@ export type DataQualityRule = (typeof DQ_RULES)[number];
 export const DQ_EVENT_DETAIL_CAP = 5000;
 
 /**
- * DDL for the quarantine/audit ledger. Single source shared by migration
- * v112 and the headless F1/F4 tooling (which must be able to record audit
- * events before the app has run the migration) -- TICKET_854.
+ * DDL for the quarantine/audit ledger (`DATA_QUALITY_EVENT_TABLE_DDL`) is owned
+ * by @StratCraft/db-migrations, alongside the v112 migration body that emits it
+ * (TICKET_1289_1 F1). Import it directly from that package.
  *
- * TICKET_1289_1 F1: the string now lives in @StratCraft/db-migrations (the v112
- * migration body moved there, and the standalone MCP -- a separate package --
- * needs it too). Re-exported here so every app-side importer keeps its path.
+ * It is deliberately NOT re-exported from here. `shared/` is compiled by plugin
+ * renderers via the `@shared/*` alias, and those plugins do not (and must not)
+ * depend on a Node/SQLite package. The re-export made every plugin typecheck
+ * require `packages/db-migrations/dist` to exist without any plugin declaring
+ * the dependency, so turbo was free to schedule the plugin build first and the
+ * typecheck failed with TS2307 on a clean checkout.
  */
-export { DATA_QUALITY_EVENT_TABLE_DDL } from '@StratCraft/db-migrations';
 
 // ---------------------------------------------------------------------------
 // Provider -> asset class resolution

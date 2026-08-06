@@ -25,7 +25,7 @@ import {
 } from '@StratCraft/chat-markdown';
 import { cn } from '../../lib/utils';
 import { COPY_FEEDBACK_DURATION_MS } from '@shared/constants/timing';
-import { SYNTAX_COLORS } from '@shared/constants/colors';
+import { SYNTAX_COLORS } from '@StratCraft/chat-markdown';
 import type { OpensourceAlgorithm } from '@StratCraft/ai-studio-operations/vibing-chat-protocol';
 import { AlgorithmCard, placeAlgorithmCards } from './AlgorithmCardList';
 
