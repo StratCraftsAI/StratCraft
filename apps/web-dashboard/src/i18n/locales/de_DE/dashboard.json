@@ -82,6 +82,7 @@
   "chat": {
     "errorPrefix": "Fehler: {{message}}",
     "calledTool": "**{{toolName}}** aufgerufen:",
+    "factorMiningLaunchRefused": "Factor-Mining konnte nicht gestartet werden: {{reason}}",
     "navigationNotImplemented": "Navigation: {{page}} (noch nicht implementiert)",
     "unexpectedFormat": "Unerwartetes Antwortformat empfangen.",
     "mcpNotConnected": "**MCP-Server nicht verbunden.** Starten Sie den MCP-Server auf Port {{port}}, um den vollen Funktionsumfang zu aktivieren.\n\nAusfuehren: `node dist/mcp-server.js --http` in `apps/desktop/src/mcp/standalone/`",
@@ -186,9 +187,32 @@
     "protocolGapTimeout": "The agent event sequence timed out.",
     "refreshGuide": "Refresh Guide and resubmit.",
     "confirmExpired": "The permission request expired before it could be submitted.",
-    "waitForReconciliation": "Wait for authority reconciliation."
+    "waitForReconciliation": "Wait for authority reconciliation.",
+    "vibingChat": {
+      "llmError": "KI-Modell hat einen Fehler festgestellt. Bitte versuchen Sie es erneut.",
+      "codeGenerationError": "Strategiecode konnte nicht generiert werden. Bitte versuchen Sie es erneut.",
+      "timeout": "Zeitueberschreitung der Anfrage. Bitte versuchen Sie es erneut.",
+      "networkError": "Netzwerkfehler aufgetreten. Bitte ueberpruefen Sie Ihre Verbindung.",
+      "rateLimit": "Ratenlimit ueberschritten. Bitte warten Sie und versuchen Sie es erneut.",
+      "invalidSession": "Ungueltige Sitzung. Bitte starten Sie eine neue Konversation.",
+      "authRequired": "Bitte melden Sie sich an, um fortzufahren."
+    }
   },
   "agentChat": {
+    "aiStudioAction": {
+      "eyebrow": "AI Studio",
+      "titleGenerate": "Strategie generieren",
+      "titleSave": "Strategie speichern",
+      "review": "Pruefen Sie die vorgeschlagenen Aenderungen vor dem Senden.",
+      "dispatched": "Aktion gesendet.",
+      "strategyRules": "Strategieregeln",
+      "entryConditions": "Einstiegsbedingungen",
+      "exitConditions": "Ausstiegsbedingungen",
+      "indicators": "Indikatoren",
+      "noRules": "Keine Regeln definiert.",
+      "generate": "Generieren",
+      "save": "Speichern"
+    },
     "permissionRisk": "Risk",
     "permissionWorkspace": "Workspace",
     "permissionCapability": "Capability",

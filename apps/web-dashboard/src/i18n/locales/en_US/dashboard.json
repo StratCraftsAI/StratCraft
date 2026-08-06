@@ -89,6 +89,7 @@
   "chat": {
     "errorPrefix": "Error: {{message}}",
     "calledTool": "Called **{{toolName}}**:",
+    "factorMiningLaunchRefused": "Could not start factor mining: {{reason}}",
     "navigatedTo": "Opened {{page}}.",
     "navigationNotImplemented": "Navigation: {{page}} (not yet implemented)",
     "unexpectedFormat": "Received unexpected response format.",
@@ -879,9 +880,32 @@
     "protocolGapTimeout": "The agent event sequence timed out.",
     "refreshGuide": "Refresh Guide and resubmit.",
     "confirmExpired": "The permission request expired before it could be submitted.",
-    "waitForReconciliation": "Wait for authority reconciliation."
+    "waitForReconciliation": "Wait for authority reconciliation.",
+    "vibingChat": {
+      "llmError": "AI model encountered an error. Please try again.",
+      "codeGenerationError": "Failed to generate strategy code. Please try again.",
+      "timeout": "Request timed out. Please try again.",
+      "networkError": "Network error occurred. Please check your connection.",
+      "rateLimit": "Rate limit exceeded. Please wait and try again.",
+      "invalidSession": "Invalid session. Please start a new conversation.",
+      "authRequired": "Please log in to continue."
+    }
   },
   "agentChat": {
+    "aiStudioAction": {
+      "eyebrow": "AI Studio",
+      "titleGenerate": "Generate strategy",
+      "titleSave": "Save strategy",
+      "review": "Review the proposed changes before dispatching.",
+      "dispatched": "Action dispatched.",
+      "strategyRules": "Strategy rules",
+      "entryConditions": "Entry conditions",
+      "exitConditions": "Exit conditions",
+      "indicators": "Indicators",
+      "noRules": "No rules defined.",
+      "generate": "Generate",
+      "save": "Save"
+    },
     "permissionRisk": "Risk",
     "permissionWorkspace": "Workspace",
     "permissionCapability": "Capability",
@@ -937,20 +961,6 @@
       "cancel": "Cancel",
       "executing": "Configuration approved — generating the strategy.",
       "cancelled": "Generation cancelled."
-    },
-    "aiStudioAction": {
-      "eyebrow": "AI Studio",
-      "titleGenerate": "Strategy Ready",
-      "titleSave": "Code Generated",
-      "review": "Review before proceeding",
-      "strategyRules": "Strategy Rules",
-      "entryConditions": "Entry Conditions",
-      "exitConditions": "Exit Conditions",
-      "indicators": "Indicators",
-      "generate": "Generate C++ Code",
-      "save": "Save Strategy",
-      "dispatched": "Action dispatched — processing.",
-      "noRules": "No strategy rules extracted yet."
     }
   },
   "agentGovernance": {

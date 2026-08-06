@@ -57,17 +57,42 @@ export function isKnownVibingChatErrorCode(code: string | undefined): boolean {
 export const VIBING_CHAT_PRESENTATION_PREFIX = 'agentOutcome.vibingChat.';
 
 /**
+ * Backend code -> i18n key segment.
+ *
+ * The segment is camelCase for two reasons, both load-bearing:
+ *
+ * 1. The projector's `MESSAGE_KEY_PATTERN`
+ *    (`/^agentOutcome\.[A-Za-z][A-Za-z0-9.]{0,127}$/`) admits no underscore,
+ *    so `agentOutcome.vibingChat.AUTH_REQUIRED` would be REJECTED by
+ *    `producerPresentation()` and silently degrade to the generic
+ *    `agentOutcome.toolFailed` -- reintroducing the very bug this ticket
+ *    fixes, for six of the seven codes.
+ * 2. It matches the existing key convention in `dashboard.json`
+ *    (`toolFailed`, `reviewDiagnostics`, ...).
+ */
+const VIBING_CHAT_PRESENTATION_SEGMENTS: Readonly<Record<string, string>> = {
+  LLM_ERROR: 'llmError',
+  CODE_GENERATION_ERROR: 'codeGenerationError',
+  TIMEOUT: 'timeout',
+  NETWORK_ERROR: 'networkError',
+  RATE_LIMIT: 'rateLimit',
+  INVALID_SESSION: 'invalidSession',
+  AUTH_REQUIRED: 'authRequired',
+};
+
+/**
  * Map a backend code to the MCP surface's presentation key, or undefined when
  * the code is not in the shared whitelist.
  *
- * The resulting key matches the projector's `MESSAGE_KEY_PATTERN`
- * (`/^agentOutcome\.[A-Za-z][A-Za-z0-9.]{0,127}$/`), so it survives the
- * browser-safety boundary intact and is rendered by the dashboard via `t()`.
+ * The resulting key matches the projector's `MESSAGE_KEY_PATTERN`, so it
+ * survives the browser-safety boundary intact and is rendered by the dashboard
+ * via `t()`. An unknown code yields undefined, so the caller emits no
+ * presentation and the projector applies its generic fallback.
  */
 export function vibingChatPresentationKey(code: string | undefined): string | undefined {
-  return isKnownVibingChatErrorCode(code)
-    ? `${VIBING_CHAT_PRESENTATION_PREFIX}${code}`
-    : undefined;
+  if (!isKnownVibingChatErrorCode(code)) return undefined;
+  const segment = VIBING_CHAT_PRESENTATION_SEGMENTS[code!];
+  return segment ? `${VIBING_CHAT_PRESENTATION_PREFIX}${segment}` : undefined;
 }
 
 // =============================================================================

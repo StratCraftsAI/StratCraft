@@ -85,6 +85,7 @@
   "chat": {
     "errorPrefix": "Hata: {{message}}",
     "calledTool": "**{{toolName}}** cagirildi:",
+    "factorMiningLaunchRefused": "Faktor madenciligi baslatilamadi: {{reason}}",
     "navigationNotImplemented": "Gezinme: {{page}} (henuz uygulanmadi)",
     "unexpectedFormat": "Beklenmeyen yanit bicimi alindi.",
     "mcpNotConnected": "**MCP sunucusu bagli degil.** Tam islevsellik icin MCP sunucusunu {{port}} portunda baslatin.\n\nCalistirin: `apps/desktop/src/mcp/standalone/` icinde `node dist/mcp-server.js --http`",
@@ -189,9 +190,32 @@
     "protocolGapTimeout": "The agent event sequence timed out.",
     "refreshGuide": "Refresh Guide and resubmit.",
     "confirmExpired": "The permission request expired before it could be submitted.",
-    "waitForReconciliation": "Wait for authority reconciliation."
+    "waitForReconciliation": "Wait for authority reconciliation.",
+    "vibingChat": {
+      "llmError": "AI modeli bir hatayla karsilasti. Tekrar deneyin.",
+      "codeGenerationError": "Strateji kodu olusturulamadi. Lutfen tekrar deneyin.",
+      "timeout": "Istek zamani asimi. Tekrar deneyin.",
+      "networkError": "Ag hatasi olustu. Baglantinizi kontrol edin.",
+      "rateLimit": "Istek limiti asildi. Lutfen bekleyin ve tekrar deneyin.",
+      "invalidSession": "Gecersiz oturum. Lutfen yeni bir konusma baslatin.",
+      "authRequired": "Devam etmek icin lutfen giris yapin."
+    }
   },
   "agentChat": {
+    "aiStudioAction": {
+      "eyebrow": "AI Studio",
+      "titleGenerate": "Strateji olustur",
+      "titleSave": "Stratejiyi kaydet",
+      "review": "Gondermeden once onerilen degisiklikleri inceleyin.",
+      "dispatched": "Islem gonderildi.",
+      "strategyRules": "Strateji kurallari",
+      "entryConditions": "Giris kosullari",
+      "exitConditions": "Cikis kosullari",
+      "indicators": "Gostergeler",
+      "noRules": "Tanimli kural yok.",
+      "generate": "Olustur",
+      "save": "Kaydet"
+    },
     "permissionRisk": "Risk",
     "permissionWorkspace": "Workspace",
     "permissionCapability": "Capability",

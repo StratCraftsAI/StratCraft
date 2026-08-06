@@ -82,6 +82,7 @@
   "chat": {
     "errorPrefix": "错误: {{message}}",
     "calledTool": "已调用 **{{toolName}}**:",
+    "factorMiningLaunchRefused": "无法启动因子挖掘: {{reason}}",
     "navigatedTo": "已打开 {{page}}。",
     "navigationNotImplemented": "导航: {{page}} (尚未实现)",
     "unexpectedFormat": "收到意外的响应格式。",
@@ -772,9 +773,32 @@
     "protocolGapTimeout": "The agent event sequence timed out.",
     "refreshGuide": "Refresh Guide and resubmit.",
     "confirmExpired": "The permission request expired before it could be submitted.",
-    "waitForReconciliation": "Wait for authority reconciliation."
+    "waitForReconciliation": "Wait for authority reconciliation.",
+    "vibingChat": {
+      "llmError": "AI模型遇到错误。请重试。",
+      "codeGenerationError": "策略代码生成失败。请重试。",
+      "timeout": "请求超时。请重试。",
+      "networkError": "发生网络错误。请检查您的连接。",
+      "rateLimit": "超出速率限制。请稍候再试。",
+      "invalidSession": "无效会话。请开始新对话。",
+      "authRequired": "请登录以继续。"
+    }
   },
   "agentChat": {
+    "aiStudioAction": {
+      "eyebrow": "AI 工作室",
+      "titleGenerate": "生成策略",
+      "titleSave": "保存策略",
+      "review": "请在派发前检查建议的更改。",
+      "dispatched": "操作已派发。",
+      "strategyRules": "策略规则",
+      "entryConditions": "入场条件",
+      "exitConditions": "出场条件",
+      "indicators": "指标",
+      "noRules": "未定义规则。",
+      "generate": "生成",
+      "save": "保存"
+    },
     "permissionRisk": "Risk",
     "permissionWorkspace": "Workspace",
     "permissionCapability": "Capability",

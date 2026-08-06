@@ -85,6 +85,7 @@
   "chat": {
     "errorPrefix": "오류: {{message}}",
     "calledTool": "**{{toolName}}** 호출됨:",
+    "factorMiningLaunchRefused": "팩터 마이닝을 시작할 수 없습니다: {{reason}}",
     "navigationNotImplemented": "내비게이션: {{page}} (아직 구현되지 않음)",
     "unexpectedFormat": "예상치 못한 응답 형식을 수신했습니다.",
     "mcpNotConnected": "**MCP 서버에 연결되지 않았습니다.** 포트 {{port}}에서 MCP 서버를 시작하여 전체 기능을 활성화하세요.\n\n실행: `apps/desktop/src/mcp/standalone/`에서 `node dist/mcp-server.js --http`",
@@ -189,9 +190,32 @@
     "protocolGapTimeout": "The agent event sequence timed out.",
     "refreshGuide": "Refresh Guide and resubmit.",
     "confirmExpired": "The permission request expired before it could be submitted.",
-    "waitForReconciliation": "Wait for authority reconciliation."
+    "waitForReconciliation": "Wait for authority reconciliation.",
+    "vibingChat": {
+      "llmError": "AI 모델에서 오류가 발생했습니다. 다시 시도하세요.",
+      "codeGenerationError": "전략 코드 생성에 실패했습니다. 다시 시도하세요.",
+      "timeout": "요청 시간이 초과되었습니다. 다시 시도하세요.",
+      "networkError": "네트워크 오류가 발생했습니다. 연결을 확인하세요.",
+      "rateLimit": "요청 한도를 초과했습니다. 잠시 기다린 후 다시 시도하세요.",
+      "invalidSession": "유효하지 않은 세션입니다. 새 대화를 시작하세요.",
+      "authRequired": "계속하려면 로그인하세요."
+    }
   },
   "agentChat": {
+    "aiStudioAction": {
+      "eyebrow": "AI 스튜디오",
+      "titleGenerate": "전략 생성",
+      "titleSave": "전략 저장",
+      "review": "전송하기 전에 제안된 변경 사항을 검토하세요.",
+      "dispatched": "작업이 전송되었습니다.",
+      "strategyRules": "전략 규칙",
+      "entryConditions": "진입 조건",
+      "exitConditions": "청산 조건",
+      "indicators": "지표",
+      "noRules": "정의된 규칙이 없습니다.",
+      "generate": "생성",
+      "save": "저장"
+    },
     "permissionRisk": "Risk",
     "permissionWorkspace": "Workspace",
     "permissionCapability": "Capability",

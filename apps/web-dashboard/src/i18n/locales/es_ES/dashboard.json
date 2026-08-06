@@ -85,6 +85,7 @@
   "chat": {
     "errorPrefix": "Error: {{message}}",
     "calledTool": "Se llamo a **{{toolName}}**:",
+    "factorMiningLaunchRefused": "No se pudo iniciar la mineria de factores: {{reason}}",
     "navigationNotImplemented": "Navegacion: {{page}} (aun no implementado)",
     "unexpectedFormat": "Se recibio un formato de respuesta inesperado.",
     "mcpNotConnected": "**Servidor MCP no conectado.** Inicie el servidor MCP en el puerto {{port}} para habilitar la funcionalidad completa.\n\nEjecutar: `node dist/mcp-server.js --http` en `apps/desktop/src/mcp/standalone/`",
@@ -189,9 +190,32 @@
     "protocolGapTimeout": "The agent event sequence timed out.",
     "refreshGuide": "Refresh Guide and resubmit.",
     "confirmExpired": "The permission request expired before it could be submitted.",
-    "waitForReconciliation": "Wait for authority reconciliation."
+    "waitForReconciliation": "Wait for authority reconciliation.",
+    "vibingChat": {
+      "llmError": "El modelo de IA encontro un error. Intentelo de nuevo.",
+      "codeGenerationError": "Error al generar el codigo de estrategia. Intentelo de nuevo.",
+      "timeout": "La solicitud ha expirado. Intentelo de nuevo.",
+      "networkError": "Error de red. Verifique su conexion.",
+      "rateLimit": "Limite de tasa excedido. Espere e intentelo de nuevo.",
+      "invalidSession": "Sesion no valida. Inicie una nueva conversacion.",
+      "authRequired": "Inicie sesion para continuar."
+    }
   },
   "agentChat": {
+    "aiStudioAction": {
+      "eyebrow": "AI Studio",
+      "titleGenerate": "Generar estrategia",
+      "titleSave": "Guardar estrategia",
+      "review": "Revise los cambios propuestos antes de enviarlos.",
+      "dispatched": "Accion enviada.",
+      "strategyRules": "Reglas de estrategia",
+      "entryConditions": "Condiciones de entrada",
+      "exitConditions": "Condiciones de salida",
+      "indicators": "Indicadores",
+      "noRules": "No hay reglas definidas.",
+      "generate": "Generar",
+      "save": "Guardar"
+    },
     "permissionRisk": "Risk",
     "permissionWorkspace": "Workspace",
     "permissionCapability": "Capability",

@@ -85,6 +85,7 @@
   "chat": {
     "errorPrefix": "Ошибка: {{message}}",
     "calledTool": "Вызван **{{toolName}}**:",
+    "factorMiningLaunchRefused": "Не удалось запустить факторный майнинг: {{reason}}",
     "navigationNotImplemented": "Навигация: {{page}} (ещё не реализовано)",
     "unexpectedFormat": "Получен неожиданный формат ответа.",
     "mcpNotConnected": "**MCP сервер не подключён.** Запустите MCP сервер на порту {{port}} для активации полной функциональности.\n\nВыполнить: `node dist/mcp-server.js --http` в `apps/desktop/src/mcp/standalone/`",
@@ -189,9 +190,32 @@
     "protocolGapTimeout": "The agent event sequence timed out.",
     "refreshGuide": "Refresh Guide and resubmit.",
     "confirmExpired": "The permission request expired before it could be submitted.",
-    "waitForReconciliation": "Wait for authority reconciliation."
+    "waitForReconciliation": "Wait for authority reconciliation.",
+    "vibingChat": {
+      "llmError": "Model' II obnaruzhila oshibku. Poprobuyteye snova.",
+      "codeGenerationError": "Ne udalos' sgenerirovat' kod strategii. Poprobuyteye snova.",
+      "timeout": "Vremya zaprosa isteklo. Poprobuyteye snova.",
+      "networkError": "Proizoshla setevaya oshibka. Prover'te podklyucheniye.",
+      "rateLimit": "Prevyshen limit zaprosov. Podozhdite i poprobuyteye snova.",
+      "invalidSession": "Nedeystvitel'naya sessiya. Nachnite novyy razgovor.",
+      "authRequired": "Voyidite v sistemu dlya prodolzheniya."
+    }
   },
   "agentChat": {
+    "aiStudioAction": {
+      "eyebrow": "AI Studio",
+      "titleGenerate": "Создать стратегию",
+      "titleSave": "Сохранить стратегию",
+      "review": "Проверьте предлагаемые изменения перед отправкой.",
+      "dispatched": "Действие отправлено.",
+      "strategyRules": "Правила стратегии",
+      "entryConditions": "Условия входа",
+      "exitConditions": "Условия выхода",
+      "indicators": "Индикаторы",
+      "noRules": "Правила не заданы.",
+      "generate": "Создать",
+      "save": "Сохранить"
+    },
     "permissionRisk": "Risk",
     "permissionWorkspace": "Workspace",
     "permissionCapability": "Capability",

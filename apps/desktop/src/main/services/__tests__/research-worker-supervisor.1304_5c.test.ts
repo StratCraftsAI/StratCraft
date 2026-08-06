@@ -320,7 +320,7 @@ describe('TICKET_1304_5C research worker supervisor', () => {
       packageManifestSha256: manifestHash,
       capabilities: descriptor.capabilities,
     });
-    await flush();
+    await vi.waitFor(() => expect(sent.length).toBeGreaterThan(1));
     expect(sent[1]).toMatchObject({
       messageType: 'execute',
       correlationId: 'host-correlation',
@@ -392,7 +392,7 @@ describe('TICKET_1304_5C research worker supervisor', () => {
       exchangeRoot: root,
       publishArtifact: vi.fn(),
     });
-    await flush();
+    await vi.waitFor(() => expect(sent.length).toBeGreaterThan(0));
     emit(child, {
       ...base('worker-hello', 0),
       selectedProtocolVersion: '1.0.0',
@@ -400,7 +400,7 @@ describe('TICKET_1304_5C research worker supervisor', () => {
       packageManifestSha256: manifestHash,
       capabilities: descriptor.capabilities,
     });
-    await flush();
+    await vi.waitFor(() => expect(sent.length).toBeGreaterThan(1));
     await expect(supervisor.cancel('request-1')).resolves.toBe(true);
     expect(sent.at(-1)).toMatchObject({
       messageType: 'cancel',
@@ -408,8 +408,7 @@ describe('TICKET_1304_5C research worker supervisor', () => {
       decisionId: 'decision-1',
       reason: 'user-request',
     });
-    await new Promise((resolve) => setTimeout(resolve, 20));
-    expect(child.kill).toHaveBeenCalledOnce();
+    await vi.waitFor(() => expect(child.kill).toHaveBeenCalledOnce());
     child.emit('close', 1, 'SIGTERM');
     await expect(terminal).resolves.toMatchObject({
       code: 'WORKER_CRASHED',
@@ -451,7 +450,7 @@ describe('TICKET_1304_5C research worker supervisor', () => {
       exchangeRoot: path.join(root, 'missing'),
       publishArtifact: vi.fn(),
     })).rejects.toThrow();
-    await flush();
+    await vi.waitFor(() => expect(sent.length).toBeGreaterThan(0));
     await supervisor.cancel('request-1');
     child.emit('close', 1, 'SIGTERM');
     await expect(first).resolves.toMatchObject({ code: 'WORKER_CRASHED' });

@@ -85,6 +85,7 @@
   "chat": {
     "errorPrefix": "Erro: {{message}}",
     "calledTool": "Chamou **{{toolName}}**:",
+    "factorMiningLaunchRefused": "Nao foi possivel iniciar a mineracao de fatores: {{reason}}",
     "navigationNotImplemented": "Navegacao: {{page}} (ainda nao implementado)",
     "unexpectedFormat": "Formato de resposta inesperado recebido.",
     "mcpNotConnected": "**Servidor MCP nao ligado.** Inicie o servidor MCP na porta {{port}} para ativar a funcionalidade completa.\n\nExecutar: `node dist/mcp-server.js --http` em `apps/desktop/src/mcp/standalone/`",
@@ -189,9 +190,32 @@
     "protocolGapTimeout": "The agent event sequence timed out.",
     "refreshGuide": "Refresh Guide and resubmit.",
     "confirmExpired": "The permission request expired before it could be submitted.",
-    "waitForReconciliation": "Wait for authority reconciliation."
+    "waitForReconciliation": "Wait for authority reconciliation.",
+    "vibingChat": {
+      "llmError": "O modelo de IA encontrou um erro. Tente novamente.",
+      "codeGenerationError": "Falha ao gerar o codigo de estrategia. Tente novamente.",
+      "timeout": "O pedido expirou. Tente novamente.",
+      "networkError": "Erro de rede. Verifique a sua ligacao.",
+      "rateLimit": "Limite de taxa excedido. Aguarde e tente novamente.",
+      "invalidSession": "Sessao invalida. Inicie uma nova conversa.",
+      "authRequired": "Faca login para continuar."
+    }
   },
   "agentChat": {
+    "aiStudioAction": {
+      "eyebrow": "AI Studio",
+      "titleGenerate": "Gerar estrategia",
+      "titleSave": "Guardar estrategia",
+      "review": "Reveja as alteracoes propostas antes de enviar.",
+      "dispatched": "Acao enviada.",
+      "strategyRules": "Regras da estrategia",
+      "entryConditions": "Condicoes de entrada",
+      "exitConditions": "Condicoes de saida",
+      "indicators": "Indicadores",
+      "noRules": "Nenhuma regra definida.",
+      "generate": "Gerar",
+      "save": "Guardar"
+    },
     "permissionRisk": "Risk",
     "permissionWorkspace": "Workspace",
     "permissionCapability": "Capability",

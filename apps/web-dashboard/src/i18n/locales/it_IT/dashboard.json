@@ -85,6 +85,7 @@
   "chat": {
     "errorPrefix": "Errore: {{message}}",
     "calledTool": "Chiamato **{{toolName}}**:",
+    "factorMiningLaunchRefused": "Impossibile avviare il factor mining: {{reason}}",
     "navigationNotImplemented": "Navigazione: {{page}} (non ancora implementato)",
     "unexpectedFormat": "Ricevuto un formato di risposta imprevisto.",
     "mcpNotConnected": "**Server MCP non connesso.** Avviare il server MCP sulla porta {{port}} per abilitare tutte le funzionalita.\n\nEseguire: `node dist/mcp-server.js --http` in `apps/desktop/src/mcp/standalone/`",
@@ -189,9 +190,32 @@
     "protocolGapTimeout": "The agent event sequence timed out.",
     "refreshGuide": "Refresh Guide and resubmit.",
     "confirmExpired": "The permission request expired before it could be submitted.",
-    "waitForReconciliation": "Wait for authority reconciliation."
+    "waitForReconciliation": "Wait for authority reconciliation.",
+    "vibingChat": {
+      "llmError": "Il modello IA ha riscontrato un errore. Riprovare.",
+      "codeGenerationError": "Generazione del codice strategia fallita. Riprovare.",
+      "timeout": "Richiesta scaduta. Riprovare.",
+      "networkError": "Errore di rete. Verificare la connessione.",
+      "rateLimit": "Limite di frequenza superato. Attendere e riprovare.",
+      "invalidSession": "Sessione non valida. Avviare una nuova conversazione.",
+      "authRequired": "Effettuare l'accesso per continuare."
+    }
   },
   "agentChat": {
+    "aiStudioAction": {
+      "eyebrow": "AI Studio",
+      "titleGenerate": "Genera strategia",
+      "titleSave": "Salva strategia",
+      "review": "Controlla le modifiche proposte prima dell'invio.",
+      "dispatched": "Azione inviata.",
+      "strategyRules": "Regole della strategia",
+      "entryConditions": "Condizioni di ingresso",
+      "exitConditions": "Condizioni di uscita",
+      "indicators": "Indicatori",
+      "noRules": "Nessuna regola definita.",
+      "generate": "Genera",
+      "save": "Salva"
+    },
     "permissionRisk": "Risk",
     "permissionWorkspace": "Workspace",
     "permissionCapability": "Capability",

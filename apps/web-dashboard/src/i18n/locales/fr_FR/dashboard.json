@@ -85,6 +85,7 @@
   "chat": {
     "errorPrefix": "Erreur : {{message}}",
     "calledTool": "Appel de **{{toolName}}** :",
+    "factorMiningLaunchRefused": "Impossible de demarrer le factor mining : {{reason}}",
     "navigationNotImplemented": "Navigation : {{page}} (pas encore implemente)",
     "unexpectedFormat": "Format de reponse inattendu recu.",
     "mcpNotConnected": "**Serveur MCP non connecte.** Demarrez le serveur MCP sur le port {{port}} pour activer toutes les fonctionnalites.\n\nExecuter : `node dist/mcp-server.js --http` dans `apps/desktop/src/mcp/standalone/`",
@@ -189,9 +190,32 @@
     "protocolGapTimeout": "The agent event sequence timed out.",
     "refreshGuide": "Refresh Guide and resubmit.",
     "confirmExpired": "The permission request expired before it could be submitted.",
-    "waitForReconciliation": "Wait for authority reconciliation."
+    "waitForReconciliation": "Wait for authority reconciliation.",
+    "vibingChat": {
+      "llmError": "Le modele IA a rencontre une erreur. Veuillez reessayer.",
+      "codeGenerationError": "Echec de la generation du code de strategie. Veuillez reessayer.",
+      "timeout": "La requete a expire. Veuillez reessayer.",
+      "networkError": "Erreur reseau survenue. Veuillez verifier votre connexion.",
+      "rateLimit": "Limite de debit depassee. Veuillez patienter et reessayer.",
+      "invalidSession": "Session non valide. Veuillez demarrer une nouvelle conversation.",
+      "authRequired": "Veuillez vous connecter pour continuer."
+    }
   },
   "agentChat": {
+    "aiStudioAction": {
+      "eyebrow": "AI Studio",
+      "titleGenerate": "Generer la strategie",
+      "titleSave": "Enregistrer la strategie",
+      "review": "Verifiez les modifications proposees avant l'envoi.",
+      "dispatched": "Action envoyee.",
+      "strategyRules": "Regles de strategie",
+      "entryConditions": "Conditions d'entree",
+      "exitConditions": "Conditions de sortie",
+      "indicators": "Indicateurs",
+      "noRules": "Aucune regle definie.",
+      "generate": "Generer",
+      "save": "Enregistrer"
+    },
     "permissionRisk": "Risk",
     "permissionWorkspace": "Workspace",
     "permissionCapability": "Capability",

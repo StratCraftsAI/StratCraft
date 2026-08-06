@@ -85,6 +85,7 @@
   "chat": {
     "errorPrefix": "錯誤: {{message}}",
     "calledTool": "已呼叫 **{{toolName}}**:",
+    "factorMiningLaunchRefused": "無法啟動因子探勘: {{reason}}",
     "navigationNotImplemented": "導航: {{page}} (尚未實作)",
     "unexpectedFormat": "收到意外的回應格式。",
     "mcpNotConnected": "**MCP 伺服器未連線。** 請在連接埠 {{port}} 上啟動 MCP 伺服器以啟用完整功能。\n\n執行: 在 `apps/desktop/src/mcp/standalone/` 中執行 `node dist/mcp-server.js --http`",
@@ -189,9 +190,32 @@
     "protocolGapTimeout": "The agent event sequence timed out.",
     "refreshGuide": "Refresh Guide and resubmit.",
     "confirmExpired": "The permission request expired before it could be submitted.",
-    "waitForReconciliation": "Wait for authority reconciliation."
+    "waitForReconciliation": "Wait for authority reconciliation.",
+    "vibingChat": {
+      "llmError": "AI模型遇到錯誤。請重試。",
+      "codeGenerationError": "策略程式碼產生失敗。請重試。",
+      "timeout": "請求逾時。請重試。",
+      "networkError": "發生網路錯誤。請檢查您的連線。",
+      "rateLimit": "超出速率限制。請稍候再試。",
+      "invalidSession": "無效工作階段。請開始新對話。",
+      "authRequired": "請登入以繼續。"
+    }
   },
   "agentChat": {
+    "aiStudioAction": {
+      "eyebrow": "AI 工作室",
+      "titleGenerate": "產生策略",
+      "titleSave": "儲存策略",
+      "review": "請在派發前檢查建議的變更。",
+      "dispatched": "操作已派發。",
+      "strategyRules": "策略規則",
+      "entryConditions": "進場條件",
+      "exitConditions": "出場條件",
+      "indicators": "指標",
+      "noRules": "未定義規則。",
+      "generate": "產生",
+      "save": "儲存"
+    },
     "permissionRisk": "Risk",
     "permissionWorkspace": "Workspace",
     "permissionCapability": "Capability",

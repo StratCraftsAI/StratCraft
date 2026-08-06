@@ -85,6 +85,7 @@
   "chat": {
     "errorPrefix": "エラー: {{message}}",
     "calledTool": "**{{toolName}}** を呼び出しました:",
+    "factorMiningLaunchRefused": "ファクターマイニングを開始できませんでした: {{reason}}",
     "navigationNotImplemented": "ナビゲーション: {{page}} (未実装)",
     "unexpectedFormat": "予期しないレスポンス形式を受信しました。",
     "mcpNotConnected": "**MCP サーバーに接続されていません。** ポート {{port}} で MCP サーバーを起動して、全機能を有効にしてください。\n\n実行: `apps/desktop/src/mcp/standalone/` で `node dist/mcp-server.js --http`",
@@ -189,9 +190,32 @@
     "protocolGapTimeout": "The agent event sequence timed out.",
     "refreshGuide": "Refresh Guide and resubmit.",
     "confirmExpired": "The permission request expired before it could be submitted.",
-    "waitForReconciliation": "Wait for authority reconciliation."
+    "waitForReconciliation": "Wait for authority reconciliation.",
+    "vibingChat": {
+      "llmError": "AIモデルでエラーが発生しました。再試行してください。",
+      "codeGenerationError": "戦略コードの生成に失敗しました。もう一度お試しください。",
+      "timeout": "リクエストがタイムアウトしました。再試行してください。",
+      "networkError": "ネットワークエラーが発生しました。接続を確認してください。",
+      "rateLimit": "レート制限を超えました。しばらく待ってから再試行してください。",
+      "invalidSession": "無効なセッションです。新しい会話を開始してください。",
+      "authRequired": "続行するにはログインしてください。"
+    }
   },
   "agentChat": {
+    "aiStudioAction": {
+      "eyebrow": "AI スタジオ",
+      "titleGenerate": "戦略を生成",
+      "titleSave": "戦略を保存",
+      "review": "送信する前に提案された変更を確認してください。",
+      "dispatched": "アクションを送信しました。",
+      "strategyRules": "戦略ルール",
+      "entryConditions": "エントリー条件",
+      "exitConditions": "エグジット条件",
+      "indicators": "インジケーター",
+      "noRules": "ルールが定義されていません。",
+      "generate": "生成",
+      "save": "保存"
+    },
     "permissionRisk": "Risk",
     "permissionWorkspace": "Workspace",
     "permissionCapability": "Capability",

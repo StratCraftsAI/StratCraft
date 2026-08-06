@@ -17,6 +17,10 @@ import * as path from 'path';
 
 const SERVICES_DIR = path.resolve(__dirname, '..');
 const LOCALES_DIR = path.resolve(__dirname, '..', '..', '..', 'locales');
+const SHARED_PROTOCOL_FILE = path.resolve(
+  __dirname, '..', '..', '..', '..', '..',
+  'packages', 'ai-studio-operations', 'src', 'vibing-chat-protocol.ts',
+);
 
 const SERVICE_FILES = [
   'trader-ai-entry-service.ts',
@@ -91,6 +95,14 @@ const ALL_ERROR_CODES = [
 
 function readServiceSource(filename: string): string {
   return fs.readFileSync(path.join(SERVICES_DIR, filename), 'utf-8');
+}
+
+/**
+ * TICKET_1376: single declaration site of the vibing-chat backend error-code
+ * whitelist, shared by the Electron plugin and the Guide WebUI / MCP surface.
+ */
+function readSharedProtocolSource(): string {
+  return fs.readFileSync(SHARED_PROTOCOL_FILE, 'utf-8');
 }
 
 function readLocaleJson(localeId: string): Record<string, unknown> {
@@ -192,7 +204,15 @@ describe('TICKET_786_17 Category A: i18n error code messages', () => {
 
     for (const file of SERVICE_FILES) {
       it(`${file} error codes are all covered by locale keys`, () => {
-        const source = readServiceSource(file);
+        // TICKET_1376 step 2: `vibing-chat-service.ts` no longer declares its
+        // whitelist locally -- it was promoted to the shared
+        // `@StratCraft/ai-studio-operations` package so the Guide WebUI surface
+        // resolves the identical backend codes. The guarantee this test gives
+        // is unchanged (every resolvable code is translated in all 12 locales);
+        // only the declaration site moved, so read it from its new owner.
+        const source = file === 'vibing-chat-service.ts'
+          ? readSharedProtocolSource()
+          : readServiceSource(file);
         // Extract all string literals from ReadonlySet declarations
         const setMatch = source.match(/new Set\(\[\s*([\s\S]*?)\]\)/);
         expect(setMatch).not.toBeNull();

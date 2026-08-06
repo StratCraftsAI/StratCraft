@@ -412,11 +412,22 @@ export async function executeVibingChat(
         ? result as Record<string, unknown>
         : undefined;
       const error = resultRecord?.error;
+      const errorRecord = error && typeof error === 'object'
+        ? error as Record<string, unknown>
+        : undefined;
       const errorMessage = (
-        error && typeof error === 'object'
-          ? (error as Record<string, unknown>).message
-            ?? (error as Record<string, unknown>).error_message
+        errorRecord
+          ? errorRecord.message ?? errorRecord.error_message
           : error
+      );
+      // TICKET_1376 RC1: carry the backend's machine code out of the poll
+      // loop. Dropping it here was the deepest layer of the defect -- every
+      // caller above was left with prose it could only pass through as an
+      // unstructured string.
+      const errorCode = (
+        errorRecord?.code
+        ?? errorRecord?.error_code
+        ?? pollData.error_code
       );
       return {
         success: false,
@@ -425,6 +436,9 @@ export async function executeVibingChat(
           : typeof pollData.error === 'string'
             ? pollData.error
             : `Vibing Chat task '${taskId}' ${status}.`,
+        ...(typeof errorCode === 'string' && errorCode.length > 0
+          ? { errorCode }
+          : {}),
       };
     }
   }
