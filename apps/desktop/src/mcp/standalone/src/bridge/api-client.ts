@@ -221,6 +221,9 @@ import {
   API_FACTOR_MINING_CONFIRM,
   API_FACTOR_MINING_STATUS,
   API_FACTOR_MINING_SESSIONS,
+  FACTOR_MINING_CORRELATION_HEADER,
+  FACTOR_MINING_TOOL_HEADER,
+  RUNTIME_COMPOSITION_HEADER,
   API_FACTOR_CATALOG_LIST,
   API_FACTOR_CATALOG_ACTIVATE,
   API_FACTOR_CATALOG_DEACTIVATE,
@@ -294,6 +297,7 @@ async function request<T>(
   path: string,
   body: Record<string, unknown> = {},
   timeoutMs: number = REQUEST_TIMEOUT_MS,
+  additionalHeaders: Readonly<Record<string, string>> = {},
 ): Promise<ApiResponse<T>> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -304,6 +308,7 @@ async function request<T>(
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${config.token}`,
+        ...additionalHeaders,
       },
       body: JSON.stringify(body),
       signal: controller.signal,
@@ -319,6 +324,33 @@ async function request<T>(
   } finally {
     clearTimeout(timer);
   }
+}
+
+export interface FactorMiningTransportDiagnostic {
+  readonly correlationId: string;
+  readonly toolName: 'edit_workload_review' | 'confirm_and_start_factor_mining';
+}
+
+function factorMiningDiagnosticHeaders(
+  path: string,
+  body: Record<string, unknown>,
+  diagnostic: FactorMiningTransportDiagnostic | undefined,
+): Readonly<Record<string, string>> {
+  if (!diagnostic) return {};
+  const runtimeCompositionFingerprint = process.env.STRATCRAFT_RUNTIME_COMPOSITION_FINGERPRINT ?? 'unavailable';
+  console.error(JSON.stringify({
+    event: 'factor_mining_mcp_boundary',
+    correlationId: diagnostic.correlationId,
+    toolName: diagnostic.toolName,
+    httpPath: path,
+    inputFields: Object.keys(body).sort(),
+    runtimeCompositionFingerprint,
+  }));
+  return {
+    [FACTOR_MINING_CORRELATION_HEADER]: diagnostic.correlationId,
+    [FACTOR_MINING_TOOL_HEADER]: diagnostic.toolName,
+    [RUNTIME_COMPOSITION_HEADER]: runtimeCompositionFingerprint,
+  };
 }
 
 async function requestContract<T>(
@@ -1965,7 +1997,11 @@ export async function setChipAllowedRegimes(config: ServiceApiConfig, params: { 
   return request(config, API_CHIP_ALLOWED_REGIMES_SET, params);
 }
 
-export async function startFactorMining(config: ServiceApiConfig, params: Record<string, unknown>): Promise<ApiResponse> {
+export async function startFactorMining(
+  config: ServiceApiConfig,
+  params: Record<string, unknown>,
+  diagnostic?: FactorMiningTransportDiagnostic,
+): Promise<ApiResponse> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), MCP_TRAINING_TIMEOUT_MS);
 
@@ -1975,6 +2011,7 @@ export async function startFactorMining(config: ServiceApiConfig, params: Record
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${config.token}`,
+        ...factorMiningDiagnosticHeaders(API_FACTOR_MINING_START, params, diagnostic),
       },
       body: JSON.stringify(params),
       signal: controller.signal,
@@ -1996,8 +2033,18 @@ export async function reviewFactorMining(config: ServiceApiConfig, params: Recor
   return request(config, API_FACTOR_MINING_REVIEW, params);
 }
 
-export async function editFactorMiningReview(config: ServiceApiConfig, params: Record<string, unknown>): Promise<ApiResponse> {
-  return request(config, API_FACTOR_MINING_EDIT, params);
+export async function editFactorMiningReview(
+  config: ServiceApiConfig,
+  params: Record<string, unknown>,
+  diagnostic?: FactorMiningTransportDiagnostic,
+): Promise<ApiResponse> {
+  return request(
+    config,
+    API_FACTOR_MINING_EDIT,
+    params,
+    REQUEST_TIMEOUT_MS,
+    factorMiningDiagnosticHeaders(API_FACTOR_MINING_EDIT, params, diagnostic),
+  );
 }
 
 export async function confirmFactorMining(config: ServiceApiConfig, params: Record<string, unknown>): Promise<ApiResponse> {

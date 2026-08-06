@@ -69,7 +69,10 @@ import {
   restoreDatabase,
   getCommercialCapability,
   executeCommercialOperation,
+  editFactorMiningReview,
+  startFactorMining,
 } from '../api-client';
+import type { FactorMiningTransportDiagnostic } from '../api-client';
 import type { ServiceApiConfig } from '../discovery';
 
 // ---------------------------------------------------------------------------
@@ -125,6 +128,39 @@ afterEach(() => {
   globalThis.fetch = originalFetch;
   vi.useRealTimers();
   vi.restoreAllMocks();
+});
+
+describe('TICKET_1382 factor-mining operation identity transport', () => {
+  it.each([
+    {
+      toolName: 'edit_workload_review' as const,
+      path: '/api/v1/factor-mining/edit',
+      invoke: (diagnostic: FactorMiningTransportDiagnostic) =>
+        editFactorMiningReview(CONFIG, { review: {}, planFingerprint: 'fingerprint', edits: {} }, diagnostic),
+    },
+    {
+      toolName: 'confirm_and_start_factor_mining' as const,
+      path: '/api/v1/factor-mining/start',
+      invoke: (diagnostic: FactorMiningTransportDiagnostic) =>
+        startFactorMining(CONFIG, { review: {}, planFingerprint: 'fingerprint', idempotencyKey: 'key' }, diagnostic),
+    },
+  ])('sends $toolName identity outside the domain body', async ({ toolName, path, invoke }) => {
+    const fetchMock = mockFetchOk();
+    vi.stubGlobal('fetch', fetchMock);
+    process.env.STRATCRAFT_RUNTIME_COMPOSITION_FINGERPRINT = 'a'.repeat(64);
+
+    await invoke({ correlationId: '00000000-0000-4000-8000-000000000001', toolName });
+
+    const [url, init] = lastFetchCall(fetchMock);
+    expect(url).toBe(`${CONFIG.baseUrl}${path}`);
+    expect(init.headers).toMatchObject({
+      'x-stratcraft-correlation-id': '00000000-0000-4000-8000-000000000001',
+      'x-stratcraft-mcp-tool': toolName,
+      'x-stratcraft-runtime-composition': 'a'.repeat(64),
+    });
+    expect(JSON.parse(init.body)).not.toHaveProperty('correlationId');
+    delete process.env.STRATCRAFT_RUNTIME_COMPOSITION_FINGERPRINT;
+  });
 });
 
 // ---------------------------------------------------------------------------

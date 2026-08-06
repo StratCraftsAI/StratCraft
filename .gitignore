@@ -175,6 +175,7 @@ apps/desktop/data/api-token
 # runtime artifact -- it records a live pid, so a committed copy is meaningless
 # to any other checkout and looks like a stale claim to the reaper.
 apps/desktop/data/api-runtime.lock
+apps/desktop/data/guide-runtime-composition.json
 apps/desktop/data/oauth-token
 apps/desktop/logs/*.backup
 

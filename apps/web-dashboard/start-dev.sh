@@ -28,6 +28,11 @@ SERVICE_RUNTIME_LAUNCHER="${STRATCRAFT_SERVICE_RUNTIME_LAUNCHER:-$ROOT/scripts/s
 SERVICE_DISCOVERY_DIR="${STRATCRAFT_SERVICE_API_DISCOVERY_DIR:-$ROOT/apps/desktop/data}"
 SERVICE_RUNTIME_CLAIM="$SERVICE_DISCOVERY_DIR/api-runtime.lock"
 CURL_BIN="${STRATCRAFT_CURL_BIN:-curl}"
+COMPOSITION_FILE="${STRATCRAFT_RUNTIME_COMPOSITION_FILE:-$SERVICE_DISCOVERY_DIR/guide-runtime-composition.json}"
+COMPOSITION_DESCRIPTOR="${STRATCRAFT_RUNTIME_COMPOSITION_DESCRIPTOR:-$SCRIPT_DIR/scripts/runtime-composition.mjs}"
+COMPOSITION_FINGERPRINT="${STRATCRAFT_RUNTIME_COMPOSITION_FINGERPRINT:-}"
+COMPOSITION_TOOLS_JSON="${STRATCRAFT_RUNTIME_COMPOSITION_TOOLS_JSON:-[]}"
+COMPOSITION_COMMERCIAL_PACKAGE_JSON="${STRATCRAFT_RUNTIME_COMMERCIAL_PACKAGE_JSON:-null}"
 SERVICE_RUNTIME_PID=""
 SERVICE_RUNTIME_OWNED=0
 SERVICE_RUNTIME_CLAIM_PID=""
@@ -48,6 +53,10 @@ cleanup_owned_children() {
   fi
   CLEANUP_STARTED=1
   trap - INT TERM EXIT
+
+  if [ -f "$COMPOSITION_FILE" ] && grep -q "\"mainPid\":$$" "$COMPOSITION_FILE" 2>/dev/null; then
+    rm -f "$COMPOSITION_FILE"
+  fi
 
   for pid in "$SERVICE_RUNTIME_PID" "$MCP_PID" "$VITE_PID"; do
     if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
@@ -86,39 +95,31 @@ if [ ! -x "$SERVICE_RUNTIME_LAUNCHER" ]; then
   echo "[ERROR] Research Runtime Service launcher is not executable: $SERVICE_RUNTIME_LAUNCHER" >&2
   exit 1
 fi
+if [ -z "$COMPOSITION_FINGERPRINT" ]; then
+  COMPOSITION_DESCRIPTION="$(node "$COMPOSITION_DESCRIPTOR" describe)" || exit 1
+  COMPOSITION_FINGERPRINT="$(printf '%s' "$COMPOSITION_DESCRIPTION" | node -e "const v=JSON.parse(require('fs').readFileSync(0,'utf8'));process.stdout.write(v.fingerprint)")"
+  COMPOSITION_TOOLS_JSON="$(printf '%s' "$COMPOSITION_DESCRIPTION" | node -e "const v=JSON.parse(require('fs').readFileSync(0,'utf8'));process.stdout.write(JSON.stringify(v.tools))")"
+  COMPOSITION_COMMERCIAL_PACKAGE_JSON="$(printf '%s' "$COMPOSITION_DESCRIPTION" | node -e "const v=JSON.parse(require('fs').readFileSync(0,'utf8'));process.stdout.write(JSON.stringify(v.commercialPackage))")"
+fi
+if [[ ! "$COMPOSITION_FINGERPRINT" =~ ^[0-9a-f]{64}$ ]]; then
+  echo "[ERROR] Guide runtime composition fingerprint is missing or invalid." >&2
+  exit 1
+fi
+export STRATCRAFT_RUNTIME_COMPOSITION_FINGERPRINT
 
 # Check both ports before spawning either child. A conflict is reported and
 # preserved; listener ownership is never inferred from PPID or port number.
 webdash_assert_ports_available "Guide WebUI foreground development" "$MCP_PORT" "$VITE_PORT"
 secure_store_keyring_preflight
 
-# TICKET_1367: a development-installed Quant Lab package is signed by the
-# isolated local development identity. Query that identity through its owning
-# script without creating or repairing it, then give the Service API the exact
-# trust store used by the lifecycle installer. An explicit environment override
-# remains authoritative. A missing identity preserves production trust
-# resolution; a corrupt or partial identity fails before runtime activation.
+# TICKET_1367: resolve development trust through the shared Electron/Guide
+# owner. A missing identity preserves production trust resolution; a corrupt
+# or partial identity fails before runtime activation.
 if [ -z "${STRATCRAFT_WORKER_TRUST_STORE:-}" ]; then
-  DEV_IDENTITY_SCRIPT="$ROOT/plugins/quant-lab-nexus/scripts/ensure-dev-signing-identity.mjs"
-  set +e
-  DEV_IDENTITY_JSON="$(node "$DEV_IDENTITY_SCRIPT" --existing)"
-  DEV_IDENTITY_STATUS=$?
-  set -e
-  case "$DEV_IDENTITY_STATUS" in
-    0)
-      STRATCRAFT_WORKER_TRUST_STORE="$(
-        printf '%s' "$DEV_IDENTITY_JSON" \
-          | node -e "process.stdout.write(JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).trustStorePath)"
-      )"
-      export STRATCRAFT_WORKER_TRUST_STORE
-      echo "[dev] Quant Lab trust: isolated development identity"
-      ;;
-    3) ;;
-    *)
-      echo "[ERROR] Quant Lab development signing identity is invalid; run './start.sh quant-lab-dev-install' to repair it." >&2
-      exit 1
-      ;;
-  esac
+  stratcraft_resolve_development_worker_trust "$ROOT" node || exit 1
+  if [ -n "${STRATCRAFT_WORKER_TRUST_STORE:-}" ]; then
+    echo "[dev] Quant Lab trust: isolated development identity"
+  fi
 fi
 
 # The Service API role must be healthy before MCP exposes tools backed by it.
@@ -168,6 +169,13 @@ echo "[dev] MCP owner PID: $MCP_PID"
 if ! webdash_wait_for_port "MCP server" "$MCP_PORT" "$MCP_PID" "$STARTUP_ATTEMPTS" "$STARTUP_DELAY_SECONDS"; then
   exit 1
 fi
+
+mkdir -p "$(dirname "$COMPOSITION_FILE")"
+COMPOSITION_TEMP="$COMPOSITION_FILE.$$"
+printf '{"schemaVersion":1,"mainPid":%s,"fingerprint":"%s","tools":%s,"commercialPackage":%s}\n' \
+  "$$" "$COMPOSITION_FINGERPRINT" "$COMPOSITION_TOOLS_JSON" \
+  "$COMPOSITION_COMMERCIAL_PACKAGE_JSON" > "$COMPOSITION_TEMP"
+mv "$COMPOSITION_TEMP" "$COMPOSITION_FILE"
 
 echo "[dev] Starting Vite on :$VITE_PORT..."
 (cd "$SCRIPT_DIR" && exec "$VITE_BIN" --host 0.0.0.0 --port "$VITE_PORT") &

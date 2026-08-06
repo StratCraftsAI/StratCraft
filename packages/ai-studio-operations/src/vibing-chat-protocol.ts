@@ -40,6 +40,48 @@ export const VIBING_CHAT_ERROR_CODES: ReadonlySet<string> = new Set([
   'AUTH_REQUIRED',
 ]);
 
+export type VibingChatPresentationCode =
+  | 'LLM_ERROR'
+  | 'CODE_GENERATION_ERROR'
+  | 'TIMEOUT'
+  | 'NETWORK_ERROR'
+  | 'RATE_LIMIT'
+  | 'INVALID_SESSION'
+  | 'AUTH_REQUIRED';
+
+/** Map nona_server ErrorCode identities to the stable product presentation. */
+const VIBING_CHAT_BACKEND_ERROR_PRESENTATION: Readonly<Record<string, VibingChatPresentationCode>> = {
+  LLM_ERROR: 'LLM_ERROR',
+  CODE_GENERATION_ERROR: 'CODE_GENERATION_ERROR',
+  TIMEOUT: 'TIMEOUT',
+  NETWORK_ERROR: 'NETWORK_ERROR',
+  RATE_LIMIT: 'RATE_LIMIT',
+  INVALID_SESSION: 'INVALID_SESSION',
+  AUTH_REQUIRED: 'AUTH_REQUIRED',
+  LLM_SERVICE_ERROR: 'LLM_ERROR',
+  LLM_SERVICE_UNAVAILABLE: 'NETWORK_ERROR',
+  LLM_EMPTY_RESPONSE: 'CODE_GENERATION_ERROR',
+  LLM_PARSE_ERROR: 'CODE_GENERATION_ERROR',
+  LLM_SCHEMA_VALIDATION: 'CODE_GENERATION_ERROR',
+  LLM_RESPONSE_FORMAT_REJECTED: 'CODE_GENERATION_ERROR',
+  LLM_RATE_LIMIT: 'RATE_LIMIT',
+  LLM_QUOTA_EXCEEDED: 'RATE_LIMIT',
+  LLM_TIMEOUT: 'TIMEOUT',
+  LLM_API_KEY_INVALID: 'AUTH_REQUIRED',
+  LLM_BYOK_KEY_REQUIRED: 'AUTH_REQUIRED',
+  LLM_BYOK_MODEL_REQUIRED: 'AUTH_REQUIRED',
+  LLM_MODEL_NOT_FOUND: 'LLM_ERROR',
+  SESSION_NOT_FOUND: 'INVALID_SESSION',
+};
+
+export function normalizeVibingChatErrorCode(
+  code: string | undefined,
+): VibingChatPresentationCode | undefined {
+  return typeof code === 'string'
+    ? VIBING_CHAT_BACKEND_ERROR_PRESENTATION[code]
+    : undefined;
+}
+
 /**
  * Validate a backend-supplied code against the shared whitelist.
  *
@@ -47,7 +89,7 @@ export const VIBING_CHAT_ERROR_CODES: ReadonlySet<string> = new Set([
  * message rather than rendering unvalidated backend prose to the user.
  */
 export function isKnownVibingChatErrorCode(code: string | undefined): boolean {
-  return typeof code === 'string' && VIBING_CHAT_ERROR_CODES.has(code);
+  return normalizeVibingChatErrorCode(code) !== undefined;
 }
 
 /**
@@ -90,9 +132,83 @@ const VIBING_CHAT_PRESENTATION_SEGMENTS: Readonly<Record<string, string>> = {
  * presentation and the projector applies its generic fallback.
  */
 export function vibingChatPresentationKey(code: string | undefined): string | undefined {
-  if (!isKnownVibingChatErrorCode(code)) return undefined;
-  const segment = VIBING_CHAT_PRESENTATION_SEGMENTS[code!];
-  return segment ? `${VIBING_CHAT_PRESENTATION_PREFIX}${segment}` : undefined;
+  const normalized = normalizeVibingChatErrorCode(code);
+  if (!normalized) return undefined;
+  const segment = VIBING_CHAT_PRESENTATION_SEGMENTS[normalized];
+  return `${VIBING_CHAT_PRESENTATION_PREFIX}${segment}`;
+}
+
+export interface VibingChatTaskFailure {
+  readonly status: 'failed' | 'rejected';
+  readonly backendCode?: string;
+  readonly message: string;
+  readonly suggestedAction?: string;
+  readonly retryable?: boolean;
+  readonly failedStage?: string;
+  readonly validatorErrorCode?: string;
+  readonly taskId?: string;
+}
+
+export const VIBING_CHAT_TASK_FAILURE_FALLBACK =
+  'Vibing Chat task failed without an error message.';
+
+function asRecord(value: unknown): Record<string, unknown> | undefined {
+  return value && typeof value === 'object' && !Array.isArray(value)
+    ? value as Record<string, unknown>
+    : undefined;
+}
+
+function asNonEmptyString(value: unknown): string | undefined {
+  return typeof value === 'string' && value.length > 0 ? value : undefined;
+}
+
+function asDiagnosticToken(value: unknown): string | undefined {
+  const token = asNonEmptyString(value);
+  return token && /^[A-Za-z0-9_.:-]{1,128}$/.test(token) ? token : undefined;
+}
+
+/** Decode nona_server's HTTP-200 failed-task envelope before transport logic. */
+export function decodeVibingChatTaskFailure(
+  response: unknown,
+): VibingChatTaskFailure | undefined {
+  const envelope = asRecord(response);
+  if (!envelope) return undefined;
+  const data = asRecord(envelope.data) ?? envelope;
+  const status = asNonEmptyString(data.status ?? envelope.status);
+  if (status !== 'failed' && status !== 'rejected') return undefined;
+
+  const result = asRecord(data.result ?? envelope.result);
+  const errorValue = result?.error ?? data.error ?? envelope.error;
+  const error = asRecord(errorValue);
+  const context = asRecord(error?.context);
+  const backendCode = asDiagnosticToken(
+    error?.error_code ?? error?.code ?? data.error_code,
+  );
+  const message = asNonEmptyString(
+    error?.error_message
+      ?? error?.message
+      ?? (typeof errorValue === 'string' ? errorValue : undefined)
+      ?? data.error_message
+      ?? envelope.error_message,
+  ) ?? VIBING_CHAT_TASK_FAILURE_FALLBACK;
+  const suggestedAction = asNonEmptyString(error?.suggested_action);
+  const failedStage = asDiagnosticToken(error?.failed_layer ?? context?.failed_layer);
+  const validatorErrorCode = asDiagnosticToken(
+    error?.validator_error_code ?? context?.error_code,
+  );
+  const taskId = asDiagnosticToken(data.task_id ?? envelope.task_id);
+  const retryValue = error?.retry_suggested ?? error?.retryable;
+
+  return {
+    status,
+    message,
+    ...(backendCode ? { backendCode } : {}),
+    ...(suggestedAction ? { suggestedAction } : {}),
+    ...(typeof retryValue === 'boolean' ? { retryable: retryValue } : {}),
+    ...(failedStage ? { failedStage } : {}),
+    ...(validatorErrorCode ? { validatorErrorCode } : {}),
+    ...(taskId ? { taskId } : {}),
+  };
 }
 
 // =============================================================================

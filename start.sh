@@ -29,6 +29,8 @@ cd "$ROOT_DIR"
 # build path and the Guide launchers cannot disagree about what they own.
 # shellcheck source=apps/web-dashboard/dev-lifecycle.sh
 source "$ROOT_DIR/apps/web-dashboard/dev-lifecycle.sh"
+# shellcheck source=scripts/start-constants.sh
+source "$ROOT_DIR/scripts/start-constants.sh"
 
 # Colors
 RED='\033[0;31m'
@@ -361,6 +363,11 @@ check_running_processes() {
 # TICKET_560: Prevent turbo dev hang from large dirty state or exhausted inotify
 # budget. TICKET_1297_1 removed the zombie-daemon and stale-socket steps: both
 # reached into user-scoped state shared with every other repo on the machine.
+electron_dev_inotify_headroom_is_sufficient() {
+    local free_instances="$1"
+    [ "$free_instances" -ge "$ELECTRON_DEV_INOTIFY_REQUIRED_HEADROOM" ]
+}
+
 turbo_preflight() {
     if [ "${SKIP_TURBO_PREFLIGHT:-0}" = "1" ]; then
         log_warn "Turbo preflight checks skipped (SKIP_TURBO_PREFLIGHT=1)"
@@ -430,8 +437,8 @@ turbo_preflight() {
     # Step 2 guards max_user_watches (how many paths one instance may watch).
     # The failure that actually kills dev mode is a different knob:
     # max_user_instances -- how many inotify FDs one uid may hold at once. Vite
-    # and every tsup/tsc watcher call inotify_init per watch root, so a full
-    # `turbo dev` fan-out costs ~60-70 instances against a default ceiling of
+    # and every tsup/tsc watcher call inotify_init per watch root. The current
+    # `turbo dev` topology consumes 48 instances against a default ceiling of
     # 128. Exhausting it surfaces as `EMFILE ... watch`, which reads like an
     # fd-limit problem but is NOT fixed by ulimit -n.
     local inst_limit=$(cat /proc/sys/fs/inotify/max_user_instances 2>/dev/null || echo 0)
@@ -444,14 +451,13 @@ turbo_preflight() {
         done
         local inst_free=$((inst_limit - inst_used))
         log_info "inotify instances: ${inst_used}/${inst_limit} used by $(id -un) (${inst_free} free)"
-        # A cold `turbo dev` fan-out needs ~70; refuse to start into a ceiling
-        # that will only fail later, deep inside the Vite build (TICKET_856:
-        # fail loudly and actionably rather than silently degrading).
-        if [ "$inst_free" -lt 70 ]; then
-            log_error "Not enough inotify instances free (${inst_free}); dev watchers need ~70."
-            log_error "Stale watchers from a previous run are the usual cause:"
-            log_error "  ./start.sh stop     # reap this repo's watcher fleet"
-            log_error "If none are stale, raise the ceiling permanently:"
+        # Compare against the measured current topology plus its explicit
+        # safety margin. The historical approximate value of 70 rejected a
+        # measured-safe launch with 68 free instances before any watcher ran.
+        if ! electron_dev_inotify_headroom_is_sufficient "$inst_free"; then
+            log_error "Not enough inotify instances free (${inst_free}); dev watchers require ${ELECTRON_DEV_INOTIFY_REQUIRED_HEADROOM} (${ELECTRON_DEV_INOTIFY_MEASURED_DEMAND} measured + ${ELECTRON_DEV_INOTIFY_SAFETY_MARGIN} safety margin)."
+            log_error "Current-user processes leave too little capacity for the measured dev topology."
+            log_error "Preserve those workloads and raise the ceiling permanently:"
             log_error "  echo fs.inotify.max_user_instances=1024 | sudo tee /etc/sysctl.d/99-inotify.conf && sudo sysctl --system"
             exit 1
         fi
@@ -1044,12 +1050,14 @@ quant_lab_dev_install() {
     log_info "[6/8] Assembling signed package..."
     local node_platform
     node_platform="$(get_node_platform_id)" || return 1
-    local version
-    version=$(node -e "console.log(JSON.parse(require('fs').readFileSync('$PLUGIN_ROOT/manifest.json','utf-8')).version)")
+    local base_version
+    base_version=$(node -e "console.log(JSON.parse(require('fs').readFileSync('$PLUGIN_ROOT/manifest.json','utf-8')).version)")
 
     local worker_bin="$RESEARCH_KERNELS_DIR/build/stratcraft-research-worker"
+    local hypothesis_host="$RESEARCH_KERNELS_DIR/build/sd_round3_host"
     if [ "$node_platform" = "win32-x64" ] || [ "$node_platform" = "win32-arm64" ]; then
         worker_bin="$RESEARCH_KERNELS_DIR/build/stratcraft-research-worker.exe"
+        hypothesis_host="$RESEARCH_KERNELS_DIR/build/sd_round3_host.exe"
     fi
     if [ ! -f "$worker_bin" ]; then
         log_error "Research worker binary not found: $worker_bin"
@@ -1071,16 +1079,56 @@ quant_lab_dev_install() {
     fi
     echo "statically-linked" > "$native_runtime_dir/lib/placeholder.txt"
 
+    # TICKET_1382: development packages are immutable too. Derive a stable
+    # prerelease version from every assembled input so changed host code can
+    # never overwrite (or be mistaken for) an already active same-version
+    # package. An unchanged input set resolves to the same version and the
+    # lifecycle installer returns an explicit no-op.
+    local package_input_fp version
+    package_input_fp=$(compute_fingerprint \
+        "$HOST_DIR/register.cjs" \
+        "$HOST_DIR/commercial-operation.cjs" \
+        "$HOST_DIR/commercial-stores.cjs" \
+        "$HOST_DIR/test-code-merger.cjs" \
+        "$worker_bin" \
+        "$hypothesis_host" \
+        "$PLUGIN_ROOT/worker" \
+        "$ROOT_DIR/packages/builder-templates/framework/factor_engines/talib_factors.json" \
+        "$ROOT_DIR/packages/builder-templates/framework/factor_engines/alpha158_factors.json" \
+        "$native_runtime_dir" \
+        "$SCRIPTS_DIR/assemble-research-worker-package.mjs") || return 1
+    version="${base_version}-dev.${package_input_fp:0:12}"
+
+    local current_status current_version
+    current_status=$(run_lifecycle_script \
+        "$SCRIPTS_DIR/lifecycle-dev-package-status.cjs" \
+        --trust-store "$trust_store" \
+        2>/dev/null || true)
+    current_version=$(printf '%s' "$current_status" | node -e '
+      const input = require("fs").readFileSync(0, "utf8");
+      if (!input) process.exit(0);
+      const value = JSON.parse(input);
+      if (value.state === "ready" && typeof value.packageVersion === "string") {
+        process.stdout.write(value.packageVersion);
+      }
+    ')
+
     local package_output="$staging_dir/research-worker-package"
+    local assembly_args=(
+        --output "$package_output"
+        --worker "$worker_bin"
+        --native-runtime-dir "$native_runtime_dir"
+        --host-module "$HOST_DIR/register.cjs"
+        --platform "$node_platform"
+        --version "$version"
+        --key-id "$key_id"
+        --signing-key "$signing_key"
+    )
+    if [ -n "$current_version" ] && [ "$current_version" != "$version" ]; then
+        assembly_args+=(--upgrades-from "$current_version")
+    fi
     node "$SCRIPTS_DIR/assemble-research-worker-package.mjs" \
-        --output "$package_output" \
-        --worker "$worker_bin" \
-        --native-runtime-dir "$native_runtime_dir" \
-        --host-module "$HOST_DIR/register.cjs" \
-        --platform "$node_platform" \
-        --version "$version" \
-        --key-id "$key_id" \
-        --signing-key "$signing_key" \
+        "${assembly_args[@]}" \
     || { log_error "Package assembly failed"; return 1; }
 
     # Step 7: Lifecycle install through the production code path
@@ -1090,9 +1138,12 @@ quant_lab_dev_install() {
         "$SCRIPTS_DIR/lifecycle-install-dev-package.cjs" \
         --package-root "$package_output" \
         --trust-store "$trust_store" \
-        --skip-health \
         2>/dev/null \
     ) || { log_error "Lifecycle install failed"; return 1; }
+
+    local manifest_sha256 install_root
+    manifest_sha256=$(echo "$install_result" | node -e "process.stdout.write(JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).manifestSha256)") || return 1
+    install_root=$(echo "$install_result" | node -e "process.stdout.write(JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).installationRoot)") || return 1
 
     # Step 8: Report
     log_info "[8/8] Verifying installed package..."
@@ -1101,16 +1152,26 @@ quant_lab_dev_install() {
         "$SCRIPTS_DIR/lifecycle-dev-package-status.cjs" \
         --trust-store "$trust_store" \
         2>/dev/null \
-    ) || { log_warn "Post-install status check failed (non-fatal)"; status_result='{"state":"unknown"}'; }
+    ) || { log_error "Post-install package verification failed"; return 1; }
+    printf '%s' "$status_result" | node -e '
+      const status = JSON.parse(require("fs").readFileSync(0, "utf8"));
+      const expectedVersion = process.argv[1];
+      const expectedManifest = process.argv[2];
+      if (status.state !== "ready"
+          || status.packageVersion !== expectedVersion
+          || status.packageManifestSha256 !== expectedManifest) {
+        process.stderr.write(`Active package identity mismatch: ${JSON.stringify(status)}\n`);
+        process.exit(1);
+      }
+    ' "$version" "$manifest_sha256" || {
+        log_error "Installed Quant Lab package does not match the assembled package"
+        return 1
+    }
 
     rm -rf "$staging_dir"
 
     echo ""
     log_info "=== Quant Lab development package installed ==="
-    local manifest_sha256
-    manifest_sha256=$(echo "$install_result" | node -e "process.stdout.write(JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).manifestSha256)")
-    local install_root
-    install_root=$(echo "$install_result" | node -e "process.stdout.write(JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).installationRoot)")
     local state
     state=$(echo "$status_result" | node -e "process.stdout.write(JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).state)")
     echo "    Version:          $version"
@@ -1481,6 +1542,17 @@ start_dev() {
     source "$ROOT_DIR/scripts/secure-store-keyring-preflight.sh"
     secure_store_keyring_preflight
 
+    # TICKET_1367: Electron and Guide consume the same read-only development
+    # identity resolver. This must run before Electron inherits the environment
+    # so an installed development package is verified against its lifecycle
+    # trust store rather than Electron's unpackaged resources directory.
+    local worker_trust_was_explicit=0
+    [ -n "${STRATCRAFT_WORKER_TRUST_STORE:-}" ] && worker_trust_was_explicit=1
+    stratcraft_resolve_development_worker_trust "$ROOT_DIR" node || exit 1
+    if [ "$worker_trust_was_explicit" -eq 0 ] && [ -n "${STRATCRAFT_WORKER_TRUST_STORE:-}" ]; then
+        log_info "Quant Lab trust: isolated development identity"
+    fi
+
     # Start the Electron development session with process-group cleanup on exit.
     # TICKET_1297: the root dev script excludes @stratcraft/web-dashboard, so
     # this process group never owns MCP :7789 or Guide Vite :7790.
@@ -1641,12 +1713,25 @@ build_prod() {
         log_warn "Verification script not found, skipping plugin verification"
     fi
 
+    # TICKET_1382: the commercial runtime loads the lifecycle-owned signed
+    # package, not the marketplace presentation copy. A local production build
+    # is incomplete until the exact host sources it just built are assembled,
+    # development-signed, installed, and verified through that lifecycle.
+    # CI remains build-only and never mutates developer application state.
+    if [ "${CI:-false}" != "true" ]; then
+        log_info "Reconciling active Quant Lab commercial package..."
+        quant_lab_dev_install || {
+            log_error "Quant Lab commercial package reconciliation failed"
+            return 1
+        }
+    fi
+
     # TICKET_1297: local builds may hand startup to the independent service
     # owner. A clean CI build never starts or mutates a live workload.
     if [ "${CI:-false}" != "true" ]; then
         log_info "Ensuring Guide WebUI background service is running..."
-        bash "$ROOT_DIR/apps/web-dashboard/start-dev-bg.sh" start || {
-            log_error "Guide WebUI background service failed to start"
+        bash "$ROOT_DIR/apps/web-dashboard/start-dev-bg.sh" refresh || {
+            log_error "Guide WebUI background service failed build-to-runtime reconciliation"
             return 1
         }
     fi

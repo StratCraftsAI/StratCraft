@@ -176,6 +176,9 @@ export const API_FACTOR_MINING_EDIT = '/api/v1/factor-mining/edit' as const;
 export const API_FACTOR_MINING_CONFIRM = '/api/v1/factor-mining/confirm' as const;
 export const API_FACTOR_MINING_STATUS = '/api/v1/factor-mining/status' as const;
 export const API_FACTOR_MINING_SESSIONS = '/api/v1/factor-mining/sessions' as const;
+export const FACTOR_MINING_CORRELATION_HEADER = 'x-stratcraft-correlation-id' as const;
+export const FACTOR_MINING_TOOL_HEADER = 'x-stratcraft-mcp-tool' as const;
+export const RUNTIME_COMPOSITION_HEADER = 'x-stratcraft-runtime-composition' as const;
 export const API_FACTOR_CATALOG_LIST = '/api/v1/factor-catalog/list' as const;
 // TICKET_1335 D2: the old install/uninstall routes mutated Python packages via
 // ambient pip. Replaced by catalog activation; no alias keeps the old wording.

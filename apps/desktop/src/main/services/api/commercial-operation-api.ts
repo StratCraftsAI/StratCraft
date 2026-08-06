@@ -41,10 +41,11 @@ export async function executeCommercialOperation(body: unknown): Promise<unknown
 export async function executeCommercialRoute(
   operationId: CommercialOperationId,
   input: CommercialJsonObject = {},
+  requestId: string = randomUUID(),
 ): Promise<CommercialRouteResult> {
   const result = await getCommercialOperationRuntime().execute({
     contractVersion: COMMERCIAL_OPERATION_CONTRACT_VERSION,
-    requestId: randomUUID(),
+    requestId,
     operationId,
     input,
   }, 'service-api');

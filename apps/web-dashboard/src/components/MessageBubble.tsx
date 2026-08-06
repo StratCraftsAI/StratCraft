@@ -27,6 +27,8 @@ const RegimeStrategyConfigCard = optionalPage(
 interface Props {
   message: ChatMessage
   onGuidedAction?: (action: GuidedAction) => Promise<GuidedActionDispatchResult>
+  /** AI Studio actions require the admitted Guide Agent turn owned by onSend. */
+  onAgentMessage?: (text: string) => void
   /** TICKET_1237_4: deliver a T2 confirm verdict for a paused agent tool call. */
   onAgentConfirm?: (
     confirmationId: string,
@@ -35,7 +37,7 @@ interface Props {
   ) => void
 }
 
-export function MessageBubble({ message, onGuidedAction, onAgentConfirm }: Props) {
+export function MessageBubble({ message, onGuidedAction, onAgentMessage, onAgentConfirm }: Props) {
   const { t } = useTranslation('dashboard')
   const isUser = message.role === 'user'
   const handleAction = onGuidedAction ?? (async () => ({ ok: false as const, error: 'Guided actions are unavailable.' }))
@@ -236,7 +238,7 @@ export function MessageBubble({ message, onGuidedAction, onAgentConfirm }: Props
       {message.visualization?.type === 'ai_studio_action' && message.visualization.guided?.type === 'ai_studio_action' && (
         <AIStudioActionCard
           data={message.visualization.guided as GuidedAIStudioAction}
-          onAction={handleAction}
+          onSend={onAgentMessage ?? (() => {})}
         />
       )}
     </div>

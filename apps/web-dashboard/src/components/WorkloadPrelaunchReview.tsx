@@ -399,6 +399,7 @@ export function WorkloadPrelaunchReview({ data, onAction, superseded = false }: 
         args: {
           specification_id: review.specificationId,
           plan_fingerprint: review.planFingerprint,
+          correlation_id: crypto.randomUUID(),
           review,
           edits,
         },
@@ -417,6 +418,7 @@ export function WorkloadPrelaunchReview({ data, onAction, superseded = false }: 
           review,
           plan_fingerprint: review.planFingerprint,
           idempotency_key: `factor-mining:${review.reviewSessionId ?? review.planFingerprint}:${review.planFingerprint}`,
+          correlation_id: crypto.randomUUID(),
         },
       })
       setLaunchInFlight(false)

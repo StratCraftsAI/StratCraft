@@ -20,7 +20,10 @@ FAKE_JOURNALCTL="$SCRIPT_DIR/fixtures/fake-journalctl.sh"
 # ever report failure; what these tests own is the readiness contract around
 # the verdict, not the browser itself.
 FAKE_BROWSER_READINESS="$SCRIPT_DIR/fixtures/fake-browser-readiness.mjs"
+FAKE_COMPOSITION_DESCRIPTOR="$SCRIPT_DIR/fixtures/fake-runtime-composition.mjs"
+FAKE_CATALOG_PROBE="$SCRIPT_DIR/fixtures/fake-mcp-catalog-probe.mjs"
 DEV_IDENTITY_SCRIPT="$ROOT/plugins/quant-lab-nexus/scripts/ensure-dev-signing-identity.mjs"
+START_CONSTANTS="$ROOT/scripts/start-constants.sh"
 TEST_TMP="$(mktemp -d)"
 OWNED_PIDS=()
 PASS_COUNT=0
@@ -44,9 +47,12 @@ trap cleanup EXIT
 
 export STRATCRAFT_SERVICE_RUNTIME_LAUNCHER="$FAKE_SERVICE_API"
 export STRATCRAFT_SERVICE_API_DISCOVERY_DIR="$TEST_TMP/service-api-discovery"
+export STRATCRAFT_RUNTIME_COMPOSITION_DESCRIPTOR="$FAKE_COMPOSITION_DESCRIPTOR"
 
 # shellcheck source=apps/web-dashboard/dev-lifecycle.sh
 source "$HELPERS"
+# shellcheck source=scripts/start-constants.sh
+source "$START_CONSTANTS"
 
 fail() {
   echo "FAIL: $*" >&2
@@ -159,6 +165,7 @@ run_foreground() {
     STRATCRAFT_WEBDASH_STARTUP_DELAY_SECONDS=0.02 \
     STRATCRAFT_MCP_NODE_BIN="$FAKE_HTTP" \
     STRATCRAFT_VITE_BIN="$FAKE_HTTP" \
+    STRATCRAFT_RUNTIME_COMPOSITION_DESCRIPTOR="$FAKE_COMPOSITION_DESCRIPTOR" \
     "$@" \
     bash "$START_DEV" > "$output" 2>&1 && status=0 || status=$?
   return "$status"
@@ -171,6 +178,12 @@ run_background() {
   local command="$4"
   shift 4
   local status
+  local composition_file="$TEST_TMP/service-api-discovery/guide-runtime-composition.json"
+  if [ -f "$TEST_TMP/main.pid" ] && [ "${FAKE_SKIP_RUNTIME_IDENTITY:-0}" != "1" ]; then
+    mkdir -p "$(dirname "$composition_file")"
+    printf '{"schemaVersion":1,"mainPid":%s,"fingerprint":"%s","tools":["fixture_tool"]}\n' \
+      "$(cat "$TEST_TMP/main.pid")" "${FAKE_COMPOSITION_FINGERPRINT:-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}" > "$composition_file"
+  fi
   env \
     STRATCRAFT_MCP_PORT="$mcp_port" \
     STRATCRAFT_WEB_DASHBOARD_PORT="$vite_port" \
@@ -187,6 +200,8 @@ run_background() {
     FAKE_SYSTEMD_MAIN_PID_FILE="$TEST_TMP/main.pid" \
     FAKE_SYSTEMD_SERVICE_LOG="$TEST_TMP/service.log" \
     STRATCRAFT_BROWSER_READINESS_PROBE="$FAKE_BROWSER_READINESS" \
+    STRATCRAFT_RUNTIME_COMPOSITION_DESCRIPTOR="$FAKE_COMPOSITION_DESCRIPTOR" \
+    STRATCRAFT_MCP_CATALOG_PROBE="$FAKE_CATALOG_PROBE" \
     "$@" \
     bash "$START_BG" "$command" > "$output" 2>&1 && status=0 || status=$?
   return "$status"
@@ -206,12 +221,113 @@ if (pkg.scripts['dev:webdash'] !== 'bash apps/web-dashboard/start-dev.sh') proce
 if (webPkg.scripts.dev !== 'bash start-dev.sh') process.exit(4);
 const start = fs.readFileSync(path.join(root, 'start.sh'), 'utf8');
 const build = start.match(/build_prod\(\) \{([\s\S]*?)\n\}/)?.[1] ?? '';
-const safeStarts = build.match(/start-dev-bg\.sh" start/g) ?? [];
+const safeStarts = build.match(/start-dev-bg\.sh" refresh/g) ?? [];
 if (safeStarts.length !== 1) process.exit(5);
 if (/start-dev-bg\.sh" stop|start-dev\.sh" --bg/.test(build)) process.exit(6);
-if (!/start-dev-bg\.sh" start \|\| \{[\s\S]*?return 1/.test(build)) process.exit(7);
+if (!/start-dev-bg\.sh" refresh \|\| \{[\s\S]*?return 1/.test(build)) process.exit(7);
+const commercialReconciles = build.match(/quant_lab_dev_install \|\| \{/g) ?? [];
+if (commercialReconciles.length !== 1) process.exit(8);
+if (build.indexOf('quant_lab_dev_install || {') > build.indexOf('start-dev-bg.sh" refresh')) process.exit(9);
+if (!start.includes('version="${base_version}-dev.${package_input_fp:0:12}"')) process.exit(10);
+if (start.includes('--skip-health')) process.exit(11);
+if (!start.includes('status.packageManifestSha256 !== expectedManifest')) process.exit(12);
+if (start.includes('$PLUGIN_ROOT/assets/factor-engines')) process.exit(13);
 NODE
-pass "Electron dev excludes Guide; build delegates one fail-fast supervised start"
+pass "Build reconciles the signed commercial package before one fail-fast supervised Guide start"
+
+# TICKET_1382: runtime composition must describe the lifecycle-owned active
+# commercial package, not the marketplace presentation copy. Use an isolated
+# immutable package fixture so this test never depends on or mutates developer
+# application state.
+COMMERCIAL_FIXTURE_ROOT="$TEST_TMP/commercial-package"
+COMMERCIAL_FIXTURE_SOURCE="$TEST_TMP/commercial-source"
+node - "$COMMERCIAL_FIXTURE_ROOT" "$COMMERCIAL_FIXTURE_SOURCE" <<'NODE'
+const crypto = require('node:crypto');
+const fs = require('node:fs');
+const path = require('node:path');
+const [installRoot, sourceRoot] = process.argv.slice(2);
+const packageRoot = path.join(installRoot, 'versions/1.0.0-dev.fixture');
+fs.mkdirSync(path.join(packageRoot, 'host'), { recursive: true });
+fs.mkdirSync(sourceRoot, { recursive: true });
+const files = {
+  'host/register.cjs': 'module.exports = { fixture: "register" };\n',
+  'host/commercial-operation.cjs': 'module.exports = { fixture: "operation" };\n',
+  'host/commercial-stores.cjs': 'module.exports = { fixture: "stores" };\n',
+};
+const digest = (bytes) => crypto.createHash('sha256').update(bytes).digest('hex');
+for (const [relative, content] of Object.entries(files)) {
+  fs.writeFileSync(path.join(packageRoot, relative), content);
+  fs.writeFileSync(path.join(sourceRoot, path.basename(relative)), content);
+}
+const signedFiles = Object.entries(files).map(([relativePath, content]) => ({
+  relativePath, sha256: digest(content),
+}));
+const manifest = {
+  packageId: 'com.stratcraft.quant-lab',
+  packageVersion: '1.0.0-dev.fixture',
+  hostModule: {
+    relativePath: 'host/register.cjs',
+    sha256: signedFiles[0].sha256,
+    operationContractVersion: '1.0.0',
+  },
+  signedFiles,
+  signature: { signatureRelativePath: 'research-worker-package.sig' },
+};
+fs.writeFileSync(path.join(packageRoot, 'research-worker-package.json'), `${JSON.stringify(manifest)}\n`);
+fs.writeFileSync(path.join(packageRoot, 'research-worker-package.sig'), 'fixture-signature');
+fs.writeFileSync(path.join(installRoot, 'active.json'), JSON.stringify({
+  schemaVersion: 1,
+  versionDirectory: 'versions/1.0.0-dev.fixture',
+  manifestRelativePath: 'research-worker-package.json',
+}));
+NODE
+
+# TICKET_1381: the build-readiness probe uses a fresh, unactivated MCP
+# session. Its expected catalog must retain ordinary tools while excluding T2
+# tools that the authoritative security contract intentionally hides until
+# browser-backed human activation.
+RUNTIME_COMPOSITION="$(
+  STRATCRAFT_WORKER_INSTALL_ROOT="$COMMERCIAL_FIXTURE_ROOT" \
+  STRATCRAFT_COMMERCIAL_HOST_SOURCE_DIR="$COMMERCIAL_FIXTURE_SOURCE" \
+  node "$ROOT/apps/web-dashboard/scripts/runtime-composition.mjs" describe
+)"
+printf '%s' "$RUNTIME_COMPOSITION" | node -e '
+const value = JSON.parse(require("fs").readFileSync(0, "utf8"));
+if (!value.tools.includes("confirm_and_start_factor_mining")) process.exit(1);
+if (value.tools.includes("activate_license")) process.exit(2);
+if (value.commercialPackage.packageVersion !== "1.0.0-dev.fixture") process.exit(3);
+' || fail "Runtime composition catalog does not match the unactivated MCP security contract"
+pass "Runtime composition uses the active commercial package and authoritative unactivated MCP catalog"
+
+printf '%s\n' 'module.exports = { fixture: "changed-source" };' \
+  > "$COMMERCIAL_FIXTURE_SOURCE/commercial-operation.cjs"
+OUTPUT="$TEST_TMP/runtime-composition-stale-commercial.log"
+set +e
+STRATCRAFT_WORKER_INSTALL_ROOT="$COMMERCIAL_FIXTURE_ROOT" \
+STRATCRAFT_COMMERCIAL_HOST_SOURCE_DIR="$COMMERCIAL_FIXTURE_SOURCE" \
+  node "$ROOT/apps/web-dashboard/scripts/runtime-composition.mjs" describe > "$OUTPUT" 2>&1
+STATUS=$?
+set -e
+assert_status 1 "$STATUS" "runtime composition stale commercial package"
+assert_contains "$OUTPUT" "active commercial host is stale for host/commercial-operation.cjs"
+pass "Runtime composition rejects a stale active signed commercial host"
+printf '%s\n' 'module.exports = { fixture: "operation" };' \
+  > "$COMMERCIAL_FIXTURE_SOURCE/commercial-operation.cjs"
+
+MALFORMED_CAPABILITY_MANIFEST="$TEST_TMP/malformed-capability-manifest.json"
+printf '%s\n' '{"capabilities":[{"mcpTools":["undeclared_tool"]}],"mutationAuthorities":[]}' \
+  > "$MALFORMED_CAPABILITY_MANIFEST"
+OUTPUT="$TEST_TMP/runtime-composition-missing-authority.log"
+set +e
+STRATCRAFT_RUNTIME_CAPABILITY_MANIFEST="$MALFORMED_CAPABILITY_MANIFEST" \
+STRATCRAFT_WORKER_INSTALL_ROOT="$COMMERCIAL_FIXTURE_ROOT" \
+STRATCRAFT_COMMERCIAL_HOST_SOURCE_DIR="$COMMERCIAL_FIXTURE_SOURCE" \
+  node "$ROOT/apps/web-dashboard/scripts/runtime-composition.mjs" describe > "$OUTPUT" 2>&1
+STATUS=$?
+set -e
+assert_status 1 "$STATUS" "runtime composition missing mutation authority"
+assert_contains "$OUTPUT" "runtime tools are missing mutation authority declarations: undeclared_tool"
+pass "Runtime composition fails fast when a tool lacks mutation authority"
 
 # TICKET_1297_1: every documented entrypoint is invoked as `./start.sh ...`,
 # so the executable bit is part of the contract, not a file attribute. It was
@@ -629,6 +745,122 @@ assert_status 1 "$STATUS" "invalid development identity"
 assert_contains "$TEST_TMP/identity-invalid.err" "incomplete or invalid"
 mv "$TEST_TMP/valid-dev-trust.json" "$DEV_TRUST_STORE"
 pass "Development identity discovery distinguishes valid, absent, and invalid state"
+
+# Both development hosts consume one trust resolver. Cover its absence,
+# existing-identity, explicit-override, malformed-identity, and missing-owner
+# branches without touching the developer's real configuration.
+unset STRATCRAFT_WORKER_TRUST_STORE
+EMPTY_IDENTITY_ROOT="$TEST_TMP/empty-identity-config"
+XDG_CONFIG_HOME="$EMPTY_IDENTITY_ROOT" \
+  stratcraft_resolve_development_worker_trust "$ROOT" node \
+  || fail "Shared development trust resolver rejected an absent identity"
+[ -z "${STRATCRAFT_WORKER_TRUST_STORE:-}" ] \
+  || fail "Absent development identity overrode production trust resolution"
+
+unset STRATCRAFT_WORKER_TRUST_STORE
+XDG_CONFIG_HOME="$IDENTITY_CONFIG_ROOT" \
+  stratcraft_resolve_development_worker_trust "$ROOT" node \
+  || fail "Shared development trust resolver rejected a valid identity"
+[ "$STRATCRAFT_WORKER_TRUST_STORE" = "$DEV_TRUST_STORE" ] \
+  || fail "Shared development trust resolver returned a different lifecycle trust store"
+
+EXPLICIT_TRUST="$TEST_TMP/explicit-trust.json"
+STRATCRAFT_WORKER_TRUST_STORE="$EXPLICIT_TRUST"
+XDG_CONFIG_HOME="$EMPTY_IDENTITY_ROOT" \
+  stratcraft_resolve_development_worker_trust "$ROOT" node \
+  || fail "Shared development trust resolver rejected an explicit override"
+[ "$STRATCRAFT_WORKER_TRUST_STORE" = "$EXPLICIT_TRUST" ] \
+  || fail "Shared development trust resolver replaced an explicit override"
+
+unset STRATCRAFT_WORKER_TRUST_STORE
+cp "$DEV_TRUST_STORE" "$TEST_TMP/valid-dev-trust-resolver.json"
+printf '%s\n' '{"schemaVersion":1,"keys":[]}' > "$DEV_TRUST_STORE"
+if XDG_CONFIG_HOME="$IDENTITY_CONFIG_ROOT" \
+  stratcraft_resolve_development_worker_trust "$ROOT" node \
+  > "$TEST_TMP/resolver-invalid.log" 2>&1; then
+  fail "Shared development trust resolver accepted a malformed identity"
+fi
+assert_contains "$TEST_TMP/resolver-invalid.log" "development signing identity is invalid"
+mv "$TEST_TMP/valid-dev-trust-resolver.json" "$DEV_TRUST_STORE"
+
+unset STRATCRAFT_WORKER_TRUST_STORE
+if stratcraft_resolve_development_worker_trust "" node \
+  > "$TEST_TMP/resolver-empty-root.log" 2>&1; then
+  fail "Shared development trust resolver accepted an empty repository root"
+fi
+assert_contains "$TEST_TMP/resolver-empty-root.log" "without the repository root"
+
+unset STRATCRAFT_WORKER_TRUST_STORE
+if stratcraft_resolve_development_worker_trust "$TEST_TMP/missing-root" node \
+  > "$TEST_TMP/resolver-missing-owner.log" 2>&1; then
+  fail "Shared development trust resolver accepted a missing identity owner"
+fi
+assert_contains "$TEST_TMP/resolver-missing-owner.log" "development identity owner is missing"
+
+FAKE_IDENTITY_ROOT="$TEST_TMP/fake-identity-root"
+mkdir -p "$FAKE_IDENTITY_ROOT/plugins/quant-lab-nexus/scripts"
+: > "$FAKE_IDENTITY_ROOT/plugins/quant-lab-nexus/scripts/ensure-dev-signing-identity.mjs"
+EMPTY_TRUST_NODE="$TEST_TMP/empty-trust-node.sh"
+cat > "$EMPTY_TRUST_NODE" <<'NODE'
+#!/usr/bin/env bash
+if [ "${1:-}" = "-e" ]; then
+  exit 0
+fi
+printf '%s\n' '{}'
+NODE
+chmod +x "$EMPTY_TRUST_NODE"
+unset STRATCRAFT_WORKER_TRUST_STORE
+if stratcraft_resolve_development_worker_trust "$FAKE_IDENTITY_ROOT" "$EMPTY_TRUST_NODE" \
+  > "$TEST_TMP/resolver-empty-trust.log" 2>&1; then
+  fail "Shared development trust resolver accepted an empty trust-store path"
+fi
+assert_contains "$TEST_TMP/resolver-empty-trust.log" "did not provide a valid trust-store path"
+
+FAILED_PARSE_NODE="$TEST_TMP/failed-parse-node.sh"
+cat > "$FAILED_PARSE_NODE" <<'NODE'
+#!/usr/bin/env bash
+if [ "${1:-}" = "-e" ]; then
+  exit 1
+fi
+printf '%s\n' '{}'
+NODE
+chmod +x "$FAILED_PARSE_NODE"
+unset STRATCRAFT_WORKER_TRUST_STORE
+if stratcraft_resolve_development_worker_trust "$FAKE_IDENTITY_ROOT" "$FAILED_PARSE_NODE" \
+  > "$TEST_TMP/resolver-failed-parse.log" 2>&1; then
+  fail "Shared development trust resolver accepted an unreadable trust-store path"
+fi
+assert_contains "$TEST_TMP/resolver-failed-parse.log" "did not provide a valid trust-store path"
+pass "Electron and Guide share complete development trust resolution behavior"
+
+# The preflight budget is the measured watcher demand plus a named margin.
+# Exact headroom is accepted and one instance below is rejected.
+INOTIFY_PROBE="$TEST_TMP/inotify-probe.sh"
+cat > "$INOTIFY_PROBE" <<PROBE
+#!/usr/bin/env bash
+set -e
+source "$START_CONSTANTS"
+$(sed -n '/^electron_dev_inotify_headroom_is_sufficient()/,/^}/p' "$ROOT/start.sh")
+electron_dev_inotify_headroom_is_sufficient "\$1"
+PROBE
+chmod +x "$INOTIFY_PROBE"
+[ "$ELECTRON_DEV_INOTIFY_REQUIRED_HEADROOM" -eq $((
+  ELECTRON_DEV_INOTIFY_MEASURED_DEMAND + ELECTRON_DEV_INOTIFY_SAFETY_MARGIN
+)) ] || fail "Inotify headroom does not equal measured demand plus safety margin"
+bash "$INOTIFY_PROBE" "$ELECTRON_DEV_INOTIFY_REQUIRED_HEADROOM" \
+  || fail "Inotify preflight rejected exact required headroom"
+if bash "$INOTIFY_PROBE" "$((ELECTRON_DEV_INOTIFY_REQUIRED_HEADROOM - 1))"; then
+  fail "Inotify preflight accepted insufficient headroom"
+fi
+
+node - "$ROOT/start.sh" <<'NODE' || fail "start.sh does not consume the authoritative inotify budget"
+const fs = require('node:fs');
+const start = fs.readFileSync(process.argv[2], 'utf8');
+if (!start.includes('source "$ROOT_DIR/scripts/start-constants.sh"')) process.exit(1);
+if (!start.includes('"$ELECTRON_DEV_INOTIFY_REQUIRED_HEADROOM"')) process.exit(2);
+if (/dev watchers need ~70/.test(start)) process.exit(3);
+NODE
+pass "Inotify preflight uses measured demand, explicit margin, and boundary checks"
 
 # Unsupported background mode is redirected to the supervised owner.
 OUTPUT="$TEST_TMP/unsupported.log"
@@ -1083,7 +1315,8 @@ start_foreign_listener "$MCP_PORT"
 ACTIVE_MCP_PID="$STARTED_PID"
 start_foreign_listener "$VITE_PORT"
 ACTIVE_VITE_PID="$STARTED_PID"
-"$FAKE_SERVICE_API" > "$TEST_TMP/active-service.log" 2>&1 &
+STRATCRAFT_RUNTIME_COMPOSITION_FINGERPRINT=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \
+  "$FAKE_SERVICE_API" > "$TEST_TMP/active-service.log" 2>&1 &
 ACTIVE_SERVICE_PID=$!
 OWNED_PIDS+=("$ACTIVE_SERVICE_PID")
 webdash_wait_for_service_api \
@@ -1136,7 +1369,8 @@ start_foreign_listener "$MCP_PORT"
 ACTIVE_MCP_PID="$STARTED_PID"
 start_foreign_listener "$VITE_PORT"
 ACTIVE_VITE_PID="$STARTED_PID"
-"$FAKE_SERVICE_API" > "$TEST_TMP/browser-service.log" 2>&1 &
+STRATCRAFT_RUNTIME_COMPOSITION_FINGERPRINT=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \
+  "$FAKE_SERVICE_API" > "$TEST_TMP/browser-service.log" 2>&1 &
 ACTIVE_SERVICE_PID=$!
 OWNED_PIDS+=("$ACTIVE_SERVICE_PID")
 webdash_wait_for_service_api \
@@ -1179,6 +1413,94 @@ stop_owned_pid "$ACTIVE_VITE_PID"
 stop_owned_pid "$ACTIVE_SERVICE_PID"
 rm -f "$TEST_TMP/main.pid"
 pass "Guide readiness includes browser rendering and never restarts an incumbent"
+
+# TICKET_1381: health and browser readiness without positive runtime identity
+# are not build-to-runtime parity. The active unit remains untouched.
+read -r MCP_PORT VITE_PORT < <(allocate_ports)
+start_foreign_listener "$MCP_PORT"
+ACTIVE_MCP_PID="$STARTED_PID"
+start_foreign_listener "$VITE_PORT"
+ACTIVE_VITE_PID="$STARTED_PID"
+printf '%s\n' "$ACTIVE_MCP_PID" > "$TEST_TMP/main.pid"
+rm -f "$STRATCRAFT_SERVICE_API_DISCOVERY_DIR/guide-runtime-composition.json"
+export FAKE_SKIP_RUNTIME_IDENTITY=1
+OUTPUT="$TEST_TMP/background-missing-composition.log"
+set +e
+run_background "$OUTPUT" "$MCP_PORT" "$VITE_PORT" start FAKE_SYSTEMCTL_ACTIVE=1
+STATUS=$?
+set -e
+unset FAKE_SKIP_RUNTIME_IDENTITY
+assert_status 1 "$STATUS" "active unit missing composition fingerprint"
+assert_contains "$OUTPUT" "actual=missing"
+assert_contains "$OUTPUT" "Owner action: bash apps/web-dashboard/start-dev-bg.sh refresh"
+kill -0 "$ACTIVE_MCP_PID" 2>/dev/null || fail "Missing identity check killed the MCP listener"
+kill -0 "$ACTIVE_VITE_PID" 2>/dev/null || fail "Missing identity check killed the Vite listener"
+stop_owned_pid "$ACTIVE_MCP_PID"
+stop_owned_pid "$ACTIVE_VITE_PID"
+rm -f "$TEST_TMP/main.pid"
+pass "Port and browser health without composition identity is rejected"
+
+# A stale positively identified unit is eligible for refresh, but a failed
+# owner-scoped stop aborts before any replacement is launched.
+read -r MCP_PORT VITE_PORT < <(allocate_ports)
+start_foreign_listener "$MCP_PORT"
+ACTIVE_MCP_PID="$STARTED_PID"
+start_foreign_listener "$VITE_PORT"
+ACTIVE_VITE_PID="$STARTED_PID"
+printf '%s\n' "$ACTIVE_MCP_PID" > "$TEST_TMP/main.pid"
+mkdir -p "$STRATCRAFT_SERVICE_API_DISCOVERY_DIR"
+printf '{"schemaVersion":1,"mainPid":%s,"fingerprint":"%s","tools":[]}\n' \
+  "$ACTIVE_MCP_PID" bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb \
+  > "$STRATCRAFT_SERVICE_API_DISCOVERY_DIR/guide-runtime-composition.json"
+export FAKE_SKIP_RUNTIME_IDENTITY=1
+rm -f "$TEST_TMP/systemd-run.log"
+OUTPUT="$TEST_TMP/background-stale-stop-failure.log"
+set +e
+run_background "$OUTPUT" "$MCP_PORT" "$VITE_PORT" refresh \
+  FAKE_SYSTEMCTL_ACTIVE=1 FAKE_SYSTEMCTL_STOP_STATUS=9
+STATUS=$?
+set -e
+unset FAKE_SKIP_RUNTIME_IDENTITY
+assert_status 1 "$STATUS" "stale unit owner stop failure"
+assert_contains "$OUTPUT" "Refreshing positively owned stale unit"
+assert_contains "$OUTPUT" "Failed to stop stale owned unit"
+[ ! -e "$TEST_TMP/systemd-run.log" ] || fail "Failed stale stop launched a replacement unit"
+kill -0 "$ACTIVE_MCP_PID" 2>/dev/null || fail "Failed owner stop killed the MCP listener"
+kill -0 "$ACTIVE_VITE_PID" 2>/dev/null || fail "Failed owner stop killed the Vite listener"
+stop_owned_pid "$ACTIVE_MCP_PID"
+stop_owned_pid "$ACTIVE_VITE_PID"
+rm -f "$TEST_TMP/main.pid"
+pass "Stale refresh is unit-scoped and failed refresh never launches replacement"
+
+# Fingerprint parity is still insufficient when the live tool registry does
+# not contain the build-declared catalog.
+read -r MCP_PORT VITE_PORT < <(allocate_ports)
+start_foreign_listener "$MCP_PORT"
+ACTIVE_MCP_PID="$STARTED_PID"
+start_foreign_listener "$VITE_PORT"
+ACTIVE_VITE_PID="$STARTED_PID"
+STRATCRAFT_RUNTIME_COMPOSITION_FINGERPRINT=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \
+  "$FAKE_SERVICE_API" > "$TEST_TMP/catalog-service.log" 2>&1 &
+ACTIVE_SERVICE_PID=$!
+OWNED_PIDS+=("$ACTIVE_SERVICE_PID")
+webdash_wait_for_service_api "$STRATCRAFT_SERVICE_API_DISCOVERY_DIR" "$ACTIVE_SERVICE_PID" 30 0.02 curl >/dev/null \
+  || fail "Catalog mismatch Service API fixture did not become healthy"
+printf '%s\n' "$ACTIVE_MCP_PID" > "$TEST_TMP/main.pid"
+OUTPUT="$TEST_TMP/background-catalog-mismatch.log"
+set +e
+run_background "$OUTPUT" "$MCP_PORT" "$VITE_PORT" start \
+  FAKE_SYSTEMCTL_ACTIVE=1 FAKE_MCP_CATALOG_RESULT=mismatch
+STATUS=$?
+set -e
+assert_status 1 "$STATUS" "live MCP catalog mismatch"
+assert_contains "$OUTPUT" "MCP catalog proof failed"
+kill -0 "$ACTIVE_MCP_PID" 2>/dev/null || fail "Catalog proof killed the MCP listener"
+kill -0 "$ACTIVE_VITE_PID" 2>/dev/null || fail "Catalog proof killed the Vite listener"
+stop_owned_pid "$ACTIVE_MCP_PID"
+stop_owned_pid "$ACTIVE_VITE_PID"
+stop_owned_pid "$ACTIVE_SERVICE_PID"
+rm -f "$TEST_TMP/main.pid"
+pass "Post-readiness live MCP catalog mismatch is rejected"
 
 # A systemd-run failure and either child failing during background startup are
 # propagated and scoped cleanup is requested for the development unit.

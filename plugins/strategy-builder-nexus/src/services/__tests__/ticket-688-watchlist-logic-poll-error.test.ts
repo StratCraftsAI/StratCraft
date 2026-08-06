@@ -301,6 +301,47 @@ describe('TICKET_688 Task F: poll error reads data.result.error.error_message', 
     ).rejects.toThrow('AI analysis service temporarily unavailable');
   });
 
+  it('lets a domain decoder reject an HTTP-200 failed task before completion mapping', async () => {
+    mockGetAccessToken.mockResolvedValue({ success: true, data: 'test-access-token' });
+    mockApiProxy
+      .mockResolvedValueOnce({
+        status: 200,
+        body: JSON.stringify({ success: true, data: { task_id: 'task-failed-200' } }),
+      })
+      .mockResolvedValueOnce({
+        status: 200,
+        body: JSON.stringify({
+          success: false,
+          data: { status: 'failed', result: { error: { error_code: 'LLM_SERVICE_ERROR' } } },
+        }),
+      });
+
+    const decodeTaskFailure = vi.fn((response: unknown) => {
+      const body = response as { data?: { status?: string } };
+      return body.data?.status === 'failed'
+        ? { message: 'Decoded provider failure', backendCode: 'LLM_SERVICE_ERROR' }
+        : undefined;
+    });
+
+    const operation = pluginApiClient.executeWithPolling({
+      initialData: { test: true },
+      startEndpoint: '/api/vibing_chat',
+      pollEndpoint: '/api/check_vibing_chat_status',
+      decodeTaskFailure,
+      handlePollResponse: () => ({
+        isComplete: true,
+        result: 'must-not-complete',
+        rawResponse: null,
+      }),
+    });
+
+    await expect(operation).rejects.toMatchObject({
+      message: 'Decoded provider failure',
+      code: 'LLM_SERVICE_ERROR',
+    });
+    expect(decodeTaskFailure).toHaveBeenCalledTimes(2);
+  });
+
   it('should extract message from data.result.error.message (proxy-normalized TICKET_682 format)', async () => {
     mockGetAccessToken.mockResolvedValue({ success: true, data: 'test-access-token' });
 

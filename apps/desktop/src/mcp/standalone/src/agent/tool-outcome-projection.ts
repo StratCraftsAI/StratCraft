@@ -20,6 +20,7 @@ const CORRELATION_ID_PATTERN = /^[A-Za-z0-9._:-]{1,128}$/;
 const SECRET_PARAMETER_PATTERN = /(?:authorization|assertion|challenge|cookie|credential|password|secret|token|api[_-]?key|csrf)/i;
 const UNSAFE_DIAGNOSTIC_PROSE_PATTERN = /^(?:body|detail|error|html|message|response|stack)$/i;
 const SAFE_DIAGNOSTIC_STRING_FIELD_PATTERN = /^(?:category|code|correlation_?id|errorCode|kind|status|type)$/;
+const SAFE_DIAGNOSTIC_TOKEN_FIELD_PATTERN = /^(?:backend_code|failed_stage|task_id|validator_error_code)$/;
 const SECRET_VALUE_PATTERN = /(?:Bearer\s+\S+|sk-[A-Za-z0-9_-]{8,}|github_pat_[A-Za-z0-9_]+|webauthn[-_: ](?:assertion|challenge)[-_: =][^\s,}"']+)/i;
 const OMITTED_DIAGNOSTIC_TEXT = '[text-omitted]';
 const OMITTED_UNSTRUCTURED_DIAGNOSTIC = '[unstructured-payload-omitted]';
@@ -229,6 +230,14 @@ function diagnosticSummary(
 function sanitizeDiagnosticValue(value: unknown, depth = 0, key?: string): unknown {
   if (depth >= AGENT_TOOL_OUTCOME_DIAGNOSTIC_MAX_DEPTH) return '[depth-limit]';
   if (typeof value === 'string') {
+    if (
+      key !== undefined
+      && SAFE_DIAGNOSTIC_TOKEN_FIELD_PATTERN.test(key)
+      && CORRELATION_ID_PATTERN.test(value)
+      && !SECRET_VALUE_PATTERN.test(value)
+    ) {
+      return value;
+    }
     if (
       key !== undefined
       && SAFE_DIAGNOSTIC_STRING_FIELD_PATTERN.test(key)

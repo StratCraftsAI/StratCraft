@@ -397,6 +397,47 @@ describe('executeVibingChat', () => {
     expect((globalThis.fetch as Mock).mock.calls).toHaveLength(1);
   });
 
+  it('preserves an HTTP-200 failed-task code before generic transport handling', async () => {
+    globalThis.fetch = vi.fn()
+      .mockResolvedValueOnce({
+        ok: true,
+        json: vi.fn().mockResolvedValue({
+          success: true,
+          data: { task_id: 'VIBE-FAILED-200', status: 'processing' },
+        }),
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: vi.fn().mockResolvedValue({
+          success: false,
+          data: {
+            task_id: 'VIBE-FAILED-200',
+            status: 'failed',
+            result: {
+              error: {
+                error_code: 'LLM_SERVICE_ERROR',
+                error_message: 'Provider generation failed.',
+              },
+            },
+          },
+        }),
+      });
+
+    await expect(executeVibingChat(CONFIG, {
+      task_id: 'VIBE-FAILED-200',
+    })).resolves.toEqual({
+      success: false,
+      error: 'Provider generation failed.',
+      errorCode: 'LLM_SERVICE_ERROR',
+      taskFailure: {
+        status: 'failed',
+        backendCode: 'LLM_SERVICE_ERROR',
+        message: 'Provider generation failed.',
+        taskId: 'VIBE-FAILED-200',
+      },
+    });
+  });
+
   it('never targets the nonexistent Electron session route on nona_server', async () => {
     globalThis.fetch = mockFetchHttpError(401);
     await executeVibingChat(CONFIG, { task_id: 'VIBE-401' });

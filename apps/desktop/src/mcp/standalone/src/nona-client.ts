@@ -16,6 +16,10 @@ import {
   API_CHECK_VIBING_CHAT,
 } from '@StratCraft/types';
 import {
+  decodeVibingChatTaskFailure,
+  type VibingChatTaskFailure,
+} from '@StratCraft/ai-studio-operations';
+import {
   MCP_REQUEST_TIMEOUT_MS,
   MCP_GENERATION_TIMEOUT_MS,
   MCP_GENERATION_POLL_INTERVAL_MS,
@@ -44,6 +48,8 @@ export interface ApiResponse<T = unknown> {
    * as a display string.
    */
   errorCode?: string;
+  /** Bounded structured evidence from a terminal Vibing Chat task. */
+  taskFailure?: VibingChatTaskFailure;
 }
 
 function extractApiErrorMessage(
@@ -369,6 +375,15 @@ export async function executeVibingChat(
         API_CHECK_VIBING_CHAT,
         { task_id: taskId },
       );
+    }
+    const taskFailure = decodeVibingChatTaskFailure(polled);
+    if (taskFailure) {
+      return {
+        success: false,
+        error: taskFailure.message,
+        ...(taskFailure.backendCode ? { errorCode: taskFailure.backendCode } : {}),
+        taskFailure,
+      };
     }
     if (polled.success === false) {
       if (

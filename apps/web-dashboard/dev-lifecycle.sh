@@ -9,6 +9,61 @@
 # re-deriving it from a port, an argv shape, or a process ancestor.
 WEBDASH_DEV_UNIT_NAME="${WEBDASH_DEV_UNIT_NAME:-stratcraft-webdash-dev}"
 
+# TICKET_1367: both Electron and Guide development hosts must activate a
+# development-installed Quant Lab package against the exact trust store used
+# by the lifecycle installer. Keep identity discovery here so the two launch
+# surfaces cannot drift. Discovery is read-only: it never creates or repairs
+# signing material, and an explicit environment override remains authoritative.
+stratcraft_resolve_development_worker_trust() {
+  local root="$1"
+  local node_bin="${2:-node}"
+  local identity_script
+  local identity_json
+  local identity_status
+  local trust_store
+
+  if [ -n "${STRATCRAFT_WORKER_TRUST_STORE:-}" ]; then
+    return 0
+  fi
+  if [ -z "$root" ]; then
+    echo "[ERROR] Cannot resolve Quant Lab development trust without the repository root" >&2
+    return 1
+  fi
+
+  identity_script="$root/plugins/quant-lab-nexus/scripts/ensure-dev-signing-identity.mjs"
+  if [ ! -f "$identity_script" ]; then
+    echo "[ERROR] Quant Lab development identity owner is missing: $identity_script" >&2
+    return 1
+  fi
+
+  if identity_json="$("$node_bin" "$identity_script" --existing)"; then
+    identity_status=0
+  else
+    identity_status=$?
+  fi
+
+  case "$identity_status" in
+    0)
+      if ! trust_store="$(
+        printf '%s' "$identity_json" \
+          | "$node_bin" -e "process.stdout.write(JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).trustStorePath)"
+      )" || [ -z "$trust_store" ]; then
+        echo "[ERROR] Quant Lab development identity did not provide a valid trust-store path" >&2
+        return 1
+      fi
+      STRATCRAFT_WORKER_TRUST_STORE="$trust_store"
+      export STRATCRAFT_WORKER_TRUST_STORE
+      ;;
+    3)
+      # No development identity: preserve packaged/production trust resolution.
+      ;;
+    *)
+      echo "[ERROR] Quant Lab development signing identity is invalid; run './start.sh quant-lab-dev-install' to repair it." >&2
+      return 1
+      ;;
+  esac
+}
+
 # TICKET_1297_1: pure cgroup-text predicate.
 #
 # Split out from the /proc reader so the positive branch is deterministically
@@ -269,6 +324,7 @@ webdash_wait_for_service_api() {
   local port
   local token
   local health
+  local expected_fingerprint="${STRATCRAFT_RUNTIME_COMPOSITION_FINGERPRINT:-}"
   local child_status
   local candidate_exited=0
 
@@ -292,7 +348,8 @@ webdash_wait_for_service_api() {
       token="$(tr -d '[:space:]' < "$token_file" 2>/dev/null || true)"
       if [[ "$port" =~ ^[0-9]+$ ]] && [ "$port" -ge 1 ] && [ "$port" -le 65535 ] && [ -n "$token" ]; then
         health="$($curl_bin --fail --silent --show-error --max-time 1 "http://127.0.0.1:$port/health" 2>/dev/null || true)"
-        if [[ "$health" == *'"status":"ok"'* ]]; then
+        if [[ "$health" == *'"status":"ok"'* ]] &&
+           { [ -z "$expected_fingerprint" ] || [[ "$health" == *"\"runtimeCompositionFingerprint\":\"$expected_fingerprint\""* ]]; }; then
           echo " ready on :$port"
           return 0
         fi

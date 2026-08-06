@@ -281,6 +281,11 @@ export const API_FACTOR_MINING_EDIT = '/api/v1/factor-mining/edit' as const;
 export const API_FACTOR_MINING_CONFIRM = '/api/v1/factor-mining/confirm' as const;
 export const API_FACTOR_MINING_STATUS = '/api/v1/factor-mining/status' as const;
 export const API_FACTOR_MINING_SESSIONS = '/api/v1/factor-mining/sessions' as const;
+export {
+  FACTOR_MINING_CORRELATION_HEADER,
+  FACTOR_MINING_TOOL_HEADER,
+  RUNTIME_COMPOSITION_HEADER,
+} from '@StratCraft/types';
 export const API_FACTOR_CATALOG_LIST = '/api/v1/factor-catalog/list' as const;
 // TICKET_1335 D2: catalog activation replaces package install/uninstall.
 export const API_FACTOR_CATALOG_ACTIVATE = '/api/v1/factor-catalog/activate' as const;

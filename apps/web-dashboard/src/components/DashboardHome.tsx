@@ -507,6 +507,7 @@ export function DashboardHome({
                 key={msg.id}
                 message={msg}
                 onGuidedAction={dispatchGuidedAction}
+                onAgentMessage={handleSend}
                 onAgentConfirm={handleAgentConfirm}
               />
             ))}

@@ -783,6 +783,9 @@ importers:
       vitest:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@25.9.5)(jsdom@25.0.1(bufferutil@4.1.0))
+      zod:
+        specifier: ^4.3.6
+        version: 4.3.6
 
   plugins/back-test-nexus:
     dependencies:

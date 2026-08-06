@@ -15,7 +15,9 @@ import {
   extractStrategyCode,
   buildVibingChatPayload,
   actionToMessage,
+  decodeVibingChatTaskFailure,
   isKnownVibingChatErrorCode,
+  normalizeVibingChatErrorCode,
   type VibingChatAction,
   type VibingChatResult,
   type StrategyRulesResponse,
@@ -106,7 +108,10 @@ export interface VibingChatResponse {
 // Behaviour is unchanged: same 7 codes, same validate-then-translate order.
 function resolveVibingChatErrorCode(code: string | undefined): string | undefined {
   if (!isKnownVibingChatErrorCode(code)) return undefined;
-  return i18n.t(`errorCodes.${code}`, { ns: 'strategy-builder' });
+  const normalized = normalizeVibingChatErrorCode(code);
+  return normalized
+    ? i18n.t(`errorCodes.${normalized}`, { ns: 'strategy-builder' })
+    : undefined;
 }
 
 /**
@@ -170,32 +175,45 @@ export async function executeVibingChat(
   console.debug('[VibingChat] Calling API:', API_ENDPOINTS.START);
   console.debug('[VibingChat] Request payload:', JSON.stringify(requestPayload, null, 2).substring(0, 1000));
 
-  return await pluginApiClient.executeWithPolling<VibingChatResponse>({
-    initialData: requestPayload,
-    startEndpoint: API_ENDPOINTS.START,
-    pollEndpoint: API_ENDPOINTS.STATUS,
-    pollInterval: VIBING_CHAT_POLL_INTERVAL_MS,
-    timeout: VIBING_CHAT_TIMEOUT_MS,
-    signal: externalSignal || config.signal,
+  try {
+    return await pluginApiClient.executeWithPolling<VibingChatResponse>({
+      initialData: requestPayload,
+      startEndpoint: API_ENDPOINTS.START,
+      pollEndpoint: API_ENDPOINTS.STATUS,
+      pollInterval: VIBING_CHAT_POLL_INTERVAL_MS,
+      timeout: VIBING_CHAT_TIMEOUT_MS,
+      signal: externalSignal || config.signal,
+      decodeTaskFailure: decodeVibingChatTaskFailure,
 
-    // TICKET_417: Centralized poll handler with VibingChat-specific result mapping
-    handlePollResponse: createStandardPollHandler<VibingChatResponse>(
-      'VibingChat',
-      (status, result) => {
-        const resp = result as Record<string, unknown> | undefined;
-        return {
-          success: status !== 'failed',
-          task_id: '',
-          session_id: (resp?.session_id as string) || '',
-          status: status as VibingChatResponse['status'],
-          result: resp as unknown as VibingChatResult | undefined,
-          error: resp?.error as VibingChatResponse['error'],
-          data: resp as VibingChatResponse['data'],
-          metadata: resp?.metadata as VibingChatResponse['metadata'],
-        } as VibingChatResponse;
-      },
-    ),
-  });
+      // TICKET_417: Centralized poll handler with VibingChat-specific result mapping
+      handlePollResponse: createStandardPollHandler<VibingChatResponse>(
+        'VibingChat',
+        (status, result) => {
+          const resp = result as Record<string, unknown> | undefined;
+          return {
+            success: status !== 'failed',
+            task_id: '',
+            session_id: (resp?.session_id as string) || '',
+            status: status as VibingChatResponse['status'],
+            result: resp as unknown as VibingChatResult | undefined,
+            error: resp?.error as VibingChatResponse['error'],
+            data: resp as VibingChatResponse['data'],
+            metadata: resp?.metadata as VibingChatResponse['metadata'],
+          } as VibingChatResponse;
+        },
+      ),
+    });
+  } catch (cause) {
+    const code = cause instanceof Error
+      ? (cause as Error & { code?: string }).code
+      : undefined;
+    const localizedMessage = resolveVibingChatErrorCode(code);
+    if (!localizedMessage) throw cause;
+    const error = new Error(localizedMessage) as Error & { code?: string; cause?: unknown };
+    error.code = code;
+    error.cause = cause;
+    throw error;
+  }
 }
 
 /**

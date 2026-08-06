@@ -52,7 +52,10 @@ if (mode === 'missing') {
 const server = http.createServer((request, response) => {
   if (request.url === '/health') {
     response.writeHead(200, { 'content-type': 'application/json' });
-    response.end('{"status":"ok"}');
+    response.end(JSON.stringify({
+      status: 'ok',
+      runtimeCompositionFingerprint: process.env.STRATCRAFT_RUNTIME_COMPOSITION_FINGERPRINT ?? null,
+    }));
     return;
   }
   response.writeHead(404);

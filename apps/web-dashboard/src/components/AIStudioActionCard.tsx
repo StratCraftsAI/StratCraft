@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import type { GuidedAction, GuidedActionDispatchResult, GuidedAIStudioAction } from '../types.ts'
+import type { GuidedAIStudioAction } from '../types.ts'
 
 interface Props {
   data: GuidedAIStudioAction
-  onAction: (action: GuidedAction) => Promise<GuidedActionDispatchResult>
+  onSend: (text: string) => void
 }
 
 function formatRuleValue(value: unknown): string {
@@ -13,7 +13,7 @@ function formatRuleValue(value: unknown): string {
   return String(value)
 }
 
-export function AIStudioActionCard({ data, onAction }: Props) {
+export function AIStudioActionCard({ data, onSend }: Props) {
   const { t } = useTranslation('dashboard')
   const [dispatched, setDispatched] = useState(false)
 
@@ -22,11 +22,7 @@ export function AIStudioActionCard({ data, onAction }: Props) {
 
   const handleGenerate = () => {
     setDispatched(true)
-    void onAction({
-      type: 'tool',
-      tool_name: 'run_ai_studio_action',
-      args: { action: 'generate_code' },
-    })
+    onSend('Generate the strategy code now.')
   }
 
   return (

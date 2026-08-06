@@ -22,7 +22,9 @@ import * as path from 'path';
 import {
   VIBING_CHAT_ERROR_CODES,
   VIBING_CHAT_PRESENTATION_PREFIX,
+  decodeVibingChatTaskFailure,
   isKnownVibingChatErrorCode,
+  normalizeVibingChatErrorCode,
   vibingChatPresentationKey,
 } from './vibing-chat-protocol';
 
@@ -125,6 +127,136 @@ describe('isKnownVibingChatErrorCode', () => {
 
   it('is case-sensitive so lowercased backend prose cannot pass', () => {
     expect(isKnownVibingChatErrorCode('code_generation_error')).toBe(false);
+  });
+});
+
+describe('backend error normalization', () => {
+  it.each([
+    ['LLM_SERVICE_ERROR', 'LLM_ERROR'],
+    ['LLM_SERVICE_UNAVAILABLE', 'NETWORK_ERROR'],
+    ['LLM_EMPTY_RESPONSE', 'CODE_GENERATION_ERROR'],
+    ['LLM_PARSE_ERROR', 'CODE_GENERATION_ERROR'],
+    ['LLM_SCHEMA_VALIDATION', 'CODE_GENERATION_ERROR'],
+    ['LLM_RESPONSE_FORMAT_REJECTED', 'CODE_GENERATION_ERROR'],
+    ['LLM_RATE_LIMIT', 'RATE_LIMIT'],
+    ['LLM_QUOTA_EXCEEDED', 'RATE_LIMIT'],
+    ['LLM_TIMEOUT', 'TIMEOUT'],
+    ['LLM_API_KEY_INVALID', 'AUTH_REQUIRED'],
+    ['LLM_BYOK_KEY_REQUIRED', 'AUTH_REQUIRED'],
+    ['LLM_BYOK_MODEL_REQUIRED', 'AUTH_REQUIRED'],
+    ['LLM_MODEL_NOT_FOUND', 'LLM_ERROR'],
+    ['SESSION_NOT_FOUND', 'INVALID_SESSION'],
+  ])('maps %s to %s', (backendCode, presentationCode) => {
+    expect(normalizeVibingChatErrorCode(backendCode)).toBe(presentationCode);
+    expect(isKnownVibingChatErrorCode(backendCode)).toBe(true);
+    expect(vibingChatPresentationKey(backendCode)).toBe(
+      vibingChatPresentationKey(presentationCode),
+    );
+  });
+
+  it('does not assign a presentation identity to unknown input', () => {
+    expect(normalizeVibingChatErrorCode(undefined)).toBeUndefined();
+    expect(normalizeVibingChatErrorCode('UNKNOWN_BACKEND_CODE')).toBeUndefined();
+  });
+});
+
+describe('decodeVibingChatTaskFailure', () => {
+  it('preserves the structured HTTP-200 failed-task envelope', () => {
+    expect(decodeVibingChatTaskFailure({
+      success: false,
+      data: {
+        task_id: 'task-1383',
+        status: 'failed',
+        result: {
+          error: {
+            error_code: 'LLM_SERVICE_ERROR',
+            error_message: 'Provider rejected the generation request.',
+            suggested_action: 'Retry with a supported model.',
+            retry_suggested: true,
+            failed_layer: 'generation',
+            validator_error_code: 'INVALID_CPP',
+          },
+        },
+      },
+    })).toEqual({
+      status: 'failed',
+      backendCode: 'LLM_SERVICE_ERROR',
+      message: 'Provider rejected the generation request.',
+      suggestedAction: 'Retry with a supported model.',
+      retryable: true,
+      failedStage: 'generation',
+      validatorErrorCode: 'INVALID_CPP',
+      taskId: 'task-1383',
+    });
+  });
+
+  it('supports a rejected direct envelope and context metadata', () => {
+    expect(decodeVibingChatTaskFailure({
+      status: 'rejected',
+      task_id: 'direct-task',
+      error: {
+        code: 'LLM_TIMEOUT',
+        message: 'Generation timed out.',
+        retryable: false,
+        context: { failed_layer: 'provider', error_code: 'UPSTREAM_TIMEOUT' },
+      },
+    })).toEqual({
+      status: 'rejected',
+      backendCode: 'LLM_TIMEOUT',
+      message: 'Generation timed out.',
+      retryable: false,
+      failedStage: 'provider',
+      validatorErrorCode: 'UPSTREAM_TIMEOUT',
+      taskId: 'direct-task',
+    });
+  });
+
+  it('uses an outer terminal status when a nested data object omits it', () => {
+    expect(decodeVibingChatTaskFailure({
+      status: 'failed',
+      data: { error_message: 'Outer status failure' },
+    })).toEqual({
+      status: 'failed',
+      message: 'Outer status failure',
+    });
+  });
+
+  it('supports string errors and data-level legacy fields', () => {
+    expect(decodeVibingChatTaskFailure({
+      data: { status: 'failed', error_code: 'LLM_ERROR', error: 'Legacy failure' },
+    })).toEqual({
+      status: 'failed',
+      backendCode: 'LLM_ERROR',
+      message: 'Legacy failure',
+    });
+  });
+
+  it('uses a deterministic message when a failed task omits error details', () => {
+    expect(decodeVibingChatTaskFailure({ status: 'failed' })).toEqual({
+      status: 'failed',
+      message: 'Vibing Chat task failed without an error message.',
+    });
+  });
+
+  it('ignores non-task and non-terminal inputs', () => {
+    expect(decodeVibingChatTaskFailure(null)).toBeUndefined();
+    expect(decodeVibingChatTaskFailure([])).toBeUndefined();
+    expect(decodeVibingChatTaskFailure({ data: { status: 'processing' } })).toBeUndefined();
+  });
+
+  it('drops unbounded diagnostic identities while preserving the safe message', () => {
+    expect(decodeVibingChatTaskFailure({
+      status: 'failed',
+      task_id: 'task id with spaces',
+      error: {
+        code: 'invalid code with spaces',
+        message: 'Safe failure message.',
+        context: { failed_layer: 'stage with spaces' },
+      },
+    })).toEqual({
+      status: 'failed',
+      message: 'Safe failure message.',
+    });
   });
 });
 

@@ -10,4 +10,6 @@ export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
+  /** Stable machine identity preserved across the Service API boundary. */
+  errorCode?: string;
 }

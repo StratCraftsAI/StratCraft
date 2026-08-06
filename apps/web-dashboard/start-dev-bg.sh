@@ -24,6 +24,9 @@ SYSTEMD_RUN_BIN="${STRATCRAFT_SYSTEMD_RUN_BIN:-systemd-run}"
 JOURNALCTL_BIN="${STRATCRAFT_JOURNALCTL_BIN:-journalctl}"
 SERVICE_DISCOVERY_DIR="${STRATCRAFT_SERVICE_API_DISCOVERY_DIR:-$ROOT/apps/desktop/data}"
 CURL_BIN="${STRATCRAFT_CURL_BIN:-curl}"
+COMPOSITION_DESCRIPTOR="${STRATCRAFT_RUNTIME_COMPOSITION_DESCRIPTOR:-$SCRIPT_DIR/scripts/runtime-composition.mjs}"
+COMPOSITION_FILE="${STRATCRAFT_RUNTIME_COMPOSITION_FILE:-$SERVICE_DISCOVERY_DIR/guide-runtime-composition.json}"
+CATALOG_PROBE="${STRATCRAFT_MCP_CATALOG_PROBE:-$SCRIPT_DIR/scripts/verify-mcp-catalog.mjs}"
 
 # shellcheck source=apps/web-dashboard/dev-lifecycle.sh
 source "$SCRIPT_DIR/dev-lifecycle.sh"
@@ -36,7 +39,8 @@ unit_load_state() {
   "$SYSTEMCTL_BIN" --user show "$UNIT_NAME.service" --property=LoadState --value
 }
 
-case "${1:-start}" in
+COMMAND="${1:-start}"
+case "$COMMAND" in
   stop)
     echo "[webdash] Stopping owned unit $UNIT_NAME.service..."
     LOAD_STATE="$(unit_load_state)" || {
@@ -63,12 +67,37 @@ case "${1:-start}" in
     "$JOURNALCTL_BIN" --user -u "$UNIT_NAME.service" -f --no-hostname
     exit $?
     ;;
-  start) ;;
+  start|refresh) ;;
   *)
-    echo "Usage: $0 {start|stop|status|logs}" >&2
+    echo "Usage: $0 {start|refresh|stop|status|logs}" >&2
     exit 2
     ;;
 esac
+
+COMPOSITION_DESCRIPTION="$(node "$COMPOSITION_DESCRIPTOR" describe)" || exit 1
+EXPECTED_FINGERPRINT="$(printf '%s' "$COMPOSITION_DESCRIPTION" | node -e "const v=JSON.parse(require('fs').readFileSync(0,'utf8'));process.stdout.write(v.fingerprint)")"
+EXPECTED_TOOLS_JSON="$(printf '%s' "$COMPOSITION_DESCRIPTION" | node -e "const v=JSON.parse(require('fs').readFileSync(0,'utf8'));process.stdout.write(JSON.stringify(v.tools))")"
+EXPECTED_COMMERCIAL_PACKAGE_JSON="$(printf '%s' "$COMPOSITION_DESCRIPTION" | node -e "const v=JSON.parse(require('fs').readFileSync(0,'utf8'));process.stdout.write(JSON.stringify(v.commercialPackage))")"
+export STRATCRAFT_RUNTIME_COMPOSITION_FINGERPRINT="$EXPECTED_FINGERPRINT"
+
+runtime_identity_fingerprint() {
+  local expected_pid="$1"
+  [ -f "$COMPOSITION_FILE" ] || return 1
+  node -e "const fs=require('fs');const v=JSON.parse(fs.readFileSync(process.argv[1],'utf8'));if(v.mainPid!==Number(process.argv[2])||!/^([0-9a-f]{64})$/.test(v.fingerprint))process.exit(1);process.stdout.write(v.fingerprint)" "$COMPOSITION_FILE" "$expected_pid"
+}
+
+verify_composition_proof() {
+  local main_pid="$1" actual
+  actual="$(runtime_identity_fingerprint "$main_pid")" || {
+    echo "[ERROR] Guide readiness is incomplete: runtime fingerprint evidence is missing or not owned by PID $main_pid." >&2
+    return 1
+  }
+  [ "$actual" = "$EXPECTED_FINGERPRINT" ] || {
+    echo "[ERROR] Guide runtime fingerprint mismatch: expected=$EXPECTED_FINGERPRINT actual=$actual owner=$UNIT_NAME.service." >&2
+    return 1
+  }
+  node "$CATALOG_PROBE" "http://127.0.0.1:$MCP_PORT/mcp" "$EXPECTED_TOOLS_JSON"
+}
 
 webdash_validate_port "MCP" "$MCP_PORT"
 webdash_validate_port "Vite" "$VITE_PORT"
@@ -82,6 +111,20 @@ fi
 
 if "$SYSTEMCTL_BIN" --user is-active --quiet "$UNIT_NAME.service"; then
   MAIN_PID="$("$SYSTEMCTL_BIN" --user show "$UNIT_NAME.service" --property=MainPID --value)"
+  ACTUAL_FINGERPRINT="$(runtime_identity_fingerprint "$MAIN_PID" 2>/dev/null || true)"
+  if [ "$ACTUAL_FINGERPRINT" != "$EXPECTED_FINGERPRINT" ]; then
+    if [ "$COMMAND" != "refresh" ]; then
+      echo "[ERROR] $UNIT_NAME.service has a stale Guide composition; no process was restarted." >&2
+      echo "        expected=$EXPECTED_FINGERPRINT actual=${ACTUAL_FINGERPRINT:-missing} owner=systemd:$UNIT_NAME.service" >&2
+      echo "        Owner action: bash apps/web-dashboard/start-dev-bg.sh refresh" >&2
+      exit 1
+    fi
+    echo "[webdash] Refreshing positively owned stale unit $UNIT_NAME.service (${ACTUAL_FINGERPRINT:-missing} -> $EXPECTED_FINGERPRINT)..."
+    "$SYSTEMCTL_BIN" --user stop "$UNIT_NAME.service" || {
+      echo "[ERROR] Failed to stop stale owned unit $UNIT_NAME.service." >&2
+      exit 1
+    }
+  else
   if ! webdash_wait_for_service_api "$SERVICE_DISCOVERY_DIR" "$MAIN_PID" "$STARTUP_ATTEMPTS" "$STARTUP_DELAY_SECONDS" "$CURL_BIN" supervised ||
      ! webdash_wait_for_port "MCP server" "$MCP_PORT" "$MAIN_PID" "$STARTUP_ATTEMPTS" "$STARTUP_DELAY_SECONDS" supervised ||
      ! webdash_wait_for_port "Vite" "$VITE_PORT" "$MAIN_PID" "$STARTUP_ATTEMPTS" "$STARTUP_DELAY_SECONDS" supervised; then
@@ -97,11 +140,17 @@ if "$SYSTEMCTL_BIN" --user is-active --quiet "$UNIT_NAME.service"; then
     echo "        Inspect: $0 logs" >&2
     exit 1
   fi
+  verify_composition_proof "$MAIN_PID" || exit 1
   echo "[webdash] $UNIT_NAME.service is already active and ready; no process was restarted."
   exit 0
+  fi
 fi
 
-webdash_assert_ports_available "Guide WebUI background development" "$MCP_PORT" "$VITE_PORT"
+if ! webdash_assert_ports_available "Guide WebUI background development" "$MCP_PORT" "$VITE_PORT"; then
+  echo "[ERROR] Cannot activate build composition: expected=$EXPECTED_FINGERPRINT actual=missing owner=foreign-or-foreground." >&2
+  echo "        Owner action: stop the foreground owner, then run 'bash apps/web-dashboard/start-dev-bg.sh refresh'." >&2
+  exit 1
+fi
 
 # Stop and clear any leftover unit state (failed, auto-restart, etc.)
 # so the transient name can be reused by systemd-run.
@@ -116,6 +165,10 @@ SYSTEMD_ENV=(
   "--setenv=STRATCRAFT_WEB_DASHBOARD_PORT=$VITE_PORT"
   "--setenv=STRATCRAFT_WEBDASH_STARTUP_ATTEMPTS=$STARTUP_ATTEMPTS"
   "--setenv=STRATCRAFT_WEBDASH_STARTUP_DELAY_SECONDS=$STARTUP_DELAY_SECONDS"
+  "--setenv=STRATCRAFT_RUNTIME_COMPOSITION_FINGERPRINT=$EXPECTED_FINGERPRINT"
+  "--setenv=STRATCRAFT_RUNTIME_COMPOSITION_TOOLS_JSON=$EXPECTED_TOOLS_JSON"
+  "--setenv=STRATCRAFT_RUNTIME_COMMERCIAL_PACKAGE_JSON=$EXPECTED_COMMERCIAL_PACKAGE_JSON"
+  "--setenv=STRATCRAFT_RUNTIME_COMPOSITION_FILE=$COMPOSITION_FILE"
 )
 if [ -n "${NONA_SERVER_URL:-}" ]; then
   SYSTEMD_ENV+=("--setenv=NONA_SERVER_URL=$NONA_SERVER_URL")
@@ -176,6 +229,12 @@ fi
 if ! webdash_wait_for_browser_application "$VITE_PORT" "$SCRIPT_DIR"; then
   "$SYSTEMCTL_BIN" --user stop "$UNIT_NAME.service" || true
   echo "[ERROR] Background Guide WebUI started but the application does not render; inspect: $0 logs" >&2
+  exit 1
+fi
+
+if ! verify_composition_proof "$MAIN_PID"; then
+  "$SYSTEMCTL_BIN" --user stop "$UNIT_NAME.service" || true
+  echo "[ERROR] Background Guide WebUI failed post-start composition proof; inspect: $0 logs" >&2
   exit 1
 fi
 

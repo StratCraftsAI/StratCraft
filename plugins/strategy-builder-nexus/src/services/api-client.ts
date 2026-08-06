@@ -85,11 +85,24 @@ export interface PollOptions<T> {
   pollInterval?: number;
   timeout?: number;
   signal?: AbortSignal;
+  decodeTaskFailure?: (response: unknown) => {
+    message: string;
+    backendCode?: string;
+  } | undefined;
   handlePollResponse: (response: unknown) => {
     isComplete: boolean;
     result?: T;
     rawResponse: unknown;
   };
+}
+
+function taskFailureError(failure: {
+  message: string;
+  backendCode?: string;
+}): Error & { code?: string } {
+  const error = new Error(failure.message) as Error & { code?: string };
+  if (failure.backendCode) error.code = failure.backendCode;
+  return error;
 }
 
 // -----------------------------------------------------------------------------
@@ -204,6 +217,7 @@ class PluginApiClient {
       pollInterval = DEFAULT_POLL_INTERVAL,
       timeout = DEFAULT_POLL_TIMEOUT,
       signal,
+      decodeTaskFailure,
       handlePollResponse,
     } = options;
 
@@ -212,6 +226,9 @@ class PluginApiClient {
     }
 
     const startResponse = await this.post<ApiResponse>(startEndpoint, initialData, signal);
+
+    const startFailure = decodeTaskFailure?.(startResponse);
+    if (startFailure) throw taskFailureError(startFailure);
 
     if (!startResponse.success) {
       const resultData = startResponse.data?.result as Record<string, unknown> | undefined;
@@ -238,6 +255,9 @@ class PluginApiClient {
       }
 
       const pollResponse = await this.post<ApiResponse>(pollEndpoint, { task_id: taskId }, signal);
+
+      const taskFailure = decodeTaskFailure?.(pollResponse);
+      if (taskFailure) throw taskFailureError(taskFailure);
 
       if (!pollResponse.success) {
         const resultError = (pollResponse.data?.result as Record<string, unknown> | undefined)
