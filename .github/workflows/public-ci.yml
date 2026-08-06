@@ -11,25 +11,37 @@ concurrency:
   group: public-ci-${{ github.ref }}
   cancel-in-progress: true
 
+defaults:
+  run:
+    shell: bash -eo pipefail {0}
+
+env:
+  VCPKG_COMMIT_ID: af752f21c9d79ba3df9cb0250ce2233933f58486
+
 jobs:
   repository-contract:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version-file: .nvmrc
       - run: node scripts/ci/public-repository-gates.mjs
+      - run: node scripts/ci/public-repository-three-platform-ci.mjs
       - run: >
           node --experimental-test-coverage
           --test-coverage-include=scripts/ci/public-repository-gates.mjs
+          --test-coverage-include=scripts/ci/public-repository-three-platform-ci.mjs
+          --test-coverage-include=scripts/ci/native-platform-matrix.mjs
           --test-coverage-lines=100
-          --test scripts/ci/__tests__/public-repository-gates.test.mjs
+          --test
+          scripts/ci/__tests__/public-repository-gates.test.mjs
+          scripts/ci/__tests__/public-repository-three-platform-ci.test.mjs
 
   secrets:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install pinned gitleaks
         run: |
           GITLEAKS_VERSION="8.24.3"
@@ -37,24 +49,163 @@ jobs:
             sudo tar -xz -C /usr/local/bin gitleaks
       - run: gitleaks detect --source . --no-git --verbose --redact
 
-  build:
+  license:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
         with:
           version: 9.0.0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: npm ci
-        working-directory: apps/desktop/src/mcp/standalone
-      - name: Build public C++ executor
-        run: VCPKG_ROOT="$VCPKG_INSTALLATION_ROOT" bash packages/executor/build.sh --package
-      - run: pnpm build
-      - run: pnpm typecheck
-      - run: pnpm test
       - run: bash scripts/check_license_compliance.sh
+
+  native-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v5
+      - id: matrix
+        run: echo "matrix=$(node scripts/ci/native-platform-matrix.mjs)" >> "$GITHUB_OUTPUT"
+
+  native-build:
+    name: Public native build and verify (${{ matrix.platform }})
+    needs: native-matrix
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.native-matrix.outputs.matrix) }}
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 9.0.0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install native build tools (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y ninja-build pkg-config autoconf automake libtool
+
+      - name: Install native build tools (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install ninja pkg-config autoconf automake libtool bison
+          echo "$(brew --prefix bison)/bin" >> "$GITHUB_PATH"
+
+      - name: Install native build tools (Windows)
+        if: runner.os == 'Windows'
+        run: choco install ninja
+
+      - name: Setup MSVC developer environment
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Reclaim runner disk space
+        if: runner.os != 'Windows'
+        run: |
+          if [ "$RUNNER_OS" = "Linux" ]; then
+            sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc \
+              /usr/local/share/boost /opt/hostedtoolcache/CodeQL || true
+          else
+            sudo rm -rf /Users/runner/Library/Android/sdk \
+              /Users/runner/hostedtoolcache/CodeQL || true
+          fi
+
+      - name: Setup vcpkg
+        uses: lukka/run-vcpkg@v11
+        with:
+          vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+          vcpkgGitCommitId: '${{ env.VCPKG_COMMIT_ID }}'
+
+      - name: Restore cached vcpkg installed packages
+        id: vcpkg-cache
+        uses: actions/cache/restore@v6
+        with:
+          path: packages/executor/vcpkg_installed
+          key: public-native-${{ runner.os }}-${{ runner.arch }}-${{ matrix.triplet }}-${{ hashFiles('packages/executor/vcpkg.json') }}
+          restore-keys: |
+            public-native-${{ runner.os }}-${{ runner.arch }}-${{ matrix.triplet }}-
+            public-native-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Install frozen workspace dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install frozen standalone MCP dependencies
+        working-directory: apps/desktop/src/mcp/standalone
+        run: npm ci
+
+      - name: Record native toolchain and public revision
+        run: |
+          mkdir -p artifacts/evidence
+          {
+            echo "source-revision=$GITHUB_SHA"
+            echo "platform=${{ matrix.platform }}"
+            echo "runner.os=${{ runner.os }}"
+            echo "runner.arch=${{ runner.arch }}"
+            echo "vcpkg.triplet=${{ matrix.triplet }}"
+            node --version
+            pnpm --version
+            cmake --version
+            ninja --version
+            python --version
+            (cl 2>&1 || true)
+            (clang --version || true)
+          } > artifacts/evidence/toolchain.txt
+
+      - name: Build exact public revision through start.sh
+        env:
+          CI: 'true'
+          CLEAN_BUILD: '1'
+          VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+          VCPKG_DEFAULT_TRIPLET: ${{ matrix.triplet }}
+        run: bash ./start.sh build 2>&1 | tee artifacts/evidence/build.log
+
+      - name: Save cached vcpkg installed packages
+        if: always() && steps.vcpkg-cache.outputs.cache-hit != 'true' && hashFiles('packages/executor/vcpkg_installed/**') != ''
+        uses: actions/cache/save@v6
+        with:
+          path: packages/executor/vcpkg_installed
+          key: public-native-${{ runner.os }}-${{ runner.arch }}-${{ matrix.triplet }}-${{ hashFiles('packages/executor/vcpkg.json') }}
+
+      - name: Verify exact public revision through start.sh
+        env:
+          CI: 'true'
+        run: bash ./start.sh verify-ci 2>&1 | tee artifacts/evidence/test.log
+
+      - name: Upload public native diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: public-native-${{ matrix.platform }}-evidence
+          path: artifacts/evidence/**
+          if-no-files-found: error
+          retention-days: 14
+
+  public-ci-result:
+    name: Public CI aggregate result
+    if: always()
+    needs: [repository-contract, secrets, license, native-matrix, native-build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every public gate and native platform cell
+        run: |
+          test "${{ needs.repository-contract.result }}" = "success"
+          test "${{ needs.secrets.result }}" = "success"
+          test "${{ needs.license.result }}" = "success"
+          test "${{ needs.native-matrix.result }}" = "success"
+          test "${{ needs.native-build.result }}" = "success"
